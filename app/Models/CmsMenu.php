@@ -6,10 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class CmsMenu extends Model
 {
-    protected $fillable = ['name', 'location', 'is_active'];
+    protected $fillable = [
+        'name',
+        'location',
+        'is_active',
+        'style_template',
+        'is_sticky',
+        'style_config',
+    ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_sticky' => 'boolean',
+        'style_config' => 'array',
     ];
 
     public function items()

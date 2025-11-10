@@ -23,5 +23,11 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        // Seed CMS data
+        $this->call([
+            CmsPagesSeeder::class,
+            CmsMenusSeeder::class,
+        ]);
     }
 }

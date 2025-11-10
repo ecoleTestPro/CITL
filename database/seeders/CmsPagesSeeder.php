@@ -3,12 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\CmsPage;
-use App\Models\CmsMenu;
-use App\Models\CmsMenuItem;
 use App\Models\User\User;
 use Illuminate\Database\Seeder;
 
-class CmsSeeder extends Seeder
+class CmsPagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -24,11 +22,11 @@ class CmsSeeder extends Seeder
             ]);
         }
 
-        // Create Pages
         $pages = [
             // CITL Section
             [
                 'title' => 'À propos de l\'ISTQB',
+                'slug' => 'a-propos-istqb',
                 'content' => [
                     'blocks' => [
                         [
@@ -47,6 +45,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'À propos du CITL',
+                'slug' => 'a-propos-citl',
                 'content' => [
                     'blocks' => [
                         [
@@ -65,6 +64,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Notre Vision',
+                'slug' => 'notre-vision',
                 'content' => [
                     'blocks' => [
                         [
@@ -83,6 +83,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Nos Missions',
+                'slug' => 'nos-missions',
                 'content' => [
                     'blocks' => [
                         [
@@ -109,6 +110,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Le Bureau Exécutif',
+                'slug' => 'bureau-executif',
                 'content' => [
                     'blocks' => [
                         [
@@ -129,6 +131,7 @@ class CmsSeeder extends Seeder
             // Adhésion Section
             [
                 'title' => 'Membres du CITL',
+                'slug' => 'membres-citl',
                 'content' => [
                     'blocks' => [
                         [
@@ -147,6 +150,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Les Groupes de Travail',
+                'slug' => 'groupes-travail',
                 'content' => [
                     'blocks' => [
                         [
@@ -167,6 +171,7 @@ class CmsSeeder extends Seeder
             // Certifications Section
             [
                 'title' => 'Pourquoi obtenir la certification ISTQB',
+                'slug' => 'pourquoi-certification-istqb',
                 'content' => [
                     'blocks' => [
                         [
@@ -193,6 +198,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'ISTQB Foundation Level',
+                'slug' => 'istqb-foundation-level',
                 'content' => [
                     'blocks' => [
                         [
@@ -211,6 +217,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'ISTQB Advanced Level',
+                'slug' => 'istqb-advanced-level',
                 'content' => [
                     'blocks' => [
                         [
@@ -231,6 +238,7 @@ class CmsSeeder extends Seeder
             // Examens Section
             [
                 'title' => 'FAQ sur les examens',
+                'slug' => 'faq-examens',
                 'content' => [
                     'blocks' => [
                         [
@@ -249,6 +257,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Frais d\'examen',
+                'slug' => 'frais-examen',
                 'content' => [
                     'blocks' => [
                         [
@@ -267,6 +276,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'S\'inscrire à l\'examen',
+                'slug' => 'inscription-examen',
                 'content' => [
                     'blocks' => [
                         [
@@ -285,6 +295,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Glossaire des tests logiciels',
+                'slug' => 'glossaire-tests-logiciels',
                 'content' => [
                     'blocks' => [
                         [
@@ -305,6 +316,7 @@ class CmsSeeder extends Seeder
             // Organismes de formation
             [
                 'title' => 'Organismes accrédités',
+                'slug' => 'organismes-accredites',
                 'content' => [
                     'blocks' => [
                         [
@@ -323,6 +335,7 @@ class CmsSeeder extends Seeder
             ],
             [
                 'title' => 'Demande d\'accréditation',
+                'slug' => 'demande-accreditation',
                 'content' => [
                     'blocks' => [
                         [
@@ -343,6 +356,7 @@ class CmsSeeder extends Seeder
             // Contact
             [
                 'title' => 'Contact',
+                'slug' => 'contact',
                 'content' => [
                     'blocks' => [
                         [
@@ -361,154 +375,11 @@ class CmsSeeder extends Seeder
             ],
         ];
 
-        $createdPages = [];
         foreach ($pages as $pageData) {
             $pageData['created_by'] = $user->id;
-            $createdPages[$pageData['title']] = CmsPage::create($pageData);
+            CmsPage::create($pageData);
         }
 
-        // Create Menus
-        $headerMenu = CmsMenu::create([
-            'name' => 'Menu Principal',
-            'location' => 'header',
-            'is_active' => true,
-        ]);
-
-        $footerMenu = CmsMenu::create([
-            'name' => 'Menu Footer',
-            'location' => 'footer',
-            'is_active' => true,
-        ]);
-
-        // Create Menu Items for Header Menu
-        $menuItems = [
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'CITL',
-                'url' => null,
-                'order' => 1,
-                'children' => [
-                    ['title' => 'À propos de l\'ISTQB', 'page' => 'À propos de l\'ISTQB'],
-                    ['title' => 'À propos du CITL', 'page' => 'À propos du CITL'],
-                    ['title' => 'Notre Vision', 'page' => 'Notre Vision'],
-                    ['title' => 'Nos Missions', 'page' => 'Nos Missions'],
-                    ['title' => 'Le Bureau Exécutif', 'page' => 'Le Bureau Exécutif'],
-                ],
-            ],
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'Adhésion',
-                'url' => null,
-                'order' => 2,
-                'children' => [
-                    ['title' => 'Membres du CITL', 'page' => 'Membres du CITL'],
-                    ['title' => 'Les Groupes de Travail', 'page' => 'Les Groupes de Travail'],
-                ],
-            ],
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'Certifications',
-                'url' => null,
-                'order' => 3,
-                'children' => [
-                    ['title' => 'Pourquoi obtenir la certification ISTQB', 'page' => 'Pourquoi obtenir la certification ISTQB'],
-                    ['title' => 'Core Foundation', 'page' => 'ISTQB Foundation Level'],
-                    ['title' => 'Core Advanced', 'page' => 'ISTQB Advanced Level'],
-                ],
-            ],
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'Examens',
-                'url' => null,
-                'order' => 4,
-                'children' => [
-                    ['title' => 'FAQ sur les examens', 'page' => 'FAQ sur les examens'],
-                    ['title' => 'Frais d\'examen', 'page' => 'Frais d\'examen'],
-                    ['title' => 'S\'inscrire à l\'examen', 'page' => 'S\'inscrire à l\'examen'],
-                    ['title' => 'Glossaire', 'page' => 'Glossaire des tests logiciels'],
-                ],
-            ],
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'Organismes de formation',
-                'url' => null,
-                'order' => 5,
-                'children' => [
-                    ['title' => 'Organismes accrédités', 'page' => 'Organismes accrédités'],
-                    ['title' => 'Demande d\'accréditation', 'page' => 'Demande d\'accréditation'],
-                ],
-            ],
-            [
-                'menu_id' => $headerMenu->id,
-                'title' => 'Contact',
-                'page' => 'Contact',
-                'url' => null,
-                'order' => 6,
-            ],
-        ];
-
-        foreach ($menuItems as $item) {
-            $children = $item['children'] ?? [];
-            unset($item['children']);
-
-            $pageId = null;
-            if (isset($item['page']) && isset($createdPages[$item['page']])) {
-                $pageId = $createdPages[$item['page']]->id;
-            }
-
-            $parentItem = CmsMenuItem::create([
-                'menu_id' => $item['menu_id'],
-                'title' => $item['title'],
-                'url' => $item['url'],
-                'page_id' => $pageId,
-                'order' => $item['order'],
-                'is_active' => true,
-            ]);
-
-            // Create children
-            foreach ($children as $index => $child) {
-                $childPageId = null;
-                if (isset($child['page']) && isset($createdPages[$child['page']])) {
-                    $childPageId = $createdPages[$child['page']]->id;
-                }
-
-                CmsMenuItem::create([
-                    'menu_id' => $headerMenu->id,
-                    'parent_id' => $parentItem->id,
-                    'title' => $child['title'],
-                    'url' => null,
-                    'page_id' => $childPageId,
-                    'order' => $index + 1,
-                    'is_active' => true,
-                ]);
-            }
-        }
-
-        // Create Footer Menu Items
-        CmsMenuItem::create([
-            'menu_id' => $footerMenu->id,
-            'title' => 'À propos',
-            'page_id' => $createdPages['À propos du CITL']->id,
-            'order' => 1,
-            'is_active' => true,
-        ]);
-
-        CmsMenuItem::create([
-            'menu_id' => $footerMenu->id,
-            'title' => 'Certifications',
-            'page_id' => $createdPages['Pourquoi obtenir la certification ISTQB']->id,
-            'order' => 2,
-            'is_active' => true,
-        ]);
-
-        CmsMenuItem::create([
-            'menu_id' => $footerMenu->id,
-            'title' => 'Contact',
-            'page_id' => $createdPages['Contact']->id,
-            'order' => 3,
-            'is_active' => true,
-        ]);
-
-        $this->command->info('CMS pages and menus seeded successfully!');
+        $this->command->info('CMS pages seeded successfully!');
     }
 }

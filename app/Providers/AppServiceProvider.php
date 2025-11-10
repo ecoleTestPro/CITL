@@ -70,6 +70,32 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Share menus with all Inertia views
+        \Inertia\Inertia::share([
+            'menus' => function () {
+                return [
+                    'header' => \App\Models\CmsMenu::where('location', 'header')
+                        ->where('is_active', true)
+                        ->with(['items' => function ($query) {
+                            $query->where('is_active', true)
+                                ->with(['children' => function ($q) {
+                                    $q->where('is_active', true)
+                                        ->with('page:id,slug')
+                                        ->orderBy('order');
+                                }, 'page:id,slug'])
+                                ->orderBy('order');
+                        }])
+                        ->first(),
+                    'footer' => \App\Models\CmsMenu::where('location', 'footer')
+                        ->where('is_active', true)
+                        ->with(['items' => function ($query) {
+                            $query->where('is_active', true)
+                                ->with('page:id,slug')
+                                ->orderBy('order');
+                        }])
+                        ->first(),
+                ];
+            },
+        ]);
     }
 }

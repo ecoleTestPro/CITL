@@ -46,6 +46,7 @@ export function SortableMenuItemV2({
         transform,
         transition,
         isDragging,
+        active,
     } = useSortable({
         id: item.id,
         data: {
@@ -63,6 +64,10 @@ export function SortableMenuItemV2({
         },
     });
 
+    // Détection du décalage horizontal pour indiquer qu'on va créer un sous-menu
+    const INDENT_THRESHOLD = 40;
+    const wantsToIndent = transform && transform.x > INDENT_THRESHOLD;
+
     const style = {
         transform: CSS.Transform.toString(transform),
         transition,
@@ -77,6 +82,7 @@ export function SortableMenuItemV2({
                 ref={setDroppableNodeRef}
                 className={`group mb-2 flex items-center gap-3 rounded-lg border bg-white p-3 transition-all hover:border-orange-300 hover:shadow-sm ${
                     isDragging ? 'border-orange-500 shadow-lg' :
+                    isOver && wantsToIndent ? 'border-orange-500 bg-orange-100 shadow-md ring-2 ring-orange-400' :
                     isOver ? 'border-orange-400 bg-orange-50 shadow-md' :
                     'border-gray-200'
                 }`}
@@ -126,9 +132,14 @@ export function SortableMenuItemV2({
                                 {item.children?.length} sous-menu(s)
                             </Badge>
                         )}
-                        {isOver && (
-                            <Badge className="bg-orange-500">
-                                Déposer ici pour créer un sous-menu
+                        {isOver && wantsToIndent && (
+                            <Badge className="bg-orange-500 animate-pulse">
+                                → Créer un sous-menu
+                            </Badge>
+                        )}
+                        {isOver && !wantsToIndent && (
+                            <Badge className="bg-blue-500">
+                                ↕ Réorganiser
                             </Badge>
                         )}
                     </div>

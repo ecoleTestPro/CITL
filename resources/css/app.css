@@ -141,3 +141,106 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* EditorJS Custom Styles */
+.codex-editor__redactor {
+    padding-bottom: 100px !important;
+}
+
+.ce-block__content,
+.ce-toolbar__content {
+    max-width: 100% !important;
+}
+
+.ce-toolbar__actions {
+    right: 0 !important;
+}
+
+.ce-toolbar__plus,
+.ce-toolbar__settings-btn {
+    color: #718096;
+    transition: all 0.2s;
+}
+
+.ce-toolbar__plus:hover,
+.ce-toolbar__settings-btn:hover {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.ce-inline-toolbar {
+    background-color: #1a202c;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.ce-inline-tool {
+    color: #e2e8f0;
+}
+
+.ce-inline-tool:hover {
+    background-color: #2d3748;
+    color: white;
+}
+
+.ce-block {
+    padding: 0.5rem 0;
+}
+
+.ce-block--selected .ce-block__content {
+    background-color: #eff6ff;
+    border-radius: 4px;
+}
+
+.ce-paragraph {
+    line-height: 1.75;
+    font-size: 1rem;
+}
+
+.ce-header {
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.cdx-list {
+    padding-left: 1.5rem;
+}
+
+.cdx-list__item {
+    padding: 0.375rem 0;
+}
+
+.ce-block .ce-paragraph:empty::before {
+    color: #cbd5e0;
+}
+
+.ce-block--focused {
+    background-color: transparent;
+}
+
+.codex-editor--narrow .ce-toolbox {
+    left: -40px;
+}
+
+.ce-block,
+.ce-inline-toolbar,
+.ce-conversion-toolbar {
+    transition: all 0.15s ease;
+}
+
+.codex-editor::-webkit-scrollbar {
+    width: 8px;
+}
+
+.codex-editor::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.codex-editor::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.codex-editor::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}

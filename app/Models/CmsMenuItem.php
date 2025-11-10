@@ -19,6 +19,10 @@ class CmsMenuItem extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'parent_id' => 'integer',
+        'page_id' => 'integer',
+        'menu_id' => 'integer',
+        'order' => 'integer',
     ];
 
     public function menu()

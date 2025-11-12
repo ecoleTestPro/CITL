@@ -1,0 +1,55 @@
+---
+description: This rule explains Laravel conventions and best practices for backend development.
+alwaysApply: true
+---
+
+Pour documenter les fonctions sur lesquelles tu travailles, il est conseillé de suivre ces bonnes pratiques générales, extraites des règles présentes dans tes fichiers :
+
+
+
+Toujours ajouter une docstring ou un commentaire juste au-dessus de la définition de la fonction. Cette documentation doit décrire clairement :
+
+Le but de la fonction.
+
+La signification des paramètres.
+
+Le type et la signification de la valeur de retour.
+
+Un ou plusieurs exemples d'utilisation si nécessaire.
+
+
+
+Utiliser un style cohérent de documentation (par exemple JSDoc pour TypeScript, PhpDoc pour PHP, ou autre selon le langage utilisé).
+
+Adopter un style de nommage clair et cohérent pour les fonctions : nommer les fonctions avec un verbe suivi d'un complément (exemples : getUserData, calculateTotalPrice, saveRecord).
+
+Pour les fonctions retournant un booléen, préférer des noms commençant par is, has, can, etc. (exemple : isActive, hasError).
+
+Documenter les cas d’erreur et les exceptions potentiellement levées par la fonction.
+
+Pour les fonctions complexes, expliquer brièvement l’algorithme ou la logique.
+
+Éviter les fonctions trop longues (idéalement moins de 20 instructions), favorisant la modularité et la séparation des responsabilités.
+
+
+Voici un exemple de docstring pour une fonction en TypeScript :
+
+
+typescript code
+
+/**
+ * calculateTotalPrice
+ * 
+ * Calcule le prix total à partir d’une liste d’articles et de leurs quantités.
+ * 
+ * @param items - Liste des articles avec leur prix unitaire et quantité
+ * @returns Le prix total calculé
+ * 
+ * @example
+ * const items = [{ price: 10, quantity: 2 }, { price: 5, quantity: 3 }]
+ * const total = calculateTotalPrice(items)
+ * console.log(total) // 35
+ */
+function calculateTotalPrice(items: Array<{price: number; quantity: number}>): number {
+  // implémentation
+}

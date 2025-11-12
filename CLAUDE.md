@@ -4,334 +4,313 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a modern full-stack learning management system built with:
-- **Backend**: Laravel 12 (PHP 8.2+) with Inertia.js
-- **Frontend**: React 19 + TypeScript with Tailwind CSS v4
-- **Database**: MySQL/SQLite with Eloquent ORM
-- **Auth**: Laravel Fortify with 2FA support
-- **Testing**: Pest PHP
-- **Build**: Vite with SSR support
+A modern Learning Management System (LMS) built with Laravel 12, React 19, and TypeScript. The system provides comprehensive course management, user authentication with 2FA, assessments, certificates, blog functionality, and a CMS with visual page builder.
 
-## Development Commands
+**Core Stack:**
+- Backend: Laravel 12 (PHP 8.2+) with Inertia.js
+- Frontend: React 19 + TypeScript (strict mode)
+- Styling: Tailwind CSS v4 with Radix UI components
+- Database: MySQL/SQLite with Eloquent ORM
+- Authentication: Laravel Fortify with 2FA support
+- Testing: Pest PHP
+- Build: Vite with React Compiler and optional SSR
+
+## Essential Commands
 
 ### Initial Setup
 ```bash
-composer run setup  # Install deps, copy .env, generate key, migrate, build assets
+# Complete setup: installs dependencies, creates .env, generates key, migrates DB, builds assets
+composer run setup
 ```
 
-### Development Server
+### Development
 ```bash
-composer run dev  # Starts all services: server, queue, logs, vite (concurrently)
-```
+# Start all services (PHP server:8000, queue worker, Laravel Pail logs, Vite dev server)
+composer run dev
 
-This starts 4 concurrent processes:
-- PHP dev server (port 8000)
-- Queue worker
-- Laravel Pail logs
-- Vite dev server
-
-### Development with SSR
-```bash
-composer run dev:ssr  # Build SSR bundle and start SSR server
+# With Server-Side Rendering
+composer run dev:ssr
 ```
 
 ### Testing
 ```bash
-composer run test           # Run all Pest tests
-./vendor/bin/pest          # Run tests directly
-./vendor/bin/pest --filter AuthenticationTest  # Run specific test file
+# Run all tests (uses SQLite in-memory)
+composer run test
+./vendor/bin/pest
+
+# Run specific test
+./vendor/bin/pest --filter AuthenticationTest
+
+# With coverage
+./vendor/bin/pest --coverage
 ```
 
 ### Code Quality
 ```bash
-# PHP
-vendor/bin/pint            # Fix PHP code style (Laravel Pint)
+# PHP (Laravel Pint - PSR-12)
+vendor/bin/pint              # Auto-fix
+vendor/bin/pint --test       # Check only
 
 # JavaScript/TypeScript
-npm run lint               # ESLint with auto-fix
-npm run format             # Format with Prettier
-npm run format:check       # Check formatting without fixing
-npm run types              # TypeScript type checking
+npm run lint                 # ESLint with auto-fix
+npm run format               # Prettier format
+npm run format:check         # Check formatting
+npm run types                # TypeScript type check
 ```
 
-### Building
+### Database
 ```bash
-npm run build              # Build frontend assets for production
-npm run build:ssr          # Build with SSR support
+php artisan migrate
+php artisan migrate:fresh
+php artisan migrate:fresh --seed
+./reset-database.sh          # Custom reset script
 ```
 
-## Architecture
+### TypeScript Routes Generation
+```bash
+# MUST run after any route changes to regenerate typed routes
+php artisan wayfinder:generate
+```
 
-### Modular Domain Organization
+### Production Build
+```bash
+npm run build                          # Standard build
+npm run build:ssr                      # With SSR
+composer install --optimize-autoloader --no-dev
+php artisan optimize
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
 
-The application is organized into 6 business domain modules:
+## Architecture Overview
 
-1. **User Module** (`app/Models/User/`, `app/Repositories/User/`)
-   - User authentication, profiles, instructor management
-   - Models: User, Instructor, Education, Experience
+### Repository Pattern (Critical)
 
-2. **Course Module** (`app/Models/Course/`, `app/Repositories/Course/`)
-   - Core course management, enrollment, reviews
-   - Models: Course, Category, Chapter, Content, Enrollment, Review
+**All database access must go through repositories** - controllers never query models directly.
 
-3. **Assessment Module** (`app/Models/Assessment/`, `app/Repositories/Assessment/`)
-   - Exam and quiz management with session tracking
-   - Models: Exam, Quiz, Question, ExamSession, QuizSession, Answer
+```
+app/Repositories/
+├── BaseRepository.php              # Abstract base with CRUD operations
+├── BaseRepositoryInterface.php
+└── [Module]/                       # User/, Course/, Assessment/, etc.
+```
 
-4. **Certificate Module** (`app/Models/Certificate/`, `app/Repositories/Certificate/`)
-   - Course completion certificates
-   - Models: ManageCertificate
+**Base Repository Methods:**
+- `all()` - Get all records
+- `find($id)` - Find by ID
+- `create(array $data)` - Create record
+- `update($id, array $data)` - Update record
+- `delete($id)` - Delete record
+- `findBy(array $criteria)` - Find by criteria
+- `paginate($perPage = 15)` - Paginated results
 
-5. **Blog Module** (`app/Models/Article/`, `app/Repositories/Article/`)
-   - Blog article management
-   - Models: Article
-
-6. **Admin/Reporting Module** (`app/Http/Controllers/Admin/`, `app/Http/Controllers/WebAdmin/`)
-   - Admin operations, report generation, filtering, PDF/CSV export
-
-### Repository Pattern
-
-All database access uses the Repository pattern:
-
-- **Base**: `app/Repositories/BaseRepository.php` (abstract class with CRUD methods)
-- **Implementation**: Module-specific repositories extend BaseRepository
-- **Injection**: Repositories bound in `AppServiceProvider::boot()` and injected into controllers
-
-Example:
+**Controller Example:**
 ```php
-class CourseController extends Controller
+public function index(CourseRepository $courseRepo)
 {
-    public function index(CourseRepository $courseRepo)
-    {
-        $courses = $courseRepo->all();
-        return $this->json('Courses found', ['courses' => $courses], 200);
-    }
+    $courses = $courseRepo->all();
+    return $this->json('Courses found', ['courses' => $courses], 200);
 }
 ```
 
-### Inertia.js Integration
+### Module Organization
 
-- **Routes**: Defined in `routes/web.php` and `routes/settings.php`
-- **Controllers**: Return data via `Inertia::render('page-name', ['data' => $value])`
-- **Pages**: Located in `resources/js/pages/` (TypeScript + React)
-- **Layouts**: `resources/js/layouts/` (AppLayout, AuthLayout)
-- **SSR**: Configured in `config/inertia.php` (runs on port 13714)
+The application is organized by business domains:
 
-### Wayfinder Route Helpers
+```
+app/
+├── Models/
+│   ├── User/          # User, Instructor, Education, Experience
+│   ├── Course/        # Course, Chapter, Content, Category, Review, Enrollment
+│   ├── Assessment/    # Exam, Quiz, Question, Answer, ExamSession, QuizSession
+│   ├── Certificate/   # ManageCertificate
+│   ├── Blog/          # Blog models
+│   └── Cms*.php       # CmsPage, CmsMenu, CmsMenuItem
+├── Repositories/      # Mirrors model structure by module
+├── Http/
+│   ├── Controllers/   # Organized by module + MasterController
+│   └── Resources/     # API resource transformers
+```
 
-Laravel routes are automatically converted to type-safe TypeScript helpers:
-
-- Generated routes: `resources/js/routes/index.ts`
-- Import in components: `import { login, dashboard } from '@/routes'`
-- Usage: `<Link href={login().url}>Login</Link>`
-
-Regenerated automatically during Vite builds via the Wayfinder plugin.
-
-### Frontend Component Structure
+### Frontend Architecture
 
 ```
 resources/js/
-├── pages/                 # Inertia page components
-│   ├── auth/             # Login, register, 2FA, etc.
-│   ├── settings/         # Profile, password, appearance
-│   └── dashboard.tsx
-├── layouts/              # Layout wrappers (AppLayout, AuthLayout)
-├── components/           # Shared React components
-│   ├── ui/              # Radix UI primitives with Tailwind
-│   └── *.tsx            # App-specific components
-├── hooks/               # Custom React hooks
-│   ├── use-appearance.tsx    # Theme management
-│   ├── use-two-factor-auth.ts  # 2FA setup
-│   └── *.ts
-├── types/               # TypeScript type definitions
-└── routes/              # Generated Wayfinder routes
+├── app.tsx                    # Inertia app entry point
+├── ssr.tsx                    # SSR entry (optional)
+├── pages/                     # Inertia pages (route-based)
+│   ├── auth/                  # Login, register, 2FA, password flows
+│   ├── settings/              # Profile, appearance, 2FA, password
+│   ├── cms/                   # CMS management (pages + menus)
+│   │   ├── pages/            # Page CRUD + visual builder
+│   │   └── menus/            # Menu management with drag-and-drop
+│   ├── dashboard.tsx
+│   └── home.tsx
+├── layouts/                   # Layout components
+│   ├── app/                   # Authenticated app layout
+│   ├── auth/                  # Auth pages layout
+│   ├── settings/              # Settings pages layout
+│   └── public-layout.tsx
+├── components/
+│   ├── ui/                    # Radix UI components (shadcn pattern)
+│   ├── cms/                   # CMS-specific components
+│   ├── page-builder/          # Craft.js page builder components
+│   └── frontend/              # Public-facing components
+├── hooks/                     # Custom React hooks
+├── types/                     # TypeScript definitions
+└── routes/                    # Auto-generated typed routes (Wayfinder)
 ```
 
-### Authentication (Fortify)
+### TypeScript Routes (Laravel Wayfinder)
 
-- **Provider**: `app/Providers/FortifyServiceProvider.php`
-- **Actions**: `app/Actions/Fortify/` (CreateNewUser, ResetUserPassword)
-- **Features**: Email verification, password reset, 2FA (TOTP + recovery codes)
-- **Routes**: Auto-registered by Fortify, rendered via Inertia views
-
-All auth pages return Inertia components:
-```php
-Fortify::loginView(fn() => Inertia::render('auth/login', [...]));
-```
-
-## Database Conventions
-
-- **Migrations**: Follow modular structure (e.g., `create_courses_table`, `create_enrollments_table`)
-- **Foreign Keys**: Use `constrained()` with `onDelete('cascade')` for relationships
-- **Soft Deletes**: Enabled on most models via `SoftDeletes` trait
-- **Timestamps**: All tables have `created_at` and `updated_at`
-
-Key relationships:
-- Courses → Instructor (user_id), Category, Chapters
-- Chapters → Contents
-- Enrollments → User, Course (tracks progress percentage)
-- Exams/Quizzes → Course, Questions
-- Sessions → Exam/Quiz, User (tracks attempts and scores)
-
-## Testing with Pest
-
-- **Location**: `tests/Feature/` and `tests/Unit/`
-- **Config**: `tests/Pest.php`
-- **Database**: Uses SQLite with `RefreshDatabase` trait
-- **Factories**: Model factories in `database/factories/`
-
-Test structure:
-```php
-uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
-
-test('authenticated users can visit the dashboard', function () {
-    $this->actingAs($user = User::factory()->create());
-    $this->get(route('dashboard'))->assertOk();
-});
-```
-
-## CI/CD Workflows
-
-### Linter Workflow (`.github/workflows/lint.yml`)
-Runs on push/PR to `develop` and `main`:
-1. Laravel Pint (PHP)
-2. Prettier (JS/TS)
-3. ESLint (JS/TS)
-
-### Tests Workflow (`.github/workflows/tests.yml`)
-Runs on push/PR to `develop` and `main`:
-1. Setup PHP 8.4 + Node 22
-2. Install dependencies
-3. Build assets
-4. Run Pest tests
-
-## Key File Locations
-
-- **Routes**: `routes/web.php`, `routes/settings.php`
-- **Controllers**: `app/Http/Controllers/` (organized by module)
-- **Models**: `app/Models/` (organized by module)
-- **Repositories**: `app/Repositories/` (organized by module)
-- **Migrations**: `database/migrations/`
-- **Seeders**: `database/seeders/`
-- **Factories**: `database/factories/`
-- **Frontend Entry**: `resources/js/app.tsx`
-- **Vite Config**: `vite.config.ts`
-- **Tailwind Config**: Embedded in `vite.config.ts` (Tailwind v4)
-
-## Important Patterns
-
-### Controller Response Pattern
-All controllers use a consistent JSON response format:
-```php
-return $this->json($message, $data, $statusCode);
-```
-
-Returns:
-```json
-{
-    "message": "Success message",
-    "data": { "key": "value" },
-    "status": 200
-}
-```
-
-### Form Request Validation
-Use Form Request classes in `app/Http/Requests/` for validation:
-```php
-public function store(CreateCourseRequest $request)
-{
-    // $request is already validated
-}
-```
-
-### Resource Transformation
-Use API Resources for consistent data formatting:
-```php
-return CourseResource::make($course);
-return CourseResource::collection($courses);
-```
-
-## Development Notes
-
-### Working with Migrations
-```bash
-php artisan migrate              # Run pending migrations
-php artisan migrate:fresh        # Drop all tables and re-migrate
-php artisan migrate:fresh --seed # Re-migrate and seed data
-php artisan migrate:rollback     # Rollback last batch
-```
-
-### Queue Management
-```bash
-php artisan queue:work           # Start queue worker
-php artisan queue:listen --tries=1  # Used in dev mode
-```
-
-### Generating Files
-```bash
-php artisan make:model Course -mfsc  # Model + migration, factory, seeder, controller
-php artisan make:controller CourseController --resource
-php artisan make:request StoreCourseRequest
-```
-
-### Wayfinder Route Generation
-Routes are auto-generated during Vite builds. To manually regenerate:
+Routes are **type-safe and auto-generated**. After modifying Laravel routes:
 ```bash
 php artisan wayfinder:generate
 ```
 
-### Theme/Appearance System
-- Managed via `use-appearance.tsx` hook
-- Stores theme in localStorage
-- Supports: light, dark, system
-- Applied via `data-appearance` attribute on `<html>`
+**Usage Pattern:**
+```tsx
+import { login, dashboard, cms } from '@/routes';
+import { Link } from '@inertiajs/react';
 
-### Two-Factor Authentication
-- Setup flow in `resources/js/hooks/use-two-factor-auth.ts`
-- QR code generation for authenticator apps
-- Recovery codes stored encrypted
-- Challenge page for login verification
+// Simple routes
+<Link href={login().url}>Login</Link>
 
-## Branch Strategy
+// With parameters
+<Link href={cms.pages.show({ page: 123 }).url}>View Page</Link>
 
-- **main**: Production branch (triggers CI/CD)
-- **develop**: Development branch (triggers CI/CD)
-- **feature/***: Feature branches (create PRs to develop)
-
-## Environment Variables
-
-Key variables in `.env`:
-```env
-APP_URL=http://localhost:8000
-DB_CONNECTION=mysql
-QUEUE_CONNECTION=sync
-INERTIA_SSR_URL=http://127.0.0.1:13714
-INERTIA_SSR_ENABLED=false  # Set to true for SSR
+// With query params
+<Link href={dashboard({ filter: 'active' }).url}>Dashboard</Link>
 ```
 
-## Performance Considerations
+### MasterController Pattern
 
-- **React Compiler**: Enabled via Babel plugin for automatic memoization
-- **SSR Support**: Available but optional (set `INERTIA_SSR_ENABLED=true`)
-- **Queue Jobs**: Use for long-running tasks (report generation, emails)
-- **Eager Loading**: Use repository methods that eager-load relationships to avoid N+1 queries
+`MasterController` provides global application configuration via JSON API. It aggregates settings, social media, payment gateways, instructors, and other app-wide data for frontend consumption.
 
-## Common Tasks
+### CMS System
 
-### Adding a New Module
-1. Create models in `app/Models/{ModuleName}/`
-2. Create repository in `app/Repositories/{ModuleName}/` extending BaseRepository
-3. Register repository in `AppServiceProvider::boot()`
-4. Create controller in `app/Http/Controllers/{ModuleName}/`
-5. Add routes to `routes/web.php`
-6. Create Inertia page component in `resources/js/pages/`
+**Components:**
+- `CmsPage` - Dynamic pages with slug routing, homepage designation, visual builder
+- `CmsMenu` - Hierarchical navigation menus
+- `CmsMenuItem` - Menu items with drag-and-drop ordering (`@minoru/react-dnd-treeview`)
 
-### Adding a New Inertia Page
-1. Create component in `resources/js/pages/`
-2. Add route in `routes/web.php` using `Inertia::render()`
-3. Wayfinder will auto-generate route helper on next build
+**Key Features:**
+- Visual page builder using Craft.js (`@craftjs/core`)
+- Dynamic homepage via `CmsPageController::setAsHomepage()`
+- Public page routing via catch-all route (must be registered last in `routes/web.php`)
 
-### Adding UI Components
-- Use Radix UI primitives from `@radix-ui/react-*`
-- Follow existing patterns in `resources/js/components/ui/`
-- Apply Tailwind styles using `class-variance-authority` for variants
+**Route Structure:**
+```php
+// routes/web.php
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('cms')->name('cms.')->group(function () {
+        Route::resource('pages', CmsPageController::class);
+        Route::post('pages/{page}/set-homepage', [CmsPageController::class, 'setAsHomepage']);
+        Route::resource('menus', CmsMenuController::class);
+    });
+});
+
+// Catch-all MUST be last to avoid conflicts
+Route::get('{slug}', [CmsPageController::class, 'show'])
+    ->where('slug', '^(?!admin|dashboard|login|register|...).*$')
+    ->name('page.show');
+```
+
+### Authentication Flow
+
+Laravel Fortify handles auth with 2FA:
+- Login/Register: `resources/js/pages/auth/`
+- Two-Factor: QR codes + recovery codes
+- Email verification
+- Password reset
+- Settings: `resources/js/pages/settings/` (profile, password, 2FA, appearance)
+
+## Key Technical Features
+
+### React Compiler
+Vite configured with `babel-plugin-react-compiler` for automatic memoization. Manual `useMemo`/`useCallback` often unnecessary.
+
+### Server-Side Rendering (Optional)
+- Entry: `resources/js/ssr.tsx`
+- Build: `npm run build:ssr`
+- Start: `composer run dev:ssr` or `php artisan inertia:start-ssr`
+- Enable: Set `INERTIA_SSR_ENABLED=true` in `.env`
+
+### Media Management
+Spatie Media Library integrated for file uploads and media handling.
+
+### Slugs
+Spatie Laravel Sluggable provides automatic slug generation for models.
+
+## Code Conventions
+
+### PHP
+- **PSR-12** compliance (enforced by Laravel Pint)
+- **Type hints** and **return types** required
+- **DocBlocks** for public methods
+- **Repository pattern** mandatory - no direct model queries in controllers
+- **Resource classes** for API responses
+
+### TypeScript
+- **Strict mode** enabled
+- **Interfaces** for all component props
+- **No `any`** unless justified
+- Use **typed routes** from `@/routes`
+- **Functional components** with hooks
+
+### Naming Conventions
+- Controllers: `PascalCase` with `Controller` suffix
+- Models: Organized in module folders (`Models/User/Instructor.php`)
+- React components: `PascalCase` (`.tsx`)
+- Directories: `kebab-case` for frontend, `PascalCase` for backend modules
+- Routes: Generated TypeScript routes use camelCase
+
+### Commit Messages
+Format: `type: description` (English)
+
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+## Development Workflow
+
+### Branch Strategy
+- `main` - Production
+- `develop` - Development (PR target)
+- `feature/*` - Feature branches
+
+### CI/CD (GitHub Actions)
+Workflows in `.github/workflows/`:
+- **linter.yml** - Laravel Pint, Prettier, ESLint (on `main`/`develop`)
+- **tests.yml** - Dependencies, asset build, Pest tests (PHP 8.4 + Node 22)
+
+### After Route Changes
+Always regenerate TypeScript routes:
+```bash
+php artisan wayfinder:generate
+```
+
+### Concurrent Development Server
+`composer run dev` uses `concurrently` to run 4 processes:
+1. PHP server (port 8000)
+2. Queue worker
+3. Laravel Pail (logs)
+4. Vite dev server
+
+Stop all with `Ctrl+C`.
+
+## Important Notes
+
+### AGENTS.md File
+The `AGENTS.md` file contains **Next.js rules** which are **NOT applicable** to this project. This is a **Laravel + Inertia.js** application, not Next.js. Ignore those rules.
+
+### Route Order Matters
+The CMS catch-all slug route must be registered **last** in `routes/web.php` to prevent conflicts with admin/auth routes.
+
+### Testing Database
+Tests use **SQLite in-memory** for speed. Configuration in `phpunit.xml`.
+
+### Queue Workers
+Development uses `php artisan queue:listen --tries=1` for auto-reload. Production should use `queue:work` with supervisor.
+
+### Asset Compilation
+Vite serves assets in development. For production, `npm run build` compiles to `public/build/`.

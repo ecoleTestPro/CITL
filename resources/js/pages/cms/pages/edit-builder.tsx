@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import {
     GeneralInfoSection,
     SeoSection,
@@ -13,20 +13,11 @@ interface Props {
     page: Page;
 }
 
-export default function Edit({ page }: Props) {
+export default function EditBuilder({ page }: Props) {
     const [settingsOpen, setSettingsOpen] = useState(false);
-
-    // Initialize with empty builder data or existing Craft.js data
-    const initializeBuilderData = () => {
-        // Check if content is already Craft.js format (has ROOT node)
-        if (page.content && typeof page.content === 'object' && 'ROOT' in page.content) {
-            return JSON.stringify(page.content);
-        }
-        // Otherwise, start with empty canvas
-        return undefined;
-    };
-
-    const [builderData, setBuilderData] = useState<string | undefined>(initializeBuilderData());
+    const [builderData, setBuilderData] = useState<string>(
+        typeof page.content === 'string' ? page.content : JSON.stringify(page.content || {})
+    );
 
     const { data, setData, put, processing, errors } = useForm({
         title: page.title,
@@ -67,11 +58,8 @@ export default function Edit({ page }: Props) {
 
     const handleSave = async () => {
         try {
-            // Parse builder data to save as JSON object
-            const contentToSave = builderData ? JSON.parse(builderData) : {};
-
             // Update content with builder data
-            setData('content', contentToSave);
+            setData('content', builderData);
 
             // Submit the form
             setTimeout(() => {
@@ -92,13 +80,7 @@ export default function Edit({ page }: Props) {
 
     const handleBuilderChange = (data: string) => {
         setBuilderData(data);
-        // Parse and set as object for form
-        try {
-            const parsed = JSON.parse(data);
-            setData('content', parsed);
-        } catch (e) {
-            console.error('Failed to parse builder data:', e);
-        }
+        setData('content', data);
     };
 
     return (

@@ -7,13 +7,14 @@ import {
     SettingsPanel as PageSettingsPanel,
 } from '@/components/cms/page-editor';
 import { PageBuilder } from '@/components/page-builder';
-import type { Page } from '@/types/cms';
+import type { Page, PageTypesMap, PageType } from '@/types/cms';
 
 interface Props {
     page: Page;
+    pageTypes: PageTypesMap;
 }
 
-export default function Edit({ page }: Props) {
+export default function Edit({ page, pageTypes }: Props) {
     const [settingsOpen, setSettingsOpen] = useState(false);
 
     // Initialize with empty builder data or existing Craft.js data
@@ -31,6 +32,7 @@ export default function Edit({ page }: Props) {
     const { data, setData, put, processing, errors } = useForm({
         title: page.title,
         status: page.status,
+        page_type: page.page_type,
         seo_title: page.seo_title || '',
         seo_description: page.seo_description || '',
         content: page.content,
@@ -47,6 +49,13 @@ export default function Edit({ page }: Props) {
     const handleStatusChange = useCallback(
         (value: 'draft' | 'published') => {
             setData('status', value);
+        },
+        [setData]
+    );
+
+    const handlePageTypeChange = useCallback(
+        (value: PageType) => {
+            setData('page_type', value);
         },
         [setData]
     );
@@ -123,8 +132,11 @@ export default function Edit({ page }: Props) {
                     <GeneralInfoSection
                         title={data.title}
                         status={data.status}
+                        pageType={data.page_type}
+                        pageTypes={pageTypes}
                         onTitleChange={handleTitleChange}
                         onStatusChange={handleStatusChange}
+                        onPageTypeChange={handlePageTypeChange}
                         titleError={errors.title}
                     />
                 }

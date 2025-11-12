@@ -7,6 +7,16 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
+    // Load dynamic homepage if set
+    $homepage = \App\Models\CmsPage::homepage()->first();
+
+    if ($homepage) {
+        return Inertia::render('cms/page-view', [
+            'page' => $homepage,
+        ]);
+    }
+
+    // Fallback to default home page
     return Inertia::render('home');
 })->name('home');
 
@@ -18,11 +28,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // CMS Routes
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::resource('pages', CmsPageController::class);
+        Route::post('pages/{page}/set-homepage', [CmsPageController::class, 'setAsHomepage'])
+            ->name('pages.set-homepage');
         Route::resource('menus', CmsMenuController::class);
     });
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';
 
 // Public page view (must be last to avoid conflicts)
 Route::get('{slug}', [CmsPageController::class, 'show'])

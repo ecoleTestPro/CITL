@@ -7,20 +7,27 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import type { PageType, PageTypesMap } from '@/types/cms';
 
 interface GeneralInfoSectionProps {
     title: string;
     status: 'draft' | 'published';
+    pageType: PageType;
+    pageTypes: PageTypesMap;
     onTitleChange: (value: string) => void;
     onStatusChange: (value: 'draft' | 'published') => void;
+    onPageTypeChange: (value: PageType) => void;
     titleError?: string;
 }
 
 export function GeneralInfoSection({
     title,
     status,
+    pageType,
+    pageTypes,
     onTitleChange,
     onStatusChange,
+    onPageTypeChange,
     titleError,
 }: GeneralInfoSectionProps) {
     return (
@@ -40,6 +47,32 @@ export function GeneralInfoSection({
                 {titleError && (
                     <p className="mt-1 text-sm text-destructive">
                         {titleError}
+                    </p>
+                )}
+            </div>
+
+            <div>
+                <Label htmlFor="page_type" className="text-xs font-medium uppercase text-muted-foreground">
+                    Type de page
+                </Label>
+                <Select
+                    value={pageType}
+                    onValueChange={(value) => onPageTypeChange(value as PageType)}
+                >
+                    <SelectTrigger className="mt-2">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {Object.entries(pageTypes).map(([key, label]) => (
+                            <SelectItem key={key} value={key}>
+                                {label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+                {pageType !== 'custom' && (
+                    <p className="mt-1 text-xs text-muted-foreground">
+                        Page statique avec structure prédéfinie
                     </p>
                 )}
             </div>

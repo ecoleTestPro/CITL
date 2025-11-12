@@ -11,11 +11,17 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { PageTypesMap } from '@/types/cms';
 
-export default function Create() {
+interface Props {
+    pageTypes: PageTypesMap;
+}
+
+export default function Create({ pageTypes }: Props) {
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         status: 'draft',
+        page_type: 'custom',
         seo_title: '',
         seo_description: '',
         content: null,
@@ -54,6 +60,32 @@ export default function Create() {
                                     {errors.title && (
                                         <p className="mt-1 text-sm text-destructive">
                                             {errors.title}
+                                        </p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <Label htmlFor="page_type">Type de page</Label>
+                                    <Select
+                                        value={data.page_type}
+                                        onValueChange={(value) =>
+                                            setData('page_type', value)
+                                        }
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {Object.entries(pageTypes).map(([key, label]) => (
+                                                <SelectItem key={key} value={key}>
+                                                    {label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                    {data.page_type !== 'custom' && (
+                                        <p className="mt-1 text-xs text-muted-foreground">
+                                            Les pages statiques ont une structure prédéfinie
                                         </p>
                                     )}
                                 </div>

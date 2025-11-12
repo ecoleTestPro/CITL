@@ -19,6 +19,7 @@ class CmsPageController extends Controller
 
         return Inertia::render('cms/pages/index', [
             'pages' => $pages,
+            'pageTypes' => CmsPage::pageTypes(),
         ]);
     }
 
@@ -27,7 +28,9 @@ class CmsPageController extends Controller
      */
     public function create()
     {
-        return Inertia::render('cms/pages/create');
+        return Inertia::render('cms/pages/create', [
+            'pageTypes' => CmsPage::pageTypes(),
+        ]);
     }
 
     /**
@@ -39,6 +42,7 @@ class CmsPageController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'nullable|array',
             'status' => 'required|in:draft,published',
+            'page_type' => 'required|string|in:' . implode(',', array_keys(CmsPage::pageTypes())),
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
         ]);
@@ -58,6 +62,7 @@ class CmsPageController extends Controller
     {
         return Inertia::render('cms/pages/edit', [
             'page' => $page,
+            'pageTypes' => CmsPage::pageTypes(),
         ]);
     }
 
@@ -70,6 +75,7 @@ class CmsPageController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'nullable|array',
             'status' => 'required|in:draft,published',
+            'page_type' => 'required|string|in:' . implode(',', array_keys(CmsPage::pageTypes())),
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
         ]);
@@ -102,5 +108,19 @@ class CmsPageController extends Controller
         return Inertia::render('cms/page-view', [
             'page' => $page,
         ]);
+    }
+
+    /**
+     * Set a page as the homepage.
+     */
+    public function setAsHomepage(CmsPage $page)
+    {
+        // Remove homepage status from all other pages
+        CmsPage::where('is_homepage', true)->update(['is_homepage' => false]);
+
+        // Set this page as homepage
+        $page->update(['is_homepage' => true]);
+
+        return back()->with('success', 'Page définie comme page d\'accueil');
     }
 }

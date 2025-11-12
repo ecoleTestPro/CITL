@@ -23,6 +23,45 @@ class CmsPagesSeeder extends Seeder
         }
 
         $pages = [
+            // Page d'accueil
+            [
+                'title' => 'Bienvenue au CITL',
+                'slug' => 'accueil',
+                'content' => [
+                    'blocks' => [
+                        [
+                            'type' => 'header',
+                            'data' => ['text' => 'Comité Ivoirien des Tests Logiciels', 'level' => 1],
+                        ],
+                        [
+                            'type' => 'paragraph',
+                            'data' => ['text' => 'Le CITL (Comité Ivoirien des Tests Logiciels) est le représentant officiel de l\'ISTQB en Côte d\'Ivoire. Notre mission est de promouvoir l\'excellence dans le domaine des tests logiciels et d\'accompagner les professionnels dans leur certification.'],
+                        ],
+                        [
+                            'type' => 'header',
+                            'data' => ['text' => 'Pourquoi se certifier ?', 'level' => 2],
+                        ],
+                        [
+                            'type' => 'list',
+                            'data' => [
+                                'style' => 'unordered',
+                                'items' => [
+                                    'Reconnaissance internationale de vos compétences',
+                                    'Amélioration de votre employabilité',
+                                    'Évolution de carrière accélérée',
+                                    'Accès à un réseau mondial de professionnels',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+                'status' => 'published',
+                'page_type' => 'home',
+                'is_homepage' => true,
+                'seo_title' => 'CITL - Comité Ivoirien des Tests Logiciels',
+                'seo_description' => 'Le CITL est le représentant officiel de l\'ISTQB en Côte d\'Ivoire. Obtenez votre certification ISTQB et rejoignez la communauté des testeurs professionnels.',
+            ],
+
             // CITL Section
             [
                 'title' => 'À propos de l\'ISTQB',
@@ -40,6 +79,7 @@ class CmsPagesSeeder extends Seeder
                     ],
                 ],
                 'status' => 'published',
+                'page_type' => 'custom',
                 'seo_title' => 'À propos de l\'ISTQB - CITL',
                 'seo_description' => 'Découvrez l\'ISTQB, l\'organisation internationale de certification des testeurs logiciels.',
             ],
@@ -59,6 +99,7 @@ class CmsPagesSeeder extends Seeder
                     ],
                 ],
                 'status' => 'published',
+                'page_type' => 'about',
                 'seo_title' => 'À propos du CITL - Comité Ivoirien des Tests Logiciels',
                 'seo_description' => 'Le CITL, représentant officiel de l\'ISTQB en Côte d\'Ivoire.',
             ],
@@ -370,6 +411,7 @@ class CmsPagesSeeder extends Seeder
                     ],
                 ],
                 'status' => 'published',
+                'page_type' => 'contact',
                 'seo_title' => 'Contact - CITL',
                 'seo_description' => 'Contactez le Comité Ivoirien des Tests Logiciels.',
             ],
@@ -377,6 +419,14 @@ class CmsPagesSeeder extends Seeder
 
         foreach ($pages as $pageData) {
             $pageData['created_by'] = $user->id;
+            // Set default page_type if not specified
+            if (!isset($pageData['page_type'])) {
+                $pageData['page_type'] = 'custom';
+            }
+            // Set default is_homepage if not specified
+            if (!isset($pageData['is_homepage'])) {
+                $pageData['is_homepage'] = false;
+            }
             CmsPage::create($pageData);
         }
 

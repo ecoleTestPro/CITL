@@ -200,6 +200,78 @@ import { Link } from '@inertiajs/react';
 - Dynamic homepage via `CmsPageController::setAsHomepage()`
 - Public page routing via catch-all route (must be registered last in `routes/web.php`)
 
+#### Page Builder (Craft.js)
+
+**Location:** `resources/js/components/page-builder/`
+
+The visual page builder allows WYSIWYG content creation with drag-and-drop sections and widgets.
+
+**Architecture:**
+```
+page-builder/
+├── PageBuilder.tsx          # Main editor wrapper
+├── Canvas.tsx               # Root drop zone
+├── sections/
+│   ├── Section.tsx          # Container for widgets
+│   └── SectionSettings.tsx  # Section configuration panel
+├── widgets/                 # Draggable content blocks
+│   ├── HeroWidget.tsx       # Hero section with CTA
+│   ├── ServiceWidget.tsx    # Service card with icon
+│   ├── HeroWidgetSettings.tsx
+│   └── ServiceWidgetSettings.tsx
+├── toolbox/
+│   └── Toolbox.tsx          # Floating palette (bottom-left)
+└── settings/
+    └── SettingsPanel.tsx    # Property editor (right sidebar)
+```
+
+**Component Registration:**
+All builder components MUST be registered in the resolver:
+```tsx
+<Editor resolver={{ Canvas, Section, HeroWidget, ServiceWidget }}>
+```
+
+**Settings Components:**
+- Use **synchronous imports** (NOT dynamic `import().then()`)
+- Settings are linked via `ComponentName.craft.related.settings`
+```tsx
+// ✅ Correct
+import { SectionSettings } from './SectionSettings';
+Section.craft = {
+  related: { settings: SectionSettings }
+};
+
+// ❌ Wrong - causes async component error
+Section.craft = {
+  related: { settings: () => import('./SectionSettings').then(m => m.SectionSettings) }
+};
+```
+
+**Content Storage:**
+- Stored as JSON in `cms_pages.content` column
+- Empty pages: `content = null` (Craft.js generates structure from `<Frame>` children)
+- Saved format: Serialized Craft.js node tree with `ROOT` key
+- Content is auto-saved on every change via `onNodesChange` callback
+
+**Header/Footer in Builder:**
+- Displayed as read-only preview (`pointer-events: none`)
+- Loaded from database via `<HeaderMenu />` and `<FooterMenu />`
+- Visual indicators: "Header (lecture seule)" badges
+- Not editable in page builder
+
+**Adding New Widgets:**
+1. Create widget component in `widgets/` with `useNode` hook
+2. Create settings component (synchronous import)
+3. Define `WidgetName.craft` with default props and settings reference
+4. Register in `PageBuilder.tsx` resolver
+5. Add to `Toolbox.tsx` widgets array
+
+**Key Craft.js Hooks:**
+- `useNode()` - Access node state, connectors for drag/drop
+- `useEditor()` - Access global editor state, actions
+- `connectors.connect(drag(ref))` - Make element draggable
+- `query.serialize()` - Export current state to JSON
+
 **Route Structure:**
 ```php
 // routes/web.php
@@ -297,6 +369,52 @@ php artisan wayfinder:generate
 4. Vite dev server
 
 Stop all with `Ctrl+C`.
+
+## Design System & UI/UX
+
+### Color Palette
+The application uses a defined color system documented in `UI-UX-GUIDELINES.md`:
+
+**Primary Colors:**
+- Primary (Orange): `#d65d03` - Actions, CTAs, emphasis
+- Secondary (Green): `#5fa772` - Success states, secondary actions
+
+**Usage in Tailwind:**
+```tsx
+<button className="bg-primary hover:bg-primary-hover text-white">
+  Action principale
+</button>
+<span className="bg-secondary/10 text-secondary">Badge</span>
+```
+
+**CSS Variables:**
+```css
+--primary: #d65d03;
+--secondary: #5fa772;
+--background: #ffffff;
+--foreground: #0a0a0a;
+--muted: #f5f5f5;
+--border: #e5e5e5;
+```
+
+### Typography
+- **Font Family:** Inter (Google Fonts)
+- **System:** 4px spacing scale (0.25rem increments)
+- **Breakpoints:** Mobile-first (640px, 768px, 1024px, 1280px, 1536px)
+
+### Component Library
+Using **shadcn/ui** pattern with Radix UI primitives in `resources/js/components/ui/`:
+- Button, Input, Card, Badge, Dialog, Select, etc.
+- All components follow accessibility guidelines
+- Customizable via Tailwind classes
+
+### Accessibility Requirements
+- Minimum contrast ratio: 4.5:1 for normal text
+- All interactive elements keyboard accessible
+- ARIA labels for icon-only buttons
+- Focus states visible for keyboard navigation
+
+**Reference:** See `UI-UX-GUIDELINES.md` for complete design system documentation.
 
 ## Important Notes
 

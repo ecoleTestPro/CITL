@@ -1,12 +1,13 @@
 import { useNode } from '@craftjs/core';
 import { cn } from '@/lib/utils';
-import type { SectionSettings } from '@/types/page-builder';
+import type { SectionSettings as SectionSettingsType } from '@/types/page-builder';
+import { SectionSettings } from './SectionSettings';
 
 interface SectionProps {
     /** Widgets enfants contenus dans cette section */
     children?: React.ReactNode;
     /** Configuration de la section (largeur, layout, styles, etc.) */
-    settings?: Partial<SectionSettings>;
+    settings?: Partial<SectionSettingsType>;
 }
 
 /**
@@ -147,6 +148,6 @@ Section.craft = {
         },
     },
     related: {
-        settings: () => import('./SectionSettings').then((m) => m.SectionSettings),
+        settings: SectionSettings,
     },
 };

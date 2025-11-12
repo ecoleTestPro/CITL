@@ -1,11 +1,12 @@
 import { useNode } from '@craftjs/core';
 import { cn } from '@/lib/utils';
 import { Icon, icons } from 'lucide-react';
-import type { ServiceSettings } from '@/types/page-builder';
+import type { ServiceSettings as ServiceSettingsType } from '@/types/page-builder';
+import { ServiceWidgetSettings } from './ServiceWidgetSettings';
 
 interface ServiceWidgetProps {
     /** Configuration du widget service (titre, description, icône, styles) */
-    settings?: Partial<ServiceSettings>;
+    settings?: Partial<ServiceSettingsType>;
 }
 
 /**
@@ -104,7 +105,6 @@ ServiceWidget.craft = {
         },
     },
     related: {
-        settings: () =>
-            import('./ServiceWidgetSettings').then((m) => m.ServiceWidgetSettings),
+        settings: ServiceWidgetSettings,
     },
 };

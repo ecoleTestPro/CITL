@@ -1,5 +1,5 @@
 import { Head, useForm } from '@inertiajs/react';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import {
     GeneralInfoSection,
     SeoSection,
@@ -31,36 +31,48 @@ export default function Edit({ page, pageTypes }: Props) {
 
     /**
      * Initialise les données du builder à partir du contenu de la page
-     *
-     * Gère 3 cas de figure :
-     * 1. Contenu déjà sérialisé en string JSON (format Craft.js)
-     * 2. Contenu en objet avec structure ROOT (format Craft.js natif)
-     * 3. Contenu vide ou invalide (retourne undefined pour canvas vierge)
-     *
-     * @returns {string | undefined} Données sérialisées pour Craft.js ou undefined
+     * Mémoïsé pour éviter les recalculs inutiles et les boucles infinies
      */
-    const initializeBuilderData = () => {
+    const initialBuilderData = useMemo(() => {
         if (!page.content) return undefined;
 
-        // If content is already a string, use it
+        // Si c'est une string, on vérifie que c'est du JSON Craft.js valide
         if (typeof page.content === 'string') {
             try {
-                JSON.parse(page.content); // Validate it's valid JSON
-                return page.content;
+                const parsed = JSON.parse(page.content);
+                // Vérifier que c'est bien du format Craft.js (doit avoir ROOT)
+                if (parsed && typeof parsed === 'object' && 'ROOT' in parsed) {
+                    return page.content;
+                }
+                console.warn('Content is JSON but not Craft.js format, starting with empty canvas');
+                return undefined;
             } catch {
+                console.warn('Content is not valid JSON, starting with empty canvas');
                 return undefined;
             }
         }
 
-        // If content is an object with ROOT node (Craft.js format), stringify it
-        if (typeof page.content === 'object' && 'ROOT' in page.content) {
-            return JSON.stringify(page.content);
+        // Si c'est un objet
+        if (typeof page.content === 'object' && page.content !== null) {
+            // Format Craft.js avec ROOT
+            if ('ROOT' in page.content) {
+                return JSON.stringify(page.content);
+            }
+
+            // Ancien format Editor.js (avec "blocks")
+            if ('blocks' in page.content) {
+                console.warn('Page uses old Editor.js format. Starting with empty canvas. Old content preserved in database.');
+                return undefined;
+            }
+
+            console.warn('Unknown content format, starting with empty canvas');
+            return undefined;
         }
 
         return undefined;
-    };
+    }, [page.content]);
 
-    const [builderData, setBuilderData] = useState<string | undefined>(initializeBuilderData());
+    const [builderData, setBuilderData] = useState<string | undefined>(initialBuilderData);
 
     const { data, setData, put, processing, errors } = useForm({
         title: page.title,

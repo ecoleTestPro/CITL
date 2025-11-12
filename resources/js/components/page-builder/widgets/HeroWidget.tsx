@@ -1,11 +1,12 @@
 import { useNode } from '@craftjs/core';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import type { HeroSettings } from '@/types/page-builder';
+import type { HeroSettings as HeroSettingsType } from '@/types/page-builder';
+import { HeroWidgetSettings } from './HeroWidgetSettings';
 
 interface HeroWidgetProps {
     /** Configuration du widget hero (titre, texte, bouton, image, styles) */
-    settings?: Partial<HeroSettings>;
+    settings?: Partial<HeroSettingsType>;
 }
 
 /**
@@ -123,6 +124,6 @@ HeroWidget.craft = {
         },
     },
     related: {
-        settings: () => import('./HeroWidgetSettings').then((m) => m.HeroWidgetSettings),
+        settings: HeroWidgetSettings,
     },
 };

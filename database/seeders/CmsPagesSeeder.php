@@ -22,39 +22,17 @@ class CmsPagesSeeder extends Seeder
             ]);
         }
 
+        // Empty Craft.js structure for all pages
+        // Note: When initialData is undefined, Craft.js creates the structure from <Frame> children
+        // So we just need to pass null/undefined for empty pages
+        $emptyCraftjsContent = null;
+
         $pages = [
             // Page d'accueil
             [
                 'title' => 'Bienvenue au CITL',
                 'slug' => 'accueil',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Comité Ivoirien des Tests Logiciels', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Le CITL (Comité Ivoirien des Tests Logiciels) est le représentant officiel de l\'ISTQB en Côte d\'Ivoire. Notre mission est de promouvoir l\'excellence dans le domaine des tests logiciels et d\'accompagner les professionnels dans leur certification.'],
-                        ],
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Pourquoi se certifier ?', 'level' => 2],
-                        ],
-                        [
-                            'type' => 'list',
-                            'data' => [
-                                'style' => 'unordered',
-                                'items' => [
-                                    'Reconnaissance internationale de vos compétences',
-                                    'Amélioration de votre employabilité',
-                                    'Évolution de carrière accélérée',
-                                    'Accès à un réseau mondial de professionnels',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'page_type' => 'home',
                 'is_homepage' => true,
@@ -66,18 +44,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'À propos de l\'ISTQB',
                 'slug' => 'a-propos-istqb',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'À propos de l\'ISTQB', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'L\'ISTQB (International Software Testing Qualifications Board) est l\'organisation mondiale de référence pour la certification des testeurs de logiciels.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'page_type' => 'custom',
                 'seo_title' => 'À propos de l\'ISTQB - CITL',
@@ -86,18 +53,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'À propos du CITL',
                 'slug' => 'a-propos-citl',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'À propos du CITL', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Le CITL (Comité Ivoirien des Tests Logiciels) est le représentant officiel de l\'ISTQB en Côte d\'Ivoire.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'page_type' => 'about',
                 'seo_title' => 'À propos du CITL - Comité Ivoirien des Tests Logiciels',
@@ -106,18 +62,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Notre Vision',
                 'slug' => 'notre-vision',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Notre Vision', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Devenir le leader régional de la certification en tests logiciels et promouvoir l\'excellence dans le domaine du test en Côte d\'Ivoire et en Afrique de l\'Ouest.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Notre Vision - CITL',
                 'seo_description' => 'La vision du CITL pour l\'excellence en tests logiciels.',
@@ -125,26 +70,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Nos Missions',
                 'slug' => 'nos-missions',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Nos Missions', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'list',
-                            'data' => [
-                                'style' => 'unordered',
-                                'items' => [
-                                    'Promouvoir les bonnes pratiques de test logiciel',
-                                    'Organiser des certifications ISTQB',
-                                    'Former les professionnels du test',
-                                    'Développer la communauté des testeurs',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Nos Missions - CITL',
                 'seo_description' => 'Les missions du CITL pour promouvoir les tests logiciels.',
@@ -152,18 +78,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Le Bureau Exécutif',
                 'slug' => 'bureau-executif',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Le Bureau Exécutif', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Le bureau exécutif du CITL est composé de professionnels expérimentés dans le domaine des tests logiciels.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Bureau Exécutif - CITL',
                 'seo_description' => 'Rencontrez l\'équipe dirigeante du CITL.',
@@ -173,18 +88,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Membres du CITL',
                 'slug' => 'membres-citl',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Membres du CITL', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Découvrez les membres actifs du CITL et leur contribution à la communauté des testeurs.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Membres du CITL',
                 'seo_description' => 'Liste des membres du Comité Ivoirien des Tests Logiciels.',
@@ -192,18 +96,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Les Groupes de Travail',
                 'slug' => 'groupes-travail',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Les Groupes de Travail', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Les groupes de travail du CITL collaborent sur différents projets et initiatives.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Groupes de Travail - CITL',
                 'seo_description' => 'Les groupes de travail actifs au sein du CITL.',
@@ -213,26 +106,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Pourquoi obtenir la certification ISTQB',
                 'slug' => 'pourquoi-certification-istqb',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Pourquoi obtenir la certification ISTQB', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'list',
-                            'data' => [
-                                'style' => 'unordered',
-                                'items' => [
-                                    'Reconnaissance internationale',
-                                    'Amélioration des compétences',
-                                    'Évolution de carrière',
-                                    'Crédibilité professionnelle',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Pourquoi la certification ISTQB - CITL',
                 'seo_description' => 'Les avantages de la certification ISTQB pour votre carrière.',
@@ -240,18 +114,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'ISTQB Foundation Level',
                 'slug' => 'istqb-foundation-level',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'ISTQB Core Foundation Level', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'La certification Foundation Level est le point d\'entrée dans le schéma de certification ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'ISTQB Foundation Level - CITL',
                 'seo_description' => 'Tout savoir sur la certification ISTQB Foundation Level.',
@@ -259,18 +122,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'ISTQB Advanced Level',
                 'slug' => 'istqb-advanced-level',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'ISTQB Core Advanced Level', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Le niveau Advanced approfondit les connaissances techniques et managériales en test logiciel.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'ISTQB Advanced Level - CITL',
                 'seo_description' => 'Certification ISTQB Advanced Level pour les professionnels expérimentés.',
@@ -280,18 +132,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'FAQ sur les examens',
                 'slug' => 'faq-examens',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Questions Fréquentes sur les Examens', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Retrouvez les réponses aux questions les plus fréquentes concernant les examens ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'FAQ Examens ISTQB - CITL',
                 'seo_description' => 'Questions fréquentes sur les examens de certification ISTQB.',
@@ -299,18 +140,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Frais d\'examen',
                 'slug' => 'frais-examen',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Frais d\'examen', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Consultez les tarifs des différents examens de certification ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Frais d\'examen ISTQB - CITL',
                 'seo_description' => 'Tarifs des examens de certification ISTQB en Côte d\'Ivoire.',
@@ -318,18 +148,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'S\'inscrire à l\'examen',
                 'slug' => 'inscription-examen',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'S\'inscrire à l\'examen', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Procédure d\'inscription aux examens de certification ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Inscription examen ISTQB - CITL',
                 'seo_description' => 'Comment s\'inscrire aux examens ISTQB avec le CITL.',
@@ -337,18 +156,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Glossaire des tests logiciels',
                 'slug' => 'glossaire-tests-logiciels',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Glossaire ISTQB', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Glossaire officiel des termes utilisés dans le domaine des tests logiciels.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Glossaire ISTQB - CITL',
                 'seo_description' => 'Glossaire des termes de test logiciel ISTQB.',
@@ -358,18 +166,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Organismes accrédités',
                 'slug' => 'organismes-accredites',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Organismes de Formation Accrédités', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Liste des organismes de formation accrédités par le CITL pour dispenser les formations ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Organismes Accrédités - CITL',
                 'seo_description' => 'Organismes de formation ISTQB accrédités en Côte d\'Ivoire.',
@@ -377,18 +174,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Demande d\'accréditation',
                 'slug' => 'demande-accreditation',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Demande d\'accréditation', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'Procédure pour devenir un organisme de formation accrédité par le CITL.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'seo_title' => 'Demande d\'accréditation - CITL',
                 'seo_description' => 'Comment devenir organisme de formation accrédité ISTQB.',
@@ -398,18 +184,7 @@ class CmsPagesSeeder extends Seeder
             [
                 'title' => 'Contact',
                 'slug' => 'contact',
-                'content' => [
-                    'blocks' => [
-                        [
-                            'type' => 'header',
-                            'data' => ['text' => 'Contactez-nous', 'level' => 1],
-                        ],
-                        [
-                            'type' => 'paragraph',
-                            'data' => ['text' => 'N\'hésitez pas à nous contacter pour toute question concernant les certifications ISTQB.'],
-                        ],
-                    ],
-                ],
+                'content' => $emptyCraftjsContent,
                 'status' => 'published',
                 'page_type' => 'contact',
                 'seo_title' => 'Contact - CITL',

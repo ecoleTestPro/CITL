@@ -3,10 +3,37 @@ import { cn } from '@/lib/utils';
 import type { SectionSettings } from '@/types/page-builder';
 
 interface SectionProps {
+    /** Widgets enfants contenus dans cette section */
     children?: React.ReactNode;
+    /** Configuration de la section (largeur, layout, styles, etc.) */
     settings?: Partial<SectionSettings>;
 }
 
+/**
+ * Section - Conteneur flexible pour organiser les widgets
+ *
+ * Une section est un conteneur qui peut accueillir plusieurs widgets.
+ * Elle offre des options de layout (flex/grid), de largeur (full/boxed/narrow),
+ * et de styles (background, padding, margin).
+ *
+ * Fonctionnalités :
+ * - Drag-and-drop pour réorganisation
+ * - Accepte des widgets enfants (canvas)
+ * - Configuration flexible (flex ou grid)
+ * - Styles personnalisables (couleur, image, gradient)
+ * - Ring visuel quand sélectionnée
+ * - Placeholder quand vide
+ *
+ * Configuration disponible :
+ * - width : 'full' | 'boxed' | 'narrow'
+ * - layout : 'flex' | 'grid'
+ * - flexDirection, justifyContent, alignItems pour flex
+ * - gridCols pour grid
+ * - padding, margin, background, minHeight
+ *
+ * @param props - Propriétés du composant
+ * @returns Section configurable et éditable
+ */
 export const Section = ({ children, settings = {} }: SectionProps) => {
     const {
         connectors: { connect, drag },
@@ -66,7 +93,11 @@ export const Section = ({ children, settings = {} }: SectionProps) => {
 
     return (
         <section
-            ref={(ref) => ref && connect(drag(ref))}
+            ref={(ref) => {
+                if (ref) {
+                    connect(drag(ref));
+                }
+            }}
             className={containerClass}
             style={{
                 ...backgroundStyle,
@@ -82,7 +113,18 @@ export const Section = ({ children, settings = {} }: SectionProps) => {
                 minHeight,
             }}
         >
-            {children}
+            {children || (
+                <div className="flex min-h-[200px] items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/25 bg-background/50">
+                    <div className="text-center">
+                        <p className="text-sm font-medium text-muted-foreground">
+                            Glissez un widget ici
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground/75">
+                            ou cliquez sur un widget dans la barre latérale
+                        </p>
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

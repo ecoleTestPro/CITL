@@ -4,9 +4,38 @@ import { cn } from '@/lib/utils';
 import type { HeroSettings } from '@/types/page-builder';
 
 interface HeroWidgetProps {
+    /** Configuration du widget hero (titre, texte, bouton, image, styles) */
     settings?: Partial<HeroSettings>;
 }
 
+/**
+ * Widget Hero - Section d'en-tête impactante avec CTA
+ *
+ * Widget de type "hero" utilisé généralement en haut de page pour capter
+ * l'attention avec un grand titre, un sous-titre et un appel à l'action.
+ *
+ * Fonctionnalités :
+ * - Titre et sous-titre personnalisables
+ * - Bouton CTA avec lien configurable
+ * - Image de fond ou gradient par défaut
+ * - Tailles de texte ajustables
+ * - Alignement du texte (left/center/right)
+ * - Padding configurable
+ * - Ring visuel quand sélectionné
+ *
+ * Configuration disponible :
+ * - title : Texte du titre principal
+ * - subtitle : Texte du sous-titre
+ * - buttonText : Libellé du bouton
+ * - buttonLink : URL de destination
+ * - backgroundImage : URL de l'image de fond
+ * - textAlign : Alignement du contenu
+ * - titleSize, subtitleSize : Tailles des textes
+ * - padding : Espacement interne
+ *
+ * @param props - Propriétés du composant
+ * @returns Widget hero éditable avec tous ses éléments
+ */
 export const HeroWidget = ({ settings = {} }: HeroWidgetProps) => {
     const {
         connectors: { connect, drag },
@@ -29,7 +58,11 @@ export const HeroWidget = ({ settings = {} }: HeroWidgetProps) => {
 
     return (
         <div
-            ref={(ref) => ref && connect(drag(ref))}
+            ref={(ref) => {
+                if (ref) {
+                    connect(drag(ref));
+                }
+            }}
             className={cn(
                 'relative overflow-hidden rounded-lg',
                 selected && 'ring-2 ring-primary ring-offset-2'

@@ -4,9 +4,35 @@ import { Icon, icons } from 'lucide-react';
 import type { ServiceSettings } from '@/types/page-builder';
 
 interface ServiceWidgetProps {
+    /** Configuration du widget service (titre, description, icône, styles) */
     settings?: Partial<ServiceSettings>;
 }
 
+/**
+ * Widget Service - Carte de présentation d'un service ou fonctionnalité
+ *
+ * Widget sous forme de carte utilisé pour présenter un service, une fonctionnalité
+ * ou un avantage de manière claire et visuelle avec une icône.
+ *
+ * Fonctionnalités :
+ * - Titre et description personnalisables
+ * - Icône configurable (bibliothèque Lucide)
+ * - Couleur et taille d'icône ajustables
+ * - Padding configurable
+ * - Effet hover avec shadow
+ * - Ring visuel quand sélectionné
+ *
+ * Configuration disponible :
+ * - title : Titre du service
+ * - description : Description détaillée
+ * - icon : Nom de l'icône Lucide (ex: 'Zap', 'Star', 'Heart')
+ * - iconColor : Couleur de l'icône (hex ou nom CSS)
+ * - iconSize : Taille de l'icône (ex: '48px')
+ * - padding : Espacement interne
+ *
+ * @param props - Propriétés du composant
+ * @returns Widget service éditable en forme de carte
+ */
 export const ServiceWidget = ({ settings = {} }: ServiceWidgetProps) => {
     const {
         connectors: { connect, drag },
@@ -29,7 +55,11 @@ export const ServiceWidget = ({ settings = {} }: ServiceWidgetProps) => {
 
     return (
         <div
-            ref={(ref) => ref && connect(drag(ref))}
+            ref={(ref) => {
+                if (ref) {
+                    connect(drag(ref));
+                }
+            }}
             className={cn(
                 'rounded-lg bg-white p-6 shadow-sm transition-all hover:shadow-md',
                 selected && 'ring-2 ring-primary ring-offset-2'

@@ -14,16 +14,49 @@ interface Props {
     pageTypes: PageTypesMap;
 }
 
+/**
+ * Page d'édition pour le CMS avec page builder visuel intégré
+ *
+ * Permet d'éditer une page existante en utilisant Craft.js pour la construction
+ * visuelle du contenu. Gère les métadonnées (titre, status, SEO) et le contenu
+ * visuel de manière séparée.
+ *
+ * @param {Props} props - Les propriétés du composant
+ * @param {Page} props.page - La page à éditer avec toutes ses données
+ * @param {PageTypesMap} props.pageTypes - Dictionnaire des types de pages disponibles
+ * @returns {JSX.Element} Interface d'édition complète avec toolbar, settings et builder
+ */
 export default function Edit({ page, pageTypes }: Props) {
     const [settingsOpen, setSettingsOpen] = useState(false);
 
-    // Initialize with empty builder data or existing Craft.js data
+    /**
+     * Initialise les données du builder à partir du contenu de la page
+     *
+     * Gère 3 cas de figure :
+     * 1. Contenu déjà sérialisé en string JSON (format Craft.js)
+     * 2. Contenu en objet avec structure ROOT (format Craft.js natif)
+     * 3. Contenu vide ou invalide (retourne undefined pour canvas vierge)
+     *
+     * @returns {string | undefined} Données sérialisées pour Craft.js ou undefined
+     */
     const initializeBuilderData = () => {
-        // Check if content is already Craft.js format (has ROOT node)
-        if (page.content && typeof page.content === 'object' && 'ROOT' in page.content) {
+        if (!page.content) return undefined;
+
+        // If content is already a string, use it
+        if (typeof page.content === 'string') {
+            try {
+                JSON.parse(page.content); // Validate it's valid JSON
+                return page.content;
+            } catch {
+                return undefined;
+            }
+        }
+
+        // If content is an object with ROOT node (Craft.js format), stringify it
+        if (typeof page.content === 'object' && 'ROOT' in page.content) {
             return JSON.stringify(page.content);
         }
-        // Otherwise, start with empty canvas
+
         return undefined;
     };
 
@@ -38,7 +71,11 @@ export default function Edit({ page, pageTypes }: Props) {
         content: page.content,
     });
 
-    // Handler functions
+    /**
+     * Gestionnaire de changement du titre de la page
+     *
+     * @param {string} value - Nouveau titre de la page
+     */
     const handleTitleChange = useCallback(
         (value: string) => {
             setData('title', value);
@@ -46,6 +83,11 @@ export default function Edit({ page, pageTypes }: Props) {
         [setData]
     );
 
+    /**
+     * Gestionnaire de changement du statut de publication
+     *
+     * @param {('draft' | 'published')} value - Nouveau statut (brouillon ou publié)
+     */
     const handleStatusChange = useCallback(
         (value: 'draft' | 'published') => {
             setData('status', value);
@@ -53,6 +95,11 @@ export default function Edit({ page, pageTypes }: Props) {
         [setData]
     );
 
+    /**
+     * Gestionnaire de changement du type de page
+     *
+     * @param {PageType} value - Nouveau type de page
+     */
     const handlePageTypeChange = useCallback(
         (value: PageType) => {
             setData('page_type', value);
@@ -60,6 +107,11 @@ export default function Edit({ page, pageTypes }: Props) {
         [setData]
     );
 
+    /**
+     * Gestionnaire de changement du titre SEO
+     *
+     * @param {string} value - Nouveau titre pour les moteurs de recherche
+     */
     const handleSeoTitleChange = useCallback(
         (value: string) => {
             setData('seo_title', value);
@@ -67,6 +119,11 @@ export default function Edit({ page, pageTypes }: Props) {
         [setData]
     );
 
+    /**
+     * Gestionnaire de changement de la description SEO
+     *
+     * @param {string} value - Nouvelle description pour les moteurs de recherche
+     */
     const handleSeoDescriptionChange = useCallback(
         (value: string) => {
             setData('seo_description', value);
@@ -74,6 +131,16 @@ export default function Edit({ page, pageTypes }: Props) {
         [setData]
     );
 
+    /**
+     * Sauvegarde la page avec toutes ses modifications
+     *
+     * Parse les données du builder en JSON et les envoie au serveur via PUT.
+     * Utilise un setTimeout pour s'assurer que l'état est bien à jour avant
+     * la soumission du formulaire.
+     *
+     * @async
+     * @returns {Promise<void>}
+     */
     const handleSave = async () => {
         try {
             // Parse builder data to save as JSON object
@@ -99,6 +166,14 @@ export default function Edit({ page, pageTypes }: Props) {
         }
     };
 
+    /**
+     * Gestionnaire des changements dans le page builder
+     *
+     * Met à jour l'état local et parse le JSON pour le stocker dans le formulaire.
+     * Appelé automatiquement par Craft.js à chaque modification du builder.
+     *
+     * @param {string} data - Données sérialisées du builder en JSON
+     */
     const handleBuilderChange = (data: string) => {
         setBuilderData(data);
         // Parse and set as object for form

@@ -2,6 +2,27 @@ import { useEditor } from '@craftjs/core';
 import { Button } from '@/components/ui/button';
 import { X, Settings } from 'lucide-react';
 
+/**
+ * Panneau de propriétés - Settings de l'élément sélectionné
+ *
+ * Sidebar droit affichant les propriétés configurables de l'élément
+ * actuellement sélectionné dans le builder. Charge dynamiquement le
+ * composant de settings approprié via le système de "related" de Craft.js.
+ *
+ * Fonctionnalités :
+ * - Affiche les settings de l'élément sélectionné
+ * - Chargement dynamique du composant de configuration
+ * - Bouton de suppression de l'élément
+ * - Bouton de désélection (X)
+ * - Message d'aide quand aucune sélection
+ *
+ * Architecture :
+ * - Utilise useEditor pour accéder à l'état Craft.js
+ * - Récupère le composant de settings via related.settings
+ * - Affiche le composant dynamiquement chargé
+ *
+ * @returns Panneau fixe à droite avec les propriétés éditables
+ */
 export const SettingsPanel = () => {
     const { active, related, actions } = useEditor((state, query) => {
         const currentlySelectedNodeId = query.getEvent('selected').first();

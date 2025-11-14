@@ -3,7 +3,16 @@
     "singleQuote": true,
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
-    "printWidth": 80,
+    "printWidth": 200,
+    "tabWidth": 4,
+    "useTabs": false,
+    "quoteProps": "as-needed",
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
+    "arrowParens": "avoid",
+    "endOfLine": "lf",
+    "embeddedLanguageFormatting": "auto",
     "plugins": [
         "prettier-plugin-organize-imports",
         "prettier-plugin-tailwindcss"
@@ -13,12 +22,36 @@
         "cn"
     ],
     "tailwindStylesheet": "resources/css/app.css",
-    "tabWidth": 4,
     "overrides": [
         {
             "files": "**/*.yml",
             "options": {
                 "tabWidth": 2
+            }
+        },
+        {
+            "files": "**/*.yaml",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "**/*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "**/*.md",
+            "options": {
+                "printWidth": 100
+            }
+        },
+        {
+            "files": "**/*.php",
+            "options": {
+                "phpVersion": "8.1",
+                "plugins": []
             }
         }
     ]

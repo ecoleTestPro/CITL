@@ -1,7 +1,7 @@
-import { useNode } from '@craftjs/core';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import type { HeroSettings as HeroSettingsType } from '@/types/page-builder';
+import { useNode } from '@craftjs/core';
 import { HeroWidgetSettings } from './HeroWidgetSettings';
 
 interface HeroWidgetProps {
@@ -41,13 +41,13 @@ export const HeroWidget = ({ settings = {} }: HeroWidgetProps) => {
     const {
         connectors: { connect, drag },
         selected,
-    } = useNode((state) => ({
+    } = useNode(state => ({
         selected: state.events.selected,
     }));
 
     const {
         title = 'Titre de votre hero',
-        subtitle = 'Sous-titre accrocheur pour capter l\'attention',
+        subtitle = "Sous-titre accrocheur pour capter l'attention",
         buttonText = 'En savoir plus',
         buttonLink = '#',
         backgroundImage,
@@ -59,19 +59,14 @@ export const HeroWidget = ({ settings = {} }: HeroWidgetProps) => {
 
     return (
         <div
-            ref={(ref) => {
+            ref={ref => {
                 if (ref) {
                     connect(drag(ref));
                 }
             }}
-            className={cn(
-                'relative overflow-hidden rounded-lg',
-                selected && 'ring-2 ring-primary ring-offset-2'
-            )}
+            className={cn('relative overflow-hidden rounded-lg', selected && 'ring-2 ring-primary ring-offset-2')}
             style={{
-                backgroundImage: backgroundImage
-                    ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})`
-                    : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                backgroundImage: backgroundImage ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 paddingTop: padding.top,
@@ -82,22 +77,16 @@ export const HeroWidget = ({ settings = {} }: HeroWidgetProps) => {
             }}
         >
             <div className="relative z-10 text-white">
-                <h1
-                    style={{ fontSize: titleSize }}
-                    className="mb-4 font-bold leading-tight"
-                >
+                <h1 style={{ fontSize: titleSize }} className="mb-4 leading-tight font-bold">
                     {title}
                 </h1>
-                <p
-                    style={{ fontSize: subtitleSize }}
-                    className="mb-8 opacity-90"
-                >
+                <p style={{ fontSize: subtitleSize }} className="mb-8 opacity-90">
                     {subtitle}
                 </p>
                 <Button
                     size="lg"
                     className="bg-white text-primary hover:bg-gray-100"
-                    onClick={(e) => {
+                    onClick={e => {
                         e.preventDefault();
                         if (buttonLink) window.location.href = buttonLink;
                     }}
@@ -114,7 +103,7 @@ HeroWidget.craft = {
     props: {
         settings: {
             title: 'Titre de votre hero',
-            subtitle: 'Sous-titre accrocheur pour capter l\'attention',
+            subtitle: "Sous-titre accrocheur pour capter l'attention",
             buttonText: 'En savoir plus',
             buttonLink: '#',
             textAlign: 'center',

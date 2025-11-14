@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\CmsMenu;
 use App\Models\CmsPage;
 use Illuminate\Http\Request;
@@ -67,7 +68,7 @@ class CmsMenuController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'location' => 'required|string|unique:cms_menus,location,' . $menu->id,
+            'location' => 'required|string|unique:cms_menus,location,'.$menu->id,
             'is_active' => 'boolean',
             'style_template' => 'nullable|string',
             'is_sticky' => 'boolean',

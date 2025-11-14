@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cms;
 
+use App\Http\Controllers\Controller;
 use App\Models\CmsPage;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
-class CmsPageController extends Controller
+class CmsPagePrivateController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $pages = CmsPage::with('creator')
             ->latest()
@@ -26,7 +28,7 @@ class CmsPageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
         return Inertia::render('cms/pages/create', [
             'pageTypes' => CmsPage::pageTypes(),
@@ -42,7 +44,7 @@ class CmsPageController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'nullable|array',
             'status' => 'required|in:draft,published',
-            'page_type' => 'required|string|in:' . implode(',', array_keys(CmsPage::pageTypes())),
+            'page_type' => 'required|string|in:'.implode(',', array_keys(CmsPage::pageTypes())),
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
         ]);
@@ -58,7 +60,7 @@ class CmsPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CmsPage $page)
+    public function edit(CmsPage $page): Response
     {
         return Inertia::render('cms/pages/edit', [
             'page' => $page,
@@ -75,7 +77,7 @@ class CmsPageController extends Controller
             'title' => 'required|string|max:255',
             'content' => 'nullable|array',
             'status' => 'required|in:draft,published',
-            'page_type' => 'required|string|in:' . implode(',', array_keys(CmsPage::pageTypes())),
+            'page_type' => 'required|string|in:'.implode(',', array_keys(CmsPage::pageTypes())),
             'seo_title' => 'nullable|string|max:255',
             'seo_description' => 'nullable|string',
         ]);
@@ -94,20 +96,6 @@ class CmsPageController extends Controller
 
         return redirect()->route('cms.pages.index')
             ->with('success', 'Page supprimée');
-    }
-
-    /**
-     * Display the specified page publicly.
-     */
-    public function show($slug)
-    {
-        $page = CmsPage::where('slug', $slug)
-            ->where('status', 'published')
-            ->firstOrFail();
-
-        return Inertia::render('cms/page-view', [
-            'page' => $page,
-        ]);
     }
 
     /**

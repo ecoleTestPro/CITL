@@ -1,42 +1,32 @@
 <?php
 
-use App\Http\Controllers\CmsPageController;
-use App\Http\Controllers\CmsMenuController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
-Route::get('/', function () {
-    // Load dynamic homepage if set
-    $homepage = \App\Models\CmsPage::homepage()->first();
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-    if ($homepage) {
-        return Inertia::render('cms/page-view', [
-            'page' => $homepage,
-        ]);
-    }
+// Homepage - loads CMS homepage if set, otherwise renders default home page
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // Fallback to default home page
-    return Inertia::render('home');
-})->name('home');
-
+// Authenticated routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-
-    // CMS Routes
-    Route::prefix('cms')->name('cms.')->group(function () {
-        Route::resource('pages', CmsPageController::class);
-        Route::post('pages/{page}/set-homepage', [CmsPageController::class, 'setAsHomepage'])
-            ->name('pages.set-homepage');
-        Route::resource('menus', CmsMenuController::class);
-    });
 });
 
+// Settings routes
 require __DIR__ . '/settings.php';
 
-// Public page view (must be last to avoid conflicts)
-Route::get('{slug}', [CmsPageController::class, 'show'])
-    ->where('slug', '^(?!admin|dashboard|login|register|forgot-password|reset-password|settings|cms).*$')
-    ->name('page.show');
+// CMS routes (management + API)
+require __DIR__ . '/cms.php';

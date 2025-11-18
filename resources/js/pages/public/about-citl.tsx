@@ -1,8 +1,14 @@
 import PublicLayout from '@/layouts/public/public-layout';
 
 function AboutCitl() {
+    const breadcrumbs = [
+        { title: 'Accueil', href: '/' },
+        { title: 'CITL', href: '#' },
+        { title: 'À propos du CITL', href: '/about-citl' },
+    ];
+
     return (
-        <PublicLayout>
+        <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
             <div className="container mx-auto px-4 py-16">
                 <h1 className="text-4xl font-bold mb-6">À propos du CITL</h1>
                 <p className="text-muted-foreground">

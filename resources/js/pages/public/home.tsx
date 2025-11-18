@@ -2,8 +2,10 @@ import PublicLayout from '@/layouts/public/public-layout';
 
 function Home() {
     return (
-        <PublicLayout>
-            <h1>Welcome to the Home Page</h1>
+        <PublicLayout variant="home">
+            <div className="container mx-auto px-4 py-12">
+                {/* Contenu additionnel de la page d'accueil */}
+            </div>
         </PublicLayout>
     );
 }

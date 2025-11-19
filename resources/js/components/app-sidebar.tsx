@@ -12,6 +12,7 @@ import {
     PieChart,
     Settings2,
     SquareTerminal,
+    FileText,
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -32,8 +33,9 @@ import appearance from '@/routes/appearance';
 import { type SharedData } from '@/types';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    const { auth } = usePage<SharedData>().props;
+    const { auth, url } = usePage<SharedData>().props;
     const user = auth?.user;
+    const currentUrl = url || '';
 
     // Configuration des données de navigation
     const data = {
@@ -61,64 +63,150 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ],
         navMain: [
             {
-                title: 'Playground',
+                title: 'Pages',
                 url: '#',
-                icon: SquareTerminal,
-                isActive: true,
+                icon: FileText,
+                isActive: currentUrl.startsWith('/dashboard/pages'),
                 items: [
                     {
-                        title: 'History',
-                        url: '#',
+                        title: 'Home',
+                        url: '/dashboard/pages/home',
+                        isActive: currentUrl === '/dashboard/pages/home',
                     },
                     {
-                        title: 'Starred',
+                        title: 'About ISTQB',
                         url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Settings',
+                        title: 'About CITL',
                         url: '#',
-                    },
-                ],
-            },
-            {
-                title: 'Models',
-                url: '#',
-                icon: Bot,
-                items: [
-                    {
-                        title: 'Genesis',
-                        url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Explorer',
+                        title: 'Vision',
                         url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Quantum',
+                        title: 'Missions',
                         url: '#',
-                    },
-                ],
-            },
-            {
-                title: 'Documentation',
-                url: '#',
-                icon: BookOpen,
-                items: [
-                    {
-                        title: 'Introduction',
-                        url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Get Started',
+                        title: 'Executive Board',
                         url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Tutorials',
+                        title: 'Members',
                         url: '#',
+                        isActive: false,
                     },
                     {
-                        title: 'Changelog',
+                        title: 'Working Groups',
                         url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Why Certification',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Core Foundation',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Core Advanced',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Specialist',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Expert Level',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'A4Q Practical Tester',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Exam Questions',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Exam Fees',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Exam Registration',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Exam FAQ',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Anti-Piracy',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Glossary',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Accredited Organizations',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Accreditation Request',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Events',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Blog',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Register Certified Testers',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Certified Testers List',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'ISTQB Registry',
+                        url: '#',
+                        isActive: false,
+                    },
+                    {
+                        title: 'Contact',
+                        url: '#',
+                        isActive: false,
                     },
                 ],
             },
@@ -126,18 +214,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 title: 'Settings',
                 url: '#',
                 icon: Settings2,
+                isActive: currentUrl.startsWith('/settings'),
                 items: [
                     {
                         title: 'Profile',
                         url: profile.edit.url(),
+                        isActive: currentUrl === profile.edit.url(),
                     },
                     {
                         title: 'Password',
                         url: userPassword.edit.url(),
+                        isActive: currentUrl === userPassword.edit.url(),
                     },
                     {
                         title: 'Appearance',
                         url: appearance.edit.url(),
+                        isActive: currentUrl === appearance.edit.url(),
                     },
                 ],
             },

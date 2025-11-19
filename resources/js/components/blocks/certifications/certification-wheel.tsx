@@ -1,120 +1,186 @@
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
-interface Certification {
+// Structure hiérarchique des niveaux avec cercles concentriques
+interface LevelNode {
     id: string;
     name: string;
-    fullName: string;
     description: string;
-    level: 'foundation' | 'advanced' | 'expert' | 'specialist';
-    link: string;
+    color: string;
+    level: number; // Profondeur dans la hiérarchie (0 = centre)
+    parent?: string; // ID du niveau parent
 }
 
-const certifications: Certification[] = [
+const levelHierarchy: LevelNode[] = [
     {
-        id: 'ctfl',
+        id: 'base',
         name: 'CTFL',
-        fullName: 'Certified Tester Foundation Level',
-        description:
-            "Le niveau Foundation est le point d'entrée pour toutes les certifications ISTQB®. Il fournit les bases essentielles du testing logiciel.",
-        level: 'foundation',
-        link: '/core-foundation',
+        description: 'Certified Tester Foundation Level - Point d\'entrée pour toutes les certifications ISTQB®.',
+        color: 'oklch(0.4 0.15 250)', // Bleu marine
+        level: 0, // Cercle central
     },
     {
-        id: 'ctal-ta',
-        name: 'TA',
-        fullName: 'Certified Tester Advanced Level - Test Analyst',
-        description: "Cette certification s'adresse aux analystes de tests expérimentés qui souhaitent approfondir leurs compétences en conception de tests.",
-        level: 'advanced',
-        link: '/core-advanced',
+        id: 'foundation',
+        name: 'Foundation',
+        description: 'Le niveau Foundation fournit les bases essentielles du testing logiciel.',
+        color: 'oklch(0.4 0.15 250)', // Bleu marine
+        level: 1, // Premier cercle
+        parent: 'base',
     },
     {
-        id: 'ctal-tae',
-        name: 'TAE',
-        fullName: 'Certified Tester Advanced Level - Test Automation Engineer',
-        description: "Conçue pour les ingénieurs qui souhaitent maîtriser l'automatisation des tests et les frameworks de test.",
-        level: 'advanced',
-        link: '/core-advanced',
-    },
-    {
-        id: 'ctal-tm',
-        name: 'TM',
-        fullName: 'Certified Tester Advanced Level - Test Manager',
-        description: 'Cette certification est destinée aux gestionnaires de tests qui dirigent des équipes et des projets de test.',
-        level: 'advanced',
-        link: '/core-advanced',
-    },
-    {
-        id: 'ctel',
-        name: 'Expert Level',
-        fullName: 'Certified Tester Expert Level',
-        description: "Le niveau Expert représente le plus haut niveau de maîtrise dans le domaine du test logiciel selon l'ISTQB®.",
-        level: 'expert',
-        link: '/expert-level',
+        id: 'advanced',
+        name: 'Core Advanced',
+        description: 'Le niveau Advanced s\'adresse aux professionnels expérimentés. Prérequis: Foundation.',
+        color: 'oklch(0.62 0.18 45)', // Orange CITL
+        level: 2, // Deuxième cercle
+        parent: 'foundation',
     },
     {
         id: 'specialist',
         name: 'Specialist',
-        fullName: 'Certifications Spécialisées',
-        description: 'Les certifications spécialisées couvrent des domaines spécifiques comme les tests mobiles, agiles, gaming, etc.',
-        level: 'specialist',
-        link: '/specialist',
+        description: 'Les certifications spécialisées couvrent des domaines spécifiques. Prérequis: Foundation.',
+        color: 'oklch(0.7 0.1 200)', // Bleu clair
+        level: 2, // Deuxième cercle
+        parent: 'foundation',
+    },
+    {
+        id: 'expert',
+        name: 'Expert Level',
+        description: 'Le niveau Expert représente le plus haut niveau de maîtrise. Prérequis: Core Advanced.',
+        color: 'oklch(0.58 0.15 145)', // Vert CITL
+        level: 3, // Troisième cercle
+        parent: 'advanced',
     },
 ];
 
-// Configuration des secteurs Core Advanced (niveau avancé)
-interface AdvancedSector {
-    certIndex: number;
-    path: string;
-    textX: number;
-    textY: number;
-    color: string;
-}
+// Fonction pour obtenir les éléments d'un niveau donné
+const getNodesAtLevel = (level: number): LevelNode[] => {
+    return levelHierarchy.filter((node) => node.level === level);
+};
 
-const ADVANCED_SECTORS: AdvancedSector[] = [
-    {
-        certIndex: 1, // TA
-        path: 'M 250 250 L 340 160 A 127 127 0 0 1 410 250 L 250 250 Z',
-        textX: 340,
-        textY: 200,
-        color: 'url(#advancedGradient)',
-    },
-    {
-        certIndex: 2, // TAE
-        path: 'M 250 250 L 410 250 A 127 127 0 0 1 340 340 L 250 250 Z',
-        textX: 350,
-        textY: 300,
-        color: 'oklch(0.6 0.17 50)',
-    },
-    {
-        certIndex: 3, // TM
-        path: 'M 250 250 L 160 160 A 127 127 0 0 1 340 160 L 250 250 Z',
-        textX: 250,
-        textY: 150,
-        color: 'oklch(0.58 0.16 40)',
-    },
-];
+// Fonction pour calculer le nombre maximum de niveaux
+const getMaxLevel = (): number => {
+    return Math.max(...levelHierarchy.map((node) => node.level));
+};
 
 const CertificationWheel = () => {
-    const [selectedCert, setSelectedCert] = useState<Certification>(certifications[0]);
+    const [selectedNode, setSelectedNode] = useState<LevelNode>(levelHierarchy[0]);
 
-    const getCertification = (idRow: number): Certification => {
-        const defualt: Certification = {
-            id: 'ctfl',
-            name: 'CTFL',
-            fullName: 'Certified Tester Foundation Level',
-            description:
-                "Le niveau Foundation est le point d'entrée pour toutes les certifications ISTQB®. Il fournit les bases essentielles du testing logiciel.",
-            level: 'foundation',
-            link: '/core-foundation',
-        };
+    // Configuration des cercles
+    const CENTER_X = 250;
+    const CENTER_Y = 250;
+    const BASE_RADIUS = 70; // Rayon du cercle central
+    const RING_WIDTH = 50; // Largeur de chaque anneau (réduit pour moins d'espace)
 
-        try {
-            const certif = certifications.find((cert) => cert.id === idRow.toString())! ?? defualt;
-            return certif;
-        } catch (error) {
-            return defualt;
+    // Fonction pour calculer le rayon d'un niveau
+    const getRadiusForLevel = (level: number): number => {
+        if (level === 0) return BASE_RADIUS;
+        return BASE_RADIUS + level * RING_WIDTH;
+    };
+
+    // Fonction pour obtenir l'angle de début et fin pour un noeud en fonction de son parent
+    const getNodeAngles = (node: LevelNode, index: number, nodesAtLevel: LevelNode[]): { startAngle: number; endAngle: number } => {
+        if (node.level === 1) {
+            // Niveau 1: cercle complet (Foundation)
+            return { startAngle: -90, endAngle: 270 };
         }
+
+        if (node.level === 2) {
+            // Niveau 2: 2 secteurs égaux (Core Advanced et Specialist)
+            const angleStep = 360 / nodesAtLevel.length;
+            const startAngle = index * angleStep - 90;
+            const endAngle = startAngle + angleStep;
+            return { startAngle, endAngle };
+        }
+
+        if (node.level === 3 && node.parent === 'advanced') {
+            // Niveau 3: Expert Level doit être dans la zone de Core Advanced
+            // Core Advanced est à l'index 0 du niveau 2, donc de -90° à 90°
+            return { startAngle: -90, endAngle: 90 };
+        }
+
+        // Par défaut: répartition égale
+        const angleStep = 360 / nodesAtLevel.length;
+        const startAngle = index * angleStep - 90;
+        const endAngle = startAngle + angleStep;
+        return { startAngle, endAngle };
+    };
+
+    // Fonction pour générer les secteurs d'un anneau
+    const generateRingSectors = (level: number) => {
+        const nodes = getNodesAtLevel(level);
+        if (nodes.length === 0) return null;
+
+        const innerRadius = getRadiusForLevel(level - 1);
+        const outerRadius = getRadiusForLevel(level);
+
+        return nodes.map((node, index) => {
+            const { startAngle, endAngle } = getNodeAngles(node, index, nodes);
+            const angleSpan = endAngle - startAngle;
+
+            // Conversion en radians
+            const startRad = (startAngle * Math.PI) / 180;
+            const endRad = (endAngle * Math.PI) / 180;
+
+            // Points du secteur
+            const x1 = CENTER_X + innerRadius * Math.cos(startRad);
+            const y1 = CENTER_Y + innerRadius * Math.sin(startRad);
+            const x2 = CENTER_X + outerRadius * Math.cos(startRad);
+            const y2 = CENTER_Y + outerRadius * Math.sin(startRad);
+            const x3 = CENTER_X + outerRadius * Math.cos(endRad);
+            const y3 = CENTER_Y + outerRadius * Math.sin(endRad);
+            const x4 = CENTER_X + innerRadius * Math.cos(endRad);
+            const y4 = CENTER_Y + innerRadius * Math.sin(endRad);
+
+            const largeArcFlag = angleSpan > 180 ? 1 : 0;
+
+            // Construction du path
+            const pathData = `
+                M ${x1} ${y1}
+                L ${x2} ${y2}
+                A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x3} ${y3}
+                L ${x4} ${y4}
+                A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x1} ${y1}
+                Z
+            `;
+
+            // Position du texte (au milieu du secteur)
+            const midAngle = (startAngle + endAngle) / 2;
+            const midRad = (midAngle * Math.PI) / 180;
+            const textRadius = (innerRadius + outerRadius) / 2;
+            const textX = CENTER_X + textRadius * Math.cos(midRad);
+            const textY = CENTER_Y + textRadius * Math.sin(midRad);
+
+            // Calculer la rotation du texte pour les secteurs verticaux
+            let textRotation = 0;
+            if (node.level === 2) {
+                // Pour Core Advanced (premier secteur): rotation vers la droite
+                // Pour Specialist (deuxième secteur): rotation vers la gauche
+                textRotation = midAngle + 90;
+            }
+
+            return (
+                <g key={node.id}>
+                    <path
+                        d={pathData}
+                        fill={node.color}
+                        className="cursor-pointer certification-wheel-hover"
+                        onClick={() => setSelectedNode(node)}
+                    />
+                    <text
+                        x={textX}
+                        y={textY}
+                        textAnchor="middle"
+                        dominantBaseline="middle"
+                        transform={textRotation !== 0 ? `rotate(${textRotation}, ${textX}, ${textY})` : undefined}
+                        className="fill-white text-xs font-bold pointer-events-none"
+                        style={{ fontSize: node.level === 1 ? '16px' : '11px' }}
+                    >
+                        {node.name}
+                    </text>
+                </g>
+            );
+        });
     };
 
     return (
@@ -139,15 +205,15 @@ const CertificationWheel = () => {
                     {/* Section gauche - Texte et description */}
                     <div className="flex h-full items-center bg-white p-6 lg:col-span-2 dark:bg-gray-900">
                         <div className="sticky top-8">
-                            {/* Card de certification sélectionnée */}
+                            {/* Card du noeud sélectionné */}
                             <div className="">
                                 <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary uppercase">
-                                    {selectedCert.level}
+                                    Niveau {selectedNode.level}
                                 </div>
-                                <h3 className="mb-2 text-2xl font-bold text-foreground">{selectedCert.fullName}</h3>
-                                <p className="mb-6 text-base leading-relaxed text-muted-foreground">{selectedCert.description}</p>
+                                <h3 className="mb-2 text-2xl font-bold text-foreground">{selectedNode.name}</h3>
+                                <p className="mb-6 text-base leading-relaxed text-muted-foreground">{selectedNode.description}</p>
                                 <Button asChild>
-                                    <a href={selectedCert.link}>En savoir plus →</a>
+                                    <a href="/certifications">Explorer les certifications →</a>
                                 </Button>
                             </div>
                         </div>
@@ -157,57 +223,52 @@ const CertificationWheel = () => {
                     <div className="flex items-center justify-center bg-[#f2f2f2] lg:col-span-3">
                         <div className="relative aspect-square w-full max-w-[600px]">
                             <svg viewBox="0 0 500 500" className="h-full w-full">
-                                {/* Définition des dégradés */}
-                                <defs>
-                                    <radialGradient id="centerGradient">
-                                        <stop offset="0%" stopColor="oklch(0.4 0.15 250)" />
-                                        <stop offset="100%" stopColor="oklch(0.3 0.15 250)" />
-                                    </radialGradient>
-                                    <radialGradient id="advancedGradient">
-                                        <stop offset="0%" stopColor="oklch(0.62 0.18 45)" />
-                                        <stop offset="100%" stopColor="oklch(0.55 0.16 45)" />
-                                    </radialGradient>
-                                    <radialGradient id="expertGradient">
-                                        <stop offset="0%" stopColor="oklch(0.58 0.15 145)" />
-                                        <stop offset="100%" stopColor="oklch(0.52 0.13 145)" />
-                                    </radialGradient>
-                                    <radialGradient id="specialistGradient">
-                                        <stop offset="0%" stopColor="oklch(0.7 0.1 200)" />
-                                        <stop offset="100%" stopColor="oklch(0.65 0.08 200)" />
-                                    </radialGradient>
-                                </defs>
+                                {/* Cercle central - Niveau 0 */}
+                                {(() => {
+                                    const centralNode = getNodesAtLevel(0)[0];
+                                    if (!centralNode) return null;
+                                    return (
+                                        <g>
+                                            <circle
+                                                cx={CENTER_X}
+                                                cy={CENTER_Y}
+                                                r={BASE_RADIUS}
+                                                fill={centralNode.color}
+                                                className="cursor-pointer certification-wheel-hover"
+                                                onClick={() => setSelectedNode(centralNode)}
+                                            />
+                                            {/* Piques triangulaires du cercle central */}
+                                            {/* Pique en haut */}
+                                            <path
+                                                d={`M ${CENTER_X} ${CENTER_Y - BASE_RADIUS - 15} L ${CENTER_X - 15} ${CENTER_Y - BASE_RADIUS + 15} L ${CENTER_X + 15} ${CENTER_Y - BASE_RADIUS + 15} Z`}
+                                                fill={centralNode.color}
+                                                className="cursor-pointer certification-wheel-hover"
+                                                onClick={() => setSelectedNode(centralNode)}
+                                            />
+                                            {/* Pique en bas */}
+                                            <path
+                                                d={`M ${CENTER_X} ${CENTER_Y + BASE_RADIUS + 15} L ${CENTER_X - 15} ${CENTER_Y + BASE_RADIUS - 15} L ${CENTER_X + 15} ${CENTER_Y + BASE_RADIUS - 15} Z`}
+                                                fill={centralNode.color}
+                                                className="cursor-pointer certification-wheel-hover"
+                                                onClick={() => setSelectedNode(centralNode)}
+                                            />
+                                            <text
+                                                x={CENTER_X}
+                                                y={CENTER_Y}
+                                                textAnchor="middle"
+                                                dominantBaseline="middle"
+                                                className="fill-white text-2xl font-bold pointer-events-none"
+                                            >
+                                                {centralNode.name}
+                                            </text>
+                                        </g>
+                                    );
+                                })()}
 
-                                {/* Cercle central - CTFL Foundation */}
-                                <circle
-                                    cx="250"
-                                    cy="250"
-                                    r="70"
-                                    fill="url(#centerGradient)"
-                                    className="cursor-pointer certification-wheel-hover"
-                                    onClick={() => setSelectedCert(certifications[0])}
-                                />
-
-                                {/* Piques triangulaires du cercle CITL (dessinés après le cercle pour être visibles) */}
-                                {/* Pique en haut - plus grand */}
-                                <path
-                                    d="M 250 165 L 235 195 L 265 195 Z"
-                                    fill="url(#centerGradient)"
-                                    className="cursor-pointer certification-wheel-hover"
-                                    onClick={() => setSelectedCert(certifications[0])}
-                                />
-                                {/* Pique en bas - plus grand */}
-                                <path
-                                    d="M 250 335 L 235 305 L 265 305 Z"
-                                    fill="url(#centerGradient)"
-                                    className="cursor-pointer certification-wheel-hover"
-                                    onClick={() => setSelectedCert(certifications[0])}
-                                />
-
-                                <text x="250" y="260" textAnchor="middle" className="fill-white text-2xl font-bold pointer-events-none">
-                                    {getCertification(0).name}
-                                </text>
-
-                                
+                                {/* Anneaux concentriques - Niveaux 1, 2, 3... */}
+                                {Array.from({ length: getMaxLevel() }, (_, i) => i + 1).map((level) =>
+                                    generateRingSectors(level)
+                                )}
                             </svg>
                         </div>
                     </div>

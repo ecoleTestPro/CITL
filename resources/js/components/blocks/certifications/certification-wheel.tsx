@@ -119,6 +119,14 @@ const CertificationWheel = () => {
 
     return (
         <div className="bg-white p-6 dark:bg-gray-900">
+            <style>{`
+                .certification-wheel-hover {
+                    transition: opacity 0.3s ease;
+                }
+                .certification-wheel-hover:hover {
+                    opacity: 0.9;
+                }
+            `}</style>
             <div className="mx-auto w-full max-w-(--breakpoint-2xl)">
                 <div className="w-2/3">
                     <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">Améliorer & Certifier vos compétences</h2>
@@ -175,23 +183,23 @@ const CertificationWheel = () => {
                                     cy="250"
                                     r="70"
                                     fill="url(#centerGradient)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
+                                    className="cursor-pointer certification-wheel-hover"
                                     onClick={() => setSelectedCert(certifications[0])}
                                 />
 
                                 {/* Piques triangulaires du cercle CITL (dessinés après le cercle pour être visibles) */}
-                                {/* Pique en haut */}
+                                {/* Pique en haut - plus grand */}
                                 <path
-                                    d="M 250 180 L 240 200 L 260 200 Z"
+                                    d="M 250 165 L 235 195 L 265 195 Z"
                                     fill="url(#centerGradient)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
+                                    className="cursor-pointer certification-wheel-hover"
                                     onClick={() => setSelectedCert(certifications[0])}
                                 />
-                                {/* Pique en bas */}
+                                {/* Pique en bas - plus grand */}
                                 <path
-                                    d="M 250 320 L 240 300 L 260 300 Z"
+                                    d="M 250 335 L 235 305 L 265 305 Z"
                                     fill="url(#centerGradient)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
+                                    className="cursor-pointer certification-wheel-hover"
                                     onClick={() => setSelectedCert(certifications[0])}
                                 />
 
@@ -199,65 +207,7 @@ const CertificationWheel = () => {
                                     {getCertification(0).name}
                                 </text>
 
-                                {/* Anneau Advanced Level - 3 secteurs (dynamique) */}
-                                {/* {ADVANCED_SECTORS.map((sector) => (
-                                    <g key={certifications[sector.certIndex].id}>
-                                        <path
-                                            d={sector.path}
-                                            fill={sector.color}
-                                            className="cursor-pointer transition-all hover:opacity-80"
-                                            onClick={() => setSelectedCert(certifications[sector.certIndex])}
-                                        />
-                                        <text
-                                            x={sector.textX}
-                                            y={sector.textY}
-                                            textAnchor="middle"
-                                            className="fill-white text-sm font-bold pointer-events-none"
-                                        >
-                                            {certifications[sector.certIndex].name}
-                                        </text>
-                                    </g>
-                                ))} */}
-
-                                {/* <path
-                                    d="M 430 250 L 420 245 L 420 255 Z"
-                                    fill="url(#expertGradient)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
-                                    onClick={() => setSelectedCert(certifications[4])}
-                                />
-                                <circle
-                                    cx="250"
-                                    cy="250"
-                                    r="180"
-                                    fill="none"
-                                    stroke="url(#expertGradient)"
-                                    strokeWidth="30"
-                                    className="cursor-pointer transition-all hover:opacity-80"
-                                    strokeDasharray="40 20"
-                                    onClick={() => setSelectedCert(certifications[4])}
-                                />
-                                <circle cx="465" cy="250" r="18" fill="url(#expertGradient)" className="cursor-pointer" onClick={() => setSelectedCert(certifications[4])} />
-                                <text x="465" y="254" textAnchor="middle" className="fill-white text-[8px] font-bold uppercase">
-                                    EXPERT
-                                </text>
-
-                                <path
-                                    d="M 30 250 L 40 245 L 40 255 Z"
-                                    fill="url(#specialistGradient)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
-                                    onClick={() => setSelectedCert(certifications[5])}
-                                />
-                                <circle
-                                    cx="250"
-                                    cy="250"
-                                    r="220"
-                                    fill="none"
-                                    stroke="url(#specialistGradient)"
-                                    strokeWidth="25"
-                                    className="cursor-pointer transition-all hover:opacity-80"
-                                    strokeDasharray="30 15"
-                                    onClick={() => setSelectedCert(certifications[5])}
-                                /> */}
+                                
                             </svg>
                         </div>
                     </div>

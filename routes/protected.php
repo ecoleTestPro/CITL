@@ -13,6 +13,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Page Management Routes
     Route::prefix('dashboard/pages')->name('dashboard.pages.')->group(function () {
         Route::get('/home', [PageManagementController::class, 'editHome'])->name('home.edit');
+
+        // Translation API routes
+        Route::get('/{page}/translations', [PageManagementController::class, 'getTranslations'])->name('translations.get');
+        Route::post('/translations', [PageManagementController::class, 'updateTranslations'])->name('translations.update');
     });
 });
 

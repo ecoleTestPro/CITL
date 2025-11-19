@@ -24,9 +24,9 @@ export const Logo = ({
 
     // Chemins d'image selon la variante
     const logoSrc = {
-        full: '/images/logo.png',
-        icon: '/images/logo-icon.png',
-        text: '/images/logo-text.png',
+        full: '/assets/images/logo.png',
+        icon: '/assets/images/logo-icon.png',
+        text: '/assets/images/logo-text.png',
     }[variant];
 
     return (

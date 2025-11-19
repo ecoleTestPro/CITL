@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Services\TranslationMetadataService;
 use App\Services\TranslationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -34,12 +35,16 @@ class PageManagementController extends Controller
     {
         $translations = $this->translationService->getPageTranslations($page);
         $locales = $this->translationService->getAvailableLocales();
+        $translationKeys = $this->translationService->getPageTranslationKeys($page);
+        $fieldsBySection = TranslationMetadataService::getFieldsBySection($translationKeys);
 
         return response()->json([
             'success' => true,
             'data' => [
                 'translations' => $translations,
                 'locales' => $locales,
+                'metadata' => TranslationMetadataService::getFieldMetadata(),
+                'sections' => $fieldsBySection,
             ],
         ]);
     }

@@ -1,8 +1,9 @@
 import { PageEditorActions } from '@/components/dashboard/page-editor-actions';
 import { PageEditorLayout } from '@/components/dashboard/page-editor-layout';
 import { PagePreview } from '@/components/dashboard/page-preview';
-import { TranslationEditor } from '@/components/dashboard/translation-editor';
+import { EnhancedTranslationEditor } from '@/components/dashboard/enhanced-translation-editor';
 import { useTranslations } from '@/hooks/use-translations';
+import { Badge } from '@/components/ui/badge';
 
 interface EditHomeProps {
     pageUrl: string;
@@ -21,6 +22,9 @@ export default function EditHome({
         availableLocales,
         loading,
         saving,
+        hasUnsavedChanges,
+        metadata,
+        sections,
         setSelectedLocale,
         handleTranslationChange,
         handleSave,
@@ -48,13 +52,22 @@ export default function EditHome({
             }
         >
             <div className="flex max-h-[calc(100vh-200px)] w-1/2 flex-col gap-4 overflow-auto">
-                <h3 className="text-lg font-semibold">
-                    Edit Translations ({selectedLocale.toUpperCase()})
-                </h3>
-                <TranslationEditor
+                <div className="flex items-center justify-between">
+                    <h3 className="text-lg font-semibold">
+                        Edit Translations ({selectedLocale.toUpperCase()})
+                    </h3>
+                    {hasUnsavedChanges && (
+                        <Badge variant="outline" className="text-orange-600 border-orange-600">
+                            Unsaved changes
+                        </Badge>
+                    )}
+                </div>
+                <EnhancedTranslationEditor
                     translations={translations[selectedLocale] || {}}
                     selectedLocale={selectedLocale}
                     loading={loading}
+                    sections={sections}
+                    metadata={metadata}
                     onTranslationChange={handleTranslationChange}
                 />
             </div>

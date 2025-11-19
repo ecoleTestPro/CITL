@@ -10,7 +10,7 @@ export function PagePreview({
     previewKey = 0,
 }: PagePreviewProps) {
     return (
-        <div className="flex w-1/2 flex-col">
+        <div className="flex w-full flex-col">
             <h3 className="mb-4 text-lg font-semibold">Live Preview</h3>
             <div className="flex-1 overflow-hidden rounded-lg border bg-background">
                 <iframe

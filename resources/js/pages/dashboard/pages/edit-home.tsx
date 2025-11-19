@@ -51,7 +51,7 @@ export default function EditHome({
                 />
             }
         >
-            <div className="flex max-h-[calc(100vh-200px)] w-1/2 flex-col gap-4 overflow-auto">
+            <div className="flex max-h-[calc(100vh-200px)] w-1/3 flex-col gap-4 overflow-auto">
                 <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold">
                         Edit Translations ({selectedLocale.toUpperCase()})

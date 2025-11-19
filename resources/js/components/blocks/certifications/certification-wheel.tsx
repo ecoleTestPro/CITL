@@ -22,7 +22,7 @@ const certifications: Certification[] = [
     },
     {
         id: 'ctal-ta',
-        name: 'CTAL-TA',
+        name: 'TA',
         fullName: 'Certified Tester Advanced Level - Test Analyst',
         description: "Cette certification s'adresse aux analystes de tests expérimentés qui souhaitent approfondir leurs compétences en conception de tests.",
         level: 'advanced',
@@ -30,7 +30,7 @@ const certifications: Certification[] = [
     },
     {
         id: 'ctal-tae',
-        name: 'CTAL-TAE',
+        name: 'TAE',
         fullName: 'Certified Tester Advanced Level - Test Automation Engineer',
         description: "Conçue pour les ingénieurs qui souhaitent maîtriser l'automatisation des tests et les frameworks de test.",
         level: 'advanced',
@@ -38,7 +38,7 @@ const certifications: Certification[] = [
     },
     {
         id: 'ctal-tm',
-        name: 'CTAL-TM',
+        name: 'TM',
         fullName: 'Certified Tester Advanced Level - Test Manager',
         description: 'Cette certification est destinée aux gestionnaires de tests qui dirigent des équipes et des projets de test.',
         level: 'advanced',
@@ -62,8 +62,60 @@ const certifications: Certification[] = [
     },
 ];
 
+// Configuration des secteurs Core Advanced (niveau avancé)
+interface AdvancedSector {
+    certIndex: number;
+    path: string;
+    textX: number;
+    textY: number;
+    color: string;
+}
+
+const ADVANCED_SECTORS: AdvancedSector[] = [
+    {
+        certIndex: 1, // TA
+        path: 'M 250 250 L 340 160 A 127 127 0 0 1 410 250 L 250 250 Z',
+        textX: 340,
+        textY: 200,
+        color: 'url(#advancedGradient)',
+    },
+    {
+        certIndex: 2, // TAE
+        path: 'M 250 250 L 410 250 A 127 127 0 0 1 340 340 L 250 250 Z',
+        textX: 350,
+        textY: 300,
+        color: 'oklch(0.6 0.17 50)',
+    },
+    {
+        certIndex: 3, // TM
+        path: 'M 250 250 L 160 160 A 127 127 0 0 1 340 160 L 250 250 Z',
+        textX: 250,
+        textY: 150,
+        color: 'oklch(0.58 0.16 40)',
+    },
+];
+
 const CertificationWheel = () => {
     const [selectedCert, setSelectedCert] = useState<Certification>(certifications[0]);
+
+    const getCertification = (idRow: number): Certification => {
+        const defualt: Certification = {
+            id: 'ctfl',
+            name: 'CTFL',
+            fullName: 'Certified Tester Foundation Level',
+            description:
+                "Le niveau Foundation est le point d'entrée pour toutes les certifications ISTQB®. Il fournit les bases essentielles du testing logiciel.",
+            level: 'foundation',
+            link: '/core-foundation',
+        };
+
+        try {
+            const certif = certifications.find((cert) => cert.id === idRow.toString())! ?? defualt;
+            return certif;
+        } catch (error) {
+            return defualt;
+        }
+    };
 
     return (
         <div className="bg-white p-6 dark:bg-gray-900">
@@ -77,7 +129,7 @@ const CertificationWheel = () => {
 
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
                     {/* Section gauche - Texte et description */}
-                    <div className="h-full flex items-center bg-white p-6 lg:col-span-2 dark:bg-gray-900">
+                    <div className="flex h-full items-center bg-white p-6 lg:col-span-2 dark:bg-gray-900">
                         <div className="sticky top-8">
                             {/* Card de certification sélectionnée */}
                             <div className="">
@@ -126,45 +178,53 @@ const CertificationWheel = () => {
                                     className="cursor-pointer transition-all hover:opacity-80"
                                     onClick={() => setSelectedCert(certifications[0])}
                                 />
-                                <text x="250" y="260" textAnchor="middle" className="fill-white text-2xl font-bold">
-                                    CTFL
-                                </text>
 
-                                {/* Anneau Advanced Level - 3 secteurs */}
-                                {/* Test Analyst */}
+                                {/* Piques triangulaires du cercle CITL (dessinés après le cercle pour être visibles) */}
+                                {/* Pique en haut */}
                                 <path
-                                    d="M 250 250 L 340 160 A 127 127 0 0 1 410 250 L 250 250 Z"
-                                    fill="url(#advancedGradient)"
+                                    d="M 250 180 L 240 200 L 260 200 Z"
+                                    fill="url(#centerGradient)"
                                     className="cursor-pointer transition-all hover:opacity-80"
-                                    onClick={() => setSelectedCert(certifications[1])}
+                                    onClick={() => setSelectedCert(certifications[0])}
                                 />
-                                <text x="340" y="200" textAnchor="middle" className="fill-white text-sm font-bold">
-                                    TA
-                                </text>
-
-                                {/* Test Automation Engineer */}
+                                {/* Pique en bas */}
                                 <path
-                                    d="M 250 250 L 410 250 A 127 127 0 0 1 340 340 L 250 250 Z"
-                                    fill="oklch(0.6 0.17 50)"
+                                    d="M 250 320 L 240 300 L 260 300 Z"
+                                    fill="url(#centerGradient)"
                                     className="cursor-pointer transition-all hover:opacity-80"
-                                    onClick={() => setSelectedCert(certifications[2])}
+                                    onClick={() => setSelectedCert(certifications[0])}
                                 />
-                                <text x="350" y="300" textAnchor="middle" className="fill-white text-sm font-bold">
-                                    TAE
+
+                                <text x="250" y="260" textAnchor="middle" className="fill-white text-2xl font-bold pointer-events-none">
+                                    {getCertification(0).name}
                                 </text>
 
-                                {/* Test Manager */}
-                                <path
-                                    d="M 250 250 L 160 160 A 127 127 0 0 1 340 160 L 250 250 Z"
-                                    fill="oklch(0.58 0.16 40)"
-                                    className="cursor-pointer transition-all hover:opacity-80"
-                                    onClick={() => setSelectedCert(certifications[3])}
-                                />
-                                <text x="250" y="150" textAnchor="middle" className="fill-white text-sm font-bold">
-                                    TM
-                                </text>
+                                {/* Anneau Advanced Level - 3 secteurs (dynamique) */}
+                                {/* {ADVANCED_SECTORS.map((sector) => (
+                                    <g key={certifications[sector.certIndex].id}>
+                                        <path
+                                            d={sector.path}
+                                            fill={sector.color}
+                                            className="cursor-pointer transition-all hover:opacity-80"
+                                            onClick={() => setSelectedCert(certifications[sector.certIndex])}
+                                        />
+                                        <text
+                                            x={sector.textX}
+                                            y={sector.textY}
+                                            textAnchor="middle"
+                                            className="fill-white text-sm font-bold pointer-events-none"
+                                        >
+                                            {certifications[sector.certIndex].name}
+                                        </text>
+                                    </g>
+                                ))} */}
 
-                                {/* Anneau Expert Level */}
+                                {/* <path
+                                    d="M 430 250 L 420 245 L 420 255 Z"
+                                    fill="url(#expertGradient)"
+                                    className="cursor-pointer transition-all hover:opacity-80"
+                                    onClick={() => setSelectedCert(certifications[4])}
+                                />
                                 <circle
                                     cx="250"
                                     cy="250"
@@ -176,11 +236,17 @@ const CertificationWheel = () => {
                                     strokeDasharray="40 20"
                                     onClick={() => setSelectedCert(certifications[4])}
                                 />
-                                <text x="430" y="255" textAnchor="middle" className="fill-current text-xs font-semibold text-secondary">
+                                <circle cx="465" cy="250" r="18" fill="url(#expertGradient)" className="cursor-pointer" onClick={() => setSelectedCert(certifications[4])} />
+                                <text x="465" y="254" textAnchor="middle" className="fill-white text-[8px] font-bold uppercase">
                                     EXPERT
                                 </text>
 
-                                {/* Anneau Specialist - Secteurs externes */}
+                                <path
+                                    d="M 30 250 L 40 245 L 40 255 Z"
+                                    fill="url(#specialistGradient)"
+                                    className="cursor-pointer transition-all hover:opacity-80"
+                                    onClick={() => setSelectedCert(certifications[5])}
+                                />
                                 <circle
                                     cx="250"
                                     cy="250"
@@ -191,21 +257,7 @@ const CertificationWheel = () => {
                                     className="cursor-pointer transition-all hover:opacity-80"
                                     strokeDasharray="30 15"
                                     onClick={() => setSelectedCert(certifications[5])}
-                                />
-                                <text x="75" y="255" textAnchor="middle" className="fill-muted-foreground text-xs font-semibold">
-                                    SPECIALIST
-                                </text>
-
-                                {/* Labels périphériques */}
-                                <text x="250" y="30" textAnchor="middle" className="fill-muted-foreground text-xs">
-                                    Core Advanced
-                                </text>
-                                <text x="470" y="255" textAnchor="middle" className="fill-muted-foreground text-xs">
-                                    Supporting Skills
-                                </text>
-                                <text x="250" y="480" textAnchor="middle" className="fill-muted-foreground text-xs">
-                                    Technologies & Approaches
-                                </text>
+                                /> */}
                             </svg>
                         </div>
                     </div>

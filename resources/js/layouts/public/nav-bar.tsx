@@ -3,12 +3,15 @@ import { Input } from '@/components/ui/input';
 import { Link } from '@inertiajs/react';
 import { Menu, Search } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import Logo from './logo';
 import NavMenu from './nav-menu';
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isMenuSticky, setIsMenuSticky] = useState(false);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -35,7 +38,7 @@ const Navbar = () => {
                         <Search className="absolute inset-y-0 left-3 my-auto h-4 w-4 text-muted-foreground" />
                         <Input
                             className="w-full rounded-full border-none bg-muted pl-10 shadow-none focus-visible:ring-1"
-                            placeholder="Rechercher..."
+                            placeholder={t('nav.search')}
                         />
                     </div>
 
@@ -50,15 +53,18 @@ const Navbar = () => {
                             <Menu className="h-5 w-5" />
                         </Button>
 
+                        {/* Changement de langue */}
+                        <LanguageSwitcher />
+
                         {/* Boutons d'authentification */}
                         <Link href="/login">
                             <Button variant="outline" className="hidden rounded-full sm:inline-flex">
-                                Connexion
+                                {t('nav.login')}
                             </Button>
                         </Link>
                         <Link href="/register">
                             <Button className="rounded-full">
-                                S'inscrire
+                                {t('nav.register')}
                             </Button>
                         </Link>
                     </div>

@@ -47,7 +47,15 @@
         "certification_wheel_title": "Improve & Certify Your Skills",
         "certification_wheel_description": "Discover our portfolio of certifications and explore what will support your testing career.",
         "level": "Level",
-        "explore_certifications": "Explore Certifications →"
+        "explore_certifications": "Explore Certifications →",
+        "develop_skills_title": "Develop Your Testing Skills",
+        "istqb_intro": "The ISTQB® International Software Testing Qualifications Board",
+        "istqb_description": "founded in 1998, is the global reference for software testing certification. Since its inception, the ISTQB® Certified Tester program has greatly contributed to professionalizing the software testing field by establishing internationally recognized standards. Its mission is to support the testing community and promote software quality on a global scale.",
+        "how_to_certify": "How to Get Certified?",
+        "how_to_certify_desc": "Discover key information and download syllabi and sample exams from our free knowledge base.",
+        "find_training": "Find Accredited Training",
+        "find_training_desc": "Identify exam providers in your region that offer the certification exam you have selected.",
+        "learn_more_btn": "Learn More"
     },
     "footer": {
         "all_rights_reserved": "All rights reserved"

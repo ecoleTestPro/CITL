@@ -47,7 +47,15 @@
         "certification_wheel_title": "Améliorer & Certifier vos compétences",
         "certification_wheel_description": "Découvrez notre portfolio de certifications et explorez ce qui soutiendra votre carrière dans le testing.",
         "level": "Niveau",
-        "explore_certifications": "Explorer les certifications →"
+        "explore_certifications": "Explorer les certifications →",
+        "develop_skills_title": "Développez vos compétences en matière de tests",
+        "istqb_intro": "L'ISTQB® International Software Testing Qualifications Board",
+        "istqb_description": "fondée en 1998, est la référence mondiale en certification en testing logiciel. Depuis ses débuts, le programme Certified Tester de l'ISTQB® a grandement contribué à professionnaliser le domaine du test logiciel, en établissant des standards reconnus internationalement. Elle a pour mission de soutenir la communauté des testeurs et de promouvoir la qualité du logiciel à l'échelle globale.",
+        "how_to_certify": "Comment obtenir la certification ?",
+        "how_to_certify_desc": "Découvrez les informations clés et téléchargez les programmes et exemples d'examens dans notre base de connaissances gratuite.",
+        "find_training": "Trouver une formation agréée",
+        "find_training_desc": "Identifiez les prestataires d'examens dans votre région qui proposent l'examen de certification que vous avez sélectionné.",
+        "learn_more_btn": "En savoir plus"
     },
     "footer": {
         "all_rights_reserved": "Tous droits réservés"

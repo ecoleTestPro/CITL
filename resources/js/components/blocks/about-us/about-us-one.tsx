@@ -1,7 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 export default function AboutUsOne() {
+    const { t } = useTranslation();
+
     return (
         <section className="relative py-24 bg-white/80 dark:bg-gray-900">
             <div className="mx-auto w-full max-w-7xl px-4 md:px-5 lg:px-5">
@@ -24,18 +27,10 @@ export default function AboutUsOne() {
                         <div className="flex w-full flex-col items-start justify-center gap-8">
                             <div className="flex w-full flex-col items-center justify-start gap-3 lg:items-start">
                                 <h2 className="font-manrope text-center text-4xl leading-normal font-bold text-gray-900 dark:text-gray-100 lg:text-start">
-                                    L'unique structure officielle ISTQB en Côte
-                                    d'Ivoire
+                                    {t('home.hero_title')}
                                 </h2>
                                 <p className="text-center text-base leading-relaxed font-normal text-gray-500 dark:text-gray-400 lg:text-start">
-                                    Le Comité Ivoirien des Tests Logiciels (CITL)
-                                    a été fondé le 24 octobre 2025 lors de
-                                    l'assemblée générale de l'ISTQB à Copenhague.
-                                    Organisation à but non lucratif, nous sommes
-                                    chargés de délivrer les certifications ISTQB,
-                                    d'accréditer les formateurs et organismes de
-                                    formation, et de promouvoir l'excellence du
-                                    testing logiciel en Côte d'Ivoire.
+                                    {t('home.hero_description')}
                                 </p>
                             </div>
                             <div className="inline-flex w-full items-center justify-center gap-5 sm:gap-10 lg:justify-start">
@@ -44,7 +39,7 @@ export default function AboutUsOne() {
                                         6
                                     </h3>
                                     <h6 className="text-base leading-relaxed font-normal text-gray-500 dark:text-gray-400">
-                                        Certifications
+                                        {t('home.certifications_count')}
                                     </h6>
                                 </div>
                                 <div className="inline-flex flex-col items-start justify-start">
@@ -52,7 +47,7 @@ export default function AboutUsOne() {
                                         3
                                     </h4>
                                     <h6 className="text-base leading-relaxed font-normal text-gray-500 dark:text-gray-400">
-                                        Niveaux de formation
+                                        {t('home.training_levels')}
                                     </h6>
                                 </div>
                                 <div className="inline-flex flex-col items-start justify-start">
@@ -60,14 +55,14 @@ export default function AboutUsOne() {
                                         0
                                     </h4>
                                     <h6 className="text-base leading-relaxed font-normal text-gray-500 dark:text-gray-400">
-                                        Testeurs certifiés
+                                        {t('home.certified_testers')}
                                     </h6>
                                 </div>
                             </div>
                         </div>
                         <Link href="/about-citl">
                             <Button className="flex w-full items-center justify-center rounded-lg bg-citl-orange px-3.5 py-2 shadow-[0px_1px_2px_0px_rgba(16,24,40,0.05)] transition-all duration-700 ease-in-out hover:bg-citl-orange/90 sm:w-fit">
-                                En savoir plus sur le CITL
+                                {t('home.learn_more')}
                             </Button>
                         </Link>
                     </div>

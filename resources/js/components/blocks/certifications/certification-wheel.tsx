@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Structure hiérarchique: Niveaux et Certifications
 interface Certification {
@@ -110,6 +111,7 @@ const getChildren = (parentId: string): Certification[] => {
 
 const CertificationWheel = () => {
     const [selectedCert, setSelectedCert] = useState<Certification>(certifications[0]);
+    const { t } = useTranslation();
 
     // Configuration des cercles
     const CENTER_X = 250;
@@ -251,9 +253,9 @@ const CertificationWheel = () => {
             `}</style>
             <div className="mx-auto w-full max-w-(--breakpoint-2xl)">
                 <div className="w-2/3">
-                    <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">Améliorer & Certifier vos compétences</h2>
+                    <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">{t('home.certification_wheel_title')}</h2>
                     <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
-                        Découvrez notre portfolio de certifications et explorez ce qui soutiendra votre carrière dans le testing.
+                        {t('home.certification_wheel_description')}
                     </p>
                 </div>
 
@@ -264,12 +266,12 @@ const CertificationWheel = () => {
                             {/* Card de la certification sélectionnée */}
                             <div className="">
                                 <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary uppercase">
-                                    Niveau {selectedCert.level}
+                                    {t('home.level')} {selectedCert.level}
                                 </div>
                                 <h3 className="mb-2 text-2xl font-bold text-foreground">{selectedCert.fullName}</h3>
                                 <p className="mb-6 text-base leading-relaxed text-muted-foreground">{selectedCert.description}</p>
                                 <Button asChild>
-                                    <a href="/certifications">Explorer les certifications →</a>
+                                    <a href="/certifications">{t('home.explore_certifications')}</a>
                                 </Button>
                             </div>
                         </div>

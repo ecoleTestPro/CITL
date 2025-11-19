@@ -1,25 +1,26 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { BookCheck, ClipboardCheck } from 'lucide-react';
-
-const certificationSteps = [
-    {
-        icon: BookCheck,
-        title: 'Comment obtenir la certification ?',
-        description:
-            "Découvrez les informations clés et téléchargez les programmes et exemples d'examens dans notre base de connaissances gratuite. ",
-        link: '/why-certification',
-    },
-    {
-        icon: ClipboardCheck,
-        title: 'Trouver une formation agréée',
-        description:
-            "Identifiez les prestataires d'examens dans votre région qui proposent l'examen de certification que vous avez sélectionné.",
-        link: '/find-a-training-provider',
-    },
-];
+import { useTranslation } from 'react-i18next';
 
 const FeaturesCertifications = () => {
+    const { t } = useTranslation();
+
+    const certificationSteps = [
+        {
+            icon: BookCheck,
+            title: t('home.how_to_certify'),
+            description: t('home.how_to_certify_desc'),
+            link: '/why-certification',
+        },
+        {
+            icon: ClipboardCheck,
+            title: t('home.find_training'),
+            description: t('home.find_training_desc'),
+            link: '/find-a-training-provider',
+        },
+    ];
+
     return (
         <div className="bg-background py-24">
             <div className="mx-auto w-full max-w-(--breakpoint-2xl) px-6">
@@ -27,23 +28,13 @@ const FeaturesCertifications = () => {
                     <div className="col-span-2">
                         <div className="mb-12 text-left">
                             <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-[2.5rem] md:leading-[1.2]">
-                                Développez vos compétences en matière de tests
+                                {t('home.develop_skills_title')}
                             </h2>
                             <p className="mt-4 text-lg text-muted-foreground sm:text-xl">
                                 <strong>
-                                    L'ISTQB® International Software Testing
-                                    Qualifications Board
+                                    {t('home.istqb_intro')}
                                 </strong>
-                                , fondée en 1998, est la référence mondiale en
-                                certification en testing logiciel. Depuis ses
-                                débuts, le programme Certified Tester de
-                                l'ISTQB® a grandement contribué à
-                                professionnaliser le domaine du test logiciel,
-                                en établissant des standards reconnus
-                                internationalement. Elle a pour mission de
-                                soutenir la communauté des testeurs et de
-                                promouvoir la qualité du logiciel à l’échelle
-                                globale.
+                                , {t('home.istqb_description')}
                             </p>
                         </div>
                     </div>
@@ -66,11 +57,9 @@ const FeaturesCertifications = () => {
                                         </p>
                                     </CardHeader>
                                     <CardContent className="mt-auto px-0 pb-0">
-                                        {/* <div className="ml-6 h-40 rounded-tl-xl bg-gradient-to-br from-primary/5 to-secondary/5"></div> */}
-
                                         <div className="px-4">
                                             <Button variant={'secondary'}>
-                                                En savoir plus
+                                                {t('home.learn_more_btn')}
                                             </Button>
                                         </div>
                                     </CardContent>

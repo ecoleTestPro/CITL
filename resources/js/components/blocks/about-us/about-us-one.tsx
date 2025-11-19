@@ -3,20 +3,20 @@ import { Link } from '@inertiajs/react';
 
 export default function AboutUsOne() {
     return (
-        <section className="relative py-24">
+        <section className="relative py-24 bg-white/80 dark:bg-gray-900">
             <div className="mx-auto w-full max-w-7xl px-4 md:px-5 lg:px-5">
                 <div className="grid w-full grid-cols-1 items-center justify-start gap-12 lg:grid-cols-2">
                     <div className="order-last grid w-full grid-cols-1 items-start justify-center gap-6 sm:grid-cols-2 lg:order-first">
                         <div className="flex items-start justify-start gap-2.5 pt-24 sm:justify-end lg:justify-center">
                             <img
                                 className="rounded-xl object-cover"
-                                src="/images/about/citl-team-1.jpg"
+                                src="/assets/images/about/citl-team-1.jpg"
                                 alt="Équipe CITL - Testing Logiciel"
                             />
                         </div>
                         <img
                             className="ml-auto rounded-xl object-cover sm:ml-0"
-                            src="/images/about/citl-certification.jpg"
+                            src="/assets/images/about/citl-certification.jpg"
                             alt="Certification ISTQB en Côte d'Ivoire"
                         />
                     </div>

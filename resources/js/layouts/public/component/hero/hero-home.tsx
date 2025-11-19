@@ -6,8 +6,13 @@ import { Link } from '@inertiajs/react';
 import { ArrowUpRight, CirclePlay } from 'lucide-react';
 
 const HeroHome = () => {
+    const height = '70vh';
     return (
-        <div className="flex h-[50vh] items-center justify-center overflow-hidden">
+        <div
+            className={
+                'flex items-center justify-center overflow-hidden ' + height
+            }
+        >
             <div className="grid w-full gap-12 px-6 py-12 lg:grid-cols-2 lg:py-0">
                 <div className="relative my-auto overflow-hidden">
                     <AnimatedGridPattern
@@ -15,7 +20,7 @@ const HeroHome = () => {
                         maxOpacity={0.3}
                         duration={2}
                         className={cn(
-                            '[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]',
+                            'mask-[radial-gradient(600px_circle_at_center,white,transparent)]',
                             'inset-0 h-full w-full',
                         )}
                     />
@@ -63,9 +68,9 @@ const HeroHome = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-50vh" aria-label="Hero Image">
+                <div className={height} aria-label="Hero Image">
                     <img
-                        className="h-[auto] w-full object-cover"
+                        className="h-auto w-full object-cover"
                         src="/assets/images/hero/pexels-theo-decker-5945814.jpg"
                     />
                 </div>

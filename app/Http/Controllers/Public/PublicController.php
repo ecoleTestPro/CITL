@@ -44,85 +44,85 @@ class PublicController extends Controller
     // Adhésion Section
     public function members()
     {
-        return Inertia::render('public/members');
+        return Inertia::render('public/membership/members');
     }
 
     public function workingGroups()
     {
-        return Inertia::render('public/working-groups');
+        return Inertia::render('public/membership/working-groups');
     }
 
     // Certifications Section
     public function whyCertification()
     {
-        return Inertia::render('public/why-certification');
+        return Inertia::render('public/certifications/why-certification');
     }
 
     public function coreFoundation()
     {
-        return Inertia::render('public/core-foundation');
+        return Inertia::render('public/certifications/core-foundation');
     }
 
     public function coreAdvanced()
     {
-        return Inertia::render('public/core-advanced');
+        return Inertia::render('public/certifications/core-advanced');
     }
 
     public function specialist()
     {
-        return Inertia::render('public/specialist');
+        return Inertia::render('public/certifications/specialist');
     }
 
     public function expertLevel()
     {
-        return Inertia::render('public/expert-level');
+        return Inertia::render('public/certifications/expert-level');
     }
 
     public function a4qPracticalTester()
     {
-        return Inertia::render('public/a4q-practical-tester');
+        return Inertia::render('public/certifications/a4q-practical-tester');
     }
 
     // Examens Section
     public function examQuestions()
     {
-        return Inertia::render('public/exam-questions');
+        return Inertia::render('public/exams/exam-questions');
     }
 
     public function examFees()
     {
-        return Inertia::render('public/exam-fees');
+        return Inertia::render('public/exams/exam-fees');
     }
 
     public function examRegistration()
     {
-        return Inertia::render('public/exam-registration');
+        return Inertia::render('public/exams/exam-registration');
     }
 
     public function examFaq()
     {
-        return Inertia::render('public/exam-faq');
+        return Inertia::render('public/exams/exam-faq');
     }
 
     public function antiPiracy()
     {
-        return Inertia::render('public/anti-piracy');
+        return Inertia::render('public/exams/anti-piracy');
     }
 
     public function glossary()
     {
-        return Inertia::render('public/glossary');
+        return Inertia::render('public/exams/glossary');
     }
 
     // Training Organizations Section
     public function accreditedOrganizations()
     {
-        return Inertia::render('public/accredited-organizations');
+        return Inertia::render('public/training/accredited-organizations');
     }
 
     public function accreditationRequest()
     {
-        return Inertia::render('public/accreditation-request');
+        return Inertia::render('public/training/accreditation-request');
     }
 
     // Events & Blog
@@ -139,17 +139,17 @@ class PublicController extends Controller
     // Registration Section
     public function registerCertifiedTesters()
     {
-        return Inertia::render('public/register-certified-testers');
+        return Inertia::render('public/registration/register-certified-testers');
     }
 
     public function certifiedTestersList()
     {
-        return Inertia::render('public/certified-testers-list');
+        return Inertia::render('public/registration/certified-testers-list');
     }
 
     public function istqbRegistry()
     {
-        return Inertia::render('public/istqb-registry');
+        return Inertia::render('public/registration/istqb-registry');
     }
 
     // Contact

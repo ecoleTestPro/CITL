@@ -1,22 +1,21 @@
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { SearchBar } from '@/components/search-bar';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Link } from '@inertiajs/react';
-import { Menu, Search } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LanguageSwitcher } from '@/components/language-switcher';
 import Logo from './logo';
 import NavMenu from './nav-menu';
 
 const Navbar = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [isMenuSticky, setIsMenuSticky] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const { t } = useTranslation();
 
     useEffect(() => {
         const handleScroll = () => {
-            // Le menu devient sticky après avoir scrollé de 80px (hauteur du premier niveau)
-            setIsMenuSticky(window.scrollY > 80);
+            setIsScrolled(window.scrollY > 80);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -24,64 +23,94 @@ const Navbar = () => {
     }, []);
 
     return (
-        <header className="relative z-50 w-full">
-            {/* Niveau 1: Logo + Recherche centrée + Actions */}
-            <div className="border-b bg-background">
-                <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4">
-                    {/* Logo */}
-                    <Link href="/" className="shrink-0">
-                        <Logo />
-                    </Link>
+        <>
+            <header className="relative z-50 w-full border-b bg-background">
+                <div>
+                    {/* Niveau 1: Logo + Barre de recherche centrée + Actions */}
+                    <div className="w-full border-b bg-background backdrop-blur-md">
+                        <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4">
+                            {/* Logo */}
+                            <Link href="/" className="shrink-0">
+                                <Logo />
+                            </Link>
 
-                    {/* Barre de recherche centrée */}
-                    <div className="relative hidden flex-1 max-w-md md:block">
-                        <Search className="absolute inset-y-0 left-3 my-auto h-4 w-4 text-muted-foreground" />
-                        <Input
-                            className="w-full rounded-full border-none bg-muted pl-10 shadow-none focus-visible:ring-1"
-                            placeholder={t('nav.search')}
-                        />
+                            {/* Barre de recherche centrée - Version complète */}
+                            <div className="hidden max-w-md flex-1 md:block">
+                                <SearchBar variant="full" />
+                            </div>
+
+                            {/* Actions de droite */}
+                            <div className="flex shrink-0 items-center gap-2">
+                                {/* Changement de langue */}
+                                <div className="hidden sm:block">
+                                    <LanguageSwitcher />
+                                </div>
+
+                                {/* Boutons d'authentification */}
+                                <Link href="/login" className="hidden lg:inline-flex">
+                                    <Button variant="ghost" className="rounded-full border border-border transition-colors hover:border-foreground/20">
+                                        {t('nav.login')}
+                                    </Button>
+                                </Link>
+                                <Link href="/register" className="hidden sm:inline-flex">
+                                    <Button className="rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90">
+                                        {t('nav.register')}
+                                    </Button>
+                                </Link>
+
+                                {/* Bouton menu mobile */}
+                                <Button size="icon" variant="ghost" className="rounded-full xl:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                                    {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                                </Button>
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Actions de droite */}
-                    <div className="flex shrink-0 items-center gap-2">
-                        <Button
-                            size="icon"
-                            variant="ghost"
-                            className="lg:hidden"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        >
-                            <Menu className="h-5 w-5" />
-                        </Button>
-
-                        {/* Changement de langue */}
-                        <LanguageSwitcher />
-
-                        {/* Boutons d'authentification */}
-                        <Link href="/login">
-                            <Button variant="outline" className="hidden rounded-full sm:inline-flex">
-                                {t('nav.login')}
-                            </Button>
-                        </Link>
-                        <Link href="/register">
-                            <Button className="rounded-full">
-                                {t('nav.register')}
-                            </Button>
-                        </Link>
+                    {/* Niveau 2: Menu de navigation */}
+                    <div
+                        className={`w-full bg-background backdrop-blur-md transition-all duration-300 ${
+                            isScrolled ? 'fixed top-0 z-50 border-b shadow-md' : ''
+                        }`}
+                    >
+                        <div className="container mx-auto px-4 py-0">
+                            <div className="flex items-center justify-center">
+                                {/* Menu principal centré */}
+                                <NavMenu />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </header>
 
-            {/* Niveau 2: Menu de navigation */}
-            <div
-                className={`border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 transition-all duration-300 ${
-                    isMenuSticky ? 'sticky top-0 shadow-md' : ''
-                }`}
-            >
-                <div className="container mx-auto px-4">
-                    <NavMenu />
+            {/* Spacer pour éviter que le contenu ne passe sous le header sticky */}
+            <div className={isScrolled ? 'h-14' : ''} />
+
+            {/* Menu mobile */}
+            {mobileMenuOpen && (
+                <div className="fixed inset-0 z-40 bg-background/95 pt-20 backdrop-blur-lg xl:hidden">
+                    <div className="container mx-auto px-4 py-6">
+                        <NavMenu mobile onNavigate={() => setMobileMenuOpen(false)} />
+
+                        {/* Actions mobiles */}
+                        <div className="mt-6 space-y-3 border-t pt-6">
+                            <div className="flex flex-col gap-3">
+                                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                                    <Button variant="outline" className="w-full rounded-full">
+                                        {t('nav.login')}
+                                    </Button>
+                                </Link>
+                                <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
+                                    <Button className="w-full rounded-full">{t('nav.register')}</Button>
+                                </Link>
+                            </div>
+                            <div className="flex justify-center pt-3">
+                                <LanguageSwitcher />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </header>
+            )}
+        </>
     );
 };
 

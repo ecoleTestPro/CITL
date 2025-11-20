@@ -10,6 +10,8 @@ import {
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 // Types pour la structure du menu
 interface MenuItem {
@@ -25,8 +27,13 @@ interface MenuSection {
     gridCols?: number;
 }
 
-const NavMenu = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+interface NavMenuProps {
+    mobile?: boolean;
+    onNavigate?: () => void;
+}
+
+const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
+    const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const { t } = useTranslation();
 
     // Configuration du menu traduite - Partie gauche (navigation principale)
@@ -113,57 +120,119 @@ const NavMenu = () => {
         },
     ];
 
-    // Rendu d'un élément de menu dropdown
+    // Rendu d'un élément de menu dropdown - Version améliorée
     const renderDropdownItem = (item: MenuItem) => (
         <li key={item.href}>
             <NavigationMenuLink asChild>
                 <Link
                     href={item.href}
-                    className="block space-y-1 rounded-md p-3 leading-none no-underline transition-colors outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                    onClick={onNavigate}
+                    className="group relative block space-y-1 rounded-xl p-3 leading-none no-underline transition-all duration-200 outline-none select-none hover:bg-accent/50"
                 >
-                    <div className="text-sm leading-none font-medium">{item.label}</div>
+                    {/* Effet de fond au hover */}
+                    <div className="absolute inset-0 rounded-xl bg-accent/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100 -z-10" />
+                    <div className="relative text-sm leading-tight font-medium text-foreground/80 group-hover:text-foreground">
+                        {item.label}
+                    </div>
                 </Link>
             </NavigationMenuLink>
         </li>
     );
 
-    // Rendu d'une section de menu
-    const renderMenuSection = (section: MenuSection) => {
+    // Rendu d'une section de menu - Desktop
+    const renderDesktopMenuSection = (section: MenuSection) => {
         if (section.type === 'link') {
             return (
                 <NavigationMenuItem key={section.title}>
                     <Link href={section.href!}>
-                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>{section.title}</NavigationMenuLink>
+                        <NavigationMenuLink
+                            className={cn(
+                                'group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
+                            )}
+                        >
+                            {section.title}
+                        </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
             );
         }
 
-        // Type dropdown
-        const gridClass = section.gridCols === 2 ? 'grid w-[500px] gap-3 p-4 md:w-[600px] md:grid-cols-2' : 'grid w-[400px] gap-3 p-4';
+        // Type dropdown avec nouveau style
+        const gridClass = section.gridCols === 2 ? 'grid w-[500px] gap-2 p-4 md:w-[600px] md:grid-cols-2' : 'grid w-[400px] gap-2 p-4';
 
         return (
             <NavigationMenuItem key={section.title}>
-                <NavigationMenuTrigger>{section.title}</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="rounded-full hover:bg-accent/50 data-[state=open]:bg-accent/50">
+                    {section.title}
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                    <ul className={gridClass}>{section.items?.map(renderDropdownItem)}</ul>
+                    <ul className={cn(gridClass, 'rounded-2xl')}>{section.items?.map(renderDropdownItem)}</ul>
                 </NavigationMenuContent>
             </NavigationMenuItem>
         );
     };
 
-    return (
-        <div className="flex items-center justify-between">
-            {/* Desktop Navigation - Partie gauche */}
-            <NavigationMenu className="hidden lg:flex">
-                <NavigationMenuList>{menuLeft.map(renderMenuSection)}</NavigationMenuList>
-            </NavigationMenu>
+    // Rendu d'une section de menu - Mobile
+    const renderMobileMenuSection = (section: MenuSection) => {
+        const isOpen = openDropdown === section.title;
 
-            {/* Desktop Navigation - Partie droite */}
-            <NavigationMenu className="hidden lg:flex">
-                <NavigationMenuList>{menuRight.map(renderMenuSection)}</NavigationMenuList>
-            </NavigationMenu>
-        </div>
+        if (section.type === 'link') {
+            return (
+                <div key={section.title} className="border-b border-border/50">
+                    <Link
+                        href={section.href!}
+                        onClick={onNavigate}
+                        className="flex items-center justify-between py-4 text-base font-medium hover:text-primary transition-colors"
+                    >
+                        {section.title}
+                    </Link>
+                </div>
+            );
+        }
+
+        return (
+            <div key={section.title} className="border-b border-border/50">
+                <button
+                    onClick={() => setOpenDropdown(isOpen ? null : section.title)}
+                    className="flex w-full items-center justify-between py-4 text-base font-medium hover:text-primary transition-colors"
+                >
+                    {section.title}
+                    <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-180')} />
+                </button>
+                {isOpen && (
+                    <div className="pb-4 pl-4 space-y-2">
+                        {section.items?.map((item) => (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                onClick={onNavigate}
+                                className="block py-2 text-sm text-foreground/70 hover:text-foreground hover:translate-x-1 transition-all"
+                            >
+                                {item.label}
+                            </Link>
+                        ))}
+                    </div>
+                )}
+            </div>
+        );
+    };
+
+    // Version mobile
+    if (mobile) {
+        return (
+            <div className="space-y-1">
+                {[...menuLeft, ...menuRight].map(renderMobileMenuSection)}
+            </div>
+        );
+    }
+
+    // Version desktop
+    return (
+        <NavigationMenu>
+            <NavigationMenuList className="gap-1">
+                {[...menuLeft, ...menuRight].map(renderDesktopMenuSection)}
+            </NavigationMenuList>
+        </NavigationMenu>
     );
 };
 

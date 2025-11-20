@@ -51,6 +51,7 @@
         "clsx": "^2.1.1",
         "concurrently": "^9.0.1",
         "globals": "^15.14.0",
+        "gsap": "^3.13.0",
         "i18next": "^25.6.3",
         "input-otp": "^1.4.2",
         "laravel-vite-plugin": "^2.0",

@@ -1,6 +1,11 @@
 import { FadeIn } from '@/components/animations';
 import { Badge } from '@/components/ui/badge';
 import { RichText } from '@/lib/text-parser';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface AboutHeroProps {
     badge?: string;
@@ -10,22 +15,48 @@ interface AboutHeroProps {
 }
 
 export default function AboutHero({ badge, title, description, backgroundImage }: AboutHeroProps) {
+    const bgRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!bgRef.current || !backgroundImage) return;
+
+        // Animation continue de zoom doux
+        const tl = gsap.timeline({
+            repeat: -1,
+            yoyo: true,
+        });
+
+        tl.to(bgRef.current, {
+            scale: 1.05,
+            duration: 8,
+            ease: 'power1.inOut',
+        });
+
+        return () => {
+            tl.kill();
+        };
+    }, [backgroundImage]);
+
     return (
-        <section
-            className="relative pt-[50px] pb-16 lg:pt-[70px] lg:pb-20 xl:pt-[100px] xl:pb-28"
-            style={backgroundImage ? {
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat'
-            } : undefined}
-        >
-            {/* Overlay pour améliorer la lisibilité du texte */}
+        <section className="relative overflow-hidden pt-[50px] pb-16 lg:pt-[70px] lg:pb-20 xl:pt-[100px] xl:pb-28">
+            {/* Background image avec animation */}
             {backgroundImage && (
-                <div className="absolute inset-0 bg-white/10 dark:bg-gray-900/80"></div>
+                <div
+                    ref={bgRef}
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage: `url(${backgroundImage})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                />
             )}
 
-            <div className="container relative z-10 mx-auto px-4">
+            {/* Overlay pour améliorer la lisibilité du texte */}
+            {backgroundImage && <div className="absolute inset-0 bg-white/10 dark:bg-gray-900/80"></div>}
+
+            <div className="relative z-10 container mx-auto px-4">
                 <div className="space-y-5">
                     {badge && (
                         <FadeIn delay={0.1}>

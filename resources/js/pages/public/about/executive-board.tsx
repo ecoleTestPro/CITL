@@ -1,12 +1,64 @@
+import { AboutHero, AboutKeyTakeaways } from '@/components/blocks/about';
+import { TeamMembers } from '@/components/blocks/team';
 import PublicLayout from '@/layouts/public/public-layout';
+import { useTranslation } from 'react-i18next';
 
 function ExecutiveBoard() {
+    const { t } = useTranslation();
+
+    const breadcrumbs = [
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.citl'), href: '#' },
+        { title: t('nav.executive_board'), href: '/executive-board' },
+    ];
+
+    const takeaways = [
+        { number: 1, text: t('about.executive_board.takeaway_1') },
+        { number: 2, text: t('about.executive_board.takeaway_2') },
+        { number: 3, text: t('about.executive_board.takeaway_3') },
+    ];
+
+    const members = [
+        {
+            name: t('about.executive_board.member_1_name'),
+            role: t('about.executive_board.member_1_role'),
+            description: t('about.executive_board.member_1_description'),
+            image: '/assets/images/team/alexis-nana.jpg',
+        },
+        {
+            name: t('about.executive_board.member_2_name'),
+            role: t('about.executive_board.member_2_role'),
+            description: t('about.executive_board.member_2_description'),
+            image: '/assets/images/team/sylviane-akpangny.jpg',
+        },
+        {
+            name: t('about.executive_board.member_3_name'),
+            role: t('about.executive_board.member_3_role'),
+            description: t('about.executive_board.member_3_description'),
+            image: '/assets/images/team/sekou-diabate.jpg',
+        },
+    ];
+
     return (
-        <PublicLayout>
-            <div className="container mx-auto px-4 py-16">
-                <h1 className="mb-6 text-4xl font-bold">Le bureau exécutif</h1>
-                <p className="text-muted-foreground">Contenu de la page Le bureau exécutif - À développer prochainement.</p>
-            </div>
+        <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <main>
+                <AboutHero
+                    badge={t('about.executive_board.badge')}
+                    title={t('about.executive_board.hero_title')}
+                    description={t('about.executive_board.overview_description')}
+                    backgroundImage="/assets/images/bg/sharp-2.png"
+                />
+
+                <TeamMembers title={t('about.executive_board.team_title')} members={members} />
+
+                <AboutKeyTakeaways
+                    title={t('about.executive_board.takeaways_title')}
+                    takeaways={takeaways}
+                    conclusion={t('about.executive_board.conclusion')}
+                    ctaText={t('about.executive_board.cta_text')}
+                    ctaLink="/certifications"
+                />
+            </main>
         </PublicLayout>
     );
 }

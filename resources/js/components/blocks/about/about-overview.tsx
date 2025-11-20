@@ -48,8 +48,8 @@ export default function AboutOverview({ title, description, learnTitle, items, i
                                 </ul>
                             </div>
                         </div>
-                        <figure className="min-h-[300px] w-full overflow-hidden rounded-[20px] lg:min-h-[490px] lg:max-w-[613px]">
-                            <img src={imageSrc} alt={imageAlt} className="h-full min-h-[300px] w-full object-cover lg:min-h-[490px]" loading="lazy" />
+                        <figure className="flex min-h-[300px] w-full items-center overflow-hidden rounded-[20px] lg:min-h-[490px] lg:max-w-[613px]">
+                            <img src={imageSrc} alt={imageAlt} className="h-auto w-full object-cover" loading="lazy" />
                         </figure>
                     </div>
                 </div>

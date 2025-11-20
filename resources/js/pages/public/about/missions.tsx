@@ -1,14 +1,56 @@
+import { AboutHero, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { useTranslation } from 'react-i18next';
 
 function Missions() {
+    const { t } = useTranslation();
+
+    const breadcrumbs = [
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.citl'), href: '#' },
+        { title: t('nav.missions'), href: '/missions' },
+    ];
+
+    const overviewItems = [
+        { text: t('about.missions.overview_item_1') },
+        { text: t('about.missions.overview_item_2') },
+        { text: t('about.missions.overview_item_3') },
+        { text: t('about.missions.overview_item_4') },
+    ];
+
+    const takeaways = [
+        { number: 1, text: t('about.missions.takeaway_1') },
+        { number: 2, text: t('about.missions.takeaway_2') },
+        { number: 3, text: t('about.missions.takeaway_3') },
+    ];
+
     return (
-        <PublicLayout>
-            <div className="container mx-auto px-4 py-16">
-                <h1 className="text-4xl font-bold mb-6">Nos missions</h1>
-                <p className="text-muted-foreground">
-                    Contenu de la page Nos missions - À développer prochainement.
-                </p>
-            </div>
+        <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <main>
+                <AboutHero
+                    badge={t('about.missions.badge')}
+                    title={t('about.missions.hero_title')}
+                    description={t('about.missions.hero_description')}
+                    backgroundImage="/assets/images/bg/sharp-2.png"
+                />
+
+                <AboutOverview
+                    title={t('about.missions.overview_title')}
+                    description={t('about.missions.overview_description')}
+                    learnTitle={t('about.missions.learn_title')}
+                    items={overviewItems}
+                    imageSrc="/assets/images/pages/about/missions-overview.jpg"
+                    imageAlt="Nos Missions - CITL"
+                />
+
+                <AboutKeyTakeaways
+                    title={t('about.missions.takeaways_title')}
+                    takeaways={takeaways}
+                    conclusion={t('about.missions.conclusion')}
+                    ctaText={t('about.missions.cta_text')}
+                    ctaLink="/certifications"
+                />
+            </main>
         </PublicLayout>
     );
 }

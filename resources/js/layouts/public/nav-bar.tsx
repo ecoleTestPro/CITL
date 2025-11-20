@@ -30,8 +30,8 @@ const Navbar = () => {
                     <div className="w-full border-b bg-background backdrop-blur-md">
                         <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4">
                             {/* Logo */}
-                            <Link href="/" className="shrink-0">
-                                <Logo />
+                            <Link href="/" className="shrink-0 p-2">
+                                <Logo width={80} />
                             </Link>
 
                             {/* Barre de recherche centrée - Version complète */}
@@ -73,10 +73,7 @@ const Navbar = () => {
                         }`}
                     >
                         <div className="container mx-auto px-4 py-0">
-                            <div className="flex items-center justify-center">
-                                {/* Menu principal centré */}
-                                <NavMenu />
-                            </div>
+                            <NavMenu />
                         </div>
                     </div>
                 </div>

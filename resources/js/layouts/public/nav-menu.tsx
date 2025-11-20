@@ -228,11 +228,21 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
 
     // Version desktop
     return (
-        <NavigationMenu>
-            <NavigationMenuList className="gap-1">
-                {[...menuLeft, ...menuRight].map(renderDesktopMenuSection)}
-            </NavigationMenuList>
-        </NavigationMenu>
+        <div className="flex w-full items-center justify-between">
+            {/* Menu principal à gauche */}
+            <NavigationMenu>
+                <NavigationMenuList className="gap-1">
+                    {menuLeft.map(renderDesktopMenuSection)}
+                </NavigationMenuList>
+            </NavigationMenu>
+
+            {/* Liens secondaires à droite */}
+            <NavigationMenu>
+                <NavigationMenuList className="gap-1">
+                    {menuRight.map(renderDesktopMenuSection)}
+                </NavigationMenuList>
+            </NavigationMenu>
+        </div>
     );
 };
 

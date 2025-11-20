@@ -64,6 +64,12 @@
         "find_training_desc": "Identifiez les prestataires d'examens dans votre région qui proposent l'examen de certification que vous avez sélectionné.",
         "learn_more_btn": "En savoir plus"
     },
+    "cta": {
+        "savings_title_part1": "Gagnez plus avec",
+        "savings_title_part2": "vos certifications",
+        "savings_description": "Nous ne vous aidons pas seulement à vous certifier—nous vous aidons à évoluer. Nos certifiés bénéficient d'opportunités de carrière accrues, avec une reconnaissance internationale et des compétences valorisées.",
+        "learn_more": "En savoir plus"
+    },
     "footer": {
         "all_rights_reserved": "Tous droits réservés"
     }

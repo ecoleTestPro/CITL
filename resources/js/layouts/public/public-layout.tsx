@@ -1,3 +1,4 @@
+import { FloatingActions } from '@/components/floating-actions';
 import { type BreadcrumbItem } from '@/types';
 import { type PropsWithChildren } from 'react';
 import Footer from './footer';
@@ -22,6 +23,7 @@ export default function PublicLayout({
                 {children}
             </main>
             <Footer />
+            <FloatingActions />
         </div>
     );
 }

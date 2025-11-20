@@ -64,6 +64,12 @@
         "find_training_desc": "Identify exam providers in your region that offer the certification exam you have selected.",
         "learn_more_btn": "Learn More"
     },
+    "cta": {
+        "savings_title_part1": "Earn more with",
+        "savings_title_part2": "your certifications",
+        "savings_description": "We don't just help you get certified—we help you grow. Our certified professionals enjoy enhanced career opportunities, with international recognition and valued expertise.",
+        "learn_more": "Learn more"
+    },
     "footer": {
         "all_rights_reserved": "All rights reserved"
     }

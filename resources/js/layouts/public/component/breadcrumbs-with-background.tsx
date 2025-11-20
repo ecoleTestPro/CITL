@@ -19,7 +19,7 @@ const BreadcrumbsWithBackground = ({
     if (!breadcrumbs.length) return null;
 
     return (
-        <Breadcrumb className="rounded-lg bg-secondary px-3 py-1.5">
+        <Breadcrumb className="rounded-lg bg-gray-50 dark:bg-gray-800 px-3 py-1.5">
             <BreadcrumbList>
                 {breadcrumbs.map((item, index) => (
                     <div key={item.href} className="contents">

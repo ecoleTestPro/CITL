@@ -18,27 +18,27 @@ class PublicController extends Controller
     // CITL Section
     public function aboutIstqb()
     {
-        return Inertia::render('public/about-istqb');
+        return Inertia::render('public/about/about-istqb');
     }
 
     public function aboutCitl()
     {
-        return Inertia::render('public/about-citl');
+        return Inertia::render('public/about/about-citl');
     }
 
     public function vision()
     {
-        return Inertia::render('public/vision');
+        return Inertia::render('public/about/vision');
     }
 
     public function missions()
     {
-        return Inertia::render('public/missions');
+        return Inertia::render('public/about/missions');
     }
 
     public function executiveBoard()
     {
-        return Inertia::render('public/executive-board');
+        return Inertia::render('public/about/executive-board');
     }
 
     // Adhésion Section

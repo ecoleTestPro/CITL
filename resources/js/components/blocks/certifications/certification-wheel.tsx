@@ -251,7 +251,7 @@ const CertificationWheel = () => {
                     opacity: 0.9;
                 }
             `}</style>
-            <div className="mx-auto w-full max-w-(--breakpoint-2xl)">
+            <div className="mx-auto container">
                 <div className="w-2/3">
                     <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">{t('home.certification_wheel_title')}</h2>
                     <p className="mb-6 text-lg leading-relaxed text-muted-foreground">

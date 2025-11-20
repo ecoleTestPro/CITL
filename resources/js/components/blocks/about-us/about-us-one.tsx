@@ -6,8 +6,8 @@ export default function AboutUsOne() {
     const { t } = useTranslation();
 
     return (
-        <section className="relative py-24 bg-white/80 dark:bg-gray-900">
-            <div className="mx-auto w-full max-w-7xl px-4 md:px-5 lg:px-5">
+        <section className="relative pt-24 pb-12 bg-white/80 dark:bg-gray-900">
+            <div className="mx-auto container px-4 md:px-5 lg:px-5">
                 <div className="grid w-full grid-cols-1 items-center justify-start gap-12 lg:grid-cols-2">
                     <div className="order-last grid w-full grid-cols-1 items-start justify-center gap-6 sm:grid-cols-2 lg:order-first">
                         <div className="flex items-start justify-start gap-2.5 pt-24 sm:justify-end lg:justify-center">

@@ -7,8 +7,8 @@ function Home() {
     return (
         <PublicLayout variant="home">
             <AboutUsOne />
-            <CertificationWheel />
             <FeaturesCertifications />
+            <CertificationWheel />
             {/* <AboutUsTwo /> */}
         </PublicLayout>
     );

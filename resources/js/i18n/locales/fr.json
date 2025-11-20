@@ -37,6 +37,13 @@
         "login": "Connexion",
         "register": "S'inscrire"
     },
+    "hero": {
+        "foundedDate": "Fondé le 24 octobre 2025",
+        "title": "Comité Ivoirien des Tests Logiciels",
+        "description": "Unique structure officielle en Côte d'Ivoire chargée de représenter et de promouvoir l'ISTQB®. Nous délivrons les certifications ISTQB, accréditons les formateurs et participons activement aux standards internationaux du testing logiciel.",
+        "registerExam": "S'inscrire à un examen",
+        "findTraining": "Trouver une formation"
+    },
     "home": {
         "hero_title": "ISTQB en Côte d'Ivoire",
         "hero_description": "Le Comité Ivoirien des Tests Logiciels (CITL) a été fondé le 24 octobre 2025 lors de l'assemblée générale de l'ISTQB à Copenhague. Organisation à but non lucratif, nous sommes chargés de délivrer les certifications ISTQB, d'accréditer les formateurs et organismes de formation, et de promouvoir l'excellence du testing logiciel en Côte d'Ivoire.",

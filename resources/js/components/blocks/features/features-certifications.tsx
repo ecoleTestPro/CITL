@@ -22,8 +22,8 @@ const FeaturesCertifications = () => {
     ];
 
     return (
-        <div className="bg-background py-24">
-            <div className="mx-auto w-full max-w-(--breakpoint-2xl) px-6">
+        <div className="bg-background py-12">
+            <div className="mx-auto container px-6">
                 <div className="grid grid-cols-5 gap-4">
                     <div className="col-span-2">
                         <div className="mb-12 text-left">

@@ -37,6 +37,13 @@
         "login": "Login",
         "register": "Sign Up"
     },
+    "hero": {
+        "foundedDate": "Founded on October 24, 2025",
+        "title": "Ivorian Software Testing Committee",
+        "description": "The only official structure in Ivory Coast responsible for representing and promoting ISTQB®. We deliver ISTQB certifications, accredit trainers and actively participate in international software testing standards.",
+        "registerExam": "Register for an exam",
+        "findTraining": "Find training"
+    },
     "home": {
         "hero_title": "The Only Official ISTQB Structure in Ivory Coast",
         "hero_description": "The Ivorian Software Testing Committee (CITL) was founded on October 24, 2025 at the ISTQB general assembly in Copenhagen. As a non-profit organization, we are responsible for delivering ISTQB certifications, accrediting trainers and training organizations, and promoting software testing excellence in Ivory Coast.",

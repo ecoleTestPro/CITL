@@ -1,18 +1,57 @@
+import { AboutHero, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { useTranslation } from 'react-i18next';
 
 function AboutCitl() {
+    const { t } = useTranslation();
+
     const breadcrumbs = [
-        { title: 'Accueil', href: '/' },
-        { title: 'CITL', href: '#' },
-        { title: 'À propos du CITL', href: '/about-citl' },
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.citl'), href: '#' },
+        { title: t('nav.about_citl'), href: '/about-citl' },
+    ];
+
+    const overviewItems = [
+        { text: t('about.citl.overview_item_1') },
+        { text: t('about.citl.overview_item_2') },
+        { text: t('about.citl.overview_item_3') },
+        { text: t('about.citl.overview_item_4') },
+    ];
+
+    const takeaways = [
+        { number: 1, text: t('about.citl.takeaway_1') },
+        { number: 2, text: t('about.citl.takeaway_2') },
+        { number: 3, text: t('about.citl.takeaway_3') },
     ];
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
-            <div className="container mx-auto px-4 py-16">
-                <h1 className="mb-6 text-4xl font-bold">À propos du CITL</h1>
-                <p className="text-muted-foreground">Contenu de la page À propos du CITL - À développer prochainement.</p>
-            </div>
+            <main>
+                <AboutHero
+                    badge={t('about.citl.badge')}
+                    title={t('about.citl.hero_title')}
+                    description={t('about.citl.hero_description')}
+                    backgroundImage="/assets/images/bg/sharp-2.png"
+                />
+
+                <AboutOverview
+                    title={t('about.citl.overview_title')}
+                    description={t('about.citl.overview_description')}
+                    learnTitle={t('about.citl.learn_title')}
+                    items={overviewItems}
+                    imageSrc="/assets/images/pages/about/citl-overview.jpg"
+                    imageAlt="CITL - Comité Ivoirien des Tests Logiciels"
+                />
+
+                <AboutKeyTakeaways
+                    title={t('about.citl.takeaways_title')}
+                    takeaways={takeaways}
+                    conclusion={t('about.citl.conclusion')}
+                    ctaText={t('about.citl.cta_text')}
+                    ctaLink="/certifications"
+                />
+                {/* <SpotlightStories /> */}
+            </main>
         </PublicLayout>
     );
 }

@@ -1,5 +1,6 @@
 {
     "nav": {
+        "home": "Home",
         "citl": "CITL",
         "about_istqb": "About ISTQB",
         "about_citl": "About CITL",
@@ -69,6 +70,26 @@
         "savings_title_part2": "your certifications",
         "savings_description": "We don't just help you get certified—we help you grow. Our certified professionals enjoy enhanced career opportunities, with international recognition and valued expertise.",
         "learn_more": "Learn more"
+    },
+    "about": {
+        "citl": {
+            "badge": "About CITL",
+            "hero_title": "The ISTQB Certification Body in Ivory Coast",
+            "hero_description": "The Ivorian Software Testing Committee (CITL) is the only official structure in Ivory Coast responsible for representing and promoting ISTQB. We deliver ISTQB certifications, accredit trainers and actively participate in international software testing standards.",
+            "overview_title": "Overview",
+            "overview_description": "The Ivorian Software Testing Committee (CITL) was founded on **October 24, 2025** at the **ISTQB (International Software Testing Qualification Board)** general assembly in Copenhagen, Denmark. As a **non-profit organization**, it remains the **only official structure in Ivory Coast** responsible for representing and promoting ISTQB. In this capacity, CITL **delivers ISTQB certifications**, **independently accredits trainers** and training organizations, and **actively participates in ISTQB® activities**.",
+            "learn_title": "What you'll learn",
+            "overview_item_1": "Access internationally recognized ISTQB certifications",
+            "overview_item_2": "Benefit from training provided by accredited organizations",
+            "overview_item_3": "Join a community of certified testers",
+            "overview_item_4": "Develop your skills according to international standards",
+            "takeaways_title": "Key takeaways",
+            "takeaway_1": "CITL is the only official ISTQB body in Ivory Coast",
+            "takeaway_2": "We offer 6 certification levels for all profiles",
+            "takeaway_3": "Our certifications are recognized in over 120 countries",
+            "conclusion": "CITL is committed to promoting software testing excellence in Ivory Coast. By joining our community, you gain access to globally recognized certifications, quality training, and a network of qualified professionals.",
+            "cta_text": "Discover certifications"
+        }
     },
     "footer": {
         "all_rights_reserved": "All rights reserved"

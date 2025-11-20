@@ -1,5 +1,6 @@
 {
     "nav": {
+        "home": "Accueil",
         "citl": "CITL",
         "about_istqb": "À propos de l'ISTQB",
         "about_citl": "À propos du CITL",
@@ -69,6 +70,26 @@
         "savings_title_part2": "vos certifications",
         "savings_description": "Nous ne vous aidons pas seulement à vous certifier—nous vous aidons à évoluer. Nos certifiés bénéficient d'opportunités de carrière accrues, avec une reconnaissance internationale et des compétences valorisées.",
         "learn_more": "En savoir plus"
+    },
+    "about": {
+        "citl": {
+            "badge": "À propos du CITL",
+            "hero_title": "L'organisme de certification **ISTQB** en Côte d'Ivoire",
+            "hero_description": "Le **Comité Ivoirien des Tests Logiciels (CITL)** est l'unique structure officielle en Côte d'Ivoire chargée de représenter et de promouvoir l'ISTQB. Nous délivrons les certifications ISTQB, accréditons les formateurs et participons activement aux **standards internationaux** du testing logiciel.",
+            "overview_title": "Aperçu",
+            "overview_description": "Le Comité Ivoirien des Tests Logiciels (CITL) a été fondé le **24 octobre 2025** lors de l'assemblée générale de l'**ISTQB (International Software Testing Qualification Board)** à Copenhague, au Danemark. **Organisation à but non lucratif**, il demeure l'**unique structure officielle en Côte d'Ivoire** chargée de représenter et de promouvoir l'ISTQB. A ce titre, le CITL **délivre les certifications ISTQB**, **accrédite indépendamment les formateurs** et les organismes de formation, et **participe activement aux activités de l'ISTQB®**.",
+            "learn_title": "Ce que vous apprendrez",
+            "overview_item_1": "Accéder aux certifications ISTQB reconnues internationalement",
+            "overview_item_2": "Bénéficier de formations dispensées par des organismes accrédités",
+            "overview_item_3": "Rejoindre une communauté de testeurs certifiés",
+            "overview_item_4": "Développer vos compétences selon les standards internationaux",
+            "takeaways_title": "Points clés",
+            "takeaway_1": "Le CITL est le seul organisme officiel ISTQB en Côte d'Ivoire",
+            "takeaway_2": "Nous proposons 6 niveaux de certification pour tous les profils",
+            "takeaway_3": "Nos certifications sont reconnues dans plus de 120 pays",
+            "conclusion": "Le CITL s'engage à promouvoir l'excellence du testing logiciel en Côte d'Ivoire. En rejoignant notre communauté, vous accédez à des certifications reconnues mondialement, à des formations de qualité et à un réseau de professionnels qualifiés.",
+            "cta_text": "Découvrir les certifications"
+        }
     },
     "footer": {
         "all_rights_reserved": "Tous droits réservés"

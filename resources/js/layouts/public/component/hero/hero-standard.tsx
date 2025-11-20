@@ -7,8 +7,8 @@ interface HeroStandardProps {
 
 const HeroStandard = ({ breadcrumbs }: HeroStandardProps) => {
     return (
-        <div className="border-b bg-background">
-            <div className="container mx-auto px-4 py-8">
+        <div className="border-b bg-white/45 backdrop-blur-sm dark:bg-gray-900/45 dark:backdrop-blur-sm">
+            <div className="container mx-auto px-4 py-4">
                 <BreadcrumbsWithBackground breadcrumbs={breadcrumbs} />
             </div>
         </div>

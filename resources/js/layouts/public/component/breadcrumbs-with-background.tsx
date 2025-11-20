@@ -13,13 +13,11 @@ interface BreadcrumbsWithBackgroundProps {
     breadcrumbs: BreadcrumbItem[];
 }
 
-const BreadcrumbsWithBackground = ({
-    breadcrumbs,
-}: BreadcrumbsWithBackgroundProps) => {
+const BreadcrumbsWithBackground = ({ breadcrumbs }: BreadcrumbsWithBackgroundProps) => {
     if (!breadcrumbs.length) return null;
 
     return (
-        <Breadcrumb className="rounded-lg bg-gray-50 dark:bg-gray-800 px-3 py-1.5">
+        <Breadcrumb className="rounded-lg px-3 py-1.5">
             <BreadcrumbList>
                 {breadcrumbs.map((item, index) => (
                     <div key={item.href} className="contents">
@@ -27,9 +25,7 @@ const BreadcrumbsWithBackground = ({
                             {index === breadcrumbs.length - 1 ? (
                                 <BreadcrumbPage>{item.title}</BreadcrumbPage>
                             ) : (
-                                <BreadcrumbLink href={item.href}>
-                                    {item.title}
-                                </BreadcrumbLink>
+                                <BreadcrumbLink href={item.href}>{item.title}</BreadcrumbLink>
                             )}
                         </BreadcrumbItemUI>
                         {index < breadcrumbs.length - 1 && (

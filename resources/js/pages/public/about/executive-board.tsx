@@ -1,4 +1,4 @@
-import { AboutHero, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
 import { TeamMembers } from '@/components/blocks/team';
 import PublicLayout from '@/layouts/public/public-layout';
 import { useTranslation } from 'react-i18next';
@@ -49,7 +49,7 @@ function ExecutiveBoard() {
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
             <main>
-                <AboutHero
+                <HeroCommon
                     badge={t('about.executive_board.badge')}
                     title={t('about.executive_board.hero_title')}
                     description={t('about.executive_board.hero_description')}

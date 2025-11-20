@@ -40,7 +40,7 @@ class TranslationService
         ],
         'about.citl' => [
             'components' => [
-                'AboutHero',
+                'HeroCommon',
                 'AboutOverview',
                 'AboutKeyTakeaways',
             ],
@@ -65,7 +65,7 @@ class TranslationService
         ],
         'about.istqb' => [
             'components' => [
-                'AboutHero',
+                'HeroCommon',
                 'AboutOverview',
                 'AboutKeyTakeaways',
             ],
@@ -90,7 +90,7 @@ class TranslationService
         ],
         'about.vision' => [
             'components' => [
-                'AboutHero',
+                'HeroCommon',
                 'AboutOverview',
                 'AboutKeyTakeaways',
             ],
@@ -117,7 +117,7 @@ class TranslationService
         ],
         'about.missions' => [
             'components' => [
-                'AboutHero',
+                'HeroCommon',
                 'AboutOverview',
                 'AboutKeyTakeaways',
             ],
@@ -142,7 +142,7 @@ class TranslationService
         ],
         'about.executive_board' => [
             'components' => [
-                'AboutHero',
+                'HeroCommon',
                 'AboutOverview',
                 'TeamMembers',
                 'AboutKeyTakeaways',

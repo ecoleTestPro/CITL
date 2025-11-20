@@ -1,4 +1,4 @@
-import { AboutHero, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
 import { useTranslation } from 'react-i18next';
 
@@ -27,7 +27,7 @@ function AboutCitl() {
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
             <main>
-                <AboutHero
+                <HeroCommon
                     badge={t('about.citl.badge')}
                     title={t('about.citl.hero_title')}
                     description={t('about.citl.hero_description')}

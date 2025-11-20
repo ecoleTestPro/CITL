@@ -7,14 +7,14 @@ import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface AboutHeroProps {
+interface HeroCommonProps {
     badge?: string;
     title: string;
     description: string;
     backgroundImage?: string;
 }
 
-export default function AboutHero({ badge, title, description, backgroundImage }: AboutHeroProps) {
+export default function HeroCommon({ badge, title, description, backgroundImage }: HeroCommonProps) {
     const bgRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {

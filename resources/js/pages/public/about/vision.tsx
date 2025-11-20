@@ -1,4 +1,4 @@
-import { AboutHero, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
 import { useTranslation } from 'react-i18next';
 
@@ -29,7 +29,7 @@ function Vision() {
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
             <main>
-                <AboutHero
+                <HeroCommon
                     badge={t('about.vision.badge')}
                     title={t('about.vision.hero_title')}
                     description={t('about.vision.hero_description')}

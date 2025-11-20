@@ -18,21 +18,22 @@ import {
     SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 
-export function NavMain({
-    items,
-}: {
-    items: {
-        title: string;
-        url: string;
-        icon?: LucideIcon;
-        isActive?: boolean;
-        items?: {
-            title: string;
-            url: string;
-            isActive?: boolean;
-        }[];
-    }[];
-}) {
+type SubItem = {
+    title: string;
+    url: string;
+    isActive?: boolean;
+    items?: SubItem[];
+};
+
+type NavItem = {
+    title: string;
+    url: string;
+    icon?: LucideIcon;
+    isActive?: boolean;
+    items?: SubItem[];
+};
+
+export function NavMain({ items }: { items: NavItem[] }) {
     return (
         <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -54,15 +55,48 @@ export function NavMain({
                             </CollapsibleTrigger>
                             <CollapsibleContent>
                                 <SidebarMenuSub>
-                                    {item.items?.map((subItem) => (
-                                        <SidebarMenuSubItem key={subItem.title}>
-                                            <SidebarMenuSubButton asChild isActive={subItem.isActive}>
-                                                <a href={subItem.url}>
-                                                    <span>{subItem.title}</span>
-                                                </a>
-                                            </SidebarMenuSubButton>
-                                        </SidebarMenuSubItem>
-                                    ))}
+                                    {item.items?.map((subItem) =>
+                                        subItem.items ? (
+                                            // Nested submenu
+                                            <Collapsible
+                                                key={subItem.title}
+                                                asChild
+                                                defaultOpen={subItem.isActive}
+                                                className="group/nested-collapsible"
+                                            >
+                                                <SidebarMenuSubItem>
+                                                    <CollapsibleTrigger asChild>
+                                                        <SidebarMenuSubButton>
+                                                            <span>{subItem.title}</span>
+                                                            <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/nested-collapsible:rotate-90" />
+                                                        </SidebarMenuSubButton>
+                                                    </CollapsibleTrigger>
+                                                    <CollapsibleContent>
+                                                        <SidebarMenuSub className="pl-4">
+                                                            {subItem.items.map((nestedItem) => (
+                                                                <SidebarMenuSubItem key={nestedItem.title}>
+                                                                    <SidebarMenuSubButton asChild isActive={nestedItem.isActive}>
+                                                                        <a href={nestedItem.url}>
+                                                                            <span>{nestedItem.title}</span>
+                                                                        </a>
+                                                                    </SidebarMenuSubButton>
+                                                                </SidebarMenuSubItem>
+                                                            ))}
+                                                        </SidebarMenuSub>
+                                                    </CollapsibleContent>
+                                                </SidebarMenuSubItem>
+                                            </Collapsible>
+                                        ) : (
+                                            // Regular submenu item
+                                            <SidebarMenuSubItem key={subItem.title}>
+                                                <SidebarMenuSubButton asChild isActive={subItem.isActive}>
+                                                    <a href={subItem.url}>
+                                                        <span>{subItem.title}</span>
+                                                    </a>
+                                                </SidebarMenuSubButton>
+                                            </SidebarMenuSubItem>
+                                        ),
+                                    )}
                                 </SidebarMenuSub>
                             </CollapsibleContent>
                         </SidebarMenuItem>

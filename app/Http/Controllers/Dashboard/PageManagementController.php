@@ -29,6 +29,66 @@ class PageManagementController extends Controller
     }
 
     /**
+     * Edit About CITL page content
+     */
+    public function editAboutCITL(): Response
+    {
+        return Inertia::render('dashboard/pages/about/edit-about-citl', [
+            'pageUrl' => route('about-citl'),
+            'pageTitle' => 'About CITL',
+            'pageName' => 'about.citl',
+        ]);
+    }
+
+    /**
+     * Edit About ISTQB page content
+     */
+    public function editAboutISTQB(): Response
+    {
+        return Inertia::render('dashboard/pages/about/edit-about-istqb', [
+            'pageUrl' => route('about-istqb'),
+            'pageTitle' => 'About ISTQB',
+            'pageName' => 'about.istqb',
+        ]);
+    }
+
+    /**
+     * Edit Vision page content
+     */
+    public function editVision(): Response
+    {
+        return Inertia::render('dashboard/pages/about/edit-vision', [
+            'pageUrl' => route('vision'),
+            'pageTitle' => 'Vision',
+            'pageName' => 'about.vision',
+        ]);
+    }
+
+    /**
+     * Edit Missions page content
+     */
+    public function editMissions(): Response
+    {
+        return Inertia::render('dashboard/pages/about/edit-missions', [
+            'pageUrl' => route('missions'),
+            'pageTitle' => 'Missions',
+            'pageName' => 'about.missions',
+        ]);
+    }
+
+    /**
+     * Edit Executive Board page content
+     */
+    public function editExecutiveBoard(): Response
+    {
+        return Inertia::render('dashboard/pages/about/edit-executive-board', [
+            'pageUrl' => route('executive-board'),
+            'pageTitle' => 'Executive Board',
+            'pageName' => 'about.executive_board',
+        ]);
+    }
+
+    /**
      * Get translations for a specific page
      */
     public function getTranslations(string $page): JsonResponse

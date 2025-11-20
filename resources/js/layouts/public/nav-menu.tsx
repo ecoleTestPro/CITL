@@ -113,11 +113,11 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             type: 'link',
             href: '/blog',
         },
-        {
-            title: t('nav.contact'),
-            type: 'link',
-            href: '/contact',
-        },
+        // {
+        //     title: t('nav.contact'),
+        //     type: 'link',
+        //     href: '/contact',
+        // },
     ];
 
     // Rendu d'un élément de menu dropdown - Version améliorée

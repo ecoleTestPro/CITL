@@ -13,6 +13,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Page Management Routes
     Route::prefix('dashboard/pages')->name('dashboard.pages.')->group(function () {
         Route::get('/home', [PageManagementController::class, 'editHome'])->name('home.edit');
+        Route::get('/about-citl', [PageManagementController::class, 'editAboutCITL'])->name('about-citl.edit');
+        Route::get('/about-istqb', [PageManagementController::class, 'editAboutISTQB'])->name('about-istqb.edit');
+        Route::get('/vision', [PageManagementController::class, 'editVision'])->name('vision.edit');
+        Route::get('/missions', [PageManagementController::class, 'editMissions'])->name('missions.edit');
+        Route::get('/executive-board', [PageManagementController::class, 'editExecutiveBoard'])->name('executive-board.edit');
 
         // Translation API routes
         Route::get('/{page}/translations', [PageManagementController::class, 'getTranslations'])->name('translations.get');

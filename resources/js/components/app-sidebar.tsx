@@ -35,7 +35,7 @@ import { type SharedData } from '@/types';
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { auth, url } = usePage<SharedData>().props;
     const user = auth?.user;
-    const currentUrl = url || '';
+    const currentUrl = (url || '') as string;
 
     // Configuration des données de navigation
     const data = {
@@ -74,29 +74,39 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         isActive: currentUrl === '/dashboard/pages/home',
                     },
                     {
-                        title: 'About ISTQB',
+                        title: 'About',
                         url: '#',
-                        isActive: false,
-                    },
-                    {
-                        title: 'About CITL',
-                        url: '#',
-                        isActive: false,
-                    },
-                    {
-                        title: 'Vision',
-                        url: '#',
-                        isActive: false,
-                    },
-                    {
-                        title: 'Missions',
-                        url: '#',
-                        isActive: false,
-                    },
-                    {
-                        title: 'Executive Board',
-                        url: '#',
-                        isActive: false,
+                        isActive: currentUrl.startsWith('/dashboard/pages/about') ||
+                                  currentUrl.includes('/vision') ||
+                                  currentUrl.includes('/missions') ||
+                                  currentUrl.includes('/executive-board'),
+                        items: [
+                            {
+                                title: 'About ISTQB',
+                                url: '/dashboard/pages/about-istqb',
+                                isActive: currentUrl === '/dashboard/pages/about-istqb',
+                            },
+                            {
+                                title: 'About CITL',
+                                url: '/dashboard/pages/about-citl',
+                                isActive: currentUrl === '/dashboard/pages/about-citl',
+                            },
+                            {
+                                title: 'Vision',
+                                url: '/dashboard/pages/vision',
+                                isActive: currentUrl === '/dashboard/pages/vision',
+                            },
+                            {
+                                title: 'Missions',
+                                url: '/dashboard/pages/missions',
+                                isActive: currentUrl === '/dashboard/pages/missions',
+                            },
+                            {
+                                title: 'Executive Board',
+                                url: '/dashboard/pages/executive-board',
+                                isActive: currentUrl === '/dashboard/pages/executive-board',
+                            },
+                        ],
                     },
                     {
                         title: 'Members',

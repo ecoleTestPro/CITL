@@ -47,14 +47,14 @@ const Navbar = () => {
                                 </div>
 
                                 {/* Boutons d'authentification */}
-                                <Link href="/login" className="hidden lg:inline-flex">
+                                <Link href="/exam-registration" className="hidden lg:inline-flex">
                                     <Button variant="ghost" className="rounded-full border border-border transition-colors hover:border-foreground/20">
-                                        {t('nav.login')}
+                                        {t('nav.exam_registration')}
                                     </Button>
                                 </Link>
-                                <Link href="/register" className="hidden sm:inline-flex">
+                                <Link href="/contact" className="hidden sm:inline-flex">
                                     <Button className="rounded-full bg-primary text-primary-foreground shadow-sm hover:bg-primary/90">
-                                        {t('nav.register')}
+                                        {t('nav.contact')}
                                     </Button>
                                 </Link>
 

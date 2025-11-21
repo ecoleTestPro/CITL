@@ -13,12 +13,36 @@ class CertificationDocumentTagSeeder extends Seeder
     public function run(): void
     {
         $tags = [
-            ['name' => 'Syllabus', 'slug' => 'syllabus', 'color' => 'blue', 'order' => 1],
-            ['name' => 'Formation', 'slug' => 'formation', 'color' => 'green', 'order' => 2],
-            ['name' => 'Examen blanc', 'slug' => 'examen-blanc', 'color' => 'purple', 'order' => 3],
-            ['name' => 'Guide', 'slug' => 'guide', 'color' => 'orange', 'order' => 4],
-            ['name' => 'Documentation', 'slug' => 'documentation', 'color' => 'red', 'order' => 5],
-            ['name' => 'Ressources', 'slug' => 'ressources', 'color' => 'yellow', 'order' => 6],
+            [
+                'name' => 'Syllabus officiel',
+                'slug' => 'syllabus-officiel',
+                'description' => 'Programme officiel de la certification',
+                'order' => 1
+            ],
+            [
+                'name' => 'Guide de formation',
+                'slug' => 'guide-formation',
+                'description' => 'Documents de support pour la formation',
+                'order' => 2
+            ],
+            [
+                'name' => 'Examen blanc',
+                'slug' => 'examen-blanc',
+                'description' => 'Exemples d\'examens et questions pratiques',
+                'order' => 3
+            ],
+            [
+                'name' => 'Documentation complémentaire',
+                'slug' => 'documentation-complementaire',
+                'description' => 'Ressources additionnelles et références',
+                'order' => 4
+            ],
+            [
+                'name' => 'Glossaire',
+                'slug' => 'glossaire',
+                'description' => 'Termes et définitions clés',
+                'order' => 5
+            ],
         ];
 
         foreach ($tags as $tag) {

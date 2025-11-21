@@ -137,12 +137,12 @@ class CertificationDocumentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:certification_document_tags,name',
-            'color' => 'required|string|in:blue,green,purple,orange,red,yellow',
+            'description' => 'nullable|string',
         ]);
 
         $tag = $this->tagRepository->createTag([
             'name' => $request->name,
-            'color' => $request->color,
+            'description' => $request->description,
             'order' => 0,
         ]);
 

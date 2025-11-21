@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->string('color')->default('blue'); // blue, green, purple, orange, red, yellow
+            $table->text('description')->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
         });

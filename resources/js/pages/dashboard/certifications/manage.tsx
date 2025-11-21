@@ -10,6 +10,7 @@ import { Head, useForm } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 
 interface Props {
     categories: CertificationCategory[];
@@ -149,6 +150,10 @@ export default function ManageCertifications({ categories, certifications }: Pro
                 onSuccess: () => {
                     setShowDeleteModal(false);
                     setItemToDelete(null);
+                    toast.success('Catégorie supprimée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la suppression de la catégorie');
                 },
             });
         } else {
@@ -157,6 +162,10 @@ export default function ManageCertifications({ categories, certifications }: Pro
                 onSuccess: () => {
                     setShowDeleteModal(false);
                     setItemToDelete(null);
+                    toast.success('Certification supprimée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la suppression de la certification');
                 },
             });
         }
@@ -167,12 +176,24 @@ export default function ManageCertifications({ categories, certifications }: Pro
         if (editingCategory) {
             categoryForm.post(`/dashboard/certifications/categories/${editingCategory.id}/update`, {
                 preserveScroll: true,
-                onSuccess: () => setShowCategoryModal(false),
+                onSuccess: () => {
+                    setShowCategoryModal(false);
+                    toast.success('Catégorie modifiée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la modification de la catégorie');
+                },
             });
         } else {
             categoryForm.post('/dashboard/certifications/categories/store', {
                 preserveScroll: true,
-                onSuccess: () => setShowCategoryModal(false),
+                onSuccess: () => {
+                    setShowCategoryModal(false);
+                    toast.success('Catégorie créée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la création de la catégorie');
+                },
             });
         }
     };
@@ -182,12 +203,24 @@ export default function ManageCertifications({ categories, certifications }: Pro
         if (editingCertification) {
             certificationForm.post(`/dashboard/certifications/${editingCertification.id}/update`, {
                 preserveScroll: true,
-                onSuccess: () => setShowCertificationModal(false),
+                onSuccess: () => {
+                    setShowCertificationModal(false);
+                    toast.success('Certification modifiée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la modification de la certification');
+                },
             });
         } else {
             certificationForm.post('/dashboard/certifications/store', {
                 preserveScroll: true,
-                onSuccess: () => setShowCertificationModal(false),
+                onSuccess: () => {
+                    setShowCertificationModal(false);
+                    toast.success('Certification créée avec succès');
+                },
+                onError: () => {
+                    toast.error('Erreur lors de la création de la certification');
+                },
             });
         }
     };

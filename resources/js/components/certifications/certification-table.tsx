@@ -58,16 +58,6 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
             cell: ({ row }) => <div className="text-sm">{row.getValue('exam_passing_score')}%</div>,
         },
         {
-            accessorKey: 'order',
-            header: ({ column }) => (
-                <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1">
-                    Ordre
-                    <ArrowUpDown className="h-4 w-4" />
-                </button>
-            ),
-            cell: ({ row }) => <div className="text-center text-sm">{row.getValue('order')}</div>,
-        },
-        {
             accessorKey: 'is_active',
             header: 'Statut',
             cell: ({ row }) => (

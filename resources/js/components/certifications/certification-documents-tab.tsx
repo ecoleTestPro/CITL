@@ -2,6 +2,7 @@ import axios from 'axios';
 import { FileText, Plus, Trash2, Upload, X } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import toast from 'react-hot-toast';
 
 interface Document {
     id: number;
@@ -155,8 +156,15 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
+
+            toast.success(
+                pendingFiles.length > 1
+                    ? `${pendingFiles.length} documents importés avec succès`
+                    : 'Document importé avec succès',
+            );
         } catch (error) {
             console.error('Error uploading files:', error);
+            toast.error('Erreur lors de l\'importation des documents');
         } finally {
             setIsUploading(false);
         }
@@ -170,11 +178,17 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
     };
 
     const handleDeleteDocument = async (documentId: number) => {
+        if (!confirm('Êtes-vous sûr de vouloir supprimer ce document ? Cette action est irréversible.')) {
+            return;
+        }
+
         try {
             await axios.delete(`/dashboard/certifications/documents/${documentId}/delete`);
             setDocuments(documents.filter((doc) => doc.id !== documentId));
+            toast.success('Document supprimé avec succès');
         } catch (error) {
             console.error('Error deleting document:', error);
+            toast.error('Erreur lors de la suppression du document');
         }
     };
 
@@ -186,9 +200,11 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
 
             if (response.data.success) {
                 setDocuments(documents.map((doc) => (doc.id === documentId ? { ...doc, tags: [...doc.tags, response.data.data.tag] } : doc)));
+                toast.success('Catégorie ajoutée au document');
             }
         } catch (error) {
             console.error('Error adding tag:', error);
+            toast.error('Erreur lors de l\'ajout de la catégorie');
         }
     };
 
@@ -199,8 +215,10 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
             });
 
             setDocuments(documents.map((doc) => (doc.id === documentId ? { ...doc, tags: doc.tags.filter((t) => t.id !== tagId) } : doc)));
+            toast.success('Catégorie retirée du document');
         } catch (error) {
             console.error('Error removing tag:', error);
+            toast.error('Erreur lors du retrait de la catégorie');
         }
     };
 
@@ -216,9 +234,11 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                 setAvailableTags([...availableTags, response.data.data.tag]);
                 setNewTagName('');
                 setShowNewTagInput(false);
+                toast.success('Nouvelle catégorie créée avec succès');
             }
         } catch (error) {
             console.error('Error creating tag:', error);
+            toast.error('Erreur lors de la création de la catégorie');
         }
     };
 

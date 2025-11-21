@@ -25,6 +25,19 @@ function WhyCertification() {
                 image={{ src: '/assets/images/pages/certification/istqb.png', alt: 'ISTQB Logo', width: 300 }}
                 title={t('certifications.why_certification.content_title')}
                 description={t('certifications.why_certification.content_description')}
+                backgroundColor="#f8fafc"
+                backgroundShapes={[
+                    {
+                        src: '/assets/images/bg/sharp-1.png',
+                        position: 'top-right',
+                        opacity: 0.05,
+                    },
+                    {
+                        src: '/assets/images/bg/sharp-2.png',
+                        position: 'bottom-left',
+                        opacity: 0.03,
+                    },
+                ]}
             />
         </PublicLayout>
     );

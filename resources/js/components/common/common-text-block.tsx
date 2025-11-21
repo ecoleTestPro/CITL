@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,15 +10,11 @@ interface CommonTextBlockImage {
     width?: number | string;
     height?: number | string;
 }
-interface CommonTextBlockDescription {
-    titlre: string;
-    text: string;
-}
 
 interface CommonTextBlockProps {
     image?: CommonTextBlockImage;
     title?: string;
-    description?: CommonTextBlockDescription[];
+    description?: string;
 }
 
 export default function CommonTextBlock({ image, title, description }: CommonTextBlockProps) {
@@ -59,15 +55,13 @@ export default function CommonTextBlock({ image, title, description }: CommonTex
                 });
             }
 
-            // Content animation with stagger
+            // Content animation
             if (contentRef.current) {
-                const items = contentRef.current.querySelectorAll('.content-item');
-                gsap.from(items, {
+                gsap.from(contentRef.current, {
                     y: 40,
                     opacity: 0,
                     duration: 0.8,
                     ease: 'power3.out',
-                    stagger: 0.15,
                     scrollTrigger: {
                         trigger: contentRef.current,
                         start: 'top 80%',
@@ -80,28 +74,31 @@ export default function CommonTextBlock({ image, title, description }: CommonTex
     }, []);
 
     return (
-        <section ref={sectionRef} className="pb-[100px] pt-32 sm:pt-36 md:pt-42 xl:pb-[100px] xl:pt-[180px]">
-            <div className="main-container">
-                <div ref={titleRef} className="mb-[70px] space-y-3 text-center">
-                    <h2>{title}</h2>
-                </div>
-
-                {image && (
-                    <figure ref={imageRef} className="mb-18">
-                        <img src={image?.src || '/assets/images/bg/ns-img-26.jpg'} alt={image?.alt || 'banner-image'} className="rounded-2xl" />
-                    </figure>
-                )}
-
-                {description && description.length > 0 && (
-                    <div ref={contentRef} className="mx-auto max-w-[840px] space-y-8">
-                        {description?.map((desc, index) => (
-                            <div key={index} className="content-item space-y-4">
-                                <h4>{desc.titlre}</h4>
-                                <p>{desc.text}</p>
+        <section ref={sectionRef} className="pt-12 pb-16">
+            <div className="container mx-auto">
+                <div className={image ? 'grid gap-12 lg:grid-cols-2 lg:gap-16' : ''}>
+                    <div>
+                        {title && (
+                            <div ref={titleRef} className="mb-[70px] space-y-3 text-left">
+                                <h2 className="bold">{title}</h2>
                             </div>
-                        ))}
+                        )}
+
+                        {description && (
+                            <div
+                                ref={contentRef}
+                                className={`prose prose-lg max-w-none ${image ? '' : 'mx-auto max-w-[840px]'}`}
+                                dangerouslySetInnerHTML={{ __html: description }}
+                            />
+                        )}
                     </div>
-                )}
+
+                    {image && (
+                        <figure ref={imageRef} className="flex h-full items-center justify-center">
+                            <img src={image?.src || '/assets/images/bg/ns-img-26.jpg'} alt={image?.alt || 'banner-image'} className="rounded-2xl" />
+                        </figure>
+                    )}
+                </div>
             </div>
         </section>
     );

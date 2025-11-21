@@ -190,18 +190,7 @@
             "hero_title": "Pourquoi obtenir la **certification ISTQB** ?",
             "hero_description": "Les certifications ISTQB® sont **reconnues mondialement** et constituent un gage de compétence et d'expertise en testing logiciel. Elles ouvrent des opportunités de carrière et valorisent votre profil professionnel.",
             "content_title": "Pourquoi obtenir la certification ISTQB®",
-            "program_quality_title": "Programmes de formation de haute qualité",
-            "program_quality_text": "Tous les syllabi (programmes) sont élaborés et révisés par des professionnels de test reconnus, issus aussi bien du monde académique que de l'industrie.",
-            "worldwide_recognition_title": "Reconnaissance mondiale",
-            "worldwide_recognition_text": "Les certifications sont reconnues à l'échelle internationale grâce à l'application cohérente des politiques et procédures de l'ISTQB® par ses organes membres.",
-            "common_language_title": "Langue commune",
-            "common_language_text": "Le glossaire de l'ISTQB® fournit un vocabulaire partagé pour toute la profession.",
-            "public_access_title": "Accès public",
-            "public_access_text": "Le glossaire et les syllabi de l'ISTQB® sont librement accessibles sur le site officiel de l'ISTQB® et sur les sites des organes membres, dans différentes langues locales.",
-            "continuous_improvement_title": "Amélioration continue",
-            "continuous_improvement_text": "Les syllabi et autres documents sont constamment mis à jour afin de répondre aux besoins des organisations dans le monde entier et de suivre l'évolution de la profession.",
-            "professional_credibility_title": "Crédibilité professionnelle",
-            "professional_credibility_text": "Être certifié offre des avantages tant pour les individus que pour les organisations, en assurant que les professionnels du testing respectent les normes élevées établies par l'ISTQB®."
+            "content_description": "<div class=\"space-y-8\"><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Programmes de formation de haute qualité</h4><p>Tous les syllabi (programmes) sont élaborés et révisés par des professionnels de test reconnus, issus aussi bien du monde académique que de l'industrie.</p></div><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Reconnaissance mondiale</h4><p>Les certifications sont reconnues à l'échelle internationale grâce à l'application cohérente des politiques et procédures de l'ISTQB® par ses organes membres.</p></div><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Langue commune</h4><p>Le glossaire de l'ISTQB® fournit un vocabulaire partagé pour toute la profession.</p></div><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Accès public</h4><p>Le glossaire et les syllabi de l'ISTQB® sont librement accessibles sur le site officiel de l'ISTQB® et sur les sites des organes membres, dans différentes langues locales.</p></div><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Amélioration continue</h4><p>Les syllabi et autres documents sont constamment mis à jour afin de répondre aux besoins des organisations dans le monde entier et de suivre l'évolution de la profession.</p></div><div class=\"space-y-4\"><h4 class=\"text-2xl font-bold\">Crédibilité professionnelle</h4><p>Être certifié offre des avantages tant pour les individus que pour les organisations, en assurant que les professionnels du testing respectent les normes élevées établies par l'ISTQB®.</p></div></div>"
         }
     },
     "footer": {

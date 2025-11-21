@@ -12,33 +12,6 @@ function WhyCertification() {
         { title: t('nav.why_certification'), href: '/why-certification' },
     ];
 
-    const contentDescription = [
-        {
-            titlre: t('certifications.why_certification.program_quality_title'),
-            text: t('certifications.why_certification.program_quality_text'),
-        },
-        {
-            titlre: t('certifications.why_certification.worldwide_recognition_title'),
-            text: t('certifications.why_certification.worldwide_recognition_text'),
-        },
-        {
-            titlre: t('certifications.why_certification.common_language_title'),
-            text: t('certifications.why_certification.common_language_text'),
-        },
-        {
-            titlre: t('certifications.why_certification.public_access_title'),
-            text: t('certifications.why_certification.public_access_text'),
-        },
-        {
-            titlre: t('certifications.why_certification.continuous_improvement_title'),
-            text: t('certifications.why_certification.continuous_improvement_text'),
-        },
-        {
-            titlre: t('certifications.why_certification.professional_credibility_title'),
-            text: t('certifications.why_certification.professional_credibility_text'),
-        },
-    ];
-
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <HeroCommon
@@ -49,8 +22,9 @@ function WhyCertification() {
             />
 
             <CommonTextBlock
+                image={{ src: '/assets/images/pages/certification/istqb.png', alt: 'ISTQB Logo', width: 300 }}
                 title={t('certifications.why_certification.content_title')}
-                description={contentDescription}
+                description={t('certifications.why_certification.content_description')}
             />
         </PublicLayout>
     );

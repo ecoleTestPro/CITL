@@ -21,7 +21,7 @@ export default function AboutOverview({ title, description, learnTitle, items, i
             <section className="bg-white py-6 dark:bg-gray-900">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col-reverse items-center justify-between gap-x-10 rounded-[32px] bg-gray-100 p-2 lg:flex-row xl:gap-x-14 dark:bg-gray-800">
-                        <div className="w-full p-6 lg:max-w-[560px]">
+                        <div className="p-6 w-1/2">
                             <div className="mb-8 space-y-5">
                                 <h2 className="text-3xl font-normal text-gray-900 dark:text-gray-100">
                                     <RichText text={title} />
@@ -48,7 +48,7 @@ export default function AboutOverview({ title, description, learnTitle, items, i
                                 </ul>
                             </div>
                         </div>
-                        <figure className="flex min-h-[300px] w-full items-center overflow-hidden rounded-[20px] lg:min-h-[490px] lg:max-w-[613px]">
+                        <figure className="flex min-h-[300px] w-1/2 items-center overflow-hidden rounded-[20px] lg:min-h-[490px] lg:max-w-[613px]">
                             <img src={imageSrc} alt={imageAlt} className="h-auto w-full object-cover" loading="lazy" />
                         </figure>
                     </div>

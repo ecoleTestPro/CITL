@@ -39,7 +39,14 @@ function CertificationDetail({ certification }: Props) {
                                     <h2 className="text-heading-4 mb-4" id="overview">
                                         Vue d'ensemble
                                     </h2>
-                                    <p className="text-gray-700 dark:text-gray-300">{certification.description}</p>
+                                    {certification.overview ? (
+                                        <div
+                                            className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300"
+                                            dangerouslySetInnerHTML={{ __html: certification.overview }}
+                                        />
+                                    ) : (
+                                        <p className="text-gray-700 dark:text-gray-300">{certification.description}</p>
+                                    )}
                                 </div>
 
                                 {/* Audience Section */}

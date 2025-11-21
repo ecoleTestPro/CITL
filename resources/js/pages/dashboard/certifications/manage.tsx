@@ -36,12 +36,18 @@ export default function ManageCertifications({ categories, certifications }: Pro
         is_active: true,
     });
 
-    const certificationForm = useForm({
+    const certificationForm = useForm<CertificationFormData>({
         certification_category_id: 0,
         title: '',
         slug: '',
         subtitle: '',
         description: '',
+        overview: '',
+        target_audience: '',
+        training_content: '',
+        exam_structure_details: '',
+        business_outcomes: '',
+        additional_information: '',
         icon: 'ns-shape-35',
         exam_questions: 40,
         exam_passing_score: 65,
@@ -107,6 +113,12 @@ export default function ManageCertifications({ categories, certifications }: Pro
             slug: certification.slug,
             subtitle: certification.subtitle || '',
             description: certification.description,
+            overview: certification.overview || '',
+            target_audience: certification.target_audience || '',
+            training_content: certification.training_content || '',
+            exam_structure_details: certification.exam_structure_details || '',
+            business_outcomes: certification.business_outcomes || '',
+            additional_information: certification.additional_information || '',
             icon: certification.icon,
             exam_questions: certification.exam_questions,
             exam_passing_score: certification.exam_passing_score,

@@ -38,7 +38,7 @@ export default function HeroCommon({ badge, title, description, backgroundImage 
     }, [backgroundImage]);
 
     return (
-        <section className="relative overflow-hidden pt-[50px] pb-16 lg:pt-[70px] lg:pb-20 xl:pt-[100px] xl:pb-28">
+        <section className="relative overflow-hidden pt-10 pb-16 ">
             {/* Background image avec animation */}
             {backgroundImage && (
                 <div
@@ -54,7 +54,7 @@ export default function HeroCommon({ badge, title, description, backgroundImage 
             )}
 
             {/* Overlay pour améliorer la lisibilité du texte */}
-            {backgroundImage && <div className="absolute inset-0 bg-white/10 dark:bg-gray-900/80"></div>}
+            {backgroundImage && <div className="absolute inset-0 bg-amber-200/10 dark:bg-gray-900/80"></div>}
 
             <div className="relative z-10 container mx-auto px-4">
                 <div className="space-y-5">

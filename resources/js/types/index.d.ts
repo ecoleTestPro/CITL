@@ -59,6 +59,12 @@ export interface Certification {
     slug: string;
     subtitle: string | null;
     description: string;
+    overview: string | null;
+    target_audience: string | null;
+    training_content: string | null;
+    exam_structure_details: string | null;
+    business_outcomes: string | null;
+    additional_information: string | null;
     icon: string;
     exam_questions: number;
     exam_passing_score: number;
@@ -78,6 +84,12 @@ export interface CertificationFormData {
     slug: string;
     subtitle: string;
     description: string;
+    overview: string;
+    target_audience: string;
+    training_content: string;
+    exam_structure_details: string;
+    business_outcomes: string;
+    additional_information: string;
     icon: string;
     exam_questions: number;
     exam_passing_score: number;

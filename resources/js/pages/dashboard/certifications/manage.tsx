@@ -260,6 +260,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
                 isEditing={!!editingCertification}
                 form={certificationForm}
                 categories={categories}
+                certificationId={editingCertification?.id}
                 onClose={() => setShowCertificationModal(false)}
                 onSubmit={submitCertificationForm}
             />

@@ -76,6 +76,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CertificationRepository::class, function ($app) {
             return new CertificationRepository(new Certification());
         });
+
+        $this->app->bind(\App\Repositories\Certificate\CertificationDocumentRepository::class, function ($app) {
+            return new \App\Repositories\Certificate\CertificationDocumentRepository(new \App\Models\Certificate\CertificationDocument());
+        });
+
+        $this->app->bind(\App\Repositories\Certificate\CertificationDocumentTagRepository::class, function ($app) {
+            return new \App\Repositories\Certificate\CertificationDocumentTagRepository(new \App\Models\Certificate\CertificationDocumentTag());
+        });
     }
 
     /**

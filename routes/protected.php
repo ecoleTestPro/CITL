@@ -40,6 +40,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/store', [CertificationManagementController::class, 'storeCertification'])->name('store');
         Route::post('/{id}/update', [CertificationManagementController::class, 'updateCertification'])->name('update');
         Route::delete('/{id}/delete', [CertificationManagementController::class, 'deleteCertification'])->name('delete');
+
+        // Document routes
+        Route::post('/documents/upload', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'upload'])->name('documents.upload');
+        Route::get('/{certificationId}/documents', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'index'])->name('documents.index');
+        Route::delete('/documents/{id}/delete', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'delete'])->name('documents.delete');
+        Route::post('/documents/{documentId}/tags/attach', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'attachTags'])->name('documents.tags.attach');
+        Route::post('/documents/{documentId}/tags/detach', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'detachTag'])->name('documents.tags.detach');
+
+        // Tag routes
+        Route::get('/tags', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'getTags'])->name('tags.index');
+        Route::post('/tags/store', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'createTag'])->name('tags.store');
     });
 });
 

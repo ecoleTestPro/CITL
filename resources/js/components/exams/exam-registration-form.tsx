@@ -4,6 +4,7 @@ import { FormRadio } from '@/components/forms/form-radio';
 import { FormSelect } from '@/components/forms/form-select';
 import { Button } from '@/components/ui/button';
 import { useForm } from '@inertiajs/react';
+import { Loader2 } from 'lucide-react';
 import { FormEvent } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -282,7 +283,14 @@ export function ExamRegistrationForm({
                     disabled={form.processing}
                     className="w-full bg-secondary px-8 py-3 text-white transition-colors hover:bg-secondary/90 disabled:opacity-50 md:w-auto"
                 >
-                    {form.processing ? t('exam.submitting') : t('exam.submit')}
+                    {form.processing ? (
+                        <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            {t('exam.submitting')}
+                        </>
+                    ) : (
+                        t('exam.submit')
+                    )}
                 </Button>
             </div>
         </form>

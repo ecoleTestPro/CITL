@@ -1,6 +1,7 @@
 import { FloatingActions } from '@/components/floating-actions';
 import { type BreadcrumbItem } from '@/types';
 import { type PropsWithChildren } from 'react';
+import { Toaster } from 'react-hot-toast';
 import Footer from './footer';
 import Hero from './hero';
 import Navbar from './nav-bar';
@@ -24,6 +25,28 @@ export default function PublicLayout({
             </main>
             <Footer />
             <FloatingActions />
+            <Toaster
+                position="top-right"
+                toastOptions={{
+                    duration: 4000,
+                    style: {
+                        background: '#fff',
+                        color: '#333',
+                    },
+                    success: {
+                        iconTheme: {
+                            primary: '#10b981',
+                            secondary: '#fff',
+                        },
+                    },
+                    error: {
+                        iconTheme: {
+                            primary: '#ef4444',
+                            secondary: '#fff',
+                        },
+                    },
+                }}
+            />
         </div>
     );
 }

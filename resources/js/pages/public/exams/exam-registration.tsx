@@ -1,11 +1,23 @@
 import HeroCommon from '@/components/common/common-hero';
 import { ExamRegistrationForm } from '@/components/exams/exam-registration-form';
 import PublicLayout from '@/layouts/public/public-layout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
 function ExamRegistration() {
     const { t } = useTranslation();
+    const { flash } = usePage().props as any;
+
+    useEffect(() => {
+        if (flash?.success) {
+            toast.success(flash.success);
+        }
+        if (flash?.error) {
+            toast.error(flash.error);
+        }
+    }, [flash]);
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },

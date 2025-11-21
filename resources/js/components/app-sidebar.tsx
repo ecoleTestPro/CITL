@@ -1,7 +1,7 @@
 'use client';
 
 import { usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2 } from 'lucide-react';
+import { AudioWaveform, Award, ClipboardList, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2 } from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
@@ -208,6 +208,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 url: '/dashboard/certifications',
                 icon: Award,
                 isActive: currentUrl.startsWith('/dashboard/certifications'),
+                items: [],
+            },
+            {
+                title: 'Inscriptions Examens',
+                url: '/dashboard/exam-registrations',
+                icon: ClipboardList,
+                isActive: currentUrl.startsWith('/dashboard/exam-registrations'),
                 items: [],
             },
             {

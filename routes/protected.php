@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\CertificationCategoryController;
 use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
+use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,6 +52,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Tag routes
         Route::get('/tags', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'getTags'])->name('tags.index');
         Route::post('/tags/store', [\App\Http\Controllers\Admin\CertificationDocumentController::class, 'createTag'])->name('tags.store');
+    });
+
+    // Exam Registration Management Routes
+    Route::prefix('dashboard/exam-registrations')->name('dashboard.exam-registrations.')->group(function () {
+        Route::get('/', [ExamRegistrationController::class, 'index'])->name('index');
+        Route::post('/{id}/status', [ExamRegistrationController::class, 'updateStatus'])->name('status');
+        Route::delete('/{id}', [ExamRegistrationController::class, 'destroy'])->name('destroy');
     });
 });
 

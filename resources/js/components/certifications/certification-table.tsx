@@ -28,10 +28,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
         {
             accessorKey: 'title',
             header: ({ column }) => (
-                <button
-                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className="flex items-center gap-1 font-medium"
-                >
+                <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
                     Titre
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
@@ -42,9 +39,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
             accessorKey: 'category.name',
             header: 'Catégorie',
             cell: ({ row }) => (
-                <span className="inline-flex rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">
-                    {row.original.category.name}
-                </span>
+                <span className="inline-flex rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">{row.original.category.name}</span>
             ),
         },
         {
@@ -65,10 +60,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
         {
             accessorKey: 'order',
             header: ({ column }) => (
-                <button
-                    onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-                    className="flex items-center gap-1"
-                >
+                <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1">
                     Ordre
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
@@ -132,7 +124,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
     });
 
     return (
-        <div className="space-y-4">
+        <div className="w-full space-y-4">
             {/* Search */}
             <div className="flex items-center justify-between">
                 <input
@@ -140,7 +132,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
                     value={globalFilter ?? ''}
                     onChange={(e) => setGlobalFilter(e.target.value)}
                     placeholder="Rechercher..."
-                    className="rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                    className="rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 />
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                     {certifications.length} certification{certifications.length > 1 ? 's' : ''}
@@ -156,11 +148,9 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
                                 {headerGroup.headers.map((header) => (
                                     <th
                                         key={header.id}
-                                        className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-700 dark:text-gray-300"
+                                        className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-700 uppercase dark:text-gray-300"
                                     >
-                                        {header.isPlaceholder
-                                            ? null
-                                            : flexRender(header.column.columnDef.header, header.getContext())}
+                                        {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                                     </th>
                                 ))}
                             </tr>
@@ -175,10 +165,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
                             </tr>
                         ) : (
                             table.getRowModel().rows.map((row) => (
-                                <tr
-                                    key={row.id}
-                                    className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-800"
-                                >
+                                <tr key={row.id} className="transition-colors hover:bg-gray-50 dark:hover:bg-gray-800">
                                     {row.getVisibleCells().map((cell) => (
                                         <td key={cell.id} className="px-6 py-4 text-sm text-gray-900 dark:text-gray-100">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}

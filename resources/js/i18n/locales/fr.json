@@ -184,7 +184,20 @@
             "member_3_description": "Responsable des études statistiques à l'Université de San Pedro, Sékou possède plus de 15 ans d'expérience en gestion de la qualité et en IT. Il contribue à la stratégie universitaire et au Plan National de Développement 2026-2030, tout en assurant la qualité, la modélisation des exigences et le suivi des projets complexes."
         }
     },
+    "common": {
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "cancel": "Annuler",
+        "save": "Enregistrer",
+        "close": "Fermer"
+    },
     "certifications": {
+        "no_certifications_available": "Aucune certification disponible pour le moment.",
+        "exam_questions": "Questions",
+        "exam_passing_score": "Score requis",
+        "exam_duration": "Durée",
+        "exam_total_points": "Points totaux",
+        "view_details": "Voir les détails",
         "why_certification": {
             "badge": "Pourquoi se certifier",
             "hero_title": "Pourquoi obtenir la **certification ISTQB** ?",
@@ -224,6 +237,28 @@
             "sector_8": "E-commerce & Digital",
             "sector_9": "Logistique & Supply Chain",
             "sector_10": "Éducation & Formation"
+        }
+    },
+    "dashboard": {
+        "certifications": {
+            "page_title": "Gestion des Certifications",
+            "categories": "Catégories",
+            "add_category": "Ajouter une catégorie",
+            "edit_category": "Modifier la catégorie",
+            "all_certifications": "Toutes les certifications",
+            "certification_count_one": "certification",
+            "certification_count_other": "certifications",
+            "certification_count": "{{count}} certification",
+            "add_certification": "Ajouter une certification",
+            "category_name": "Nom",
+            "category_description": "Description",
+            "category_order": "Ordre",
+            "category_active": "Active",
+            "saving": "Enregistrement...",
+            "delete_category_title": "Supprimer la catégorie",
+            "delete_certification_title": "Supprimer la certification",
+            "delete_category_message": "Êtes-vous sûr de vouloir supprimer cette catégorie ? Toutes les certifications associées seront également supprimées.",
+            "delete_certification_message": "Êtes-vous sûr de vouloir supprimer cette certification ? Cette action est irréversible."
         }
     },
     "footer": {

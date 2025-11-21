@@ -1,5 +1,7 @@
 import { CertificationCategory } from '@/types';
 import { Edit, Plus, Trash2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { Button } from '../ui/button';
 
 interface CategorySidebarProps {
     categories: CertificationCategory[];
@@ -22,19 +24,20 @@ export function CategorySidebar({
     certificationCounts,
     totalCount,
 }: CategorySidebarProps) {
+    const { t } = useTranslation();
     return (
         <div className="w-64 flex-shrink-0">
             <div className="sticky top-6 space-y-6">
                 <div className="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
                     <div className="mb-4 flex items-center justify-between">
-                        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Catégories</h2>
-                        <button
+                        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.categories')}</h2>
+                        <Button
                             onClick={onAddCategory}
                             className="rounded-lg bg-secondary p-2 text-white transition-colors hover:bg-secondary/90"
-                            title="Ajouter une catégorie"
+                            title={t('dashboard.certifications.add_category')}
                         >
                             <Plus className="h-4 w-4" />
-                        </button>
+                        </Button>
                     </div>
                     <nav className="space-y-1">
                         <button
@@ -45,12 +48,8 @@ export function CategorySidebar({
                                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         >
-                            <span>Toutes les certifications</span>
-                            <span
-                                className={`rounded-full px-2 py-0.5 text-xs ${
-                                    selectedCategory === 'all' ? 'bg-white/20' : 'bg-gray-200 dark:bg-gray-700'
-                                }`}
-                            >
+                            <span>{t('dashboard.certifications.all_certifications')}</span>
+                            <span className={`rounded-full px-2 py-0.5 text-xs ${selectedCategory === 'all' ? 'bg-white/20' : 'bg-gray-200 dark:bg-gray-700'}`}>
                                 {totalCount}
                             </span>
                         </button>
@@ -79,14 +78,14 @@ export function CategorySidebar({
                                         <button
                                             onClick={() => onEditCategory(category)}
                                             className="rounded bg-white p-1 text-secondary shadow-sm hover:bg-gray-50 dark:bg-gray-700"
-                                            title="Modifier"
+                                            title={t('common.edit')}
                                         >
                                             <Edit className="h-3 w-3" />
                                         </button>
                                         <button
                                             onClick={() => onDeleteCategory(category)}
                                             className="rounded bg-white p-1 text-red-600 shadow-sm hover:bg-gray-50 dark:bg-gray-700"
-                                            title="Supprimer"
+                                            title={t('common.delete')}
                                         >
                                             <Trash2 className="h-3 w-3" />
                                         </button>

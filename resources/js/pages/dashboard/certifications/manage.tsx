@@ -3,11 +3,13 @@ import { CategorySidebar } from '@/components/certifications/category-sidebar';
 import { CertificationModal } from '@/components/certifications/certification-modal';
 import { CertificationTable } from '@/components/certifications/certification-table';
 import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal';
+import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
-import { Certification, CertificationCategory, CertificationFormData, CategoryFormData } from '@/types';
+import { Certification, CertificationCategory, CertificationFormData } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     categories: CertificationCategory[];
@@ -15,6 +17,7 @@ interface Props {
 }
 
 export default function ManageCertifications({ categories, certifications }: Props) {
+    const { t } = useTranslation();
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
     // Modals state
@@ -191,42 +194,53 @@ export default function ManageCertifications({ categories, certifications }: Pro
 
     return (
         <AppLayout>
-            <Head title="Gestion des Certifications" />
+            <Head title={t('dashboard.certifications.page_title')} />
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                        {selectedCategory === 'all'
+                            ? t('dashboard.certifications.all_certifications')
+                            : categories.find((c) => c.slug === selectedCategory)?.name}
+                    </h1>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {filteredCertifications.length} {t('dashboard.certifications.certification_count', { count: filteredCertifications.length })}
+                    </p>
+                </div>
+                <Button
+                    onClick={handleAddCertification}
+                    className="flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
+                >
+                    <Plus className="h-4 w-4" />
+                    {t('dashboard.certifications.add_certification')}
+                </Button>
+            </div>
             <div className="flex gap-6">
-                {/* Sub-sidebar */}
-                <CategorySidebar
-                    categories={categories}
-                    selectedCategory={selectedCategory}
-                    onSelectCategory={setSelectedCategory}
-                    onAddCategory={handleAddCategory}
-                    onEditCategory={handleEditCategory}
-                    onDeleteCategory={handleDeleteCategory}
-                    certificationCounts={certificationCounts}
-                    totalCount={certifications.length}
-                />
-
                 {/* Main content */}
                 <div className="flex-1 space-y-6">
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                                {selectedCategory === 'all' ? 'Toutes les certifications' : categories.find((c) => c.slug === selectedCategory)?.name}
-                            </h1>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                                {filteredCertifications.length} certification{filteredCertifications.length !== 1 ? 's' : ''}
-                            </p>
-                        </div>
-                        <button
-                            onClick={handleAddCertification}
-                            className="flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
-                        >
-                            <Plus className="h-4 w-4" />
-                            Ajouter une certification
-                        </button>
-                    </div>
-
                     <div className="rounded-lg bg-white p-6 shadow dark:bg-gray-800">
-                        <CertificationTable certifications={filteredCertifications} onEdit={handleEditCertification} onDelete={handleDeleteCertification} />
+                        <div className="flex space-x-2">
+                            {/* Sub-sidebar */}
+                            <CategorySidebar
+                                categories={categories}
+                                selectedCategory={selectedCategory}
+                                onSelectCategory={setSelectedCategory}
+                                onAddCategory={handleAddCategory}
+                                onEditCategory={handleEditCategory}
+                                onDeleteCategory={handleDeleteCategory}
+                                certificationCounts={certificationCounts}
+                                totalCount={certifications.length}
+                            />
+
+                            <div className="w-3/4">
+                                <div className="flex justify-center px-2">
+                                    <CertificationTable
+                                        certifications={filteredCertifications}
+                                        onEdit={handleEditCertification}
+                                        onDelete={handleDeleteCertification}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -258,11 +272,15 @@ export default function ManageCertifications({ categories, certifications }: Pro
                     setItemToDelete(null);
                 }}
                 onConfirm={confirmDelete}
-                title={itemToDelete?.type === 'category' ? 'Supprimer la catégorie' : 'Supprimer la certification'}
+                title={
+                    itemToDelete?.type === 'category'
+                        ? t('dashboard.certifications.delete_category_title')
+                        : t('dashboard.certifications.delete_certification_title')
+                }
                 message={
                     itemToDelete?.type === 'category'
-                        ? 'Êtes-vous sûr de vouloir supprimer cette catégorie ? Toutes les certifications associées seront également supprimées.'
-                        : 'Êtes-vous sûr de vouloir supprimer cette certification ? Cette action est irréversible.'
+                        ? t('dashboard.certifications.delete_category_message')
+                        : t('dashboard.certifications.delete_certification_message')
                 }
                 itemName={itemToDelete?.name}
                 isDeleting={categoryForm.processing || certificationForm.processing}

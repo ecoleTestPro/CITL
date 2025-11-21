@@ -7,8 +7,8 @@ import * as React from 'react';
 import { NavMain } from '@/components/nav-main';
 import { NavProjects } from '@/components/nav-projects';
 import { NavUser } from '@/components/nav-user';
-import { TeamSwitcher } from '@/components/team-switcher';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
+import Logo from '@/layouts/public/logo';
 import appearance from '@/routes/appearance';
 import profile from '@/routes/profile';
 import userPassword from '@/routes/user-password';
@@ -256,7 +256,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <TeamSwitcher teams={data.teams} />
+                {/* <TeamSwitcher teams={data.teams} /> */}
+                <div className="flex items-center justify-center px-4 py-3">
+                    <Logo />
+                </div>
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain} />

@@ -172,7 +172,20 @@
             "cta_text": "Learn about membership"
         }
     },
+    "common": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "save": "Save",
+        "close": "Close"
+    },
     "certifications": {
+        "no_certifications_available": "No certifications available at the moment.",
+        "exam_questions": "Questions",
+        "exam_passing_score": "Passing Score",
+        "exam_duration": "Duration",
+        "exam_total_points": "Total Points",
+        "view_details": "View Details",
         "why_certification": {
             "badge": "Why Get Certified",
             "hero_title": "Why Get **ISTQB Certified**?",
@@ -212,6 +225,28 @@
             "sector_8": "E-commerce & Digital",
             "sector_9": "Logistics & Supply Chain",
             "sector_10": "Education & Training"
+        }
+    },
+    "dashboard": {
+        "certifications": {
+            "page_title": "Certification Management",
+            "categories": "Categories",
+            "add_category": "Add Category",
+            "edit_category": "Edit Category",
+            "all_certifications": "All Certifications",
+            "certification_count_one": "certification",
+            "certification_count_other": "certifications",
+            "certification_count": "{{count}} certification",
+            "add_certification": "Add Certification",
+            "category_name": "Name",
+            "category_description": "Description",
+            "category_order": "Order",
+            "category_active": "Active",
+            "saving": "Saving...",
+            "delete_category_title": "Delete Category",
+            "delete_certification_title": "Delete Certification",
+            "delete_category_message": "Are you sure you want to delete this category? All associated certifications will also be deleted.",
+            "delete_certification_message": "Are you sure you want to delete this certification? This action is irreversible."
         }
     },
     "footer": {

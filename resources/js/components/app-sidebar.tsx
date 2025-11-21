@@ -13,6 +13,7 @@ import {
     Settings2,
     SquareTerminal,
     FileText,
+    Award,
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -217,6 +218,24 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         title: 'Contact',
                         url: '#',
                         isActive: false,
+                    },
+                ],
+            },
+            {
+                title: 'Certifications',
+                url: '#',
+                icon: Award,
+                isActive: currentUrl.startsWith('/dashboard/certification'),
+                items: [
+                    {
+                        title: 'Catégories',
+                        url: '/dashboard/certification-categories',
+                        isActive: currentUrl.startsWith('/dashboard/certification-categories'),
+                    },
+                    {
+                        title: 'Certifications',
+                        url: '/dashboard/certifications',
+                        isActive: currentUrl.startsWith('/dashboard/certifications'),
                     },
                 ],
             },

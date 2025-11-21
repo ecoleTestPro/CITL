@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\CertificationCategoryController;
+use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,6 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Translation API routes
         Route::get('/{page}/translations', [PageManagementController::class, 'getTranslations'])->name('translations.get');
         Route::post('/translations', [PageManagementController::class, 'updateTranslations'])->name('translations.update');
+    });
+
+    // Certification Management Routes
+    Route::prefix('dashboard')->name('dashboard.')->group(function () {
+        Route::resource('certification-categories', CertificationCategoryController::class);
+        Route::resource('certifications', CertificationController::class);
     });
 });
 

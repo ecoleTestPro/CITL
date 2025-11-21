@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,8 @@ Route::get('/istqb-registry', [PublicController::class, 'istqbRegistry'])->name(
 
 // Contact
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+
+// API Routes
+Route::prefix('api')->group(function () {
+    Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');
+});

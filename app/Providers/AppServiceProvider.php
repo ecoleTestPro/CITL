@@ -6,6 +6,8 @@ use App\Models\Assessment\Exam;
 use App\Models\Assessment\Quiz;
 use App\Models\Blog\Article;
 use App\Models\Certificate\ManageCertificate;
+use App\Models\Certification\Certification;
+use App\Models\Certification\CertificationCategory;
 use App\Models\Course\Category;
 use App\Models\Course\Course;
 use App\Models\User\Instructor;
@@ -14,6 +16,8 @@ use App\Repositories\Assessment\ExamRepository;
 use App\Repositories\Assessment\QuizRepository;
 use App\Repositories\Blog\ArticleRepository;
 use App\Repositories\Certificate\CertificateRepository;
+use App\Repositories\Certification\CertificationCategoryRepository;
+use App\Repositories\Certification\CertificationRepository;
 use App\Repositories\Course\CategoryRepository;
 use App\Repositories\Course\CourseRepository;
 use App\Repositories\User\InstructorRepository;
@@ -62,6 +66,15 @@ class AppServiceProvider extends ServiceProvider
         // Blog Module Repositories
         $this->app->bind(ArticleRepository::class, function ($app) {
             return new ArticleRepository(new Article());
+        });
+
+        // Certification Module Repositories
+        $this->app->bind(CertificationCategoryRepository::class, function ($app) {
+            return new CertificationCategoryRepository(new CertificationCategory());
+        });
+
+        $this->app->bind(CertificationRepository::class, function ($app) {
+            return new CertificationRepository(new Certification());
         });
     }
 

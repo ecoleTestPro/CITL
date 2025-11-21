@@ -1,3 +1,4 @@
+import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Certification } from '@/types';
 import { Head } from '@inertiajs/react';
@@ -8,352 +9,376 @@ interface Props {
 
 function CertificationDetail({ certification }: Props) {
     const breadcrumbs = [
-        { label: 'Accueil', href: '/' },
-        { label: 'Certifications', href: '/why-certification' },
-        { label: certification.category.name, href: `/${certification.category.slug}` },
-        { label: certification.title },
+        { title: 'Accueil', href: '/' },
+        { title: 'Certifications', href: '/why-certification' },
+        { title: certification.category.name, href: `/${certification.category.slug}` },
+        { title: certification.title },
     ];
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head title={`${certification.title} - CITL`} />
-            <section className="pt-32 pb-24 sm:pt-36 md:pt-42 md:pb-36 lg:pb-44 xl:pt-[180px] xl:pb-[200px]">
+
+            {/* Hero Section */}
+            <HeroCommon
+                badge={certification.category.name}
+                title={certification.title}
+                description={certification.subtitle || certification.description}
+                backgroundImage="/assets/images/bg/sharp-2.png"
+            />
+
+            {/* Main Content Section */}
+            <section className="pt-12 pb-24 sm:pt-16 md:pt-20 md:pb-36 lg:pb-44">
                 <div className="container mx-auto">
-                    <div className="flex items-start lg:gap-[72px]">
+                    <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-[72px]">
+                        {/* Left Column - Main Content */}
                         <div className="w-full max-w-full lg:max-w-[767px]">
-                            <div className="services-details-content mb-[72px]">
-                                <h2 data-ns-animate data-delay="0.3" id="track-conversions">
-                                    Track conversions
-                                </h2>
-                                <p data-ns-animate data-delay="0.4">
-                                    Lorem ipsum dolor sit amet consectetur. Nullam blandit dui gravida aliquam enim eu. Adipiscing viverra vulputate curabitur
-                                    est.
-                                </p>
-                                <p data-ns-animate data-delay="0.5">
-                                    Morbi lorem proin morbi tempor risus. Nisl lobortis diam id faucibus pretium vitae suspendisse sed accumsan. Sodales morbi
-                                    tristique elit cursus gravida. Ullamcorper commodo eget pulvinar pretium. Condimentum rhoncus commodo amet nec auctor nibh
-                                    vel mi blandit.
-                                </p>
-                                <p data-ns-animate data-delay="0.6">
-                                    Neque ultrices nunc condimentum morbi risus tincidunt. Vel arcu lacus non ornare. Porttitor in rhoncus magna augue
-                                    adipiscing.
-                                </p>
-                                <figure data-ns-animate data-delay="0.6" data-instant className="max-w-[767px] overflow-hidden rounded-xl">
-                                    <img src="images/ns-img-397.png" alt="service-details" className="size-full object-cover" />
-                                </figure>
-
-                                <h2 data-ns-animate data-delay="0.1" id="sales-management">
-                                    What’s included
-                                </h2>
-                                <p data-ns-animate data-delay="0.2">
-                                    Morbi lorem proin morbi tempor risus. Nisl lobortis diam id faucibus pretium vitae suspendisse sed accumsan. Sodales morbi
-                                    tristique elit cursus gravida. Ullamcorper commodo eget pulvinar pretium. Condimentum rhoncus commodo amet nec auctor nibh
-                                    vel mi blandit.
-                                </p>
-                                <p data-ns-animate data-delay="0.3">
-                                    Neque ultrices nunc condimentum morbi risus tincidunt. Vel arcu lacus non ornare. Porttitor in rhoncus magna augue
-                                    adipiscing.
-                                </p>
-
-                                <ul className="space-y-4 pt-2">
-                                    <li data-ns-animate data-delay="0.1" className="flex items-center gap-3">
-                                        <span className="flex size-5 items-center justify-center rounded-full bg-secondary dark:bg-accent">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="10"
-                                                height="7"
-                                                viewBox="0 0 10 7"
-                                                fill="none"
-                                                aria-hidden="true"
-                                                className="fill-white dark:fill-secondary"
-                                            >
-                                                <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
-                                            </svg>
-                                        </span>
-                                        <span className="text-tagline-1 font-normal text-secondary dark:text-accent">Drag-and-drop automation builder</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.2" className="flex items-center gap-3">
-                                        <span className="flex size-5 items-center justify-center rounded-full bg-secondary dark:bg-accent">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="10"
-                                                height="7"
-                                                viewBox="0 0 10 7"
-                                                fill="none"
-                                                aria-hidden="true"
-                                                className="fill-white dark:fill-secondary"
-                                            >
-                                                <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
-                                            </svg>
-                                        </span>
-
-                                        <span className="text-tagline-1 font-normal text-secondary dark:text-accent">Trigger-based Actions</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.3" className="flex items-center gap-3">
-                                        <span className="flex size-5 items-center justify-center rounded-full bg-secondary dark:bg-accent">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="10"
-                                                height="7"
-                                                viewBox="0 0 10 7"
-                                                fill="none"
-                                                aria-hidden="true"
-                                                className="fill-white dark:fill-secondary"
-                                            >
-                                                <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
-                                            </svg>
-                                        </span>
-
-                                        <span className="text-tagline-1 font-normal text-secondary dark:text-accent">Multi-step workflows</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.4" className="flex items-center gap-3">
-                                        <span className="flex size-5 items-center justify-center rounded-full bg-secondary dark:bg-accent">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="10"
-                                                height="7"
-                                                viewBox="0 0 10 7"
-                                                fill="none"
-                                                aria-hidden="true"
-                                                className="fill-white dark:fill-secondary"
-                                            >
-                                                <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
-                                            </svg>
-                                        </span>
-
-                                        <span className="text-tagline-1 font-normal text-secondary dark:text-accent">Pre-built templates</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.5" className="flex items-center gap-3">
-                                        <span className="flex size-5 items-center justify-center rounded-full bg-secondary dark:bg-accent">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="10"
-                                                height="7"
-                                                viewBox="0 0 10 7"
-                                                fill="none"
-                                                aria-hidden="true"
-                                                className="fill-white dark:fill-secondary"
-                                            >
-                                                <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
-                                            </svg>
-                                        </span>
-
-                                        <span className="text-tagline-1 font-normal text-secondary dark:text-accent">Real-time logs & error handling</span>
-                                    </li>
-                                </ul>
-
-                                <figure data-ns-animate data-delay="0.3" className="max-w-[767px] overflow-hidden rounded-xl">
-                                    <img src="images/ns-img-398.png" alt="service-details" className="size-full object-cover" />
-                                </figure>
-
-                                <h2 data-ns-animate data-delay="0.2" id="use-cases">
-                                    Use cases
-                                </h2>
-                                <p data-ns-animate data-delay="0.3">
-                                    Morbi lorem proin morbi tempor risus. Nisl lobortis diam id faucibus pretium vitae suspendisse sed accumsan. Sodales morbi
-                                    tristique elit cursus gravida. Ullamcorper commodo eget pulvinar pretium. Condimentum rhoncus commodo amet nec auctor nibh
-                                    vel mi blandit.
-                                </p>
-                                <p data-ns-animate data-delay="0.4">
-                                    Neque ultrices nunc condimentum morbi risus tincidunt. Vel arcu lacus non ornare. Porttitor in rhoncus magna augue
-                                    adipiscing.
-                                </p>
-
-                                <ul className="list-inside list-disc space-y-4 pt-2">
-                                    <li data-ns-animate data-delay="0.5" className="text-tagline-1 font-normal text-secondary/60 dark:text-accent/60">
-                                        Automatically send onboarding emails after a new user signs up
-                                    </li>
-                                    <li data-ns-animate data-delay="0.6" className="text-tagline-1 font-normal text-secondary/60 dark:text-accent/60">
-                                        Trigger invoice generation when a deal closes in your CRM
-                                    </li>
-                                    <li data-ns-animate data-delay="0.8" className="text-tagline-1 font-normal text-secondary/60 dark:text-accent/60">
-                                        Update dashboards when new data is uploaded
-                                    </li>
-                                    <li data-ns-animate data-delay="0.9" className="text-tagline-1 font-normal text-secondary/60 dark:text-accent/60">
-                                        Assign tasks to the right team members based on project status
-                                    </li>
-                                </ul>
-
-                                <figure data-ns-animate data-delay="0.4" className="max-w-[767px] overflow-hidden rounded-xl">
-                                    <img src="images/ns-img-399.jpg" alt="service-details" className="block dark:hidden" />
-                                    <img src="images/ns-img-dark-216.jpg" alt="service-details" className="hidden dark:block" />
-                                </figure>
-
-                                <h2 data-ns-animate data-delay="0.2" id="real-time-analytics">
-                                    Built-in security & controls
-                                </h2>
-                                <p data-ns-animate data-delay="0.3">
-                                    Morbi lorem proin morbi tempor risus. Nisl lobortis diam id faucibus pretium vitae suspendisse sed accumsan. Sodales morbi
-                                    tristique elit cursus gravida. Ullamcorper commodo eget pulvinar pretium. Condimentum rhoncus commodo amet nec auctor nibh
-                                    vel mi blandit.
-                                </p>
-                                <p data-ns-animate data-delay="0.4">
-                                    Neque ultrices nunc condimentum morbi risus tincidunt. Vel arcu lacus non ornare. Porttitor in rhoncus magna augue
-                                    adipiscing.
-                                </p>
-
-                                <ul className="space-y-4 pt-2">
-                                    <li data-ns-animate data-delay="0.1" className="flex items-center gap-3">
-                                        <div>
-                                            <span className="ns-shape-7 text-[36px] text-secondary dark:text-accent"></span>
-                                        </div>
-                                        <span className="text-tagline-1 font-medium text-secondary dark:text-accent">Role-based permissions</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.2" className="flex items-center gap-3">
-                                        <div>
-                                            <span className="ns-shape-14 text-[36px] text-secondary dark:text-accent"></span>
-                                        </div>
-                                        <span className="text-tagline-1 font-medium text-secondary dark:text-accent">Encrypted data processing</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.3" className="flex items-center gap-3">
-                                        <div>
-                                            <span className="ns-shape-11 text-[36px] text-secondary dark:text-accent"></span>
-                                        </div>
-                                        <span className="text-tagline-1 font-medium text-secondary dark:text-accent">Full audit logs</span>
-                                    </li>
-                                    <li data-ns-animate data-delay="0.4" className="flex items-center gap-3">
-                                        <div>
-                                            <span className="ns-shape-32 text-[36px] text-secondary dark:text-accent"></span>
-                                        </div>
-                                        <span className="text-tagline-1 font-medium text-secondary dark:text-accent">GDPR & SOC 2 compliant</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="mt-[70px] space-y-14" id="live-data-insights">
-                                <div className="space-y-3">
-                                    <h4 data-ns-animate data-delay="0.1" className="text-heading-2">
-                                        What our users say
-                                    </h4>
-                                    <p data-ns-animate data-delay="0.2" className="text-tagline-1">
-                                        “Nextsaas delivered our entire platform ahead of schedule—flawless execution and real partnership.”
-                                    </p>
+                            <div className="services-details-content mb-[72px] space-y-12">
+                                {/* Overview Section */}
+                                <div data-ns-animate data-delay="0.3">
+                                    <h2 className="text-heading-4 mb-4" id="overview">
+                                        Vue d'ensemble
+                                    </h2>
+                                    <p className="text-gray-700 dark:text-gray-300">{certification.description}</p>
                                 </div>
-                                <div data-ns-animate data-delay="0.1" className="space-y-6 rounded-[20px] bg-secondary p-8">
-                                    <figure className="size-16 overflow-hidden rounded-full bg-linear-[180deg,#ffffff_0%,#83e7ee_100%]">
-                                        <img className="size-full object-cover" src="images/ns-avatar-1.png" alt="avatar" />
-                                    </figure>
-                                    <blockquote>
-                                        <p data-ns-animate data-delay="0.3" className="text-white">
-                                            “Workflow Automation helped us eliminate hours of manual work each week. Now, our ops team can focus on strategic
-                                            initiatives instead of button-clicking.”
-                                        </p>
-                                    </blockquote>
-                                    <div>
-                                        <p data-ns-animate data-delay="0.4" className="text-lg font-medium text-white">
-                                            John Smith
-                                        </p>
-                                        <p data-ns-animate data-delay="0.5" className="text-tagline-2 font-normal text-accent/60">
-                                            Lorem ipsum
-                                        </p>
+
+                                {/* Audience Section */}
+                                <div data-ns-animate data-delay="0.4">
+                                    <h2 className="text-heading-4 mb-4" id="audience">
+                                        Public cible
+                                    </h2>
+                                    <p className="mb-4 text-gray-700 dark:text-gray-300">
+                                        Cette certification s'adresse aux professionnels du test logiciel qui souhaitent développer leurs compétences et valider
+                                        leur expertise dans le domaine.
+                                    </p>
+                                    <ul className="space-y-3">
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1 flex size-5 flex-shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="10"
+                                                    height="7"
+                                                    viewBox="0 0 10 7"
+                                                    fill="none"
+                                                    aria-hidden="true"
+                                                    className="fill-white dark:fill-secondary"
+                                                >
+                                                    <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
+                                                </svg>
+                                            </span>
+                                            <span className="text-gray-700 dark:text-gray-300">Testeurs de logiciels débutants ou expérimentés</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1 flex size-5 flex-shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="10"
+                                                    height="7"
+                                                    viewBox="0 0 10 7"
+                                                    fill="none"
+                                                    aria-hidden="true"
+                                                    className="fill-white dark:fill-secondary"
+                                                >
+                                                    <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
+                                                </svg>
+                                            </span>
+                                            <span className="text-gray-700 dark:text-gray-300">Ingénieurs qualité et responsables de tests</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1 flex size-5 flex-shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="10"
+                                                    height="7"
+                                                    viewBox="0 0 10 7"
+                                                    fill="none"
+                                                    aria-hidden="true"
+                                                    className="fill-white dark:fill-secondary"
+                                                >
+                                                    <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
+                                                </svg>
+                                            </span>
+                                            <span className="text-gray-700 dark:text-gray-300">
+                                                Développeurs souhaitant améliorer leurs compétences en test
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <span className="mt-1 flex size-5 flex-shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="10"
+                                                    height="7"
+                                                    viewBox="0 0 10 7"
+                                                    fill="none"
+                                                    aria-hidden="true"
+                                                    className="fill-white dark:fill-secondary"
+                                                >
+                                                    <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z"></path>
+                                                </svg>
+                                            </span>
+                                            <span className="text-gray-700 dark:text-gray-300">Chefs de projet et analystes métier</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* Content Section */}
+                                <div data-ns-animate data-delay="0.5">
+                                    <h2 className="text-heading-4 mb-4" id="content">
+                                        Contenu de la formation
+                                    </h2>
+                                    <p className="mb-4 text-gray-700 dark:text-gray-300">
+                                        Le programme couvre l'ensemble des compétences nécessaires pour maîtriser les concepts et techniques de test logiciel
+                                        selon les standards internationaux.
+                                    </p>
+                                    <ul className="list-inside list-disc space-y-2 text-gray-700 dark:text-gray-300">
+                                        <li>Fondamentaux du test logiciel</li>
+                                        <li>Test tout au long du cycle de vie logiciel</li>
+                                        <li>Techniques de test statique et dynamique</li>
+                                        <li>Gestion des tests et outils</li>
+                                        <li>Analyse des risques et stratégies de test</li>
+                                    </ul>
+                                </div>
+
+                                {/* Exam Structure Section */}
+                                <div data-ns-animate data-delay="0.6">
+                                    <h2 className="text-heading-4 mb-4" id="exam-structure">
+                                        Structure de l'examen
+                                    </h2>
+                                    <p className="mb-4 text-gray-700 dark:text-gray-300">
+                                        L'examen est conçu pour évaluer votre compréhension des concepts et votre capacité à les appliquer dans des situations
+                                        pratiques.
+                                    </p>
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <div className="mb-2 flex items-center gap-3">
+                                                <span className="ns-shape-7 text-[32px] text-secondary dark:text-accent"></span>
+                                                <span className="text-lg font-semibold text-secondary dark:text-accent">Format</span>
+                                            </div>
+                                            <p className="text-gray-700 dark:text-gray-300">QCM - {certification.exam_questions} questions</p>
+                                        </div>
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <div className="mb-2 flex items-center gap-3">
+                                                <span className="ns-shape-14 text-[32px] text-secondary dark:text-accent"></span>
+                                                <span className="text-lg font-semibold text-secondary dark:text-accent">Durée</span>
+                                            </div>
+                                            <p className="text-gray-700 dark:text-gray-300">{certification.exam_duration}</p>
+                                        </div>
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <div className="mb-2 flex items-center gap-3">
+                                                <span className="ns-shape-11 text-[32px] text-secondary dark:text-accent"></span>
+                                                <span className="text-lg font-semibold text-secondary dark:text-accent">Score requis</span>
+                                            </div>
+                                            <p className="text-gray-700 dark:text-gray-300">{certification.exam_passing_score}%</p>
+                                        </div>
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <div className="mb-2 flex items-center gap-3">
+                                                <span className="ns-shape-32 text-[32px] text-secondary dark:text-accent"></span>
+                                                <span className="text-lg font-semibold text-secondary dark:text-accent">Points totaux</span>
+                                            </div>
+                                            <p className="text-gray-700 dark:text-gray-300">{certification.exam_total_points} points</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Business Outcomes Section */}
+                                <div data-ns-animate data-delay="0.7">
+                                    <h2 className="text-heading-4 mb-4" id="business-outcomes">
+                                        Bénéfices professionnels
+                                    </h2>
+                                    <p className="mb-4 text-gray-700 dark:text-gray-300">
+                                        L'obtention de cette certification vous permettra de renforcer votre profil professionnel et d'accéder à de nouvelles
+                                        opportunités de carrière.
+                                    </p>
+                                    <ul className="space-y-3">
+                                        <li className="flex items-start gap-3">
+                                            <div>
+                                                <span className="ns-shape-7 text-[36px] text-secondary dark:text-accent"></span>
+                                            </div>
+                                            <span className="text-gray-700 dark:text-gray-300">
+                                                <strong>Reconnaissance internationale</strong> - Certification reconnue dans plus de 100 pays
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div>
+                                                <span className="ns-shape-14 text-[36px] text-secondary dark:text-accent"></span>
+                                            </div>
+                                            <span className="text-gray-700 dark:text-gray-300">
+                                                <strong>Évolution de carrière</strong> - Accès à des postes à responsabilité et meilleures opportunités
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div>
+                                                <span className="ns-shape-11 text-[36px] text-secondary dark:text-accent"></span>
+                                            </div>
+                                            <span className="text-gray-700 dark:text-gray-300">
+                                                <strong>Compétences validées</strong> - Preuve de votre expertise selon les standards internationaux
+                                            </span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div>
+                                                <span className="ns-shape-32 text-[36px] text-secondary dark:text-accent"></span>
+                                            </div>
+                                            <span className="text-gray-700 dark:text-gray-300">
+                                                <strong>Réseau professionnel</strong> - Intégration dans une communauté mondiale de testeurs certifiés
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                {/* More Information Section */}
+                                <div data-ns-animate data-delay="0.8">
+                                    <h2 className="text-heading-4 mb-4" id="more-information">
+                                        Informations complémentaires
+                                    </h2>
+                                    <div className="space-y-4">
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <h3 className="mb-2 text-lg font-semibold text-secondary dark:text-accent">Prérequis</h3>
+                                            <p className="text-gray-700 dark:text-gray-300">
+                                                Il est recommandé d'avoir une expérience pratique dans le développement ou le test de logiciels avant de passer
+                                                l'examen.
+                                            </p>
+                                        </div>
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <h3 className="mb-2 text-lg font-semibold text-secondary dark:text-accent">Validité</h3>
+                                            <p className="text-gray-700 dark:text-gray-300">
+                                                La certification est valable à vie et reconnue internationalement par les organisations membres de l'ISTQB.
+                                            </p>
+                                        </div>
+                                        <div className="bg-background-1 dark:bg-background-6 rounded-lg p-6">
+                                            <h3 className="mb-2 text-lg font-semibold text-secondary dark:text-accent">Langues disponibles</h3>
+                                            <p className="text-gray-700 dark:text-gray-300">
+                                                L'examen est disponible en français, anglais et plusieurs autres langues selon les centres d'examen.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="table-of-contents hidden w-full lg:sticky lg:top-20 lg:block lg:max-w-[449px]" data-ns-animate data-delay="0.3">
-                            <div className="bg-background-1 dark:bg-background-6 w-full space-y-4 rounded-[20px] p-11">
-                                <h3 className="text-heading-5">Categories</h3>
-                                <ul className="table-of-list w-full">
-                                    <li>
-                                        <a
-                                            href="#track-conversions"
-                                            className="lenis-scroll-to border-b-stroke-4 dark:border-b-stroke-7 flex items-center justify-between border-b py-4"
-                                        >
-                                            <span className="text-lg leading-[27px] font-medium text-secondary dark:text-accent">Track conversions</span>
 
-                                            <span>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                                    <path
-                                                        d="M10 8.5L14 12.5L10 16.5"
-                                                        className="stroke-secondary dark:stroke-accent"
-                                                        stroke-opacity="0.6"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
+                        {/* Right Column - Sticky Sidebar */}
+                        <div className="w-full lg:sticky lg:top-24 lg:w-[449px] lg:self-start" data-ns-animate data-delay="0.3">
+                            <div className="bg-background-1 dark:bg-background-6 w-full space-y-6 rounded-[20px] p-8">
+                                <h3 className="text-heading-5">Informations de l'examen</h3>
+
+                                {/* Exam Metadata */}
+                                <div className="space-y-4">
+                                    <div className="border-stroke-4 dark:border-stroke-7 flex items-center justify-between border-b pb-3">
+                                        <span className="text-gray-600 dark:text-gray-400">Catégorie</span>
+                                        <span className="font-semibold text-secondary dark:text-accent">{certification.category.name}</span>
+                                    </div>
+                                    <div className="border-stroke-4 dark:border-stroke-7 flex items-center justify-between border-b pb-3">
+                                        <span className="text-gray-600 dark:text-gray-400">Questions</span>
+                                        <span className="font-semibold text-secondary dark:text-accent">{certification.exam_questions}</span>
+                                    </div>
+                                    <div className="border-stroke-4 dark:border-stroke-7 flex items-center justify-between border-b pb-3">
+                                        <span className="text-gray-600 dark:text-gray-400">Durée</span>
+                                        <span className="font-semibold text-secondary dark:text-accent">{certification.exam_duration}</span>
+                                    </div>
+                                    <div className="border-stroke-4 dark:border-stroke-7 flex items-center justify-between border-b pb-3">
+                                        <span className="text-gray-600 dark:text-gray-400">Score requis</span>
+                                        <span className="font-semibold text-secondary dark:text-accent">{certification.exam_passing_score}%</span>
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-gray-600 dark:text-gray-400">Points totaux</span>
+                                        <span className="font-semibold text-secondary dark:text-accent">{certification.exam_total_points}</span>
+                                    </div>
+                                </div>
+
+                                {/* Documents Section - Static for now */}
+                                <div className="border-stroke-4 dark:border-stroke-7 border-t pt-6">
+                                    <h4 className="mb-4 text-lg font-semibold text-secondary dark:text-accent">Documents</h4>
+                                    <div className="space-y-3">
                                         <a
-                                            href="#sales-management"
-                                            className="lenis-scroll-to border-b-stroke-4 dark:border-b-stroke-7 flex items-center justify-between border-b py-4"
+                                            href="#"
+                                            className="dark:bg-background-7 dark:hover:bg-background-8 flex items-center gap-3 rounded-lg bg-white p-3 transition-colors hover:bg-gray-50"
                                         >
-                                            <span className="text-lg leading-[27px] font-normal text-secondary/60 dark:text-accent/60">Sales management</span>
-                                            <span className="invisible">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                                    <path
-                                                        d="M10 8.5L14 12.5L10 16.5"
-                                                        className="stroke-secondary dark:stroke-accent"
-                                                        stroke-opacity="0.6"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
+                                            <span className="ns-shape-35 text-[24px] text-secondary dark:text-accent"></span>
+                                            <span className="text-sm font-medium">Syllabus officiel</span>
                                         </a>
-                                    </li>
-                                    <li>
                                         <a
-                                            href="#use-cases"
-                                            className="lenis-scroll-to border-b-stroke-4 dark:border-b-stroke-7 flex items-center justify-between border-b py-4"
+                                            href="#"
+                                            className="dark:bg-background-7 dark:hover:bg-background-8 flex items-center gap-3 rounded-lg bg-white p-3 transition-colors hover:bg-gray-50"
                                         >
-                                            <span className="text-lg leading-[27px] font-normal text-secondary/60 dark:text-accent/60">Use cases</span>
-                                            <span className="invisible">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                                    <path
-                                                        d="M10 8.5L14 12.5L10 16.5"
-                                                        className="stroke-secondary dark:stroke-accent"
-                                                        stroke-opacity="0.6"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
+                                            <span className="ns-shape-12 text-[24px] text-secondary dark:text-accent"></span>
+                                            <span className="text-sm font-medium">Guide de préparation</span>
                                         </a>
-                                    </li>
-                                    <li>
                                         <a
-                                            href="#real-time-analytics"
-                                            className="lenis-scroll-to border-b-stroke-4 dark:border-b-stroke-7 flex items-center justify-between border-b py-4"
+                                            href="#"
+                                            className="dark:bg-background-7 dark:hover:bg-background-8 flex items-center gap-3 rounded-lg bg-white p-3 transition-colors hover:bg-gray-50"
                                         >
-                                            <span className="text-lg leading-[27px] font-normal text-secondary/60 dark:text-accent/60">
-                                                Real-time analytics
-                                            </span>
-                                            <span className="invisible">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                                    <path
-                                                        d="M10 8.5L14 12.5L10 16.5"
-                                                        className="stroke-secondary dark:stroke-accent"
-                                                        stroke-opacity="0.6"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
+                                            <span className="ns-shape-3 text-[24px] text-secondary dark:text-accent"></span>
+                                            <span className="text-sm font-medium">Exemples de questions</span>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a href="#live-data-insights" className="lenis-scroll-to flex items-center justify-between py-4">
-                                            <span className="text-lg leading-[27px] font-normal text-secondary/60 dark:text-accent/60">Live data insights</span>
-                                            <span className="invisible">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-                                                    <path
-                                                        d="M10 8.5L14 12.5L10 16.5"
-                                                        className="stroke-secondary dark:stroke-accent"
-                                                        stroke-opacity="0.6"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                    />
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
+
+                                {/* CTA Buttons */}
+                                <div className="border-stroke-4 dark:border-stroke-7 space-y-3 border-t pt-6">
+                                    <a
+                                        href="/exam-registration"
+                                        className="flex w-full items-center justify-center rounded-lg bg-secondary px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-secondary/90 hover:shadow-md"
+                                    >
+                                        S'inscrire à l'examen
+                                    </a>
+                                    <a
+                                        href="/accredited-organizations"
+                                        className="flex w-full items-center justify-center rounded-lg border border-secondary px-6 py-3 text-sm font-semibold text-secondary transition-all duration-300 hover:bg-secondary/5 dark:text-accent"
+                                    >
+                                        Trouver une formation
+                                    </a>
+                                </div>
+
+                                {/* Table of Contents */}
+                                <div className="border-stroke-4 dark:border-stroke-7 border-t pt-6">
+                                    <h4 className="mb-4 text-lg font-semibold text-secondary dark:text-accent">Sur cette page</h4>
+                                    <ul className="space-y-2">
+                                        <li>
+                                            <a
+                                                href="#overview"
+                                                className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent"
+                                            >
+                                                Vue d'ensemble
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#audience"
+                                                className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent"
+                                            >
+                                                Public cible
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#content" className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent">
+                                                Contenu de la formation
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#exam-structure"
+                                                className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent"
+                                            >
+                                                Structure de l'examen
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#business-outcomes"
+                                                className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent"
+                                            >
+                                                Bénéfices professionnels
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="#more-information"
+                                                className="text-sm text-gray-600 hover:text-secondary dark:text-gray-400 dark:hover:text-accent"
+                                            >
+                                                Informations complémentaires
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

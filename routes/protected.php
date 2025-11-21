@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\CertificationCategoryController;
 use App\Http\Controllers\Dashboard\CertificationController;
+use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,10 +27,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/translations', [PageManagementController::class, 'updateTranslations'])->name('translations.update');
     });
 
-    // Certification Management Routes
-    Route::prefix('dashboard')->name('dashboard.')->group(function () {
-        Route::resource('certification-categories', CertificationCategoryController::class);
-        Route::resource('certifications', CertificationController::class);
+    // Certification Management Routes (Unified)
+    Route::prefix('dashboard/certifications')->name('dashboard.certifications.')->group(function () {
+        Route::get('/', [CertificationManagementController::class, 'index'])->name('manage');
+
+        // Category routes
+        Route::post('/categories/store', [CertificationManagementController::class, 'storeCategory'])->name('categories.store');
+        Route::post('/categories/{id}/update', [CertificationManagementController::class, 'updateCategory'])->name('categories.update');
+        Route::delete('/categories/{id}/delete', [CertificationManagementController::class, 'deleteCategory'])->name('categories.delete');
+
+        // Certification routes
+        Route::post('/store', [CertificationManagementController::class, 'storeCertification'])->name('store');
+        Route::post('/{id}/update', [CertificationManagementController::class, 'updateCertification'])->name('update');
+        Route::delete('/{id}/delete', [CertificationManagementController::class, 'deleteCertification'])->name('delete');
     });
 });
 

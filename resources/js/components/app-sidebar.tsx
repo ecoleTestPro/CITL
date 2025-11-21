@@ -1,36 +1,17 @@
 'use client';
 
 import { usePage } from '@inertiajs/react';
-import {
-    AudioWaveform,
-    BookOpen,
-    Bot,
-    Command,
-    Frame,
-    GalleryVerticalEnd,
-    Map,
-    PieChart,
-    Settings2,
-    SquareTerminal,
-    FileText,
-    Award,
-} from 'lucide-react';
+import { AudioWaveform, Award, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2 } from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
 import { NavProjects } from '@/components/nav-projects';
 import { NavUser } from '@/components/nav-user';
 import { TeamSwitcher } from '@/components/team-switcher';
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarHeader,
-    SidebarRail,
-} from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
+import appearance from '@/routes/appearance';
 import profile from '@/routes/profile';
 import userPassword from '@/routes/user-password';
-import appearance from '@/routes/appearance';
 import { type SharedData } from '@/types';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -77,10 +58,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     {
                         title: 'About',
                         url: '#',
-                        isActive: currentUrl.startsWith('/dashboard/pages/about') ||
-                                  currentUrl.includes('/vision') ||
-                                  currentUrl.includes('/missions') ||
-                                  currentUrl.includes('/executive-board'),
+                        isActive:
+                            currentUrl.startsWith('/dashboard/pages/about') ||
+                            currentUrl.includes('/vision') ||
+                            currentUrl.includes('/missions') ||
+                            currentUrl.includes('/executive-board'),
                         items: [
                             {
                                 title: 'About ISTQB',
@@ -223,21 +205,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             },
             {
                 title: 'Certifications',
-                url: '#',
+                url: '/dashboard/certifications',
                 icon: Award,
-                isActive: currentUrl.startsWith('/dashboard/certification'),
-                items: [
-                    {
-                        title: 'Catégories',
-                        url: '/dashboard/certification-categories',
-                        isActive: currentUrl.startsWith('/dashboard/certification-categories'),
-                    },
-                    {
-                        title: 'Certifications',
-                        url: '/dashboard/certifications',
-                        isActive: currentUrl.startsWith('/dashboard/certifications'),
-                    },
-                ],
+                isActive: currentUrl.startsWith('/dashboard/certifications'),
+                items: [],
             },
             {
                 title: 'Settings',

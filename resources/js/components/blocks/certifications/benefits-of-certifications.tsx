@@ -1,4 +1,9 @@
 import { Link } from '@inertiajs/react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef } from 'react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface BenefitCard {
     title: string;
@@ -19,21 +24,116 @@ interface BenefitsOfCertificationsProps {
 }
 
 function BenefitsOfCertifications({ badge, title, subtitle, benefits }: BenefitsOfCertificationsProps) {
+    const sectionRef = useRef<HTMLElement>(null);
+    const headerRef = useRef<HTMLDivElement>(null);
+    const cardsRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (!sectionRef.current) return;
+
+        const ctx = gsap.context(() => {
+            // Header animations
+            if (headerRef.current) {
+                const badge = headerRef.current.querySelector('.benefit-badge');
+                const title = headerRef.current.querySelector('.benefit-title');
+                const subtitle = headerRef.current.querySelector('.benefit-subtitle');
+
+                if (badge) {
+                    gsap.from(badge, {
+                        y: 30,
+                        opacity: 0,
+                        filter: 'blur(10px)',
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 80%',
+                        },
+                    });
+                }
+
+                if (title) {
+                    gsap.from(title, {
+                        y: 40,
+                        opacity: 0,
+                        filter: 'blur(12px)',
+                        duration: 1,
+                        delay: 0.1,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 80%',
+                        },
+                    });
+                }
+
+                if (subtitle) {
+                    gsap.from(subtitle, {
+                        y: 30,
+                        opacity: 0,
+                        filter: 'blur(10px)',
+                        duration: 0.8,
+                        delay: 0.2,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 80%',
+                        },
+                    });
+                }
+            }
+
+            // Cards animations
+            if (cardsRef.current) {
+                const cards = cardsRef.current.querySelectorAll('.benefit-card');
+                cards.forEach((card, index) => {
+                    gsap.from(card, {
+                        y: 60,
+                        opacity: 0,
+                        filter: 'blur(16px)',
+                        duration: 1,
+                        delay: index * 0.15,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: card,
+                            start: 'top 85%',
+                        },
+                    });
+
+                    // Image hover animation
+                    const img = card.querySelector('img');
+                    if (img) {
+                        card.addEventListener('mouseenter', () => {
+                            gsap.to(img, {
+                                scale: 1.05,
+                                duration: 0.4,
+                                ease: 'power2.out',
+                            });
+                        });
+
+                        card.addEventListener('mouseleave', () => {
+                            gsap.to(img, {
+                                scale: 1,
+                                duration: 0.4,
+                                ease: 'power2.out',
+                            });
+                        });
+                    }
+                });
+            }
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, [benefits]);
     const renderCard = (benefit: BenefitCard, index: number) => {
         const baseCardClasses = 'bg-white border-background-12 grid h-full grid-cols-12 rounded-3xl border p-5 md:gap-6 md:p-8';
         const largeCardClasses = 'gap-y-6 rounded-4xl px-5 pt-8 md:px-8';
 
         return (
-            <div
-                key={index}
-                className={`group/card-img ${benefit.type === 'large' ? 'col-span-12' : 'col-span-12 lg:col-span-6'}`}
-                data-ns-animate
-                data-delay={`0.${index + 1}`}
-                data-direction={benefit.type === 'medium' ? (index % 2 === 0 ? 'left' : 'right') : undefined}
-            >
+            <div key={index} className={`benefit-card group/card-img ${benefit.type === 'large' ? 'col-span-12' : 'col-span-12 lg:col-span-6'}`}>
                 <div className={`${baseCardClasses} ${benefit.type === 'large' ? largeCardClasses : 'gap-y-16'}`}>
                     <aside
-                        className={`col-span-12 flex flex-col justify-between space-y-5 ${benefit.type === 'large' ? 'pt-14 pb-9 md:col-span-5 lg:col-span-3' : 'pt-14 md:col-span-6'}`}
+                        className={`col-span-12 flex flex-col justify-between space-y-5 ${benefit.type === 'large' ? 'pt-14 pb-9 md:col-span-5 lg:col-span-5' : 'pt-14 md:col-span-6'}`}
                     >
                         <blockquote className="space-y-2">
                             <h3 className="text-xl font-semibold text-secondary">{benefit.title}</h3>
@@ -107,7 +207,7 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
                         </figure>
                     ) : (
                         <figure
-                            className={`col-span-12 mx-auto w-full max-w-[905px] overflow-hidden ${benefit.type === 'large' ? 'rounded-t-lg md:col-span-7 md:rounded-t-[20px] lg:col-span-9' : 'h-[360px] rounded-lg md:col-span-6 md:h-full md:rounded-[20px]'} transition-transform duration-500 ease-in-out group-hover/card-img:scale-105`}
+                            className={`col-span-12 mx-auto w-full max-w-[905px] overflow-hidden ${benefit.type === 'large' ? 'rounded-t-lg md:col-span-6 md:rounded-t-[20px] lg:col-span-7' : 'h-[360px] rounded-lg md:col-span-6 md:h-full md:rounded-[20px]'} transition-transform duration-500 ease-in-out group-hover/card-img:scale-105`}
                         >
                             <img src={benefit.image || ''} alt={benefit.imageAlt || benefit.title} className="h-full w-full object-cover" />
                         </figure>
@@ -118,29 +218,23 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
     };
 
     return (
-        <section className="mt-10 overflow-hidden py-14 md:py-16 lg:py-24 xl:py-28">
+        <section ref={sectionRef} className="mt-10 overflow-hidden py-6">
             <div className="container mx-auto">
                 {(badge || title || subtitle) && (
-                    <div className="mb-11 text-center lg:mx-auto lg:mb-9 lg:max-w-[730px]">
+                    <div ref={headerRef} className="mb-11 text-center lg:mx-auto lg:mb-9 lg:max-w-[730px]">
                         {badge && (
-                            <span className="inline-flex items-center rounded-md bg-primary-400/50 px-2 py-1 text-xs font-medium text-primary-400 inset-ring inset-ring-gray-400/20">
+                            <span className="benefit-badge bg-primary-400/50 text-primary-400 inline-flex items-center rounded-md px-2 py-1 text-xs font-medium inset-ring inset-ring-gray-400/20">
                                 {badge}
                             </span>
                         )}
-                        {title && (
-                            <h2 data-ns-animate data-delay="0.2" className="mb-1 text-3xl font-semibold md:mb-3 md:text-4xl lg:text-5xl">
-                                {title}
-                            </h2>
-                        )}
-                        {subtitle && (
-                            <p data-ns-animate data-delay="0.3" className="text-black/40 lg:mx-auto lg:max-w-[530px]">
-                                {subtitle}
-                            </p>
-                        )}
+                        {title && <h2 className="benefit-title mb-1 text-3xl font-semibold md:mb-3 md:text-4xl lg:text-5xl">{title}</h2>}
+                        {subtitle && <p className="benefit-subtitle text-black/40 lg:mx-auto lg:max-w-[530px]">{subtitle}</p>}
                     </div>
                 )}
 
-                <div className="grid grid-cols-12 gap-y-6 md:gap-6">{benefits.map((benefit, index) => renderCard(benefit, index))}</div>
+                <div ref={cardsRef} className="grid grid-cols-12 gap-y-6 md:gap-6">
+                    {benefits.map((benefit, index) => renderCard(benefit, index))}
+                </div>
             </div>
         </section>
     );

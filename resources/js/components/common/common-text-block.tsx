@@ -70,6 +70,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                 gsap.from(titleRef.current, {
                     y: 50,
                     opacity: 0,
+                    filter: 'blur(12px)',
                     duration: 1,
                     ease: 'power3.out',
                     scrollTrigger: {
@@ -85,6 +86,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                     scale: 0.8,
                     rotation: -5,
                     opacity: 0,
+                    filter: 'blur(8px)',
                     duration: 1.2,
                     ease: 'back.out(1.7)',
                     scrollTrigger: {
@@ -122,6 +124,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                 gsap.from(contentRef.current, {
                     y: 40,
                     opacity: 0,
+                    filter: 'blur(10px)',
                     duration: 0.8,
                     ease: 'power3.out',
                     scrollTrigger: {
@@ -135,6 +138,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                 gsap.from(textElements, {
                     x: -30,
                     opacity: 0,
+                    filter: 'blur(8px)',
                     duration: 0.6,
                     stagger: 0.1,
                     ease: 'power2.out',

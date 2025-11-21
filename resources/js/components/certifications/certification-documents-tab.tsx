@@ -16,7 +16,11 @@ interface Tag {
     id: number;
     name: string;
     slug: string;
-    description?: string;
+}
+
+interface PendingFile {
+    file: File;
+    tagIds: number[];
 }
 
 interface CertificationDocumentsTabProps {
@@ -28,9 +32,9 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [documents, setDocuments] = useState<Document[]>([]);
     const [availableTags, setAvailableTags] = useState<Tag[]>([]);
+    const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([]);
     const [isUploading, setIsUploading] = useState(false);
     const [newTagName, setNewTagName] = useState('');
-    const [newTagDescription, setNewTagDescription] = useState('');
     const [showNewTagInput, setShowNewTagInput] = useState(false);
 
     // Load documents and tags on mount
@@ -65,42 +69,16 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
         }
     };
 
-    const handleFileSelect = useCallback(
-        async (files: FileList | null) => {
-            if (!files || files.length === 0) return;
+    const handleFileSelect = useCallback((files: FileList | null) => {
+        if (!files || files.length === 0) return;
 
-            setIsUploading(true);
-            const formData = new FormData();
+        const newPendingFiles: PendingFile[] = Array.from(files).map((file) => ({
+            file,
+            tagIds: [],
+        }));
 
-            Array.from(files).forEach((file) => {
-                formData.append('files[]', file);
-            });
-
-            if (certificationId) {
-                formData.append('certification_id', certificationId.toString());
-            }
-
-            try {
-                const response = await axios.post('/dashboard/certifications/documents/upload', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                    },
-                });
-
-                if (response.data.success) {
-                    setDocuments([...documents, ...response.data.data.documents]);
-                }
-            } catch (error) {
-                console.error('Error uploading files:', error);
-            } finally {
-                setIsUploading(false);
-                if (fileInputRef.current) {
-                    fileInputRef.current.value = '';
-                }
-            }
-        },
-        [certificationId, documents],
-    );
+        setPendingFiles([...pendingFiles, ...newPendingFiles]);
+    }, [pendingFiles]);
 
     const handleDrop = useCallback(
         (e: React.DragEvent<HTMLDivElement>) => {
@@ -113,6 +91,83 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
     const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     }, []);
+
+    const handleRemovePendingFile = (index: number) => {
+        setPendingFiles(pendingFiles.filter((_, i) => i !== index));
+    };
+
+    const handleToggleTagForPendingFile = (fileIndex: number, tagId: number) => {
+        setPendingFiles(
+            pendingFiles.map((pf, i) => {
+                if (i === fileIndex) {
+                    const tagIds = pf.tagIds.includes(tagId) ? pf.tagIds.filter((id) => id !== tagId) : [...pf.tagIds, tagId];
+                    return { ...pf, tagIds };
+                }
+                return pf;
+            }),
+        );
+    };
+
+    const handleConfirmUpload = async () => {
+        if (pendingFiles.length === 0) return;
+
+        setIsUploading(true);
+
+        try {
+            // Upload files one by one with their tags
+            for (const pendingFile of pendingFiles) {
+                const formData = new FormData();
+                formData.append('files[]', pendingFile.file);
+
+                if (certificationId) {
+                    formData.append('certification_id', certificationId.toString());
+                }
+
+                const response = await axios.post('/dashboard/certifications/documents/upload', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                if (response.data.success && response.data.data.documents.length > 0) {
+                    const uploadedDoc = response.data.data.documents[0];
+
+                    // Attach tags if any
+                    if (pendingFile.tagIds.length > 0) {
+                        for (const tagId of pendingFile.tagIds) {
+                            await axios.post(`/dashboard/certifications/documents/${uploadedDoc.id}/tags/attach`, {
+                                tag_id: tagId,
+                            });
+                        }
+
+                        // Reload document with tags
+                        const docResponse = await axios.get(`/dashboard/certifications/${certificationId}/documents`);
+                        if (docResponse.data.success) {
+                            setDocuments(docResponse.data.data.documents || []);
+                        }
+                    } else {
+                        setDocuments([...documents, uploadedDoc]);
+                    }
+                }
+            }
+
+            setPendingFiles([]);
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
+        } catch (error) {
+            console.error('Error uploading files:', error);
+        } finally {
+            setIsUploading(false);
+        }
+    };
+
+    const handleCancelUpload = () => {
+        setPendingFiles([]);
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
 
     const handleDeleteDocument = async (documentId: number) => {
         try {
@@ -155,13 +210,11 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
         try {
             const response = await axios.post('/dashboard/certifications/tags/store', {
                 name: newTagName,
-                description: newTagDescription,
             });
 
             if (response.data.success) {
                 setAvailableTags([...availableTags, response.data.data.tag]);
                 setNewTagName('');
-                setNewTagDescription('');
                 setShowNewTagInput(false);
             }
         } catch (error) {
@@ -186,39 +239,113 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                 </p>
 
                 {/* Upload area */}
-                <div
-                    onDrop={handleDrop}
-                    onDragOver={handleDragOver}
-                    onClick={() => fileInputRef.current?.click()}
-                    className="mb-6 cursor-pointer rounded-lg border-2 border-dashed border-gray-300 bg-white p-8 text-center transition-colors hover:border-secondary dark:border-gray-600 dark:bg-gray-800 dark:hover:border-accent"
-                >
-                    {isUploading ? (
-                        <div className="flex flex-col items-center">
-                            <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-secondary border-t-transparent"></div>
-                            <p className="text-sm text-gray-700 dark:text-gray-300">Téléchargement en cours...</p>
+                {pendingFiles.length === 0 && (
+                    <div
+                        onDrop={handleDrop}
+                        onDragOver={handleDragOver}
+                        onClick={() => fileInputRef.current?.click()}
+                        className="mb-6 cursor-pointer rounded-lg border-2 border-dashed border-gray-300 bg-white p-8 text-center transition-colors hover:border-secondary dark:border-gray-600 dark:bg-gray-800 dark:hover:border-accent"
+                    >
+                        <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
+                        <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
+                            <span className="font-semibold">Cliquez pour charger</span> ou glissez-déposez
+                        </p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">PDF, DOC, DOCX, XLS, XLSX (MAX. 10MB)</p>
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            className="hidden"
+                            accept=".pdf,.doc,.docx,.xls,.xlsx"
+                            multiple
+                            onChange={(e) => handleFileSelect(e.target.files)}
+                        />
+                    </div>
+                )}
+
+                {/* Pending files confirmation */}
+                {pendingFiles.length > 0 && (
+                    <div className="mb-6 space-y-4 rounded-lg border-2 border-secondary bg-secondary/5 p-4 dark:border-accent dark:bg-accent/5">
+                        <div className="flex items-center justify-between">
+                            <h4 className="font-medium text-gray-900 dark:text-gray-100">
+                                {pendingFiles.length} fichier{pendingFiles.length > 1 ? 's' : ''} sélectionné{pendingFiles.length > 1 ? 's' : ''}
+                            </h4>
+                            <button
+                                onClick={handleCancelUpload}
+                                className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+                            >
+                                Annuler
+                            </button>
                         </div>
-                    ) : (
-                        <>
-                            <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-                            <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
-                                <span className="font-semibold">Cliquez pour charger</span> ou glissez-déposez
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">PDF, DOC, DOCX, XLS, XLSX (MAX. 10MB)</p>
-                        </>
-                    )}
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        className="hidden"
-                        accept=".pdf,.doc,.docx,.xls,.xlsx"
-                        multiple
-                        onChange={(e) => handleFileSelect(e.target.files)}
-                    />
-                </div>
+
+                        <div className="space-y-3">
+                            {pendingFiles.map((pf, index) => (
+                                <div key={index} className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
+                                    <div className="mb-3 flex items-center justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <FileText className="h-5 w-5 text-secondary dark:text-accent" />
+                                            <div>
+                                                <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{pf.file.name}</p>
+                                                <p className="text-xs text-gray-500 dark:text-gray-400">{formatFileSize(pf.file.size)}</p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => handleRemovePendingFile(index)}
+                                            className="text-gray-400 hover:text-red-600"
+                                        >
+                                            <X className="h-5 w-5" />
+                                        </button>
+                                    </div>
+
+                                    {/* Tags selection */}
+                                    <div className="rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-600 dark:bg-gray-750">
+                                        <p className="mb-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                                            Catégories disponibles (optionnel)
+                                        </p>
+                                        <p className="mb-3 text-xs text-gray-600 dark:text-gray-400">
+                                            Sélectionnez une ou plusieurs catégories pour organiser ce document
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {availableTags.length > 0 ? (
+                                                availableTags.map((tag) => (
+                                                    <button
+                                                        key={tag.id}
+                                                        type="button"
+                                                        onClick={() => handleToggleTagForPendingFile(index, tag.id)}
+                                                        className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                                                            pf.tagIds.includes(tag.id)
+                                                                ? 'bg-secondary text-white dark:bg-accent'
+                                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
+                                                        }`}
+                                                    >
+                                                        {tag.name}
+                                                    </button>
+                                                ))
+                                            ) : (
+                                                <p className="text-xs italic text-gray-500 dark:text-gray-400">
+                                                    Aucune catégorie disponible
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex gap-3 pt-2">
+                            <button
+                                onClick={handleConfirmUpload}
+                                disabled={isUploading}
+                                className="flex-1 rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-secondary/90 disabled:opacity-50 dark:bg-accent dark:hover:bg-accent/90"
+                            >
+                                {isUploading ? 'Importation en cours...' : 'Confirmer l\'importation'}
+                            </button>
+                        </div>
+                    </div>
+                )}
 
                 {/* Documents list */}
                 <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Documents chargés ({documents.length})</h4>
+                    <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">Documents importés ({documents.length})</h4>
 
                     {documents.length > 0 ? (
                         <div className="space-y-3">
@@ -228,7 +355,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                     className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
                                 >
                                     <div className="flex flex-1 items-center gap-3">
-                                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-secondary/10 dark:bg-accent/10">
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/10 dark:bg-accent/10">
                                             <FileText className="h-6 w-6 text-secondary dark:text-accent" />
                                         </div>
                                         <div className="min-w-0 flex-1">
@@ -239,7 +366,6 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                                     <span
                                                         key={tag.id}
                                                         className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary dark:bg-accent/10 dark:text-accent"
-                                                        title={tag.description}
                                                     >
                                                         {tag.name}
                                                         <button
@@ -260,7 +386,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                                     }}
                                                     className="rounded-full border border-dashed border-gray-300 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-600 hover:border-secondary hover:text-secondary dark:border-gray-600 dark:text-gray-400"
                                                 >
-                                                    <option value="">+ Ajouter un tag</option>
+                                                    <option value="">+ Ajouter</option>
                                                     {availableTags
                                                         .filter((tag) => !doc.tags.some((t) => t.id === tag.id))
                                                         .map((tag) => (
@@ -275,7 +401,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                     <button
                                         type="button"
                                         onClick={() => handleDeleteDocument(doc.id)}
-                                        className="ml-4 flex-shrink-0 rounded-lg p-2 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20"
+                                        className="ml-4 shrink-0 rounded-lg p-2 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20"
                                     >
                                         <Trash2 className="h-5 w-5" />
                                     </button>
@@ -285,60 +411,56 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                     ) : (
                         <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center dark:border-gray-700 dark:bg-gray-900">
                             <FileText className="mx-auto mb-3 h-12 w-12 text-gray-400" />
-                            <p className="text-sm text-gray-500 dark:text-gray-400">Aucun document chargé pour le moment</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">Aucun document importé pour le moment</p>
                         </div>
                     )}
                 </div>
 
                 {/* Tag management */}
                 <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
-                    <h4 className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">Catégories disponibles pour organiser les documents</h4>
+                    <h4 className="mb-3 text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Catégories disponibles
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                         {availableTags.map((tag) => (
                             <span
                                 key={tag.id}
                                 className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-                                title={tag.description}
                             >
                                 {tag.name}
                             </span>
                         ))}
                         {showNewTagInput ? (
-                            <div className="flex w-full flex-col gap-2">
+                            <div className="flex w-full gap-2">
                                 <input
                                     type="text"
                                     value={newTagName}
                                     onChange={(e) => setNewTagName(e.target.value)}
                                     placeholder="Nom de la catégorie"
-                                    className="rounded-lg border border-gray-300 px-3 py-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                    className="flex-1 rounded-lg border border-gray-300 px-3 py-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            handleCreateTag();
+                                        }
+                                    }}
                                 />
-                                <input
-                                    type="text"
-                                    value={newTagDescription}
-                                    onChange={(e) => setNewTagDescription(e.target.value)}
-                                    placeholder="Description (optionnel)"
-                                    className="rounded-lg border border-gray-300 px-3 py-1 text-sm dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                                />
-                                <div className="flex gap-2">
-                                    <button
-                                        type="button"
-                                        onClick={handleCreateTag}
-                                        className="rounded-lg bg-secondary px-3 py-1 text-sm text-white hover:bg-secondary/90"
-                                    >
-                                        Créer
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => {
-                                            setShowNewTagInput(false);
-                                            setNewTagName('');
-                                            setNewTagDescription('');
-                                        }}
-                                        className="rounded-lg px-3 py-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400"
-                                    >
-                                        Annuler
-                                    </button>
-                                </div>
+                                <button
+                                    type="button"
+                                    onClick={handleCreateTag}
+                                    className="rounded-lg bg-secondary px-3 py-1 text-sm text-white hover:bg-secondary/90"
+                                >
+                                    Créer
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setShowNewTagInput(false);
+                                        setNewTagName('');
+                                    }}
+                                    className="rounded-lg px-3 py-1 text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400"
+                                >
+                                    Annuler
+                                </button>
                             </div>
                         ) : (
                             <button

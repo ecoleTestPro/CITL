@@ -7,7 +7,7 @@ interface CertificationSidebarProps {
 
 export function CertificationSidebar({ certification }: CertificationSidebarProps) {
     return (
-        <div className="w-full lg:sticky lg:top-24 lg:w-[449px] lg:self-start">
+        <div className="w-full bg-white lg:sticky lg:top-24 lg:w-[449px] lg:self-start dark:bg-gray-800">
             <FadeIn delay={0.3}>
                 <div className="bg-background-1 dark:bg-background-6 w-full space-y-6 rounded-[20px] p-8 shadow-lg transition-shadow duration-300 hover:shadow-xl">
                     <h3 className="text-heading-5">Informations de l'examen</h3>

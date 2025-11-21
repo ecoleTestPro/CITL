@@ -137,12 +137,10 @@ class CertificationDocumentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:certification_document_tags,name',
-            'description' => 'nullable|string',
         ]);
 
         $tag = $this->tagRepository->createTag([
             'name' => $request->name,
-            'description' => $request->description,
             'order' => 0,
         ]);
 

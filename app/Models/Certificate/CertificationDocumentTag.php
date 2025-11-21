@@ -14,7 +14,6 @@ class CertificationDocumentTag extends Model
     protected $fillable = [
         'name',
         'slug',
-        'description',
         'order',
     ];
 

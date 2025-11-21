@@ -1,3 +1,4 @@
+import BenefitsOfCertifications from '@/components/blocks/certifications/benefits-of-certifications';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import PublicLayout from '@/layouts/public/public-layout';
@@ -36,6 +37,36 @@ function WhyCertification() {
                         src: '/assets/images/bg/sharp-2.png',
                         position: 'bottom-left',
                         opacity: 0.03,
+                    },
+                ]}
+            />
+
+            <BenefitsOfCertifications
+                badge={t('certifications.why_certification.benefits_badge')}
+                title={t('certifications.why_certification.benefits_title')}
+                subtitle={t('certifications.why_certification.benefits_subtitle')}
+                benefits={[
+                    {
+                        type: 'large',
+                        title: t('certifications.why_certification.benefit_1_title'),
+                        description: t('certifications.why_certification.benefit_1_description'),
+                        image: '/assets/images/certifications/benefit-1.jpg',
+                        imageAlt: 'Career Advancement',
+                        link: '/certifications',
+                    },
+                    {
+                        type: 'medium',
+                        title: t('certifications.why_certification.benefit_2_title'),
+                        description: t('certifications.why_certification.benefit_2_description'),
+                        image: '/assets/images/certifications/benefit-2.jpg',
+                        imageAlt: 'Industry Recognition',
+                    },
+                    {
+                        type: 'medium',
+                        title: t('certifications.why_certification.benefit_3_title'),
+                        description: t('certifications.why_certification.benefit_3_description'),
+                        image: '/assets/images/certifications/benefit-3.jpg',
+                        imageAlt: 'Professional Network',
                     },
                 ]}
             />

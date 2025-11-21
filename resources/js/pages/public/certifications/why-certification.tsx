@@ -1,5 +1,6 @@
 import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
 import BenefitsOfCertifications from '@/components/blocks/certifications/benefits-of-certifications';
+import CertificationList from '@/components/blocks/certifications/certification-list';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import PublicLayout from '@/layouts/public/public-layout';
@@ -118,6 +119,8 @@ function WhyCertification() {
                     videoPoster="/assets/images/pages/certification/sectors-poster.jpg"
                 />
             </div>
+
+            <CertificationList />
         </PublicLayout>
     );
 }

@@ -54,4 +54,5 @@ Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 // API Routes
 Route::prefix('api')->group(function () {
     Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');
+    Route::get('/certifications/{slug}', [CertificationController::class, 'show'])->name('api.certifications.show');
 });

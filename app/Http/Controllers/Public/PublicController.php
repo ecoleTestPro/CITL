@@ -132,14 +132,16 @@ class PublicController extends Controller
 
     public function certificationDetail(string $slug)
     {
+        // Verify certification exists and is active before rendering the page
         $certification = $this->certificationRepo->findBySlugWithCategory($slug);
 
         if (!$certification || !$certification->is_active) {
             abort(404);
         }
 
+        // Pass only the slug to the page - data will be loaded via axios
         return Inertia::render('public/certifications/certification-detail', [
-            'certification' => $certification,
+            'slug' => $slug,
         ]);
     }
 

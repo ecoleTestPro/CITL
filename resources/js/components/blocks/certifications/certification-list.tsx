@@ -97,7 +97,7 @@ function CertificationList({ certifications }: CertificationListProps) {
                                 </div>
                                 <div className="pt-4">
                                     <a
-                                        href="#"
+                                        href={`/certifications/${cert.slug}`}
                                         className="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-secondary/90 hover:shadow-md"
                                     >
                                         Voir les détails

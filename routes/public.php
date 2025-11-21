@@ -25,6 +25,7 @@ Route::get('/core-advanced', [PublicController::class, 'coreAdvanced'])->name('c
 Route::get('/specialist', [PublicController::class, 'specialist'])->name('specialist');
 Route::get('/expert-level', [PublicController::class, 'expertLevel'])->name('expert-level');
 Route::get('/a4q-practical-tester', [PublicController::class, 'a4qPracticalTester'])->name('a4q-practical-tester');
+Route::get('/certifications/{slug}', [PublicController::class, 'certificationDetail'])->name('certification-detail');
 
 // Examens Section
 Route::get('/exam-questions', [PublicController::class, 'examQuestions'])->name('exam-questions');

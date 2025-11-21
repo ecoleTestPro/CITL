@@ -130,6 +130,19 @@ class PublicController extends Controller
         return Inertia::render('public/certifications/a4q-practical-tester');
     }
 
+    public function certificationDetail(string $slug)
+    {
+        $certification = $this->certificationRepo->findBySlugWithCategory($slug);
+
+        if (!$certification || !$certification->is_active) {
+            abort(404);
+        }
+
+        return Inertia::render('public/certifications/certification-detail', [
+            'certification' => $certification,
+        ]);
+    }
+
     // Examens Section
     public function examQuestions()
     {

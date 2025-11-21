@@ -30,7 +30,8 @@ Route::get('/certifications/{slug}', [PublicController::class, 'certificationDet
 // Examens Section
 Route::get('/exam-questions', [PublicController::class, 'examQuestions'])->name('exam-questions');
 Route::get('/exam-fees', [PublicController::class, 'examFees'])->name('exam-fees');
-Route::get('/exam-registration', [PublicController::class, 'examRegistration'])->name('exam-registration');
+Route::get('/exam-registration', [\App\Http\Controllers\ExamRegistrationController::class, 'index'])->name('exam-registration');
+Route::post('/exams/register', [\App\Http\Controllers\ExamRegistrationController::class, 'store'])->name('exams.register');
 Route::get('/exam-faq', [PublicController::class, 'examFaq'])->name('exam-faq');
 Route::get('/anti-piracy', [PublicController::class, 'antiPiracy'])->name('anti-piracy');
 Route::get('/glossary', [PublicController::class, 'glossary'])->name('glossary');

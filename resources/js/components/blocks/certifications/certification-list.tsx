@@ -25,7 +25,6 @@ interface Certification {
 function CertificationList() {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
-    const cardsRef = useRef<HTMLDivElement>(null);
 
     const certifications: Certification[] = [
         {
@@ -66,8 +65,7 @@ function CertificationList() {
             step: 'Step 3',
             title: 'CTAL-TAE v2.0',
             subtitle: 'Certified Tester Advanced Level - Test Automation Engineer',
-            description:
-                "La certification Core Advanced - Test Automation Engineer se concentre sur l'automatisation des tests.",
+            description: "La certification Core Advanced - Test Automation Engineer se concentre sur l'automatisation des tests.",
             examInfo: {
                 questions: 40,
                 passingScore: 65,
@@ -82,8 +80,7 @@ function CertificationList() {
             step: 'Step 4',
             title: 'CTAL-TM v3.0',
             subtitle: 'Certified Tester Advanced Level - Test Manager',
-            description:
-                'La certification Core Advanced - Test Manager est destinée aux professionnels qui souhaitent occuper des postes de gestion de test.',
+            description: 'La certification Core Advanced - Test Manager est destinée aux professionnels qui souhaitent occuper des postes de gestion de test.',
             examInfo: {
                 questions: 40,
                 passingScore: 65,
@@ -114,7 +111,7 @@ function CertificationList() {
             step: 'Step 6',
             title: 'CT-AT',
             subtitle: 'Certified Tester - Agile Testing',
-            description: "La certification CT-AT est conçue pour les testeurs travaillant dans des environnements Agiles.",
+            description: 'La certification CT-AT est conçue pour les testeurs travaillant dans des environnements Agiles.',
             examInfo: {
                 questions: 40,
                 passingScore: 65,
@@ -175,8 +172,7 @@ function CertificationList() {
             step: 'Step 10',
             title: 'CFLBA',
             subtitle: 'Certified Foundation Level Business Analyst',
-            description:
-                "La certification CFLBA s'adresse aux analystes métier qui souhaitent acquérir des compétences en ingénierie des exigences.",
+            description: "La certification CFLBA s'adresse aux analystes métier qui souhaitent acquérir des compétences en ingénierie des exigences.",
             examInfo: {
                 questions: 40,
                 passingScore: 65,
@@ -206,6 +202,20 @@ function CertificationList() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
+            // Background shape continuous animation
+            const bgShape = sectionRef.current?.querySelector('.bg-shape-animate');
+            if (bgShape) {
+                gsap.to(bgShape, {
+                    y: '+=30',
+                    x: '+=20',
+                    rotation: '+=5',
+                    duration: 8,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: 'sine.inOut',
+                });
+            }
+
             // Title section animation
             if (titleRef.current) {
                 const badge = titleRef.current.querySelector('.badge');
@@ -257,9 +267,26 @@ function CertificationList() {
                 }
             }
 
-            // Cards animation with stagger
-            if (cardsRef.current) {
-                const cards = cardsRef.current.querySelectorAll('article');
+            // Category titles animation
+            const categoryTitles = sectionRef.current?.querySelectorAll('.category-title') ?? [];
+            categoryTitles.forEach((title) => {
+                gsap.from(title, {
+                    y: 40,
+                    opacity: 0,
+                    filter: 'blur(10px)',
+                    duration: 0.8,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 80%',
+                    },
+                });
+            });
+
+            // Cards animation with stagger per category
+            const categoryGroups = sectionRef.current?.querySelectorAll('.category-group') ?? [];
+            categoryGroups.forEach((group) => {
+                const cards = group.querySelectorAll('article');
                 gsap.from(cards, {
                     y: 60,
                     opacity: 0,
@@ -268,58 +295,90 @@ function CertificationList() {
                     stagger: 0.1,
                     ease: 'power3.out',
                     scrollTrigger: {
-                        trigger: cardsRef.current,
+                        trigger: group,
                         start: 'top 80%',
                     },
                 });
-            }
+            });
         }, sectionRef);
 
         return () => ctx.revert();
     }, []);
 
+    // Group certifications by category
+    const groupedCertifications = certifications.reduce(
+        (acc, cert) => {
+            if (!acc[cert.category]) {
+                acc[cert.category] = [];
+            }
+            acc[cert.category].push(cert);
+            return acc;
+        },
+        {} as Record<string, Certification[]>,
+    );
+
     return (
-        <section ref={sectionRef} className="py-14 md:py-16 lg:py-[88px] xl:py-[100px]">
-            <div className="container mx-auto">
+        <section ref={sectionRef} className="relative overflow-hidden pt-12 pb-6">
+            {/* Animated Background Shape */}
+            <div className="pointer-events-none absolute inset-0 z-0">
+                <div className="bg-shape-animate absolute -top-20 -right-20 opacity-5 dark:opacity-[0.02]">
+                    <img src="/assets/images/bg/sharp-3.png" alt="Background shape" className="h-auto w-auto max-w-none" />
+                </div>
+            </div>
+
+            <div className="relative z-10 container mx-auto">
                 <div className="space-y-10 md:space-y-[70px]">
-                    <div ref={titleRef} className="mx-auto max-w-[602px] space-y-3 text-center">
-                        <span className="badge badge-green mb-5">Nos Certifications</span>
-                        <h2>Catalogue des Certifications ISTQB</h2>
-                        <p>Découvrez notre gamme complète de certifications reconnues internationalement pour les professionnels du test logiciel</p>
+                    <div ref={titleRef} className="space-y-3 text-left">
+                        <span className="badge badge-green mb-5 text-2xl font-semibold text-gray-900 md:text-3xl dark:text-gray-100">Certifications</span>
                     </div>
 
-                    <div ref={cardsRef} className="grid grid-cols-12 gap-8">
-                        {certifications.map((cert, index) => (
-                            <article
-                                key={cert.id}
-                                className="dark:bg-background-6 col-span-12 space-y-3.5 rounded-[20px] bg-white p-8 md:col-span-6 lg:col-span-4"
-                            >
-                                <div className="space-y-11">
-                                    <span className="text-tagline-2 inline-block dark:text-accent/60">{cert.step}</span>
-                                    <div>
-                                        <span className={`${cert.icon} text-[52px] text-secondary dark:text-accent`}></span>
-                                    </div>
+                    <div className="space-y-16">
+                        {Object.entries(groupedCertifications).map(([category, certs]) => (
+                            <div key={category}>
+                                <h3 className="category-title mb-8 text-2xl font-semibold text-gray-900 md:text-3xl dark:text-gray-100">{category}</h3>
+                                <div className="category-group grid grid-cols-12 gap-8">
+                                    {certs.map((cert) => (
+                                        <article
+                                            key={cert.id}
+                                            className="dark:bg-background-6 col-span-12 space-y-3.5 rounded-[20px] bg-white p-8 md:col-span-6 lg:col-span-4"
+                                        >
+                                            <div className="space-y-11">
+                                                <span className="rounded bg-secondary px-1.5 py-0.5 text-xs font-medium text-white">{cert.category}</span>
+                                                <div>
+                                                    <span className={`${cert.icon} text-[52px] text-secondary dark:text-accent`}></span>
+                                                </div>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <h3 className="text-heading-6 md:text-heading-5">{cert.title}</h3>
+                                                <p className="text-sm font-medium text-secondary">{cert.subtitle}</p>
+                                                <p className="max-w-[345px]">{cert.description}</p>
+                                                <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
+                                                    <p>
+                                                        <strong>Questions:</strong> {cert.examInfo.questions}
+                                                    </p>
+                                                    <p>
+                                                        <strong>Score requis:</strong> {cert.examInfo.passingScore}%
+                                                    </p>
+                                                    <p>
+                                                        <strong>Durée:</strong> {cert.examInfo.duration}
+                                                    </p>
+                                                    <p>
+                                                        <strong>Points totaux:</strong> {cert.examInfo.totalPoints}
+                                                    </p>
+                                                </div>
+                                                <div className="pt-4">
+                                                    <a
+                                                        href="#"
+                                                        className="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-secondary/90 hover:shadow-md"
+                                                    >
+                                                        Voir les détails
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    ))}
                                 </div>
-                                <div className="space-y-3">
-                                    <h3 className="text-heading-6 md:text-heading-5">{cert.title}</h3>
-                                    <p className="text-sm font-medium text-citl-orange">{cert.subtitle}</p>
-                                    <p className="max-w-[345px]">{cert.description}</p>
-                                    <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
-                                        <p>
-                                            <strong>Questions:</strong> {cert.examInfo.questions}
-                                        </p>
-                                        <p>
-                                            <strong>Score requis:</strong> {cert.examInfo.passingScore}%
-                                        </p>
-                                        <p>
-                                            <strong>Durée:</strong> {cert.examInfo.duration}
-                                        </p>
-                                        <p>
-                                            <strong>Points totaux:</strong> {cert.examInfo.totalPoints}
-                                        </p>
-                                    </div>
-                                </div>
-                            </article>
+                            </div>
                         ))}
                     </div>
                 </div>

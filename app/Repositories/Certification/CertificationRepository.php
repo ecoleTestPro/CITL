@@ -67,4 +67,19 @@ class CertificationRepository extends BaseRepository
             ->with(['category'])
             ->findOrFail($id);
     }
+
+    /**
+     * Get active certifications by category slug.
+     */
+    public function getByCategorySlug(string $categorySlug)
+    {
+        return $this->model
+            ->whereHas('category', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
+            })
+            ->where('is_active', true)
+            ->with(['category'])
+            ->orderBy('order')
+            ->get();
+    }
 }

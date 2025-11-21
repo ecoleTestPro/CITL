@@ -4,44 +4,13 @@ import { CertificationModal } from '@/components/certifications/certification-mo
 import { CertificationTable } from '@/components/certifications/certification-table';
 import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal';
 import AppLayout from '@/layouts/app-layout';
+import { Certification, CertificationCategory, CertificationFormData, CategoryFormData } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    description: string | null;
-    order: number;
-    is_active: boolean;
-}
-
-interface Certification {
-    id: number;
-    title: string;
-    slug: string;
-    subtitle: string | null;
-    description: string;
-    icon: string;
-    exam_questions: number;
-    exam_passing_score: number;
-    exam_total_points: number;
-    exam_duration: string;
-    syllabus_url: string | null;
-    image: string | null;
-    order: number;
-    is_active: boolean;
-    certification_category_id: number;
-    category: {
-        id: number;
-        name: string;
-        slug: string;
-    };
-}
-
 interface Props {
-    categories: Category[];
+    categories: CertificationCategory[];
     certifications: Certification[];
 }
 
@@ -51,7 +20,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
     // Modals state
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showCertificationModal, setShowCertificationModal] = useState(false);
-    const [editingCategory, setEditingCategory] = useState<Category | null>(null);
+    const [editingCategory, setEditingCategory] = useState<CertificationCategory | null>(null);
     const [editingCertification, setEditingCertification] = useState<Certification | null>(null);
 
     // Delete confirmation state
@@ -106,7 +75,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
         setShowCategoryModal(true);
     };
 
-    const handleEditCategory = (category: Category) => {
+    const handleEditCategory = (category: CertificationCategory) => {
         setEditingCategory(category);
         categoryForm.setData({
             name: category.name,
@@ -118,7 +87,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
         setShowCategoryModal(true);
     };
 
-    const handleDeleteCategory = (category: Category) => {
+    const handleDeleteCategory = (category: CertificationCategory) => {
         setItemToDelete({ type: 'category', id: category.id, name: category.name });
         setShowDeleteModal(true);
     };

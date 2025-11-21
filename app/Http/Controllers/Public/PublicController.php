@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Certification\CertificationCategoryRepository;
+use App\Repositories\Certification\CertificationRepository;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 class PublicController extends Controller
 {
+    public function __construct(
+        protected CertificationCategoryRepository $categoryRepo,
+        protected CertificationRepository $certificationRepo
+    ) {}
+
     public function home()
     {
         return Inertia::render('public/home', [
@@ -60,22 +67,62 @@ class PublicController extends Controller
 
     public function coreFoundation()
     {
-        return Inertia::render('public/certifications/core-foundation');
+        $category = $this->categoryRepo->findBySlug('core-foundation');
+        if (!$category || !$category->is_active) {
+            abort(404);
+        }
+
+        $certifications = $this->certificationRepo->getByCategorySlug('core-foundation');
+
+        return Inertia::render('public/certifications/core-foundation', [
+            'category' => $category,
+            'certifications' => $certifications,
+        ]);
     }
 
     public function coreAdvanced()
     {
-        return Inertia::render('public/certifications/core-advanced');
+        $category = $this->categoryRepo->findBySlug('core-advanced');
+        if (!$category || !$category->is_active) {
+            abort(404);
+        }
+
+        $certifications = $this->certificationRepo->getByCategorySlug('core-advanced');
+
+        return Inertia::render('public/certifications/core-advanced', [
+            'category' => $category,
+            'certifications' => $certifications,
+        ]);
     }
 
     public function specialist()
     {
-        return Inertia::render('public/certifications/specialist');
+        $category = $this->categoryRepo->findBySlug('specialist');
+        if (!$category || !$category->is_active) {
+            abort(404);
+        }
+
+        $certifications = $this->certificationRepo->getByCategorySlug('specialist');
+
+        return Inertia::render('public/certifications/specialist', [
+            'category' => $category,
+            'certifications' => $certifications,
+        ]);
     }
 
     public function expertLevel()
     {
-        return Inertia::render('public/certifications/expert-level');
+        $category = $this->categoryRepo->findBySlug('expert-level');
+        if (!$category || !$category->is_active) {
+            abort(404);
+        }
+
+        $certifications = $this->certificationRepo->getByCategorySlug('expert-level');
+
+        return Inertia::render('public/certifications/expert-level', [
+            'category' => $category,
+            'certifications' => $certifications,
+        ]);
     }
 
     public function a4qPracticalTester()

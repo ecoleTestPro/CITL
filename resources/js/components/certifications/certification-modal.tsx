@@ -1,33 +1,11 @@
+import { CertificationCategory, CertificationFormData } from '@/types';
 import { UseFormReturn } from '@inertiajs/react';
-
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-}
-
-interface CertificationFormData {
-    certification_category_id: number;
-    title: string;
-    slug: string;
-    subtitle: string;
-    description: string;
-    icon: string;
-    exam_questions: number;
-    exam_passing_score: number;
-    exam_total_points: number;
-    exam_duration: string;
-    syllabus_url: string;
-    image: string;
-    order: number;
-    is_active: boolean;
-}
 
 interface CertificationModalProps {
     isOpen: boolean;
     isEditing: boolean;
     form: UseFormReturn<CertificationFormData>;
-    categories: Category[];
+    categories: CertificationCategory[];
     onClose: () => void;
     onSubmit: (e: React.FormEvent) => void;
 }

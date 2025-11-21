@@ -17,6 +17,7 @@ class CertificationSeeder extends Seeder
         $coreFoundation = CertificationCategory::create([
             'name' => 'Core Foundation',
             'slug' => 'core-foundation',
+            'key' => 'core-foundation',
             'description' => 'Niveau de base pour toutes les certifications ISTQB',
             'order' => 1,
             'is_active' => true,
@@ -25,6 +26,7 @@ class CertificationSeeder extends Seeder
         $coreAdvanced = CertificationCategory::create([
             'name' => 'Core Advanced',
             'slug' => 'core-advanced',
+            'key' => 'core-advanced',
             'description' => 'Certifications avancées pour approfondir vos compétences',
             'order' => 2,
             'is_active' => true,
@@ -33,16 +35,27 @@ class CertificationSeeder extends Seeder
         $specialist = CertificationCategory::create([
             'name' => 'Spécialiste',
             'slug' => 'specialist',
+            'key' => 'specialist',
             'description' => 'Certifications spécialisées dans des domaines spécifiques',
             'order' => 3,
+            'is_active' => true,
+        ]);
+
+        $expertLevel = CertificationCategory::create([
+            'name' => 'Expert Level',
+            'slug' => 'expert-level',
+            'key' => 'expert-level',
+            'description' => 'Certifications de niveau expert pour les professionnels expérimentés',
+            'order' => 4,
             'is_active' => true,
         ]);
 
         $requirementsEngineering = CertificationCategory::create([
             'name' => 'Ingénieurie des exigences',
             'slug' => 'requirements-engineering',
+            'key' => 'requirements-engineering',
             'description' => 'Certifications en ingénierie des exigences',
-            'order' => 4,
+            'order' => 5,
             'is_active' => true,
         ]);
 
@@ -209,6 +222,52 @@ class CertificationSeeder extends Seeder
             'exam_total_points' => 45,
             'exam_duration' => '75 min',
             'order' => 2,
+            'is_active' => true,
+        ]);
+
+        // Expert Level certifications
+        Certification::create([
+            'certification_category_id' => $expertLevel->id,
+            'title' => 'CTEL-TM',
+            'slug' => 'ctel-tm',
+            'subtitle' => 'Certified Tester Expert Level - Test Management',
+            'description' => 'La certification CTEL-TM est le niveau expert en gestion de test, destinée aux managers de test expérimentés.',
+            'icon' => 'ns-shape-35',
+            'exam_questions' => 50,
+            'exam_passing_score' => 70,
+            'exam_total_points' => 100,
+            'exam_duration' => '180 min',
+            'order' => 1,
+            'is_active' => true,
+        ]);
+
+        Certification::create([
+            'certification_category_id' => $expertLevel->id,
+            'title' => 'CTEL-SEC',
+            'slug' => 'ctel-sec',
+            'subtitle' => 'Certified Tester Expert Level - Security Testing',
+            'description' => "La certification CTEL-SEC est le niveau expert en test de sécurité pour les professionnels expérimentés.",
+            'icon' => 'ns-shape-12',
+            'exam_questions' => 50,
+            'exam_passing_score' => 70,
+            'exam_total_points' => 100,
+            'exam_duration' => '180 min',
+            'order' => 2,
+            'is_active' => true,
+        ]);
+
+        Certification::create([
+            'certification_category_id' => $expertLevel->id,
+            'title' => 'CTEL-TA',
+            'slug' => 'ctel-ta',
+            'subtitle' => 'Certified Tester Expert Level - Test Automation',
+            'description' => "La certification CTEL-TA est le niveau expert en automatisation des tests pour les ingénieurs d'automatisation expérimentés.",
+            'icon' => 'ns-shape-3',
+            'exam_questions' => 50,
+            'exam_passing_score' => 70,
+            'exam_total_points' => 100,
+            'exam_duration' => '180 min',
+            'order' => 3,
             'is_active' => true,
         ]);
     }

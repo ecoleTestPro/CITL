@@ -1,12 +1,5 @@
+import { CategoryFormData } from '@/types';
 import { UseFormReturn } from '@inertiajs/react';
-
-interface CategoryFormData {
-    name: string;
-    slug: string;
-    description: string;
-    order: number;
-    is_active: boolean;
-}
 
 interface CategoryModalProps {
     isOpen: boolean;

@@ -52,4 +52,12 @@ class CertificationCategoryRepository extends BaseRepository
             ->with(['certifications'])
             ->findOrFail($id);
     }
+
+    /**
+     * Find category by slug.
+     */
+    public function findBySlug(string $slug)
+    {
+        return $this->model->where('slug', $slug)->first();
+    }
 }

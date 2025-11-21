@@ -41,3 +41,58 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+// Certification Types
+export interface CertificationCategory {
+    id: number;
+    name: string;
+    slug: string;
+    key: string;
+    description: string | null;
+    order: number;
+    is_active: boolean;
+}
+
+export interface Certification {
+    id: number;
+    title: string;
+    slug: string;
+    subtitle: string | null;
+    description: string;
+    icon: string;
+    exam_questions: number;
+    exam_passing_score: number;
+    exam_total_points: number;
+    exam_duration: string;
+    syllabus_url: string | null;
+    image: string | null;
+    order: number;
+    is_active: boolean;
+    certification_category_id: number;
+    category: CertificationCategory;
+}
+
+export interface CertificationFormData {
+    certification_category_id: number;
+    title: string;
+    slug: string;
+    subtitle: string;
+    description: string;
+    icon: string;
+    exam_questions: number;
+    exam_passing_score: number;
+    exam_total_points: number;
+    exam_duration: string;
+    syllabus_url: string;
+    image: string;
+    order: number;
+    is_active: boolean;
+}
+
+export interface CategoryFormData {
+    name: string;
+    slug: string;
+    description: string;
+    order: number;
+    is_active: boolean;
+}

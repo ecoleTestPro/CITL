@@ -13,6 +13,7 @@ class CertificationCategory extends Model
     protected $fillable = [
         'name',
         'slug',
+        'key',
         'description',
         'order',
         'is_active',

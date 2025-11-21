@@ -1,3 +1,4 @@
+import { Certification } from '@/types';
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -11,31 +12,6 @@ import {
 } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-}
-
-interface Certification {
-    id: number;
-    title: string;
-    slug: string;
-    subtitle: string | null;
-    description: string;
-    icon: string;
-    exam_questions: number;
-    exam_passing_score: number;
-    exam_total_points: number;
-    exam_duration: string;
-    syllabus_url: string | null;
-    image: string | null;
-    order: number;
-    is_active: boolean;
-    certification_category_id: number;
-    category: Category;
-}
 
 interface CertificationTableProps {
     certifications: Certification[];

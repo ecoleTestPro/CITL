@@ -1,21 +1,13 @@
+import { CertificationCategory } from '@/types';
 import { Edit, Plus, Trash2 } from 'lucide-react';
 
-interface Category {
-    id: number;
-    name: string;
-    slug: string;
-    description: string | null;
-    order: number;
-    is_active: boolean;
-}
-
 interface CategorySidebarProps {
-    categories: Category[];
+    categories: CertificationCategory[];
     selectedCategory: string;
     onSelectCategory: (slug: string) => void;
     onAddCategory: () => void;
-    onEditCategory: (category: Category) => void;
-    onDeleteCategory: (category: Category) => void;
+    onEditCategory: (category: CertificationCategory) => void;
+    onDeleteCategory: (category: CertificationCategory) => void;
     certificationCounts: Record<string, number>;
     totalCount: number;
 }

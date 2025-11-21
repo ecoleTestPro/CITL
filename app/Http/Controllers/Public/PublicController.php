@@ -67,12 +67,12 @@ class PublicController extends Controller
 
     public function coreFoundation()
     {
-        $category = $this->categoryRepo->findBySlug('core-foundation');
+        $category = $this->categoryRepo->findByKey('core-foundation');
         if (!$category || !$category->is_active) {
             abort(404);
         }
 
-        $certifications = $this->certificationRepo->getByCategorySlug('core-foundation');
+        $certifications = $this->certificationRepo->getByCategoryKey('core-foundation');
 
         return Inertia::render('public/certifications/core-foundation', [
             'category' => $category,
@@ -82,12 +82,12 @@ class PublicController extends Controller
 
     public function coreAdvanced()
     {
-        $category = $this->categoryRepo->findBySlug('core-advanced');
+        $category = $this->categoryRepo->findByKey('core-advanced');
         if (!$category || !$category->is_active) {
             abort(404);
         }
 
-        $certifications = $this->certificationRepo->getByCategorySlug('core-advanced');
+        $certifications = $this->certificationRepo->getByCategoryKey('core-advanced');
 
         return Inertia::render('public/certifications/core-advanced', [
             'category' => $category,
@@ -97,12 +97,12 @@ class PublicController extends Controller
 
     public function specialist()
     {
-        $category = $this->categoryRepo->findBySlug('specialist');
+        $category = $this->categoryRepo->findByKey('specialist');
         if (!$category || !$category->is_active) {
             abort(404);
         }
 
-        $certifications = $this->certificationRepo->getByCategorySlug('specialist');
+        $certifications = $this->certificationRepo->getByCategoryKey('specialist');
 
         return Inertia::render('public/certifications/specialist', [
             'category' => $category,
@@ -112,12 +112,12 @@ class PublicController extends Controller
 
     public function expertLevel()
     {
-        $category = $this->categoryRepo->findBySlug('expert-level');
+        $category = $this->categoryRepo->findByKey('expert-level');
         if (!$category || !$category->is_active) {
             abort(404);
         }
 
-        $certifications = $this->certificationRepo->getByCategorySlug('expert-level');
+        $certifications = $this->certificationRepo->getByCategoryKey('expert-level');
 
         return Inertia::render('public/certifications/expert-level', [
             'category' => $category,

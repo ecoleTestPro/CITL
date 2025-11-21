@@ -82,4 +82,19 @@ class CertificationRepository extends BaseRepository
             ->orderBy('order')
             ->get();
     }
+
+    /**
+     * Get active certifications by category key.
+     */
+    public function getByCategoryKey(string $categoryKey)
+    {
+        return $this->model
+            ->whereHas('category', function ($query) use ($categoryKey) {
+                $query->where('key', $categoryKey);
+            })
+            ->where('is_active', true)
+            ->with(['category'])
+            ->orderBy('order')
+            ->get();
+    }
 }

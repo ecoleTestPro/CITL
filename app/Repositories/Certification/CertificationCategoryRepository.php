@@ -60,4 +60,12 @@ class CertificationCategoryRepository extends BaseRepository
     {
         return $this->model->where('slug', $slug)->first();
     }
+
+    /**
+     * Find category by key.
+     */
+    public function findByKey(string $key)
+    {
+        return $this->model->where('key', $key)->first();
+    }
 }

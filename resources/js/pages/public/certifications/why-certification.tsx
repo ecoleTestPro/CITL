@@ -120,7 +120,7 @@ function WhyCertification() {
                 />
             </div>
 
-            <CertificationList />
+            <CertificationList certifications={[]} />
         </PublicLayout>
     );
 }

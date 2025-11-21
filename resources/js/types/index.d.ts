@@ -51,6 +51,8 @@ export interface CertificationCategory {
     description: string | null;
     order: number;
     is_active: boolean;
+    activeCertifications?: Certification[];
+    active_certifications?: Certification[]; // Support for snake_case from API
 }
 
 export interface Certification {

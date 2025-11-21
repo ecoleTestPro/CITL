@@ -1,13 +1,35 @@
 import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
 import BenefitsOfCertifications from '@/components/blocks/certifications/benefits-of-certifications';
-import CertificationList from '@/components/blocks/certifications/certification-list';
+import CertificationListGrouped from '@/components/blocks/certifications/certification-list-grouped';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import PublicLayout from '@/layouts/public/public-layout';
+import { CertificationCategory } from '@/types';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 function WhyCertification() {
     const { t } = useTranslation();
+    const [categories, setCategories] = useState<CertificationCategory[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchCertifications = async () => {
+            try {
+                setLoading(true);
+                const response = await axios.get<{ success: boolean; data: CertificationCategory[] }>('/api/certifications');
+                setCategories(response.data.data);
+            } catch (err) {
+                console.error('Error fetching certifications:', err);
+                setCategories([]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCertifications();
+    }, []);
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -120,7 +142,20 @@ function WhyCertification() {
                 />
             </div>
 
-            <CertificationList certifications={[]} />
+            {loading ? (
+                <section className="relative overflow-hidden py-12">
+                    <div className="container mx-auto">
+                        <div className="flex min-h-[200px] items-center justify-center">
+                            <div className="text-center">
+                                <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-secondary border-t-transparent"></div>
+                                <p className="animate-pulse text-gray-600 dark:text-gray-400">Chargement des certifications...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            ) : (
+                <CertificationListGrouped categories={categories} />
+            )}
         </PublicLayout>
     );
 }

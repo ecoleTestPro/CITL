@@ -55,7 +55,7 @@ function CertificationDetail({ slug }: Props) {
         { title: 'Accueil', href: '/' },
         { title: 'Certifications', href: '/why-certification' },
         { title: certification.category.name, href: `/${certification.category.slug}` },
-        { title: certification.title },
+        { title: certification.title, href: '' },
     ];
 
     return (

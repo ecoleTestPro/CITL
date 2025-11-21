@@ -126,7 +126,7 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
         return () => ctx.revert();
     }, [benefits]);
     const renderCard = (benefit: BenefitCard, index: number) => {
-        const baseCardClasses = 'bg-white border-background-12 grid h-full grid-cols-12 rounded-3xl border p-5 md:gap-6 md:p-8';
+        const baseCardClasses = 'bg-white dark:bg-gray-800 border-background-12 dark:border-gray-700 grid h-full grid-cols-12 rounded-3xl border p-5 md:gap-6 md:p-8';
         const largeCardClasses = 'gap-y-6 rounded-4xl px-5 pt-8 md:px-8';
 
         return (
@@ -136,14 +136,14 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
                         className={`col-span-12 flex flex-col justify-between space-y-5 ${benefit.type === 'large' ? 'pt-14 pb-9 md:col-span-5 lg:col-span-5' : 'pt-14 md:col-span-6'}`}
                     >
                         <blockquote className="space-y-2">
-                            <h3 className="text-xl font-semibold text-secondary">{benefit.title}</h3>
-                            <div className="prose prose-sm text-tagline-1 max-w-none" dangerouslySetInnerHTML={{ __html: benefit.description }} />
+                            <h3 className="text-xl font-semibold text-secondary dark:text-gray-100">{benefit.title}</h3>
+                            <div className="prose prose-sm dark:prose-invert text-tagline-1 dark:text-gray-300 max-w-none" dangerouslySetInnerHTML={{ __html: benefit.description }} />
                         </blockquote>
 
                         {benefit.link && (
                             <Link
                                 href={benefit.link}
-                                className="hover:bg-primary-500 group relative flex h-10 w-18 items-center justify-center space-y-5 overflow-hidden rounded-[40px] bg-secondary p-4 ring-8 ring-white transition-all duration-500 ease-in-out md:h-13 md:w-22 md:p-5"
+                                className="hover:bg-primary-500 dark:hover:bg-primary-600 group relative flex h-10 w-18 items-center justify-center space-y-5 overflow-hidden rounded-[40px] bg-secondary dark:bg-gray-700 p-4 ring-8 ring-white dark:ring-gray-800 transition-all duration-500 ease-in-out md:h-13 md:w-22 md:p-5"
                             >
                                 <figure className="relative size-6 items-center justify-center overflow-hidden">
                                     <svg
@@ -186,12 +186,12 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
                                         className="after pointer-events-none absolute inset-0 z-20 h-full w-full object-cover"
                                     />
                                     <div className="slider-handle absolute top-0 left-1/2 z-30 h-full w-1 -translate-x-1/2 transition-all duration-200 ease-in-out">
-                                        <div className="handle-line bg-stroke-1 absolute top-0 left-1/2 h-full w-px -translate-x-1/2"></div>
+                                        <div className="handle-line bg-stroke-1 dark:bg-gray-600 absolute top-0 left-1/2 h-full w-px -translate-x-1/2"></div>
                                         <div
                                             className="absolute top-1/2 left-1/2 h-[267px] w-20 -translate-x-1/2 -translate-y-1/2 blur-[30px]"
                                             style={{ background: 'var(--color-gradient-12)' }}
                                         ></div>
-                                        <div className="handle-circle ring-background-9/50 absolute top-1/2 left-1/2 flex h-[30px] w-[17px] -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-[10px] rounded-[40px] bg-white px-[1px] py-[7px] ring-2 backdrop-blur-[17px] transition-all duration-200 ease-in-out hover:scale-105 hover:bg-white/90 active:scale-110 md:h-[28px] md:w-[15px] md:py-[6px]">
+                                        <div className="handle-circle ring-background-9/50 dark:ring-gray-700 absolute top-1/2 left-1/2 flex h-[30px] w-[17px] -translate-x-1/2 -translate-y-1/2 items-center justify-center gap-[10px] rounded-[40px] bg-white dark:bg-gray-800 px-[1px] py-[7px] ring-2 backdrop-blur-[17px] transition-all duration-200 ease-in-out hover:scale-105 hover:bg-white/90 dark:hover:bg-gray-700 active:scale-110 md:h-[28px] md:w-[15px] md:py-[6px]">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
                                                 <path
                                                     fillRule="evenodd"
@@ -218,7 +218,7 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
     };
 
     return (
-        <section ref={sectionRef} className="mt-10 overflow-hidden py-6">
+        <section ref={sectionRef} className="mt-10 overflow-hidden bg-white dark:bg-gray-900 py-6">
             <div className="container mx-auto">
                 {(badge || title || subtitle) && (
                     <div ref={headerRef} className="mb-11 text-center lg:mx-auto lg:mb-9 lg:max-w-[730px]">
@@ -227,8 +227,8 @@ function BenefitsOfCertifications({ badge, title, subtitle, benefits }: Benefits
                                 {badge}
                             </span>
                         )}
-                        {title && <h2 className="benefit-title mb-1 text-3xl font-semibold md:mb-3 md:text-4xl lg:text-5xl">{title}</h2>}
-                        {subtitle && <p className="benefit-subtitle text-black/40 lg:mx-auto lg:max-w-[530px]">{subtitle}</p>}
+                        {title && <h2 className="benefit-title mb-1 text-3xl font-semibold text-gray-900 dark:text-gray-100 md:mb-3 md:text-4xl lg:text-5xl">{title}</h2>}
+                        {subtitle && <p className="benefit-subtitle text-black/40 dark:text-gray-400 lg:mx-auto lg:max-w-[530px]">{subtitle}</p>}
                     </div>
                 )}
 

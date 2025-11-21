@@ -171,7 +171,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
     };
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden pt-12 pb-16" style={{ backgroundColor: backgroundColor || 'transparent' }}>
+        <section ref={sectionRef} className="relative overflow-hidden bg-white pt-12 pb-16 dark:bg-gray-900" style={{ backgroundColor: backgroundColor || undefined }}>
             {/* Background Shapes */}
             {backgroundShapes && backgroundShapes.length > 0 && (
                 <div ref={shapesRef} className="pointer-events-none absolute inset-0 z-0">
@@ -181,7 +181,7 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                             className={`bg-shape absolute ${getShapePositionClasses(shape.position)}`}
                             style={{ opacity: shape.opacity || 0.1 }}
                         >
-                            <img src={shape.src} alt={`Background shape ${index + 1}`} className="h-auto w-auto max-w-none" />
+                            <img src={shape.src} alt={`Background shape ${index + 1}`} className="h-auto w-auto max-w-none dark:opacity-50" />
                         </div>
                     ))}
                 </div>
@@ -192,14 +192,14 @@ export default function CommonTextBlock({ image, title, description, backgroundC
                     <div>
                         {title && (
                             <div ref={titleRef} className="mb-[70px] space-y-3 text-left">
-                                <h2 className="bold">{title}</h2>
+                                <h2 className="bold text-gray-900 dark:text-gray-100">{title}</h2>
                             </div>
                         )}
 
                         {description && (
                             <div
                                 ref={contentRef}
-                                className={`prose prose-lg max-w-none ${image ? '' : 'mx-auto max-w-[840px]'}`}
+                                className={`prose prose-lg dark:prose-invert max-w-none text-gray-600 dark:text-gray-300 ${image ? '' : 'mx-auto max-w-[840px]'}`}
                                 dangerouslySetInnerHTML={{ __html: description }}
                             />
                         )}

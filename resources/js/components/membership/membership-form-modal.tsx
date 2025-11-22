@@ -37,7 +37,7 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
             return;
         }
 
-        post(route('membership.apply'), {
+        post('/membership/apply', {
             onSuccess: () => {
                 toast.success('Demande d\'adhésion envoyée avec succès!');
                 reset();

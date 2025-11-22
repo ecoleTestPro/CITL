@@ -1,13 +1,12 @@
 'use client';
 
 import { usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, ClipboardList, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2, Users } from 'lucide-react';
+import { AudioWaveform, Award, ClipboardList, Command, FileText, GalleryVerticalEnd, Settings2, Users } from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
-import { NavProjects } from '@/components/nav-projects';
 import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from '@/components/ui/sidebar';
 import Logo from '@/layouts/public/logo';
 import appearance from '@/routes/appearance';
 import profile from '@/routes/profile';
@@ -211,20 +210,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 items: [],
             },
             {
-                title: 'Inscriptions Examens',
-                url: '/dashboard/exam-registrations',
-                icon: ClipboardList,
-                isActive: currentUrl.startsWith('/dashboard/exam-registrations'),
-                items: [],
-            },
-            {
-                title: 'Demandes d\'adhésion',
-                url: '/dashboard/membership-applications',
-                icon: Users,
-                isActive: currentUrl.startsWith('/dashboard/membership-applications'),
-                items: [],
-            },
-            {
                 title: 'Settings',
                 url: '#',
                 icon: Settings2,
@@ -248,21 +233,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 ],
             },
         ],
-        projects: [
+        navRequests: [
             {
-                name: 'Design Engineering',
-                url: '#',
-                icon: Frame,
+                name: 'Inscriptions Examens',
+                url: '/dashboard/exam-registrations',
+                icon: ClipboardList,
+                isActive: currentUrl.startsWith('/dashboard/exam-registrations'),
             },
             {
-                name: 'Sales & Marketing',
-                url: '#',
-                icon: PieChart,
-            },
-            {
-                name: 'Travel',
-                url: '#',
-                icon: Map,
+                name: 'Demandes d\'adhésion',
+                url: '/dashboard/membership-applications',
+                icon: Users,
+                isActive: currentUrl.startsWith('/dashboard/membership-applications'),
             },
         ],
     };
@@ -277,7 +259,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain} />
-                <NavProjects projects={data.projects} />
+
+                {/* Demandes Section */}
+                <SidebarGroup>
+                    <SidebarGroupLabel>Demandes</SidebarGroupLabel>
+                    <SidebarMenu>
+                        {data.navRequests.map((item) => (
+                            <SidebarMenuItem key={item.name}>
+                                <SidebarMenuButton asChild isActive={item.isActive}>
+                                    <a href={item.url}>
+                                        <item.icon />
+                                        <span>{item.name}</span>
+                                    </a>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        ))}
+                    </SidebarMenu>
+                </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />

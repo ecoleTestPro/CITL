@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('certification_categories', function (Blueprint $table) {
-            $table->string('key')->unique()->after('slug');
+            $table->boolean('can_delete')->default(true)->after('is_active');
         });
     }
 
@@ -22,8 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('certification_categories', function (Blueprint $table) {
-            $table->dropUnique(['key']);
-            $table->dropColumn('key');
+            $table->dropColumn('can_delete');
         });
     }
 };

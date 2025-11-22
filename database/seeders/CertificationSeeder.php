@@ -21,6 +21,7 @@ class CertificationSeeder extends Seeder
             'description' => 'Niveau de base pour toutes les certifications ISTQB',
             'order' => 1,
             'is_active' => true,
+            'can_delete' => false,
         ]);
 
         $coreAdvanced = CertificationCategory::create([
@@ -30,6 +31,7 @@ class CertificationSeeder extends Seeder
             'description' => 'Certifications avancées pour approfondir vos compétences',
             'order' => 2,
             'is_active' => true,
+            'can_delete' => false,
         ]);
 
         $specialist = CertificationCategory::create([
@@ -39,6 +41,7 @@ class CertificationSeeder extends Seeder
             'description' => 'Certifications spécialisées dans des domaines spécifiques',
             'order' => 3,
             'is_active' => true,
+            'can_delete' => false,
         ]);
 
         $expertLevel = CertificationCategory::create([
@@ -48,6 +51,7 @@ class CertificationSeeder extends Seeder
             'description' => 'Certifications de niveau expert pour les professionnels expérimentés',
             'order' => 4,
             'is_active' => true,
+            'can_delete' => false,
         ]);
 
         $requirementsEngineering = CertificationCategory::create([
@@ -57,6 +61,7 @@ class CertificationSeeder extends Seeder
             'description' => 'Certifications en ingénierie des exigences',
             'order' => 5,
             'is_active' => true,
+            'can_delete' => false,
         ]);
 
         // Create certifications

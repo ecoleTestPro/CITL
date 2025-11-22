@@ -76,6 +76,13 @@ class CertificationManagementController extends Controller
      */
     public function deleteCategory(int $id)
     {
+        $category = $this->categoryRepository->findById($id);
+
+        // Check if category can be deleted
+        if (!$category->can_delete) {
+            return redirect()->back()->with('error', 'Cette catégorie par défaut ne peut pas être supprimée.');
+        }
+
         $this->categoryRepository->delete($id);
 
         return redirect()->back()->with('success', 'Catégorie supprimée avec succès.');

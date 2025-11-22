@@ -73,7 +73,9 @@ export default function ManageCertifications({ categories, certifications }: Pro
     const certificationCounts = useMemo(() => {
         const counts: Record<string, number> = {};
         certifications.forEach((cert) => {
-            counts[cert.category.slug] = (counts[cert.category.slug] || 0) + 1;
+            if (cert.category?.slug) {
+                counts[cert.category.slug] = (counts[cert.category.slug] || 0) + 1;
+            }
         });
         return counts;
     }, [certifications]);

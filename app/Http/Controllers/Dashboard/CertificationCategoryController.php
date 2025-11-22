@@ -103,6 +103,14 @@ class CertificationCategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        $category = $this->categoryRepository->findById($id);
+
+        // Check if category can be deleted
+        if (!$category->can_delete) {
+            return redirect()->route('dashboard.certification-categories.index')
+                ->with('error', 'Cette catégorie par défaut ne peut pas être supprimée.');
+        }
+
         $this->categoryRepository->delete($id);
 
         return redirect()->route('dashboard.certification-categories.index')

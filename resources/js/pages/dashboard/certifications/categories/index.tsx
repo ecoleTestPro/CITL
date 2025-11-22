@@ -9,6 +9,7 @@ interface Category {
     description: string | null;
     order: number;
     is_active: boolean;
+    can_delete: boolean;
 }
 
 interface Props {
@@ -94,19 +95,25 @@ export default function CategoriesIndex({ categories }: Props) {
                                                     >
                                                         Modifier
                                                     </Link>
-                                                    <Link
-                                                        href={`/dashboard/certification-categories/${category.id}`}
-                                                        method="delete"
-                                                        as="button"
-                                                        className="text-sm text-red-600 hover:text-red-800"
-                                                        onClick={(e) => {
-                                                            if (!confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')) {
-                                                                e.preventDefault();
-                                                            }
-                                                        }}
-                                                    >
-                                                        Supprimer
-                                                    </Link>
+                                                    {category.can_delete ? (
+                                                        <Link
+                                                            href={`/dashboard/certification-categories/${category.id}`}
+                                                            method="delete"
+                                                            as="button"
+                                                            className="text-sm text-red-600 hover:text-red-800"
+                                                            onClick={(e) => {
+                                                                if (!confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')) {
+                                                                    e.preventDefault();
+                                                                }
+                                                            }}
+                                                        >
+                                                            Supprimer
+                                                        </Link>
+                                                    ) : (
+                                                        <span className="text-sm text-gray-400 cursor-not-allowed" title="Cette catégorie par défaut ne peut pas être supprimée">
+                                                            Supprimer
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

@@ -17,10 +17,12 @@ class CertificationCategory extends Model
         'description',
         'order',
         'is_active',
+        'can_delete',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'can_delete' => 'boolean',
         'order' => 'integer',
     ];
 

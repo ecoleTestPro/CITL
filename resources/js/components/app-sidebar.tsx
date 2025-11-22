@@ -1,7 +1,7 @@
 'use client';
 
 import { usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, ClipboardList, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2 } from 'lucide-react';
+import { AudioWaveform, Award, ClipboardList, Command, FileText, Frame, GalleryVerticalEnd, Map, PieChart, Settings2, Users } from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
@@ -215,6 +215,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 url: '/dashboard/exam-registrations',
                 icon: ClipboardList,
                 isActive: currentUrl.startsWith('/dashboard/exam-registrations'),
+                items: [],
+            },
+            {
+                title: 'Demandes d\'adhésion',
+                url: '/dashboard/membership-applications',
+                icon: Users,
+                isActive: currentUrl.startsWith('/dashboard/membership-applications'),
                 items: [],
             },
             {

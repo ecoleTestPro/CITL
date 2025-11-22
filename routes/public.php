@@ -16,6 +16,7 @@ Route::get('/executive-board', [PublicController::class, 'executiveBoard'])->nam
 
 // Adhésion Section
 Route::get('/members', [PublicController::class, 'members'])->name('members');
+Route::post('/membership/apply', [\App\Http\Controllers\MembershipApplicationController::class, 'store'])->name('membership.apply');
 Route::get('/working-groups', [PublicController::class, 'workingGroups'])->name('working-groups');
 
 // Certifications Section

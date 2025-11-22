@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\CertificationCategoryController;
 use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
+use App\Http\Controllers\Dashboard\MembershipApplicationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -59,6 +60,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [ExamRegistrationController::class, 'index'])->name('index');
         Route::post('/{id}/status', [ExamRegistrationController::class, 'updateStatus'])->name('status');
         Route::delete('/{id}', [ExamRegistrationController::class, 'destroy'])->name('destroy');
+    });
+
+    // Membership Application Management Routes
+    Route::prefix('dashboard/membership-applications')->name('dashboard.membership-applications.')->group(function () {
+        Route::get('/', [MembershipApplicationController::class, 'index'])->name('index');
+        Route::post('/{id}/status', [MembershipApplicationController::class, 'updateStatus'])->name('status');
+        Route::delete('/{id}', [MembershipApplicationController::class, 'destroy'])->name('destroy');
     });
 });
 

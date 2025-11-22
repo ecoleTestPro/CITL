@@ -88,6 +88,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\ExamRegistrationRepository::class, function ($app) {
             return new \App\Repositories\ExamRegistrationRepository(new \App\Models\ExamRegistration());
         });
+
+        $this->app->bind(\App\Repositories\MembershipApplicationRepository::class, function ($app) {
+            return new \App\Repositories\MembershipApplicationRepository(new \App\Models\MembershipApplication());
+        });
     }
 
     /**

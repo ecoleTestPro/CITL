@@ -4,85 +4,55 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
+import toast from 'react-hot-toast';
 
 interface MembershipFormModalProps {
     open: boolean;
     onOpenChange: (open: boolean) => void;
 }
 
-type MembershipType = 'new' | 'renewal' | '';
-
-interface FormData {
-    membershipType: MembershipType;
-    firstName: string;
-    surname: string;
-    phone: string;
-    email: string;
-    address: string;
-    company: string;
-    jobTitle: string;
-    yearsOfExperience: string;
-    membershipLevel: string;
-    qualification: string;
-    agreeToTerms: boolean;
-}
-
 export default function MembershipFormModal({ open, onOpenChange }: MembershipFormModalProps) {
-    const [formData, setFormData] = useState<FormData>({
-        membershipType: '',
-        firstName: '',
+    const { data, setData, post, processing, errors, reset } = useForm({
+        membership_type: '',
+        first_name: '',
         surname: '',
         phone: '',
         email: '',
         address: '',
         company: '',
-        jobTitle: '',
-        yearsOfExperience: '',
-        membershipLevel: '',
+        job_title: '',
+        years_of_experience: '',
+        membership_level: '',
         qualification: '',
         agreeToTerms: false,
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        if (!formData.agreeToTerms) {
-            alert('Please agree to the terms and conditions');
+        if (!data.agreeToTerms) {
+            toast.error('Veuillez accepter les termes et conditions');
             return;
         }
 
-        // Handle form submission
-        console.log('Form submitted:', formData);
-        // TODO: Add actual submission logic (API call)
-        onOpenChange(false);
-    };
-
-    const handleInputChange = (field: keyof FormData, value: string | boolean) => {
-        setFormData((prev) => ({ ...prev, [field]: value }));
-    };
-
-    const resetForm = () => {
-        setFormData({
-            membershipType: '',
-            firstName: '',
-            surname: '',
-            phone: '',
-            email: '',
-            address: '',
-            company: '',
-            jobTitle: '',
-            yearsOfExperience: '',
-            membershipLevel: '',
-            qualification: '',
-            agreeToTerms: false,
+        post(route('membership.apply'), {
+            onSuccess: () => {
+                toast.success('Demande d\'adhésion envoyée avec succès!');
+                reset();
+                onOpenChange(false);
+            },
+            onError: () => {
+                toast.error('Une erreur s\'est produite. Veuillez réessayer.');
+            },
         });
     };
 
     return (
         <Dialog open={open} onOpenChange={(isOpen) => {
             onOpenChange(isOpen);
-            if (!isOpen) resetForm();
+            if (!isOpen) reset();
         }}>
             <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
@@ -96,8 +66,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                             Select Type <span className="text-red-500">*</span>
                         </Label>
                         <Select
-                            value={formData.membershipType}
-                            onValueChange={(value) => handleInputChange('membershipType', value as MembershipType)}
+                            value={data.membership_type}
+                            onValueChange={(value) => setData('membership_type', value)}
                             required
                         >
                             <SelectTrigger id="membershipType">
@@ -111,7 +81,7 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                     </div>
 
                     {/* Step 2: Show form fields if membership type is selected */}
-                    {formData.membershipType && (
+                    {data.membership_type && (
                         <>
                             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                                 {/* First Name */}
@@ -121,8 +91,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     </Label>
                                     <Input
                                         id="firstName"
-                                        value={formData.firstName}
-                                        onChange={(e) => handleInputChange('firstName', e.target.value)}
+                                        value={data.first_name}
+                                        onChange={(e) => setData('first_name', e.target.value)}
                                         required
                                         placeholder="Enter your first name"
                                     />
@@ -135,8 +105,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     </Label>
                                     <Input
                                         id="surname"
-                                        value={formData.surname}
-                                        onChange={(e) => handleInputChange('surname', e.target.value)}
+                                        value={data.surname}
+                                        onChange={(e) => setData('surname', e.target.value)}
                                         required
                                         placeholder="Enter your surname"
                                     />
@@ -152,8 +122,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     <Input
                                         id="phone"
                                         type="tel"
-                                        value={formData.phone}
-                                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                                        value={data.phone}
+                                        onChange={(e) => setData('phone', e.target.value)}
                                         required
                                         placeholder="+225 XX XX XX XX XX"
                                     />
@@ -167,8 +137,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     <Input
                                         id="email"
                                         type="email"
-                                        value={formData.email}
-                                        onChange={(e) => handleInputChange('email', e.target.value)}
+                                        value={data.email}
+                                        onChange={(e) => setData('email', e.target.value)}
                                         required
                                         placeholder="your.email@example.com"
                                     />
@@ -182,8 +152,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 </Label>
                                 <Input
                                     id="address"
-                                    value={formData.address}
-                                    onChange={(e) => handleInputChange('address', e.target.value)}
+                                    value={data.address}
+                                    onChange={(e) => setData('address', e.target.value)}
                                     required
                                     placeholder="Enter your address"
                                 />
@@ -197,8 +167,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     </Label>
                                     <Input
                                         id="company"
-                                        value={formData.company}
-                                        onChange={(e) => handleInputChange('company', e.target.value)}
+                                        value={data.company}
+                                        onChange={(e) => setData('company', e.target.value)}
                                         required
                                         placeholder="Your company name"
                                     />
@@ -211,8 +181,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     </Label>
                                     <Input
                                         id="jobTitle"
-                                        value={formData.jobTitle}
-                                        onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                                        value={data.job_title}
+                                        onChange={(e) => setData('job_title', e.target.value)}
                                         required
                                         placeholder="Your job title"
                                     />
@@ -226,8 +196,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                         Years of Experience <span className="text-red-500">*</span>
                                     </Label>
                                     <Select
-                                        value={formData.yearsOfExperience}
-                                        onValueChange={(value) => handleInputChange('yearsOfExperience', value)}
+                                        value={data.years_of_experience}
+                                        onValueChange={(value) => setData('years_of_experience', value)}
                                         required
                                     >
                                         <SelectTrigger id="yearsOfExperience">
@@ -249,8 +219,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                         Membership Level <span className="text-red-500">*</span>
                                     </Label>
                                     <Select
-                                        value={formData.membershipLevel}
-                                        onValueChange={(value) => handleInputChange('membershipLevel', value)}
+                                        value={data.membership_level}
+                                        onValueChange={(value) => setData('membership_level', value)}
                                         required
                                     >
                                         <SelectTrigger id="membershipLevel">
@@ -266,13 +236,13 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                             </div>
 
                             {/* Qualification - Only for Professional level */}
-                            {formData.membershipLevel === 'professional' && (
+                            {data.membership_level === 'professional' && (
                                 <div className="space-y-2">
                                     <Label htmlFor="qualification">Professional Qualification</Label>
                                     <Input
                                         id="qualification"
-                                        value={formData.qualification}
-                                        onChange={(e) => handleInputChange('qualification', e.target.value)}
+                                        value={data.qualification}
+                                        onChange={(e) => setData('qualification', e.target.value)}
                                         placeholder="Enter your professional qualification"
                                     />
                                 </div>
@@ -283,8 +253,8 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 <div className="flex items-start space-x-3">
                                     <Checkbox
                                         id="agreeToTerms"
-                                        checked={formData.agreeToTerms}
-                                        onCheckedChange={(checked) => handleInputChange('agreeToTerms', checked as boolean)}
+                                        checked={data.agreeToTerms}
+                                        onCheckedChange={(checked) => setData('agreeToTerms', checked as boolean)}
                                         required
                                     />
                                     <Label htmlFor="agreeToTerms" className="text-sm leading-relaxed cursor-pointer">
@@ -308,13 +278,14 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     variant="outline"
                                     onClick={() => {
                                         onOpenChange(false);
-                                        resetForm();
+                                        reset();
                                     }}
+                                    disabled={processing}
                                 >
                                     Cancel
                                 </Button>
-                                <Button type="submit" className="bg-citl-orange hover:bg-citl-orange/90">
-                                    Submit Application
+                                <Button type="submit" className="bg-citl-orange hover:bg-citl-orange/90" disabled={processing}>
+                                    {processing ? 'Submitting...' : 'Submit Application'}
                                 </Button>
                             </div>
                         </>

@@ -15,17 +15,6 @@ function Members() {
         { title: t('nav.members'), href: '/members' },
     ];
 
-    const membershipBenefits = [
-        t('about.members.benefit_1'),
-        t('about.members.benefit_2'),
-        t('about.members.benefit_3'),
-        t('about.members.benefit_4'),
-        t('about.members.benefit_5'),
-        t('about.members.benefit_6'),
-        t('about.members.benefit_7'),
-        t('about.members.benefit_8'),
-    ];
-
     const takeaways = [
         {
             number: 1,
@@ -57,8 +46,6 @@ function Members() {
                     badge={t('about.members.why_join_badge')}
                     title={t('about.members.why_join_title')}
                     description={t('about.members.why_join_description')}
-                    benefitsTitle={t('about.members.benefits_title')}
-                    benefits={membershipBenefits}
                     ctaText={t('about.members.join_now')}
                     onCtaClick={() => setIsModalOpen(true)}
                     imageSrc="/assets/images/pages/membership/membership-benefits.jpg"

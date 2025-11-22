@@ -294,6 +294,12 @@
         "success_message": "Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.",
         "error_message": "Une erreur s'est produite lors de l'envoi du message. Veuillez réessayer."
     },
+    "events": {
+        "page_title": "Événements",
+        "page_description": "Découvrez nos événements, formations et conférences à venir sur les tests logiciels et la certification ISTQB.",
+        "no_events_title": "Aucun événement disponible pour le moment",
+        "no_events_message": "Cette fonctionnalité sera bientôt disponible. Revenez prochainement pour découvrir nos événements et formations."
+    },
     "common": {
         "edit": "Modifier",
         "delete": "Supprimer",

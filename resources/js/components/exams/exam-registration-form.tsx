@@ -1,8 +1,8 @@
 import { FormField } from '@/components/forms/form-field';
 import { FormInput } from '@/components/forms/form-input';
 import { FormRadio } from '@/components/forms/form-radio';
-import { FormSelect } from '@/components/forms/form-select';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useForm } from '@inertiajs/react';
 import { Loader2 } from 'lucide-react';
 import { FormEvent } from 'react';
@@ -65,7 +65,8 @@ export function ExamRegistrationForm({
     };
 
     return (
-        <form onSubmit={handleSubmit} className={`space-y-6 ${className}`}>
+        <form onSubmit={handleSubmit} className={`flex flex-col h-full ${className}`}>
+            <div className="flex-1 space-y-6 overflow-y-auto pr-2">
             {/* Type d'Achat */}
             <FormField label={t('exam.purchase_type')} name="purchase_type" required error={form.errors.purchase_type}>
                 <div className="mt-2 space-y-2">
@@ -88,14 +89,22 @@ export function ExamRegistrationForm({
 
             {/* Nom de l'Examen */}
             <FormField label={t('exam.exam_name')} name="exam_name" required error={form.errors.exam_name}>
-                <FormSelect
-                    name="exam_name"
+                <Select
                     value={form.data.exam_name}
-                    onChange={(e) => form.setData('exam_name', e.target.value)}
-                    options={examOptions}
-                    error={form.errors.exam_name}
+                    onValueChange={(value) => form.setData('exam_name', value)}
                     required
-                />
+                >
+                    <SelectTrigger>
+                        <SelectValue placeholder={t('exam.select_exam')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {examOptions.filter(opt => opt.value !== '').map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                                {option.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
             </FormField>
 
             {/* Coordonnées */}
@@ -275,9 +284,10 @@ export function ExamRegistrationForm({
                     />
                 </div>
             </FormField>
+            </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-end">
+            {/* Submit Button - Always Visible */}
+            <div className="flex justify-end border-t border-border pt-4 mt-4">
                 <Button
                     type="submit"
                     disabled={form.processing}

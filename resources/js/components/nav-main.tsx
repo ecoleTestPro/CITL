@@ -1,5 +1,6 @@
 'use client';
 
+import { Link } from '@inertiajs/react';
 import { ChevronRight, type LucideIcon } from 'lucide-react';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -69,9 +70,9 @@ export function NavMain({ items }: { items: NavItem[] }) {
                                                                 {subItem.items.map((nestedItem) => (
                                                                     <SidebarMenuSubItem key={nestedItem.title}>
                                                                         <SidebarMenuSubButton asChild isActive={nestedItem.isActive}>
-                                                                            <a href={nestedItem.url}>
+                                                                            <Link href={nestedItem.url}>
                                                                                 <span>{nestedItem.title}</span>
-                                                                            </a>
+                                                                            </Link>
                                                                         </SidebarMenuSubButton>
                                                                     </SidebarMenuSubItem>
                                                                 ))}
@@ -83,9 +84,9 @@ export function NavMain({ items }: { items: NavItem[] }) {
                                                 // Regular submenu item
                                                 <SidebarMenuSubItem key={subItem.title}>
                                                     <SidebarMenuSubButton asChild isActive={subItem.isActive}>
-                                                        <a href={subItem.url}>
+                                                        <Link href={subItem.url}>
                                                             <span>{subItem.title}</span>
-                                                        </a>
+                                                        </Link>
                                                     </SidebarMenuSubButton>
                                                 </SidebarMenuSubItem>
                                             ),
@@ -98,10 +99,10 @@ export function NavMain({ items }: { items: NavItem[] }) {
                         // Item without children - use direct link
                         <SidebarMenuItem key={item.title}>
                             <SidebarMenuButton asChild tooltip={item.title} isActive={item.isActive}>
-                                <a href={item.url}>
+                                <Link href={item.url}>
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
-                                </a>
+                                </Link>
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ),

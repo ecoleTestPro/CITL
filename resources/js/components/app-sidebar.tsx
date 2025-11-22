@@ -1,9 +1,11 @@
 'use client';
 
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { AudioWaveform, Award, ClipboardList, Command, FileText, GalleryVerticalEnd, Settings2, Users } from 'lucide-react';
 import * as React from 'react';
+import { useTranslation } from 'react-i18next';
 
+import { LanguageSwitcher } from '@/components/language-switcher';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from '@/components/ui/sidebar';
@@ -15,6 +17,7 @@ import { type SharedData } from '@/types';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { auth, url } = usePage<SharedData>().props;
+    const { t } = useTranslation();
     const user = auth?.user;
     const currentUrl = (url || '') as string;
 
@@ -267,10 +270,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         {data.navRequests.map((item) => (
                             <SidebarMenuItem key={item.name}>
                                 <SidebarMenuButton asChild isActive={item.isActive}>
-                                    <a href={item.url}>
+                                    <Link href={item.url}>
                                         <item.icon />
                                         <span>{item.name}</span>
-                                    </a>
+                                    </Link>
                                 </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
@@ -279,6 +282,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />
+                <div className="flex items-center justify-center gap-2 p-2 border-t border-sidebar-border">
+                    <LanguageSwitcher />
+                </div>
             </SidebarFooter>
             <SidebarRail />
         </Sidebar>

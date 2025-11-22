@@ -16,7 +16,7 @@ import {
 } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ArrowUpDown, CheckCircle, Eye, Mail, Phone, Trash2, XCircle } from 'lucide-react';
+import { ArrowUpDown, Eye, Mail, Phone, RefreshCw, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 
@@ -49,6 +49,18 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
     const [applicationToDelete, setApplicationToDelete] = useState<MembershipApplication | null>(null);
     const [selectedApplication, setSelectedApplication] = useState<MembershipApplication | null>(null);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    const handleRefresh = () => {
+        setIsRefreshing(true);
+        router.reload({
+            only: ['applications'],
+            onFinish: () => {
+                setIsRefreshing(false);
+                toast.success('Données actualisées');
+            },
+        });
+    };
 
     const handleDelete = () => {
         if (!applicationToDelete) return;
@@ -66,18 +78,6 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
         });
     };
 
-    const handleStatusChange = (id: number, status: 'approved' | 'rejected') => {
-        router.post(`/dashboard/membership-applications/${id}/status`, { status }, {
-            preserveScroll: true,
-            onSuccess: () => {
-                toast.success(`Statut mis à jour: ${status === 'approved' ? 'Approuvé' : 'Rejeté'}`);
-            },
-            onError: () => {
-                toast.error('Erreur lors de la mise à jour du statut');
-            },
-        });
-    };
-
     const confirmDelete = (application: MembershipApplication) => {
         setApplicationToDelete(application);
         setShowDeleteModal(true);
@@ -86,16 +86,6 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
     const viewDetails = (application: MembershipApplication) => {
         setSelectedApplication(application);
         setShowDetailsModal(true);
-    };
-
-    const getStatusBadge = (status: string) => {
-        const variants: Record<string, { variant: 'default' | 'destructive' | 'outline' | 'secondary', label: string }> = {
-            pending: { variant: 'outline', label: 'En attente' },
-            approved: { variant: 'default', label: 'Approuvé' },
-            rejected: { variant: 'destructive', label: 'Rejeté' },
-        };
-        const config = variants[status] || variants.pending;
-        return <Badge variant={config.variant}>{config.label}</Badge>;
     };
 
     const getLevelBadge = (level: string) => {
@@ -165,33 +155,10 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
             ),
         },
         {
-            accessorKey: 'status',
-            header: 'Statut',
-            cell: ({ row }) => getStatusBadge(row.getValue('status')),
-        },
-        {
             id: 'actions',
             header: 'Actions',
             cell: ({ row }) => (
                 <div className="flex items-center gap-2">
-                    {row.original.status === 'pending' && (
-                        <>
-                            <button
-                                onClick={() => handleStatusChange(row.original.id, 'approved')}
-                                className="rounded p-1 text-green-600 transition-colors hover:bg-green-50 dark:text-green-400 dark:hover:bg-green-900/20"
-                                title="Approuver"
-                            >
-                                <CheckCircle className="h-4 w-4" />
-                            </button>
-                            <button
-                                onClick={() => handleStatusChange(row.original.id, 'rejected')}
-                                className="rounded p-1 text-orange-600 transition-colors hover:bg-orange-50 dark:text-orange-400 dark:hover:bg-orange-900/20"
-                                title="Rejeter"
-                            >
-                                <XCircle className="h-4 w-4" />
-                            </button>
-                        </>
-                    )}
                     <button
                         onClick={() => viewDetails(row.original)}
                         className="rounded p-1 text-blue-600 transition-colors hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20"
@@ -240,6 +207,16 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
                             Gérez les demandes d'adhésion au CITL
                         </p>
                     </div>
+                    <Button
+                        onClick={handleRefresh}
+                        disabled={isRefreshing}
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                    >
+                        <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                        Actualiser
+                    </Button>
                 </div>
 
                 <div className="w-full space-y-4">
@@ -373,10 +350,6 @@ export default function MembershipApplicationsIndex({ applications }: Props) {
                                         <p>{selectedApplication.qualification}</p>
                                     </div>
                                 )}
-                                <div className="col-span-2">
-                                    <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">Statut</p>
-                                    {getStatusBadge(selectedApplication.status)}
-                                </div>
                             </div>
                         </div>
                         <div className="mt-6 flex justify-end">

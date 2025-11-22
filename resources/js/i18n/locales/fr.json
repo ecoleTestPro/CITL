@@ -69,7 +69,14 @@
         "savings_title_part1": "Gagnez plus avec",
         "savings_title_part2": "vos certifications",
         "savings_description": "Nous ne vous aidons pas seulement à vous certifier—nous vous aidons à évoluer. Nos certifiés bénéficient d'opportunités de carrière accrues, avec une reconnaissance internationale et des compétences valorisées.",
-        "learn_more": "En savoir plus"
+        "learn_more": "En savoir plus",
+        "cta_two": {
+            "badge": "Contactez-nous",
+            "title": "Prêt à obtenir votre certification ISTQB ?",
+            "description": "Rejoignez la communauté des testeurs certifiés en Côte d'Ivoire. Inscrivez-vous dès aujourd'hui pour passer votre examen ou contactez-nous pour plus d'informations.",
+            "contact_button": "Nous contacter",
+            "exam_button": "S'inscrire à l'examen"
+        }
     },
     "about": {
         "citl": {
@@ -207,6 +214,51 @@
             "member_3_role": "Secrétaire Général",
             "member_3_description": "Responsable des études statistiques à l'Université de San Pedro, Sékou possède plus de 15 ans d'expérience en gestion de la qualité et en IT. Il contribue à la stratégie universitaire et au Plan National de Développement 2026-2030, tout en assurant la qualité, la modélisation des exigences et le suivi des projets complexes."
         }
+    },
+    "membership_form": {
+        "title": "Demande d'adhésion CITL",
+        "select_type": "Sélectionner le type",
+        "membership_type": "Type d'adhésion",
+        "select_membership_type": "Choisissez le type d'adhésion",
+        "new_membership": "Nouvelle adhésion",
+        "membership_renewal": "Renouvellement d'adhésion",
+        "first_name": "Prénom",
+        "first_name_placeholder": "Entrez votre prénom",
+        "surname": "Nom",
+        "surname_placeholder": "Entrez votre nom",
+        "phone": "Téléphone",
+        "phone_placeholder": "+225 XX XX XX XX XX",
+        "email": "Email",
+        "email_placeholder": "votre.email@exemple.com",
+        "address": "Adresse",
+        "address_placeholder": "Entrez votre adresse",
+        "company": "Entreprise",
+        "company_placeholder": "Nom de votre entreprise",
+        "job_title": "Poste",
+        "job_title_placeholder": "Votre poste",
+        "years_of_experience": "Années d'expérience",
+        "select_years": "Sélectionnez les années",
+        "experience_0_1": "0-1 an",
+        "experience_1_3": "1-3 ans",
+        "experience_3_5": "3-5 ans",
+        "experience_5_10": "5-10 ans",
+        "experience_10_plus": "10+ ans",
+        "membership_level": "Niveau d'adhésion",
+        "select_level": "Sélectionnez le niveau",
+        "level_student": "Étudiant",
+        "level_professional": "Professionnel",
+        "level_expert": "Expert",
+        "qualification": "Qualification professionnelle",
+        "qualification_placeholder": "Entrez votre qualification professionnelle",
+        "agreement_text": "JE CONFIRME PAR LA PRÉSENTE QUE TOUTES LES INFORMATIONS ET DONNÉES MENTIONNÉES CI-DESSUS SONT EXACTES.",
+        "view_privacy_policy": "Voir la politique de confidentialité",
+        "view_terms_of_use": "Voir les conditions d'utilisation",
+        "cancel": "Annuler",
+        "submit": "Soumettre la demande",
+        "submitting": "Envoi en cours...",
+        "accept_terms_error": "Veuillez accepter les termes et conditions",
+        "success_message": "Demande d'adhésion envoyée avec succès!",
+        "error_message": "Une erreur s'est produite. Veuillez réessayer."
     },
     "common": {
         "edit": "Modifier",
@@ -365,7 +417,9 @@
             "delete_success": "Inscription supprimée avec succès",
             "delete_error": "Erreur lors de la suppression",
             "delete_modal_title": "Supprimer l'inscription",
-            "delete_modal_description": "Êtes-vous sûr de vouloir supprimer l'inscription de {{name}} ? Cette action est irréversible."
+            "delete_modal_description": "Êtes-vous sûr de vouloir supprimer l'inscription de {{name}} ? Cette action est irréversible.",
+            "refresh": "Actualiser",
+            "refreshed": "Données actualisées"
         },
         "details": {
             "title": "Détails de l'inscription",

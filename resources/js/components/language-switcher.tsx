@@ -21,10 +21,13 @@ export function LanguageSwitcher() {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="h-10 w-10">
+                <Button variant="ghost" size="icon" className="flex w-fit justify-start bg-gray-200 px-2 dark:bg-gray-700">
                     <Languages className="h-4 w-4" />
-                    <span> {currentLanguage.code}</span>
-                    <span className="sr-only">Changer la langue</span>
+                    <span>
+                        {/* <span className="mr-2">{currentLanguage.flag}</span> */}
+                        <span className="mr-2">{currentLanguage.label}</span>
+                        <span className="sr-only">Changer la langue</span>
+                    </span>
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

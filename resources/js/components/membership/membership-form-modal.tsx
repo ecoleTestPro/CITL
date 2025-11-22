@@ -1,12 +1,13 @@
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Checkbox } from '@/components/ui/checkbox';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface MembershipFormModalProps {
     open: boolean;
@@ -14,6 +15,7 @@ interface MembershipFormModalProps {
 }
 
 export default function MembershipFormModal({ open, onOpenChange }: MembershipFormModalProps) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         membership_type: '',
         first_name: '',
@@ -33,49 +35,48 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
         e.preventDefault();
 
         if (!data.agreeToTerms) {
-            toast.error('Veuillez accepter les termes et conditions');
+            toast.error(t('membership_form.accept_terms_error'));
             return;
         }
 
         post('/membership/apply', {
             onSuccess: () => {
-                toast.success('Demande d\'adhésion envoyée avec succès!');
+                toast.success(t('membership_form.success_message'));
                 reset();
                 onOpenChange(false);
             },
             onError: () => {
-                toast.error('Une erreur s\'est produite. Veuillez réessayer.');
+                toast.error(t('membership_form.error_message'));
             },
         });
     };
 
     return (
-        <Dialog open={open} onOpenChange={(isOpen) => {
-            onOpenChange(isOpen);
-            if (!isOpen) reset();
-        }}>
-            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <Dialog
+            open={open}
+            onOpenChange={(isOpen) => {
+                onOpenChange(isOpen);
+                if (!isOpen) reset();
+            }}
+        >
+            <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle className="text-2xl font-bold">CITL Membership Application</DialogTitle>
+                    <DialogTitle className="text-2xl font-bold">{t('membership_form.title')}</DialogTitle>
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Step 1: Membership Type */}
                     <div className="space-y-2">
                         <Label htmlFor="membershipType" className="text-base font-semibold">
-                            Select Type <span className="text-red-500">*</span>
+                            {t('membership_form.select_type')} <span className="text-red-500">*</span>
                         </Label>
-                        <Select
-                            value={data.membership_type}
-                            onValueChange={(value) => setData('membership_type', value)}
-                            required
-                        >
+                        <Select value={data.membership_type} onValueChange={(value) => setData('membership_type', value)} required>
                             <SelectTrigger id="membershipType">
-                                <SelectValue placeholder="Select membership type" />
+                                <SelectValue placeholder={t('membership_form.select_membership_type')} />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="new">New Membership</SelectItem>
-                                <SelectItem value="renewal">Membership Renewal</SelectItem>
+                                <SelectItem value="new">{t('membership_form.new_membership')}</SelectItem>
+                                <SelectItem value="renewal">{t('membership_form.membership_renewal')}</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -87,28 +88,28 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 {/* First Name */}
                                 <div className="space-y-2">
                                     <Label htmlFor="firstName">
-                                        First Name <span className="text-red-500">*</span>
+                                        {t('membership_form.first_name')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="firstName"
                                         value={data.first_name}
                                         onChange={(e) => setData('first_name', e.target.value)}
                                         required
-                                        placeholder="Enter your first name"
+                                        placeholder={t('membership_form.first_name_placeholder')}
                                     />
                                 </div>
 
                                 {/* Surname */}
                                 <div className="space-y-2">
                                     <Label htmlFor="surname">
-                                        Surname <span className="text-red-500">*</span>
+                                        {t('membership_form.surname')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="surname"
                                         value={data.surname}
                                         onChange={(e) => setData('surname', e.target.value)}
                                         required
-                                        placeholder="Enter your surname"
+                                        placeholder={t('membership_form.surname_placeholder')}
                                     />
                                 </div>
                             </div>
@@ -117,7 +118,7 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 {/* Phone */}
                                 <div className="space-y-2">
                                     <Label htmlFor="phone">
-                                        Phone <span className="text-red-500">*</span>
+                                        {t('membership_form.phone')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="phone"
@@ -125,14 +126,14 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                         value={data.phone}
                                         onChange={(e) => setData('phone', e.target.value)}
                                         required
-                                        placeholder="+225 XX XX XX XX XX"
+                                        placeholder={t('membership_form.phone_placeholder')}
                                     />
                                 </div>
 
                                 {/* Email */}
                                 <div className="space-y-2">
                                     <Label htmlFor="email">
-                                        Email <span className="text-red-500">*</span>
+                                        {t('membership_form.email')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="email"
@@ -140,7 +141,7 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
                                         required
-                                        placeholder="your.email@example.com"
+                                        placeholder={t('membership_form.email_placeholder')}
                                     />
                                 </div>
                             </div>
@@ -148,14 +149,14 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                             {/* Address */}
                             <div className="space-y-2">
                                 <Label htmlFor="address">
-                                    Address <span className="text-red-500">*</span>
+                                    {t('membership_form.address')} <span className="text-red-500">*</span>
                                 </Label>
                                 <Input
                                     id="address"
                                     value={data.address}
                                     onChange={(e) => setData('address', e.target.value)}
                                     required
-                                    placeholder="Enter your address"
+                                    placeholder={t('membership_form.address_placeholder')}
                                 />
                             </div>
 
@@ -163,28 +164,28 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 {/* Company */}
                                 <div className="space-y-2">
                                     <Label htmlFor="company">
-                                        Company <span className="text-red-500">*</span>
+                                        {t('membership_form.company')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="company"
                                         value={data.company}
                                         onChange={(e) => setData('company', e.target.value)}
                                         required
-                                        placeholder="Your company name"
+                                        placeholder={t('membership_form.company_placeholder')}
                                     />
                                 </div>
 
                                 {/* Job Title */}
                                 <div className="space-y-2">
                                     <Label htmlFor="jobTitle">
-                                        Job Title <span className="text-red-500">*</span>
+                                        {t('membership_form.job_title')} <span className="text-red-500">*</span>
                                     </Label>
                                     <Input
                                         id="jobTitle"
                                         value={data.job_title}
                                         onChange={(e) => setData('job_title', e.target.value)}
                                         required
-                                        placeholder="Your job title"
+                                        placeholder={t('membership_form.job_title_placeholder')}
                                     />
                                 </div>
                             </div>
@@ -193,22 +194,18 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 {/* Years of Experience */}
                                 <div className="space-y-2">
                                     <Label htmlFor="yearsOfExperience">
-                                        Years of Experience <span className="text-red-500">*</span>
+                                        {t('membership_form.years_of_experience')} <span className="text-red-500">*</span>
                                     </Label>
-                                    <Select
-                                        value={data.years_of_experience}
-                                        onValueChange={(value) => setData('years_of_experience', value)}
-                                        required
-                                    >
+                                    <Select value={data.years_of_experience} onValueChange={(value) => setData('years_of_experience', value)} required>
                                         <SelectTrigger id="yearsOfExperience">
-                                            <SelectValue placeholder="Select years" />
+                                            <SelectValue placeholder={t('membership_form.select_years')} />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="0-1">0-1 year</SelectItem>
-                                            <SelectItem value="1-3">1-3 years</SelectItem>
-                                            <SelectItem value="3-5">3-5 years</SelectItem>
-                                            <SelectItem value="5-10">5-10 years</SelectItem>
-                                            <SelectItem value="10+">10+ years</SelectItem>
+                                            <SelectItem value="0-1">{t('membership_form.experience_0_1')}</SelectItem>
+                                            <SelectItem value="1-3">{t('membership_form.experience_1_3')}</SelectItem>
+                                            <SelectItem value="3-5">{t('membership_form.experience_3_5')}</SelectItem>
+                                            <SelectItem value="5-10">{t('membership_form.experience_5_10')}</SelectItem>
+                                            <SelectItem value="10+">{t('membership_form.experience_10_plus')}</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -216,20 +213,16 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                 {/* Membership Level */}
                                 <div className="space-y-2">
                                     <Label htmlFor="membershipLevel">
-                                        Membership Level <span className="text-red-500">*</span>
+                                        {t('membership_form.membership_level')} <span className="text-red-500">*</span>
                                     </Label>
-                                    <Select
-                                        value={data.membership_level}
-                                        onValueChange={(value) => setData('membership_level', value)}
-                                        required
-                                    >
+                                    <Select value={data.membership_level} onValueChange={(value) => setData('membership_level', value)} required>
                                         <SelectTrigger id="membershipLevel">
-                                            <SelectValue placeholder="Select level" />
+                                            <SelectValue placeholder={t('membership_form.select_level')} />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="student">Student</SelectItem>
-                                            <SelectItem value="professional">Professional</SelectItem>
-                                            <SelectItem value="expert">Expert</SelectItem>
+                                            <SelectItem value="student">{t('membership_form.level_student')}</SelectItem>
+                                            <SelectItem value="professional">{t('membership_form.level_professional')}</SelectItem>
+                                            <SelectItem value="expert">{t('membership_form.level_expert')}</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </div>
@@ -238,12 +231,12 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                             {/* Qualification - Only for Professional level */}
                             {data.membership_level === 'professional' && (
                                 <div className="space-y-2">
-                                    <Label htmlFor="qualification">Professional Qualification</Label>
+                                    <Label htmlFor="qualification">{t('membership_form.qualification')}</Label>
                                     <Input
                                         id="qualification"
                                         value={data.qualification}
                                         onChange={(e) => setData('qualification', e.target.value)}
-                                        placeholder="Enter your professional qualification"
+                                        placeholder={t('membership_form.qualification_placeholder')}
                                     />
                                 </div>
                             )}
@@ -257,16 +250,16 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                         onCheckedChange={(checked) => setData('agreeToTerms', checked as boolean)}
                                         required
                                     />
-                                    <Label htmlFor="agreeToTerms" className="text-sm leading-relaxed cursor-pointer">
-                                        I HEREBY AGREE AND CONFIRM THAT ALL INFORMATION AND DATA STATED ABOVE ARE ACCURATE.
+                                    <Label htmlFor="agreeToTerms" className="cursor-pointer text-sm leading-relaxed">
+                                        {t('membership_form.agreement_text')}
                                     </Label>
                                 </div>
                                 <div className="space-y-1 text-sm">
-                                    <a href="/privacy-policy" target="_blank" className="text-primary hover:underline block">
-                                        View Privacy Policy
+                                    <a href="/privacy-policy" target="_blank" className="block text-primary hover:underline">
+                                        {t('membership_form.view_privacy_policy')}
                                     </a>
-                                    <a href="/terms-of-use" target="_blank" className="text-primary hover:underline block">
-                                        View Terms of Use
+                                    <a href="/terms-of-use" target="_blank" className="block text-primary hover:underline">
+                                        {t('membership_form.view_terms_of_use')}
                                     </a>
                                 </div>
                             </div>
@@ -282,10 +275,10 @@ export default function MembershipFormModal({ open, onOpenChange }: MembershipFo
                                     }}
                                     disabled={processing}
                                 >
-                                    Cancel
+                                    {t('membership_form.cancel')}
                                 </Button>
                                 <Button type="submit" className="bg-citl-orange hover:bg-citl-orange/90" disabled={processing}>
-                                    {processing ? 'Submitting...' : 'Submit Application'}
+                                    {processing ? t('membership_form.submitting') : t('membership_form.submit')}
                                 </Button>
                             </div>
                         </>

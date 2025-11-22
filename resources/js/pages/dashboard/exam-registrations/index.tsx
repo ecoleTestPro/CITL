@@ -1,6 +1,7 @@
 import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal';
 import { ExamRegistrationDetailsModal } from '@/components/exams/exam-registration-details-modal';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { Head, router } from '@inertiajs/react';
 import {
@@ -16,7 +17,7 @@ import {
 } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ArrowUpDown, Eye, Mail, Phone, Trash2 } from 'lucide-react';
+import { ArrowUpDown, Eye, Mail, Phone, RefreshCw, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
@@ -54,6 +55,18 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
     const [registrationToDelete, setRegistrationToDelete] = useState<ExamRegistration | null>(null);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [selectedRegistration, setSelectedRegistration] = useState<ExamRegistration | null>(null);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+
+    const handleRefresh = () => {
+        setIsRefreshing(true);
+        router.reload({
+            only: ['registrations'],
+            onFinish: () => {
+                setIsRefreshing(false);
+                toast.success(t('exam.dashboard.refreshed'));
+            },
+        });
+    };
 
     const handleDelete = () => {
         if (!registrationToDelete) return;
@@ -187,6 +200,10 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                             {t('exam.dashboard.subtitle')}
                         </p>
                     </div>
+                    <Button onClick={handleRefresh} disabled={isRefreshing} variant="outline" size="sm" className="gap-2">
+                        <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                        {t('exam.dashboard.refresh') || 'Actualiser'}
+                    </Button>
                 </div>
 
                 <div className="w-full space-y-4">

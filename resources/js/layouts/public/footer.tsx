@@ -1,3 +1,4 @@
+import CtaTwo from '@/components/blocks/cta/cta-two';
 import { Link } from '@inertiajs/react';
 import { type ComponentType, type SVGProps } from 'react';
 import Logo from './logo';
@@ -180,8 +181,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 const COMPANY_INFO: CompanyInfo = {
     description: 'CITL association à but non lucratif',
     location: "Abidjan, Côte d'Ivoire",
-    copyrightText:
-        'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
+    copyrightText: 'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
 };
 
 const LEGAL_LINKS: FooterLink[] = [
@@ -196,87 +196,78 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="border-t bg-background">
-            <div className="container mx-auto px-4 py-12">
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                    {/* Logo et informations */}
-                    <div>
-                        <div className="mb-4">
-                            <Logo />
-                        </div>
-                        <p className="mb-4 text-sm text-muted-foreground">
-                            {currentYear} {COMPANY_INFO.description}
-                        </p>
-                        <p className="mb-4 text-sm text-muted-foreground">
-                            {COMPANY_INFO.location}
-                        </p>
-                        <div className="mb-4">
-                            {LEGAL_LINKS.map((link, index) => (
-                                <span key={link.href}>
-                                    {index > 0 && ' | '}
-                                    <Link
-                                        href={link.href}
-                                        className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </span>
-                            ))}
-                        </div>
+        <>
+            <CtaTwo />
+            <footer className="border-t bg-gray-50 dark:bg-gray-800/50">
+                <div className="container mx-auto px-4 py-12">
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+                        {/* Logo et informations */}
                         <div>
-                            <p className="mb-2 text-sm font-medium text-foreground">
-                                Suivez-nous
-                            </p>
-                            <div className="flex gap-3">
-                                {SOCIAL_LINKS.map((social) => {
-                                    const Icon = social.icon;
-                                    return (
-                                        <a
-                                            key={social.name}
-                                            href={social.href}
-                                            className="text-muted-foreground transition-colors hover:text-foreground"
-                                            aria-label={social.ariaLabel}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                        </a>
-                                    );
-                                })}
+                            <div className="mb-4">
+                                <Logo />
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Sections dynamiques */}
-                    {FOOTER_SECTIONS.map((section) => (
-                        <div key={section.title}>
-                            <h3 className="mb-4 text-lg font-semibold text-foreground">
-                                {section.title}
-                            </h3>
-                            <ul className="space-y-3">
-                                {section.links.map((link) => (
-                                    <li key={link.href}>
-                                        <Link
-                                            href={link.href}
-                                            className="text-muted-foreground transition-colors hover:text-foreground"
-                                        >
+                            <p className="mb-4 text-sm text-muted-foreground">
+                                {currentYear} {COMPANY_INFO.description}
+                            </p>
+                            <p className="mb-4 text-sm text-muted-foreground">{COMPANY_INFO.location}</p>
+                            <div className="mb-4">
+                                {LEGAL_LINKS.map((link, index) => (
+                                    <span key={link.href}>
+                                        {index > 0 && ' | '}
+                                        <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                                             {link.label}
                                         </Link>
-                                    </li>
+                                    </span>
                                 ))}
-                            </ul>
+                            </div>
+                            <div>
+                                <p className="mb-2 text-sm font-medium text-foreground">Suivez-nous</p>
+                                <div className="flex gap-3">
+                                    {SOCIAL_LINKS.map((social) => {
+                                        const Icon = social.icon;
+                                        return (
+                                            <a
+                                                key={social.name}
+                                                href={social.href}
+                                                className="text-muted-foreground transition-colors hover:text-foreground"
+                                                aria-label={social.ariaLabel}
+                                            >
+                                                <Icon className="h-5 w-5" />
+                                            </a>
+                                        );
+                                    })}
+                                </div>
+                            </div>
                         </div>
-                    ))}
-                </div>
-            </div>
 
-            {/* Copyright bar */}
-            <div className="border-t">
-                <div className="container mx-auto px-4 py-4">
-                    <p className="text-center text-sm text-muted-foreground">
-                        © {currentYear} {COMPANY_INFO.copyrightText}
-                    </p>
+                        {/* Sections dynamiques */}
+                        {FOOTER_SECTIONS.map((section) => (
+                            <div key={section.title}>
+                                <h3 className="mb-4 text-lg font-semibold text-foreground">{section.title}</h3>
+                                <ul className="space-y-3">
+                                    {section.links.map((link) => (
+                                        <li key={link.href}>
+                                            <Link href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">
+                                                {link.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </footer>
+
+                {/* Copyright bar */}
+                <div className="border-t">
+                    <div className="container mx-auto px-4 py-4">
+                        <p className="text-center text-sm text-muted-foreground">
+                            © {currentYear} {COMPANY_INFO.copyrightText}
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </>
     );
 };
 

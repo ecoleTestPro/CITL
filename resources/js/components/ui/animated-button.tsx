@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface AnimatedButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
-    variant?: 'primary' | 'secondary' | 'accent';
+    variant?: 'primary' | 'secondary' | 'accent' | 'primaryOutlined';
     fullWidth?: boolean;
 }
 
@@ -16,9 +16,10 @@ export function AnimatedButton({
     const baseClasses = "shadow-1 inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-full px-5 py-2.5 text-center font-normal text-nowrap transition-all duration-500 ease-in-out group-hover:scale-101 md:h-12";
 
     const variantClasses = {
-        primary: "bg-primary-500 text-white hover:bg-secondary dark:hover:bg-accent",
-        secondary: "bg-secondary text-white hover:bg-primary-500 dark:bg-accent dark:hover:bg-primary-500",
-        accent: "bg-accent text-white hover:bg-primary-500 dark:bg-secondary dark:hover:bg-primary-500"
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+        accent: "bg-accent text-accent-foreground hover:bg-accent/90",
+        primaryOutlined: "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
     };
 
     const widthClass = fullWidth ? "w-full" : "md:w-auto";

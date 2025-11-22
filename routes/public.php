@@ -52,6 +52,7 @@ Route::get('/istqb-registry', [PublicController::class, 'istqbRegistry'])->name(
 
 // Contact
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+Route::post('/contact/send', [\App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
 // API Routes
 Route::prefix('api')->group(function () {

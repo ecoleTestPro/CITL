@@ -11,8 +11,12 @@ function CtaTwo() {
     const [showExamModal, setShowExamModal] = useState(false);
 
     return (
-        <section className="bg-white py-[50px] dark:bg-gray-900 md:py-20 lg:py-28" aria-label="Call to Action">
-            <div className="container mx-auto">
+        <section
+            className="relative bg-white py-[50px] dark:bg-gray-900 md:py-20 lg:py-28 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: "url('/assets/images/bg/sharp-4.png')" }}
+            aria-label="Call to Action"
+        >
+            <div className="container mx-auto relative z-10">
                 <div className="flex flex-col items-center justify-between lg:flex-row">
                     <div className="w-full space-y-5 text-center max-[400px]:max-w-[300px] lg:max-w-[476px] lg:text-left xl:max-w-[650px]">
                         <span data-ns-animate data-delay="0.3" className="inline-block rounded-full bg-yellow-100 px-4 py-1.5 text-sm font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
@@ -35,13 +39,13 @@ function CtaTwo() {
                             className="flex flex-col items-center justify-start gap-5 sm:flex-row lg:gap-3"
                         >
                             <Link href="/contact" className="w-full md:w-auto">
-                                <AnimatedButton variant="secondary" fullWidth>
+                                <AnimatedButton variant="primary" fullWidth>
                                     {t('cta.cta_two.contact_button')}
                                 </AnimatedButton>
                             </Link>
 
                             <AnimatedButton
-                                variant="primary"
+                                variant="primaryOutlined"
                                 fullWidth
                                 onClick={() => setShowExamModal(true)}
                             >

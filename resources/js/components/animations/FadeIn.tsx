@@ -8,11 +8,12 @@ interface FadeInProps {
     stagger?: number;
     triggerOnScroll?: boolean;
     className?: string;
+    blur?: number;
 }
 
-export const FadeIn = ({ children, duration = 1, delay = 0, stagger = 0, triggerOnScroll = true, className = '' }: FadeInProps) => {
+export const FadeIn = ({ children, duration = 1, delay = 0, stagger = 0, triggerOnScroll = true, className = '', blur }: FadeInProps) => {
     return (
-        <AnimatedContainer animation="fadeIn" duration={duration} delay={delay} stagger={stagger} triggerOnScroll={triggerOnScroll} className={className}>
+        <AnimatedContainer animation="fadeIn" duration={duration} delay={delay} stagger={stagger} triggerOnScroll={triggerOnScroll} className={className} blur={blur}>
             {children}
         </AnimatedContainer>
     );

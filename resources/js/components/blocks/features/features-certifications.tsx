@@ -1,3 +1,4 @@
+import { FadeIn, ScaleIn } from '@/components/animations';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { BookCheck, ClipboardCheck } from 'lucide-react';
@@ -26,7 +27,7 @@ const FeaturesCertifications = () => {
             <div className="mx-auto container px-6">
                 <div className="grid grid-cols-5 gap-4">
                     <div className="col-span-2">
-                        <div className="mb-12 text-left">
+                        <FadeIn duration={1} delay={0} blur={12} className="mb-12 text-left">
                             <h2 className="text-4xl font-semibold tracking-tight text-foreground md:text-[2.5rem] md:leading-[1.2]">
                                 {t('home.develop_skills_title')}
                             </h2>
@@ -36,10 +37,10 @@ const FeaturesCertifications = () => {
                                 </strong>
                                 , {t('home.istqb_description')}
                             </p>
-                        </div>
+                        </FadeIn>
                     </div>
                     <div className="col-span-3">
-                        <div className="mx-auto grid w-full gap-6 md:grid-cols-2">
+                        <ScaleIn duration={0.8} delay={0.2} stagger={0.15} blur={10} className="mx-auto grid w-full gap-6 md:grid-cols-2">
                             {certificationSteps.map((step, index) => (
                                 <Card
                                     key={step.title}
@@ -65,7 +66,7 @@ const FeaturesCertifications = () => {
                                     </CardContent>
                                 </Card>
                             ))}
-                        </div>
+                        </ScaleIn>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,7 @@ interface AnimatedContainerProps {
     triggerStart?: string;
     className?: string;
     ease?: string;
+    blur?: number; // Blur effect intensity in pixels (e.g., 8, 10, 12)
 }
 
 export const AnimatedContainer = ({
@@ -28,6 +29,7 @@ export const AnimatedContainer = ({
     triggerStart = 'top 80%',
     className = '',
     ease = 'power3.out',
+    blur,
 }: AnimatedContainerProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -79,6 +81,11 @@ export const AnimatedContainer = ({
                 break;
         }
 
+        // Add blur effect if specified
+        if (blur !== undefined && blur > 0) {
+            fromConfig.filter = `blur(${blur}px)`;
+        }
+
         const targets = children.length > 0 ? children : element;
 
         if (triggerOnScroll) {
@@ -92,6 +99,7 @@ export const AnimatedContainer = ({
                 y: 0,
                 scale: 1,
                 rotation: 0,
+                filter: 'blur(0px)', // Clear blur on animation
                 scrollTrigger: {
                     trigger: element,
                     start: triggerStart,
@@ -104,7 +112,7 @@ export const AnimatedContainer = ({
                 ...animationConfig,
             });
         }
-    }, [animation, duration, delay, stagger, triggerOnScroll, triggerStart, ease]);
+    }, [animation, duration, delay, stagger, triggerOnScroll, triggerStart, ease, blur]);
 
     return (
         <div ref={containerRef} className={className}>

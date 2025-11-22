@@ -1,3 +1,4 @@
+import { FadeIn, ScaleIn } from '@/components/animations';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -252,17 +253,17 @@ const CertificationWheel = () => {
                 }
             `}</style>
             <div className="mx-auto container">
-                <div className="w-2/3">
+                <FadeIn duration={1} delay={0} blur={12} className="w-2/3">
                     <h2 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">{t('home.certification_wheel_title')}</h2>
                     <p className="mb-6 text-lg leading-relaxed text-muted-foreground">
                         {t('home.certification_wheel_description')}
                     </p>
-                </div>
+                </FadeIn>
 
                 <div className="grid grid-cols-1 gap-12 lg:grid-cols-5">
                     {/* Section gauche - Texte et description */}
                     <div className="flex h-full items-center bg-white p-6 lg:col-span-2 dark:bg-gray-900">
-                        <div className="sticky top-8">
+                        <FadeIn duration={0.8} delay={0.2} blur={10} className="sticky top-8">
                             {/* Card de la certification sélectionnée */}
                             <div className="">
                                 <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary uppercase">
@@ -274,12 +275,12 @@ const CertificationWheel = () => {
                                     <a href="/certifications">{t('home.explore_certifications')}</a>
                                 </Button>
                             </div>
-                        </div>
+                        </FadeIn>
                     </div>
 
                     {/* Section droite - Roue des certifications */}
                     <div className="flex items-center justify-center bg-[#f2f2f2] lg:col-span-3">
-                        <div className="relative aspect-square w-full max-w-[600px]">
+                        <ScaleIn duration={1.2} delay={0.3} blur={10} className="relative aspect-square w-full max-w-[600px]">
                             <svg viewBox="0 0 500 500" className="h-full w-full">
                                 {/* Cercle central - Niveau 0 */}
                                 {(() => {
@@ -328,7 +329,7 @@ const CertificationWheel = () => {
                                     generateRingSectors(level)
                                 )}
                             </svg>
-                        </div>
+                        </ScaleIn>
                     </div>
                 </div>
             </div>

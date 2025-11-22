@@ -9,9 +9,10 @@ interface SlideInProps {
     stagger?: number;
     triggerOnScroll?: boolean;
     className?: string;
+    blur?: number;
 }
 
-export const SlideIn = ({ children, direction = 'up', duration = 1, delay = 0, stagger = 0, triggerOnScroll = true, className = '' }: SlideInProps) => {
+export const SlideIn = ({ children, direction = 'up', duration = 1, delay = 0, stagger = 0, triggerOnScroll = true, className = '', blur }: SlideInProps) => {
     const animationMap = {
         up: 'slideUp',
         down: 'slideDown',
@@ -27,6 +28,7 @@ export const SlideIn = ({ children, direction = 'up', duration = 1, delay = 0, s
             stagger={stagger}
             triggerOnScroll={triggerOnScroll}
             className={className}
+            blur={blur}
         >
             {children}
         </AnimatedContainer>

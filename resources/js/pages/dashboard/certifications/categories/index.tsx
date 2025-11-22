@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface Category {
@@ -22,7 +22,8 @@ export default function CategoriesIndex({ categories }: Props) {
     const filteredCategories = categories.filter((cat) => cat.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     return (
-        <AppLayout title="Gestion des Catégories de Certifications">
+        <AppLayout>
+            <Head title="Gestion des Catégories de Certifications" />
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Catégories de Certifications</h1>
@@ -41,7 +42,7 @@ export default function CategoriesIndex({ categories }: Props) {
                             placeholder="Rechercher une catégorie..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         />
                     </div>
 
@@ -69,9 +70,8 @@ export default function CategoriesIndex({ categories }: Props) {
                                             <td className="px-4 py-4">
                                                 <div>
                                                     <p className="font-medium text-gray-900 dark:text-gray-100">{category.name}</p>
-                                                    {category.description && (
-                                                        <p className="text-sm text-gray-500 dark:text-gray-400">{category.description}</p>
-                                                    )}
+                                                    {category.can_delete}
+                                                    {category.description && <p className="text-sm text-gray-500 dark:text-gray-400">{category.description}</p>}
                                                 </div>
                                             </td>
                                             <td className="px-4 py-4 text-gray-900 dark:text-gray-100">{category.slug}</td>
@@ -110,7 +110,10 @@ export default function CategoriesIndex({ categories }: Props) {
                                                             Supprimer
                                                         </Link>
                                                     ) : (
-                                                        <span className="text-sm text-gray-400 cursor-not-allowed" title="Cette catégorie par défaut ne peut pas être supprimée">
+                                                        <span
+                                                            className="cursor-not-allowed text-sm text-gray-400"
+                                                            title="Cette catégorie par défaut ne peut pas être supprimée"
+                                                        >
                                                             Supprimer
                                                         </span>
                                                     )}

@@ -82,13 +82,15 @@ export function CategorySidebar({
                                         >
                                             <Edit className="h-3 w-3" />
                                         </button>
-                                        <button
-                                            onClick={() => onDeleteCategory(category)}
-                                            className="rounded bg-white p-1 text-red-600 shadow-sm hover:bg-gray-50 dark:bg-gray-700"
-                                            title={t('common.delete')}
-                                        >
-                                            <Trash2 className="h-3 w-3" />
-                                        </button>
+                                        {category && category.can_delete && (
+                                            <button
+                                                onClick={() => onDeleteCategory(category)}
+                                                className="rounded bg-white p-1 text-red-600 shadow-sm hover:bg-gray-50 dark:bg-gray-700"
+                                                title={t('common.delete')}
+                                            >
+                                                <Trash2 className="h-3 w-3" />
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             );

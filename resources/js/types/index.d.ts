@@ -1,20 +1,32 @@
 import { InertiaLinkProps } from '@inertiajs/react';
 import { LucideIcon } from 'lucide-react';
 
+/**
+ * Interface représentant les données d'authentification
+ */
 export interface Auth {
     user: User;
 }
 
+/**
+ * Interface représentant un élément de fil d'Ariane
+ */
 export interface BreadcrumbItem {
     title: string;
     href: string;
 }
 
+/**
+ * Interface représentant un groupe de navigation dans la sidebar
+ */
 export interface NavGroup {
     title: string;
     items: NavItem[];
 }
 
+/**
+ * Interface représentant un élément de navigation
+ */
 export interface NavItem {
     title: string;
     href: NonNullable<InertiaLinkProps['href']>;
@@ -22,6 +34,9 @@ export interface NavItem {
     isActive?: boolean;
 }
 
+/**
+ * Interface représentant les données partagées entre les composants
+ */
 export interface SharedData {
     name: string;
     quote: { message: string; author: string };
@@ -30,6 +45,9 @@ export interface SharedData {
     [key: string]: unknown;
 }
 
+/**
+ * Interface représentant un utilisateur du système
+ */
 export interface User {
     id: number;
     name: string;
@@ -43,6 +61,10 @@ export interface User {
 }
 
 // Certification Types
+
+/**
+ * Interface représentant une catégorie de certification
+ */
 export interface CertificationCategory {
     id: number;
     name: string;
@@ -53,8 +75,12 @@ export interface CertificationCategory {
     is_active: boolean;
     activeCertifications?: Certification[];
     active_certifications?: Certification[]; // Support for snake_case from API
+    can_delete: boolean;
 }
 
+/**
+ * Interface représentant une certification
+ */
 export interface Certification {
     id: number;
     title: string;
@@ -80,6 +106,9 @@ export interface Certification {
     category: CertificationCategory;
 }
 
+/**
+ * Interface représentant les données du formulaire de certification
+ */
 export interface CertificationFormData {
     certification_category_id: number;
     title: string;
@@ -103,6 +132,9 @@ export interface CertificationFormData {
     is_active: boolean;
 }
 
+/**
+ * Interface représentant les données du formulaire de catégorie
+ */
 export interface CategoryFormData {
     name: string;
     slug: string;

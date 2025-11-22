@@ -1,30 +1,26 @@
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { Link } from '@inertiajs/react';
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from '@inertiajs/react';
+import { Box, Button, Grid, ListItemText, Menu, MenuList, MenuItem as MuiMenuItem, Paper, Typography } from '@mui/material';
+import { ChevronDown } from 'lucide-react';
+import { MouseEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 // Types pour la structure du menu
 interface MenuItem {
     label: string;
     href: string;
+    description?: string;
+    image?: string;
 }
 
 interface MenuSection {
     title: string;
-    type: 'dropdown' | 'link';
+    type: 'dropdown' | 'link' | 'mega';
     href?: string;
     items?: MenuItem[];
     gridCols?: number;
+    featured?: MenuItem;
+    image?: string;
 }
 
 interface NavMenuProps {
@@ -34,7 +30,16 @@ interface NavMenuProps {
 
 const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+    const [anchorEl, setAnchorEl] = useState<{ [key: string]: HTMLElement | null }>({});
     const { t } = useTranslation();
+
+    const handleMenuOpen = (event: MouseEvent<HTMLElement>, menuKey: string) => {
+        setAnchorEl((prev) => ({ ...prev, [menuKey]: event.currentTarget }));
+    };
+
+    const handleMenuClose = (menuKey: string) => {
+        setAnchorEl((prev) => ({ ...prev, [menuKey]: null }));
+    };
 
     // Configuration du menu traduite - Partie gauche (navigation principale)
     const menuLeft: MenuSection[] = [
@@ -81,6 +86,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                 { label: t('nav.anti_piracy'), href: '/anti-piracy' },
                 { label: t('nav.glossary'), href: '/glossary' },
             ],
+            image: '/assets/images/menu/pexels-divinetechygirl-1181714.jpg',
         },
         {
             title: t('nav.training'),
@@ -120,55 +126,280 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
         // },
     ];
 
-    // Rendu d'un élément de menu dropdown - Version améliorée
-    const renderDropdownItem = (item: MenuItem) => (
-        <li key={item.href}>
-            <NavigationMenuLink asChild>
-                <Link
-                    href={item.href}
-                    onClick={onNavigate}
-                    className="group relative block space-y-1 rounded-xl p-3 leading-none no-underline transition-all duration-200 outline-none select-none hover:bg-accent/50"
-                >
-                    {/* Effet de fond au hover */}
-                    <div className="absolute inset-0 rounded-xl bg-accent/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100 -z-10" />
-                    <div className="relative text-sm leading-tight font-medium text-foreground/80 group-hover:text-foreground">
-                        {item.label}
-                    </div>
-                </Link>
-            </NavigationMenuLink>
-        </li>
+    // Rendu d'un menu item MUI simple
+    const renderMuiMenuItem = (item: MenuItem, menuKey: string) => (
+        <MuiMenuItem
+            key={item.href}
+            onClick={() => {
+                handleMenuClose(menuKey);
+                onNavigate?.();
+            }}
+            component={Link}
+            href={item.href}
+            sx={{
+                py: 1.5,
+                px: 2,
+                borderRadius: 2,
+                mx: 1,
+                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+            }}
+        >
+            <ListItemText
+                primary={item.label}
+                secondary={item.description}
+                primaryTypographyProps={{ fontSize: '0.875rem', fontWeight: 500 }}
+                secondaryTypographyProps={{ fontSize: '0.75rem' }}
+            />
+        </MuiMenuItem>
     );
 
-    // Rendu d'une section de menu - Desktop
+    // Rendu d'un mega menu MUI avec grid
+    const renderMuiMegaMenu = (section: MenuSection, menuKey: string) => {
+        if (!section.items) return null;
+
+        const gridCols = section.gridCols || 1;
+
+        return (
+            <Paper sx={{ minWidth: gridCols === 2 ? 600 : 400, maxWidth: 800, borderRadius: 3 }}>
+                <Grid container spacing={0}>
+                    {section.featured && (
+                        <Grid item xs={12} md={gridCols === 2 ? 6 : 12}>
+                            <Box
+                                component={Link}
+                                href={section.featured.href}
+                                onClick={() => {
+                                    handleMenuClose(menuKey);
+                                    onNavigate?.();
+                                }}
+                                sx={{
+                                    display: 'block',
+                                    p: 3,
+                                    textDecoration: 'none',
+                                    color: 'inherit',
+                                    height: '100%',
+                                    bgcolor: 'grey.50',
+                                    borderRadius: 3,
+                                    '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                                }}
+                            >
+                                {section.featured.image && (
+                                    <Box
+                                        component="img"
+                                        src={section.featured.image}
+                                        alt={section.featured.label}
+                                        sx={{ width: '100%', height: 120, objectFit: 'cover', borderRadius: 2, mb: 2 }}
+                                    />
+                                )}
+                                <Typography variant="subtitle1" fontWeight={600} gutterBottom>
+                                    {section.featured.label}
+                                </Typography>
+                                {section.featured.description && (
+                                    <Typography variant="body2" color="text.secondary">
+                                        {section.featured.description}
+                                    </Typography>
+                                )}
+                            </Box>
+                        </Grid>
+                    )}
+                    <Grid item xs={12} md={section.featured && gridCols === 2 ? 6 : 12}>
+                        <MenuList>
+                            {section.items.map((item) => (
+                                <MuiMenuItem
+                                    key={item.href}
+                                    onClick={() => {
+                                        handleMenuClose(menuKey);
+                                        onNavigate?.();
+                                    }}
+                                    component={Link}
+                                    href={item.href}
+                                    sx={{
+                                        py: 1.5,
+                                        px: 3,
+                                        borderRadius: 2,
+                                        mx: 1,
+                                        '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                                    }}
+                                >
+                                    <Box sx={{ width: '100%' }}>
+                                        {item.image && (
+                                            <Box
+                                                component="img"
+                                                src={item.image}
+                                                alt={item.label}
+                                                sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
+                                            />
+                                        )}
+                                        <Typography variant="body2" fontWeight={500}>
+                                            {item.label}
+                                        </Typography>
+                                        {item.description && (
+                                            <Typography variant="caption" color="text.secondary" display="block">
+                                                {item.description}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                </MuiMenuItem>
+                            ))}
+                        </MenuList>
+                    </Grid>
+                </Grid>
+            </Paper>
+        );
+    };
+
+    // Rendu d'une section de menu - Desktop avec MUI
     const renderDesktopMenuSection = (section: MenuSection) => {
+        const menuKey = section.title;
+        const isOpen = Boolean(anchorEl[menuKey]);
+
         if (section.type === 'link') {
             return (
-                <NavigationMenuItem key={section.title}>
-                    <Link href={section.href!}>
-                        <NavigationMenuLink
-                            className={cn(
-                                'group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors hover:bg-accent/50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'
-                            )}
-                        >
-                            {section.title}
-                        </NavigationMenuLink>
-                    </Link>
-                </NavigationMenuItem>
+                <Link key={section.title} href={section.href!} className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary">
+                    {section.title}
+                </Link>
             );
         }
 
-        // Type dropdown avec nouveau style
-        const gridClass = section.gridCols === 2 ? 'grid w-[500px] gap-2 p-4 md:w-[600px] md:grid-cols-2' : 'grid w-[400px] gap-2 p-4';
+        // Mega menu avec images
+        if (section.type === 'mega') {
+            return (
+                <div key={section.title}>
+                    <Button
+                        onClick={(e) => handleMenuOpen(e, menuKey)}
+                        endIcon={<ChevronDown className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')} />}
+                        sx={{
+                            color: 'inherit',
+                            textTransform: 'none',
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                            px: 1.5,
+                            py: 1,
+                            borderRadius: 2,
+                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)', color: 'black' },
+                        }}
+                    >
+                        {section.title}
+                    </Button>
+                    <Menu
+                        anchorEl={anchorEl[menuKey]}
+                        open={isOpen}
+                        onClose={() => handleMenuClose(menuKey)}
+                        PaperProps={{
+                            elevation: 0,
+                            sx: {
+                                mt: 1,
+                                borderRadius: 3,
+                                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                            },
+                        }}
+                    >
+                        {renderMuiMegaMenu(section, menuKey)}
+                    </Menu>
+                </div>
+            );
+        }
 
+        // Dropdown simple
         return (
-            <NavigationMenuItem key={section.title}>
-                <NavigationMenuTrigger className="rounded-full hover:bg-accent/50 data-[state=open]:bg-accent/50">
+            <div key={section.title}>
+                <Button
+                    onClick={(e) => handleMenuOpen(e, menuKey)}
+                    endIcon={<ChevronDown className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')} />}
+                    sx={{
+                        color: 'inherit',
+                        textTransform: 'none',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        px: 1.5,
+                        py: 1,
+                        borderRadius: 2,
+                        '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)', color: 'black' },
+                    }}
+                >
                     {section.title}
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                    <ul className={cn(gridClass, 'rounded-2xl')}>{section.items?.map(renderDropdownItem)}</ul>
-                </NavigationMenuContent>
-            </NavigationMenuItem>
+                </Button>
+                <Menu
+                    anchorEl={anchorEl[menuKey]}
+                    open={isOpen}
+                    onClose={() => handleMenuClose(menuKey)}
+                    PaperProps={{
+                        elevation: 0,
+                        sx: {
+                            mt: 1,
+                            minWidth: section.gridCols === 2 ? 500 : 300,
+                            borderRadius: 3,
+                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                        },
+                    }}
+                >
+                    {section.image ? (
+                        <Grid container>
+                            {/* Liens à gauche */}
+                            <Grid item xs={7}>
+                                <Box sx={{ p: 1 }}>
+                                    {section.gridCols === 2 ? (
+                                        <Grid container>
+                                            {section.items?.map((item) => (
+                                                <Grid item xs={12} key={item.href}>
+                                                    {renderMuiMenuItem(item, menuKey)}
+                                                </Grid>
+                                            ))}
+                                        </Grid>
+                                    ) : (
+                                        section.items?.map((item) => renderMuiMenuItem(item, menuKey))
+                                    )}
+                                </Box>
+                            </Grid>
+                            {/* Image à droite */}
+                            <Grid item xs={5}>
+                                <Box
+                                    sx={{
+                                        p: 2,
+                                        height: '100%',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            bgcolor: 'grey.100',
+                                            borderRadius: 2,
+                                            p: 1.5,
+                                            width: '100%',
+                                        }}
+                                    >
+                                        <Box
+                                            component="img"
+                                            src={section.image}
+                                            alt={section.title}
+                                            sx={{
+                                                width: '100%',
+                                                height: 200,
+                                                objectFit: 'cover',
+                                                borderRadius: 1.5,
+                                            }}
+                                        />
+                                    </Box>
+                                </Box>
+                            </Grid>
+                        </Grid>
+                    ) : (
+                        <Box>
+                            {section.gridCols === 2 ? (
+                                <Grid container>
+                                    {section.items?.map((item) => (
+                                        <Grid item xs={6} key={item.href}>
+                                            {renderMuiMenuItem(item, menuKey)}
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            ) : (
+                                section.items?.map((item) => renderMuiMenuItem(item, menuKey))
+                            )}
+                        </Box>
+                    )}
+                </Menu>
+            </div>
         );
     };
 
@@ -182,7 +413,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     <Link
                         href={section.href!}
                         onClick={onNavigate}
-                        className="flex items-center justify-between py-4 text-base font-medium hover:text-primary transition-colors"
+                        className="flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-primary"
                     >
                         {section.title}
                     </Link>
@@ -194,19 +425,19 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             <div key={section.title} className="border-b border-border/50">
                 <button
                     onClick={() => setOpenDropdown(isOpen ? null : section.title)}
-                    className="flex w-full items-center justify-between py-4 text-base font-medium hover:text-primary transition-colors"
+                    className="flex w-full items-center justify-between py-4 text-base font-medium transition-colors hover:text-primary"
                 >
                     {section.title}
                     <ChevronDown className={cn('h-4 w-4 transition-transform duration-200', isOpen && 'rotate-180')} />
                 </button>
                 {isOpen && (
-                    <div className="pb-4 pl-4 space-y-2">
+                    <div className="space-y-2 pb-4 pl-4">
                         {section.items?.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
                                 onClick={onNavigate}
-                                className="block py-2 text-sm text-foreground/70 hover:text-foreground hover:translate-x-1 transition-all"
+                                className="block py-2 text-sm text-foreground/70 transition-all hover:translate-x-1 hover:text-foreground"
                             >
                                 {item.label}
                             </Link>
@@ -219,29 +450,17 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
 
     // Version mobile
     if (mobile) {
-        return (
-            <div className="space-y-1">
-                {[...menuLeft, ...menuRight].map(renderMobileMenuSection)}
-            </div>
-        );
+        return <div className="space-y-1">{[...menuLeft, ...menuRight].map(renderMobileMenuSection)}</div>;
     }
 
-    // Version desktop
+    // Version desktop avec MUI
     return (
         <div className="flex w-full items-center justify-between">
             {/* Menu principal à gauche */}
-            <NavigationMenu>
-                <NavigationMenuList className="gap-1">
-                    {menuLeft.map(renderDesktopMenuSection)}
-                </NavigationMenuList>
-            </NavigationMenu>
+            <div className="flex items-center gap-1">{menuLeft.map(renderDesktopMenuSection)}</div>
 
             {/* Liens secondaires à droite */}
-            <NavigationMenu>
-                <NavigationMenuList className="gap-1">
-                    {menuRight.map(renderDesktopMenuSection)}
-                </NavigationMenuList>
-            </NavigationMenu>
+            <div className="flex items-center gap-1">{menuRight.map(renderDesktopMenuSection)}</div>
         </div>
     );
 };

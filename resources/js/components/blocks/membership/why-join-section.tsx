@@ -1,5 +1,5 @@
 import { FadeIn, ScaleIn } from '@/components/animations';
-import { Button } from '@/components/ui/button';
+import { AnimatedButton } from '@/components/ui/animated-button';
 import { RichText } from '@/lib/text-parser';
 
 interface WhyJoinSectionProps {
@@ -25,7 +25,7 @@ export default function WhyJoinSection({
 }: WhyJoinSectionProps) {
     const contentSection = (
         <FadeIn duration={1} delay={0} blur={12} className="space-y-6">
-            <div className="flex flex-col mt-0 sm:mt-28">
+            <div className="mt-0 flex flex-col sm:mt-28">
                 <div>
                     <div className="mb-3 inline-block rounded-full bg-citl-orange/10 px-4 py-1.5 text-sm font-semibold text-citl-orange">{badge}</div>
                     <h2 className="text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100">
@@ -35,9 +35,9 @@ export default function WhyJoinSection({
                 <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-400">{description}</p>
 
                 <div className="pt-4">
-                    <Button onClick={onCtaClick} className="bg-citl-orange px-8 py-6 text-base font-semibold hover:bg-citl-orange/90" size="lg">
+                    <AnimatedButton onClick={onCtaClick} className="bg-citl-orange px-8 py-6 text-base font-semibold hover:bg-citl-orange/90" size="lg">
                         {ctaText}
-                    </Button>
+                    </AnimatedButton>
                 </div>
             </div>
         </FadeIn>

@@ -17,10 +17,11 @@ interface AboutKeyTakeawaysProps {
     takeaways: Takeaway[];
     conclusion: string;
     ctaText: string;
-    ctaLink: string;
+    ctaLink?: string;
+    onCtaClick?: () => void;
 }
 
-export default function AboutKeyTakeaways({ title, takeaways, conclusion, ctaText, ctaLink }: AboutKeyTakeawaysProps) {
+export default function AboutKeyTakeaways({ title, takeaways, conclusion, ctaText, ctaLink, onCtaClick }: AboutKeyTakeawaysProps) {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const takeawaysRef = useRef<HTMLUListElement>(null);
@@ -124,14 +125,24 @@ export default function AboutKeyTakeaways({ title, takeaways, conclusion, ctaTex
                     <RichText text={conclusion} />
                 </p>
                 <div ref={ctaRef} className="mt-14 max-w-max">
-                    <Link href={ctaLink}>
+                    {onCtaClick ? (
                         <Button
                             size="lg"
+                            onClick={onCtaClick}
                             className="mx-auto w-full rounded-full bg-citl-orange px-8 py-6 text-lg text-white transition-all duration-300 hover:bg-citl-orange/90 md:mx-0 md:w-auto"
                         >
                             {ctaText}
                         </Button>
-                    </Link>
+                    ) : (
+                        <Link href={ctaLink || '#'}>
+                            <Button
+                                size="lg"
+                                className="mx-auto w-full rounded-full bg-citl-orange px-8 py-6 text-lg text-white transition-all duration-300 hover:bg-citl-orange/90 md:mx-0 md:w-auto"
+                            >
+                                {ctaText}
+                            </Button>
+                        </Link>
+                    )}
                 </div>
             </div>
         </section>

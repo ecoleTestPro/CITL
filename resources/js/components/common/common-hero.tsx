@@ -14,7 +14,7 @@ interface HeroCommonProps {
     backgroundImage?: string;
 }
 
-export default function HeroCommon({ badge, title, description, backgroundImage }: HeroCommonProps) {
+export default function HeroCommon({ badge, title, description, backgroundImage = '/assets/images/bg/sharp-2.png' }: HeroCommonProps) {
     const bgRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ export default function HeroCommon({ badge, title, description, backgroundImage 
     }, [backgroundImage]);
 
     return (
-        <section className="relative overflow-hidden pt-10 pb-16 ">
+        <section className="relative overflow-hidden pt-10 pb-16">
             {/* Background image avec animation */}
             {backgroundImage && (
                 <div

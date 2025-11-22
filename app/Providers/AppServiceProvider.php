@@ -10,6 +10,7 @@ use App\Models\Certification\Certification;
 use App\Models\Certification\CertificationCategory;
 use App\Models\Course\Category;
 use App\Models\Course\Course;
+use App\Models\Glossary;
 use App\Models\User\Instructor;
 use App\Models\User\User;
 use App\Repositories\Assessment\ExamRepository;
@@ -20,6 +21,7 @@ use App\Repositories\Certification\CertificationCategoryRepository;
 use App\Repositories\Certification\CertificationRepository;
 use App\Repositories\Course\CategoryRepository;
 use App\Repositories\Course\CourseRepository;
+use App\Repositories\Glossary\GlossaryRepository;
 use App\Repositories\User\InstructorRepository;
 use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -91,6 +93,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(\App\Repositories\MembershipApplicationRepository::class, function ($app) {
             return new \App\Repositories\MembershipApplicationRepository(new \App\Models\MembershipApplication());
+        });
+
+        // Glossary Repository
+        $this->app->bind(GlossaryRepository::class, function ($app) {
+            return new GlossaryRepository(new Glossary());
         });
     }
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\CertificationCategoryController;
 use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
+use App\Http\Controllers\Dashboard\GlossaryController;
 use App\Http\Controllers\Dashboard\MembershipApplicationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [MembershipApplicationController::class, 'index'])->name('index');
         Route::post('/{id}/status', [MembershipApplicationController::class, 'updateStatus'])->name('status');
         Route::delete('/{id}', [MembershipApplicationController::class, 'destroy'])->name('destroy');
+    });
+
+    // Glossary Management Routes
+    Route::prefix('dashboard/glossary')->name('dashboard.glossary.')->group(function () {
+        Route::get('/', [GlossaryController::class, 'index'])->name('index');
+        Route::get('/create', [GlossaryController::class, 'create'])->name('create');
+        Route::post('/', [GlossaryController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [GlossaryController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [GlossaryController::class, 'update'])->name('update');
+        Route::delete('/{id}', [GlossaryController::class, 'destroy'])->name('destroy');
     });
 });
 

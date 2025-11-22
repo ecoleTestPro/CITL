@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CertificationController;
+use App\Http\Controllers\Api\GlossaryController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -58,4 +59,10 @@ Route::post('/contact/send', [\App\Http\Controllers\ContactController::class, 's
 Route::prefix('api')->group(function () {
     Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');
     Route::get('/certifications/{slug}', [CertificationController::class, 'show'])->name('api.certifications.show');
+
+    // Glossary API Routes
+    Route::get('/glossary', [GlossaryController::class, 'index'])->name('api.glossary.index');
+    Route::get('/glossary/grouped', [GlossaryController::class, 'groupedByLetter'])->name('api.glossary.grouped');
+    Route::get('/glossary/letter/{letter}', [GlossaryController::class, 'byLetter'])->name('api.glossary.by-letter');
+    Route::get('/glossary/search', [GlossaryController::class, 'search'])->name('api.glossary.search');
 });

@@ -6,6 +6,7 @@ interface DeleteConfirmationModalProps {
     onConfirm: () => void;
     title: string;
     message: string;
+    description?: string;
     itemName?: string;
     isDeleting?: boolean;
 }
@@ -16,6 +17,7 @@ export function DeleteConfirmationModal({
     onConfirm,
     title,
     message,
+    description,
     itemName,
     isDeleting = false,
 }: DeleteConfirmationModalProps) {

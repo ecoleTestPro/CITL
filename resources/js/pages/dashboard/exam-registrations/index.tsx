@@ -1,6 +1,6 @@
 import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal';
+import { ExamRegistrationDetailsModal } from '@/components/exams/exam-registration-details-modal';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { Head, router } from '@inertiajs/react';
 import {
@@ -16,9 +16,10 @@ import {
 } from '@tanstack/react-table';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { ArrowUpDown, CheckCircle, Clock, Mail, Phone, Trash2, XCircle } from 'lucide-react';
+import { ArrowUpDown, Eye, Mail, Phone, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface ExamRegistration {
     id: number;
@@ -45,53 +46,14 @@ interface Props {
 }
 
 export default function ExamRegistrationsIndex({ registrations }: Props) {
+    const { t } = useTranslation();
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [registrationToDelete, setRegistrationToDelete] = useState<ExamRegistration | null>(null);
-
-    const getStatusBadge = (status: string) => {
-        switch (status) {
-            case 'confirmed':
-                return (
-                    <Badge className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                        <CheckCircle className="mr-1 h-3 w-3" />
-                        Confirmé
-                    </Badge>
-                );
-            case 'cancelled':
-                return (
-                    <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
-                        <XCircle className="mr-1 h-3 w-3" />
-                        Annulé
-                    </Badge>
-                );
-            default:
-                return (
-                    <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200">
-                        <Clock className="mr-1 h-3 w-3" />
-                        En attente
-                    </Badge>
-                );
-        }
-    };
-
-    const handleStatusChange = (id: number, status: string) => {
-        router.post(
-            `/dashboard/exam-registrations/${id}/status`,
-            { status },
-            {
-                preserveScroll: true,
-                onSuccess: () => {
-                    toast.success('Statut mis à jour avec succès');
-                },
-                onError: () => {
-                    toast.error('Erreur lors de la mise à jour du statut');
-                },
-            }
-        );
-    };
+    const [showDetailsModal, setShowDetailsModal] = useState(false);
+    const [selectedRegistration, setSelectedRegistration] = useState<ExamRegistration | null>(null);
 
     const handleDelete = () => {
         if (!registrationToDelete) return;
@@ -99,12 +61,12 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
         router.delete(`/dashboard/exam-registrations/${registrationToDelete.id}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success('Inscription supprimée avec succès');
+                toast.success(t('exam.dashboard.delete_success'));
                 setShowDeleteModal(false);
                 setRegistrationToDelete(null);
             },
             onError: () => {
-                toast.error('Erreur lors de la suppression');
+                toast.error(t('exam.dashboard.delete_error'));
             },
         });
     };
@@ -114,12 +76,17 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
         setShowDeleteModal(true);
     };
 
+    const viewDetails = (registration: ExamRegistration) => {
+        setSelectedRegistration(registration);
+        setShowDetailsModal(true);
+    };
+
     const columns: ColumnDef<ExamRegistration>[] = [
         {
             accessorKey: 'created_at',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
-                    Date
+                    {t('exam.dashboard.date')}
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
@@ -127,7 +94,7 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
         },
         {
             accessorKey: 'first_name',
-            header: 'Candidat',
+            header: t('exam.dashboard.candidate'),
             cell: ({ row }) => (
                 <div>
                     <p className="font-medium">{row.original.first_name} {row.original.last_name}</p>
@@ -137,12 +104,12 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
         },
         {
             accessorKey: 'exam_name',
-            header: 'Examen',
+            header: t('exam.dashboard.exam'),
             cell: ({ row }) => <div className="text-sm">{row.getValue('exam_name')}</div>,
         },
         {
             accessorKey: 'email',
-            header: 'Contact',
+            header: t('exam.dashboard.contact'),
             cell: ({ row }) => (
                 <div className="space-y-1">
                     <div className="flex items-center text-sm">
@@ -160,45 +127,29 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
         },
         {
             accessorKey: 'purchase_type',
-            header: 'Type',
+            header: t('exam.dashboard.type'),
             cell: ({ row }) => (
                 <Badge variant="outline">
-                    {row.getValue('purchase_type') === 'individual' ? 'Individuel' : 'Groupe'}
+                    {row.getValue('purchase_type') === 'individual' ? t('exam.dashboard.individual') : t('exam.dashboard.group')}
                 </Badge>
             ),
         },
         {
-            accessorKey: 'status',
-            header: 'Statut',
-            cell: ({ row }) => getStatusBadge(row.getValue('status')),
-        },
-        {
             id: 'actions',
-            header: 'Actions',
+            header: t('exam.dashboard.actions'),
             cell: ({ row }) => (
                 <div className="flex items-center gap-2">
-                    {row.original.status === 'pending' && (
-                        <>
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleStatusChange(row.original.id, 'confirmed')}
-                            >
-                                Confirmer
-                            </Button>
-                            <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleStatusChange(row.original.id, 'cancelled')}
-                            >
-                                Annuler
-                            </Button>
-                        </>
-                    )}
+                    <button
+                        onClick={() => viewDetails(row.original)}
+                        className="rounded p-1 text-blue-600 transition-colors hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20"
+                        title={t('exam.dashboard.view_details')}
+                    >
+                        <Eye className="h-4 w-4" />
+                    </button>
                     <button
                         onClick={() => confirmDelete(row.original)}
                         className="rounded p-1 text-red-600 transition-colors hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
-                        title="Supprimer"
+                        title={t('exam.dashboard.delete')}
                     >
                         <Trash2 className="h-4 w-4" />
                     </button>
@@ -226,14 +177,14 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
 
     return (
         <AppLayout>
-            <Head title="Inscriptions aux Examens - Dashboard" />
+            <Head title={t('exam.dashboard.page_title')} />
 
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold tracking-tight">Inscriptions aux Examens</h1>
+                        <h1 className="text-3xl font-bold tracking-tight">{t('exam.dashboard.title')}</h1>
                         <p className="text-muted-foreground">
-                            Gérez les inscriptions aux examens ISTQB
+                            {t('exam.dashboard.subtitle')}
                         </p>
                     </div>
                 </div>
@@ -245,11 +196,11 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                             type="text"
                             value={globalFilter ?? ''}
                             onChange={(e) => setGlobalFilter(e.target.value)}
-                            placeholder="Rechercher..."
+                            placeholder={t('exam.dashboard.search_placeholder')}
                             className="rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         />
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                            {registrations.length} inscription{registrations.length > 1 ? 's' : ''}
+                            {registrations.length} {t('exam.dashboard.registration_count', { count: registrations.length })}
                         </div>
                     </div>
 
@@ -274,7 +225,7 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                                 {table.getRowModel().rows.length === 0 ? (
                                     <tr>
                                         <td colSpan={columns.length} className="px-6 py-8 text-center text-gray-500">
-                                            Aucune inscription trouvée
+                                            {t('exam.dashboard.no_registrations')}
                                         </td>
                                     </tr>
                                 ) : (
@@ -296,7 +247,10 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                     {table.getPageCount() > 1 && (
                         <div className="flex items-center justify-between">
                             <div className="text-sm text-gray-700 dark:text-gray-300">
-                                Page {table.getState().pagination.pageIndex + 1} sur {table.getPageCount()}
+                                {t('exam.dashboard.page_info', {
+                                    current: table.getState().pagination.pageIndex + 1,
+                                    total: table.getPageCount()
+                                })}
                             </div>
                             <div className="flex gap-2">
                                 <button
@@ -304,20 +258,26 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                                     disabled={!table.getCanPreviousPage()}
                                     className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                                 >
-                                    Précédent
+                                    {t('exam.dashboard.previous')}
                                 </button>
                                 <button
                                     onClick={() => table.nextPage()}
                                     disabled={!table.getCanNextPage()}
                                     className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
                                 >
-                                    Suivant
+                                    {t('exam.dashboard.next')}
                                 </button>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
+
+            <ExamRegistrationDetailsModal
+                isOpen={showDetailsModal}
+                onClose={() => setShowDetailsModal(false)}
+                registration={selectedRegistration}
+            />
 
             <DeleteConfirmationModal
                 isOpen={showDeleteModal}
@@ -326,8 +286,10 @@ export default function ExamRegistrationsIndex({ registrations }: Props) {
                     setRegistrationToDelete(null);
                 }}
                 onConfirm={handleDelete}
-                title="Supprimer l'inscription"
-                description={`Êtes-vous sûr de vouloir supprimer l'inscription de ${registrationToDelete?.first_name} ${registrationToDelete?.last_name} ? Cette action est irréversible.`}
+                title={t('exam.dashboard.delete_modal_title')}
+                message={t('exam.dashboard.delete_modal_description', {
+                    name: `${registrationToDelete?.first_name} ${registrationToDelete?.last_name}`
+                })}
             />
         </AppLayout>
     );

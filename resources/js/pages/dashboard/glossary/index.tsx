@@ -1,10 +1,11 @@
 import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal';
+import { GlossaryFormModal } from '@/components/glossary/glossary-form-modal';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import AppLayout from '@/layouts/app-layout';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -56,6 +57,8 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [glossaryToDelete, setGlossaryToDelete] = useState<Glossary | null>(null);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [showFormModal, setShowFormModal] = useState(false);
+    const [glossaryToEdit, setGlossaryToEdit] = useState<Glossary | null>(null);
 
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
@@ -89,6 +92,25 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
     const confirmDelete = (glossary: Glossary) => {
         setGlossaryToDelete(glossary);
         setShowDeleteModal(true);
+    };
+
+    const openCreateModal = () => {
+        setGlossaryToEdit(null);
+        setShowFormModal(true);
+    };
+
+    const openEditModal = (glossary: Glossary) => {
+        setGlossaryToEdit(glossary);
+        setShowFormModal(true);
+    };
+
+    const closeFormModal = () => {
+        setShowFormModal(false);
+        setGlossaryToEdit(null);
+    };
+
+    const handleFormSuccess = () => {
+        router.reload({ only: ['glossaries'] });
     };
 
     const handleSearch = () => {
@@ -171,10 +193,8 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                 const glossary = row.original;
                 return (
                     <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="sm" asChild>
-                            <Link href={`/dashboard/glossary/${glossary.id}/edit`}>
-                                <Edit className="h-4 w-4" />
-                            </Link>
+                        <Button variant="ghost" size="sm" onClick={() => openEditModal(glossary)}>
+                            <Edit className="h-4 w-4" />
                         </Button>
                         <Button variant="ghost" size="sm" onClick={() => confirmDelete(glossary)}>
                             <Trash2 className="h-4 w-4 text-red-500" />
@@ -217,11 +237,9 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                             <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                             Actualiser
                         </Button>
-                        <Button asChild>
-                            <Link href="/dashboard/glossary/create">
-                                <Plus className="mr-2 h-4 w-4" />
-                                Ajouter un terme
-                            </Link>
+                        <Button onClick={openCreateModal}>
+                            <Plus className="mr-2 h-4 w-4" />
+                            Ajouter un terme
                         </Button>
                     </div>
                 </div>
@@ -243,12 +261,12 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                         </div>
                         <div>
                             <label className="mb-2 block text-sm font-medium">Lettre</label>
-                            <Select value={letterFilter} onValueChange={setLetterFilter}>
+                            <Select value={letterFilter || 'all'} onValueChange={(value) => setLetterFilter(value === 'all' ? '' : value)}>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Toutes les lettres" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="">Toutes les lettres</SelectItem>
+                                    <SelectItem value="all">Toutes les lettres</SelectItem>
                                     {alphabet.map((letter) => (
                                         <SelectItem key={letter} value={letter}>
                                             {letter}
@@ -259,12 +277,12 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                         </div>
                         <div>
                             <label className="mb-2 block text-sm font-medium">Statut</label>
-                            <Select value={statusFilter} onValueChange={setStatusFilter}>
+                            <Select value={statusFilter || 'all'} onValueChange={(value) => setStatusFilter(value === 'all' ? '' : value)}>
                                 <SelectTrigger>
                                     <SelectValue placeholder="Tous les statuts" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="">Tous les statuts</SelectItem>
+                                    <SelectItem value="all">Tous les statuts</SelectItem>
                                     <SelectItem value="1">Actif</SelectItem>
                                     <SelectItem value="0">Inactif</SelectItem>
                                 </SelectContent>
@@ -351,6 +369,13 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                 onConfirm={handleDelete}
                 title="Supprimer le terme"
                 message={`Êtes-vous sûr de vouloir supprimer le terme "${glossaryToDelete?.term}" ? Cette action est irréversible.`}
+            />
+
+            <GlossaryFormModal
+                isOpen={showFormModal}
+                onClose={closeFormModal}
+                glossary={glossaryToEdit}
+                onSuccess={handleFormSuccess}
             />
         </AppLayout>
     );

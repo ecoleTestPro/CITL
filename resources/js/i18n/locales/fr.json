@@ -521,5 +521,64 @@
             "search_placeholder": "Rechercher des articles",
             "search_aria": "Rechercher des articles"
         }
+    },
+    "exams": {
+        "hero": {
+            "badge": "Examens ISTQB®",
+            "title": "Questions sur les examens et taux de réussite",
+            "description": "Découvrez tout ce que vous devez savoir sur le déroulement des examens ISTQB®, les taux de réussite et les stratégies pour réussir votre certification"
+        },
+        "understanding": {
+            "title": "Comprendre les examens ISTQB®",
+            "description": "Les examens ISTQB® sont conçus pour évaluer vos compétences réelles en testing logiciel. Ils combinent des questions théoriques et pratiques pour garantir que les candidats maîtrisent les concepts essentiels du testing professionnel.",
+            "image_alt": "Exam Success"
+        },
+        "administration": {
+            "title": "Administration des examens ISTQB®",
+            "provider_intro": "Les examens ISTQB® sont administrés en Côte d'Ivoire par le",
+            "provider_name": "CITL (Comité Ivoirien des Tests Logiciels)",
+            "provider_details": "à travers iSQI, son fournisseur d'examens accrédité.",
+            "organization_contact": "Si vous êtes une organisation souhaitant organiser un examen pour un nombre considérable de vos employés, veuillez contacter le",
+            "organization_name": "CITL",
+            "organization_details": "pour explorer la possibilité d'organiser un examen en interne.",
+            "consistency_note": "Les examens ISTQB® sont organisés de manière cohérente à travers le monde et sont basés sur un nombre précis de questions, variant selon le niveau de certification."
+        },
+        "format": {
+            "title": "Format des examens par module",
+            "column_module": "Module",
+            "column_questions": "Nombre de Questions",
+            "column_duration": "Durée (Minutes)",
+            "column_duration_non_native": "Durée pour Langue Non Native",
+            "note_title": "Note importante :",
+            "note_duration": "La durée d'examen pour langue non native s'applique aux candidats dont la langue maternelle n'est pas celle de l'examen.",
+            "note_essay": "Les examens Expert incluent une partie essai (essay) en plus des questions à choix multiples.",
+            "note_standards": "Tous les examens sont organisés selon les standards internationaux ISTQB®."
+        },
+        "level_format": {
+            "title": "Format des examens par niveau",
+            "description": "Chaque niveau de certification ISTQB® a ses propres caractéristiques d'examen, adaptées à la complexité des compétences évaluées."
+        },
+        "foundation": {
+            "subtitle": "Foundation Level",
+            "content": "40 questions en 60 minutes, score requis : 26/40 (65%). Questions à choix multiples et réponses multiples.",
+            "item_1": "Format : QCM (Questions à Choix Multiple)",
+            "item_2": "Durée : 60 minutes (+25% pour non-natifs)",
+            "item_3": "Score requis : 65% (26/40 points)",
+            "item_4": "Taux de réussite moyen : 75-80%",
+            "image_alt": "Exam Format"
+        },
+        "fees": {
+            "title": "Frais d'examen ISTQB®",
+            "description": "Consultez les tarifs des examens de certification ISTQB® en euros",
+            "pricing_table_title": "Grille tarifaire des examens",
+            "pricing_table_description": "Tarifs en euros (€) pour tous les niveaux de certification ISTQB®",
+            "column_level": "Niveau d'Examen",
+            "column_flex": "FLEX (Surveillance à distance)",
+            "column_pearson": "Pearson Vue (Centre d'examen)",
+            "level_foundation": "ISTQB Foundation Level",
+            "level_advanced": "ISTQB Advanced Level",
+            "level_specialist": "ISTQB Specialist Level",
+            "level_expert": "ISTQB Expert Level"
+        }
     }
 }

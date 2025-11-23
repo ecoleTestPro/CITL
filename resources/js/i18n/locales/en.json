@@ -509,5 +509,64 @@
             "search_placeholder": "Search articles",
             "search_aria": "Search articles"
         }
+    },
+    "exams": {
+        "hero": {
+            "badge": "ISTQB® Exams",
+            "title": "Exam Questions and Pass Rates",
+            "description": "Discover everything you need to know about ISTQB® exam procedures, pass rates, and strategies to succeed in your certification"
+        },
+        "understanding": {
+            "title": "Understanding ISTQB® Exams",
+            "description": "ISTQB® exams are designed to assess your real software testing skills. They combine theoretical and practical questions to ensure candidates master essential professional testing concepts.",
+            "image_alt": "Exam Success"
+        },
+        "administration": {
+            "title": "ISTQB® Exam Administration",
+            "provider_intro": "ISTQB® exams are administered in Côte d'Ivoire by the",
+            "provider_name": "CITL (Ivorian Software Testing Committee)",
+            "provider_details": "through iSQI, its accredited exam provider.",
+            "organization_contact": "If you are an organization wishing to arrange an exam for a considerable number of your employees, please contact the",
+            "organization_name": "CITL",
+            "organization_details": "to explore the possibility of organizing an in-house exam.",
+            "consistency_note": "ISTQB® exams are organized consistently worldwide and are based on a precisely defined number of questions, varying depending on the certification level."
+        },
+        "format": {
+            "title": "Exam Format by Module",
+            "column_module": "Module",
+            "column_questions": "Number of Questions",
+            "column_duration": "Duration (Minutes)",
+            "column_duration_non_native": "Duration for Non-Native Language",
+            "note_title": "Important note:",
+            "note_duration": "The non-native language exam duration applies to candidates whose mother tongue is not the language of the exam.",
+            "note_essay": "Expert exams include an essay part in addition to multiple choice questions.",
+            "note_standards": "All exams are organized according to international ISTQB® standards."
+        },
+        "level_format": {
+            "title": "Exam Format by Level",
+            "description": "Each ISTQB® certification level has its own exam characteristics, tailored to the complexity of the skills being assessed."
+        },
+        "foundation": {
+            "subtitle": "Foundation Level",
+            "content": "40 questions in 60 minutes, required score: 26/40 (65%). Multiple choice and multiple response questions.",
+            "item_1": "Format: MCQ (Multiple Choice Questions)",
+            "item_2": "Duration: 60 minutes (+25% for non-natives)",
+            "item_3": "Required score: 65% (26/40 points)",
+            "item_4": "Average pass rate: 75-80%",
+            "image_alt": "Exam Format"
+        },
+        "fees": {
+            "title": "ISTQB® Exam Fees",
+            "description": "Check the ISTQB® certification exam fees in euros",
+            "pricing_table_title": "Exam Fee Schedule",
+            "pricing_table_description": "Fees in euros (€) for all ISTQB® certification levels",
+            "column_level": "Exam Level",
+            "column_flex": "FLEX (Remote Proctored)",
+            "column_pearson": "Pearson Vue (Test Center)",
+            "level_foundation": "ISTQB Foundation Level",
+            "level_advanced": "ISTQB Advanced Level",
+            "level_specialist": "ISTQB Specialist Level",
+            "level_expert": "ISTQB Expert Level"
+        }
     }
 }

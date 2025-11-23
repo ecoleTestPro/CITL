@@ -1,4 +1,5 @@
 import HeroCommon from '@/components/common/common-hero';
+import Timeline from '@/components/events/timeline';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Calendar } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +16,10 @@ function Events() {
                 description={t('events.page_description')}
                 backgroundImage="/assets/images/bg/sharp-2.png"
             />
+
+            <section>
+                <Timeline />
+            </section>
 
             {/* Events Section */}
             <section className="bg-white py-16 md:py-24 dark:bg-gray-900">

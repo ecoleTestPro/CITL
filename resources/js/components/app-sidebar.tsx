@@ -1,7 +1,7 @@
 'use client';
 
 import { Link, usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, BookOpen, Calendar, ClipboardList, Command, FileText, GalleryVerticalEnd, Newspaper, Settings2, Users } from 'lucide-react';
+import { AudioWaveform, Award, BookOpen, Calendar, ClipboardList, Command, FileText, GalleryVerticalEnd, HelpCircle, Newspaper, Settings2, Users } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -216,7 +216,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 title: 'Gestion',
                 url: '#',
                 icon: BookOpen,
-                isActive: currentUrl.startsWith('/dashboard/glossary') || currentUrl.startsWith('/dashboard/blog') || currentUrl.startsWith('/dashboard/events'),
+                isActive: currentUrl.startsWith('/dashboard/glossary') || currentUrl.startsWith('/dashboard/blog') || currentUrl.startsWith('/dashboard/events') || currentUrl.startsWith('/dashboard/faqs'),
                 items: [
                     {
                         title: 'Glossaire',
@@ -232,6 +232,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         title: 'Événements',
                         url: '/dashboard/events',
                         isActive: currentUrl.startsWith('/dashboard/events'),
+                    },
+                    {
+                        title: 'FAQs',
+                        url: '/dashboard/faqs',
+                        isActive: currentUrl.startsWith('/dashboard/faqs'),
                     },
                 ],
             },

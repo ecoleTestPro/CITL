@@ -19,11 +19,10 @@ function AntiPiracy() {
                 badge="Protection ISTQB®"
                 title="Avertissement contre la contrefaçon"
                 description="Le CITL et l'ISTQB® luttent activement contre la contrefaçon des certifications. Découvrez pourquoi l'authenticité de votre certification est cruciale pour votre carrière professionnelle."
-                backgroundImage="/assets/images/bg/sharp-2.png"
             />
 
             <CommonTextBlock
-                image={{ src: '/assets/images/pages/certification/protection-shield.png', alt: 'Protection Shield', width: 300 }}
+                image={{ src: '/assets/images/pages/certification/shield.png', alt: 'Protection Shield', width: 300 }}
                 title="La valeur de l'authenticité"
                 description="Une certification ISTQB® authentique représente des mois d'étude intensive, de formation professionnelle et de validation d'expertise. La contrefaçon porte atteinte non seulement à la valeur de votre investissement personnel, mais aussi à l'intégrité de toute la communauté du testing logiciel."
                 backgroundColor="#f8fafc"

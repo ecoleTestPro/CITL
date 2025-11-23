@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CertificationCategoryController;
@@ -109,6 +110,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/{id}', [EventController::class, 'update'])->name('update');
         Route::delete('/{id}', [EventController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/toggle-active', [EventController::class, 'toggleActive'])->name('toggle-active');
+    });
+
+    // FAQ Management Routes
+    Route::prefix('dashboard/faqs')->name('admin.faqs.')->group(function () {
+        Route::get('/', [FaqController::class, 'index'])->name('index');
+        Route::post('/', [FaqController::class, 'store'])->name('store');
+        Route::put('/{id}', [FaqController::class, 'update'])->name('update');
+        Route::delete('/{id}', [FaqController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/toggle-active', [FaqController::class, 'toggleActive'])->name('toggle-active');
+        Route::post('/{id}/update-order', [FaqController::class, 'updateOrder'])->name('update-order');
     });
 });
 

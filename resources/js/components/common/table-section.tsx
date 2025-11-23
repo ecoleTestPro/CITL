@@ -8,13 +8,21 @@ interface Column {
     className?: string;
 }
 
+interface Note {
+    text: string;
+}
+
 interface TableSectionProps {
     title: string;
     description?: string;
     columns: Column[];
     data: Record<string, any>[];
+    notes?: Note[];
     maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl';
     bgColor?: string;
+    notesBgColor?: string;
+    notesBgColorDark?: string;
+    notesTitle?: string;
     className?: string;
     delay?: string;
 }
@@ -24,8 +32,12 @@ export function TableSection({
     description,
     columns,
     data,
+    notes,
     maxWidth = '6xl',
     bgColor = 'bg-gray-50 dark:bg-gray-800/50',
+    notesBgColor = 'bg-blue-50',
+    notesBgColorDark = 'dark:bg-blue-900/20',
+    notesTitle = 'Note importante :',
     className,
     delay = '0.2',
 }: TableSectionProps) {
@@ -52,6 +64,20 @@ export function TableSection({
                     </div>
 
                     <PublicTable columns={columns} data={data} />
+
+                    {notes && notes.length > 0 && (
+                        <div className={cn('mt-8 rounded-lg p-6', notesBgColor, notesBgColorDark)}>
+                            <h3 className="mb-3 font-semibold text-gray-900 dark:text-gray-100">{notesTitle}</h3>
+                            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                {notes.map((note, index) => (
+                                    <li key={index} className="flex items-start gap-2">
+                                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-citl-orange"></span>
+                                        <span>{note.text}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

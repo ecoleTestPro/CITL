@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\GlossaryController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -75,4 +76,8 @@ Route::prefix('api')->group(function () {
 
     // Global Search API Route
     Route::get('/search', [SearchController::class, 'search'])->name('api.search');
+
+    // FAQ API Routes
+    Route::get('/faqs', [FaqController::class, 'index'])->name('api.faqs.index');
+    Route::get('/faqs/category/{category}', [FaqController::class, 'getByCategory'])->name('api.faqs.by-category');
 });

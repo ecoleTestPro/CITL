@@ -15,7 +15,7 @@ interface FaqBlockOneProps {
     badge?: string;
     title?: string;
     description?: string;
-    categories?: FaqCategory;
+    categories?: FaqCategory | FaqCategory[];
     className?: string;
 }
 
@@ -39,6 +39,8 @@ function FaqBlockOne({
     },
     className = '',
 }: FaqBlockOneProps) {
+    const categoriesArray = Array.isArray(categories) ? categories : [categories];
+    const [activeCategory, setActiveCategory] = useState<string>(categoriesArray[0]?.id || 'general');
     const [openItems, setOpenItems] = useState<Set<number>>(new Set([0]));
 
     const toggleAccordion = (index: number) => {
@@ -51,27 +53,59 @@ function FaqBlockOne({
         setOpenItems(newOpenItems);
     };
 
+    const handleCategoryChange = (categoryId: string) => {
+        setActiveCategory(categoryId);
+        setOpenItems(new Set([0])); // Open first item of new category
+    };
+
+    const activeItems = categoriesArray.find((cat) => cat.id === activeCategory)?.items || [];
+
     return (
         <main>
             <section className={`pt-12 pb-[100px] ${className}`}>
                 <div className="main-container">
                     <div className="space-y-5 text-center">
-                        <span data-ns-animate data-delay="0.2" className="badge badge-cyan">
-                            {badge}
-                        </span>
-                        <div className="space-y-3 text-center">
-                            <h2 data-ns-animate data-delay="0.3">
-                                {title}
-                            </h2>
-                            <p data-ns-animate data-delay="0.4" className="mx-auto max-w-[600px]">
-                                {description}
-                            </p>
-                        </div>
+                        {badge && (
+                            <span data-ns-animate data-delay="0.2" className="badge badge-cyan">
+                                {badge}
+                            </span>
+                        )}
+                        {title && (
+                            <div className="space-y-3 text-center">
+                                <h2 data-ns-animate data-delay="0.3">
+                                    {title}
+                                </h2>
+                                {description && (
+                                    <p data-ns-animate data-delay="0.4" className="mx-auto max-w-[600px]">
+                                        {description}
+                                    </p>
+                                )}
+                            </div>
+                        )}
                     </div>
+
+                    {/* Tabs for categories if multiple */}
+                    {categoriesArray.length > 1 && (
+                        <div className="mt-10 flex flex-wrap justify-center gap-4" data-ns-animate data-delay="0.5">
+                            {categoriesArray.map((category) => (
+                                <button
+                                    key={category.id}
+                                    onClick={() => handleCategoryChange(category.id)}
+                                    className={`rounded-full px-6 py-2.5 text-sm font-medium transition-all ${
+                                        activeCategory === category.id
+                                            ? 'bg-citl-orange text-white'
+                                            : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                                    }`}
+                                >
+                                    {category.name}
+                                </button>
+                            ))}
+                        </div>
+                    )}
 
                     <div data-ns-animate data-delay="0.6" data-instant>
                         <div className="tab-content mx-auto mt-[70px] max-w-[850px] space-y-4">
-                            {categories?.items.map((item, index) => (
+                            {activeItems.map((item, index) => (
                                 <div
                                     key={index}
                                     className={`accordion-item bg-background-1 dark:bg-background-6 rounded-[20px] px-8 ${
@@ -82,7 +116,7 @@ function FaqBlockOne({
                                         onClick={() => toggleAccordion(index)}
                                         className="accordion-action flex w-full cursor-pointer items-center justify-between pt-8 pb-8"
                                     >
-                                        <span className="text-lg font-semibold flex-1 text-left dark:text-accent">{item.question}</span>
+                                        <span className="flex-1 text-left text-lg font-semibold dark:text-accent">{item.question}</span>
 
                                         <span className="accordion-arrow ml-2.5 block sm:ml-auto">
                                             <svg
@@ -107,11 +141,11 @@ function FaqBlockOne({
                                     </button>
                                     <div
                                         className={`accordion-content overflow-hidden transition-all duration-300 ${
-                                            openItems.has(index) ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                                            openItems.has(index) ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                                         }`}
                                     >
                                         <div className="border-t-stroke-2 dark:border-t-stroke-6 border-t pt-6 pb-8">
-                                            <p>{item.answer}</p>
+                                            <div className="prose prose-sm max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: item.answer }} />
                                         </div>
                                     </div>
                                 </div>

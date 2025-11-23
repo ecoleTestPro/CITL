@@ -90,7 +90,7 @@ class BlogRepository extends BaseRepository
             }
         }
 
-        return array_unique($allTags);
+        return array_values(array_unique($allTags));
     }
 
     /**
@@ -98,13 +98,33 @@ class BlogRepository extends BaseRepository
      */
     public function getArchives(): Collection
     {
-        return $this->model
-            ->selectRaw('YEAR(published_at) as year, MONTH(published_at) as month, COUNT(*) as count')
-            ->published()
-            ->groupBy('year', 'month')
-            ->orderBy('year', 'desc')
-            ->orderBy('month', 'desc')
-            ->get();
+        $driver = config('database.default');
+        $connection = config("database.connections.{$driver}.driver");
+
+        if ($connection === 'sqlite') {
+            // SQLite compatible syntax
+            return $this->model
+                ->selectRaw("strftime('%Y', published_at) as year, strftime('%m', published_at) as month, COUNT(*) as count")
+                ->published()
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'desc')
+                ->orderBy('month', 'desc')
+                ->get()
+                ->map(function ($item) {
+                    $item->year = (int) $item->year;
+                    $item->month = (int) $item->month;
+                    return $item;
+                });
+        } else {
+            // MySQL compatible syntax
+            return $this->model
+                ->selectRaw('YEAR(published_at) as year, MONTH(published_at) as month, COUNT(*) as count')
+                ->published()
+                ->groupBy('year', 'month')
+                ->orderBy('year', 'desc')
+                ->orderBy('month', 'desc')
+                ->get();
+        }
     }
 
     /**

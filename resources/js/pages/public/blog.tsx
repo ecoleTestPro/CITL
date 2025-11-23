@@ -1,21 +1,21 @@
-import { BlogArticleCard, BlogSidebar, Pagination } from '@/components/blog';
 import type { Archive, BlogArticle, Category, RecentArticle, Tag } from '@/components/blog';
+import { BlogArticleCard, BlogSidebar, Pagination } from '@/components/blog';
 import PublicLayout from '@/layouts/public/public-layout';
 import { router } from '@inertiajs/react';
 
 interface BlogProps {
-    blogs: {
+    blogs?: {
         data: any[];
         current_page: number;
         last_page: number;
         per_page: number;
         total: number;
     };
-    categories: any[];
-    recentArticles: any[];
-    tags: string[];
-    archives: any[];
-    filters: {
+    categories?: any[];
+    recentArticles?: any[];
+    tags?: string[];
+    archives?: any[];
+    filters?: {
         category?: number;
         tag?: string;
         search?: string;
@@ -29,7 +29,7 @@ interface BlogProps {
 
 function Blog({ blogs, categories, recentArticles, tags, archives, filters, currentCategory, currentTag, currentArchive }: BlogProps) {
     // Transform backend data to frontend format
-    const articles: BlogArticle[] = blogs.data.map((blog) => ({
+    const articles: BlogArticle[] = (blogs?.data || []).map((blog) => ({
         id: blog.id,
         title: blog.title,
         slug: blog.slug,
@@ -41,14 +41,14 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
         url: `/blog/${blog.slug}`,
     }));
 
-    const sidebarCategories: Category[] = categories.map((cat) => ({
+    const sidebarCategories: Category[] = (categories || []).map((cat) => ({
         name: cat.name,
         slug: cat.slug,
         count: cat.blogs_count || 0,
         url: `/blog/category/${cat.slug}`,
     }));
 
-    const sidebarRecent: RecentArticle[] = recentArticles.map((article) => ({
+    const sidebarRecent: RecentArticle[] = (recentArticles || []).map((article) => ({
         id: article.id,
         title: article.title,
         image: article.featured_image || 'images/default-blog.png',
@@ -56,15 +56,33 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
         url: `/blog/${article.slug}`,
     }));
 
-    const sidebarTags: Tag[] = tags.map((tag) => ({
-        name: tag,
-        slug: tag.toLowerCase().replace(/\s+/g, '-'),
-        url: `/blog/tag/${tag}`,
-    }));
+    const sidebarTags = (): Tag[] => {
+        console.log("tags", tags);
+        
+        if (!tags) return [];
+
+        if (tags && tags.length === 0) return [];
+
+        return tags
+            .map((tag) => {
+                if (!tag) throw new Error('Tag is null or undefined');
+
+                const slug = tag.toLowerCase().replace(/\s+/g, '-');
+
+                if (!slug) throw new Error('Slug is empty');
+
+                return {
+                    name: tag,
+                    slug,
+                    url: `/blog/tag/${slug}`,
+                };
+            })
+            .filter(Boolean) as Tag[];
+    };
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    const sidebarArchives: Archive[] = archives.map((archive) => ({
+    const sidebarArchives: Archive[] = (archives || []).map((archive) => ({
         month: monthNames[archive.month - 1],
         year: archive.year,
         count: archive.count,
@@ -72,11 +90,11 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
     }));
 
     const handleSearch = (query: string) => {
-        router.get('/blog', { ...filters, search: query }, { preserveState: true });
+        router.get('/blog', { ...(filters || {}), search: query }, { preserveState: true });
     };
 
     const handlePageChange = (page: number) => {
-        router.get('/blog', { ...filters, page }, { preserveState: true });
+        router.get('/blog', { ...(filters || {}), page }, { preserveState: true });
     };
 
     return (
@@ -86,12 +104,10 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
                     {/* Liste des articles */}
                     <div className="max-w-[793px] space-y-14 max-lg:col-span-7 max-md:order-2 max-md:col-span-full md:space-y-[70px] lg:col-span-8">
                         {articles.length > 0 ? (
-                            articles.map((article, index) => (
-                                <BlogArticleCard key={article.id} article={article} delay={index === 0 ? '0.3' : '0.1'} />
-                            ))
+                            articles.map((article, index) => <BlogArticleCard key={article.id} article={article} delay={index === 0 ? '0.3' : '0.1'} />)
                         ) : (
-                            <div className="text-center py-20">
-                                <p className="text-secondary dark:text-accent text-lg">Aucun article trouvé.</p>
+                            <div className="py-20 text-center">
+                                <p className="text-lg text-secondary dark:text-accent">Aucun article trouvé.</p>
                             </div>
                         )}
                     </div>
@@ -100,14 +116,14 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
                     <BlogSidebar
                         categories={sidebarCategories}
                         recentArticles={sidebarRecent}
-                        tags={sidebarTags}
+                        tags={sidebarTags()}
                         archives={sidebarArchives}
                         onSearch={handleSearch}
                     />
                 </div>
 
                 {/* Pagination */}
-                {blogs.last_page > 1 && (
+                {blogs && blogs.last_page > 1 && (
                     <Pagination currentPage={blogs.current_page} totalPages={blogs.last_page} baseUrl="/blog" onPageChange={handlePageChange} />
                 )}
             </section>

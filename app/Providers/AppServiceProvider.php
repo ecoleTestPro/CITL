@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Models\Assessment\Exam;
 use App\Models\Assessment\Quiz;
 use App\Models\Blog\Article;
+use App\Models\Blog\Blog;
+use App\Models\Blog\BlogCategory;
 use App\Models\Certificate\ManageCertificate;
 use App\Models\Certification\Certification;
 use App\Models\Certification\CertificationCategory;
@@ -16,6 +18,8 @@ use App\Models\User\User;
 use App\Repositories\Assessment\ExamRepository;
 use App\Repositories\Assessment\QuizRepository;
 use App\Repositories\Blog\ArticleRepository;
+use App\Repositories\Blog\BlogRepository;
+use App\Repositories\Blog\BlogCategoryRepository;
 use App\Repositories\Certificate\CertificateRepository;
 use App\Repositories\Certification\CertificationCategoryRepository;
 use App\Repositories\Certification\CertificationRepository;
@@ -69,6 +73,14 @@ class AppServiceProvider extends ServiceProvider
         // Blog Module Repositories
         $this->app->bind(ArticleRepository::class, function ($app) {
             return new ArticleRepository(new Article());
+        });
+
+        $this->app->bind(BlogRepository::class, function ($app) {
+            return new BlogRepository(new Blog());
+        });
+
+        $this->app->bind(BlogCategoryRepository::class, function ($app) {
+            return new BlogCategoryRepository(new BlogCategory());
         });
 
         // Certification Module Repositories

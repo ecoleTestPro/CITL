@@ -1,108 +1,82 @@
 import { BlogArticleCard, BlogSidebar, Pagination } from '@/components/blog';
 import type { Archive, BlogArticle, Category, RecentArticle, Tag } from '@/components/blog';
 import PublicLayout from '@/layouts/public/public-layout';
+import { router } from '@inertiajs/react';
 
-// Données statiques pour la démo
-const MOCK_ARTICLES: BlogArticle[] = [
-    {
-        id: 1,
-        title: 'Product-led growth vs sales-led growth which one wins',
-        slug: 'product-led-growth-vs-sales-led-growth',
-        image: 'images/ns-img-453.png',
-        categories: ['Design', 'Research'],
-        publishedDate: '14.04.2020',
-        readTime: 4,
-        url: '/blog/product-led-growth-vs-sales-led-growth',
-    },
-    {
-        id: 2,
-        title: 'Our saas seo strategy 6 months, 300% organic traffic growth',
-        slug: 'our-saas-seo-strategy',
-        image: 'images/ns-img-454.png',
-        categories: ['Design', 'Research'],
-        publishedDate: '01.04.2020',
-        readTime: 4,
-        url: '/blog/our-saas-seo-strategy',
-    },
-    {
-        id: 3,
-        title: 'Decoding saas consolidation what it means for founders',
-        slug: 'decoding-saas-consolidation',
-        image: 'images/ns-img-455.png',
-        categories: ['Design', 'Research'],
-        publishedDate: '14.04.2020',
-        readTime: 4,
-        url: '/blog/decoding-saas-consolidation',
-    },
-    {
-        id: 4,
-        title: 'Digital is making place in funds back-office',
-        slug: 'digital-is-making-place',
-        image: 'images/ns-img-456.png',
-        categories: ['Marketing', 'Strategy'],
-        publishedDate: '14.04.2020',
-        readTime: 4,
-        url: '/blog/digital-is-making-place',
-    },
-];
+interface BlogProps {
+    blogs: {
+        data: any[];
+        current_page: number;
+        last_page: number;
+        per_page: number;
+        total: number;
+    };
+    categories: any[];
+    recentArticles: any[];
+    tags: string[];
+    archives: any[];
+    filters: {
+        category?: number;
+        tag?: string;
+        search?: string;
+        month?: number;
+        year?: number;
+    };
+    currentCategory?: any;
+    currentTag?: string;
+    currentArchive?: { year: number; month: number };
+}
 
-const MOCK_CATEGORIES: Category[] = [
-    { name: 'Day Trading', slug: 'day-trading', count: 9, url: '/blog/category/day-trading' },
-    { name: 'Finance', slug: 'finance', count: 20, url: '/blog/category/finance' },
-    { name: 'Virtual Hiring', slug: 'virtual-hiring', count: 25, url: '/blog/category/virtual-hiring' },
-    { name: 'Headhunting', slug: 'headhunting', count: 6, url: '/blog/category/headhunting' },
-    { name: 'Promotions', slug: 'promotions', count: 18, url: '/blog/category/promotions' },
-    { name: 'Recruitment Agencies', slug: 'recruitment-agencies', count: 11, url: '/blog/category/recruitment-agencies' },
-];
+function Blog({ blogs, categories, recentArticles, tags, archives, filters, currentCategory, currentTag, currentArchive }: BlogProps) {
+    // Transform backend data to frontend format
+    const articles: BlogArticle[] = blogs.data.map((blog) => ({
+        id: blog.id,
+        title: blog.title,
+        slug: blog.slug,
+        excerpt: blog.excerpt,
+        image: blog.featured_image || 'images/default-blog.png',
+        categories: blog.category ? [blog.category.name] : [],
+        publishedDate: blog.formatted_published_date,
+        readTime: blog.read_time,
+        url: `/blog/${blog.slug}`,
+    }));
 
-const MOCK_RECENT_ARTICLES: RecentArticle[] = [
-    {
-        id: 5,
-        title: "We've mastered saas pricing models",
-        image: 'images/ns-img-454.png',
-        publishedDate: '1 May 2024',
-        url: '/blog/saas-pricing-models',
-    },
-    {
-        id: 6,
-        title: 'Decoding saas consolidation what it means for founders',
-        image: 'images/ns-img-455.png',
-        publishedDate: '1 May 2024',
-        url: '/blog/decoding-saas-consolidation',
-    },
-    {
-        id: 7,
-        title: 'Digital is making place in funds back-office',
-        image: 'images/ns-img-456.png',
-        publishedDate: '1 May 2024',
-        url: '/blog/digital-is-making-place',
-    },
-];
+    const sidebarCategories: Category[] = categories.map((cat) => ({
+        name: cat.name,
+        slug: cat.slug,
+        count: cat.blogs_count || 0,
+        url: `/blog/category/${cat.slug}`,
+    }));
 
-const MOCK_TAGS: Tag[] = [
-    { name: 'Business', slug: 'business', url: '/blog/tag/business' },
-    { name: 'Technology', slug: 'technology', url: '/blog/tag/technology' },
-    { name: 'Design', slug: 'design', url: '/blog/tag/design' },
-    { name: 'Marketing', slug: 'marketing', url: '/blog/tag/marketing' },
-    { name: 'Development', slug: 'development', url: '/blog/tag/development' },
-];
+    const sidebarRecent: RecentArticle[] = recentArticles.map((article) => ({
+        id: article.id,
+        title: article.title,
+        image: article.featured_image || 'images/default-blog.png',
+        publishedDate: article.formatted_published_date,
+        url: `/blog/${article.slug}`,
+    }));
 
-const MOCK_ARCHIVES: Archive[] = [
-    { month: 'January', year: 2024, count: 9, url: '/blog/archive/2024/01' },
-    { month: 'February', year: 2024, count: 20, url: '/blog/archive/2024/02' },
-    { month: 'March', year: 2024, count: 25, url: '/blog/archive/2024/03' },
-    { month: 'April', year: 2024, count: 6, url: '/blog/archive/2024/04' },
-];
+    const sidebarTags: Tag[] = tags.map((tag) => ({
+        name: tag,
+        slug: tag.toLowerCase().replace(/\s+/g, '-'),
+        url: `/blog/tag/${tag}`,
+    }));
 
-function Blog() {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    const sidebarArchives: Archive[] = archives.map((archive) => ({
+        month: monthNames[archive.month - 1],
+        year: archive.year,
+        count: archive.count,
+        url: `/blog/archive/${archive.year}/${archive.month}`,
+    }));
+
     const handleSearch = (query: string) => {
-        console.log('Search query:', query);
-        // TODO: Implémenter la recherche
+        router.get('/blog', { ...filters, search: query }, { preserveState: true });
     };
 
     const handlePageChange = (page: number) => {
-        console.log('Page changed to:', page);
-        // TODO: Implémenter le changement de page
+        router.get('/blog', { ...filters, page }, { preserveState: true });
     };
 
     return (
@@ -111,23 +85,31 @@ function Blog() {
                 <div className="grid grid-cols-12 max-md:gap-y-20 md:gap-5 lg:gap-16">
                     {/* Liste des articles */}
                     <div className="max-w-[793px] space-y-14 max-lg:col-span-7 max-md:order-2 max-md:col-span-full md:space-y-[70px] lg:col-span-8">
-                        {MOCK_ARTICLES.map((article, index) => (
-                            <BlogArticleCard key={article.id} article={article} delay={index === 0 ? '0.3' : '0.1'} />
-                        ))}
+                        {articles.length > 0 ? (
+                            articles.map((article, index) => (
+                                <BlogArticleCard key={article.id} article={article} delay={index === 0 ? '0.3' : '0.1'} />
+                            ))
+                        ) : (
+                            <div className="text-center py-20">
+                                <p className="text-secondary dark:text-accent text-lg">Aucun article trouvé.</p>
+                            </div>
+                        )}
                     </div>
 
                     {/* Sidebar */}
                     <BlogSidebar
-                        categories={MOCK_CATEGORIES}
-                        recentArticles={MOCK_RECENT_ARTICLES}
-                        tags={MOCK_TAGS}
-                        archives={MOCK_ARCHIVES}
+                        categories={sidebarCategories}
+                        recentArticles={sidebarRecent}
+                        tags={sidebarTags}
+                        archives={sidebarArchives}
                         onSearch={handleSearch}
                     />
                 </div>
 
                 {/* Pagination */}
-                <Pagination currentPage={1} totalPages={5} baseUrl="/blog" onPageChange={handlePageChange} />
+                {blogs.last_page > 1 && (
+                    <Pagination currentPage={blogs.current_page} totalPages={blogs.last_page} baseUrl="/blog" onPageChange={handlePageChange} />
+                )}
             </section>
         </PublicLayout>
     );

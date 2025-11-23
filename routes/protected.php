@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BlogCategoryController;
+use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CertificationCategoryController;
 use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
@@ -78,6 +80,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{id}/edit', [GlossaryController::class, 'edit'])->name('edit');
         Route::put('/{id}', [GlossaryController::class, 'update'])->name('update');
         Route::delete('/{id}', [GlossaryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Blog Management Routes
+    Route::prefix('dashboard/blog')->name('dashboard.blog.')->group(function () {
+        Route::get('/', [BlogController::class, 'index'])->name('index');
+        Route::post('/', [BlogController::class, 'store'])->name('store');
+        Route::put('/{id}', [BlogController::class, 'update'])->name('update');
+        Route::delete('/{id}', [BlogController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/toggle-publish', [BlogController::class, 'togglePublish'])->name('toggle-publish');
+
+        // Blog Category routes (API-style for modal)
+        Route::prefix('categories')->name('categories.')->group(function () {
+            Route::get('/', [BlogCategoryController::class, 'index'])->name('index');
+            Route::post('/', [BlogCategoryController::class, 'store'])->name('store');
+            Route::put('/{id}', [BlogCategoryController::class, 'update'])->name('update');
+            Route::delete('/{id}', [BlogCategoryController::class, 'destroy'])->name('destroy');
+            Route::post('/{id}/toggle-active', [BlogCategoryController::class, 'toggleActive'])->name('toggle-active');
+            Route::post('/reorder', [BlogCategoryController::class, 'reorder'])->name('reorder');
+        });
     });
 });
 

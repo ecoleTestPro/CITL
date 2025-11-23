@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\GlossaryController;
 use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +46,11 @@ Route::get('/accreditation-request', [PublicController::class, 'accreditationReq
 
 // Events & Blog
 Route::get('/events', [PublicController::class, 'events'])->name('events');
-Route::get('/blog', [PublicController::class, 'blog'])->name('blog');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/tag/{tag}', [BlogController::class, 'tag'])->name('blog.tag');
+Route::get('/blog/archive/{year}/{month}', [BlogController::class, 'archive'])->name('blog.archive');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Registration Section
 Route::get('/register-certified-testers', [PublicController::class, 'registerCertifiedTesters'])->name('register-certified-testers');

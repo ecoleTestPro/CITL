@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils';
-import { Link } from '@inertiajs/react';
-import { Box, Button, Grid, ListItemText, Menu, MenuList, MenuItem as MuiMenuItem, Paper, Typography } from '@mui/material';
+import { Link, usePage } from '@inertiajs/react';
+import { Box, Button, createTheme, ListItemText, Menu, MenuList, MenuItem as MuiMenuItem, Paper, ThemeProvider, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useAppearance } from '@/hooks/use-appearance';
 
 // Types pour la structure du menu
 interface MenuItem {
@@ -33,6 +34,55 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [anchorEl, setAnchorEl] = useState<{ [key: string]: HTMLElement | null }>({});
     const { t } = useTranslation();
+    const { url } = usePage();
+    const { appearance } = useAppearance();
+
+    // Créer le thème MUI avec les couleurs CITL
+    const muiTheme = useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode: appearance === 'dark' ? 'dark' : 'light',
+                    primary: {
+                        main: '#e36c19', // Orange CITL
+                        light: '#ff8c42',
+                        dark: '#b85614',
+                        contrastText: '#ffffff',
+                    },
+                    secondary: {
+                        main: '#2e9e43', // Vert CITL
+                        light: '#4caf50',
+                        dark: '#1b6e2f',
+                        contrastText: '#ffffff',
+                    },
+                    background: {
+                        default: appearance === 'dark' ? '#252525' : '#ffffff',
+                        paper: appearance === 'dark' ? '#252525' : '#ffffff',
+                    },
+                    text: {
+                        primary: appearance === 'dark' ? '#fafafa' : '#252525',
+                        secondary: appearance === 'dark' ? '#b0b0b0' : '#6b6b6b',
+                    },
+                },
+            }),
+        [appearance],
+    );
+
+    // Fonction pour vérifier si une section contient l'URL active
+    const isSectionActive = (section: MenuSection): boolean => {
+        if (section.type === 'link' && section.href) {
+            return url === section.href;
+        }
+        if (section.items) {
+            return section.items.some((item) => url === item.href || url.startsWith(item.href + '/'));
+        }
+        return false;
+    };
+
+    // Fonction pour vérifier si un item est actif
+    const isItemActive = (itemHref: string): boolean => {
+        return url === itemHref || url.startsWith(itemHref + '/');
+    };
 
     const handleMenuOpen = (event: MouseEvent<HTMLElement>, menuKey: string) => {
         setAnchorEl((prev) => ({ ...prev, [menuKey]: event.currentTarget }));
@@ -132,31 +182,40 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     ];
 
     // Rendu d'un menu item MUI simple
-    const renderMuiMenuItem = (item: MenuItem, menuKey: string) => (
-        <MuiMenuItem
-            key={item.href}
-            onClick={() => {
-                handleMenuClose(menuKey);
-                onNavigate?.();
-            }}
-            component={Link}
-            href={item.href}
-            sx={{
-                py: 1.5,
-                px: 2,
-                borderRadius: 2,
-                mx: 1,
-                '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
-            }}
-        >
-            <ListItemText
-                primary={item.label}
-                secondary={item.description}
-                primaryTypographyProps={{ fontSize: '0.875rem', fontWeight: 500 }}
-                secondaryTypographyProps={{ fontSize: '0.75rem' }}
-            />
-        </MuiMenuItem>
-    );
+    const renderMuiMenuItem = (item: MenuItem, menuKey: string) => {
+        const active = isItemActive(item.href);
+        return (
+            <MuiMenuItem
+                key={item.href}
+                onClick={() => {
+                    handleMenuClose(menuKey);
+                    onNavigate?.();
+                }}
+                component={Link}
+                href={item.href}
+                sx={{
+                    py: 1.5,
+                    px: 2,
+                    borderRadius: 2,
+                    mx: 1,
+                    bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
+                    borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
+                    '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
+                }}
+            >
+                <ListItemText
+                    primary={item.label}
+                    secondary={item.description}
+                    primaryTypographyProps={{
+                        fontSize: '0.875rem',
+                        fontWeight: active ? 600 : 500,
+                        color: active ? '#e36c19' : 'inherit',
+                    }}
+                    secondaryTypographyProps={{ fontSize: '0.75rem' }}
+                />
+            </MuiMenuItem>
+        );
+    };
 
     // Rendu d'un mega menu MUI avec grid
     const renderMuiMegaMenu = (section: MenuSection, menuKey: string) => {
@@ -229,43 +288,48 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                             {groups.map((group) => (
                                 <Box key={group} sx={{ flex: 1 }}>
                                     <MenuList>
-                                        {groupedItems[group].map((item) => (
-                                            <MuiMenuItem
-                                                key={item.href}
-                                                onClick={() => {
-                                                    handleMenuClose(menuKey);
-                                                    onNavigate?.();
-                                                }}
-                                                component={Link}
-                                                href={item.href}
-                                                sx={{
-                                                    py: 1.5,
-                                                    px: 3,
-                                                    borderRadius: 2,
-                                                    mx: 1,
-                                                    '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
-                                                }}
-                                            >
-                                                <Box sx={{ width: '100%' }}>
-                                                    {item.image && (
-                                                        <Box
-                                                            component="img"
-                                                            src={item.image}
-                                                            alt={item.label}
-                                                            sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
-                                                        />
-                                                    )}
-                                                    <Typography variant="body2" fontWeight={500}>
-                                                        {item.label}
-                                                    </Typography>
-                                                    {item.description && (
-                                                        <Typography variant="caption" color="text.secondary" display="block">
-                                                            {item.description}
+                                        {groupedItems[group].map((item) => {
+                                            const active = isItemActive(item.href);
+                                            return (
+                                                <MuiMenuItem
+                                                    key={item.href}
+                                                    onClick={() => {
+                                                        handleMenuClose(menuKey);
+                                                        onNavigate?.();
+                                                    }}
+                                                    component={Link}
+                                                    href={item.href}
+                                                    sx={{
+                                                        py: 1.5,
+                                                        px: 3,
+                                                        borderRadius: 2,
+                                                        mx: 1,
+                                                        bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
+                                                        borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
+                                                        '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
+                                                    }}
+                                                >
+                                                    <Box sx={{ width: '100%' }}>
+                                                        {item.image && (
+                                                            <Box
+                                                                component="img"
+                                                                src={item.image}
+                                                                alt={item.label}
+                                                                sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
+                                                            />
+                                                        )}
+                                                        <Typography variant="body2" fontWeight={active ? 600 : 500} color={active ? '#e36c19' : 'inherit'}>
+                                                            {item.label}
                                                         </Typography>
-                                                    )}
-                                                </Box>
-                                            </MuiMenuItem>
-                                        ))}
+                                                        {item.description && (
+                                                            <Typography variant="caption" color="text.secondary" display="block">
+                                                                {item.description}
+                                                            </Typography>
+                                                        )}
+                                                    </Box>
+                                                </MuiMenuItem>
+                                            );
+                                        })}
                                     </MenuList>
                                 </Box>
                             ))}
@@ -274,43 +338,48 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                         // Afficher normalement si pas de groupes
                         <Box sx={{ width: section.featured && gridCols === 2 ? '50%' : '100%' }}>
                             <MenuList>
-                                {section.items.map((item) => (
-                                    <MuiMenuItem
-                                        key={item.href}
-                                        onClick={() => {
-                                            handleMenuClose(menuKey);
-                                            onNavigate?.();
-                                        }}
-                                        component={Link}
-                                        href={item.href}
-                                        sx={{
-                                            py: 1.5,
-                                            px: 3,
-                                            borderRadius: 2,
-                                            mx: 1,
-                                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
-                                        }}
-                                    >
-                                        <Box sx={{ width: '100%' }}>
-                                            {item.image && (
-                                                <Box
-                                                    component="img"
-                                                    src={item.image}
-                                                    alt={item.label}
-                                                    sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
-                                                />
-                                            )}
-                                            <Typography variant="body2" fontWeight={500}>
-                                                {item.label}
-                                            </Typography>
-                                            {item.description && (
-                                                <Typography variant="caption" color="text.secondary" display="block">
-                                                    {item.description}
+                                {section.items.map((item) => {
+                                    const active = isItemActive(item.href);
+                                    return (
+                                        <MuiMenuItem
+                                            key={item.href}
+                                            onClick={() => {
+                                                handleMenuClose(menuKey);
+                                                onNavigate?.();
+                                            }}
+                                            component={Link}
+                                            href={item.href}
+                                            sx={{
+                                                py: 1.5,
+                                                px: 3,
+                                                borderRadius: 2,
+                                                mx: 1,
+                                                bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
+                                                borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
+                                                '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
+                                            }}
+                                        >
+                                            <Box sx={{ width: '100%' }}>
+                                                {item.image && (
+                                                    <Box
+                                                        component="img"
+                                                        src={item.image}
+                                                        alt={item.label}
+                                                        sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
+                                                    />
+                                                )}
+                                                <Typography variant="body2" fontWeight={active ? 600 : 500} color={active ? '#e36c19' : 'inherit'}>
+                                                    {item.label}
                                                 </Typography>
-                                            )}
-                                        </Box>
-                                    </MuiMenuItem>
-                                ))}
+                                                {item.description && (
+                                                    <Typography variant="caption" color="text.secondary" display="block">
+                                                        {item.description}
+                                                    </Typography>
+                                                )}
+                                            </Box>
+                                        </MuiMenuItem>
+                                    );
+                                })}
                             </MenuList>
                         </Box>
                     )}
@@ -323,10 +392,18 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     const renderDesktopMenuSection = (section: MenuSection) => {
         const menuKey = section.title;
         const isOpen = Boolean(anchorEl[menuKey]);
+        const isActive = isSectionActive(section);
 
         if (section.type === 'link') {
             return (
-                <Link key={section.title} href={section.href!} className="px-3 py-2 text-sm font-medium transition-colors hover:text-primary">
+                <Link
+                    key={section.title}
+                    href={section.href!}
+                    className={cn(
+                        'px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-lg',
+                        isActive && 'bg-primary/10 text-primary font-semibold',
+                    )}
+                >
                     {section.title}
                 </Link>
             );
@@ -340,14 +417,18 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                         onClick={(e) => handleMenuOpen(e, menuKey)}
                         endIcon={<ChevronDown className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')} />}
                         sx={{
-                            color: 'inherit',
+                            color: isActive ? 'primary.main' : 'inherit',
                             textTransform: 'none',
                             fontSize: '0.875rem',
-                            fontWeight: 500,
+                            fontWeight: isActive ? 600 : 500,
                             px: 1.5,
                             py: 1,
                             borderRadius: 2,
-                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)', color: 'black' },
+                            bgcolor: isActive ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
+                            '&:hover': {
+                                bgcolor: isActive ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)',
+                                color: isActive ? 'primary.main' : 'black'
+                            },
                         }}
                     >
                         {section.title}
@@ -378,14 +459,18 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     onClick={(e) => handleMenuOpen(e, menuKey)}
                     endIcon={<ChevronDown className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')} />}
                     sx={{
-                        color: 'inherit',
+                        color: isActive ? 'primary.main' : 'inherit',
                         textTransform: 'none',
                         fontSize: '0.875rem',
-                        fontWeight: 500,
+                        fontWeight: isActive ? 600 : 500,
                         px: 1.5,
                         py: 1,
                         borderRadius: 2,
-                        '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)', color: 'black' },
+                        bgcolor: isActive ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
+                        '&:hover': {
+                            bgcolor: isActive ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)',
+                            color: 'black'
+                        },
                     }}
                 >
                     {section.title}
@@ -405,25 +490,13 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     }}
                 >
                     {section.image ? (
-                        <Grid container>
+                        <Box sx={{ display: 'flex' }}>
                             {/* Liens à gauche */}
-                            <Grid item xs={7}>
-                                <Box sx={{ p: 1 }}>
-                                    {section.gridCols === 2 ? (
-                                        <Grid container>
-                                            {section.items?.map((item) => (
-                                                <Grid item xs={12} key={item.href}>
-                                                    {renderMuiMenuItem(item, menuKey)}
-                                                </Grid>
-                                            ))}
-                                        </Grid>
-                                    ) : (
-                                        section.items?.map((item) => renderMuiMenuItem(item, menuKey))
-                                    )}
-                                </Box>
-                            </Grid>
+                            <Box sx={{ flex: 7, p: 1 }}>
+                                {section.items?.map((item) => renderMuiMenuItem(item, menuKey))}
+                            </Box>
                             {/* Image à droite */}
-                            <Grid item xs={5}>
+                            <Box sx={{ flex: 5 }}>
                                 <Box
                                     sx={{
                                         p: 2,
@@ -453,21 +526,11 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                         />
                                     </Box>
                                 </Box>
-                            </Grid>
-                        </Grid>
+                            </Box>
+                        </Box>
                     ) : (
                         <Box>
-                            {section.gridCols === 2 ? (
-                                <Grid container>
-                                    {section.items?.map((item) => (
-                                        <Grid item xs={6} key={item.href}>
-                                            {renderMuiMenuItem(item, menuKey)}
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            ) : (
-                                section.items?.map((item) => renderMuiMenuItem(item, menuKey))
-                            )}
+                            {section.items?.map((item) => renderMuiMenuItem(item, menuKey))}
                         </Box>
                     )}
                 </Menu>
@@ -527,13 +590,15 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
 
     // Version desktop avec MUI
     return (
-        <div className="flex w-full items-center justify-between">
-            {/* Menu principal à gauche */}
-            <div className="flex items-center gap-1">{menuLeft.map(renderDesktopMenuSection)}</div>
+        <ThemeProvider theme={muiTheme}>
+            <div className="flex w-full items-center justify-between">
+                {/* Menu principal à gauche */}
+                <div className="flex items-center gap-1">{menuLeft.map(renderDesktopMenuSection)}</div>
 
-            {/* Liens secondaires à droite */}
-            <div className="flex items-center gap-1">{menuRight.map(renderDesktopMenuSection)}</div>
-        </div>
+                {/* Liens secondaires à droite */}
+                <div className="flex items-center gap-1">{menuRight.map(renderDesktopMenuSection)}</div>
+            </div>
+        </ThemeProvider>
     );
 };
 

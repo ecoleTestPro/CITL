@@ -171,28 +171,28 @@ export default function CommonTextBlock({ image, title, description, backgroundC
     };
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden bg-white pt-12 pb-16 dark:bg-gray-900" style={{ backgroundColor: backgroundColor || undefined }}>
+        <section
+            ref={sectionRef}
+            className="relative overflow-hidden bg-white pt-12 pb-16 dark:bg-gray-900"
+            style={{ backgroundColor: backgroundColor || undefined }}
+        >
             {/* Background Shapes */}
             {backgroundShapes && backgroundShapes.length > 0 && (
                 <div ref={shapesRef} className="pointer-events-none absolute inset-0 z-0">
                     {backgroundShapes.map((shape, index) => (
-                        <div
-                            key={index}
-                            className={`bg-shape absolute ${getShapePositionClasses(shape.position)}`}
-                            style={{ opacity: shape.opacity || 0.1 }}
-                        >
+                        <div key={index} className={`bg-shape absolute ${getShapePositionClasses(shape.position)}`} style={{ opacity: shape.opacity || 0.1 }}>
                             <img src={shape.src} alt={`Background shape ${index + 1}`} className="h-auto w-auto max-w-none dark:opacity-50" />
                         </div>
                     ))}
                 </div>
             )}
 
-            <div className="container relative z-10 mx-auto">
+            <div className="relative z-10 container mx-auto">
                 <div className={image ? 'grid gap-12 lg:grid-cols-2 lg:gap-16' : ''}>
                     <div>
                         {title && (
                             <div ref={titleRef} className="mb-[70px] space-y-3 text-left">
-                                <h2 className="bold text-gray-900 dark:text-gray-100">{title}</h2>
+                                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{title}</h2>
                             </div>
                         )}
 
@@ -207,7 +207,11 @@ export default function CommonTextBlock({ image, title, description, backgroundC
 
                     {image && (
                         <figure ref={imageRef} className="flex h-full items-center justify-center">
-                            <img src={image?.src || '/assets/images/bg/ns-img-26.jpg'} alt={image?.alt || 'banner-image'} className="rounded-2xl transition-transform duration-300" />
+                            <img
+                                src={image?.src || '/assets/images/bg/ns-img-26.jpg'}
+                                alt={image?.alt || 'banner-image'}
+                                className="rounded-2xl transition-transform duration-300"
+                            />
                         </figure>
                     )}
                 </div>

@@ -696,6 +696,23 @@
             "a40": "Les personnes détenant un certificat ISTQB® avant le lancement du registre peuvent ne pas encore être listées. Veuillez nous contacter pour plus d'informations sur la façon d'être ajouté.",
             "q41": "Je suis inscrit dans le registre et je souhaite me retirer. Que dois-je faire?",
             "a41": "Si vous souhaitez retirer ou modifier vos informations dans le registre SCR, veuillez nous contacter via le formulaire de contact sur la page Contact ou envoyer votre demande à contact@citl.ci"
+        },
+        "anti_piracy": {
+            "hero_badge": "Avertissement",
+            "hero_title": "Avertissement contre la contrefaçon",
+            "hero_description": "La popularité et la reconnaissance du système ISTQB dans le monde sont devenues si élevées que des certificats contrefaits circulent désormais.",
+            "warning_title": "Certificats contrefaits en circulation",
+            "warning_text": "La popularité et la reconnaissance du système ISTQB dans le monde sont devenues si élevées que des certificats contrefaits circulent désormais.",
+            "verification_title": "Vérifier l'authenticité",
+            "verification_text": "Pour vérifier l'authenticité de votre organisme de formation, fournisseur d'examens et certificat, ou si vous avez des soupçons sur la manière dont une formation ou des examens sont conduits, veuillez contacter le CITL en fournissant les détails du certificat et de l'organisme de formation/fournisseur d'examens.",
+            "what_to_verify": "Ce que vous pouvez vérifier :",
+            "verify_training_provider": "L'authenticité de votre organisme de formation",
+            "verify_exam_provider": "La légitimité de votre fournisseur d'examens",
+            "verify_certificate": "La validité de votre certificat ISTQB",
+            "contact_title": "Contactez le CITL",
+            "contact_text": "Pour vérifier l'authenticité de votre organisme de formation, fournisseur d'examens et certificat, ou si vous avez des soupçons sur la manière dont une formation ou des examens sont conduits, veuillez contacter le CITL en fournissant les détails du certificat et de l'organisme de formation/fournisseur d'examens.",
+            "contact_form": "Formulaire de contact",
+            "footer_note": "Protégez la valeur de votre certification en vérifiant son authenticité auprès du CITL"
         }
     }
 }

@@ -16,15 +16,15 @@ function AntiPiracy() {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <HeroCommon
-                badge="Protection ISTQB®"
-                title="Avertissement contre la contrefaçon"
-                description="Le CITL et l'ISTQB® luttent activement contre la contrefaçon des certifications. Découvrez pourquoi l'authenticité de votre certification est cruciale pour votre carrière professionnelle."
+                badge={t('exams.anti_piracy.hero_badge')}
+                title={t('exams.anti_piracy.hero_title')}
+                description={t('exams.anti_piracy.hero_description')}
             />
 
             <CommonTextBlock
-                image={{ src: '/assets/images/pages/certification/shield.png', alt: 'Protection Shield', width: 300 }}
-                title="La valeur de l'authenticité"
-                description="Une certification ISTQB® authentique représente des mois d'étude intensive, de formation professionnelle et de validation d'expertise. La contrefaçon porte atteinte non seulement à la valeur de votre investissement personnel, mais aussi à l'intégrité de toute la communauté du testing logiciel."
+                image={{ src: '/assets/images/pages/certification/shield-2.png', alt: 'Protection Shield', width: 300 }}
+                title={t('exams.anti_piracy.warning_title')}
+                description={t('exams.anti_piracy.warning_text')}
                 backgroundColor="#f8fafc"
                 backgroundShapes={[
                     {
@@ -42,17 +42,16 @@ function AntiPiracy() {
 
             <div className="bg-white dark:bg-gray-500/20">
                 <AboutBlockOne
-                    title="Comment vérifier l'authenticité"
-                    description="Le CITL met à votre disposition plusieurs moyens de vérifier l'authenticité des certifications ISTQB® et de signaler les cas de contrefaçon."
-                    subtitle="Vérification en ligne"
-                    subtitleContent="Utilisez notre outil de vérification en ligne pour confirmer l'authenticité d'une certification en entrant le numéro de certificat et les informations du titulaire."
+                    title={t('exams.anti_piracy.verification_title')}
+                    description={t('exams.anti_piracy.verification_text')}
+                    subtitle={t('exams.anti_piracy.what_to_verify')}
+                    subtitleContent={t('exams.anti_piracy.contact_text')}
                     items={[
-                        { text: 'Accès gratuit au vérificateur ISTQB® officiel' },
-                        { text: 'Vérification instantanée des certificats' },
-                        { text: 'Base de données mondiale des certifications valides' },
-                        { text: 'Protection contre la falsification numérique' },
+                        { text: t('exams.anti_piracy.verify_training_provider') },
+                        { text: t('exams.anti_piracy.verify_exam_provider') },
+                        { text: t('exams.anti_piracy.verify_certificate') },
                     ]}
-                    imageSrc="/assets/images/pages/certification/verification-tool.png"
+                    imageSrc="/assets/images/pages/certification/shield.png"
                     imageAlt="Online Verification Tool"
                 />
             </div>

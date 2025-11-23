@@ -567,6 +567,23 @@
             "level_advanced": "ISTQB Advanced Level",
             "level_specialist": "ISTQB Specialist Level",
             "level_expert": "ISTQB Expert Level"
+        },
+        "anti_piracy": {
+            "hero_badge": "Warning",
+            "hero_title": "Anti-Piracy Warning",
+            "hero_description": "The popularity and recognition of the ISTQB scheme worldwide have become so high, that counterfeit certificates are now in circulation.",
+            "warning_title": "Counterfeit Certificates in Circulation",
+            "warning_text": "The popularity and recognition of the ISTQB scheme worldwide have become so high, that counterfeit certificates are now in circulation.",
+            "verification_title": "Verify Authenticity",
+            "verification_text": "To verify the authenticity of your Training Provider, Exam Provider and Certificate, or if you are suspicious about the way any training or exams are conducted, please contact CITL, providing details of the certificate and of the Exam/Training Provider.",
+            "what_to_verify": "What you can verify:",
+            "verify_training_provider": "The authenticity of your Training Provider",
+            "verify_exam_provider": "The legitimacy of your Exam Provider",
+            "verify_certificate": "The validity of your ISTQB Certificate",
+            "contact_title": "Contact CITL",
+            "contact_text": "To verify the authenticity of your Training Provider, Exam Provider and Certificate, or if you are suspicious about the way any training or exams are conducted, please contact CITL, providing details of the certificate and of the Exam/Training Provider.",
+            "contact_form": "Contact Form",
+            "footer_note": "Protect the value of your certification by verifying its authenticity with CITL"
         }
     }
 }

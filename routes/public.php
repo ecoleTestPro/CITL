@@ -44,7 +44,8 @@ Route::get('/glossary', [PublicController::class, 'glossary'])->name('glossary')
 
 // Training Organizations Section
 Route::get('/accredited-organizations', [PublicController::class, 'accreditedOrganizations'])->name('accredited-organizations');
-Route::get('/accreditation-request', [PublicController::class, 'accreditationRequest'])->name('accreditation-request');
+Route::get('/accreditation-request', [\App\Http\Controllers\AccreditationRequestController::class, 'index'])->name('accreditation-request');
+Route::post('/training/accreditation-request', [\App\Http\Controllers\AccreditationRequestController::class, 'store'])->name('training.accreditation-request');
 
 // Events & Blog
 Route::get('/events', [EventController::class, 'index'])->name('events');

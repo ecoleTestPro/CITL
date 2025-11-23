@@ -12,6 +12,7 @@ use App\Models\Certification\Certification;
 use App\Models\Certification\CertificationCategory;
 use App\Models\Course\Category;
 use App\Models\Course\Course;
+use App\Models\Event;
 use App\Models\Glossary;
 use App\Models\User\Instructor;
 use App\Models\User\User;
@@ -25,6 +26,7 @@ use App\Repositories\Certification\CertificationCategoryRepository;
 use App\Repositories\Certification\CertificationRepository;
 use App\Repositories\Course\CategoryRepository;
 use App\Repositories\Course\CourseRepository;
+use App\Repositories\Event\EventRepository;
 use App\Repositories\Glossary\GlossaryRepository;
 use App\Repositories\Search\SearchRepository;
 use App\Repositories\User\InstructorRepository;
@@ -116,6 +118,11 @@ class AppServiceProvider extends ServiceProvider
         // Glossary Repository
         $this->app->bind(GlossaryRepository::class, function ($app) {
             return new GlossaryRepository(new Glossary());
+        });
+
+        // Event Repository
+        $this->app->bind(EventRepository::class, function ($app) {
+            return new EventRepository(new Event());
         });
     }
 

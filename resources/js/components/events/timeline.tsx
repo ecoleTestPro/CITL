@@ -1,41 +1,57 @@
 import { Badge } from '@/components/ui/badge';
-import { Building2, Calendar } from 'lucide-react';
+import { Building2, Calendar, MapPin } from 'lucide-react';
 
-const experiences = [
-    {
-        title: 'Senior Full Stack Developer',
-        company: 'TechCorp Solutions',
-        period: '2023 - Present',
-        description:
-            'Led the development of enterprise-scale web applications, mentored junior developers, and implemented best practices for code quality and performance optimization.',
-        technologies: ['React', 'Node.js', 'TypeScript', 'AWS', 'MongoDB'],
-    },
-    {
-        title: 'Full Stack Developer',
-        company: 'Digital Innovations Inc',
-        period: '2021 - 2023',
-        description:
-            'Developed and maintained multiple client projects, implemented responsive designs, and integrated third-party APIs for enhanced functionality.',
-        technologies: ['React', 'Express.js', 'PostgreSQL', 'Docker', 'Redis'],
-    },
-    {
-        title: 'Frontend Developer',
-        company: 'WebTech Studios',
-        period: '2018 - 2021',
-        description: 'Created responsive and interactive user interfaces, collaborated with designers, and optimized application performance.',
-        technologies: ['React', 'JavaScript', 'SASS', 'Webpack', 'Jest'],
-    },
-];
+interface Event {
+    id: number;
+    title: string;
+    organization: string;
+    description: string;
+    start_date: string;
+    end_date: string | null;
+    location: string | null;
+    tags: string[] | null;
+    is_active: boolean;
+    order: number;
+}
 
-export default function Timeline() {
+interface TimelineProps {
+    events?: Event[];
+}
+
+export default function Timeline({ events = [] }: TimelineProps) {
+    // Format date to display period
+    const formatPeriod = (startDate: string, endDate: string | null) => {
+        const start = new Date(startDate);
+        const startFormatted = start.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+
+        if (endDate) {
+            const end = new Date(endDate);
+            const endFormatted = end.toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' });
+            return `${startFormatted} - ${endFormatted}`;
+        }
+
+        return `${startFormatted} - Présent`;
+    };
+
+    if (events.length === 0) {
+        return (
+            <div className="mx-auto max-w-(--breakpoint-sm) px-6 py-12 md:py-20">
+                <div className="text-center text-muted-foreground">
+                    <Calendar className="mx-auto mb-4 h-12 w-12" />
+                    <p>Aucun événement disponible pour le moment.</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="mx-auto max-w-(--breakpoint-sm) px-6 py-12 md:py-20">
             <div className="relative ml-3">
                 {/* Timeline line */}
                 <div className="absolute top-4 bottom-0 left-0 border-l-2" />
 
-                {experiences.map(({ company, description, period, technologies, title }, index) => (
-                    <div key={index} className="relative pb-12 pl-8 last:pb-0">
+                {events.map((event) => (
+                    <div key={event.id} className="relative pb-12 pl-8 last:pb-0">
                         {/* Timeline dot */}
                         <div className="absolute top-3 left-px h-3 w-3 -translate-x-1/2 rounded-full border-2 border-primary bg-background" />
 
@@ -45,23 +61,36 @@ export default function Timeline() {
                                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent">
                                     <Building2 className="h-5 w-5 text-muted-foreground" />
                                 </div>
-                                <span className="text-base font-medium">{company}</span>
+                                <span className="text-base font-medium">{event.organization}</span>
                             </div>
                             <div>
-                                <h3 className="text-lg font-semibold">{title}</h3>
-                                <div className="mt-2 flex items-center gap-2 text-sm">
-                                    <Calendar className="h-4 w-4" />
-                                    <span>{period}</span>
+                                <h3 className="text-lg font-semibold">{event.title}</h3>
+                                <div className="mt-2 flex flex-col gap-2 text-sm sm:flex-row sm:items-center">
+                                    <div className="flex items-center gap-2">
+                                        <Calendar className="h-4 w-4" />
+                                        <span>{formatPeriod(event.start_date, event.end_date)}</span>
+                                    </div>
+                                    {event.location && (
+                                        <>
+                                            <span className="hidden sm:inline">•</span>
+                                            <div className="flex items-center gap-2">
+                                                <MapPin className="h-4 w-4" />
+                                                <span>{event.location}</span>
+                                            </div>
+                                        </>
+                                    )}
                                 </div>
                             </div>
-                            <p className="text-sm text-pretty text-muted-foreground sm:text-base">{description}</p>
-                            <div className="flex flex-wrap gap-2">
-                                {technologies.map((tech) => (
-                                    <Badge key={tech} variant="secondary" className="rounded-full">
-                                        {tech}
-                                    </Badge>
-                                ))}
-                            </div>
+                            <p className="text-sm text-pretty text-muted-foreground sm:text-base">{event.description}</p>
+                            {event.tags && event.tags.length > 0 && (
+                                <div className="flex flex-wrap gap-2">
+                                    {event.tags.map((tag) => (
+                                        <Badge key={tag} variant="secondary" className="rounded-full">
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}

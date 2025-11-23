@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { Tag } from '../types';
 
 interface TagCloudProps {
@@ -6,9 +7,11 @@ interface TagCloudProps {
 }
 
 export const TagCloud = ({ tags }: TagCloudProps) => {
+    const { t } = useTranslation();
+
     return (
         <div>
-            <h3 className="text-heading-5 text-secondary dark:text-foreground">Tags</h3>
+            <h3 className="text-heading-5 text-secondary dark:text-foreground">{t('blog.sidebar.tags', 'Tags')}</h3>
             <div className="mt-6 flex flex-wrap gap-4">
                 {tags.map((tag) => (
                     <Link key={tag.slug} href={tag.url}>

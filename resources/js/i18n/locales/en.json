@@ -492,6 +492,22 @@
         "category_description": "Articles in the {{category}} category",
         "tag_description": "Articles with the {{tag}} tag",
         "archive_description": "Articles from {{month}}/{{year}}",
-        "article_description": "Discover this article"
+        "article_description": "Discover this article",
+        "no_articles": "No articles found.",
+        "back_to_articles": "Back to articles",
+        "min_read": "min read",
+        "views_count": "views",
+        "tags_label": "Tags:",
+        "related_articles": "Related articles",
+        "min": "min",
+        "read_more": "Read more",
+        "sidebar": {
+            "categories": "Categories",
+            "recent_articles": "Recent articles",
+            "archives": "Archives",
+            "tags": "Tags",
+            "search_placeholder": "Search articles",
+            "search_aria": "Search articles"
+        }
     }
 }

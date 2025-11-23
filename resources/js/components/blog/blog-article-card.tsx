@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { Calendar, Clock, Image } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AnimatedButton } from '../ui/animated-button';
 import { BlogArticle } from './types';
 
@@ -10,6 +11,7 @@ interface BlogArticleCardProps {
 }
 
 export const BlogArticleCard = ({ article, delay = '0.1' }: BlogArticleCardProps) => {
+    const { t } = useTranslation();
     const [imageError, setImageError] = useState(false);
     const hasImage = article.image && !imageError;
 
@@ -54,7 +56,7 @@ export const BlogArticleCard = ({ article, delay = '0.1' }: BlogArticleCardProps
 
                             <time className="text-tagline-2 flex items-center gap-2 font-medium text-secondary/60 dark:text-foreground/60">
                                 <Clock className="h-5 w-5" />
-                                {article.readTime} min
+                                {article.readTime} {t('blog.min', 'min')}
                             </time>
                         </div>
 
@@ -68,7 +70,9 @@ export const BlogArticleCard = ({ article, delay = '0.1' }: BlogArticleCardProps
                         {/* Bouton Read more */}
                         <div className="text-center md:text-left">
                             <div className="group/btn-v2 mx-auto inline-block w-[85%] rounded-full transition-transform duration-500 ease-in-out md:mx-0 md:w-auto">
-                                <AnimatedButton href={article.url} className="bg-citl-orange px-8 py-6 text-base font-semibold hover:bg-citl-orange/90">Voir</AnimatedButton>
+                                <AnimatedButton href={article.url} className="bg-citl-orange px-8 py-6 text-base font-semibold hover:bg-citl-orange/90">
+                                    {t('blog.read_more', 'Voir')}
+                                </AnimatedButton>
                             </div>
                         </div>
                     </div>

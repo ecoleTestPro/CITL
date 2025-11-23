@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { Image } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { RecentArticle } from '../types';
 
 interface RecentArticlesProps {
@@ -8,9 +9,11 @@ interface RecentArticlesProps {
 }
 
 export const RecentArticles = ({ articles }: RecentArticlesProps) => {
+    const { t } = useTranslation();
+
     return (
         <div>
-            <h3 className="text-heading-5 text-secondary dark:text-foreground">Recent articles</h3>
+            <h3 className="text-heading-5 text-secondary dark:text-foreground">{t('blog.sidebar.recent_articles', 'Recent articles')}</h3>
             <div className="mt-6 space-y-5">
                 {articles.map((article) => (
                     <ArticleItem key={article.id} article={article} />

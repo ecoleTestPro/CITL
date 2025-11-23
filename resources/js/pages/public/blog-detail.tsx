@@ -1,5 +1,5 @@
-import type { Category, RecentArticle, Tag } from '@/components/blog';
-import { BlogSidebar } from '@/components/blog';
+import type { BlogArticle, Category, RecentArticle, Tag } from '@/components/blog';
+import { BlogArticleCard, BlogSidebar } from '@/components/blog';
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Link } from '@inertiajs/react';
@@ -73,6 +73,19 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
         url: `/blog/tag/${tag}`,
     }));
 
+    // Transform related blogs to BlogArticle format
+    const relatedArticles: BlogArticle[] = relatedBlogs.map((related) => ({
+        id: related.id,
+        title: related.title,
+        slug: related.slug,
+        excerpt: '',
+        image: related.featured_image || 'images/default-blog.png',
+        categories: related.category ? [related.category.name] : [],
+        publishedDate: related.formatted_published_date,
+        readTime: related.read_time,
+        url: `/blog/${related.slug}`,
+    }));
+
     return (
         <PublicLayout>
             {/* Hero Section */}
@@ -93,7 +106,7 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                             className="hover:text-primary-500 dark:hover:text-primary-400 mb-6 inline-flex items-center gap-2 text-sm text-gray-600 transition-colors dark:text-gray-400"
                         >
                             <ArrowLeft className="h-4 w-4" />
-                            Retour aux articles
+                            {t('blog.back_to_articles', 'Retour aux articles')}
                         </a>
                         <br />
                         {/* Featured Image */}
@@ -114,7 +127,7 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                         )}
 
                         {/* Title */}
-                        <h1 className="mb-6 text-3xl font-bold text-secondary md:text-4xl lg:text-5xl dark:text-accent">{blog.title}</h1>
+                        <h1 className="mb-6 text-3xl font-bold text-secondary md:text-4xl lg:text-5xl dark:text-foreground">{blog.title}</h1>
 
                         {/* Meta Information */}
                         <div className="border-stroke-3 dark:border-stroke-7 mb-8 flex flex-wrap items-center gap-4 border-b pb-8">
@@ -128,29 +141,33 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                             </div>
                             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                 <Clock className="h-4 w-4" />
-                                <span>{blog.read_time} min de lecture</span>
+                                <span>
+                                    {blog.read_time} {t('blog.min_read', 'min de lecture')}
+                                </span>
                             </div>
                             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                 <Eye className="h-4 w-4" />
-                                <span>{blog.views} vues</span>
+                                <span>
+                                    {blog.views} {t('blog.views_count', 'vues')}
+                                </span>
                             </div>
                         </div>
 
                         {/* Excerpt */}
-                        {blog.excerpt && (
+                        {false && blog.excerpt && (
                             <p className="border-primary-500 mb-8 border-l-4 pl-4 text-lg text-gray-600 italic dark:text-gray-400">{blog.excerpt}</p>
                         )}
 
                         {/* Content */}
                         <div
-                            className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-secondary dark:prose-headings:text-accent prose-p:text-secondary/80 dark:prose-p:text-accent/80 prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary dark:prose-strong:text-accent prose-img:rounded-lg prose-img:shadow-lg prose-code:text-primary-500 prose-code:bg-primary-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-blockquote:border-l-primary-500 prose-blockquote:bg-primary-500/5 prose-blockquote:py-1 max-w-none"
+                            className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-secondary dark:prose-headings:text-foreground prose-p:text-secondary/80 dark:prose-p:text-foreground/80 prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary dark:prose-strong:text-foreground prose-img:rounded-lg prose-img:shadow-lg prose-code:text-primary-500 prose-code:bg-primary-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-blockquote:border-l-primary-500 prose-blockquote:bg-primary-500/5 prose-blockquote:py-1 max-w-none"
                             dangerouslySetInnerHTML={{ __html: blog.content }}
                         />
 
                         {/* Tags */}
                         {blog.tags && blog.tags.length > 0 && (
                             <div className="border-stroke-3 dark:border-stroke-7 mt-12 border-t pt-8">
-                                <h3 className="mb-4 text-lg font-semibold text-secondary dark:text-accent">Tags:</h3>
+                                <h3 className="mb-4 text-lg font-semibold text-secondary dark:text-foreground">{t('blog.tags_label', 'Tags:')}</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {blog.tags.map((tag, index) => (
                                         <Link
@@ -166,30 +183,14 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                         )}
 
                         {/* Related Articles */}
-                        {relatedBlogs.length > 0 && (
+                        {relatedArticles.length > 0 && (
                             <div className="border-stroke-3 dark:border-stroke-7 mt-16 border-t pt-8">
-                                <h2 className="mb-8 text-2xl font-bold text-secondary dark:text-accent">Articles similaires</h2>
-                                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                                    {relatedBlogs.map((related) => (
-                                        <Link key={related.id} href={`/blog/${related.slug}`} className="group">
-                                            <div className="mb-3 overflow-hidden rounded-lg">
-                                                <img
-                                                    src={related.featured_image ? `/storage/${related.featured_image}` : '/images/default-blog.png'}
-                                                    alt={related.title}
-                                                    className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
-                                                />
-                                            </div>
-                                            {related.category && (
-                                                <span className="text-primary-500 mb-2 inline-block text-xs font-medium">{related.category.name}</span>
-                                            )}
-                                            <h3 className="group-hover:text-primary-500 mb-2 line-clamp-2 font-semibold text-secondary transition-colors dark:text-accent">
-                                                {related.title}
-                                            </h3>
-                                            <div className="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
-                                                <span>{related.formatted_published_date}</span>
-                                                <span>{related.read_time} min</span>
-                                            </div>
-                                        </Link>
+                                <h2 className="mb-8 text-2xl font-bold text-secondary dark:text-foreground">
+                                    {t('blog.related_articles', 'Articles similaires')}
+                                </h2>
+                                <div className="space-y-8">
+                                    {relatedArticles.map((article) => (
+                                        <BlogArticleCard key={article.id} article={article} delay="0.1" />
                                     ))}
                                 </div>
                             </div>

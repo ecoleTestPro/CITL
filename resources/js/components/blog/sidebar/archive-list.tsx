@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { Archive } from '../types';
 
 interface ArchiveListProps {
@@ -6,9 +7,11 @@ interface ArchiveListProps {
 }
 
 export const ArchiveList = ({ archives }: ArchiveListProps) => {
+    const { t } = useTranslation();
+
     return (
         <div>
-            <h3 className="text-heading-5 text-secondary dark:text-foreground">Past records</h3>
+            <h3 className="text-heading-5 text-secondary dark:text-foreground">{t('blog.sidebar.archives', 'Past records')}</h3>
             <div className="mt-2.5 space-y-2">
                 {archives.map((archive, index) => (
                     <Link

@@ -110,9 +110,9 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
     };
 
     const getPageDescription = () => {
-        if (currentCategory) return t('blog.category_description', `Articles de la catégorie ${currentCategory.name}`);
-        if (currentTag) return t('blog.tag_description', `Articles avec le tag ${currentTag}`);
-        if (currentArchive) return t('blog.archive_description', `Articles de ${currentArchive.month}/${currentArchive.year}`);
+        if (currentCategory) return t('blog.category_description', { category: currentCategory.name });
+        if (currentTag) return t('blog.tag_description', { tag: currentTag });
+        if (currentArchive) return t('blog.archive_description', { month: currentArchive.month, year: currentArchive.year });
         return t('blog.page_description', 'Découvrez nos derniers articles sur les tests logiciels, les certifications ISTQB et les meilleures pratiques.');
     };
 
@@ -134,7 +134,7 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
                             articles.map((article, index) => <BlogArticleCard key={article.id} article={article} delay={index === 0 ? '0.3' : '0.1'} />)
                         ) : (
                             <div className="py-20 text-center">
-                                <p className="text-lg text-secondary dark:text-accent">Aucun article trouvé.</p>
+                                <p className="text-lg text-secondary dark:text-foreground">{t('blog.no_articles', 'Aucun article trouvé.')}</p>
                             </div>
                         )}
                     </div>

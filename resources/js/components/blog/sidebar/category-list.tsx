@@ -1,4 +1,5 @@
 import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { Category } from '../types';
 
 interface CategoryListProps {
@@ -7,9 +8,11 @@ interface CategoryListProps {
 }
 
 export const CategoryList = ({ categories, activeCategory }: CategoryListProps) => {
+    const { t } = useTranslation();
+
     return (
         <div>
-            <h3 className="text-heading-5 text-secondary dark:text-foreground">Categories</h3>
+            <h3 className="text-heading-5 text-secondary dark:text-foreground">{t('blog.sidebar.categories', 'Categories')}</h3>
             <div className="mt-2.5 space-y-2">
                 {categories.map((category) => {
                     const isActive = activeCategory === category.slug;

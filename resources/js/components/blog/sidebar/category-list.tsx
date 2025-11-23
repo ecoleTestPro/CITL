@@ -9,7 +9,7 @@ interface CategoryListProps {
 export const CategoryList = ({ categories, activeCategory }: CategoryListProps) => {
     return (
         <div>
-            <h3 className="text-heading-5">Categories</h3>
+            <h3 className="text-heading-5 text-secondary dark:text-foreground">Categories</h3>
             <div className="mt-2.5 space-y-2">
                 {categories.map((category) => {
                     const isActive = activeCategory === category.slug;
@@ -18,7 +18,7 @@ export const CategoryList = ({ categories, activeCategory }: CategoryListProps) 
                             key={category.slug}
                             href={category.url}
                             className={`text-tagline-1 flex items-center justify-between py-1.5 transition-colors duration-300 ${
-                                isActive ? 'text-primary-500' : 'hover:text-primary-500 dark:text-accent'
+                                isActive ? 'text-primary dark:text-primary' : 'text-secondary hover:text-primary dark:text-foreground dark:hover:text-primary'
                             }`}
                         >
                             <span>{category.name}</span>

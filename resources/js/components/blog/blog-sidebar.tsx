@@ -19,7 +19,7 @@ export const BlogSidebar = ({ categories, recentArticles, tags, archives, active
         <div
             data-ns-animate
             data-delay="0.3"
-            className="blog-item bg-background-2 dark:bg-background-6 shadow-1 max-w-full space-y-[52px] self-start rounded-[20px] px-8 py-[44px] max-lg:col-span-5 max-md:order-1 max-md:col-span-full md:max-w-[410px] lg:col-span-4"
+            className="blog-item bg-white/30 dark:bg-gray-800/20 shadow-1 max-w-full space-y-[52px] self-start rounded-[20px] px-8 py-[44px] max-lg:col-span-5 max-md:order-1 max-md:col-span-full md:max-w-[410px] lg:col-span-4"
         >
             {/* Formulaire de recherche */}
             <SearchForm onSearch={onSearch} />

@@ -1,7 +1,9 @@
 import type { Archive, BlogArticle, Category, RecentArticle, Tag } from '@/components/blog';
 import { BlogArticleCard, BlogSidebar, Pagination } from '@/components/blog';
+import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { router } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 interface BlogProps {
     blogs?: {
@@ -28,6 +30,8 @@ interface BlogProps {
 }
 
 function Blog({ blogs, categories, recentArticles, tags, archives, filters, currentCategory, currentTag, currentArchive }: BlogProps) {
+    const { t } = useTranslation();
+
     // Transform backend data to frontend format
     const articles: BlogArticle[] = (blogs?.data || []).map((blog) => ({
         id: blog.id,
@@ -97,9 +101,32 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
         router.get('/blog', { ...(filters || {}), page }, { preserveState: true });
     };
 
+    // Déterminer le titre et la description en fonction des filtres
+    const getPageTitle = () => {
+        if (currentCategory) return currentCategory.name;
+        if (currentTag) return `Tag: ${currentTag}`;
+        if (currentArchive) return `Archive: ${currentArchive.month}/${currentArchive.year}`;
+        return t('blog.page_title', 'Blog');
+    };
+
+    const getPageDescription = () => {
+        if (currentCategory) return t('blog.category_description', `Articles de la catégorie ${currentCategory.name}`);
+        if (currentTag) return t('blog.tag_description', `Articles avec le tag ${currentTag}`);
+        if (currentArchive) return t('blog.archive_description', `Articles de ${currentArchive.month}/${currentArchive.year}`);
+        return t('blog.page_description', 'Découvrez nos derniers articles sur les tests logiciels, les certifications ISTQB et les meilleures pratiques.');
+    };
+
     return (
         <PublicLayout>
-            <section className="container mx-auto pt-[120px] pb-14 md:pt-[160px] md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+            {/* Hero Section */}
+            <HeroCommon
+                badge={t('blog.badge', 'Blog')}
+                title={getPageTitle()}
+                description={getPageDescription()}
+                backgroundImage="/assets/images/bg/sharp-2.png"
+            />
+
+            <section className="container mx-auto pt-12 pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
                 <div className="grid grid-cols-12 max-md:gap-y-20 md:gap-5 lg:gap-16">
                     {/* Liste des articles */}
                     <div className="max-w-[793px] space-y-14 max-lg:col-span-7 max-md:order-2 max-md:col-span-full md:space-y-[70px] lg:col-span-8">

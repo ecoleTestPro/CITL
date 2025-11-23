@@ -81,7 +81,7 @@ export const Pagination = ({ currentPage, totalPages, baseUrl, onPageChange }: P
                 if (page === '...') {
                     return (
                         <li key={`ellipsis-${index}`} className="flex h-10 w-10 items-center justify-center">
-                            <span className="text-secondary dark:text-accent">...</span>
+                            <span className="text-secondary dark:text-foreground">...</span>
                         </li>
                     );
                 }
@@ -94,8 +94,8 @@ export const Pagination = ({ currentPage, totalPages, baseUrl, onPageChange }: P
                         <Link
                             href={getPageUrl(pageNumber)}
                             onClick={(e) => handlePageClick(e, pageNumber)}
-                            className={`text-tagline-2 hover:bg-primary-500 flex h-10 w-10 items-center justify-center rounded-full font-medium duration-300 hover:text-accent dark:text-accent ${
-                                isActive ? 'bg-primary-500 text-accent' : ''
+                            className={`text-tagline-2 hover:bg-primary-500 flex h-10 w-10 items-center justify-center rounded-full font-medium duration-300 hover:text-white dark:text-foreground ${
+                                isActive ? 'bg-primary-500 text-white' : ''
                             }`}
                         >
                             {pageNumber}

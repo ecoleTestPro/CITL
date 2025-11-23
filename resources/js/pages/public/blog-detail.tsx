@@ -1,8 +1,10 @@
-import { BlogSidebar } from '@/components/blog';
 import type { Category, RecentArticle, Tag } from '@/components/blog';
+import { BlogSidebar } from '@/components/blog';
+import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
-import { Clock, Eye, Calendar, User, ArrowLeft } from 'lucide-react';
 import { Link } from '@inertiajs/react';
+import { ArrowLeft, Calendar, Clock, Eye, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Blog {
     id: number;
@@ -48,6 +50,8 @@ interface BlogDetailProps {
 }
 
 export default function BlogDetail({ blog, relatedBlogs, categories, recentArticles, tags }: BlogDetailProps) {
+    const { t } = useTranslation();
+
     const sidebarCategories: Category[] = categories.map((cat) => ({
         name: cat.name,
         slug: cat.slug,
@@ -71,23 +75,31 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
 
     return (
         <PublicLayout>
-            <article className="container mx-auto pt-[120px] pb-14 md:pt-[160px] md:pb-16 lg:pb-[88px] xl:pb-[100px]">
+            {/* Hero Section */}
+            <HeroCommon
+                badge={blog.category?.name || t('blog.badge', 'Blog')}
+                title={blog.title}
+                description={blog.excerpt || t('blog.article_description', 'Découvrez cet article')}
+                backgroundImage="/assets/images/bg/sharp-2.png"
+            />
+
+            <article className="container mx-auto pt-12 pb-14 md:pb-16 lg:pb-[88px] xl:pb-[100px]">
                 <div className="grid grid-cols-12 max-md:gap-y-20 md:gap-5 lg:gap-16">
                     {/* Main Content */}
                     <div className="max-w-[793px] max-lg:col-span-7 max-md:order-2 max-md:col-span-full lg:col-span-8">
                         {/* Back Button */}
-                        <Link
+                        <a
                             href="/blog"
-                            className="inline-flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 mb-6 transition-colors"
+                            className="hover:text-primary-500 dark:hover:text-primary-400 mb-6 inline-flex items-center gap-2 text-sm text-gray-600 transition-colors dark:text-gray-400"
                         >
                             <ArrowLeft className="h-4 w-4" />
                             Retour aux articles
-                        </Link>
-
+                        </a>
+                        <br />
                         {/* Featured Image */}
                         {blog.featured_image && (
                             <div className="mb-8 overflow-hidden rounded-lg">
-                                <img src={`/storage/${blog.featured_image}`} alt={blog.title} className="w-full h-auto object-cover" />
+                                <img src={`/storage/${blog.featured_image}`} alt={blog.title} className="h-auto w-full object-cover" />
                             </div>
                         )}
 
@@ -95,17 +107,17 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                         {blog.category && (
                             <Link
                                 href={`/blog/category/${blog.category.slug}`}
-                                className="inline-block mb-4 px-3 py-1 text-xs font-medium rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 transition-colors"
+                                className="bg-primary-500/10 text-primary-500 hover:bg-primary-500/20 mb-4 inline-block rounded-full px-3 py-1 text-xs font-medium transition-colors"
                             >
                                 {blog.category.name}
                             </Link>
                         )}
 
                         {/* Title */}
-                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-secondary dark:text-accent">{blog.title}</h1>
+                        <h1 className="mb-6 text-3xl font-bold text-secondary md:text-4xl lg:text-5xl dark:text-accent">{blog.title}</h1>
 
                         {/* Meta Information */}
-                        <div className="flex flex-wrap items-center gap-4 mb-8 pb-8 border-b border-stroke-3 dark:border-stroke-7">
+                        <div className="border-stroke-3 dark:border-stroke-7 mb-8 flex flex-wrap items-center gap-4 border-b pb-8">
                             <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                                 <User className="h-4 w-4" />
                                 <span>{blog.author.name}</span>
@@ -125,32 +137,26 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                         </div>
 
                         {/* Excerpt */}
-                        {blog.excerpt && <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 italic border-l-4 border-primary-500 pl-4">{blog.excerpt}</p>}
+                        {blog.excerpt && (
+                            <p className="border-primary-500 mb-8 border-l-4 pl-4 text-lg text-gray-600 italic dark:text-gray-400">{blog.excerpt}</p>
+                        )}
 
                         {/* Content */}
                         <div
-                            className="prose prose-lg dark:prose-invert max-w-none
-                                prose-headings:font-bold prose-headings:text-secondary dark:prose-headings:text-accent
-                                prose-p:text-secondary/80 dark:prose-p:text-accent/80
-                                prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline
-                                prose-strong:text-secondary dark:prose-strong:text-accent
-                                prose-img:rounded-lg prose-img:shadow-lg
-                                prose-code:text-primary-500 prose-code:bg-primary-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-                                prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950
-                                prose-blockquote:border-l-primary-500 prose-blockquote:bg-primary-500/5 prose-blockquote:py-1"
+                            className="prose prose-lg dark:prose-invert prose-headings:font-bold prose-headings:text-secondary dark:prose-headings:text-accent prose-p:text-secondary/80 dark:prose-p:text-accent/80 prose-a:text-primary-500 prose-a:no-underline hover:prose-a:underline prose-strong:text-secondary dark:prose-strong:text-accent prose-img:rounded-lg prose-img:shadow-lg prose-code:text-primary-500 prose-code:bg-primary-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-blockquote:border-l-primary-500 prose-blockquote:bg-primary-500/5 prose-blockquote:py-1 max-w-none"
                             dangerouslySetInnerHTML={{ __html: blog.content }}
                         />
 
                         {/* Tags */}
                         {blog.tags && blog.tags.length > 0 && (
-                            <div className="mt-12 pt-8 border-t border-stroke-3 dark:border-stroke-7">
-                                <h3 className="text-lg font-semibold mb-4 text-secondary dark:text-accent">Tags:</h3>
+                            <div className="border-stroke-3 dark:border-stroke-7 mt-12 border-t pt-8">
+                                <h3 className="mb-4 text-lg font-semibold text-secondary dark:text-accent">Tags:</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {blog.tags.map((tag, index) => (
                                         <Link
                                             key={index}
                                             href={`/blog/tag/${tag}`}
-                                            className="px-3 py-1 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-primary-500/10 hover:text-primary-500 transition-colors"
+                                            className="hover:bg-primary-500/10 hover:text-primary-500 rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-700 transition-colors dark:bg-gray-800 dark:text-gray-300"
                                         >
                                             #{tag}
                                         </Link>
@@ -161,22 +167,22 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
 
                         {/* Related Articles */}
                         {relatedBlogs.length > 0 && (
-                            <div className="mt-16 pt-8 border-t border-stroke-3 dark:border-stroke-7">
-                                <h2 className="text-2xl font-bold mb-8 text-secondary dark:text-accent">Articles similaires</h2>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="border-stroke-3 dark:border-stroke-7 mt-16 border-t pt-8">
+                                <h2 className="mb-8 text-2xl font-bold text-secondary dark:text-accent">Articles similaires</h2>
+                                <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                                     {relatedBlogs.map((related) => (
                                         <Link key={related.id} href={`/blog/${related.slug}`} className="group">
-                                            <div className="overflow-hidden rounded-lg mb-3">
+                                            <div className="mb-3 overflow-hidden rounded-lg">
                                                 <img
                                                     src={related.featured_image ? `/storage/${related.featured_image}` : '/images/default-blog.png'}
                                                     alt={related.title}
-                                                    className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                                                    className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
                                                 />
                                             </div>
                                             {related.category && (
-                                                <span className="inline-block mb-2 text-xs font-medium text-primary-500">{related.category.name}</span>
+                                                <span className="text-primary-500 mb-2 inline-block text-xs font-medium">{related.category.name}</span>
                                             )}
-                                            <h3 className="font-semibold text-secondary dark:text-accent group-hover:text-primary-500 transition-colors line-clamp-2 mb-2">
+                                            <h3 className="group-hover:text-primary-500 mb-2 line-clamp-2 font-semibold text-secondary transition-colors dark:text-accent">
                                                 {related.title}
                                             </h3>
                                             <div className="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
@@ -191,7 +197,13 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
                     </div>
 
                     {/* Sidebar */}
-                    <BlogSidebar categories={sidebarCategories} recentArticles={sidebarRecent} tags={sidebarTags} archives={[]} onSearch={(query) => console.log(query)} />
+                    <BlogSidebar
+                        categories={sidebarCategories}
+                        recentArticles={sidebarRecent}
+                        tags={sidebarTags}
+                        archives={[]}
+                        onSearch={(query) => console.log(query)}
+                    />
                 </div>
             </article>
         </PublicLayout>

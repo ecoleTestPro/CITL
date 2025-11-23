@@ -484,5 +484,14 @@
             "confirm_registration": "Confirm Registration",
             "cancel_registration": "Cancel Registration"
         }
+    },
+    "blog": {
+        "badge": "Blog",
+        "page_title": "Blog",
+        "page_description": "Discover our latest articles on software testing, ISTQB certifications, and best practices.",
+        "category_description": "Articles in the {{category}} category",
+        "tag_description": "Articles with the {{tag}} tag",
+        "archive_description": "Articles from {{month}}/{{year}}",
+        "article_description": "Discover this article"
     }
 }

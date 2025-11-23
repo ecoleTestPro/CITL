@@ -22,6 +22,7 @@ use App\Repositories\Certification\CertificationRepository;
 use App\Repositories\Course\CategoryRepository;
 use App\Repositories\Course\CourseRepository;
 use App\Repositories\Glossary\GlossaryRepository;
+use App\Repositories\Search\SearchRepository;
 use App\Repositories\User\InstructorRepository;
 use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
@@ -85,6 +86,11 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(\App\Repositories\Certificate\CertificationDocumentTagRepository::class, function ($app) {
             return new \App\Repositories\Certificate\CertificationDocumentTagRepository(new \App\Models\Certificate\CertificationDocumentTag());
+        });
+
+        // Search Repository
+        $this->app->singleton(SearchRepository::class, function ($app) {
+            return new SearchRepository();
         });
 
         $this->app->bind(\App\Repositories\ExamRegistrationRepository::class, function ($app) {

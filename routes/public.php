@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\GlossaryController;
+use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,4 +66,7 @@ Route::prefix('api')->group(function () {
     Route::get('/glossary/grouped', [GlossaryController::class, 'groupedByLetter'])->name('api.glossary.grouped');
     Route::get('/glossary/letter/{letter}', [GlossaryController::class, 'byLetter'])->name('api.glossary.by-letter');
     Route::get('/glossary/search', [GlossaryController::class, 'search'])->name('api.glossary.search');
+
+    // Global Search API Route
+    Route::get('/search', [SearchController::class, 'search'])->name('api.search');
 });

@@ -1,14 +1,9 @@
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAppearance } from '@/hooks/use-appearance';
 import { ArrowUp, Globe, Moon, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
 export const FloatingActions = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -44,57 +39,51 @@ export const FloatingActions = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <div className="fixed right-6 bottom-6 z-40 flex flex-col gap-3">
             {/* Bouton Scroll to Top */}
             <Button
                 size="icon"
                 onClick={scrollToTop}
-                className="h-12 w-12 rounded-full bg-citl-orange shadow-lg transition-all duration-300 hover:bg-citl-orange/90 hover:scale-110"
+                className="h-12 w-12 rounded-full bg-citl-orange shadow-lg transition-all duration-300 hover:scale-110 hover:bg-citl-orange/90"
                 aria-label="Scroll to top"
             >
                 <ArrowUp className="h-5 w-5 text-white" />
             </Button>
 
             {/* Bouton Changement de thème */}
-            <Button
-                size="icon"
-                onClick={toggleTheme}
-                className="h-12 w-12 rounded-full bg-background shadow-lg transition-all duration-300 hover:scale-110 border border-border"
-                aria-label="Toggle theme"
-            >
-                {appearance === 'dark' ? (
-                    <Sun className="h-5 w-5 text-foreground" />
-                ) : (
-                    <Moon className="h-5 w-5 text-foreground" />
-                )}
-            </Button>
+            {false && (
+                <Button
+                    size="icon"
+                    onClick={toggleTheme}
+                    className="h-12 w-12 rounded-full border border-border bg-background shadow-lg transition-all duration-300 hover:scale-110"
+                    aria-label="Toggle theme"
+                >
+                    {appearance === 'dark' ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}
+                </Button>
+            )}
 
             {/* Bouton Changement de langue */}
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button
-                        size="icon"
-                        className="h-12 w-12 rounded-full bg-background shadow-lg transition-all duration-300 hover:scale-110 border border-border"
-                        aria-label="Change language"
-                    >
-                        <Globe className="h-5 w-5 text-foreground" />
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-32">
-                    <DropdownMenuItem
-                        onClick={() => changeLanguage('fr')}
-                        className={i18n.language === 'fr' ? 'bg-accent' : ''}
-                    >
-                        🇫🇷 Français
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                        onClick={() => changeLanguage('en')}
-                        className={i18n.language === 'en' ? 'bg-accent' : ''}
-                    >
-                        🇬🇧 English
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+            {false && (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            size="icon"
+                            className="h-12 w-12 rounded-full border border-border bg-background shadow-lg transition-all duration-300 hover:scale-110"
+                            aria-label="Change language"
+                        >
+                            <Globe className="h-5 w-5 text-foreground" />
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-32">
+                        <DropdownMenuItem onClick={() => changeLanguage('fr')} className={i18n.language === 'fr' ? 'bg-accent' : ''}>
+                            🇫🇷 Français
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? 'bg-accent' : ''}>
+                            🇬🇧 English
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )}
         </div>
     );
 };

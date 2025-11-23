@@ -11,6 +11,7 @@ interface MenuItem {
     href: string;
     description?: string;
     image?: string;
+    group?: string;
 }
 
 interface MenuSection {
@@ -53,6 +54,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                 { label: t('nav.missions'), href: '/missions' },
                 { label: t('nav.executive_board'), href: '/executive-board' },
             ],
+            image: '/assets/images/menu/pexels-mikhail-nilov-9301868.jpg',
         },
         {
             title: t('nav.membership'),
@@ -64,15 +66,18 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
         },
         {
             title: t('nav.certifications'),
-            type: 'dropdown',
+            type: 'mega',
             gridCols: 2,
             items: [
-                { label: t('nav.why_certification'), href: '/why-certification' },
-                { label: t('nav.core_foundation'), href: '/core-foundation' },
-                { label: t('nav.core_advanced'), href: '/core-advanced' },
-                { label: t('nav.specialist'), href: '/specialist' },
-                { label: t('nav.expert_level'), href: '/expert-level' },
-                { label: t('nav.a4q_practical_tester'), href: '/a4q-practical-tester' },
+                // Colonne 1: Info & A4Q
+                { label: t('nav.why_certification'), href: '/why-certification', group: 'info' },
+                { label: t('nav.a4q_practical_tester'), href: '/a4q-practical-tester', group: 'info' },
+
+                // Colonne 2: Catégories ISTQB
+                { label: t('nav.core_foundation'), href: '/core-foundation', group: 'istqb' },
+                { label: t('nav.core_advanced'), href: '/core-advanced', group: 'istqb' },
+                { label: t('nav.specialist'), href: '/specialist', group: 'istqb' },
+                { label: t('nav.expert_level'), href: '/expert-level', group: 'istqb' },
             ],
         },
         {
@@ -159,11 +164,27 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
 
         const gridCols = section.gridCols || 1;
 
+        // Grouper les items par groupe si disponible
+        const hasGroups = section.items.some((item) => item.group);
+        const groupedItems = hasGroups
+            ? section.items.reduce(
+                  (acc, item) => {
+                      const group = item.group || 'default';
+                      if (!acc[group]) acc[group] = [];
+                      acc[group].push(item);
+                      return acc;
+                  },
+                  {} as Record<string, MenuItem[]>,
+              )
+            : { default: section.items };
+
+        const groups = Object.keys(groupedItems);
+
         return (
             <Paper sx={{ minWidth: gridCols === 2 ? 600 : 400, maxWidth: 800, borderRadius: 3 }}>
-                <Grid container spacing={0}>
+                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     {section.featured && (
-                        <Grid item xs={12} md={gridCols === 2 ? 6 : 12}>
+                        <Box sx={{ width: gridCols === 2 ? '50%' : '100%' }}>
                             <Box
                                 component={Link}
                                 href={section.featured.href}
@@ -199,50 +220,101 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                     </Typography>
                                 )}
                             </Box>
-                        </Grid>
+                        </Box>
                     )}
-                    <Grid item xs={12} md={section.featured && gridCols === 2 ? 6 : 12}>
-                        <MenuList>
-                            {section.items.map((item) => (
-                                <MuiMenuItem
-                                    key={item.href}
-                                    onClick={() => {
-                                        handleMenuClose(menuKey);
-                                        onNavigate?.();
-                                    }}
-                                    component={Link}
-                                    href={item.href}
-                                    sx={{
-                                        py: 1.5,
-                                        px: 3,
-                                        borderRadius: 2,
-                                        mx: 1,
-                                        '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
-                                    }}
-                                >
-                                    <Box sx={{ width: '100%' }}>
-                                        {item.image && (
-                                            <Box
-                                                component="img"
-                                                src={item.image}
-                                                alt={item.label}
-                                                sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
-                                            />
-                                        )}
-                                        <Typography variant="body2" fontWeight={500}>
-                                            {item.label}
-                                        </Typography>
-                                        {item.description && (
-                                            <Typography variant="caption" color="text.secondary" display="block">
-                                                {item.description}
-                                            </Typography>
-                                        )}
-                                    </Box>
-                                </MuiMenuItem>
+
+                    {hasGroups ? (
+                        // Afficher en colonnes si groupé
+                        <Box sx={{ display: 'flex', flex: 1 }}>
+                            {groups.map((group) => (
+                                <Box key={group} sx={{ flex: 1 }}>
+                                    <MenuList>
+                                        {groupedItems[group].map((item) => (
+                                            <MuiMenuItem
+                                                key={item.href}
+                                                onClick={() => {
+                                                    handleMenuClose(menuKey);
+                                                    onNavigate?.();
+                                                }}
+                                                component={Link}
+                                                href={item.href}
+                                                sx={{
+                                                    py: 1.5,
+                                                    px: 3,
+                                                    borderRadius: 2,
+                                                    mx: 1,
+                                                    '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                                                }}
+                                            >
+                                                <Box sx={{ width: '100%' }}>
+                                                    {item.image && (
+                                                        <Box
+                                                            component="img"
+                                                            src={item.image}
+                                                            alt={item.label}
+                                                            sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
+                                                        />
+                                                    )}
+                                                    <Typography variant="body2" fontWeight={500}>
+                                                        {item.label}
+                                                    </Typography>
+                                                    {item.description && (
+                                                        <Typography variant="caption" color="text.secondary" display="block">
+                                                            {item.description}
+                                                        </Typography>
+                                                    )}
+                                                </Box>
+                                            </MuiMenuItem>
+                                        ))}
+                                    </MenuList>
+                                </Box>
                             ))}
-                        </MenuList>
-                    </Grid>
-                </Grid>
+                        </Box>
+                    ) : (
+                        // Afficher normalement si pas de groupes
+                        <Box sx={{ width: section.featured && gridCols === 2 ? '50%' : '100%' }}>
+                            <MenuList>
+                                {section.items.map((item) => (
+                                    <MuiMenuItem
+                                        key={item.href}
+                                        onClick={() => {
+                                            handleMenuClose(menuKey);
+                                            onNavigate?.();
+                                        }}
+                                        component={Link}
+                                        href={item.href}
+                                        sx={{
+                                            py: 1.5,
+                                            px: 3,
+                                            borderRadius: 2,
+                                            mx: 1,
+                                            '&:hover': { bgcolor: 'rgba(0, 0, 0, 0.04)' },
+                                        }}
+                                    >
+                                        <Box sx={{ width: '100%' }}>
+                                            {item.image && (
+                                                <Box
+                                                    component="img"
+                                                    src={item.image}
+                                                    alt={item.label}
+                                                    sx={{ width: '100%', height: 80, objectFit: 'cover', borderRadius: 2, mb: 1 }}
+                                                />
+                                            )}
+                                            <Typography variant="body2" fontWeight={500}>
+                                                {item.label}
+                                            </Typography>
+                                            {item.description && (
+                                                <Typography variant="caption" color="text.secondary" display="block">
+                                                    {item.description}
+                                                </Typography>
+                                            )}
+                                        </Box>
+                                    </MuiMenuItem>
+                                ))}
+                            </MenuList>
+                        </Box>
+                    )}
+                </Box>
             </Paper>
         );
     };

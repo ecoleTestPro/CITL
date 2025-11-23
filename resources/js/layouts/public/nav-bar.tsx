@@ -1,4 +1,3 @@
-import { LanguageSwitcher } from '@/components/language-switcher';
 import { SearchBar } from '@/components/search-bar';
 import { Button } from '@/components/ui/button';
 import { Link } from '@inertiajs/react';
@@ -41,11 +40,6 @@ const Navbar = () => {
 
                             {/* Actions de droite */}
                             <div className="flex shrink-0 items-center gap-2">
-                                {/* Changement de langue */}
-                                <div className="hidden sm:block">
-                                    <LanguageSwitcher />
-                                </div>
-
                                 {/* Boutons d'authentification */}
                                 <Link href="/exam-registration" className="hidden lg:inline-flex">
                                     <Button variant="ghost" className="rounded-full border border-border transition-colors hover:border-foreground/20">
@@ -68,7 +62,7 @@ const Navbar = () => {
 
                     {/* Niveau 2: Menu de navigation */}
                     <div
-                        className={`w-full bg-background backdrop-blur-md transition-all duration-300 ${
+                        className={`hidden w-full bg-background backdrop-blur-md transition-all duration-300 xl:block ${
                             isScrolled ? 'fixed top-0 z-50 border-b shadow-md' : ''
                         }`}
                     >
@@ -91,17 +85,14 @@ const Navbar = () => {
                         {/* Actions mobiles */}
                         <div className="mt-6 space-y-3 border-t pt-6">
                             <div className="flex flex-col gap-3">
-                                <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                                <Link href="/exam-registration" onClick={() => setMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full rounded-full">
-                                        {t('nav.login')}
+                                        {t('nav.exam_registration')}
                                     </Button>
                                 </Link>
-                                <Link href="/register" onClick={() => setMobileMenuOpen(false)}>
-                                    <Button className="w-full rounded-full">{t('nav.register')}</Button>
+                                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                                    <Button className="w-full rounded-full">{t('nav.contact')}</Button>
                                 </Link>
-                            </div>
-                            <div className="flex justify-center pt-3">
-                                <LanguageSwitcher />
                             </div>
                         </div>
                     </div>

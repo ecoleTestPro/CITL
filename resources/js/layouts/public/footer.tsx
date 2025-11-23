@@ -1,5 +1,9 @@
 import CtaTwo from '@/components/blocks/cta/cta-two';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { Button } from '@/components/ui/button';
+import { useAppearance } from '@/hooks/use-appearance';
 import { Link } from '@inertiajs/react';
+import { Moon, Sun } from 'lucide-react';
 import { type ComponentType, type SVGProps } from 'react';
 import Logo from './logo';
 
@@ -193,7 +197,14 @@ const LEGAL_LINKS: FooterLink[] = [
 ];
 
 const Footer = () => {
+    const { appearance, updateAppearance } = useAppearance();
+
     const currentYear = new Date().getFullYear();
+
+    const toggleTheme = () => {
+        const newTheme = appearance === 'dark' ? 'light' : 'dark';
+        updateAppearance(newTheme);
+    };
 
     return (
         <>
@@ -255,6 +266,21 @@ const Footer = () => {
                                 </ul>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Language Switcher */}
+                <div className="">
+                    <div className="item-center container mx-auto flex justify-end gap-x-2 px-4 py-4">
+                        <LanguageSwitcher />
+                        <Button
+                            size="icon"
+                            onClick={toggleTheme}
+                            className="h-12 w-12 rounded-full border border-border bg-background shadow-lg transition-all duration-300 hover:scale-110"
+                            aria-label="Toggle theme"
+                        >
+                            {appearance === 'dark' ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}
+                        </Button>
                     </div>
                 </div>
 

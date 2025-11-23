@@ -371,12 +371,7 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                 message={`Êtes-vous sûr de vouloir supprimer le terme "${glossaryToDelete?.term}" ? Cette action est irréversible.`}
             />
 
-            <GlossaryFormModal
-                isOpen={showFormModal}
-                onClose={closeFormModal}
-                glossary={glossaryToEdit}
-                onSuccess={handleFormSuccess}
-            />
+            <GlossaryFormModal isOpen={showFormModal} onClose={closeFormModal} glossary={glossaryToEdit} onSuccess={handleFormSuccess} />
         </AppLayout>
     );
 }

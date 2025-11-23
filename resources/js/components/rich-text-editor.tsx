@@ -1,9 +1,12 @@
 import { Color } from '@tiptap/extension-color';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
+import { Table } from '@tiptap/extension-table';
+import { TableCell } from '@tiptap/extension-table-cell';
+import { TableHeader } from '@tiptap/extension-table-header';
+import { TableRow } from '@tiptap/extension-table-row';
 import TextAlign from '@tiptap/extension-text-align';
 import { TextStyle } from '@tiptap/extension-text-style';
-// import TextStyle from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -18,6 +21,7 @@ import {
     ListOrdered,
     Redo,
     Strikethrough,
+    Table as TableIcon,
     Underline as UnderlineIcon,
     Undo,
 } from 'lucide-react';
@@ -48,6 +52,23 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Comme
             }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
+            }),
+            Table.configure({
+                resizable: true,
+                HTMLAttributes: {
+                    class: 'border-collapse table-auto w-full',
+                },
+            }),
+            TableRow,
+            TableHeader.configure({
+                HTMLAttributes: {
+                    class: 'border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 px-4 py-2 text-left font-semibold',
+                },
+            }),
+            TableCell.configure({
+                HTMLAttributes: {
+                    class: 'border border-gray-300 dark:border-gray-600 px-4 py-2',
+                },
             }),
         ],
         content,
@@ -235,6 +256,64 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Comme
                         />
                     </svg>
                 </button>
+
+                <div className="mx-1 h-6 w-px bg-gray-300 dark:bg-gray-600" />
+
+                {/* Table */}
+                <button
+                    onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()}
+                    className={`rounded p-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 ${
+                        editor.isActive('table') ? 'bg-gray-200 dark:bg-gray-700' : ''
+                    }`}
+                    type="button"
+                    title="Insérer un tableau"
+                >
+                    <TableIcon className="h-4 w-4" />
+                </button>
+                {editor.isActive('table') && (
+                    <>
+                        <button
+                            onClick={() => editor.chain().focus().addColumnBefore().run()}
+                            className="rounded px-2 py-2 text-xs transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            title="Ajouter une colonne avant"
+                        >
+                            +Col
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().addRowBefore().run()}
+                            className="rounded px-2 py-2 text-xs transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            title="Ajouter une ligne avant"
+                        >
+                            +Row
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().deleteColumn().run()}
+                            className="rounded px-2 py-2 text-xs transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            title="Supprimer la colonne"
+                        >
+                            -Col
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().deleteRow().run()}
+                            className="rounded px-2 py-2 text-xs transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            title="Supprimer la ligne"
+                        >
+                            -Row
+                        </button>
+                        <button
+                            onClick={() => editor.chain().focus().deleteTable().run()}
+                            className="rounded px-2 py-2 text-xs text-red-600 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                            type="button"
+                            title="Supprimer le tableau"
+                        >
+                            Del
+                        </button>
+                    </>
+                )}
 
                 <div className="mx-1 h-6 w-px bg-gray-300 dark:bg-gray-600" />
 

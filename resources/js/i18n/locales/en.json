@@ -568,6 +568,11 @@
             "level_specialist": "ISTQB Specialist Level",
             "level_expert": "ISTQB Expert Level"
         },
+        "glossary": {
+            "hero_badge": "ISTQB® Glossary",
+            "hero_title": "Software Testing Glossary",
+            "hero_description": "Discover the official definitions of terms used in the field of software testing according to ISTQB® standards."
+        },
         "anti_piracy": {
             "hero_badge": "Warning",
             "hero_title": "Anti-Piracy Warning",

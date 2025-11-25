@@ -34,12 +34,10 @@ export function GlossarySidebar({ availableLetters, activeLetter, onLetterClick,
     return (
         <div className="sticky top-24 space-y-6">
             {/* Search Box */}
-            <div className="rounded-lg border bg-white dark:bg-gray-900 p-4 shadow-sm">
-                <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                    Rechercher
-                </h3>
+            <div className="rounded-lg border bg-white p-4 shadow-sm dark:bg-gray-900">
+                <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">Rechercher</h3>
                 <div className="relative">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
                     <Input
                         type="text"
                         placeholder="Rechercher un terme..."
@@ -51,10 +49,8 @@ export function GlossarySidebar({ availableLetters, activeLetter, onLetterClick,
             </div>
 
             {/* Alphabet Navigation */}
-            <div className="rounded-lg border bg-white dark:bg-gray-900 p-4 shadow-sm">
-                <h3 className="text-sm font-semibold mb-3 text-gray-900 dark:text-gray-100">
-                    Navigation alphabétique
-                </h3>
+            <div className="rounded-lg border bg-white p-4 shadow-sm dark:bg-gray-900">
+                <h3 className="mb-3 text-sm font-semibold text-gray-900 dark:text-gray-100">Navigation alphabétique</h3>
                 <div className="grid grid-cols-7 gap-2">
                     {alphabet.map((letter) => {
                         const isAvailable = availableLetters.includes(letter);
@@ -65,31 +61,19 @@ export function GlossarySidebar({ availableLetters, activeLetter, onLetterClick,
                                 key={letter}
                                 onClick={() => isAvailable && scrollToLetter(letter)}
                                 disabled={!isAvailable}
-                                className={`
-                                    h-10 w-10 rounded-lg font-medium transition-all
-                                    ${isActive
+                                className={`h-10 w-10 rounded-lg font-medium transition-all ${
+                                    isActive
                                         ? 'bg-primary text-white shadow-md'
                                         : isAvailable
-                                        ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700'
-                                        : 'bg-gray-50 dark:bg-gray-900 text-gray-300 dark:text-gray-700 cursor-not-allowed'
-                                    }
-                                `}
+                                          ? 'bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700'
+                                          : 'cursor-not-allowed bg-gray-50 text-gray-300 dark:bg-gray-900 dark:text-gray-700'
+                                } `}
                             >
                                 {letter}
                             </button>
                         );
                     })}
                 </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="rounded-lg border bg-white dark:bg-gray-900 p-4 shadow-sm">
-                <h3 className="text-sm font-semibold mb-2 text-gray-900 dark:text-gray-100">
-                    Statistiques
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {availableLetters.length} lettres disponibles
-                </p>
             </div>
         </div>
     );

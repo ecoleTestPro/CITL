@@ -697,6 +697,11 @@
             "q41": "Je suis inscrit dans le registre et je souhaite me retirer. Que dois-je faire?",
             "a41": "Si vous souhaitez retirer ou modifier vos informations dans le registre SCR, veuillez nous contacter via le formulaire de contact sur la page Contact ou envoyer votre demande à contact@citl.ci"
         },
+        "glossary": {
+            "hero_badge": "Glossaire ISTQB®",
+            "hero_title": "Glossaire des termes de test logiciel",
+            "hero_description": "Découvrez les définitions officielles des termes utilisés dans le domaine du test logiciel selon les standards ISTQB®."
+        },
         "anti_piracy": {
             "hero_badge": "Avertissement",
             "hero_title": "Avertissement contre la contrefaçon",

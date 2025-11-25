@@ -705,7 +705,7 @@
             "warning_text": "La popularité et la reconnaissance du système ISTQB dans le monde sont devenues si élevées que des certificats contrefaits circulent désormais.",
             "verification_title": "Vérifier l'authenticité",
             "verification_text": "Pour vérifier l'authenticité de votre organisme de formation, fournisseur d'examens et certificat, ou si vous avez des soupçons sur la manière dont une formation ou des examens sont conduits, veuillez contacter le CITL en fournissant les détails du certificat et de l'organisme de formation/fournisseur d'examens.",
-            "what_to_verify": "Ce que vous pouvez vérifier :",
+            "what_to_verify": "Ce que vous pouvez vérifier",
             "verify_training_provider": "L'authenticité de votre organisme de formation",
             "verify_exam_provider": "La légitimité de votre fournisseur d'examens",
             "verify_certificate": "La validité de votre certificat ISTQB",

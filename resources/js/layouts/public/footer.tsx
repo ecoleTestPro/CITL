@@ -271,7 +271,7 @@ const Footer = () => {
 
                 {/* Language Switcher */}
                 <div className="">
-                    <div className="item-center container mx-auto flex justify-end gap-x-2 px-4 py-4">
+                    <div className="item-center container mx-auto flex justify-between gap-x-2 px-4 py-4">
                         <LanguageSwitcher />
                         <Button
                             size="icon"

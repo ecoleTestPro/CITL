@@ -199,7 +199,6 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     borderRadius: 2,
                     mx: 1,
                     bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
-                    borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
                     '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
                 }}
             >
@@ -305,7 +304,6 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                                         borderRadius: 2,
                                                         mx: 1,
                                                         bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
-                                                        borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
                                                         '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
                                                     }}
                                                 >
@@ -355,7 +353,6 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                                 borderRadius: 2,
                                                 mx: 1,
                                                 bgcolor: active ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
-                                                borderLeft: active ? '3px solid #e36c19' : '3px solid transparent',
                                                 '&:hover': { bgcolor: active ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)' },
                                             }}
                                         >

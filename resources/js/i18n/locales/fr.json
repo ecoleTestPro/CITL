@@ -700,7 +700,13 @@
         "glossary": {
             "hero_badge": "Glossaire ISTQB®",
             "hero_title": "Glossaire des termes de test logiciel",
-            "hero_description": "Découvrez les définitions officielles des termes utilisés dans le domaine du test logiciel selon les standards ISTQB®."
+            "hero_description": "Découvrez les définitions officielles des termes utilisés dans le domaine du test logiciel selon les standards ISTQB®.",
+            "search": "Rechercher",
+            "search_placeholder": "Rechercher un terme...",
+            "alphabet_nav": "Navigation alphabétique",
+            "no_results": "Aucun terme trouvé pour votre recherche.",
+            "no_terms": "Aucun terme disponible.",
+            "loading": "Chargement du glossaire..."
         },
         "anti_piracy": {
             "hero_badge": "Avertissement",

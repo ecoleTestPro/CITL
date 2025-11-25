@@ -571,7 +571,13 @@
         "glossary": {
             "hero_badge": "ISTQB® Glossary",
             "hero_title": "Software Testing Glossary",
-            "hero_description": "Discover the official definitions of terms used in the field of software testing according to ISTQB® standards."
+            "hero_description": "Discover the official definitions of terms used in the field of software testing according to ISTQB® standards.",
+            "search": "Search",
+            "search_placeholder": "Search for a term...",
+            "alphabet_nav": "Alphabetical Navigation",
+            "no_results": "No terms found for your search.",
+            "no_terms": "No terms available.",
+            "loading": "Loading glossary..."
         },
         "anti_piracy": {
             "hero_badge": "Warning",

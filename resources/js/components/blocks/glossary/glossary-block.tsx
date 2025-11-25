@@ -2,6 +2,7 @@ import axios from 'axios';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { GlossarySidebar } from './glossary-sidebar';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,12 +19,14 @@ interface GroupedGlossary {
 }
 
 function GlossaryBlock() {
+    const { t } = useTranslation();
     const [glossary, setGlossary] = useState<GroupedGlossary>({});
     const [filteredGlossary, setFilteredGlossary] = useState<GroupedGlossary>({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [initialAnimationDone, setInitialAnimationDone] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
     const sidebarRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -45,9 +48,9 @@ function GlossaryBlock() {
         fetchGlossary();
     }, []);
 
-    // Animation GSAP
+    // Animation GSAP - exécutée une seule fois au chargement initial
     useEffect(() => {
-        if (loading || !sectionRef.current) return;
+        if (loading || !sectionRef.current || initialAnimationDone) return;
 
         const ctx = gsap.context(() => {
             // Sidebar animation
@@ -100,8 +103,10 @@ function GlossaryBlock() {
             }
         }, sectionRef);
 
+        setInitialAnimationDone(true);
+
         return () => ctx.revert();
-    }, [loading, filteredGlossary]);
+    }, [loading, initialAnimationDone]);
 
     useEffect(() => {
         if (!searchTerm) {
@@ -133,7 +138,7 @@ function GlossaryBlock() {
         return (
             <section className="bg-white/80 pt-12 pb-16 dark:bg-gray-800">
                 <div className="container mx-auto py-16 text-center">
-                    <p className="text-lg text-gray-600 dark:text-gray-400">Chargement du glossaire...</p>
+                    <p className="text-lg text-gray-600 dark:text-gray-400">{t('exams.glossary.loading')}</p>
                 </div>
             </section>
         );
@@ -150,6 +155,7 @@ function GlossaryBlock() {
     }
 
     const availableLetters = Object.keys(glossary).sort();
+    const filteredLetters = Object.keys(filteredGlossary).sort();
 
     return (
         <section ref={sectionRef} className="bg-white/80 pt-12 pb-16 dark:bg-gray-800">
@@ -160,6 +166,7 @@ function GlossaryBlock() {
                         <div ref={sidebarRef} className="lg:col-span-3">
                             <GlossarySidebar
                                 availableLetters={availableLetters}
+                                filteredLetters={filteredLetters}
                                 activeLetter={activeLetter}
                                 onLetterClick={handleLetterClick}
                                 onSearch={handleSearch}
@@ -171,7 +178,7 @@ function GlossaryBlock() {
                             {Object.keys(filteredGlossary).length === 0 ? (
                                 <div className="py-16 text-center">
                                     <p className="text-lg text-gray-600 dark:text-gray-400">
-                                        {searchTerm ? 'Aucun terme trouvé pour votre recherche.' : 'Aucun terme disponible.'}
+                                        {searchTerm ? t('exams.glossary.no_results') : t('exams.glossary.no_terms')}
                                     </p>
                                 </div>
                             ) : (

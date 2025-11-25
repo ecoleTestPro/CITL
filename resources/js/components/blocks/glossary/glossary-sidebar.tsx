@@ -1,5 +1,6 @@
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search } from 'lucide-react';
+import { Printer, Search } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -9,9 +10,10 @@ interface GlossarySidebarProps {
     activeLetter: string | null;
     onLetterClick: (letter: string) => void;
     onSearch: (term: string) => void;
+    onPrint: () => void;
 }
 
-export function GlossarySidebar({ availableLetters, filteredLetters, activeLetter, onLetterClick, onSearch }: GlossarySidebarProps) {
+export function GlossarySidebar({ availableLetters, filteredLetters, activeLetter, onLetterClick, onSearch, onPrint }: GlossarySidebarProps) {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
     const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -157,6 +159,12 @@ export function GlossarySidebar({ availableLetters, filteredLetters, activeLette
                     })}
                 </div>
             </div>
+
+            {/* Print Button */}
+            <Button onClick={onPrint} variant="outline" className="w-full gap-2">
+                <Printer className="h-4 w-4" />
+                {t('exams.glossary.print')}
+            </Button>
             </div>
         </>
     );

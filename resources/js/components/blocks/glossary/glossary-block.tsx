@@ -134,6 +134,184 @@ function GlossaryBlock() {
         setActiveLetter(letter);
     };
 
+    const handlePrint = () => {
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank');
+        if (!printWindow) return;
+
+        // Get the current date for the print
+        const currentDate = new Date().toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+
+        // Generate the glossary content HTML
+        const glossaryContent = Object.keys(filteredGlossary)
+            .sort()
+            .map(
+                (letter) => `
+                <div class="letter-section">
+                    <h2 class="letter-heading">${letter}</h2>
+                    ${filteredGlossary[letter]
+                        .map(
+                            (term) => `
+                        <div class="term-item">
+                            <h3 class="term-name">${term.term}</h3>
+                            <p class="term-definition">${term.definition}</p>
+                        </div>
+                    `,
+                        )
+                        .join('')}
+                </div>
+            `,
+            )
+            .join('');
+
+        // Write the print document
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${t('exams.glossary.print_title')}</title>
+                <style>
+                    @page {
+                        margin: 2cm;
+                        size: A4;
+                    }
+                    * {
+                        box-sizing: border-box;
+                    }
+                    body {
+                        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                        line-height: 1.6;
+                        color: #333;
+                        margin: 0;
+                        padding: 20px;
+                    }
+                    .print-header {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        border-bottom: 3px solid #f97316;
+                        padding-bottom: 20px;
+                        margin-bottom: 30px;
+                    }
+                    .logo-section {
+                        display: flex;
+                        align-items: center;
+                        gap: 15px;
+                    }
+                    .logo-section img {
+                        height: 60px;
+                        width: auto;
+                    }
+                    .logo-text {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .logo-title {
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #1a1a2e;
+                        margin: 0;
+                    }
+                    .logo-subtitle {
+                        font-size: 12px;
+                        color: #666;
+                        margin: 0;
+                    }
+                    .print-date {
+                        font-size: 12px;
+                        color: #666;
+                        text-align: right;
+                    }
+                    .main-title {
+                        text-align: center;
+                        font-size: 28px;
+                        color: #1a1a2e;
+                        margin-bottom: 30px;
+                        padding-bottom: 15px;
+                        border-bottom: 1px solid #e5e5e5;
+                    }
+                    .letter-section {
+                        margin-bottom: 25px;
+                        page-break-inside: avoid;
+                    }
+                    .letter-heading {
+                        font-size: 32px;
+                        font-weight: bold;
+                        color: #f97316;
+                        border-bottom: 2px solid #f97316;
+                        padding-bottom: 5px;
+                        margin-bottom: 15px;
+                    }
+                    .term-item {
+                        margin-bottom: 15px;
+                        padding-left: 15px;
+                        border-left: 3px solid #e5e5e5;
+                    }
+                    .term-name {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #1a1a2e;
+                        margin: 0 0 5px 0;
+                    }
+                    .term-definition {
+                        font-size: 14px;
+                        color: #555;
+                        margin: 0;
+                    }
+                    .print-footer {
+                        margin-top: 40px;
+                        padding-top: 20px;
+                        border-top: 1px solid #e5e5e5;
+                        text-align: center;
+                        font-size: 11px;
+                        color: #888;
+                    }
+                    @media print {
+                        .no-print {
+                            display: none;
+                        }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="print-header">
+                    <div class="logo-section">
+                        <img src="/images/logo.svg" alt="CITL Logo" onerror="this.style.display='none'" />
+                        <div class="logo-text">
+                            <p class="logo-title">CITL</p>
+                            <p class="logo-subtitle">${t('exams.glossary.print_subtitle')}</p>
+                        </div>
+                    </div>
+                    <div class="print-date">
+                        ${currentDate}
+                    </div>
+                </div>
+
+                <h1 class="main-title">${t('exams.glossary.print_title')}</h1>
+
+                ${glossaryContent}
+
+                <div class="print-footer">
+                    <p>© ${new Date().getFullYear()} CITL - ${t('exams.glossary.print_subtitle')}</p>
+                    <p>www.citl.ci</p>
+                </div>
+            </body>
+            </html>
+        `);
+
+        printWindow.document.close();
+
+        // Wait for content to load then print
+        printWindow.onload = () => {
+            printWindow.focus();
+            printWindow.print();
+        };
+    };
+
     if (loading) {
         return (
             <section className="bg-white/80 pt-12 pb-16 dark:bg-gray-800">
@@ -170,6 +348,7 @@ function GlossaryBlock() {
                                 activeLetter={activeLetter}
                                 onLetterClick={handleLetterClick}
                                 onSearch={handleSearch}
+                                onPrint={handlePrint}
                             />
                         </div>
 

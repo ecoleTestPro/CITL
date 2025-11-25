@@ -706,7 +706,10 @@
             "alphabet_nav": "Navigation alphabétique",
             "no_results": "Aucun terme trouvé pour votre recherche.",
             "no_terms": "Aucun terme disponible.",
-            "loading": "Chargement du glossaire..."
+            "loading": "Chargement du glossaire...",
+            "print": "Imprimer le glossaire",
+            "print_title": "Glossaire ISTQB® - CITL",
+            "print_subtitle": "Comité Ivoirien des Tests Logiciels"
         },
         "anti_piracy": {
             "hero_badge": "Avertissement",

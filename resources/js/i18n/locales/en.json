@@ -577,7 +577,10 @@
             "alphabet_nav": "Alphabetical Navigation",
             "no_results": "No terms found for your search.",
             "no_terms": "No terms available.",
-            "loading": "Loading glossary..."
+            "loading": "Loading glossary...",
+            "print": "Print glossary",
+            "print_title": "ISTQB® Glossary - CITL",
+            "print_subtitle": "Ivorian Software Testing Committee"
         },
         "anti_piracy": {
             "hero_badge": "Warning",

@@ -1,4 +1,4 @@
-import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
+import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import { AccreditationRequestForm } from '@/components/training/accreditation-request-form';
 import PublicLayout from '@/layouts/public/public-layout';
@@ -61,48 +61,24 @@ function AccreditationRequest() {
                         </div>
 
                         {/* Sidebar - 1/4 width */}
-                        <div className="hidden w-full lg:block lg:w-1/4">
-                            <div className="sticky top-24 rounded-lg border border-gray-200 bg-gradient-to-br from-secondary/10 to-accent/10 p-6 shadow-lg dark:border-gray-700">
-                                <div className="space-y-6">
-                                    {/* Animation pulse */}
-                                    <div className="animate-pulse space-y-4">
-                                        <div className="flex items-center justify-center">
-                                            <div className="h-24 w-24 rounded-full bg-secondary/20 dark:bg-accent/20"></div>
-                                        </div>
-
-                                        <div className="space-y-3">
-                                            <div className="h-4 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                            <div className="h-4 w-5/6 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                            <div className="h-4 w-4/6 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                        </div>
-                                    </div>
-
-                                    <div className="pt-4">
-                                        <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">{t('training.process_title')}</h3>
-                                        <p className="text-sm text-gray-600 dark:text-gray-400">{t('training.process_description')}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <BenefitsSidebar
+                            title={t('training.process_title')}
+                            benefits={[
+                                { text: t('training.process_step_1') },
+                                { text: t('training.process_step_2') },
+                                { text: t('training.process_step_3') },
+                                { text: t('training.process_step_4') },
+                            ]}
+                            adBanner={{
+                                imageSrc: '/assets/images/ads/ads-2.jpg',
+                                imageAlt: 'Accréditation CITL',
+                                title: 'Devenez organisme accrédité',
+                                href: '/accredited-organizations',
+                            }}
+                        />
                     </div>
                 </div>
             </section>
-
-            {/* Process Section */}
-            <div className="bg-white dark:bg-gray-500/20">
-                <AboutBlockOne
-                    title={t('training.process_title')}
-                    description={t('training.process_description')}
-                    items={[
-                        { text: t('training.process_step_1') },
-                        { text: t('training.process_step_2') },
-                        { text: t('training.process_step_3') },
-                        { text: t('training.process_step_4') },
-                    ]}
-                    imageSrc="/assets/images/pages/certification/accreditation-process.png"
-                    imageAlt="Processus d'accréditation CITL"
-                />
-            </div>
         </PublicLayout>
     );
 }

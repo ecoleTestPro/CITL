@@ -593,7 +593,7 @@
             "title": "ISTQB® Exam Fees",
             "description": "Check the ISTQB® certification exam fees in euros",
             "pricing_table_title": "Exam Fee Schedule",
-            "pricing_table_description": "Fees in euros (€) for all ISTQB® certification levels",
+            "pricing_table_description": "Fees in FCFA for all ISTQB® certification levels (hover for €/$ conversions)",
             "column_level": "Exam Level",
             "column_flex": "FLEX (Remote Proctored)",
             "column_pearson": "Pearson Vue (Test Center)",

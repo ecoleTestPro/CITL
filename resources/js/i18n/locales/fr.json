@@ -605,7 +605,7 @@
             "title": "Frais d'examen ISTQB®",
             "description": "Consultez les tarifs des examens de certification ISTQB® en euros",
             "pricing_table_title": "Grille tarifaire des examens",
-            "pricing_table_description": "Tarifs en euros (€) pour tous les niveaux de certification ISTQB®",
+            "pricing_table_description": "Tarifs en FCFA pour tous les niveaux de certification ISTQB® (survolez pour voir les conversions €/$)",
             "column_level": "Niveau d'Examen",
             "column_flex": "FLEX (Surveillance à distance)",
             "column_pearson": "Pearson Vue (Centre d'examen)",

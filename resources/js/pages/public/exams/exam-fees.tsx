@@ -1,8 +1,46 @@
 import HeroCommon from '@/components/common/common-hero';
 import { TableSection } from '@/components/common/table-section';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
+
+// Taux de conversion (1 EUR = 655.957 XOF, approximation courante)
+const EUR_TO_XOF = 656;
+// Taux EUR/USD approximatif
+const EUR_TO_USD = 1.08;
+
+// Formatage des montants avec espace comme séparateur de milliers
+function formatCurrency(amount: number, decimals: number = 0): string {
+    return amount.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+interface PriceWithTooltipProps {
+    euroAmount: number;
+}
+
+function PriceWithTooltip({ euroAmount }: PriceWithTooltipProps) {
+    const xofAmount = euroAmount * EUR_TO_XOF;
+    const usdAmount = euroAmount * EUR_TO_USD;
+
+    return (
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <span className="cursor-help border-b border-dashed border-gray-400 font-semibold text-citl-orange dark:border-gray-500">
+                        {formatCurrency(xofAmount)} FCFA
+                    </span>
+                </TooltipTrigger>
+                <TooltipContent className="bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900">
+                    <div className="space-y-1 text-sm">
+                        <p>{formatCurrency(euroAmount)} € EUR</p>
+                        <p>{formatCurrency(usdAmount, 2)} $ USD</p>
+                    </div>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
+    );
+}
 
 function ExamFees() {
     const { t } = useTranslation();
@@ -14,10 +52,10 @@ function ExamFees() {
     ];
 
     const feeData = [
-        { level: t('exams.fees.level_foundation'), flex: '€100', pearson: '€100' },
-        { level: t('exams.fees.level_advanced'), flex: '€120', pearson: '€120' },
-        { level: t('exams.fees.level_specialist'), flex: '€120', pearson: '€120' },
-        { level: t('exams.fees.level_expert'), flex: '€155', pearson: '€155' },
+        { level: t('exams.fees.level_foundation'), flex: <PriceWithTooltip euroAmount={100} />, pearson: <PriceWithTooltip euroAmount={100} /> },
+        { level: t('exams.fees.level_advanced'), flex: <PriceWithTooltip euroAmount={120} />, pearson: <PriceWithTooltip euroAmount={120} /> },
+        { level: t('exams.fees.level_specialist'), flex: <PriceWithTooltip euroAmount={120} />, pearson: <PriceWithTooltip euroAmount={120} /> },
+        { level: t('exams.fees.level_expert'), flex: <PriceWithTooltip euroAmount={155} />, pearson: <PriceWithTooltip euroAmount={155} /> },
     ];
 
     return (

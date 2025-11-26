@@ -1,3 +1,4 @@
+import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import { ExamRegistrationForm } from '@/components/exams/exam-registration-form';
 import PublicLayout from '@/layouts/public/public-layout';
@@ -52,71 +53,22 @@ function ExamRegistration() {
                         </div>
                     </div>
 
-                    {/* Image animée - 1/4 de largeur */}
-                    <div className="hidden w-full lg:block lg:w-1/4">
-                        <div className="sticky top-24 rounded-lg border border-gray-200 bg-gradient-to-br from-secondary/10 to-accent/10 p-6 shadow-lg dark:border-gray-700">
-                            <div className="space-y-6">
-                                {/* Animation pulse */}
-                                <div className="animate-pulse space-y-4">
-                                    <div className="flex items-center justify-center">
-                                        <div className="h-24 w-24 rounded-full bg-secondary/20 dark:bg-accent/20"></div>
-                                    </div>
-
-                                    <div className="space-y-3">
-                                        <div className="h-4 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                        <div className="h-4 w-5/6 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                        <div className="h-4 w-4/6 rounded bg-secondary/20 dark:bg-accent/20"></div>
-                                    </div>
-                                </div>
-
-                                <div className="pt-4">
-                                    <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-gray-100">{t('exam.benefits_title')}</h3>
-                                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                                        <li className="flex items-start gap-2">
-                                            <svg className="mt-1 h-4 w-4 flex-shrink-0 text-secondary dark:text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            <span>{t('exam.benefit_online')}</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <svg className="mt-1 h-4 w-4 flex-shrink-0 text-secondary dark:text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            <span>{t('exam.benefit_international')}</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <svg className="mt-1 h-4 w-4 flex-shrink-0 text-secondary dark:text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            <span>{t('exam.benefit_registry')}</span>
-                                        </li>
-                                        <li className="flex items-start gap-2">
-                                            <svg className="mt-1 h-4 w-4 flex-shrink-0 text-secondary dark:text-accent" fill="currentColor" viewBox="0 0 20 20">
-                                                <path
-                                                    fillRule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                                    clipRule="evenodd"
-                                                />
-                                            </svg>
-                                            <span>{t('exam.benefit_support')}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Sidebar avec avantages et bannière */}
+                    <BenefitsSidebar
+                        title={t('exam.benefits_title')}
+                        benefits={[
+                            { text: t('exam.benefit_online') },
+                            { text: t('exam.benefit_international') },
+                            { text: t('exam.benefit_registry') },
+                            { text: t('exam.benefit_support') },
+                        ]}
+                        adBanner={{
+                            imageSrc: '/assets/images/ads/ads-1.jpg',
+                            imageAlt: 'Certification ISTQB',
+                            title: 'Devenez certifié ISTQB',
+                            href: '/certifications',
+                        }}
+                    />
                 </div>
             </div>
         </PublicLayout>

@@ -27,7 +27,14 @@ function ExamRegistration() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
-            <Head title={t('exam.page_title')} />
+            <Head>
+                <title>{t('seo.exam_registration.title')}</title>
+                <meta name="description" content={t('seo.exam_registration.description')} />
+                <meta name="keywords" content={t('seo.exam_registration.keywords')} />
+                <meta property="og:title" content={t('seo.exam_registration.title')} />
+                <meta property="og:description" content={t('seo.exam_registration.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
 
             <HeroCommon title={t('exam.hero_title')} description={t('exam.hero_description')} backgroundImage="/assets/images/bg/sharp-2.png" />
 

@@ -1,5 +1,6 @@
-import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function Missions() {
@@ -26,6 +27,14 @@ function Missions() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.missions.title')}</title>
+                <meta name="description" content={t('seo.missions.description')} />
+                <meta name="keywords" content={t('seo.missions.keywords')} />
+                <meta property="og:title" content={t('seo.missions.title')} />
+                <meta property="og:description" content={t('seo.missions.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <main>
                 <HeroCommon
                     badge={t('about.missions.badge')}

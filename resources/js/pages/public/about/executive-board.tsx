@@ -1,6 +1,7 @@
-import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import { TeamMembers } from '@/components/blocks/team';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function ExecutiveBoard() {
@@ -48,6 +49,14 @@ function ExecutiveBoard() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.executive_board.title')}</title>
+                <meta name="description" content={t('seo.executive_board.description')} />
+                <meta name="keywords" content={t('seo.executive_board.keywords')} />
+                <meta property="og:title" content={t('seo.executive_board.title')} />
+                <meta property="og:description" content={t('seo.executive_board.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <main>
                 <HeroCommon
                     badge={t('about.executive_board.badge')}

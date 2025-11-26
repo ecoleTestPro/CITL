@@ -5,6 +5,7 @@ import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import PublicLayout from '@/layouts/public/public-layout';
 import { CertificationCategory } from '@/types';
+import { Head } from '@inertiajs/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -39,6 +40,14 @@ function WhyCertification() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.why_certification.title')}</title>
+                <meta name="description" content={t('seo.why_certification.description')} />
+                <meta name="keywords" content={t('seo.why_certification.keywords')} />
+                <meta property="og:title" content={t('seo.why_certification.title')} />
+                <meta property="og:description" content={t('seo.why_certification.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('certifications.why_certification.badge')}
                 title={t('certifications.why_certification.hero_title')}

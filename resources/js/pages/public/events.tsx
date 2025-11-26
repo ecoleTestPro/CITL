@@ -1,6 +1,7 @@
 import HeroCommon from '@/components/common/common-hero';
 import Timeline from '@/components/events/timeline';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 interface Event {
@@ -25,6 +26,14 @@ function Events({ events }: Props) {
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{t('seo.events.title')}</title>
+                <meta name="description" content={t('seo.events.description')} />
+                <meta name="keywords" content={t('seo.events.keywords')} />
+                <meta property="og:title" content={t('seo.events.title')} />
+                <meta property="og:description" content={t('seo.events.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             {/* Hero Section */}
             <HeroCommon
                 badge={t('events.page_title')}

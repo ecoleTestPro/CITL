@@ -1,6 +1,7 @@
 import HeroCommon from '@/components/common/common-hero';
 import { TableSection } from '@/components/common/table-section';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function ExamFees() {
@@ -21,6 +22,14 @@ function ExamFees() {
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{t('seo.exam_fees.title')}</title>
+                <meta name="description" content={t('seo.exam_fees.description')} />
+                <meta name="keywords" content={t('seo.exam_fees.keywords')} />
+                <meta property="og:title" content={t('seo.exam_fees.title')} />
+                <meta property="og:description" content={t('seo.exam_fees.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('nav.exam_fees')}
                 title={t('exams.fees.title')}

@@ -60,7 +60,14 @@ function CertificationDetail({ slug }: Props) {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
-            <Head title={`${certification.title} - CITL`} />
+            <Head>
+                <title>{`${certification.title} - CITL`}</title>
+                <meta name="description" content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`} />
+                <meta name="keywords" content={`${certification.title}, ISTQB, certification, CITL, test logiciel`} />
+                <meta property="og:title" content={`${certification.title} - CITL`} />
+                <meta property="og:description" content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`} />
+                <meta property="og:type" content="website" />
+            </Head>
 
             {/* Hero Section */}
             <HeroCommon

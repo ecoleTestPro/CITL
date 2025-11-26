@@ -1,6 +1,7 @@
 import FaqBlockOne from '@/components/blocks/faq/faq-block-one';
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -44,6 +45,14 @@ function ExamFaq() {
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{t('seo.exam_faq.title')}</title>
+                <meta name="description" content={t('seo.exam_faq.description')} />
+                <meta name="keywords" content={t('seo.exam_faq.keywords')} />
+                <meta property="og:title" content={t('seo.exam_faq.title')} />
+                <meta property="og:description" content={t('seo.exam_faq.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('exams.faq.hero_badge')}
                 title={t('exams.faq.hero_title')}

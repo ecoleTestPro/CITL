@@ -1,6 +1,7 @@
 import HeroCommon from '@/components/common/common-hero';
 import { ContactForm } from '@/components/contact/contact-form';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function Contact() {
@@ -8,6 +9,14 @@ function Contact() {
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{t('seo.contact.title')}</title>
+                <meta name="description" content={t('seo.contact.description')} />
+                <meta name="keywords" content={t('seo.contact.keywords')} />
+                <meta property="og:title" content={t('seo.contact.title')} />
+                <meta property="og:description" content={t('seo.contact.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             {/* Hero Section */}
             <HeroCommon
                 badge={t('contact.page_title')}

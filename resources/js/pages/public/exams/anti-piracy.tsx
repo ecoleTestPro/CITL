@@ -2,6 +2,7 @@ import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AntiPiracy() {
@@ -15,6 +16,14 @@ function AntiPiracy() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.anti_piracy.title')}</title>
+                <meta name="description" content={t('seo.anti_piracy.description')} />
+                <meta name="keywords" content={t('seo.anti_piracy.keywords')} />
+                <meta property="og:title" content={t('seo.anti_piracy.title')} />
+                <meta property="og:description" content={t('seo.anti_piracy.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('exams.anti_piracy.hero_badge')}
                 title={t('exams.anti_piracy.hero_title')}

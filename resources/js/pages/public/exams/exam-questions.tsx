@@ -3,6 +3,7 @@ import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import { TableSection } from '@/components/common/table-section';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function ExamQuestions() {
@@ -51,6 +52,14 @@ function ExamQuestions() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.exam_questions.title')}</title>
+                <meta name="description" content={t('seo.exam_questions.description')} />
+                <meta name="keywords" content={t('seo.exam_questions.keywords')} />
+                <meta property="og:title" content={t('seo.exam_questions.title')} />
+                <meta property="og:description" content={t('seo.exam_questions.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('exams.hero.badge')}
                 title={t('exams.hero.title')}

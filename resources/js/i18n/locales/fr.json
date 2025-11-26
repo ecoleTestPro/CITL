@@ -814,5 +814,117 @@
         "process_step_2": "Le panel d'experts : chargé de valider le contenu pédagogique conformément aux recommandations de l'ISTQB®.",
         "process_step_3": "Le bureau du CITL : qui supervise et coordonne l'ensemble du processus d'accréditation.",
         "process_step_4": "L'organisme de formation"
+    },
+    "seo": {
+        "home": {
+            "title": "CITL - Comité Ivoirien des Tests Logiciels | Certifications ISTQB",
+            "description": "Le CITL est l'organisme officiel de certification ISTQB en Côte d'Ivoire. Obtenez votre certification de testeur logiciel reconnue internationalement.",
+            "keywords": "CITL, ISTQB, certification, test logiciel, Côte d'Ivoire, testeur, QA, qualité logicielle"
+        },
+        "contact": {
+            "title": "Contactez-nous | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Contactez le CITL pour toute question sur les certifications ISTQB, les examens ou l'accréditation des formateurs en Côte d'Ivoire.",
+            "keywords": "contact CITL, certification ISTQB, Côte d'Ivoire, test logiciel"
+        },
+        "blog": {
+            "title": "Blog | CITL - Actualités du Test Logiciel",
+            "description": "Découvrez les dernières actualités, articles et conseils sur le test logiciel et les certifications ISTQB en Côte d'Ivoire.",
+            "keywords": "blog test logiciel, actualités ISTQB, certification, CITL"
+        },
+        "events": {
+            "title": "Événements | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Retrouvez tous les événements, conférences et sessions d'examen organisés par le CITL en Côte d'Ivoire.",
+            "keywords": "événements CITL, conférences test logiciel, examens ISTQB"
+        },
+        "about_citl": {
+            "title": "À propos du CITL | Comité Ivoirien des Tests Logiciels",
+            "description": "Découvrez le CITL, l'organisme officiel de certification ISTQB en Côte d'Ivoire. Notre mission, vision et valeurs.",
+            "keywords": "CITL, à propos, comité ivoirien, test logiciel, ISTQB"
+        },
+        "about_istqb": {
+            "title": "À propos de l'ISTQB | CITL",
+            "description": "Découvrez l'ISTQB, le standard international de certification pour les testeurs logiciels, représenté en Côte d'Ivoire par le CITL.",
+            "keywords": "ISTQB, certification internationale, test logiciel, standard"
+        },
+        "vision": {
+            "title": "Notre Vision | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Découvrez la vision du CITL pour le développement de la qualité logicielle en Côte d'Ivoire et en Afrique.",
+            "keywords": "vision CITL, qualité logicielle, Côte d'Ivoire, Afrique"
+        },
+        "missions": {
+            "title": "Nos Missions | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Les missions du CITL : certification, accréditation, promotion du test logiciel en Côte d'Ivoire.",
+            "keywords": "missions CITL, certification, accréditation, test logiciel"
+        },
+        "executive_board": {
+            "title": "Bureau Exécutif | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Rencontrez les membres du bureau exécutif du CITL, dédiés à la promotion du test logiciel en Côte d'Ivoire.",
+            "keywords": "bureau exécutif CITL, équipe, direction"
+        },
+        "why_certification": {
+            "title": "Pourquoi se Certifier | CITL - Certifications ISTQB",
+            "description": "Découvrez les avantages de la certification ISTQB pour votre carrière de testeur logiciel.",
+            "keywords": "certification ISTQB, avantages, carrière testeur, pourquoi se certifier"
+        },
+        "core_foundation": {
+            "title": "Certifications Foundation | CITL - ISTQB",
+            "description": "Explorez les certifications ISTQB de niveau Foundation disponibles en Côte d'Ivoire.",
+            "keywords": "ISTQB Foundation, certification, niveau débutant, test logiciel"
+        },
+        "core_advanced": {
+            "title": "Certifications Advanced | CITL - ISTQB",
+            "description": "Explorez les certifications ISTQB de niveau Advanced disponibles en Côte d'Ivoire.",
+            "keywords": "ISTQB Advanced, certification, niveau avancé, test logiciel"
+        },
+        "specialist": {
+            "title": "Certifications Specialist | CITL - ISTQB",
+            "description": "Explorez les certifications ISTQB Specialist disponibles en Côte d'Ivoire.",
+            "keywords": "ISTQB Specialist, certification, spécialisation, test logiciel"
+        },
+        "expert_level": {
+            "title": "Certifications Expert | CITL - ISTQB",
+            "description": "Explorez les certifications ISTQB de niveau Expert disponibles en Côte d'Ivoire.",
+            "keywords": "ISTQB Expert, certification, niveau expert, test logiciel"
+        },
+        "exam_registration": {
+            "title": "S'inscrire à l'examen | CITL - ISTQB",
+            "description": "Inscrivez-vous à un examen de certification ISTQB en Côte d'Ivoire avec le CITL.",
+            "keywords": "inscription examen, ISTQB, certification, CITL"
+        },
+        "exam_questions": {
+            "title": "Questions et Taux de Réussite | CITL - Examens ISTQB",
+            "description": "Informations sur le format des examens ISTQB, nombre de questions et durée.",
+            "keywords": "questions examen ISTQB, format, durée, taux réussite"
+        },
+        "exam_fees": {
+            "title": "Frais d'Examen | CITL - Tarifs ISTQB",
+            "description": "Consultez les tarifs des examens de certification ISTQB en Côte d'Ivoire.",
+            "keywords": "frais examen ISTQB, tarifs, prix certification"
+        },
+        "exam_faq": {
+            "title": "FAQ Examens | CITL - Questions Fréquentes",
+            "description": "Réponses aux questions fréquentes sur les examens de certification ISTQB.",
+            "keywords": "FAQ ISTQB, questions fréquentes, examens, certification"
+        },
+        "anti_piracy": {
+            "title": "Avertissement Contrefaçon | CITL - ISTQB",
+            "description": "Informations importantes sur la lutte contre la contrefaçon des certifications ISTQB.",
+            "keywords": "contrefaçon ISTQB, avertissement, certification authentique"
+        },
+        "glossary": {
+            "title": "Glossaire | CITL - Termes du Test Logiciel",
+            "description": "Glossaire des termes de test logiciel selon les standards ISTQB.",
+            "keywords": "glossaire test logiciel, termes ISTQB, définitions"
+        },
+        "members": {
+            "title": "Adhésion au CITL | Devenir Membre",
+            "description": "Rejoignez le CITL et participez au développement du test logiciel en Côte d'Ivoire.",
+            "keywords": "adhésion CITL, devenir membre, test logiciel"
+        },
+        "accreditation": {
+            "title": "Demande d'Accréditation | CITL - Formation ISTQB",
+            "description": "Faites accréditer votre organisme de formation ISTQB par le CITL.",
+            "keywords": "accréditation formation, ISTQB, CITL, organisme de formation"
+        }
     }
 }

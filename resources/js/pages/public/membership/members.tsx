@@ -2,6 +2,7 @@ import { AboutKeyTakeaways, HeroCommon } from '@/components/blocks/about';
 import { WhyJoinSection } from '@/components/blocks/membership';
 import MembershipFormModal from '@/components/membership/membership-form-modal';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -32,6 +33,14 @@ function Members() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.members.title')}</title>
+                <meta name="description" content={t('seo.members.description')} />
+                <meta name="keywords" content={t('seo.members.keywords')} />
+                <meta property="og:title" content={t('seo.members.title')} />
+                <meta property="og:description" content={t('seo.members.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <main>
                 {/* Hero Section */}
                 <HeroCommon

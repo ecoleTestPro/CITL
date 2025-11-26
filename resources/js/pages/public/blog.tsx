@@ -2,7 +2,7 @@ import type { Archive, BlogArticle, Category, RecentArticle, Tag } from '@/compo
 import { BlogArticleCard, BlogSidebar, Pagination } from '@/components/blog';
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
-import { router } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 interface BlogProps {
@@ -118,6 +118,14 @@ function Blog({ blogs, categories, recentArticles, tags, archives, filters, curr
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{t('seo.blog.title')}</title>
+                <meta name="description" content={t('seo.blog.description')} />
+                <meta name="keywords" content={t('seo.blog.keywords')} />
+                <meta property="og:title" content={t('seo.blog.title')} />
+                <meta property="og:description" content={t('seo.blog.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             {/* Hero Section */}
             <HeroCommon
                 badge={t('blog.badge', 'Blog')}

@@ -2,7 +2,7 @@ import type { BlogArticle, Category, RecentArticle, Tag } from '@/components/blo
 import { BlogArticleCard, BlogSidebar } from '@/components/blog';
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { ArrowLeft, Calendar, Clock, Eye, User } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -88,6 +88,14 @@ export default function BlogDetail({ blog, relatedBlogs, categories, recentArtic
 
     return (
         <PublicLayout>
+            <Head>
+                <title>{`${blog.title} | CITL Blog`}</title>
+                <meta name="description" content={blog.excerpt || blog.title} />
+                <meta name="keywords" content={blog.tags?.join(', ') || 'blog, ISTQB, test logiciel, CITL'} />
+                <meta property="og:title" content={`${blog.title} | CITL Blog`} />
+                <meta property="og:description" content={blog.excerpt || blog.title} />
+                <meta property="og:type" content="article" />
+            </Head>
             {/* Hero Section */}
             <HeroCommon
                 badge={blog.category?.name || t('blog.badge', 'Blog')}

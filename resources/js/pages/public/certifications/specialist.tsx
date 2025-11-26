@@ -2,6 +2,7 @@ import CertificationList from '@/components/blocks/certifications/certification-
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Certification, CertificationCategory } from '@/types';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 interface Props {
@@ -20,6 +21,14 @@ function Specialist({ category, certifications }: Props) {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.specialist.title')}</title>
+                <meta name="description" content={t('seo.specialist.description')} />
+                <meta name="keywords" content={t('seo.specialist.keywords')} />
+                <meta property="og:title" content={t('seo.specialist.title')} />
+                <meta property="og:description" content={t('seo.specialist.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <HeroCommon
                 badge={t('nav.certifications')}
                 title={category.name}

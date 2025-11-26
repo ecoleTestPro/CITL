@@ -1,5 +1,6 @@
-import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function Vision() {
@@ -28,6 +29,14 @@ function Vision() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.vision.title')}</title>
+                <meta name="description" content={t('seo.vision.description')} />
+                <meta name="keywords" content={t('seo.vision.keywords')} />
+                <meta property="og:title" content={t('seo.vision.title')} />
+                <meta property="og:description" content={t('seo.vision.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <main>
                 <HeroCommon
                     badge={t('about.vision.badge')}

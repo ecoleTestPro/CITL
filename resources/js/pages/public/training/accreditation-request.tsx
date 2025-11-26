@@ -28,7 +28,14 @@ function AccreditationRequest() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
-            <Head title={t('training.page_title')} />
+            <Head>
+                <title>{t('seo.accreditation.title')}</title>
+                <meta name="description" content={t('seo.accreditation.description')} />
+                <meta name="keywords" content={t('seo.accreditation.keywords')} />
+                <meta property="og:title" content={t('seo.accreditation.title')} />
+                <meta property="og:description" content={t('seo.accreditation.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
 
             <HeroCommon
                 badge={t('training.hero_badge')}

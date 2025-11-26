@@ -685,5 +685,117 @@
         "process_step_2": "The panel of experts: responsible for validating educational content in accordance with ISTQB® recommendations.",
         "process_step_3": "The CITL board: which supervises and coordinates the entire accreditation process.",
         "process_step_4": "The training organization"
+    },
+    "seo": {
+        "home": {
+            "title": "CITL - Ivorian Software Testing Committee | ISTQB Certifications",
+            "description": "CITL is the official ISTQB certification body in Ivory Coast. Get your internationally recognized software tester certification.",
+            "keywords": "CITL, ISTQB, certification, software testing, Ivory Coast, tester, QA, software quality"
+        },
+        "contact": {
+            "title": "Contact Us | CITL - Ivorian Software Testing Committee",
+            "description": "Contact CITL for any questions about ISTQB certifications, exams or trainer accreditation in Ivory Coast.",
+            "keywords": "contact CITL, ISTQB certification, Ivory Coast, software testing"
+        },
+        "blog": {
+            "title": "Blog | CITL - Software Testing News",
+            "description": "Discover the latest news, articles and tips on software testing and ISTQB certifications in Ivory Coast.",
+            "keywords": "software testing blog, ISTQB news, certification, CITL"
+        },
+        "events": {
+            "title": "Events | CITL - Ivorian Software Testing Committee",
+            "description": "Find all events, conferences and exam sessions organized by CITL in Ivory Coast.",
+            "keywords": "CITL events, software testing conferences, ISTQB exams"
+        },
+        "about_citl": {
+            "title": "About CITL | Ivorian Software Testing Committee",
+            "description": "Discover CITL, the official ISTQB certification body in Ivory Coast. Our mission, vision and values.",
+            "keywords": "CITL, about, ivorian committee, software testing, ISTQB"
+        },
+        "about_istqb": {
+            "title": "About ISTQB | CITL",
+            "description": "Discover ISTQB, the international certification standard for software testers, represented in Ivory Coast by CITL.",
+            "keywords": "ISTQB, international certification, software testing, standard"
+        },
+        "vision": {
+            "title": "Our Vision | CITL - Ivorian Software Testing Committee",
+            "description": "Discover CITL's vision for the development of software quality in Ivory Coast and Africa.",
+            "keywords": "CITL vision, software quality, Ivory Coast, Africa"
+        },
+        "missions": {
+            "title": "Our Missions | CITL - Ivorian Software Testing Committee",
+            "description": "CITL missions: certification, accreditation, promotion of software testing in Ivory Coast.",
+            "keywords": "CITL missions, certification, accreditation, software testing"
+        },
+        "executive_board": {
+            "title": "Executive Board | CITL - Ivorian Software Testing Committee",
+            "description": "Meet the members of the CITL executive board, dedicated to promoting software testing in Ivory Coast.",
+            "keywords": "CITL executive board, team, management"
+        },
+        "why_certification": {
+            "title": "Why Get Certified | CITL - ISTQB Certifications",
+            "description": "Discover the benefits of ISTQB certification for your software tester career.",
+            "keywords": "ISTQB certification, benefits, tester career, why get certified"
+        },
+        "core_foundation": {
+            "title": "Foundation Certifications | CITL - ISTQB",
+            "description": "Explore Foundation level ISTQB certifications available in Ivory Coast.",
+            "keywords": "ISTQB Foundation, certification, beginner level, software testing"
+        },
+        "core_advanced": {
+            "title": "Advanced Certifications | CITL - ISTQB",
+            "description": "Explore Advanced level ISTQB certifications available in Ivory Coast.",
+            "keywords": "ISTQB Advanced, certification, advanced level, software testing"
+        },
+        "specialist": {
+            "title": "Specialist Certifications | CITL - ISTQB",
+            "description": "Explore ISTQB Specialist certifications available in Ivory Coast.",
+            "keywords": "ISTQB Specialist, certification, specialization, software testing"
+        },
+        "expert_level": {
+            "title": "Expert Certifications | CITL - ISTQB",
+            "description": "Explore Expert level ISTQB certifications available in Ivory Coast.",
+            "keywords": "ISTQB Expert, certification, expert level, software testing"
+        },
+        "exam_registration": {
+            "title": "Register for Exam | CITL - ISTQB",
+            "description": "Register for an ISTQB certification exam in Ivory Coast with CITL.",
+            "keywords": "exam registration, ISTQB, certification, CITL"
+        },
+        "exam_questions": {
+            "title": "Questions and Pass Rates | CITL - ISTQB Exams",
+            "description": "Information about ISTQB exam format, number of questions and duration.",
+            "keywords": "ISTQB exam questions, format, duration, pass rate"
+        },
+        "exam_fees": {
+            "title": "Exam Fees | CITL - ISTQB Pricing",
+            "description": "Check ISTQB certification exam fees in Ivory Coast.",
+            "keywords": "ISTQB exam fees, pricing, certification cost"
+        },
+        "exam_faq": {
+            "title": "Exam FAQ | CITL - Frequently Asked Questions",
+            "description": "Answers to frequently asked questions about ISTQB certification exams.",
+            "keywords": "ISTQB FAQ, frequently asked questions, exams, certification"
+        },
+        "anti_piracy": {
+            "title": "Anti-Piracy Warning | CITL - ISTQB",
+            "description": "Important information about combating counterfeit ISTQB certifications.",
+            "keywords": "ISTQB counterfeit, warning, authentic certification"
+        },
+        "glossary": {
+            "title": "Glossary | CITL - Software Testing Terms",
+            "description": "Glossary of software testing terms according to ISTQB standards.",
+            "keywords": "software testing glossary, ISTQB terms, definitions"
+        },
+        "members": {
+            "title": "CITL Membership | Become a Member",
+            "description": "Join CITL and participate in the development of software testing in Ivory Coast.",
+            "keywords": "CITL membership, become a member, software testing"
+        },
+        "accreditation": {
+            "title": "Accreditation Request | CITL - ISTQB Training",
+            "description": "Get your ISTQB training organization accredited by CITL.",
+            "keywords": "training accreditation, ISTQB, CITL, training organization"
+        }
     }
 }

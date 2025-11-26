@@ -1,5 +1,6 @@
-import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AboutIstqb() {
@@ -26,6 +27,14 @@ function AboutIstqb() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.about_istqb.title')}</title>
+                <meta name="description" content={t('seo.about_istqb.description')} />
+                <meta name="keywords" content={t('seo.about_istqb.keywords')} />
+                <meta property="og:title" content={t('seo.about_istqb.title')} />
+                <meta property="og:description" content={t('seo.about_istqb.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
             <main>
                 <HeroCommon
                     badge={t('about.istqb.badge')}

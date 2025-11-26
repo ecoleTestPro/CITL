@@ -1,5 +1,6 @@
-import { HeroCommon, AboutKeyTakeaways, AboutOverview } from '@/components/blocks/about';
+import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AboutCitl() {
@@ -26,6 +27,13 @@ function AboutCitl() {
 
     return (
         <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.about_citl.title')}</title>
+                <meta name="description" content={t('seo.about_citl.description')} />
+                <meta name="keywords" content={t('seo.about_citl.keywords')} />
+                <meta property="og:title" content={t('seo.about_citl.title')} />
+                <meta property="og:description" content={t('seo.about_citl.description')} />
+            </Head>
             <main>
                 <HeroCommon
                     badge={t('about.citl.badge')}

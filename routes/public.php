@@ -57,7 +57,8 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 // Registration Section
 Route::get('/register-certified-testers', [PublicController::class, 'registerCertifiedTesters'])->name('register-certified-testers');
-Route::get('/certified-testers-list', [PublicController::class, 'certifiedTestersList'])->name('certified-testers-list');
+Route::get('/certified-testers-list', [\App\Http\Controllers\CertifiedTesterRegistrationController::class, 'index'])->name('certified-testers-list');
+Route::post('/registration/certified-testers', [\App\Http\Controllers\CertifiedTesterRegistrationController::class, 'store'])->name('registration.certified-testers.store');
 Route::get('/istqb-registry', [PublicController::class, 'istqbRegistry'])->name('istqb-registry');
 
 // Contact

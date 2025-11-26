@@ -76,7 +76,9 @@
             "title": "Prêt à obtenir votre certification ISTQB ?",
             "description": "Rejoignez la communauté des testeurs certifiés en Côte d'Ivoire. Inscrivez-vous dès aujourd'hui pour passer votre examen ou contactez-nous pour plus d'informations.",
             "contact_button": "Nous contacter",
-            "exam_button": "S'inscrire à l'examen"
+            "exam_button": "S'inscrire à l'examen",
+            "feature_international": "Certification reconnue internationalement",
+            "feature_online": "Examen en ligne depuis votre domicile"
         }
     },
     "about": {

@@ -23,10 +23,10 @@ const Navbar = () => {
 
     return (
         <>
-            <header className="relative z-50 w-full border-b bg-background">
+            <header className="relative z-50 w-full border-b bg-background dark:border-gray-700 dark:bg-gray-900">
                 <div>
                     {/* Niveau 1: Logo + Barre de recherche centrée + Actions */}
-                    <div className="w-full border-b bg-background backdrop-blur-md">
+                    <div className="w-full border-b bg-background backdrop-blur-md dark:border-gray-800 dark:bg-gray-900">
                         <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4">
                             {/* Logo */}
                             <Link href="/" className="shrink-0 p-2">
@@ -62,8 +62,8 @@ const Navbar = () => {
 
                     {/* Niveau 2: Menu de navigation */}
                     <div
-                        className={`hidden w-full bg-background backdrop-blur-md transition-all duration-300 xl:block ${
-                            isScrolled ? 'fixed top-0 z-50 border-b shadow-md' : ''
+                        className={`hidden w-full bg-background backdrop-blur-md transition-all duration-300 xl:block dark:bg-gray-900 ${
+                            isScrolled ? 'fixed top-0 z-40 border-b shadow-md dark:border-gray-800' : ''
                         }`}
                     >
                         <div className="container mx-auto px-4 py-0">
@@ -78,12 +78,12 @@ const Navbar = () => {
 
             {/* Menu mobile */}
             {mobileMenuOpen && (
-                <div className="fixed inset-0 z-40 bg-background/95 pt-20 backdrop-blur-lg xl:hidden">
+                <div className="fixed inset-0 z-40 bg-background/95 pt-20 backdrop-blur-lg xl:hidden dark:bg-gray-900/95">
                     <div className="container mx-auto px-4 py-6">
                         <NavMenu mobile onNavigate={() => setMobileMenuOpen(false)} />
 
                         {/* Actions mobiles */}
-                        <div className="mt-6 space-y-3 border-t pt-6">
+                        <div className="mt-6 space-y-3 border-t pt-6 dark:border-gray-800">
                             <div className="flex flex-col gap-3">
                                 <Link href="/exam-registration" onClick={() => setMobileMenuOpen(false)}>
                                     <Button variant="outline" className="w-full rounded-full">

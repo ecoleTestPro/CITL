@@ -76,7 +76,9 @@
             "title": "Ready to get your ISTQB certification?",
             "description": "Join the community of certified testers in Ivory Coast. Register today to take your exam or contact us for more information.",
             "contact_button": "Contact us",
-            "exam_button": "Register for exam"
+            "exam_button": "Register for exam",
+            "feature_international": "Internationally recognized certification",
+            "feature_online": "Online exam from your home"
         }
     },
     "about": {

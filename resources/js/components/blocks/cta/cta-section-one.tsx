@@ -1,5 +1,5 @@
 import { FadeIn, SlideIn } from '@/components/animations';
-import { Button } from '@/components/ui/button';
+import { AnimatedButton } from '@/components/ui/animated-button';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -42,10 +42,10 @@ export default function CtaSectionOne() {
 
                                 {/* Bouton CTA */}
                                 <FadeIn delay={0.3}>
-                                    <Link href="/certifications" className="mx-auto w-[85%] md:mx-0 md:w-auto">
-                                        <Button className="w-full rounded-full bg-citl-orange px-6 py-3 text-white shadow-sm transition-all duration-300 hover:bg-citl-orange/90 md:w-auto">
+                                    <Link href="/why-certification" className="mx-auto w-[85%] md:mx-0 md:w-auto">
+                                        <AnimatedButton className="w-full rounded-full bg-citl-orange px-6 py-3 text-white shadow-sm transition-all duration-300 hover:bg-citl-orange/90 md:w-auto">
                                             {t('cta.learn_more')}
-                                        </Button>
+                                        </AnimatedButton>
                                     </Link>
                                 </FadeIn>
                             </div>

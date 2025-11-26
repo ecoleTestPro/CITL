@@ -30,7 +30,7 @@ export function AnimatedButton({
 
     const content = (
         <>
-            <span className="inline-block transition-transform duration-300 ease-in-out first-letter:uppercase lowercase">
+            <span className="inline-block transition-transform duration-300 ease-in-out">
                 {children}
             </span>
 

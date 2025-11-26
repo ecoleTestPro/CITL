@@ -19,7 +19,7 @@ export default function PublicLayout({
     return (
         <div className="flex min-h-screen w-full flex-col overflow-x-hidden bg-gray-50 dark:bg-gray-900">
             <Navbar />
-            <Hero variant={variant} breadcrumbs={breadcrumbs} />
+            {/* <Hero variant={variant} breadcrumbs={breadcrumbs} /> */}
             <main className="flex-1 bg-[#f2f2f2] dark:bg-gray-900">
                 {children}
             </main>

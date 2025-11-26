@@ -1,10 +1,10 @@
+import { AnimatedButton } from '@/components/ui/animated-button';
 import AnimatedGridPattern from '@/components/ui/animated-grid-pattern';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, CirclePlay } from 'lucide-react';
+import { ArrowUpRight, Trophy } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const HeroHome = () => {
@@ -62,19 +62,14 @@ const HeroHome = () => {
 
     return (
         <div className={'container mx-auto flex items-center justify-center overflow-hidden ' + height}>
-            <AnimatedGridPattern
-                numSquares={50}
-                maxOpacity={0.3}
-                duration={2}
-                className={cn('mask-[radial-gradient(600px_circle_at_center,white,transparent)]', 'inset-0 h-full w-full')}
-            />
             <div className="grid w-full gap-12 px-6 lg:grid-cols-2">
-                <motion.div
-                    className="relative my-auto overflow-hidden py-12"
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
+                <motion.div className="relative my-auto overflow-hidden py-12" variants={containerVariants} initial="hidden" animate="visible">
+                    <AnimatedGridPattern
+                        numSquares={50}
+                        maxOpacity={0.3}
+                        duration={2}
+                        className={cn('mask-[radial-gradient(600px_circle_at_center,white,transparent)]', 'inset-0 h-full w-full')}
+                    />
                     <div className="container mx-auto px-4 md:px-5 lg:px-5">
                         <motion.div variants={badgeVariants}>
                             <Badge variant="secondary" className="relative rounded-full border-border" asChild>
@@ -98,30 +93,28 @@ const HeroHome = () => {
                         <motion.div variants={itemVariants} className="relative mt-12 flex items-center gap-4">
                             <Link href="/exam-registration">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <Button size="lg" className="rounded-full text-base">
-                                        {t('hero.registerExam')} <ArrowUpRight className="h-5! w-5!" />
-                                    </Button>
+                                    <AnimatedButton className="rounded-full">
+                                        <span className="flex items-center gap-2">
+                                            {t('hero.registerExam')} <ArrowUpRight className="h-5! w-5!" />
+                                        </span>
+                                    </AnimatedButton>
                                 </motion.div>
                             </Link>
-                            <Link href="/accredited-organizations">
+                            <Link href="/why-certification">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <Button variant="outline" size="lg" className="rounded-full text-base shadow-none">
-                                        <CirclePlay className="h-5! w-5!" /> {t('hero.findTraining')}
-                                    </Button>
+                                    <AnimatedButton variant="primaryOutlined" className="rounded-full bg-white shadow-none">
+                                        <span className="flex items-center gap-2">
+                                            <Trophy className="h-5! w-5!" /> {t('hero.findCertification')}
+                                        </span>
+                                    </AnimatedButton>
                                 </motion.div>
                             </Link>
                         </motion.div>
                     </div>
                 </motion.div>
 
-                <motion.div
-                    className={height}
-                    aria-label="Hero Image"
-                    variants={imageVariants}
-                    initial="hidden"
-                    animate="visible"
-                >
-                    <img className="h-full w-auto object-cover" src="/assets/images/hero/pexels-theo-decker-5945814.jpg" />
+                <motion.div className={height} aria-label="Hero Image" variants={imageVariants} initial="hidden" animate="visible">
+                    <img className="h-full w-auto object-cover" src="/assets/images/hero/hero-bg-01.jpg" />
                 </motion.div>
             </div>
         </div>

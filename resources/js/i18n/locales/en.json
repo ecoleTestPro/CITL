@@ -43,7 +43,8 @@
         "title": "Ivorian Software Testing Committee",
         "description": "The only official structure in Ivory Coast responsible for representing and promoting ISTQB®. We deliver ISTQB certifications, accredit trainers and actively participate in international software testing standards.",
         "registerExam": "Register for an exam",
-        "findTraining": "Find training"
+        "findTraining": "Find training",
+        "findCertification": "Find a certification"
     },
     "home": {
         "hero_title": "The Only Official ISTQB Structure in Ivory Coast",
@@ -364,6 +365,17 @@
             "delete_category_message": "Are you sure you want to delete this category? All associated certifications will also be deleted.",
             "delete_certification_message": "Are you sure you want to delete this certification? This action is irreversible."
         }
+    },
+    "features": {
+        "badge": "Your Journey",
+        "title": "A Simple Path to Excellence",
+        "description": "From preparation to certification, we support you at every step of your professional journey in software testing.",
+        "card1_title": "Prepare for Your Certification",
+        "card1_description": "Access official ISTQB® resources, syllabi and sample exams to effectively prepare for your certification.",
+        "card2_title": "A Complete Portfolio of Certifications",
+        "card2_description": "From Foundation to Expert level, choose from our internationally recognized certifications to validate your skills.",
+        "card3_title": "Get Your Official Certificate",
+        "card3_description": "After passing the exam, receive your ISTQB® certificate recognized in over 120 countries and register in the international registry."
     },
     "footer": {
         "all_rights_reserved": "All rights reserved"

@@ -7,14 +7,14 @@ function IstqbRegistry() {
 
     return (
         <PublicLayout>
-            <Head>
+            {/* <Head>
                 <title>{t('nav.istqb_registry')} | CITL</title>
                 <meta name="description" content="Accédez au registre international des testeurs ISTQB certifiés via le CITL." />
                 <meta name="keywords" content="registre ISTQB, testeurs certifiés, certification internationale, CITL" />
                 <meta property="og:title" content={`${t('nav.istqb_registry')} | CITL`} />
                 <meta property="og:description" content="Accédez au registre international des testeurs ISTQB certifiés via le CITL." />
                 <meta property="og:type" content="website" />
-            </Head>
+            </Head> */}
             <div className="container mx-auto px-4 py-16">
                 <h1 className="text-4xl font-bold mb-6">Registre des testeurs ISTQB certifiés</h1>
                 <p className="text-muted-foreground">

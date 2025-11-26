@@ -20,8 +20,11 @@ function FeaturesSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const leftCardRef = useRef<HTMLDivElement>(null);
+    const leftCardTextRef = useRef<HTMLDivElement>(null);
     const rightTopRef = useRef<HTMLDivElement>(null);
+    const rightTopTextRef = useRef<HTMLDivElement>(null);
     const rightBottomRef = useRef<HTMLDivElement>(null);
+    const rightBottomTextRef = useRef<HTMLDivElement>(null);
     const marqueeRef1 = useRef<HTMLDivElement>(null);
     const marqueeRef2 = useRef<HTMLDivElement>(null);
 
@@ -29,20 +32,60 @@ function FeaturesSection() {
         if (!sectionRef.current) return;
 
         const ctx = gsap.context(() => {
-            // Animation du header
+            // Animation du header avec stagger sur les éléments enfants
             if (headerRef.current) {
-                gsap.from(headerRef.current, {
-                    y: 50,
-                    opacity: 0,
-                    filter: 'blur(10px)',
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: headerRef.current,
-                        start: 'top 85%',
-                        toggleActions: 'play none none reverse',
-                    },
-                });
+                // Animation du badge
+                const badge = headerRef.current.querySelector('span');
+                if (badge) {
+                    gsap.from(badge, {
+                        scale: 0.8,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.6,
+                        ease: 'back.out(1.7)',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
+
+                // Animation du titre
+                const title = headerRef.current.querySelector('h2');
+                if (title) {
+                    gsap.from(title, {
+                        y: 50,
+                        opacity: 0,
+                        filter: 'blur(12px)',
+                        duration: 1,
+                        delay: 0.2,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
+
+                // Animation de la description
+                const description = headerRef.current.querySelector('p');
+                if (description) {
+                    gsap.from(description, {
+                        y: 30,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.8,
+                        delay: 0.4,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: headerRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
             }
 
             // Animation de la carte gauche
@@ -60,6 +103,25 @@ function FeaturesSection() {
                         toggleActions: 'play none none reverse',
                     },
                 });
+
+                // Animation des textes de la carte gauche avec stagger
+                if (leftCardTextRef.current) {
+                    const textElements = leftCardTextRef.current.querySelectorAll('h3, p');
+                    gsap.from(textElements, {
+                        x: -30,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.6,
+                        stagger: 0.15,
+                        delay: 0.6,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: leftCardRef.current,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
             }
 
             // Animation de la carte droite supérieure
@@ -77,6 +139,25 @@ function FeaturesSection() {
                         toggleActions: 'play none none reverse',
                     },
                 });
+
+                // Animation des textes de la carte droite supérieure
+                if (rightTopTextRef.current) {
+                    const textElements = rightTopTextRef.current.querySelectorAll('h3, p');
+                    gsap.from(textElements, {
+                        x: 30,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.6,
+                        stagger: 0.15,
+                        delay: 0.5,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: rightTopRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
             }
 
             // Animation de la carte droite inférieure
@@ -89,6 +170,43 @@ function FeaturesSection() {
                     duration: 1,
                     delay: 0.2,
                     ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: rightBottomRef.current,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse',
+                    },
+                });
+
+                // Animation des textes de la carte droite inférieure
+                if (rightBottomTextRef.current) {
+                    const textElements = rightBottomTextRef.current.querySelectorAll('h3, p');
+                    gsap.from(textElements, {
+                        y: 20,
+                        opacity: 0,
+                        filter: 'blur(8px)',
+                        duration: 0.6,
+                        stagger: 0.15,
+                        delay: 0.7,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: rightBottomRef.current,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                }
+
+                // Animation des images avec rotation
+                const images = rightBottomRef.current.querySelectorAll('figure');
+                gsap.from(images, {
+                    scale: 0.8,
+                    opacity: 0,
+                    rotation: (index) => (index === 1 ? 0 : index === 0 ? -20 : 20),
+                    filter: 'blur(5px)',
+                    duration: 0.8,
+                    stagger: 0.1,
+                    delay: 0.3,
+                    ease: 'back.out(1.4)',
                     scrollTrigger: {
                         trigger: rightBottomRef.current,
                         start: 'top 90%',
@@ -153,21 +271,18 @@ function FeaturesSection() {
                     <div className="grid grid-cols-12 gap-y-10 md:gap-x-8">
                         {/* Carte gauche - Grande image */}
                         <div ref={leftCardRef} className="col-span-12 md:col-span-6">
-                            <div className="relative h-full min-h-[450px] max-w-full overflow-hidden rounded-[20px] bg-white sm:min-h-[780px] md:min-h-[720px] lg:p-10.5 dark:bg-gray-900">
-                                {/* Gradient overlay */}
-                                <div className="absolute bottom-0 left-0 z-10 h-[480px] w-full bg-linear-to-t from-white via-white/80 to-transparent md:bottom-20 lg:bottom-0 dark:from-gray-900 dark:via-gray-900/80"></div>
+                            <div className="relative h-full min-h-[450px] max-w-full overflow-hidden rounded-[20px] sm:min-h-[780px] md:min-h-[720px] dark:bg-gray-900">
+                                {/* Image de fond */}
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                                    style={{ backgroundImage: "url('/assets/images/features/feature-certification-process.jpg')" }}
+                                />
 
-                                {/* Image principale */}
-                                <figure className="absolute right-0 bottom-2 md:bottom-40 lg:bottom-20 xl:bottom-2">
-                                    <img
-                                        src="/assets/images/features/feature-certification-process.jpg"
-                                        alt="Processus de certification ISTQB"
-                                        className="h-full w-full object-cover"
-                                    />
-                                </figure>
+                                {/* Gradient overlay */}
+                                <div className="absolute inset-0 z-10 bg-linear-to-t from-white via-white/70 to-transparent dark:from-gray-900 dark:via-gray-900/70"></div>
 
                                 {/* Texte */}
-                                <div className="absolute right-10.5 bottom-10.5 left-6 z-20 space-y-2 sm:left-10.5 md:left-6 xl:left-10.5">
+                                <div ref={leftCardTextRef} className="absolute right-6 bottom-8 left-6 z-20 space-y-2 sm:right-10 sm:left-10 lg:right-10.5 lg:bottom-10.5 lg:left-10.5">
                                     <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card1_title')}</h3>
                                     <p className="max-w-[450px] text-muted-foreground">{t('features.card1_description')}</p>
                                 </div>
@@ -215,7 +330,7 @@ function FeaturesSection() {
                                 </div>
 
                                 {/* Texte */}
-                                <div className="space-y-2">
+                                <div ref={rightTopTextRef} className="space-y-2">
                                     <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card2_title')}</h3>
                                     <p className="max-w-[450px] text-muted-foreground">{t('features.card2_description')}</p>
                                 </div>
@@ -240,7 +355,7 @@ function FeaturesSection() {
                                 </div>
 
                                 {/* Texte */}
-                                <div className="relative z-20 space-y-2">
+                                <div ref={rightBottomTextRef} className="relative z-20 space-y-2">
                                     <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card3_title')}</h3>
                                     <p className="max-w-[450px] text-muted-foreground">{t('features.card3_description')}</p>
                                 </div>

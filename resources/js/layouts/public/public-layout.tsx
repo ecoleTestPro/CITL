@@ -1,3 +1,4 @@
+import { CookieConsentModal } from '@/components/cookie-consent-modal';
 import { FloatingActions } from '@/components/floating-actions';
 import { type BreadcrumbItem } from '@/types';
 import { type PropsWithChildren } from 'react';
@@ -25,6 +26,7 @@ export default function PublicLayout({
             </main>
             <Footer />
             <FloatingActions />
+            <CookieConsentModal />
             <Toaster
                 position="top-right"
                 toastOptions={{

@@ -382,6 +382,26 @@
     "footer": {
         "all_rights_reserved": "All rights reserved"
     },
+    "cookie_consent": {
+        "title": "Welcome to CITL",
+        "subtitle": "Customize your experience",
+        "choose_theme": "Choose your preferred theme",
+        "theme_light": "Light",
+        "theme_dark": "Dark",
+        "theme_system": "System",
+        "description": "We use cookies to enhance your experience on our site. Some are essential for the site to function, while others help us improve it.",
+        "necessary_title": "Essential cookies",
+        "necessary_desc": "Required for the site to function. Cannot be disabled.",
+        "analytics_title": "Analytics cookies",
+        "analytics_desc": "Help us understand how you use the site to improve it.",
+        "marketing_title": "Marketing cookies",
+        "marketing_desc": "Used to show you relevant content and advertisements.",
+        "show_details": "Customize cookies",
+        "hide_details": "Hide details",
+        "accept_all": "Accept all",
+        "necessary_only": "Essential only",
+        "save_preferences": "Save my preferences"
+    },
     "exam": {
         "page_title": "Register for Exam - CITL",
         "hero_title": "Register for Exam",

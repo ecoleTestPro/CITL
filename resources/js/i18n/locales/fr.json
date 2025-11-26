@@ -394,6 +394,26 @@
     "footer": {
         "all_rights_reserved": "Tous droits réservés"
     },
+    "cookie_consent": {
+        "title": "Bienvenue sur CITL",
+        "subtitle": "Personnalisez votre expérience",
+        "choose_theme": "Choisissez votre thème préféré",
+        "theme_light": "Clair",
+        "theme_dark": "Sombre",
+        "theme_system": "Système",
+        "description": "Nous utilisons des cookies pour améliorer votre expérience sur notre site. Certains sont essentiels au fonctionnement du site, tandis que d'autres nous aident à l'améliorer.",
+        "necessary_title": "Cookies essentiels",
+        "necessary_desc": "Nécessaires au fonctionnement du site. Ne peuvent pas être désactivés.",
+        "analytics_title": "Cookies analytiques",
+        "analytics_desc": "Nous aident à comprendre comment vous utilisez le site pour l'améliorer.",
+        "marketing_title": "Cookies marketing",
+        "marketing_desc": "Utilisés pour vous proposer des contenus et publicités pertinents.",
+        "show_details": "Personnaliser les cookies",
+        "hide_details": "Masquer les détails",
+        "accept_all": "Tout accepter",
+        "necessary_only": "Essentiels uniquement",
+        "save_preferences": "Enregistrer mes choix"
+    },
     "exam": {
         "page_title": "S'inscrire à l'examen - CITL",
         "hero_title": "S'inscrire à l'examen",

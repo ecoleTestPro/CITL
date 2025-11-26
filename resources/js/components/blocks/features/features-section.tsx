@@ -126,7 +126,7 @@ function FeaturesSection() {
                         duration: 30,
                         ease: 'none',
                         repeat: -1,
-                    }
+                    },
                 );
             }
         }, sectionRef);
@@ -138,7 +138,7 @@ function FeaturesSection() {
     const duplicatedCerts = [...certifications, ...certifications, ...certifications];
 
     return (
-        <section ref={sectionRef} className="max-[1920px]:px-5 py-16">
+        <section ref={sectionRef} className="py-16 max-[1920px]:px-5">
             <div className="mx-auto max-w-[1880px] rounded-3xl bg-gray-100 py-20 lg:rounded-4xl lg:py-30 xl:py-39 dark:bg-gray-800">
                 <div className="container mx-auto px-4 md:px-5 lg:px-5">
                     {/* Header */}
@@ -146,12 +146,8 @@ function FeaturesSection() {
                         <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
                             {t('features.badge')}
                         </span>
-                        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">
-                            {t('features.title')}
-                        </h2>
-                        <p className="text-lg text-muted-foreground">
-                            {t('features.description')}
-                        </p>
+                        <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl lg:text-5xl">{t('features.title')}</h2>
+                        <p className="text-lg text-muted-foreground">{t('features.description')}</p>
                     </div>
 
                     <div className="grid grid-cols-12 gap-y-10 md:gap-x-8">
@@ -159,12 +155,12 @@ function FeaturesSection() {
                         <div ref={leftCardRef} className="col-span-12 md:col-span-6">
                             <div className="relative h-full min-h-[450px] max-w-full overflow-hidden rounded-[20px] bg-white sm:min-h-[780px] md:min-h-[720px] lg:p-10.5 dark:bg-gray-900">
                                 {/* Gradient overlay */}
-                                <div className="absolute bottom-0 left-0 z-10 h-[480px] w-full bg-linear-to-t from-white via-white/80 to-transparent dark:from-gray-900 dark:via-gray-900/80 md:bottom-20 lg:bottom-0"></div>
+                                <div className="absolute bottom-0 left-0 z-10 h-[480px] w-full bg-linear-to-t from-white via-white/80 to-transparent md:bottom-20 lg:bottom-0 dark:from-gray-900 dark:via-gray-900/80"></div>
 
                                 {/* Image principale */}
                                 <figure className="absolute right-0 bottom-2 md:bottom-40 lg:bottom-20 xl:bottom-2">
                                     <img
-                                        src="/assets/images/features/feature-certification-process.png"
+                                        src="/assets/images/features/feature-certification-process.jpg"
                                         alt="Processus de certification ISTQB"
                                         className="h-full w-full object-cover"
                                     />
@@ -172,12 +168,8 @@ function FeaturesSection() {
 
                                 {/* Texte */}
                                 <div className="absolute right-10.5 bottom-10.5 left-6 z-20 space-y-2 sm:left-10.5 md:left-6 xl:left-10.5">
-                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">
-                                        {t('features.card1_title')}
-                                    </h3>
-                                    <p className="max-w-[450px] text-muted-foreground">
-                                        {t('features.card1_description')}
-                                    </p>
+                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card1_title')}</h3>
+                                    <p className="max-w-[450px] text-muted-foreground">{t('features.card1_description')}</p>
                                 </div>
                             </div>
                         </div>
@@ -193,14 +185,10 @@ function FeaturesSection() {
                                             {duplicatedCerts.map((cert, index) => (
                                                 <div
                                                     key={`row1-${cert.id}-${index}`}
-                                                    className="inline-flex min-w-[180px] max-w-[180px] items-center gap-x-3 rounded-full bg-white p-2 shadow-sm dark:bg-gray-700"
+                                                    className="inline-flex max-w-[180px] min-w-[180px] items-center gap-x-3 rounded-full bg-white p-2 shadow-sm dark:bg-gray-700"
                                                 >
                                                     <figure className="size-12 shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600">
-                                                        <img
-                                                            src={cert.logo}
-                                                            alt={cert.name}
-                                                            className="size-full object-contain p-1"
-                                                        />
+                                                        <img src={cert.logo} alt={cert.name} className="size-full object-contain p-1" />
                                                     </figure>
                                                     <span className="text-sm font-medium text-foreground">{cert.name}</span>
                                                 </div>
@@ -214,14 +202,10 @@ function FeaturesSection() {
                                             {duplicatedCerts.map((cert, index) => (
                                                 <div
                                                     key={`row2-${cert.id}-${index}`}
-                                                    className="inline-flex min-w-[180px] max-w-[180px] items-center gap-x-3 rounded-full bg-white p-2 shadow-sm dark:bg-gray-700"
+                                                    className="inline-flex max-w-[180px] min-w-[180px] items-center gap-x-3 rounded-full bg-white p-2 shadow-sm dark:bg-gray-700"
                                                 >
                                                     <figure className="size-12 shrink-0 overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600">
-                                                        <img
-                                                            src={cert.logo}
-                                                            alt={cert.name}
-                                                            className="size-full object-contain p-1"
-                                                        />
+                                                        <img src={cert.logo} alt={cert.name} className="size-full object-contain p-1" />
                                                     </figure>
                                                     <span className="text-sm font-medium text-foreground">{cert.name}</span>
                                                 </div>
@@ -232,24 +216,16 @@ function FeaturesSection() {
 
                                 {/* Texte */}
                                 <div className="space-y-2">
-                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">
-                                        {t('features.card2_title')}
-                                    </h3>
-                                    <p className="max-w-[450px] text-muted-foreground">
-                                        {t('features.card2_description')}
-                                    </p>
+                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card2_title')}</h3>
+                                    <p className="max-w-[450px] text-muted-foreground">{t('features.card2_description')}</p>
                                 </div>
                             </div>
 
                             {/* Carte avec les 3 images */}
                             <div ref={rightBottomRef} className="space-y-8 rounded-[20px] bg-white p-5 sm:p-8 md:p-5 xl:p-8 dark:bg-gray-900">
                                 <div className="flex items-center justify-center -space-x-12">
-                                    <figure className="w-full max-w-[214px] rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:rotate-0 hover:scale-105">
-                                        <img
-                                            src="/assets/images/features/feature-exam-1.png"
-                                            alt="Examen ISTQB"
-                                            className="h-full w-full object-cover"
-                                        />
+                                    <figure className="w-full max-w-[214px] rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:scale-105 hover:rotate-0">
+                                        <img src="/assets/images/features/feature-exam-1.png" alt="Examen ISTQB" className="h-full w-full object-cover" />
                                     </figure>
                                     <figure className="relative z-10 w-full max-w-[214px] overflow-hidden rounded-b-[15px] shadow-2xl transition-transform duration-500 hover:scale-110">
                                         <img
@@ -258,23 +234,15 @@ function FeaturesSection() {
                                             className="h-full w-full object-cover"
                                         />
                                     </figure>
-                                    <figure className="relative z-10 w-full max-w-[214px] -rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:rotate-0 hover:scale-105">
-                                        <img
-                                            src="/assets/images/features/feature-exam-3.png"
-                                            alt="Certificat ISTQB"
-                                            className="h-full w-full object-cover"
-                                        />
+                                    <figure className="relative z-10 w-full max-w-[214px] -rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:scale-105 hover:rotate-0">
+                                        <img src="/assets/images/features/feature-exam-3.png" alt="Certificat ISTQB" className="h-full w-full object-cover" />
                                     </figure>
                                 </div>
 
                                 {/* Texte */}
                                 <div className="relative z-20 space-y-2">
-                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">
-                                        {t('features.card3_title')}
-                                    </h3>
-                                    <p className="max-w-[450px] text-muted-foreground">
-                                        {t('features.card3_description')}
-                                    </p>
+                                    <h3 className="text-xl font-bold text-foreground md:text-2xl">{t('features.card3_title')}</h3>
+                                    <p className="max-w-[450px] text-muted-foreground">{t('features.card3_description')}</p>
                                 </div>
                             </div>
                         </div>

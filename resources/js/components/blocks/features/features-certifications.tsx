@@ -129,25 +129,25 @@ const FeaturesCertifications = () => {
     }, []);
 
     return (
-        <div ref={sectionRef} className="bg-background py-12">
-            <div className="container mx-auto px-6">
-                <div className="grid grid-cols-5 gap-4">
-                    <div className="col-span-2">
-                        <div className="mb-12 text-left">
+        <div ref={sectionRef} className="bg-background py-8 sm:py-12">
+            <div className="container mx-auto px-4 sm:px-6">
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-5 lg:gap-8">
+                    <div className="lg:col-span-2">
+                        <div className="mb-6 text-center lg:mb-12 lg:text-left">
                             <h2
                                 ref={titleRef}
-                                className="text-4xl font-semibold tracking-tight text-foreground md:text-[2.5rem] md:leading-[1.2]"
+                                className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl md:leading-[1.2] lg:text-[2.5rem]"
                             >
                                 {t('home.develop_skills_title')}
                             </h2>
-                            <p ref={descriptionRef} className="mt-4 text-lg text-muted-foreground sm:text-xl">
+                            <p ref={descriptionRef} className="mt-3 text-base text-muted-foreground sm:mt-4 sm:text-lg lg:text-xl">
                                 <strong>{t('home.istqb_intro')}</strong>, {t('home.istqb_description')}
                             </p>
                         </div>
                     </div>
-                    <div className="col-span-3">
+                    <div className="lg:col-span-3">
                         <div className="flex h-full items-center">
-                            <div className="mx-auto grid w-full gap-6 md:grid-cols-2">
+                            <div className="mx-auto grid w-full gap-4 sm:grid-cols-2 sm:gap-6">
                                 {certificationSteps.map((step, index) => (
                                     <div
                                         key={step.title}
@@ -156,16 +156,16 @@ const FeaturesCertifications = () => {
                                         }}
                                     >
                                         <Card className="flex h-full flex-col overflow-hidden rounded-xl border shadow-none transition-colors">
-                                            <CardHeader>
-                                                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                                                    <step.icon className="h-6 w-6" />
+                                            <CardHeader className="p-4 sm:p-6">
+                                                <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary sm:mb-4 sm:h-12 sm:w-12">
+                                                    <step.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                                                 </div>
-                                                <h4 className="mt-3! text-xl font-semibold tracking-tight text-foreground">{step.title}</h4>
-                                                <p className="mt-1 text-[17px] text-muted-foreground">{step.description}</p>
+                                                <h4 className="mt-2! text-lg font-semibold tracking-tight text-foreground sm:mt-3! sm:text-xl">{step.title}</h4>
+                                                <p className="mt-1 text-sm text-muted-foreground sm:text-[17px]">{step.description}</p>
                                             </CardHeader>
                                             <CardContent className="mt-auto px-0 pb-0">
-                                                <div className="px-4">
-                                                    <Button variant={'secondary'} asChild>
+                                                <div className="px-4 pb-4 sm:px-6 sm:pb-6">
+                                                    <Button variant={'secondary'} className="w-full sm:w-auto" asChild>
                                                         <Link href={step.link}>{t('home.learn_more_btn')}</Link>
                                                     </Button>
                                                 </div>

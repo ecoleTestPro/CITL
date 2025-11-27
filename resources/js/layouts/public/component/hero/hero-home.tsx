@@ -9,7 +9,6 @@ import { useTranslation } from 'react-i18next';
 
 const HeroHome = () => {
     const { t } = useTranslation();
-    const height = '70vh';
 
     // Animation variants
     const containerVariants = {
@@ -61,9 +60,9 @@ const HeroHome = () => {
     };
 
     return (
-        <div className={'container mx-auto flex items-center justify-center overflow-hidden ' + height}>
-            <div className="grid w-full gap-12 px-6 lg:grid-cols-2">
-                <motion.div className="relative my-auto overflow-hidden py-12" variants={containerVariants} initial="hidden" animate="visible">
+        <div className={'container mx-auto flex items-center justify-center overflow-hidden min-h-[70vh] py-8 lg:py-0'}>
+            <div className="grid w-full gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
+                <motion.div className="relative my-auto overflow-hidden py-6 lg:py-12" variants={containerVariants} initial="hidden" animate="visible">
                     <AnimatedGridPattern
                         numSquares={50}
                         maxOpacity={0.3}
@@ -81,29 +80,29 @@ const HeroHome = () => {
 
                         <motion.h1
                             variants={itemVariants}
-                            className="relative mt-6 max-w-[20ch] text-4xl leading-[1.2]! font-semibold tracking-tighter md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]"
+                            className="relative mt-4 max-w-[20ch] text-3xl leading-[1.2]! font-semibold tracking-tighter sm:mt-6 sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]"
                         >
                             {t('hero.title')}
                         </motion.h1>
 
-                        <motion.p variants={itemVariants} className="relative mt-6 max-w-[60ch] text-lg text-foreground/80">
+                        <motion.p variants={itemVariants} className="relative mt-4 max-w-[60ch] text-base text-foreground/80 sm:mt-6 sm:text-lg">
                             {t('hero.description')}
                         </motion.p>
 
-                        <motion.div variants={itemVariants} className="relative mt-12 flex items-center gap-4">
-                            <Link href="/exam-registration">
+                        <motion.div variants={itemVariants} className="relative mt-8 flex flex-col items-start gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4">
+                            <Link href="/exam-registration" className="w-full sm:w-auto">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <AnimatedButton className="rounded-full">
-                                        <span className="flex items-center gap-2">
+                                    <AnimatedButton className="w-full rounded-full sm:w-auto">
+                                        <span className="flex items-center justify-center gap-2">
                                             {t('hero.registerExam')} <ArrowUpRight className="h-5! w-5!" />
                                         </span>
                                     </AnimatedButton>
                                 </motion.div>
                             </Link>
-                            <Link href="/why-certification">
+                            <Link href="/why-certification" className="w-full sm:w-auto">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <AnimatedButton variant="primaryOutlined" className="rounded-full bg-white shadow-none">
-                                        <span className="flex items-center gap-2">
+                                    <AnimatedButton variant="primaryOutlined" className="w-full rounded-full bg-white shadow-none sm:w-auto">
+                                        <span className="flex items-center justify-center gap-2">
                                             <Trophy className="h-5! w-5!" /> {t('hero.findCertification')}
                                         </span>
                                     </AnimatedButton>
@@ -113,8 +112,8 @@ const HeroHome = () => {
                     </div>
                 </motion.div>
 
-                <motion.div className={height} aria-label="Hero Image" variants={imageVariants} initial="hidden" animate="visible">
-                    <img className="h-full w-auto object-cover" src="/assets/images/hero/hero-bg-01.jpg" />
+                <motion.div className="hidden h-[50vh] lg:block lg:h-[70vh]" aria-label="Hero Image" variants={imageVariants} initial="hidden" animate="visible">
+                    <img className="h-full w-full rounded-2xl object-cover" src="/assets/images/hero/hero-bg-01.jpg" alt={t('hero.imageAlt', 'CITL - Certification ISTQB')} />
                 </motion.div>
             </div>
         </div>

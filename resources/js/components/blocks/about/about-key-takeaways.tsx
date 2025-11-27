@@ -99,21 +99,21 @@ export default function AboutKeyTakeaways({ title, takeaways, conclusion, ctaTex
     }, [takeaways]);
 
     return (
-        <section ref={sectionRef} className="bg-white py-16 xl:py-19 dark:bg-gray-900">
+        <section ref={sectionRef} className="bg-white py-10 sm:py-16 xl:py-19 dark:bg-gray-900">
             <div className="container mx-auto px-4">
-                <h2 ref={titleRef} className="text-3xl font-normal text-gray-900 dark:text-gray-100">
+                <h2 ref={titleRef} className="text-2xl font-normal text-gray-900 sm:text-3xl dark:text-gray-100">
                     <RichText text={title} />
                 </h2>
-                <ul ref={takeawaysRef} className="py-6">
+                <ul ref={takeawaysRef} className="py-4 sm:py-6">
                     {takeaways.map((takeaway, index) => (
                         <div key={index}>
-                            <li className="flex items-center gap-2 p-3">
-                                <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-gray-200 p-1 dark:bg-gray-800">
-                                    <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-lg font-medium text-gray-900 shadow-[0_1px_2px_0_rgba(0,0,0,0.15)] dark:bg-gray-700 dark:text-gray-100">
+                            <li className="flex items-start gap-2 p-2 sm:items-center sm:gap-3 sm:p-3">
+                                <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gray-200 p-1 sm:size-11 dark:bg-gray-800">
+                                    <div className="flex size-7 shrink-0 items-center justify-center rounded-full bg-white text-base font-medium text-gray-900 shadow-[0_1px_2px_0_rgba(0,0,0,0.15)] sm:size-9 sm:text-lg dark:bg-gray-700 dark:text-gray-100">
                                         {takeaway.number}
                                     </div>
                                 </div>
-                                <p className="text-gray-600 dark:text-gray-400">
+                                <p className="text-sm text-gray-600 sm:text-base dark:text-gray-400">
                                     <RichText text={takeaway.text} />
                                 </p>
                             </li>
@@ -121,23 +121,23 @@ export default function AboutKeyTakeaways({ title, takeaways, conclusion, ctaTex
                         </div>
                     ))}
                 </ul>
-                <p ref={conclusionRef} className="w-full max-w-3xl text-gray-600 dark:text-gray-400">
+                <p ref={conclusionRef} className="w-full max-w-3xl text-sm text-gray-600 sm:text-base dark:text-gray-400">
                     <RichText text={conclusion} />
                 </p>
-                <div ref={ctaRef} className="mt-14 max-w-max">
+                <div ref={ctaRef} className="mt-8 sm:mt-14">
                     {onCtaClick ? (
                         <Button
                             size="lg"
                             onClick={onCtaClick}
-                            className="mx-auto w-full rounded-full bg-citl-orange px-8 py-6 text-lg text-white transition-all duration-300 hover:bg-citl-orange/90 md:mx-0 md:w-auto"
+                            className="w-full rounded-full bg-citl-orange px-6 py-5 text-base text-white transition-all duration-300 hover:bg-citl-orange/90 sm:w-auto sm:px-8 sm:py-6 sm:text-lg"
                         >
                             {ctaText}
                         </Button>
                     ) : (
-                        <Link href={ctaLink || '#'}>
+                        <Link href={ctaLink || '#'} className="block sm:inline-block">
                             <Button
                                 size="lg"
-                                className="mx-auto w-full rounded-full bg-citl-orange px-8 py-6 text-lg text-white transition-all duration-300 hover:bg-citl-orange/90 md:mx-0 md:w-auto"
+                                className="w-full rounded-full bg-citl-orange px-6 py-5 text-base text-white transition-all duration-300 hover:bg-citl-orange/90 sm:w-auto sm:px-8 sm:py-6 sm:text-lg"
                             >
                                 {ctaText}
                             </Button>

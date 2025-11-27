@@ -120,45 +120,47 @@ function CtaTwo() {
     return (
         <section
             ref={sectionRef}
-            className="relative bg-white/50 bg-cover bg-center bg-no-repeat py-[50px] md:py-20 lg:py-28 dark:bg-gray-900"
+            className="relative bg-white/50 bg-cover bg-center bg-no-repeat py-10 sm:py-14 md:py-20 lg:py-28 dark:bg-gray-900"
             style={{ backgroundImage: "url('/assets/images/bg/image_2025-10-21_060850034-removebg-preview.png')", backgroundPositionY: 'left', backgroundRepeat: 'no-repeat' }}
             aria-label="Call to Action"
         >
-            <div className="relative z-10 container mx-auto">
-                <div className="flex flex-col items-center justify-between lg:flex-row">
-                    <div className="w-full space-y-5 text-center max-[400px]:max-w-[300px] lg:max-w-[476px] lg:text-left xl:max-w-[650px]">
+            <div className="relative z-10 container mx-auto px-4 sm:px-6">
+                <div className="flex flex-col items-center justify-between gap-6 lg:flex-row lg:gap-10">
+                    <div className="w-full space-y-4 text-center sm:space-y-5 lg:max-w-[476px] lg:text-left xl:max-w-[650px]">
                         <span
                             ref={badgeRef}
-                            className="inline-block rounded-full bg-yellow-100 px-4 py-1.5 text-sm font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                            className="inline-block rounded-full bg-yellow-100 px-3 py-1 text-xs font-medium text-yellow-800 sm:px-4 sm:py-1.5 sm:text-sm dark:bg-yellow-900/30 dark:text-yellow-300"
                         >
                             {t('cta.cta_two.badge')}
                         </span>
-                        <div className="space-y-3">
-                            <h2 ref={titleRef} className="text-3xl font-bold text-secondary sm:text-4xl lg:text-5xl dark:text-white">
+                        <div className="space-y-2 sm:space-y-3">
+                            <h2 ref={titleRef} className="text-2xl font-bold text-secondary sm:text-3xl md:text-4xl lg:text-5xl dark:text-white">
                                 {t('cta.cta_two.title')}
                             </h2>
-                            <p ref={descriptionRef} className="text-base text-gray-600 md:text-lg dark:text-gray-300">
+                            <p ref={descriptionRef} className="text-sm text-gray-600 sm:text-base md:text-lg dark:text-gray-300">
                                 {t('cta.cta_two.description')}
                             </p>
                         </div>
                     </div>
 
-                    <div className="w-full space-y-6 pt-[40px] sm:w-[80%] md:ml-0 md:w-[60%] lg:basis-[486px] lg:pt-[67px] xl:ml-[80px]">
-                        <div ref={buttonsRef} className="flex flex-col items-center justify-start gap-5 sm:flex-row lg:gap-3">
-                            <Link href="/contact" className="w-full md:w-auto">
+                    <div className="w-full space-y-4 sm:space-y-6 md:w-[80%] lg:w-auto lg:basis-[486px] xl:ml-[80px]">
+                        <div ref={buttonsRef} className="flex flex-col items-center justify-start gap-3 sm:flex-row sm:gap-4 lg:gap-3">
+                            <Link href="/contact" className="w-full sm:w-auto">
                                 <AnimatedButton variant="primary" fullWidth>
                                     {t('cta.cta_two.contact_button')}
                                 </AnimatedButton>
                             </Link>
 
-                            <AnimatedButton variant="primaryOutlined" fullWidth onClick={() => setShowExamModal(true)}>
-                                {t('cta.cta_two.exam_button')}
-                            </AnimatedButton>
+                            <div className="w-full sm:w-auto">
+                                <AnimatedButton variant="primaryOutlined" fullWidth onClick={() => setShowExamModal(true)}>
+                                    {t('cta.cta_two.exam_button')}
+                                </AnimatedButton>
+                            </div>
                         </div>
 
-                        <ul ref={listRef} className="flex flex-row flex-wrap items-center justify-center gap-x-4 gap-y-3 sm:gap-x-6 lg:justify-start">
+                        <ul ref={listRef} className="flex flex-col items-center justify-center gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6 sm:gap-y-3 lg:justify-start">
                             <li className="flex items-center justify-center gap-2">
-                                <span className="flex size-[18px] items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="10"
@@ -171,10 +173,10 @@ function CtaTwo() {
                                         <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z" />
                                     </svg>
                                 </span>
-                                <p className="text-sm text-gray-700 sm:text-base dark:text-gray-300">{t('cta.cta_two.feature_international')}</p>
+                                <p className="text-sm text-gray-700 dark:text-gray-300">{t('cta.cta_two.feature_international')}</p>
                             </li>
                             <li className="flex items-center justify-center gap-2">
-                                <span className="flex size-[18px] items-center justify-center rounded-full bg-secondary dark:bg-accent">
+                                <span className="flex size-[18px] shrink-0 items-center justify-center rounded-full bg-secondary dark:bg-accent">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="10"
@@ -187,7 +189,7 @@ function CtaTwo() {
                                         <path d="M4.31661 6.75605L9.74905 1.42144C10.0836 1.0959 10.0836 0.569702 9.74905 0.244158C9.41446 -0.081386 8.87363 -0.081386 8.53904 0.244158L3.7116 4.99012L1.46096 2.78807C1.12636 2.46253 0.585538 2.46253 0.250945 2.78807C-0.0836483 3.11362 -0.0836483 3.63982 0.250945 3.96536L3.1066 6.75605C3.27347 6.91841 3.49253 7 3.7116 7C3.93067 7 4.14974 6.91841 4.31661 6.75605Z" />
                                     </svg>
                                 </span>
-                                <p className="text-sm text-gray-700 sm:text-base dark:text-gray-300">{t('cta.cta_two.feature_online')}</p>
+                                <p className="text-sm text-gray-700 dark:text-gray-300">{t('cta.cta_two.feature_online')}</p>
                             </li>
                         </ul>
                     </div>

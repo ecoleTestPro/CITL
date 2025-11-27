@@ -8,22 +8,22 @@ export default function AboutUsOne() {
     const { t } = useTranslation();
 
     return (
-        <section className="relative bg-white/80 pt-24 pb-6 dark:bg-gray-900">
+        <section className="relative bg-white/80 pt-12 pb-6 sm:pt-24 dark:bg-gray-900">
             <div className="container mx-auto px-4 md:px-5 lg:px-5">
-                <div className="grid w-full grid-cols-1 items-center justify-start gap-12 lg:grid-cols-2">
+                <div className="grid w-full grid-cols-1 items-center justify-start gap-8 sm:gap-12 lg:grid-cols-2">
                     {/* Images avec animation SlideIn depuis la gauche avec stagger */}
-                    <div className="order-last grid w-full grid-cols-1 items-start justify-center gap-6 sm:grid-cols-2 lg:order-first">
+                    <div className="order-last grid w-full grid-cols-1 items-start justify-center gap-4 sm:grid-cols-2 sm:gap-6 lg:order-first">
                         <SlideIn
                             direction="left"
                             duration={1.2}
                             delay={0}
-                            className="flex items-start justify-start gap-2.5 pt-24 sm:justify-end lg:justify-center"
+                            className="flex items-start justify-center gap-2.5 pt-0 sm:justify-end sm:pt-24 lg:justify-center"
                         >
-                            <img className="rounded-xl object-cover" src="/assets/images/about/about-02.jpg" alt="Équipe CITL - Testing Logiciel" />
+                            <img className="max-h-[250px] w-full rounded-xl object-cover sm:max-h-none sm:w-auto" src="/assets/images/about/about-02.jpg" alt="Équipe CITL - Testing Logiciel" />
                         </SlideIn>
                         <SlideIn direction="left" duration={1.2} delay={0.2}>
                             <img
-                                className="ml-auto rounded-xl object-cover sm:ml-0"
+                                className="mx-auto max-h-[250px] w-full rounded-xl object-cover sm:mx-0 sm:ml-0 sm:max-h-none sm:w-auto"
                                 src="/assets/images/about/about-01.jpg"
                                 alt="Certification ISTQB en Côte d'Ivoire"
                             />

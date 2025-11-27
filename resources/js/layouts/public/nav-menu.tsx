@@ -1,10 +1,10 @@
+import { useAppearance } from '@/hooks/use-appearance';
 import { cn } from '@/lib/utils';
 import { Link, usePage } from '@inertiajs/react';
 import { Box, Button, createTheme, ListItemText, Menu, MenuList, MenuItem as MuiMenuItem, Paper, ThemeProvider, Typography } from '@mui/material';
 import { ChevronDown } from 'lucide-react';
 import { MouseEvent, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAppearance } from '@/hooks/use-appearance';
 
 // Types pour la structure du menu
 interface MenuItem {
@@ -13,6 +13,7 @@ interface MenuItem {
     description?: string;
     image?: string;
     group?: string;
+    blank?: boolean;
 }
 
 interface MenuSection {
@@ -157,7 +158,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             items: [
                 { label: t('nav.register_certified_testers'), href: '/register-certified-testers' },
                 { label: t('nav.certified_testers_list'), href: '/certified-testers-list' },
-                { label: t('nav.istqb_registry'), href: '/istqb-registry' },
+                { label: t('nav.istqb_registry'), href: 'https://scr.istqb.org', blank: true },
             ],
         },
     ];
@@ -184,6 +185,8 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     // Rendu d'un menu item MUI simple
     const renderMuiMenuItem = (item: MenuItem, menuKey: string) => {
         const active = isItemActive(item.href);
+        const isExternal = item.href.startsWith('http') || item.blank;
+
         return (
             <MuiMenuItem
                 key={item.href}
@@ -191,8 +194,10 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     handleMenuClose(menuKey);
                     onNavigate?.();
                 }}
-                component={Link}
+                component={isExternal ? 'a' : Link}
                 href={item.href}
+                target={isExternal ? '_blank' : '_self'}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
                 sx={{
                     py: 1.5,
                     px: 2,
@@ -244,8 +249,10 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     {section.featured && (
                         <Box sx={{ width: gridCols === 2 ? '50%' : '100%' }}>
                             <Box
-                                component={Link}
+                                component={section.featured.href.startsWith('http') ? 'a' : Link}
                                 href={section.featured.href}
+                                target={section.featured.href.startsWith('http') ? '_blank' : '_self'}
+                                rel={section.featured.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                                 onClick={() => {
                                     handleMenuClose(menuKey);
                                     onNavigate?.();
@@ -289,6 +296,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                     <MenuList>
                                         {groupedItems[group].map((item) => {
                                             const active = isItemActive(item.href);
+                                            const isExternal = item.href.startsWith('http') || item.blank;
                                             return (
                                                 <MuiMenuItem
                                                     key={item.href}
@@ -296,8 +304,10 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                                         handleMenuClose(menuKey);
                                                         onNavigate?.();
                                                     }}
-                                                    component={Link}
+                                                    component={isExternal ? 'a' : Link}
                                                     href={item.href}
+                                                    target={isExternal ? '_blank' : '_self'}
+                                                    rel={isExternal ? 'noopener noreferrer' : undefined}
                                                     sx={{
                                                         py: 1.5,
                                                         px: 3,
@@ -338,6 +348,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                             <MenuList>
                                 {section.items.map((item) => {
                                     const active = isItemActive(item.href);
+                                    const isExternal = item.href.startsWith('http') || item.blank;
                                     return (
                                         <MuiMenuItem
                                             key={item.href}
@@ -345,8 +356,10 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                                                 handleMenuClose(menuKey);
                                                 onNavigate?.();
                                             }}
-                                            component={Link}
+                                            component={isExternal ? 'a' : Link}
                                             href={item.href}
+                                            target={isExternal ? '_blank' : '_self'}
+                                            rel={isExternal ? 'noopener noreferrer' : undefined}
                                             sx={{
                                                 py: 1.5,
                                                 px: 3,
@@ -397,8 +410,8 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     key={section.title}
                     href={section.href!}
                     className={cn(
-                        'px-3 py-2 text-sm font-medium transition-colors hover:text-primary rounded-lg',
-                        isActive && 'bg-primary/10 text-primary font-semibold',
+                        'rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:text-primary',
+                        isActive && 'bg-primary/10 font-semibold text-primary',
                     )}
                 >
                     {section.title}
@@ -424,7 +437,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                             bgcolor: isActive ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
                             '&:hover': {
                                 bgcolor: isActive ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)',
-                                color: isActive ? 'primary.main' : 'black'
+                                color: isActive ? 'primary.main' : 'black',
                             },
                         }}
                     >
@@ -466,7 +479,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                         bgcolor: isActive ? 'rgba(227, 108, 25, 0.08)' : 'transparent',
                         '&:hover': {
                             bgcolor: isActive ? 'rgba(227, 108, 25, 0.12)' : 'rgba(0, 0, 0, 0.04)',
-                            color: 'black'
+                            color: 'black',
                         },
                     }}
                 >
@@ -489,9 +502,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     {section.image ? (
                         <Box sx={{ display: 'flex' }}>
                             {/* Liens à gauche */}
-                            <Box sx={{ flex: 7, p: 1 }}>
-                                {section.items?.map((item) => renderMuiMenuItem(item, menuKey))}
-                            </Box>
+                            <Box sx={{ flex: 7, p: 1 }}>{section.items?.map((item) => renderMuiMenuItem(item, menuKey))}</Box>
                             {/* Image à droite */}
                             <Box sx={{ flex: 5 }}>
                                 <Box
@@ -526,9 +537,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                             </Box>
                         </Box>
                     ) : (
-                        <Box>
-                            {section.items?.map((item) => renderMuiMenuItem(item, menuKey))}
-                        </Box>
+                        <Box>{section.items?.map((item) => renderMuiMenuItem(item, menuKey))}</Box>
                     )}
                 </Menu>
             </div>
@@ -540,15 +549,28 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
         const isOpen = openDropdown === section.title;
 
         if (section.type === 'link') {
+            const isExternal = section.href!.startsWith('http');
             return (
                 <div key={section.title} className="border-b border-border/50">
-                    <Link
-                        href={section.href!}
-                        onClick={onNavigate}
-                        className="flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-primary"
-                    >
-                        {section.title}
-                    </Link>
+                    {isExternal ? (
+                        <a
+                            href={section.href!}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={onNavigate}
+                            className="flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-primary"
+                        >
+                            {section.title}
+                        </a>
+                    ) : (
+                        <Link
+                            href={section.href!}
+                            onClick={onNavigate}
+                            className="flex items-center justify-between py-4 text-base font-medium transition-colors hover:text-primary"
+                        >
+                            {section.title}
+                        </Link>
+                    )}
                 </div>
             );
         }

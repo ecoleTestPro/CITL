@@ -855,6 +855,31 @@
         "benefit_3": "Validation de votre certification",
         "benefit_4": "Accès au réseau des testeurs certifiés"
     },
+    "certified_testers_list": {
+        "page_title": "Liste officielle ivoirienne des testeurs de logiciels certifiés",
+        "hero_badge": "Testeurs Certifiés",
+        "hero_title": "Liste officielle ivoirienne des testeurs de logiciels certifiés",
+        "hero_description": "Il s'agit de la liste officielle ivoirienne des testeurs de logiciels certifiés utilisés par les employeurs ivoiriens pour vérifier la présence de testeurs certifiés ISTQB.",
+        "intro_paragraph_1": "Les testeurs de cette liste sont certifiés par l'International Software Testing Qualifications Board (ISTQB). Le CITL est le conseil officiel de certification ivoirien pour les certifications ISTQB. iSQI est le fournisseur officiel d'examens mondiaux du CITL pour les examens ISTQB.",
+        "employers_note_title": "Employeurs",
+        "employers_note": "Les testeurs figurant sur cette liste ont réussi l'examen officiel ISTQB. Cela démontre leur capacité et leur engagement à communiquer efficacement avec votre équipe ivoirienne de qualité logicielle.",
+        "testers_note_title": "Testeur",
+        "testers_note": "Si vous avez été certifié par ISTQB via le CITL et que vous ne voyez pas votre nom ici, veuillez vous inscrire via notre formulaire d'inscription.",
+        "register_link": "S'inscrire sur la liste",
+        "search_title": "Recherche par nom ou numéro de certificat",
+        "search_name_label": "Nom",
+        "search_name_placeholder": "Entrez un nom",
+        "search_certificate_label": "Numéro de certificat",
+        "search_certificate_placeholder": "Entrez un numéro de certificat",
+        "search_button": "Rechercher",
+        "results_title": "Résultats de recherche",
+        "no_results": "Aucun testeur trouvé pour votre recherche.",
+        "enter_search": "Entrez un nom ou un numéro de certificat pour rechercher des testeurs certifiés.",
+        "table_name": "Nom",
+        "table_certification": "Certification",
+        "table_certificate_number": "N° Certificat",
+        "table_date": "Date"
+    },
     "seo": {
         "home": {
             "title": "CITL - Comité Ivoirien des Tests Logiciels | Certifications ISTQB",

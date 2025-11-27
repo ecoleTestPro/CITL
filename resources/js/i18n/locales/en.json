@@ -726,6 +726,31 @@
         "benefit_3": "Validation of your certification",
         "benefit_4": "Access to the certified testers network"
     },
+    "certified_testers_list": {
+        "page_title": "Official Ivorian List of Certified Software Testers",
+        "hero_badge": "Certified Testers",
+        "hero_title": "Official Ivorian List of Certified Software Testers",
+        "hero_description": "This is the official Ivorian list of certified software testers used by Ivorian employers to verify the presence of ISTQB certified testers.",
+        "intro_paragraph_1": "The testers on this list are certified by the International Software Testing Qualifications Board (ISTQB). CITL is the official Ivorian certification board for ISTQB certifications. iSQI is CITL's official global exam provider for ISTQB exams.",
+        "employers_note_title": "Employers",
+        "employers_note": "The testers on this list have passed the official ISTQB exam. This demonstrates their ability and commitment to communicate effectively with your Ivorian software quality team.",
+        "testers_note_title": "Tester",
+        "testers_note": "If you have been certified by ISTQB via CITL and don't see your name here, please register via our registration form.",
+        "register_link": "Register on the list",
+        "search_title": "Search by name or certificate number",
+        "search_name_label": "Name",
+        "search_name_placeholder": "Enter a name",
+        "search_certificate_label": "Certificate Number",
+        "search_certificate_placeholder": "Enter a certificate number",
+        "search_button": "Search",
+        "results_title": "Search Results",
+        "no_results": "No testers found for your search.",
+        "enter_search": "Enter a name or certificate number to search for certified testers.",
+        "table_name": "Name",
+        "table_certification": "Certification",
+        "table_certificate_number": "Certificate #",
+        "table_date": "Date"
+    },
     "seo": {
         "home": {
             "title": "CITL - Ivorian Software Testing Committee | ISTQB Certifications",

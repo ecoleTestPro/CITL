@@ -11,11 +11,53 @@ use Inertia\Inertia;
 class CertifiedTesterRegistrationController extends Controller
 {
     /**
-     * Show the certified tester registration page
+     * Show the certified testers list/search page
      */
     public function index()
     {
         return Inertia::render('public/registration/certified-testers-list');
+    }
+
+    /**
+     * Search for certified testers
+     */
+    public function search(Request $request)
+    {
+        $name = $request->input('name');
+        $certificateNumber = $request->input('certificate_number');
+
+        // Only search if at least one parameter is provided
+        if (empty($name) && empty($certificateNumber)) {
+            return response()->json([
+                'success' => true,
+                'data' => [],
+                'message' => 'Please provide a search term'
+            ]);
+        }
+
+        $query = CertifiedTesterRegistration::approved();
+
+        if (!empty($name)) {
+            $query->where('full_name', 'like', '%' . $name . '%');
+        }
+
+        if (!empty($certificateNumber)) {
+            $query->where('certificate_number', 'like', '%' . $certificateNumber . '%');
+        }
+
+        $testers = $query->select([
+            'id',
+            'full_name',
+            'certification_obtained',
+            'certificate_number',
+            'exam_date'
+        ])->orderBy('full_name')->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => $testers,
+            'message' => $testers->count() > 0 ? 'Testers found' : 'No testers found'
+        ]);
     }
 
     /**

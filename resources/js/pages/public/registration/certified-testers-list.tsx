@@ -1,6 +1,7 @@
 import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
-import { CertifiedTesterRegistrationForm } from '@/components/registration/certified-tester-registration-form';
+import CommonTextBlock from '@/components/common/common-text-block';
+import { CertifiedTesterSearchForm } from '@/components/registration/certified-tester-search-form';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
@@ -9,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 function CertifiedTestersList() {
     const { t } = useTranslation();
-    const { flash } = usePage().props as any;
+    const { flash } = usePage().props as { flash?: { success?: string; error?: string } };
 
     useEffect(() => {
         if (flash?.success) {
@@ -28,29 +29,25 @@ function CertifiedTestersList() {
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
-            <Head title={`${t('certified_tester_registration.page_title')} | CITL`} />
+            <Head title={`${t('certified_testers_list.page_title')} | CITL`} />
 
             <HeroCommon
-                badge={t('certified_tester_registration.hero_badge')}
-                title={t('certified_tester_registration.hero_title')}
-                description={t('certified_tester_registration.hero_description')}
+                badge={t('certified_testers_list.hero_badge')}
+                title={t('certified_testers_list.hero_title')}
+                description={t('certified_testers_list.hero_description')}
                 backgroundImage="/assets/images/bg/sharp-2.png"
             />
 
-            {/* Form Section */}
-            <section className="bg-gray-50 py-16 dark:bg-gray-800">
+            {/* Introduction Section */}
+            <CommonTextBlock description={`<p>${t('certified_testers_list.intro_paragraph_1')}</p>`} />
+
+            {/* Search Section with Sidebar */}
+            <section className="bg-white py-16 dark:bg-gray-900">
                 <div className="container mx-auto px-4">
                     <div className="flex flex-col gap-8 lg:flex-row">
-                        {/* Form - 3/4 width */}
+                        {/* Main Content - 3/4 width */}
                         <div className="w-full lg:w-3/4">
-                            <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-lg md:p-8 dark:border-gray-700 dark:bg-gray-900">
-                                <div className="mb-6">
-                                    <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('certified_tester_registration.form_title')}</h2>
-                                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t('certified_tester_registration.form_description')}</p>
-                                </div>
-
-                                <CertifiedTesterRegistrationForm />
-                            </div>
+                            <CertifiedTesterSearchForm />
                         </div>
 
                         {/* Sidebar - 1/4 width */}

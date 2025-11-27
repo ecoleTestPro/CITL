@@ -1,0 +1,82 @@
+import { AboutKeyTakeaways, HeroCommon } from '@/components/blocks/about';
+import { WhyJoinSection } from '@/components/blocks/membership';
+import MembershipFormModal from '@/components/membership/membership-form-modal';
+import PublicLayout from '@/layouts/public/public-layout';
+import { Head } from '@inertiajs/react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+function Members() {
+    const { t } = useTranslation();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const breadcrumbs = [
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.membership'), href: '#' },
+        { title: t('nav.members'), href: '/members' },
+    ];
+
+    const takeaways = [
+        {
+            number: 1,
+            text: t('about.members.takeaway_1'),
+        },
+        {
+            number: 2,
+            text: t('about.members.takeaway_2'),
+        },
+        {
+            number: 3,
+            text: t('about.members.takeaway_3'),
+        },
+    ];
+
+    return (
+        <PublicLayout variant="standard" breadcrumbs={breadcrumbs}>
+            <Head>
+                <title>{t('seo.members.title')}</title>
+                <meta name="description" content={t('seo.members.description')} />
+                <meta name="keywords" content={t('seo.members.keywords')} />
+                <meta property="og:title" content={t('seo.members.title')} />
+                <meta property="og:description" content={t('seo.members.description')} />
+                <meta property="og:type" content="website" />
+            </Head>
+            <main>
+                {/* Hero Section */}
+                <HeroCommon
+                    badge={t('about.members.badge')}
+                    title={t('about.members.hero_title')}
+                    description={t('about.members.hero_description')}
+                    backgroundImage="/assets/images/bg/sharp-2.png"
+                />
+
+                {/* Why Join CITL Section */}
+                <WhyJoinSection
+                    badge={t('about.members.why_join_badge')}
+                    title={t('about.members.why_join_title')}
+                    description={t('about.members.why_join_description')}
+                    ctaText={t('about.members.join_now')}
+                    onCtaClick={() => setIsModalOpen(true)}
+                    imageSrc="/assets/images/pages/membership/membership-benefits.jpg"
+                    imageAlt="CITL Membership Benefits"
+                    imagePosition="right"
+                />
+
+                {/* Key Takeaways */}
+                <AboutKeyTakeaways
+                    title={t('about.members.why_matters_title')}
+                    takeaways={takeaways}
+                    conclusion={t('about.members.conclusion')}
+                    ctaText={t('about.members.cta_text')}
+                    ctaLink="#"
+                    onCtaClick={() => setIsModalOpen(true)}
+                />
+            </main>
+
+            {/* Membership Form Modal */}
+            <MembershipFormModal open={isModalOpen} onOpenChange={setIsModalOpen} />
+        </PublicLayout>
+    );
+}
+
+export default Members;

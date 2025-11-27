@@ -1,36 +1,112 @@
+'use client';
+
+import { Link } from '@inertiajs/react';
+import { ChevronRight, type LucideIcon } from 'lucide-react';
+
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
     SidebarGroup,
     SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
-import { resolveUrl } from '@/lib/utils';
-import { type NavItem } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
 
-export function NavMain({ items = [] }: { items: NavItem[] }) {
-    const page = usePage();
+type SubItem = {
+    title: string;
+    url: string;
+    isActive?: boolean;
+    items?: SubItem[];
+};
+
+type NavItem = {
+    title: string;
+    url: string;
+    icon?: LucideIcon;
+    isActive?: boolean;
+    items?: SubItem[];
+};
+
+export function NavMain({ items }: { items: NavItem[] }) {
     return (
-        <SidebarGroup className="px-2 py-0">
+        <SidebarGroup>
             <SidebarGroupLabel>Platform</SidebarGroupLabel>
             <SidebarMenu>
-                {items.map((item) => (
-                    <SidebarMenuItem key={item.title}>
-                        <SidebarMenuButton
-                            asChild
-                            isActive={page.url.startsWith(
-                                resolveUrl(item.href),
-                            )}
-                            tooltip={{ children: item.title }}
-                        >
-                            <Link href={item.href} prefetch>
-                                {item.icon && <item.icon />}
-                                <span>{item.title}</span>
-                            </Link>
-                        </SidebarMenuButton>
-                    </SidebarMenuItem>
-                ))}
+                {items.map((item) =>
+                    item.items && item.items.length > 0 ? (
+                        // Item with children - use Collapsible
+                        <Collapsible key={item.title} asChild defaultOpen={item.isActive} className="group/collapsible">
+                            <SidebarMenuItem>
+                                <CollapsibleTrigger asChild>
+                                    <SidebarMenuButton tooltip={item.title}>
+                                        {item.icon && <item.icon />}
+                                        <span>{item.title}</span>
+                                        <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                                    </SidebarMenuButton>
+                                </CollapsibleTrigger>
+                                <CollapsibleContent>
+                                    <SidebarMenuSub>
+                                        {item.items?.map((subItem) =>
+                                            subItem.items ? (
+                                                // Nested submenu
+                                                <Collapsible
+                                                    key={subItem.title}
+                                                    asChild
+                                                    defaultOpen={subItem.isActive}
+                                                    className="group/nested-collapsible"
+                                                >
+                                                    <SidebarMenuSubItem>
+                                                        <CollapsibleTrigger asChild>
+                                                            <SidebarMenuSubButton>
+                                                                <span>{subItem.title}</span>
+                                                                <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/nested-collapsible:rotate-90" />
+                                                            </SidebarMenuSubButton>
+                                                        </CollapsibleTrigger>
+                                                        <CollapsibleContent>
+                                                            <SidebarMenuSub className="pl-4">
+                                                                {subItem.items.map((nestedItem) => (
+                                                                    <SidebarMenuSubItem key={nestedItem.title}>
+                                                                        <SidebarMenuSubButton asChild isActive={nestedItem.isActive}>
+                                                                            <Link href={nestedItem.url}>
+                                                                                <span>{nestedItem.title}</span>
+                                                                            </Link>
+                                                                        </SidebarMenuSubButton>
+                                                                    </SidebarMenuSubItem>
+                                                                ))}
+                                                            </SidebarMenuSub>
+                                                        </CollapsibleContent>
+                                                    </SidebarMenuSubItem>
+                                                </Collapsible>
+                                            ) : (
+                                                // Regular submenu item
+                                                <SidebarMenuSubItem key={subItem.title}>
+                                                    <SidebarMenuSubButton asChild isActive={subItem.isActive}>
+                                                        <Link href={subItem.url}>
+                                                            <span>{subItem.title}</span>
+                                                        </Link>
+                                                    </SidebarMenuSubButton>
+                                                </SidebarMenuSubItem>
+                                            ),
+                                        )}
+                                    </SidebarMenuSub>
+                                </CollapsibleContent>
+                            </SidebarMenuItem>
+                        </Collapsible>
+                    ) : (
+                        // Item without children - use direct link
+                        <SidebarMenuItem key={item.title}>
+                            <SidebarMenuButton asChild tooltip={item.title} isActive={item.isActive}>
+                                <Link href={item.url}>
+                                    {item.icon && <item.icon />}
+                                    <span>{item.title}</span>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    ),
+                )}
             </SidebarMenu>
         </SidebarGroup>
     );

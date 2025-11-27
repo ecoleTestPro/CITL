@@ -11,6 +11,9 @@ This is a modern full-stack learning management system built with:
 - **Auth**: Laravel Fortify with 2FA support
 - **Testing**: Pest PHP
 - **Build**: Vite with SSR support
+- **i18n**: react-i18next (French/English support)
+- **Animations**: GSAP + Motion (Framer Motion)
+- **Rich Text**: TipTap editor
 
 ## Development Commands
 
@@ -64,7 +67,7 @@ npm run build:ssr          # Build with SSR support
 
 ### Modular Domain Organization
 
-The application is organized into 6 business domain modules:
+The application is organized into 7+ business domain modules:
 
 1. **User Module** (`app/Models/User/`, `app/Repositories/User/`)
    - User authentication, profiles, instructor management
@@ -77,16 +80,21 @@ The application is organized into 6 business domain modules:
 3. **Assessment Module** (`app/Models/Assessment/`, `app/Repositories/Assessment/`)
    - Exam and quiz management with session tracking
    - Models: Exam, Quiz, Question, ExamSession, QuizSession, Answer
+   - ExamRegistration for external exam enrollment
 
 4. **Certificate Module** (`app/Models/Certificate/`, `app/Repositories/Certificate/`)
    - Course completion certificates
-   - Models: ManageCertificate
+   - Models: ManageCertificate, CertificationDocument, CertificationDocumentTag
 
-5. **Blog Module** (`app/Models/Article/`, `app/Repositories/Article/`)
+5. **Certification Module** (`app/Models/Certification/`, `app/Repositories/Certification/`)
+   - Professional certifications (distinct from course certificates)
+   - Models: Certification, CertificationCategory
+
+6. **Blog Module** (`app/Models/Blog/`, `app/Repositories/Blog/`)
    - Blog article management
    - Models: Article
 
-6. **Admin/Reporting Module** (`app/Http/Controllers/Admin/`, `app/Http/Controllers/WebAdmin/`)
+7. **Admin/Reporting Module** (`app/Http/Controllers/Admin/`, `app/Http/Controllers/WebAdmin/`)
    - Admin operations, report generation, filtering, PDF/CSV export
 
 ### Repository Pattern
@@ -94,8 +102,9 @@ The application is organized into 6 business domain modules:
 All database access uses the Repository pattern:
 
 - **Base**: `app/Repositories/BaseRepository.php` (abstract class with CRUD methods)
+- **Interface**: `app/Repositories/BaseRepositoryInterface.php` defines repository contract
 - **Implementation**: Module-specific repositories extend BaseRepository
-- **Injection**: Repositories bound in `AppServiceProvider::boot()` and injected into controllers
+- **Registration**: Repositories bound in `AppServiceProvider::register()` and injected into controllers
 
 Example:
 ```php
@@ -134,15 +143,26 @@ resources/js/
 ├── pages/                 # Inertia page components
 │   ├── auth/             # Login, register, 2FA, etc.
 │   ├── settings/         # Profile, password, appearance
+│   ├── public/           # Public-facing pages
 │   └── dashboard.tsx
 ├── layouts/              # Layout wrappers (AppLayout, AuthLayout)
 ├── components/           # Shared React components
-│   ├── ui/              # Radix UI primitives with Tailwind
+│   ├── ui/              # Radix UI primitives with Tailwind (shadcn-style)
+│   ├── blocks/          # Reusable page sections/blocks
+│   │   ├── about/       # About section variants
+│   │   ├── certifications/  # Certification displays
+│   │   ├── testimonials/    # Testimonial sections
+│   │   ├── cta/         # Call-to-action blocks
+│   │   ├── faq/         # FAQ sections
+│   │   └── ...          # Other block types
 │   └── *.tsx            # App-specific components
 ├── hooks/               # Custom React hooks
 │   ├── use-appearance.tsx    # Theme management
 │   ├── use-two-factor-auth.ts  # 2FA setup
 │   └── *.ts
+├── i18n/                # Internationalization
+│   ├── config.ts        # i18next configuration
+│   └── locales/         # Translation files (fr.json, en.json)
 ├── types/               # TypeScript type definitions
 └── routes/              # Generated Wayfinder routes
 ```
@@ -221,7 +241,7 @@ Runs on push/PR to `develop` and `main`:
 ## Important Patterns
 
 ### Controller Response Pattern
-All controllers use a consistent JSON response format:
+All controllers extend `app/Http/Controllers/Controller.php` which provides a consistent JSON response method:
 ```php
 return $this->json($message, $data, $statusCode);
 ```
@@ -229,11 +249,13 @@ return $this->json($message, $data, $statusCode);
 Returns:
 ```json
 {
+    "success": true,
     "message": "Success message",
-    "data": { "key": "value" },
-    "status": 200
+    "data": { "key": "value" }
 }
 ```
+
+The `success` field is automatically set based on status code (2xx = true).
 
 ### Form Request Validation
 Use Form Request classes in `app/Http/Requests/` for validation:
@@ -333,5 +355,35 @@ INERTIA_SSR_ENABLED=false  # Set to true for SSR
 
 ### Adding UI Components
 - Use Radix UI primitives from `@radix-ui/react-*`
-- Follow existing patterns in `resources/js/components/ui/`
+- Follow existing patterns in `resources/js/components/ui/` (shadcn-compatible)
 - Apply Tailwind styles using `class-variance-authority` for variants
+- Use `shadcn` CLI for adding new UI components: `npx shadcn@latest add [component]`
+
+### Working with Block Components
+Block components (`resources/js/components/blocks/`) are reusable page sections designed for marketing/public pages:
+- Each block is self-contained with its own styles and logic
+- Blocks are composed into pages for flexible layouts
+- Common block types: about, certifications, testimonials, cta, faq, features, team
+- Animations often use GSAP or Motion for smooth transitions
+
+### Internationalization (i18n)
+The app uses react-i18next for multilingual support:
+- Default language: French (`fr`)
+- Supported languages: French (`fr`), English (`en`)
+- Language preference stored in localStorage
+- Translation files: `resources/js/i18n/locales/{lang}.json`
+- Usage in components:
+```tsx
+import { useTranslation } from 'react-i18next';
+
+function MyComponent() {
+    const { t, i18n } = useTranslation();
+    return <h1>{t('welcome.title')}</h1>;
+}
+```
+
+### Rich Text Editing
+The app uses TipTap (based on ProseMirror) for rich text editing:
+- Extensions enabled: Color, Image, Link, TextAlign, TextStyle, Underline
+- Starter kit provides basic formatting (bold, italic, lists, etc.)
+- TipTap components located in `resources/js/components/` (search for tiptap usage)

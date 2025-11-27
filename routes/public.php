@@ -1,0 +1,86 @@
+<?php
+
+use App\Http\Controllers\Api\CertificationController;
+use App\Http\Controllers\Api\GlossaryController;
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\Public\BlogController;
+use App\Http\Controllers\Public\PublicController;
+use Illuminate\Support\Facades\Route;
+
+// Public Routes
+Route::get('/', [PublicController::class, 'home'])->name('home');
+
+// CITL Section
+Route::get('/about-istqb', [PublicController::class, 'aboutIstqb'])->name('about-istqb');
+Route::get('/about-citl', [PublicController::class, 'aboutCitl'])->name('about-citl');
+Route::get('/vision', [PublicController::class, 'vision'])->name('vision');
+Route::get('/missions', [PublicController::class, 'missions'])->name('missions');
+Route::get('/executive-board', [PublicController::class, 'executiveBoard'])->name('executive-board');
+
+// Adhésion Section
+Route::get('/members', [PublicController::class, 'members'])->name('members');
+Route::post('/membership/apply', [\App\Http\Controllers\MembershipApplicationController::class, 'store'])->name('membership.apply');
+Route::get('/working-groups', [PublicController::class, 'workingGroups'])->name('working-groups');
+
+// Certifications Section
+Route::get('/why-certification', [PublicController::class, 'whyCertification'])->name('why-certification');
+Route::get('/core-foundation', [PublicController::class, 'coreFoundation'])->name('core-foundation');
+Route::get('/core-advanced', [PublicController::class, 'coreAdvanced'])->name('core-advanced');
+Route::get('/specialist', [PublicController::class, 'specialist'])->name('specialist');
+Route::get('/expert-level', [PublicController::class, 'expertLevel'])->name('expert-level');
+Route::get('/a4q-practical-tester', [PublicController::class, 'a4qPracticalTester'])->name('a4q-practical-tester');
+Route::get('/certifications/{slug}', [PublicController::class, 'certificationDetail'])->name('certification-detail');
+
+// Examens Section
+Route::get('/exam-questions', [PublicController::class, 'examQuestions'])->name('exam-questions');
+Route::get('/exam-fees', [PublicController::class, 'examFees'])->name('exam-fees');
+Route::get('/exam-registration', [\App\Http\Controllers\ExamRegistrationController::class, 'index'])->name('exam-registration');
+Route::post('/exams/register', [\App\Http\Controllers\ExamRegistrationController::class, 'store'])->name('exams.register');
+Route::get('/exam-faq', [PublicController::class, 'examFaq'])->name('exam-faq');
+Route::get('/anti-piracy', [PublicController::class, 'antiPiracy'])->name('anti-piracy');
+Route::get('/glossary', [PublicController::class, 'glossary'])->name('glossary');
+
+// Training Organizations Section
+Route::get('/accredited-organizations', [PublicController::class, 'accreditedOrganizations'])->name('accredited-organizations');
+Route::get('/accreditation-request', [\App\Http\Controllers\AccreditationRequestController::class, 'index'])->name('accreditation-request');
+Route::post('/training/accreditation-request', [\App\Http\Controllers\AccreditationRequestController::class, 'store'])->name('training.accreditation-request');
+
+// Events & Blog
+Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+Route::get('/blog/tag/{tag}', [BlogController::class, 'tag'])->name('blog.tag');
+Route::get('/blog/archive/{year}/{month}', [BlogController::class, 'archive'])->name('blog.archive');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+
+// Registration Section
+Route::get('/register-certified-testers', [PublicController::class, 'registerCertifiedTesters'])->name('register-certified-testers');
+Route::get('/certified-testers-list', [\App\Http\Controllers\CertifiedTesterRegistrationController::class, 'index'])->name('certified-testers-list');
+Route::post('/registration/certified-testers', [\App\Http\Controllers\CertifiedTesterRegistrationController::class, 'store'])->name('registration.certified-testers.store');
+Route::get('/api/certified-testers/search', [\App\Http\Controllers\CertifiedTesterRegistrationController::class, 'search'])->name('api.certified-testers.search');
+Route::get('/istqb-registry', [PublicController::class, 'istqbRegistry'])->name('istqb-registry');
+
+// Contact
+Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
+Route::post('/contact/send', [\App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+
+// API Routes
+Route::prefix('api')->group(function () {
+    Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');
+    Route::get('/certifications/{slug}', [CertificationController::class, 'show'])->name('api.certifications.show');
+
+    // Glossary API Routes
+    Route::get('/glossary', [GlossaryController::class, 'index'])->name('api.glossary.index');
+    Route::get('/glossary/grouped', [GlossaryController::class, 'groupedByLetter'])->name('api.glossary.grouped');
+    Route::get('/glossary/letter/{letter}', [GlossaryController::class, 'byLetter'])->name('api.glossary.by-letter');
+    Route::get('/glossary/search', [GlossaryController::class, 'search'])->name('api.glossary.search');
+
+    // Global Search API Route
+    Route::get('/search', [SearchController::class, 'search'])->name('api.search');
+
+    // FAQ API Routes
+    Route::get('/faqs', [FaqController::class, 'index'])->name('api.faqs.index');
+    Route::get('/faqs/category/{category}', [FaqController::class, 'getByCategory'])->name('api.faqs.by-category');
+});

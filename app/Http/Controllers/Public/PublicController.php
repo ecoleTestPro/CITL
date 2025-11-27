@@ -219,4 +219,15 @@ class PublicController extends Controller
     {
         return Inertia::render('public/contact');
     }
+
+    // Legal Pages
+    public function privacyPolicy()
+    {
+        return Inertia::render('public/legal/privacy-policy');
+    }
+
+    public function terms()
+    {
+        return Inertia::render('public/legal/terms');
+    }
 }

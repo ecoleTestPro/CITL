@@ -66,6 +66,10 @@ Route::get('/istqb-registry', [PublicController::class, 'istqbRegistry'])->name(
 Route::get('/contact', [PublicController::class, 'contact'])->name('contact');
 Route::post('/contact/send', [\App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
+// Legal Pages
+Route::get('/privacy-policy', [PublicController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms', [PublicController::class, 'terms'])->name('terms');
+
 // API Routes
 Route::prefix('api')->group(function () {
     Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');

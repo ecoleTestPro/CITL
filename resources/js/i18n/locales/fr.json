@@ -991,5 +991,128 @@
             "description": "Faites accréditer votre organisme de formation ISTQB par le CITL.",
             "keywords": "accréditation formation, ISTQB, CITL, organisme de formation"
         }
+    },
+    "privacy_policy": {
+        "seo": {
+            "title": "Politique de Confidentialité | CITL",
+            "description": "Politique de confidentialité du CITL - Découvrez comment nous collectons, utilisons et protégeons vos données personnelles."
+        },
+        "badge": "Mentions légales",
+        "hero_title": "Politique de **Confidentialité**",
+        "hero_description": "Nous prenons la protection de vos données personnelles très au sérieux. Cette politique explique comment nous collectons, utilisons et protégeons vos informations.",
+        "table_of_contents": "Table des matières",
+        "last_updated": "Dernière mise à jour",
+        "section": "Section",
+        "footer_note": "Pour toute question concernant cette politique de confidentialité, n'hésitez pas à nous contacter à l'adresse contact@citl.ci",
+        "sections": {
+            "introduction": {
+                "title": "Introduction",
+                "content_1": "Le Comité Ivoirien des Tests Logiciels (CITL) s'engage à protéger la vie privée des utilisateurs de son site web et des personnes dont il traite les données personnelles dans le cadre de ses activités.",
+                "content_2": "La présente politique de confidentialité décrit les types de données que nous collectons, comment nous les utilisons, les partageons et les protégeons, ainsi que vos droits concernant ces données."
+            },
+            "data_collected": {
+                "title": "Données Collectées",
+                "content_1": "Nous collectons les données personnelles que vous nous fournissez directement, telles que : nom, prénom, adresse email, numéro de téléphone, entreprise, poste occupé, et informations relatives à vos certifications.",
+                "content_2": "Nous collectons également des données automatiquement lors de votre visite sur notre site : adresse IP, type de navigateur, pages consultées, durée de visite, et données de cookies.",
+                "content_3": "Dans le cadre des inscriptions aux examens ISTQB, nous pouvons collecter des informations supplémentaires nécessaires à la gestion et à la délivrance des certifications."
+            },
+            "data_usage": {
+                "title": "Utilisation des Données",
+                "content_1": "Vos données sont utilisées pour : gérer votre inscription aux examens et certifications ISTQB, traiter vos demandes d'adhésion ou d'accréditation, répondre à vos questions et demandes de contact.",
+                "content_2": "Nous utilisons également vos données pour vous envoyer des informations sur nos services, événements et actualités (avec votre consentement), améliorer notre site web et nos services.",
+                "content_3": "Les données relatives aux certifications sont partagées avec l'ISTQB international dans le cadre de la gestion du registre mondial des testeurs certifiés."
+            },
+            "data_protection": {
+                "title": "Protection des Données",
+                "content_1": "Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, modification, divulgation ou destruction.",
+                "content_2": "L'accès à vos données personnelles est limité aux personnes qui en ont besoin dans le cadre de leurs fonctions. Nos systèmes sont régulièrement mis à jour et nos pratiques de sécurité sont revues périodiquement."
+            },
+            "cookies": {
+                "title": "Cookies et Technologies Similaires",
+                "content_1": "Notre site utilise des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et personnaliser le contenu.",
+                "content_2": "Les cookies essentiels sont nécessaires au fonctionnement du site. Les cookies analytiques nous aident à comprendre comment les visiteurs interagissent avec notre site.",
+                "content_3": "Vous pouvez gérer vos préférences de cookies à tout moment via les paramètres de votre navigateur ou notre bandeau de gestion des cookies."
+            },
+            "user_rights": {
+                "title": "Vos Droits",
+                "content_1": "Conformément à la réglementation applicable, vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données personnelles.",
+                "content_2": "Vous pouvez également vous opposer au traitement de vos données ou demander la limitation de celui-ci dans certaines circonstances.",
+                "content_3": "Pour exercer ces droits, contactez-nous à l'adresse : contact@citl.ci. Nous nous engageons à répondre à votre demande dans un délai de 30 jours."
+            },
+            "data_retention": {
+                "title": "Conservation des Données",
+                "content_1": "Vos données personnelles sont conservées pendant la durée nécessaire aux finalités pour lesquelles elles ont été collectées, ou conformément aux obligations légales applicables.",
+                "content_2": "Les données relatives aux certifications ISTQB sont conservées indéfiniment dans le registre international des testeurs certifiés, conformément aux exigences de l'ISTQB."
+            },
+            "contact": {
+                "title": "Nous Contacter",
+                "content_1": "Pour toute question relative à cette politique de confidentialité ou à vos données personnelles, vous pouvez nous contacter par email à contact@citl.ci.",
+                "content_2": "CITL - Comité Ivoirien des Tests Logiciels, Abidjan, Côte d'Ivoire."
+            }
+        }
+    },
+    "terms": {
+        "seo": {
+            "title": "Conditions d'Utilisation | CITL",
+            "description": "Conditions générales d'utilisation du site web du CITL et des services de certification ISTQB en Côte d'Ivoire."
+        },
+        "badge": "Mentions légales",
+        "hero_title": "Conditions **d'Utilisation**",
+        "hero_description": "Veuillez lire attentivement ces conditions d'utilisation avant d'utiliser notre site web et nos services de certification ISTQB.",
+        "table_of_contents": "Table des matières",
+        "last_updated": "Dernière mise à jour",
+        "article": "Article",
+        "important_notice": "En utilisant ce site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.",
+        "footer_note": "Ces conditions sont régies par le droit ivoirien. Pour toute question, contactez-nous à contact@citl.ci",
+        "sections": {
+            "acceptance": {
+                "title": "Acceptation des Conditions",
+                "content_1": "En accédant à ce site web et en utilisant les services du CITL, vous acceptez d'être lié par les présentes conditions d'utilisation, toutes les lois et réglementations applicables.",
+                "content_2": "Si vous n'acceptez pas l'une de ces conditions, vous n'êtes pas autorisé à utiliser ou à accéder à ce site. Les documents contenus dans ce site web sont protégés par le droit applicable en matière de droit d'auteur et de marque."
+            },
+            "services": {
+                "title": "Description des Services",
+                "content_1": "Le CITL est l'organisme officiel en Côte d'Ivoire pour la certification ISTQB. Nous proposons des services d'inscription aux examens, d'accréditation des organismes de formation, et de gestion du registre des testeurs certifiés.",
+                "content_2": "Nos services incluent également l'information sur les certifications ISTQB, la mise en relation avec des organismes de formation accrédités, et l'organisation d'événements liés au test logiciel.",
+                "content_3": "Le CITL se réserve le droit de modifier, suspendre ou interrompre tout ou partie de ses services à tout moment, avec ou sans préavis."
+            },
+            "user_obligations": {
+                "title": "Obligations de l'Utilisateur",
+                "content_1": "Vous vous engagez à fournir des informations exactes, complètes et à jour lors de votre inscription ou de toute demande effectuée via notre site.",
+                "content_2": "Vous êtes responsable de maintenir la confidentialité de vos identifiants de connexion et de toute activité effectuée sous votre compte.",
+                "content_3": "Il est interdit d'utiliser ce site à des fins illégales, de tenter de compromettre la sécurité du site, ou de perturber son fonctionnement normal."
+            },
+            "intellectual_property": {
+                "title": "Propriété Intellectuelle",
+                "content_1": "Tout le contenu présent sur ce site (textes, images, logos, documents, matériels de formation) est protégé par les droits de propriété intellectuelle et appartient au CITL ou à l'ISTQB.",
+                "content_2": "Toute reproduction, distribution, modification ou utilisation du contenu sans autorisation préalable écrite est strictement interdite. La marque ISTQB® est une marque déposée de l'ISTQB."
+            },
+            "certifications": {
+                "title": "Certifications et Examens",
+                "content_1": "L'inscription à un examen ISTQB implique l'acceptation du règlement d'examen de l'ISTQB et des conditions spécifiques du CITL.",
+                "content_2": "Les résultats d'examen sont définitifs. En cas de fraude ou de non-respect du règlement d'examen, le CITL se réserve le droit d'annuler la certification et d'interdire de futures inscriptions.",
+                "content_3": "Les frais d'examen ne sont pas remboursables sauf en cas d'annulation de la session par le CITL. Les reports sont soumis à des conditions spécifiques."
+            },
+            "liability": {
+                "title": "Limitation de Responsabilité",
+                "content_1": "Le CITL s'efforce de fournir des informations exactes et à jour sur ce site. Cependant, nous ne garantissons pas l'exactitude, l'exhaustivité ou l'actualité des informations fournies.",
+                "content_2": "Le CITL ne pourra être tenu responsable des dommages directs ou indirects résultant de l'utilisation de ce site ou de l'impossibilité de l'utiliser, sauf en cas de faute grave ou intentionnelle."
+            },
+            "termination": {
+                "title": "Résiliation",
+                "content_1": "Le CITL peut résilier ou suspendre votre accès à tout ou partie du site immédiatement, sans préavis ni responsabilité, pour quelque raison que ce soit, y compris en cas de violation des présentes conditions.",
+                "content_2": "En cas de résiliation, votre droit d'utiliser le site cessera immédiatement. Les dispositions qui, par leur nature, doivent survivre à la résiliation resteront en vigueur."
+            },
+            "modifications": {
+                "title": "Modifications des Conditions",
+                "content_1": "Le CITL se réserve le droit de modifier ces conditions d'utilisation à tout moment. Les modifications entrent en vigueur dès leur publication sur le site.",
+                "content_2": "Il est de votre responsabilité de consulter régulièrement ces conditions. Votre utilisation continue du site après toute modification constitue votre acceptation des nouvelles conditions."
+            },
+            "governing_law": {
+                "title": "Droit Applicable et Juridiction",
+                "content_1": "Les présentes conditions d'utilisation sont régies par le droit ivoirien. Tout litige relatif à l'interprétation ou à l'exécution des présentes conditions sera soumis aux tribunaux compétents d'Abidjan.",
+                "content_2": "En cas de différend, les parties s'efforceront de trouver une solution amiable avant tout recours juridictionnel."
+            }
+        }
     }
 }

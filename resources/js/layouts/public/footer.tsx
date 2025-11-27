@@ -1,11 +1,16 @@
 import CtaTwo from '@/components/blocks/cta/cta-two';
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { useAppearance } from '@/hooks/use-appearance';
 import { Link } from '@inertiajs/react';
-import { Moon, Sun } from 'lucide-react';
-import { type ComponentType, type SVGProps } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Mail, MapPin, Moon, Phone, Sun } from 'lucide-react';
+import { type ComponentType, type SVGProps, useEffect, useRef } from 'react';
 import Logo from './logo';
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Types
 interface FooterLink {
@@ -29,6 +34,8 @@ interface CompanyInfo {
     description: string;
     location: string;
     copyrightText: string;
+    email: string;
+    phone: string;
 }
 
 // Custom Social Icons (SVG Components)
@@ -186,18 +193,29 @@ const COMPANY_INFO: CompanyInfo = {
     description: 'CITL association à but non lucratif',
     location: "Abidjan, Côte d'Ivoire",
     copyrightText: 'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
+    email: 'contact@citl.ci',
+    phone: '+225 XX XX XX XX XX',
 };
 
 const LEGAL_LINKS: FooterLink[] = [
     {
-        label: "Politique de confidentialité & Conditions d'utilisation",
-        href: '/contact',
+        label: 'Politique de confidentialité',
+        href: '/privacy-policy',
+    },
+    {
+        label: "Conditions d'utilisation",
+        href: '/terms',
     },
     { label: 'Aide', href: '/contact' },
 ];
 
 const Footer = () => {
     const { appearance, updateAppearance } = useAppearance();
+    const footerRef = useRef<HTMLElement>(null);
+    const logoRef = useRef<HTMLDivElement>(null);
+    const sectionsRef = useRef<HTMLDivElement>(null);
+    const socialRef = useRef<HTMLDivElement>(null);
+    const bottomRef = useRef<HTMLDivElement>(null);
 
     const currentYear = new Date().getFullYear();
 
@@ -206,44 +224,175 @@ const Footer = () => {
         updateAppearance(newTheme);
     };
 
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Logo and company info animation
+            if (logoRef.current) {
+                gsap.fromTo(
+                    logoRef.current,
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: logoRef.current,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    },
+                );
+            }
+
+            // Footer sections staggered animation
+            if (sectionsRef.current) {
+                const sections = sectionsRef.current.querySelectorAll('.footer-section');
+                gsap.fromTo(
+                    sections,
+                    { opacity: 0, y: 40 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        stagger: 0.15,
+                        ease: 'power3.out',
+                        scrollTrigger: {
+                            trigger: sectionsRef.current,
+                            start: 'top 85%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    },
+                );
+            }
+
+            // Social links animation
+            if (socialRef.current) {
+                const socialIcons = socialRef.current.querySelectorAll('.social-icon');
+                gsap.fromTo(
+                    socialIcons,
+                    { opacity: 0, scale: 0, rotation: -180 },
+                    {
+                        opacity: 1,
+                        scale: 1,
+                        rotation: 0,
+                        duration: 0.5,
+                        stagger: 0.1,
+                        ease: 'back.out(1.7)',
+                        scrollTrigger: {
+                            trigger: socialRef.current,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    },
+                );
+            }
+
+            // Bottom bar animation
+            if (bottomRef.current) {
+                gsap.fromTo(
+                    bottomRef.current,
+                    { opacity: 0 },
+                    {
+                        opacity: 1,
+                        duration: 0.8,
+                        delay: 0.5,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: bottomRef.current,
+                            start: 'top 95%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    },
+                );
+            }
+        }, footerRef);
+
+        return () => ctx.revert();
+    }, []);
+
+    // Hover animation for social icons
+    const handleSocialHover = (e: React.MouseEvent<HTMLAnchorElement>, isEnter: boolean) => {
+        gsap.to(e.currentTarget, {
+            scale: isEnter ? 1.2 : 1,
+            y: isEnter ? -5 : 0,
+            duration: 0.3,
+            ease: 'power2.out',
+        });
+    };
+
+    // Hover animation for links
+    const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement>, isEnter: boolean) => {
+        gsap.to(e.currentTarget, {
+            x: isEnter ? 8 : 0,
+            color: isEnter ? '#e36c19' : '',
+            duration: 0.3,
+            ease: 'power2.out',
+        });
+    };
+
     return (
         <>
             <CtaTwo />
-            <footer className="border-t bg-gray-50 dark:bg-gray-800/50">
-                <div className="container mx-auto px-4 py-12">
-                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-                        {/* Logo et informations */}
-                        <div>
-                            <div className="mb-4">
+            <footer ref={footerRef} className="relative overflow-hidden border-t bg-linear-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-950">
+                {/* Decorative background elements */}
+                <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                    <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+                    <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
+                </div>
+
+                <div className="container relative z-10 mx-auto px-4 py-16">
+                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+                        {/* Logo and company info - 4 columns */}
+                        <div ref={logoRef} className="lg:col-span-4">
+                            <div className="mb-6">
                                 <Logo />
                             </div>
-                            <p className="mb-4 text-sm text-muted-foreground">
-                                {currentYear} {COMPANY_INFO.description}
+                            <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                                Le Comité Ivoirien pour les Tests Logiciels (CITL) est une association à but non lucratif dédiée à la promotion et au développement des
+                                compétences en tests logiciels en Côte d&apos;Ivoire.
                             </p>
-                            <p className="mb-4 text-sm text-muted-foreground">{COMPANY_INFO.location}</p>
-                            <div className="mb-4">
-                                {LEGAL_LINKS.map((link, index) => (
-                                    <span key={link.href}>
-                                        {index > 0 && ' | '}
-                                        <Link href={link.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                                            {link.label}
-                                        </Link>
-                                    </span>
-                                ))}
+
+                            {/* Contact info */}
+                            <div className="mb-6 space-y-3">
+                                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                        <MapPin className="h-4 w-4 text-primary" />
+                                    </div>
+                                    <span>{COMPANY_INFO.location}</span>
+                                </div>
+                                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                        <Mail className="h-4 w-4 text-primary" />
+                                    </div>
+                                    <a href={`mailto:${COMPANY_INFO.email}`} className="transition-colors hover:text-primary">
+                                        {COMPANY_INFO.email}
+                                    </a>
+                                </div>
+                                <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                        <Phone className="h-4 w-4 text-primary" />
+                                    </div>
+                                    <span>{COMPANY_INFO.phone}</span>
+                                </div>
                             </div>
-                            <div>
-                                <p className="mb-2 text-sm font-medium text-foreground">Suivez-nous</p>
-                                <div className="flex gap-3">
+
+                            {/* Social links */}
+                            <div ref={socialRef}>
+                                <p className="mb-3 text-sm font-semibold text-foreground">Suivez-nous</p>
+                                <div className="flex gap-2">
                                     {SOCIAL_LINKS.map((social) => {
                                         const Icon = social.icon;
                                         return (
                                             <a
                                                 key={social.name}
                                                 href={social.href}
-                                                className="text-muted-foreground transition-colors hover:text-foreground"
+                                                className="social-icon flex h-10 w-10 items-center justify-center rounded-full bg-gray-200/80 text-muted-foreground transition-colors hover:bg-primary hover:text-white dark:bg-gray-800"
                                                 aria-label={social.ariaLabel}
+                                                onMouseEnter={(e) => handleSocialHover(e, true)}
+                                                onMouseLeave={(e) => handleSocialHover(e, false)}
                                             >
-                                                <Icon className="h-5 w-5" />
+                                                <Icon className="h-4 w-4" />
                                             </a>
                                         );
                                     })}
@@ -251,45 +400,70 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        {/* Sections dynamiques */}
-                        {FOOTER_SECTIONS.map((section) => (
-                            <div key={section.title}>
-                                <h3 className="mb-4 text-lg font-semibold text-foreground">{section.title}</h3>
-                                <ul className="space-y-3">
-                                    {section.links.map((link) => (
-                                        <li key={link.href}>
-                                            <Link href={link.href} className="text-muted-foreground transition-colors hover:text-foreground">
-                                                {link.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
+                        {/* Navigation sections - 8 columns */}
+                        <div ref={sectionsRef} className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:col-span-8">
+                            {FOOTER_SECTIONS.map((section) => (
+                                <div key={section.title} className="footer-section">
+                                    <h3 className="relative mb-6 text-lg font-bold text-foreground">
+                                        {section.title}
+                                        <span className="absolute -bottom-2 left-0 h-0.5 w-12 bg-primary" />
+                                    </h3>
+                                    <ul className="space-y-3">
+                                        {section.links.map((link) => (
+                                            <li key={link.href}>
+                                                <Link
+                                                    href={link.href}
+                                                    className="inline-block text-sm text-muted-foreground transition-colors hover:text-primary"
+                                                    onMouseEnter={(e) => handleLinkHover(e, true)}
+                                                    onMouseLeave={(e) => handleLinkHover(e, false)}
+                                                >
+                                                    {link.label}
+                                                </Link>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom section */}
+                <div ref={bottomRef} className="border-t bg-gray-100/50 dark:bg-gray-900/50">
+                    <div className="container mx-auto px-4 py-6">
+                        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+                            {/* Language Switcher */}
+                            <div className="flex items-center gap-4">
+                                <LanguageSwitcher />
+                                <Separator orientation="vertical" className="hidden h-6 md:block" />
+                                <Button
+                                    size="icon"
+                                    variant="ghost"
+                                    onClick={toggleTheme}
+                                    className="h-10 w-10 rounded-full transition-all duration-300 hover:bg-primary/10 hover:text-primary"
+                                    aria-label="Toggle theme"
+                                >
+                                    {appearance === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+                                </Button>
                             </div>
-                        ))}
-                    </div>
-                </div>
 
-                {/* Language Switcher */}
-                <div className="">
-                    <div className="item-center container mx-auto flex justify-between gap-x-2 px-4 py-4">
-                        <LanguageSwitcher />
-                        <Button
-                            size="icon"
-                            onClick={toggleTheme}
-                            className="h-12 w-12 rounded-full border border-border bg-background shadow-lg transition-all duration-300 hover:scale-110"
-                            aria-label="Toggle theme"
-                        >
-                            {appearance === 'dark' ? <Sun className="h-5 w-5 text-foreground" /> : <Moon className="h-5 w-5 text-foreground" />}
-                        </Button>
-                    </div>
-                </div>
+                            {/* Legal links */}
+                            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+                                {LEGAL_LINKS.map((link, index) => (
+                                    <span key={link.href} className="flex items-center">
+                                        {index > 0 && <Separator orientation="vertical" className="mx-2 h-4" />}
+                                        <Link href={link.href} className="text-xs text-muted-foreground transition-colors hover:text-primary">
+                                            {link.label}
+                                        </Link>
+                                    </span>
+                                ))}
+                            </div>
 
-                {/* Copyright bar */}
-                <div className="border-t">
-                    <div className="container mx-auto px-4 py-4">
-                        <p className="text-center text-sm text-muted-foreground">
-                            © {currentYear} {COMPANY_INFO.copyrightText}
-                        </p>
+                            {/* Copyright */}
+                            <p className="text-center text-xs text-muted-foreground">
+                                © {currentYear} {COMPANY_INFO.copyrightText}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </footer>

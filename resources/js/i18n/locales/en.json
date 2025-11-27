@@ -862,5 +862,128 @@
             "description": "Get your ISTQB training organization accredited by CITL.",
             "keywords": "training accreditation, ISTQB, CITL, training organization"
         }
+    },
+    "privacy_policy": {
+        "seo": {
+            "title": "Privacy Policy | CITL",
+            "description": "CITL Privacy Policy - Learn how we collect, use and protect your personal data."
+        },
+        "badge": "Legal",
+        "hero_title": "Privacy **Policy**",
+        "hero_description": "We take the protection of your personal data very seriously. This policy explains how we collect, use and protect your information.",
+        "table_of_contents": "Table of Contents",
+        "last_updated": "Last updated",
+        "section": "Section",
+        "footer_note": "For any questions regarding this privacy policy, please contact us at contact@citl.ci",
+        "sections": {
+            "introduction": {
+                "title": "Introduction",
+                "content_1": "The Ivorian Committee for Software Testing (CITL) is committed to protecting the privacy of users of its website and individuals whose personal data it processes in the course of its activities.",
+                "content_2": "This privacy policy describes the types of data we collect, how we use, share and protect it, as well as your rights regarding this data."
+            },
+            "data_collected": {
+                "title": "Data Collected",
+                "content_1": "We collect personal data that you provide directly to us, such as: name, surname, email address, phone number, company, job title, and information relating to your certifications.",
+                "content_2": "We also collect data automatically when you visit our site: IP address, browser type, pages viewed, duration of visit, and cookie data.",
+                "content_3": "For ISTQB exam registrations, we may collect additional information necessary for the management and delivery of certifications."
+            },
+            "data_usage": {
+                "title": "Data Usage",
+                "content_1": "Your data is used to: manage your registration for ISTQB exams and certifications, process your membership or accreditation requests, and respond to your questions and contact requests.",
+                "content_2": "We also use your data to send you information about our services, events and news (with your consent), and to improve our website and services.",
+                "content_3": "Certification-related data is shared with ISTQB International as part of managing the global registry of certified testers."
+            },
+            "data_protection": {
+                "title": "Data Protection",
+                "content_1": "We implement appropriate technical and organizational security measures to protect your data against unauthorized access, modification, disclosure or destruction.",
+                "content_2": "Access to your personal data is limited to those who need it in the course of their duties. Our systems are regularly updated and our security practices are reviewed periodically."
+            },
+            "cookies": {
+                "title": "Cookies and Similar Technologies",
+                "content_1": "Our site uses cookies to improve your browsing experience, analyze site traffic and personalize content.",
+                "content_2": "Essential cookies are necessary for the site to function. Analytical cookies help us understand how visitors interact with our site.",
+                "content_3": "You can manage your cookie preferences at any time via your browser settings or our cookie management banner."
+            },
+            "user_rights": {
+                "title": "Your Rights",
+                "content_1": "In accordance with applicable regulations, you have the right to access, rectify, delete and port your personal data.",
+                "content_2": "You may also object to the processing of your data or request its limitation in certain circumstances.",
+                "content_3": "To exercise these rights, contact us at: contact@citl.ci. We are committed to responding to your request within 30 days."
+            },
+            "data_retention": {
+                "title": "Data Retention",
+                "content_1": "Your personal data is retained for as long as necessary for the purposes for which it was collected, or in accordance with applicable legal obligations.",
+                "content_2": "ISTQB certification data is retained indefinitely in the international registry of certified testers, in accordance with ISTQB requirements."
+            },
+            "contact": {
+                "title": "Contact Us",
+                "content_1": "For any questions relating to this privacy policy or your personal data, you can contact us by email at contact@citl.ci.",
+                "content_2": "CITL - Ivorian Committee for Software Testing, Abidjan, Ivory Coast."
+            }
+        }
+    },
+    "terms": {
+        "seo": {
+            "title": "Terms of Use | CITL",
+            "description": "General terms of use for the CITL website and ISTQB certification services in Ivory Coast."
+        },
+        "badge": "Legal",
+        "hero_title": "Terms of **Use**",
+        "hero_description": "Please read these terms of use carefully before using our website and ISTQB certification services.",
+        "table_of_contents": "Table of Contents",
+        "last_updated": "Last updated",
+        "article": "Article",
+        "important_notice": "By using this site, you accept these terms. If you disagree, please do not use our services.",
+        "footer_note": "These terms are governed by Ivorian law. For any questions, contact us at contact@citl.ci",
+        "sections": {
+            "acceptance": {
+                "title": "Acceptance of Terms",
+                "content_1": "By accessing this website and using CITL services, you agree to be bound by these terms of use and all applicable laws and regulations.",
+                "content_2": "If you do not accept any of these terms, you are not authorized to use or access this site. The materials contained in this website are protected by applicable copyright and trademark law."
+            },
+            "services": {
+                "title": "Description of Services",
+                "content_1": "CITL is the official organization in Ivory Coast for ISTQB certification. We offer exam registration services, training organization accreditation, and management of the certified testers registry.",
+                "content_2": "Our services also include information on ISTQB certifications, connecting with accredited training organizations, and organizing software testing related events.",
+                "content_3": "CITL reserves the right to modify, suspend or discontinue all or part of its services at any time, with or without notice."
+            },
+            "user_obligations": {
+                "title": "User Obligations",
+                "content_1": "You agree to provide accurate, complete and up-to-date information when registering or making any request through our site.",
+                "content_2": "You are responsible for maintaining the confidentiality of your login credentials and any activity carried out under your account.",
+                "content_3": "It is prohibited to use this site for illegal purposes, attempt to compromise the security of the site, or disrupt its normal operation."
+            },
+            "intellectual_property": {
+                "title": "Intellectual Property",
+                "content_1": "All content on this site (texts, images, logos, documents, training materials) is protected by intellectual property rights and belongs to CITL or ISTQB.",
+                "content_2": "Any reproduction, distribution, modification or use of content without prior written authorization is strictly prohibited. The ISTQB® trademark is a registered trademark of ISTQB."
+            },
+            "certifications": {
+                "title": "Certifications and Exams",
+                "content_1": "Registration for an ISTQB exam implies acceptance of the ISTQB exam regulations and CITL-specific conditions.",
+                "content_2": "Exam results are final. In case of fraud or non-compliance with exam regulations, CITL reserves the right to cancel the certification and prohibit future registrations.",
+                "content_3": "Exam fees are non-refundable except in case of session cancellation by CITL. Postponements are subject to specific conditions."
+            },
+            "liability": {
+                "title": "Limitation of Liability",
+                "content_1": "CITL strives to provide accurate and up-to-date information on this site. However, we do not guarantee the accuracy, completeness or timeliness of the information provided.",
+                "content_2": "CITL shall not be liable for any direct or indirect damages resulting from the use of this site or the inability to use it, except in cases of gross negligence or willful misconduct."
+            },
+            "termination": {
+                "title": "Termination",
+                "content_1": "CITL may terminate or suspend your access to all or part of the site immediately, without notice or liability, for any reason, including in case of violation of these terms.",
+                "content_2": "Upon termination, your right to use the site will cease immediately. Provisions that by their nature should survive termination shall remain in effect."
+            },
+            "modifications": {
+                "title": "Modifications to Terms",
+                "content_1": "CITL reserves the right to modify these terms of use at any time. Modifications take effect upon publication on the site.",
+                "content_2": "It is your responsibility to regularly review these terms. Your continued use of the site after any modification constitutes your acceptance of the new terms."
+            },
+            "governing_law": {
+                "title": "Governing Law and Jurisdiction",
+                "content_1": "These terms of use are governed by Ivorian law. Any dispute relating to the interpretation or execution of these terms shall be submitted to the competent courts of Abidjan.",
+                "content_2": "In case of dispute, the parties will endeavor to find an amicable solution before any legal action."
+            }
+        }
     }
 }

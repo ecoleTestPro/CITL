@@ -1,167 +1,224 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouvelle demande d'adhésion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            background-color: #e36c19;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px 5px 0 0;
-        }
-        .content {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border: 1px solid #ddd;
-            border-radius: 0 0 5px 5px;
-        }
-        .section {
-            margin-bottom: 25px;
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #e36c19;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #e36c19;
-            padding-bottom: 5px;
-        }
-        .info-row {
-            display: flex;
-            margin-bottom: 8px;
-        }
-        .info-label {
-            font-weight: bold;
-            min-width: 200px;
-            color: #555;
-        }
-        .info-value {
-            color: #333;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #777;
-            font-size: 14px;
-        }
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .badge-new {
-            background-color: #10b981;
-            color: white;
-        }
-        .badge-renewal {
-            background-color: #3b82f6;
-            color: white;
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: inherit !important; }
+        #MessageViewBody a { color: inherit; text-decoration: none; }
+        p { line-height: inherit; margin: 0; }
+        @media (max-width: 680px) {
+            .row-content { width: 100% !important; }
+            .stack .column { width: 100%; display: block; }
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <h1 style="margin: 0;">Nouvelle Demande d'Adhésion</h1>
-        <p style="margin: 10px 0 0 0;">CITL - Comité Ivoirien des Tests Logiciels</p>
-    </div>
+<body style="background-color: #ffe7d9; margin: 0; padding: 0;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffe7d9;">
+        <tbody>
+            <tr>
+                <td>
+                    <!-- Header -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #e36c19; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: center; padding: 20px 30px; vertical-align: middle;">
+                                                    <p style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; letter-spacing: 1px; margin: 0;">
+                                                        CITL - Comité Ivoirien des Tests Logiciels
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <div class="content">
-        <div class="section">
-            <div class="section-title">Type d'Adhésion</div>
-            <div class="info-row">
-                <span class="info-value">
-                    <span class="badge {{ $application->membership_type === 'new' ? 'badge-new' : 'badge-renewal' }}">
-                        {{ $application->membership_type === 'new' ? 'Nouvelle adhésion' : 'Renouvellement' }}
-                    </span>
-                </span>
-            </div>
-        </div>
+                    <!-- Hero Section -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 40px 30px; vertical-align: top;">
+                                                    <div style="text-align: center; margin-bottom: 20px;">
+                                                        <div style="display: inline-block; background-color: #ffe7d9; border-radius: 50%; width: 80px; height: 80px; line-height: 80px; font-size: 36px;">
+                                                            👤
+                                                        </div>
+                                                    </div>
+                                                    <h1 style="margin: 0; color: #1a1a1a; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 28px; font-weight: 700; text-align: center; line-height: 1.3;">
+                                                        Nouvelle Demande d'Adhésion
+                                                    </h1>
+                                                    <p style="margin-top: 10px; color: #666666; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; text-align: center;">
+                                                        Membre CITL
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <div class="section">
-            <div class="section-title">Informations Personnelles</div>
-            <div class="info-row">
-                <span class="info-label">Prénom :</span>
-                <span class="info-value">{{ $application->first_name }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Nom :</span>
-                <span class="info-value">{{ $application->surname }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Téléphone :</span>
-                <span class="info-value">{{ $application->phone }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Email :</span>
-                <span class="info-value">{{ $application->email }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Adresse :</span>
-                <span class="info-value">{{ $application->address }}</span>
-            </div>
-        </div>
+                    <!-- Type Badge Banner -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: {{ $application->membership_type === 'new' ? '#10b981' : '#3b82f6' }}; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 20px 30px; vertical-align: top;">
+                                                    <p style="margin: 0; color: #ffffff; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 18px; font-weight: 600; text-align: center;">
+                                                        {{ $application->membership_type === 'new' ? '✨ Nouvelle adhésion' : '🔄 Renouvellement' }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <div class="section">
-            <div class="section-title">Informations Professionnelles</div>
-            <div class="info-row">
-                <span class="info-label">Entreprise :</span>
-                <span class="info-value">{{ $application->company }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Poste :</span>
-                <span class="info-value">{{ $application->job_title }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Années d'expérience :</span>
-                <span class="info-value">{{ $application->years_of_experience }}</span>
-            </div>
-        </div>
+                    <!-- Content -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 30px; vertical-align: top;">
 
-        <div class="section">
-            <div class="section-title">Niveau d'Adhésion</div>
-            <div class="info-row">
-                <span class="info-label">Niveau :</span>
-                <span class="info-value">{{ ucfirst($application->membership_level) }}</span>
-            </div>
-            @if($application->qualification)
-            <div class="info-row">
-                <span class="info-label">Qualification :</span>
-                <span class="info-value">{{ $application->qualification }}</span>
-            </div>
-            @endif
-        </div>
+                                                    <!-- Section: Informations Personnelles -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Informations Personnelles
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Prénom</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $application->first_name }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Nom</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $application->surname }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Téléphone</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $application->phone }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Email</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $application->email }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Adresse</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $application->address }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
-        <div class="section">
-            <div class="section-title">Informations Administratives</div>
-            <div class="info-row">
-                <span class="info-label">Statut :</span>
-                <span class="info-value">{{ ucfirst($application->status) }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Date de soumission :</span>
-                <span class="info-value">{{ $application->created_at->format('d/m/Y à H:i') }}</span>
-            </div>
-        </div>
-    </div>
+                                                    <!-- Section: Informations Professionnelles -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Informations Professionnelles
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Entreprise</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $application->company }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Poste</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $application->job_title }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Années d'expérience</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $application->years_of_experience }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
-    <div class="footer">
-        <p>Ceci est un email automatique généré par le système CITL.</p>
-        <p>© {{ date('Y') }} CITL - Tous droits réservés</p>
-    </div>
+                                                    <!-- Section: Niveau d'Adhésion -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Niveau d'Adhésion
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Niveau</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ ucfirst($application->membership_level) }}</td>
+                                                            </tr>
+                                                            @if($application->qualification)
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Qualification</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $application->qualification }}</td>
+                                                            </tr>
+                                                            @endif
+                                                        </table>
+                                                    </div>
+
+                                                    <!-- Status -->
+                                                    <div style="text-align: center; margin-top: 30px;">
+                                                        <span style="display: inline-block; padding: 10px 25px; border-radius: 25px; background-color: #fef3cd; color: #856404; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600;">
+                                                            {{ ucfirst($application->status) }} - {{ $application->created_at->format('d/m/Y à H:i') }}
+                                                        </span>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Footer -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffbe98; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: center; padding: 30px; vertical-align: top;">
+                                                    <p style="margin: 0 0 15px 0; color: #1a365d; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 12px;">
+                                                        Ceci est un email automatique généré par le système CITL.
+                                                    </p>
+                                                    <div style="margin-bottom: 20px;">
+                                                        <a href="https://www.facebook.com/citl.ci" style="display: inline-block; margin: 0 5px;"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-color/facebook@2x.png" width="32" height="32" alt="Facebook" style="display: block;"></a>
+                                                        <a href="https://www.linkedin.com/company/citl-ci" style="display: inline-block; margin: 0 5px;"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-color/linkedin@2x.png" width="32" height="32" alt="LinkedIn" style="display: block;"></a>
+                                                    </div>
+                                                    <p style="margin: 0; color: #1a365d; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 12px;">
+                                                        © {{ date('Y') }} CITL - Comité Ivoirien des Tests Logiciels<br>
+                                                        Tous droits réservés
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

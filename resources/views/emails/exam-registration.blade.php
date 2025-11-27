@@ -1,169 +1,246 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nouvelle inscription à l'examen</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .header {
-            background-color: #e36c19;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px 5px 0 0;
-        }
-        .content {
-            background-color: #f9f9f9;
-            padding: 30px;
-            border: 1px solid #ddd;
-            border-radius: 0 0 5px 5px;
-        }
-        .section {
-            margin-bottom: 25px;
-        }
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #e36c19;
-            margin-bottom: 10px;
-            border-bottom: 2px solid #e36c19;
-            padding-bottom: 5px;
-        }
-        .info-row {
-            display: flex;
-            margin-bottom: 8px;
-        }
-        .info-label {
-            font-weight: bold;
-            min-width: 180px;
-            color: #555;
-        }
-        .info-value {
-            color: #333;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #777;
-            font-size: 14px;
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none; }
+        a[x-apple-data-detectors] { color: inherit !important; text-decoration: inherit !important; }
+        #MessageViewBody a { color: inherit; text-decoration: none; }
+        p { line-height: inherit; margin: 0; }
+        @media (max-width: 680px) {
+            .row-content { width: 100% !important; }
+            .stack .column { width: 100%; display: block; }
         }
     </style>
 </head>
-<body>
-    <div class="header">
-        <h1 style="margin: 0;">Nouvelle Inscription à l'Examen</h1>
-        <p style="margin: 10px 0 0 0;">CITL - Centre d'Inscription aux Tests Logiciels</p>
-    </div>
+<body style="background-color: #ffe7d9; margin: 0; padding: 0;">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffe7d9;">
+        <tbody>
+            <tr>
+                <td>
+                    <!-- Header -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #e36c19; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: center; padding: 20px 30px; vertical-align: middle;">
+                                                    <p style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #ffffff; letter-spacing: 1px; margin: 0;">
+                                                        CITL - Comité Ivoirien des Tests Logiciels
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <div class="content">
-        <div class="section">
-            <div class="section-title">Type d'Achat</div>
-            <div class="info-row">
-                <span class="info-value">
-                    {{ $registration->purchase_type === 'individual' ? 'Achat individuel' : 'Achat de groupe' }}
-                </span>
-            </div>
-        </div>
+                    <!-- Hero Section -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 40px 30px; vertical-align: top;">
+                                                    <div style="text-align: center; margin-bottom: 20px;">
+                                                        <div style="display: inline-block; background-color: #ffe7d9; border-radius: 50%; width: 80px; height: 80px; line-height: 80px; font-size: 36px;">
+                                                            📝
+                                                        </div>
+                                                    </div>
+                                                    <h1 style="margin: 0; color: #1a1a1a; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 28px; font-weight: 700; text-align: center; line-height: 1.3;">
+                                                        Nouvelle Inscription à l'Examen
+                                                    </h1>
+                                                    <p style="margin-top: 10px; color: #666666; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; text-align: center;">
+                                                        Certification ISTQB®
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <div class="section">
-            <div class="section-title">Examen Sélectionné</div>
-            <div class="info-row">
-                <span class="info-value">{{ ucfirst($registration->exam_name) }}</span>
-            </div>
-        </div>
+                    <!-- Purchase Type Banner -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #1a365d; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 25px 30px; vertical-align: top;">
+                                                    <p style="margin: 0; color: #ffffff; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 18px; font-weight: 600; text-align: center;">
+                                                        {{ $registration->purchase_type === 'individual' ? '👤 Achat individuel' : '👥 Achat de groupe' }}
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-        <div class="section">
-            <div class="section-title">Coordonnées du Candidat</div>
-            <div class="info-row">
-                <span class="info-label">Prénom :</span>
-                <span class="info-value">{{ $registration->first_name }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Nom de famille :</span>
-                <span class="info-value">{{ $registration->last_name }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Intitulé du Poste :</span>
-                <span class="info-value">{{ $registration->job_title }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Entreprise/Organisation :</span>
-                <span class="info-value">{{ $registration->company }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Téléphone :</span>
-                <span class="info-value">{{ $registration->phone }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Email :</span>
-                <span class="info-value">{{ $registration->email }}</span>
-            </div>
-        </div>
+                    <!-- Content Sections -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffffff; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: left; padding: 30px; vertical-align: top;">
 
-        <div class="section">
-            <div class="section-title">Adresse</div>
-            <div class="info-row">
-                <span class="info-label">Adresse Ligne 1 :</span>
-                <span class="info-value">{{ $registration->address_line1 }}</span>
-            </div>
-            @if($registration->address_line2)
-            <div class="info-row">
-                <span class="info-label">Adresse Ligne 2 :</span>
-                <span class="info-value">{{ $registration->address_line2 }}</span>
-            </div>
-            @endif
-            <div class="info-row">
-                <span class="info-label">Ville :</span>
-                <span class="info-value">{{ $registration->city }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Code Postal :</span>
-                <span class="info-value">{{ $registration->postal_code }}</span>
-            </div>
-        </div>
+                                                    <!-- Section: Examen -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Examen Sélectionné
+                                                        </h3>
+                                                        <div style="background-color: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center;">
+                                                            <p style="margin: 0; color: #1a1a1a; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 18px; font-weight: 600;">
+                                                                {{ ucfirst($registration->exam_name) }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
 
-        <div class="section">
-            <div class="section-title">Format de l'Examen</div>
-            <div class="info-row">
-                <span class="info-value">Examen en ligne à domicile</span>
-            </div>
-        </div>
+                                                    <!-- Section: Candidat -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Coordonnées du Candidat
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Prénom</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $registration->first_name }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Nom de famille</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $registration->last_name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Intitulé du poste</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $registration->job_title }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Entreprise</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $registration->company }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Téléphone</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $registration->phone }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Email</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $registration->email }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
-        <div class="section">
-            <div class="section-title">Inscription au Registre</div>
-            <div class="info-row">
-                <span class="info-value">
-                    {{ $registration->register_in_registry === 'yes' ? 'Oui, j\'accepte d\'être inscrit au registre' : 'Non, je ne souhaite pas être inscrit au registre' }}
-                </span>
-            </div>
-        </div>
+                                                    <!-- Section: Adresse -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Adresse
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Adresse Ligne 1</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $registration->address_line1 }}</td>
+                                                            </tr>
+                                                            @if($registration->address_line2)
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Adresse Ligne 2</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $registration->address_line2 }}</td>
+                                                            </tr>
+                                                            @endif
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666;">Ville</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">{{ $registration->city }}</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Code postal</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">{{ $registration->postal_code }}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
-        <div class="section">
-            <div class="section-title">Informations Administratives</div>
-            <div class="info-row">
-                <span class="info-label">Statut :</span>
-                <span class="info-value">{{ ucfirst($registration->status) }}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Date d'inscription :</span>
-                <span class="info-value">{{ $registration->created_at->format('d/m/Y à H:i') }}</span>
-            </div>
-        </div>
-    </div>
+                                                    <!-- Section: Options -->
+                                                    <div style="margin-bottom: 25px;">
+                                                        <h3 style="margin: 0 0 15px 0; color: #e36c19; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 16px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #e36c19; padding-bottom: 8px;">
+                                                            Options
+                                                        </h3>
+                                                        <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
+                                                            <tr>
+                                                                <td style="padding: 8px 0; color: #666666; width: 40%;">Format de l'examen</td>
+                                                                <td style="padding: 8px 0; color: #1a1a1a; font-weight: 500;">Examen en ligne à domicile</td>
+                                                            </tr>
+                                                            <tr style="background-color: #f9f9f9;">
+                                                                <td style="padding: 8px; color: #666666;">Inscription au registre</td>
+                                                                <td style="padding: 8px; color: #1a1a1a; font-weight: 500;">
+                                                                    {{ $registration->register_in_registry === 'yes' ? '✓ Oui' : '✕ Non' }}
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
 
-    <div class="footer">
-        <p>Ceci est un email automatique généré par le système CITL.</p>
-        <p>© {{ date('Y') }} CITL - Tous droits réservés</p>
-    </div>
+                                                    <!-- Status -->
+                                                    <div style="text-align: center; margin-top: 30px;">
+                                                        <span style="display: inline-block; padding: 10px 25px; border-radius: 25px; background-color: #fef3cd; color: #856404; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600;">
+                                                            {{ ucfirst($registration->status) }} - {{ $registration->created_at->format('d/m/Y à H:i') }}
+                                                        </span>
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Footer -->
+                    <table align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #ffbe98; width: 680px; margin: 0 auto;" width="680">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-weight: 400; text-align: center; padding: 30px; vertical-align: top;">
+                                                    <p style="margin: 0 0 15px 0; color: #1a365d; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 12px;">
+                                                        Ceci est un email automatique généré par le système CITL.
+                                                    </p>
+                                                    <div style="margin-bottom: 20px;">
+                                                        <a href="https://www.facebook.com/citl.ci" style="display: inline-block; margin: 0 5px;"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-color/facebook@2x.png" width="32" height="32" alt="Facebook" style="display: block;"></a>
+                                                        <a href="https://www.linkedin.com/company/citl-ci" style="display: inline-block; margin: 0 5px;"><img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-color/linkedin@2x.png" width="32" height="32" alt="LinkedIn" style="display: block;"></a>
+                                                    </div>
+                                                    <p style="margin: 0; color: #1a365d; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 12px;">
+                                                        © {{ date('Y') }} CITL - Comité Ivoirien des Tests Logiciels<br>
+                                                        Tous droits réservés
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>

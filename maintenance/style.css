@@ -1,0 +1,296 @@
+/* Définition des couleurs du logo */
+:root {
+    --color-green: #3aa54c;
+    --color-orange: #f37021;
+    --color-grey: #8c8c8c;
+    --color-dark: #333333;
+    --color-light-bg: #f8f9fa; /* Fond clair par défaut */
+    --color-white: #ffffff;
+}
+
+/* Style de base */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--color-light-bg) 0%, #e0e6e9 100%); /* Dégradé de fond subtil */
+    color: var(--color-dark);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 750px; /* Légèrement plus large pour une meilleure présence */
+    width: 100%;
+    margin: 20px;
+    padding: 50px 60px; /* Plus d'espacement */
+    background-color: var(--color-white);
+    border-radius: 15px; /* Bords plus arrondis */
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1); /* Ombre plus prononcée */
+    animation: fadeIn 1s ease-out; /* Animation d'apparition */
+}
+
+/* Animation fadeIn */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Conteneur du logo pour le cadre rond */
+header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.logo-circle {
+    width: 180px; /* Taille du cercle */
+    height: 180px; /* Taille du cercle */
+    /* Dégradé de fond subtil pour le cercle */
+    background: linear-gradient(145deg, #f0f0f0, #ffffff); 
+    border-radius: 50%; /* Rend la forme ronde */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Ombre plus sophistiquée et douce */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), /* Ombre générale */
+                0 0 0 8px rgba(58, 165, 76, 0.1); /* Halo vert subtil rappelant le logo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Plus besoin de bordure puisque le halo la remplace */
+}
+
+.logo-circle:hover {
+    transform: translateY(-5px); /* Se soulève légèrement */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), /* Ombre plus intense au survol */
+                0 0 0 10px rgba(243, 112, 33, 0.15); /* Halo orange au survol */
+}
+
+.logo {
+    max-width: 80%; /* Le logo prend 80% de la largeur du cercle */
+    max-height: 80%; /* Le logo prend 80% de la hauteur du cercle */
+    height: auto;
+    display: block; /* S'assure que l'image ne déborde pas */
+}
+
+
+/* Titres */
+h1 {
+    color: #aaa;
+    font-size: 2.3rem; /* Taille plus grande */
+    font-weight: 700; /* Plus gras */
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 40px;
+    line-height: 1.7;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Compte à rebours */
+.countdown-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur mobile */
+    justify-content: center;
+    gap: 25px; /* Espacement plus grand entre les boîtes */
+    margin: 40px 0;
+}
+
+.countdown-box {
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0); /* Dégradé pour les boîtes */
+    padding: 20px 25px; /* Plus de padding */
+    border-radius: 10px;
+    min-width: 100px; /* Largeur minimale pour desktop */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation au survol */
+}
+
+.countdown-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.countdown-box .number {
+    display: block;
+    font-size: 3.2rem; /* Plus grand */
+    font-weight: 800; /* Encore plus gras */
+    color: var(--color-green); /* Couleur verte du logo */
+    line-height: 1.1;
+    margin-bottom: 5px;
+}
+
+.countdown-box .label {
+    font-size: 0.9rem; /* Plus lisible */
+    text-transform: uppercase;
+    color: var(--color-grey); /* Couleur grise du logo */
+    font-weight: 600;
+    letter-spacing: 1.2px; /* Espacement des lettres */
+}
+
+/* Date de lancement */
+.launch-date {
+    font-size: 1rem;
+    margin-top: 30px;
+    color: #aaa;
+}
+
+.launch-date strong {
+    color: var(--color-orange); /* Couleur orange du logo */
+    font-weight: 700;
+}
+
+/* Texte si lancé */
+.launched {
+    font-size: 2rem;
+    color: var(--color-green);
+    font-weight: 700;
+    animation: pulse 1.5s infinite; /* Animation de pulsation */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Pied de page */
+footer {
+    border-top: 1px solid #eee;
+    padding-top: 35px;
+    margin-top: 50px;
+    color: #777;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+
+.contact-email {
+    color: var(--color-green);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.25rem; /* Plus grand et plus visible */
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block; /* Pour l'animation transform */
+    margin-top: 5px;
+}
+
+.contact-email:hover {
+    color: var(--color-orange);
+    transform: scale(1.05);
+}
+
+.copyright {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+/* Responsive pour mobile (max-width: 600px) */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 30px 20px; /* Réduire le padding pour petits écrans */
+        margin: 10px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Ombre plus subtile */
+    }
+
+    .logo-circle {
+        width: 140px; /* Taille réduite pour mobile */
+        height: 140px;
+        /* Ajustement des ombres pour mobile */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08),
+                    0 0 0 5px rgba(58, 165, 76, 0.08);
+    }
+
+    .logo-circle:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
+                    0 0 0 7px rgba(243, 112, 33, 0.1);
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Taille adaptée pour mobile */
+        margin-bottom: 10px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .countdown-container {
+        flex-direction: row; /* Garde sur une ligne si possible */
+        flex-wrap: wrap; /* Permet de passer à la ligne */
+        gap: 15px; /* Réduit l'espacement */
+        margin: 25px 0;
+    }
+
+    .countdown-box {
+        padding: 15px 10px;
+        min-width: unset; /* Permet aux boîtes de s'adapter */
+        flex: 1 1 45%; /* Deux boîtes par ligne, ou une si trop petit */
+        box-sizing: border-box; /* Inclut padding et border dans la largeur */
+    }
+
+    .countdown-box .number {
+        font-size: 2.2rem; /* Taille adaptée pour mobile */
+    }
+
+    .countdown-box .label {
+        font-size: 0.75rem;
+    }
+
+    .launch-date {
+        font-size: 1.05rem;
+        margin-top: 20px;
+    }
+
+    .contact-email {
+        font-size: 1.1rem;
+    }
+
+    footer {
+        padding-top: 25px;
+        margin-top: 30px;
+    }
+}
+
+/* Responsive pour tablettes (entre 600px et 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+    .container {
+        padding: 40px;
+    }
+    .logo-circle {
+        width: 160px;
+        height: 160px;
+    }
+    h1 {
+        font-size: 2.2rem;
+    }
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    .countdown-box .number {
+        font-size: 2.8rem;
+    }
+    .countdown-box .label {
+        font-size: 0.85rem;
+    }
+}

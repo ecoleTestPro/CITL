@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CITL - Comité Ivoirien des Tests Logiciels (Bientôt disponible)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo-circle">
+                <img src="logo.png" alt="Logo du CITL - Comité Ivoirien des Tests Logiciels" class="logo">
+            </div>
+        </header>
+
+        <main>
+            <h1>Notre nouveau site arrive bientôt !</h1>
+            <p class="subtitle">
+                Le portail officiel du <strong>Comité Ivoirien des Tests Logiciels</strong> est en cours de finalisation.
+            </p>
+
+            <div class="countdown-container" id="countdown">
+                <div class="countdown-box">
+                    <span class="number" id="days">0</span>
+                    <span class="label">Jours</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="number" id="hours">0</span>
+                    <span class="label">Heures</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="number" id="minutes">0</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="number" id="seconds">0</span>
+                    <span class="label">Secondes</span>
+                </div>
+            </div>
+
+            <p class="launch-date">
+                Lancement prévu le <strong>26 Novembre 2025</strong>
+            </p>
+        </main>
+
+        <footer>
+            <p>En attendant, restons en contact :</p>
+            <a href="mailto:contact@citl-istqb.org" class="contact-email">contact@citl-istqb.org</a>
+            <p class="copyright">© 2025 Comité Ivoirien des Tests Logiciels. Tous droits réservés.</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Définir la date de lancement ---
+        const targetDate = new Date("2025-11-28T08:00:00").getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            // Calculs du temps
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Affichage dans le HTML
+            document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+
+            // Si le compte à rebours est terminé
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").innerHTML = "<h2 class='launched'>Le site est lancé !</h2>";
+                document.querySelector(".launch-date").style.display = 'none';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

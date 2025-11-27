@@ -61,44 +61,47 @@ function CertificationList({ certifications }: CertificationListProps) {
     }
 
     return (
-        <section ref={sectionRef} className="relative overflow-hidden py-12">
+        <section ref={sectionRef} className="relative overflow-hidden py-12 dark:bg-gray-800">
             <div className="pointer-events-none absolute inset-0 z-0">
                 <div className="bg-shape-animate absolute -top-20 -right-20 opacity-5 dark:opacity-[0.02]">
-                    <img src="/assets/images/bg/sharp-3.png" alt="Background shape" className="h-auto w-auto max-w-none" />
+                    <img src="/assets/images/bg/sharp-3.png" alt="Background shape" className="h-auto w-auto max-w-none dark:opacity-30 dark:invert" />
                 </div>
             </div>
 
             <div className="relative z-10 container mx-auto">
                 <div className="grid grid-cols-12 gap-8">
                     {certifications.map((cert) => (
-                        <article key={cert.id} className="dark:bg-background-6 col-span-12 space-y-3.5 rounded-[20px] bg-white p-8 md:col-span-6 lg:col-span-4">
+                        <article
+                            key={cert.id}
+                            className="col-span-12 space-y-3.5 rounded-[20px] border border-gray-100 bg-white p-8 shadow-sm transition-shadow hover:shadow-md md:col-span-6 lg:col-span-4 dark:border-gray-800 dark:bg-gray-900"
+                        >
                             <div className="space-y-11">
                                 <div>
-                                    <span className={`${cert.icon} text-[52px] text-secondary dark:text-accent`}></span>
+                                    <span className={`${cert.icon} text-[52px] text-secondary dark:text-primary`}></span>
                                 </div>
                             </div>
                             <div className="space-y-3">
-                                <h3 className="text-heading-6 md:text-heading-5">{cert.title}</h3>
-                                {cert.subtitle && <p className="text-sm font-medium text-secondary">{cert.subtitle}</p>}
-                                <p className="max-w-[345px]">{cert.description}</p>
+                                <h3 className="text-heading-6 md:text-heading-5 text-gray-900 dark:text-white">{cert.title}</h3>
+                                {cert.subtitle && <p className="text-sm font-medium text-secondary dark:text-primary">{cert.subtitle}</p>}
+                                <p className="max-w-[345px] text-gray-600 dark:text-gray-400">{cert.description}</p>
                                 <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
                                     <p>
-                                        <strong>Questions:</strong> {cert.exam_questions}
+                                        <strong className="text-gray-900 dark:text-gray-200">Questions:</strong> {cert.exam_questions}
                                     </p>
                                     <p>
-                                        <strong>Score requis:</strong> {cert.exam_passing_score}%
+                                        <strong className="text-gray-900 dark:text-gray-200">Score requis:</strong> {cert.exam_passing_score}%
                                     </p>
                                     <p>
-                                        <strong>Durée:</strong> {cert.exam_duration}
+                                        <strong className="text-gray-900 dark:text-gray-200">Durée:</strong> {cert.exam_duration}
                                     </p>
                                     <p>
-                                        <strong>Points totaux:</strong> {cert.exam_total_points}
+                                        <strong className="text-gray-900 dark:text-gray-200">Points totaux:</strong> {cert.exam_total_points}
                                     </p>
                                 </div>
                                 <div className="pt-4">
                                     <a
                                         href={`/certifications/${cert.slug}`}
-                                        className="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-secondary/90 hover:shadow-md"
+                                        className="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-secondary/90 hover:shadow-md dark:bg-primary dark:hover:bg-primary/90"
                                     >
                                         Voir les détails
                                     </a>

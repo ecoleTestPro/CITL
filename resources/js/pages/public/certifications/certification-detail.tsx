@@ -62,10 +62,16 @@ function CertificationDetail({ slug }: Props) {
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
                 <title>{`${certification.title} - CITL`}</title>
-                <meta name="description" content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`} />
+                <meta
+                    name="description"
+                    content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`}
+                />
                 <meta name="keywords" content={`${certification.title}, ISTQB, certification, CITL, test logiciel`} />
                 <meta property="og:title" content={`${certification.title} - CITL`} />
-                <meta property="og:description" content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`} />
+                <meta
+                    property="og:description"
+                    content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`}
+                />
                 <meta property="og:type" content="website" />
             </Head>
 
@@ -112,20 +118,22 @@ function CertificationDetail({ slug }: Props) {
                                 />
 
                                 {/* Exam Structure Section */}
-                                <CertificationContentSection
-                                    id="exam-structure"
-                                    title="Structure de l'examen"
-                                    delay={0.6}
-                                    richContent={certification.exam_structure_details}
-                                    fallbackContent={
-                                        <ExamStructureFallback
-                                            examQuestions={certification.exam_questions}
-                                            examDuration={certification.exam_duration}
-                                            examPassingScore={certification.exam_passing_score}
-                                            examTotalPoints={certification.exam_total_points}
-                                        />
-                                    }
-                                />
+                                {false && certification && (
+                                    <CertificationContentSection
+                                        id="exam-structure"
+                                        title="Structure de l'examen"
+                                        delay={0.6}
+                                        richContent={certification.exam_structure_details}
+                                        fallbackContent={
+                                            <ExamStructureFallback
+                                                examQuestions={certification.exam_questions}
+                                                examDuration={certification.exam_duration}
+                                                examPassingScore={certification.exam_passing_score}
+                                                examTotalPoints={certification.exam_total_points}
+                                            />
+                                        }
+                                    />
+                                )}
 
                                 {/* Business Outcomes Section */}
                                 <CertificationContentSection

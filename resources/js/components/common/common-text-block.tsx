@@ -22,10 +22,18 @@ interface CommonTextBlockProps {
     title?: string;
     description?: string;
     backgroundColor?: string;
+    darkBackgroundColor?: string;
     backgroundShapes?: CommonTextBlockBackgroundShape[];
 }
 
-export default function CommonTextBlock({ image, title, description, backgroundColor, backgroundShapes }: CommonTextBlockProps) {
+export default function CommonTextBlock({
+    image,
+    title,
+    description,
+    backgroundColor,
+    darkBackgroundColor,
+    backgroundShapes,
+}: CommonTextBlockProps) {
     const sectionRef = useRef<HTMLElement>(null);
     const titleRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLElement>(null);
@@ -170,11 +178,19 @@ export default function CommonTextBlock({ image, title, description, backgroundC
         }
     };
 
+    // Generate CSS custom properties for background colors
+    const sectionStyle = {
+        '--bg-light': backgroundColor || undefined,
+        '--bg-dark': darkBackgroundColor || undefined,
+    } as React.CSSProperties;
+
     return (
         <section
             ref={sectionRef}
-            className="relative overflow-hidden bg-white pt-12 pb-16 dark:bg-gray-900"
-            style={{ backgroundColor: backgroundColor || undefined }}
+            className={`relative overflow-hidden pt-12 pb-16 ${
+                backgroundColor ? 'bg-(--bg-light)' : 'bg-white'
+            } ${darkBackgroundColor ? 'dark:bg-(--bg-dark)' : 'dark:bg-gray-900'}`}
+            style={sectionStyle}
         >
             {/* Background Shapes */}
             {backgroundShapes && backgroundShapes.length > 0 && (

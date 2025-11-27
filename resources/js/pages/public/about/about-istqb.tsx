@@ -57,7 +57,7 @@ function AboutIstqb() {
                     takeaways={takeaways}
                     conclusion={t('about.istqb.conclusion')}
                     ctaText={t('about.istqb.cta_text')}
-                    ctaLink="/certifications"
+                    ctaLink="/why-certification"
                 />
             </main>
         </PublicLayout>

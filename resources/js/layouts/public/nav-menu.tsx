@@ -112,7 +112,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             type: 'dropdown',
             items: [
                 { label: t('nav.members'), href: '/members' },
-                { label: t('nav.working_groups'), href: '/working-groups' },
+                // { label: t('nav.working_groups'), href: '/working-groups' }, // Temporarily disabled
             ],
         },
         {
@@ -122,7 +122,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             items: [
                 // Colonne 1: Info & A4Q
                 { label: t('nav.why_certification'), href: '/why-certification', group: 'info' },
-                { label: t('nav.a4q_practical_tester'), href: '/a4q-practical-tester', group: 'info' },
+                // { label: t('nav.a4q_practical_tester'), href: '/a4q-practical-tester', group: 'info' }, // Temporarily disabled
 
                 // Colonne 2: Catégories ISTQB
                 { label: t('nav.core_foundation'), href: '/core-foundation', group: 'istqb' },
@@ -148,7 +148,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             title: t('nav.training'),
             type: 'dropdown',
             items: [
-                { label: t('nav.accredited_organizations'), href: '/accredited-organizations' },
+                // { label: t('nav.accredited_organizations'), href: '/accredited-organizations' }, // Temporarily disabled
                 { label: t('nav.accreditation_request'), href: '/accreditation-request' },
             ],
         },

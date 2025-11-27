@@ -81,7 +81,7 @@ function ExecutiveBoard() {
                     takeaways={takeaways}
                     conclusion={t('about.executive_board.conclusion')}
                     ctaText={t('about.executive_board.cta_text')}
-                    ctaLink="/certifications"
+                    ctaLink="/contact"
                 />
             </main>
         </PublicLayout>

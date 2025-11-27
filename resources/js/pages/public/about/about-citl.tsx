@@ -56,7 +56,7 @@ function AboutCitl() {
                     takeaways={takeaways}
                     conclusion={t('about.citl.conclusion')}
                     ctaText={t('about.citl.cta_text')}
-                    ctaLink="/certifications"
+                    ctaLink="/why-certification"
                 />
                 {/* <SpotlightStories /> */}
             </main>

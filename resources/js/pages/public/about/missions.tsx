@@ -57,7 +57,7 @@ function Missions() {
                     takeaways={takeaways}
                     conclusion={t('about.missions.conclusion')}
                     ctaText={t('about.missions.cta_text')}
-                    ctaLink="/certifications"
+                    ctaLink="/why-certification"
                 />
             </main>
         </PublicLayout>

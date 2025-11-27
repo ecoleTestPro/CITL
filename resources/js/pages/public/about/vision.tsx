@@ -59,7 +59,7 @@ function Vision() {
                     takeaways={takeaways}
                     conclusion={t('about.vision.conclusion')}
                     ctaText={t('about.vision.cta_text')}
-                    ctaLink="/certifications"
+                    ctaLink="/contact"
                 />
             </main>
         </PublicLayout>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GlossarySidebar } from './glossary-sidebar';
 
@@ -9,8 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface GlossaryTerm {
     id: number;
-    term: string;
-    definition: string;
+    term_en: string;
+    term_fr: string;
+    definition_en: string;
+    definition_fr: string;
     letter: string;
 }
 
@@ -19,7 +21,7 @@ interface GroupedGlossary {
 }
 
 function GlossaryBlock() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [glossary, setGlossary] = useState<GroupedGlossary>({});
     const [filteredGlossary, setFilteredGlossary] = useState<GroupedGlossary>({});
     const [loading, setLoading] = useState(true);
@@ -31,22 +33,31 @@ function GlossaryBlock() {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
 
+    // Helper functions to get term/definition based on current language
+    const currentLocale = i18n.language === 'en' ? 'en' : 'fr';
+    const getTerm = useCallback((term: GlossaryTerm) => (currentLocale === 'en' ? term.term_en : term.term_fr), [currentLocale]);
+    const getDefinition = useCallback(
+        (term: GlossaryTerm) => (currentLocale === 'en' ? term.definition_en : term.definition_fr),
+        [currentLocale],
+    );
+
     useEffect(() => {
         const fetchGlossary = async () => {
             try {
-                const response = await axios.get('/api/glossary/grouped');
+                const locale = i18n.language === 'en' ? 'en' : 'fr';
+                const response = await axios.get(`/api/glossary/grouped?locale=${locale}`);
                 setGlossary(response.data.data);
                 setFilteredGlossary(response.data.data);
                 setLoading(false);
             } catch (err) {
-                setError('Erreur lors du chargement du glossaire');
+                setError(t('exams.glossary.error_loading'));
                 setLoading(false);
                 console.error('Error fetching glossary:', err);
             }
         };
 
         fetchGlossary();
-    }, []);
+    }, [i18n.language, t]);
 
     // Animation GSAP - exécutée une seule fois au chargement initial
     useEffect(() => {
@@ -117,14 +128,16 @@ function GlossaryBlock() {
         const filtered: GroupedGlossary = {};
         Object.keys(glossary).forEach((letter) => {
             const matchingTerms = glossary[letter].filter(
-                (term) => term.term.toLowerCase().includes(searchTerm.toLowerCase()) || term.definition.toLowerCase().includes(searchTerm.toLowerCase()),
+                (term) =>
+                    getTerm(term).toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    getDefinition(term).toLowerCase().includes(searchTerm.toLowerCase()),
             );
             if (matchingTerms.length > 0) {
                 filtered[letter] = matchingTerms;
             }
         });
         setFilteredGlossary(filtered);
-    }, [searchTerm, glossary]);
+    }, [searchTerm, glossary, getTerm, getDefinition]);
 
     const handleSearch = (term: string) => {
         setSearchTerm(term);
@@ -157,8 +170,8 @@ function GlossaryBlock() {
                         .map(
                             (term) => `
                         <div class="term-item">
-                            <h3 class="term-name">${term.term}</h3>
-                            <p class="term-definition">${term.definition}</p>
+                            <h3 class="term-name">${getTerm(term)}</h3>
+                            <p class="term-definition">${getDefinition(term)}</p>
                         </div>
                     `,
                         )
@@ -380,8 +393,8 @@ function GlossaryBlock() {
                                                                 data-term
                                                                 className="border-b-stroke-1 dark:border-b-stroke-7 w-full space-y-2 border-b px-3 py-4"
                                                             >
-                                                                <h3 className="text-2xl font-normal text-secondary/80 dark:text-accent/80">{term.term}</h3>
-                                                                <p className="font-normal">{term.definition}</p>
+                                                                <h3 className="text-2xl font-normal text-secondary/80 dark:text-accent/80">{getTerm(term)}</h3>
+                                                                <p className="font-normal">{getDefinition(term)}</p>
                                                             </div>
                                                         ))}
                                                     </div>

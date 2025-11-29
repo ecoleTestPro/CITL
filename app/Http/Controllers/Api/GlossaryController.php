@@ -16,41 +16,57 @@ class GlossaryController extends Controller
     }
 
     /**
+     * Get locale from request (default: fr)
+     */
+    private function getLocale(Request $request): string
+    {
+        $locale = $request->get('locale', $request->header('Accept-Language', 'fr'));
+
+        return in_array($locale, ['fr', 'en']) ? $locale : 'fr';
+    }
+
+    /**
      * Get all active glossaries
      */
-    public function index()
+    public function index(Request $request)
     {
-        $glossaries = $this->glossaryRepo->getAllActive();
+        $locale = $this->getLocale($request);
+        $glossaries = $this->glossaryRepo->getAllActive($locale);
 
         return response()->json([
             'message' => 'Glossaries retrieved successfully',
             'data' => $glossaries,
+            'locale' => $locale,
         ]);
     }
 
     /**
      * Get all glossaries grouped by letter
      */
-    public function groupedByLetter()
+    public function groupedByLetter(Request $request)
     {
-        $glossaries = $this->glossaryRepo->getAllGroupedByLetter();
+        $locale = $this->getLocale($request);
+        $glossaries = $this->glossaryRepo->getAllGroupedByLetter($locale);
 
         return response()->json([
             'message' => 'Glossaries grouped by letter retrieved successfully',
             'data' => $glossaries,
+            'locale' => $locale,
         ]);
     }
 
     /**
      * Get glossaries by letter
      */
-    public function byLetter($letter)
+    public function byLetter(Request $request, $letter)
     {
-        $glossaries = $this->glossaryRepo->getByLetter(strtoupper($letter));
+        $locale = $this->getLocale($request);
+        $glossaries = $this->glossaryRepo->getByLetter(strtoupper($letter), $locale);
 
         return response()->json([
             'message' => 'Glossaries for letter ' . strtoupper($letter) . ' retrieved successfully',
             'data' => $glossaries,
+            'locale' => $locale,
         ]);
     }
 
@@ -60,6 +76,7 @@ class GlossaryController extends Controller
     public function search(Request $request)
     {
         $term = $request->get('term', '');
+        $locale = $this->getLocale($request);
 
         if (empty($term)) {
             return response()->json([
@@ -68,11 +85,12 @@ class GlossaryController extends Controller
             ], 400);
         }
 
-        $glossaries = $this->glossaryRepo->search($term);
+        $glossaries = $this->glossaryRepo->search($term, $locale);
 
         return response()->json([
             'message' => 'Search results retrieved successfully',
             'data' => $glossaries,
+            'locale' => $locale,
         ]);
     }
 }

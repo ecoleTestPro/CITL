@@ -15,43 +15,48 @@ class GlossaryRepository extends BaseRepository
     /**
      * Get all active glossaries ordered by letter and order
      */
-    public function getAllActive()
+    public function getAllActive(string $locale = 'fr')
     {
-        return $this->model->active()->ordered()->get();
+        return $this->model->active()->ordered($locale)->get();
     }
 
     /**
      * Get glossaries by letter
      */
-    public function getByLetter($letter)
+    public function getByLetter($letter, string $locale = 'fr')
     {
-        return $this->model->byLetter($letter)->active()->ordered()->get();
+        return $this->model->byLetter($letter)->active()->ordered($locale)->get();
     }
 
     /**
-     * Search glossaries by term
+     * Search glossaries by term (searches in both languages)
      */
-    public function search($term)
+    public function search($term, string $locale = 'fr')
     {
         return $this->model
-            ->where('term', 'like', '%' . $term . '%')
+            ->where(function ($query) use ($term) {
+                $query->where('term_en', 'like', '%' . $term . '%')
+                    ->orWhere('term_fr', 'like', '%' . $term . '%')
+                    ->orWhere('definition_en', 'like', '%' . $term . '%')
+                    ->orWhere('definition_fr', 'like', '%' . $term . '%');
+            })
             ->active()
-            ->ordered()
+            ->ordered($locale)
             ->get();
     }
 
     /**
      * Get all glossaries grouped by letter
      */
-    public function getAllGroupedByLetter()
+    public function getAllGroupedByLetter(string $locale = 'fr')
     {
-        return $this->model->active()->ordered()->get()->groupBy('letter');
+        return $this->model->active()->ordered($locale)->get()->groupBy('letter');
     }
 
     /**
      * Get paginated glossaries with filters
      */
-    public function getPaginated($perPage = 15, $filters = [])
+    public function getPaginated($perPage = 15, $filters = [], string $locale = 'fr')
     {
         $query = $this->model->query();
 
@@ -60,13 +65,16 @@ class GlossaryRepository extends BaseRepository
         }
 
         if (isset($filters['search'])) {
-            $query->where('term', 'like', '%' . $filters['search'] . '%');
+            $query->where(function ($q) use ($filters) {
+                $q->where('term_en', 'like', '%' . $filters['search'] . '%')
+                    ->orWhere('term_fr', 'like', '%' . $filters['search'] . '%');
+            });
         }
 
         if (isset($filters['is_active'])) {
             $query->where('is_active', $filters['is_active']);
         }
 
-        return $query->ordered()->paginate($perPage);
+        return $query->ordered($locale)->paginate($perPage);
     }
 }

@@ -10,8 +10,10 @@ class Glossary extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'term',
-        'definition',
+        'term_en',
+        'term_fr',
+        'definition_en',
+        'definition_fr',
         'category',
         'letter',
         'order',
@@ -42,8 +44,26 @@ class Glossary extends Model
     /**
      * Scope to order by custom order
      */
-    public function scopeOrdered($query)
+    public function scopeOrdered($query, $locale = 'fr')
     {
-        return $query->orderBy('order')->orderBy('term');
+        $termColumn = $locale === 'en' ? 'term_en' : 'term_fr';
+
+        return $query->orderBy('order')->orderBy($termColumn);
+    }
+
+    /**
+     * Get term based on locale
+     */
+    public function getTerm(string $locale = 'fr'): string
+    {
+        return $locale === 'en' ? $this->term_en : $this->term_fr;
+    }
+
+    /**
+     * Get definition based on locale
+     */
+    public function getDefinition(string $locale = 'fr'): string
+    {
+        return $locale === 'en' ? $this->definition_en : $this->definition_fr;
     }
 }

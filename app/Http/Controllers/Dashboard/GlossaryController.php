@@ -49,8 +49,10 @@ class GlossaryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'term' => 'required|string|max:255',
-            'definition' => 'required|string',
+            'term_en' => 'required|string|max:255',
+            'term_fr' => 'required|string|max:255',
+            'definition_en' => 'required|string',
+            'definition_fr' => 'required|string',
             'category' => 'nullable|string|max:255',
             'letter' => 'required|string|size:1',
             'order' => 'nullable|integer',
@@ -86,8 +88,10 @@ class GlossaryController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'term' => 'required|string|max:255',
-            'definition' => 'required|string',
+            'term_en' => 'required|string|max:255',
+            'term_fr' => 'required|string|max:255',
+            'definition_en' => 'required|string',
+            'definition_fr' => 'required|string',
             'category' => 'nullable|string|max:255',
             'letter' => 'required|string|size:1',
             'order' => 'nullable|integer',

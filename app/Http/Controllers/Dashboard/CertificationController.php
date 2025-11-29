@@ -132,6 +132,14 @@ class CertificationController extends Controller
      */
     public function destroy(string $id)
     {
+        $certification = $this->certificationRepository->findById($id);
+
+        // Prevent deletion of protected certifications
+        if ($certification && !$certification->can_delete) {
+            return redirect()->route('dashboard.certifications.index')
+                ->with('error', 'Cette certification ne peut pas être supprimée car elle est protégée par le système.');
+        }
+
         $this->certificationRepository->delete($id);
 
         return redirect()->route('dashboard.certifications.index')

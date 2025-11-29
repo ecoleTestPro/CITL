@@ -1007,5 +1007,32 @@
                 "content_2": "In case of dispute, the parties will endeavor to find an amicable solution before any legal action."
             }
         }
+    },
+    "working_groups": {
+        "hero_title": "Working Groups",
+        "hero_description": "CITL working groups play an essential role in the collaborative design of training and certification programs, drawing on the expertise of qualified testers across the country.",
+        "overview_title": "About Working Groups",
+        "overview_description": "CITL working groups play an essential role in the **collaborative design** of training and certification programs, drawing on the expertise of qualified testers across the country.\n\nBased on voluntary commitment, they bring together passionate professionals contributing to the advancement of **software testing practices** in Côte d'Ivoire, while ensuring alignment with ISTQB international standards.\n\nEach group is structured around a **specific domain**, promoting increased specialization and a targeted approach to current testing challenges.",
+        "learn_title": "What You Will Learn",
+        "overview_item_1": "Participate in the design of certification programs",
+        "overview_item_2": "Contribute to the advancement of software testing practices",
+        "overview_item_3": "Align with ISTQB international standards",
+        "domains_title": "Example **Areas of Action**",
+        "domain_1": "Governance Development",
+        "domain_2": "Standards and Regulations",
+        "domain_3": "Automation and Testing Tools",
+        "domain_4": "Mobile Application Testing",
+        "domain_5": "Web Application Testing",
+        "domain_6": "Desktop Application Testing",
+        "domain_7": "Performance and Load Testing",
+        "domain_8": "Security and Penetration Testing",
+        "domain_9": "Accessibility and UX Compliance",
+        "domain_10": "Artificial Intelligence and AI-Based Testing",
+        "domain_11": "Cloud Environment Testing",
+        "domain_12": "DevOps and Continuous Integration",
+        "domain_13": "Agile Methodologies and Testing",
+        "domain_14": "Training and Mentoring",
+        "conclusion": "CITL working groups are open to all those who wish to actively contribute to the growth of software testing in Côte d'Ivoire. If you are passionate about software quality, join us to share your knowledge, develop new skills and help shape the future of testing in our country.",
+        "cta_text": "Join a Working Group"
     }
 }

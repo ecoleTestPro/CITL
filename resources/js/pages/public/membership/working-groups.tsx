@@ -1,29 +1,73 @@
+import AboutOverview from '@/components/blocks/about/about-overview';
+import DomainsGrid from '@/components/blocks/about/domains-grid';
+import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function WorkingGroups() {
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
+
+    const breadcrumbs = [
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.membership'), href: '#' },
+        { title: t('nav.working_groups'), href: '/working-groups' },
+    ];
+
+    // Fallback values for translations
+    const pageTitle = ready ? t('nav.working_groups') : 'Working Groups';
+    const metaDescription = ready ? t('working_groups.hero_description') : '';
+
+    // Overview items
+    const overviewItems = [
+        { text: t('working_groups.overview_item_1') },
+        { text: t('working_groups.overview_item_2') },
+        { text: t('working_groups.overview_item_3') },
+    ];
+
+    // Domains (14 items)
+    const domains = [
+        { text: t('working_groups.domain_1') },
+        { text: t('working_groups.domain_2') },
+        { text: t('working_groups.domain_3') },
+        { text: t('working_groups.domain_4') },
+        { text: t('working_groups.domain_5') },
+        { text: t('working_groups.domain_6') },
+        { text: t('working_groups.domain_7') },
+        { text: t('working_groups.domain_8') },
+        { text: t('working_groups.domain_9') },
+        { text: t('working_groups.domain_10') },
+        { text: t('working_groups.domain_11') },
+        { text: t('working_groups.domain_12') },
+        { text: t('working_groups.domain_13') },
+        { text: t('working_groups.domain_14') },
+    ];
 
     return (
-        <PublicLayout>
-            {false && (
-                <Head>
-                    <title>{t('nav.working_groups')} | CITL</title>
-                    <meta name="description" content="Découvrez les groupes de travail du CITL dédiés au développement du test logiciel en Côte d'Ivoire." />
-                    <meta name="keywords" content="groupes de travail, CITL, test logiciel, ISTQB" />
-                    <meta property="og:title" content={`${t('nav.working_groups')} | CITL`} />
-                    <meta
-                        property="og:description"
-                        content="Découvrez les groupes de travail du CITL dédiés au développement du test logiciel en Côte d'Ivoire."
-                    />
-                    <meta property="og:type" content="website" />
-                </Head>
-            )}
-            <div className="container mx-auto px-4 py-16">
-                <h1 className="mb-6 text-4xl font-bold">Les groupes de travail</h1>
-                <p className="text-muted-foreground">Contenu de la page Les groupes de travail - À développer prochainement.</p>
-            </div>
+        <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head title={`${pageTitle} | CITL`}>{metaDescription && <meta name="description" content={metaDescription} />}</Head>
+
+            {/* Hero Section */}
+            <HeroCommon badge={t('nav.membership')} title={t('working_groups.hero_title')} description={t('working_groups.hero_description')} />
+
+            {/* About Overview Section */}
+            <AboutOverview
+                title={t('working_groups.overview_title')}
+                description={t('working_groups.overview_description')}
+                learnTitle={t('working_groups.learn_title')}
+                items={overviewItems}
+                imageSrc="/assets/images/about/about-03.jpg"
+                imageAlt={t('working_groups.hero_title')}
+            />
+
+            {/* Domains Grid Section */}
+            <DomainsGrid
+                title={t('working_groups.domains_title')}
+                domains={domains}
+                conclusion={t('working_groups.conclusion')}
+                ctaText={t('working_groups.cta_text')}
+                ctaLink="/contact"
+            />
         </PublicLayout>
     );
 }

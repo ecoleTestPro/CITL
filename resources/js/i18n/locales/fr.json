@@ -1136,5 +1136,32 @@
                 "content_2": "En cas de différend, les parties s'efforceront de trouver une solution amiable avant tout recours juridictionnel."
             }
         }
+    },
+    "working_groups": {
+        "hero_title": "Groupe de travail",
+        "hero_description": "Les groupes de travail du CITL jouent un rôle essentiel dans la conception collaborative des programmes de formation et de certification, en s'appuyant sur l'expertise de testeurs qualifiés à travers le pays.",
+        "overview_title": "À propos des groupes de travail",
+        "overview_description": "Les groupes de travail du CITL jouent un rôle essentiel dans la **conception collaborative** des programmes de formation et de certification, en s'appuyant sur l'expertise de testeurs qualifiés à travers le pays.\n\nFondés sur un engagement volontaire, ils réunissent des professionnels passionnés contribuant à l'avancement des **pratiques de test logiciel** en Côte d'Ivoire, tout en assurant l'alignement avec les standards internationaux de l'ISTQB.\n\nChaque groupe est structuré autour d'un **domaine spécifique**, favorisant une spécialisation accrue et une approche ciblée des défis actuels du testing.",
+        "learn_title": "Ce que vous apprendrez",
+        "overview_item_1": "Participer à la conception des programmes de certification",
+        "overview_item_2": "Contribuer à l'avancement des pratiques de test logiciel",
+        "overview_item_3": "S'aligner avec les standards internationaux de l'ISTQB",
+        "domains_title": "Exemple de **Domaines d'Action**",
+        "domain_1": "Développement de la Gouvernance",
+        "domain_2": "Normes et Réglementations",
+        "domain_3": "Automation et Outils de Testing",
+        "domain_4": "Testing des Applications Mobiles",
+        "domain_5": "Testing des Applications Web",
+        "domain_6": "Testing des Applications Desktop",
+        "domain_7": "Performance et Tests de Charge",
+        "domain_8": "Sécurité et Tests de Pénétration",
+        "domain_9": "Accessibilité et Conformité UX",
+        "domain_10": "Intelligence Artificielle et Test Basé sur l'IA",
+        "domain_11": "Testing en Environnement Cloud",
+        "domain_12": "DevOps et Intégration Continue",
+        "domain_13": "Méthodologies Agiles et Tests",
+        "domain_14": "Formation et Mentorat",
+        "conclusion": "Les groupes de travail du CITL sont ouverts à tous ceux qui souhaitent contribuer activement à l'essor du testing logiciel en Côte d'Ivoire. Si vous êtes passionné par la qualité logicielle, rejoignez-nous pour partager vos connaissances, développer de nouvelles compétences et aider à façonner l'avenir du testing dans notre pays.",
+        "cta_text": "Rejoindre un groupe de travail"
     }
 }

@@ -194,7 +194,7 @@ const COMPANY_INFO: CompanyInfo = {
     location: "Abidjan, Côte d'Ivoire",
     copyrightText: 'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
     email: 'contact@citl.ci',
-    phone: '+225 XX XX XX XX XX',
+    phone: '+225 27 22 39 18 67',
 };
 
 const LEGAL_LINKS: FooterLink[] = [

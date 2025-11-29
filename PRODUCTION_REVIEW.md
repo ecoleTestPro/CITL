@@ -45,7 +45,7 @@ Les pages suivantes n'ont pas de contenu réel et affichent uniquement un messag
 
 | Élément | Valeur actuelle | Action |
 |---------|-----------------|--------|
-| Téléphone | `+225 XX XX XX XX XX` | Remplacer par le vrai numéro |
+| Téléphone | `+225 27 22 39 18 67` | Remplacer par le vrai numéro |
 | Email | `contact@citl.ci` | Vérifier que ce domaine existe et fonctionne |
 | Adresse | `Abidjan, Côte d'Ivoire` | Ajouter l'adresse complète |
 

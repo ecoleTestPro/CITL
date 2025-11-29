@@ -9,7 +9,7 @@ interface LogoProps {
 
 export const Logo = ({
     className,
-    width = 120,
+    width = 180,
     height = 'auto',
     variant = 'full',
 }: LogoProps) => {

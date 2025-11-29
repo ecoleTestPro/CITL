@@ -211,7 +211,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="padding: 5px 0; color: #1a1a1a;">
-                                                                        📞 +225 XX XX XX XX XX
+                                                                        📞 +225 27 22 39 18 67
                                                                     </td>
                                                                 </tr>
                                                             </table>

@@ -29,8 +29,8 @@ const Navbar = () => {
                     <div className="w-full border-b bg-background backdrop-blur-md dark:border-gray-800 dark:bg-gray-900">
                         <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4">
                             {/* Logo */}
-                            <Link href="/" className="shrink-0 p-2">
-                                <Logo width={80} />
+                            <Link href="/" className="shrink-0 px-2 py-5">
+                                <Logo width={110} />
                             </Link>
 
                             {/* Barre de recherche centrée - Version complète */}

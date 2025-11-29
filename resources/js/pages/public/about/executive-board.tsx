@@ -37,7 +37,7 @@ function ExecutiveBoard() {
             name: t('about.executive_board.member_2_name'),
             role: t('about.executive_board.member_2_role'),
             description: t('about.executive_board.member_2_description'),
-            image: '/assets/images/team/sylviane-akpangny.png',
+            image: '/assets/images/team/sylviane-akpangny.jpeg',
         },
         {
             name: t('about.executive_board.member_3_name'),

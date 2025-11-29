@@ -1,19 +1,49 @@
+import { OrganizationsListSection } from '@/components/accredited-organizations/organizations-list-section';
+import AboutOverview from '@/components/blocks/about/about-overview';
+import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AccreditedOrganizations() {
-    const { t } = useTranslation();
+    const { t, ready } = useTranslation();
+
+    const breadcrumbs = [
+        { title: t('nav.home'), href: '/' },
+        { title: t('nav.training'), href: '#' },
+        { title: t('nav.accredited_organizations'), href: '/accredited-organizations' },
+    ];
+
+    // Fallback values for translations
+    const pageTitle = ready ? t('nav.accredited_organizations') : 'Accredited Organizations';
+    const metaDescription = ready ? t('training.accredited_organizations_description') : '';
+
+    // Overview items
+    const overviewItems = [{ text: t('training.overview_item_1') }, { text: t('training.overview_item_2') }, { text: t('training.overview_item_3') }];
 
     return (
-        <PublicLayout>
-            {/* <Head>
-                <title>{t('nav.accredited_organizations')} | CITL</title>
-            </Head> */}
-            <div className="container mx-auto px-4 py-16">
-                <h1 className="mb-6 text-4xl font-bold">Organismes accrédités par le CITL</h1>
-                <p className="text-muted-foreground">Contenu de la page Organismes accrédités par le CITL - À développer prochainement.</p>
-            </div>
+        <PublicLayout breadcrumbs={breadcrumbs}>
+            <Head title={`${pageTitle} | CITL`}>{metaDescription && <meta name="description" content={metaDescription} />}</Head>
+
+            {/* Hero Section */}
+            <HeroCommon
+                badge={t('training.training_providers')}
+                title={t('training.accredited_organizations_title')}
+                description={t('training.accredited_organizations_subtitle')}
+            />
+
+            {/* About Overview Section */}
+            <AboutOverview
+                title={t('training.accreditation_overview_title')}
+                description={t('training.accreditation_overview_description')}
+                learnTitle={t('training.accreditation_learn_title')}
+                items={overviewItems}
+                imageSrc="/assets/images/ads/ads-2.jpg"
+                imageAlt={t('training.accredited_organizations_title')}
+            />
+
+            {/* Organizations List Section */}
+            <OrganizationsListSection />
         </PublicLayout>
     );
 }

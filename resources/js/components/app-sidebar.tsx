@@ -1,7 +1,7 @@
 'use client';
 
 import { Link, usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, BookOpen, Calendar, ClipboardList, Command, FileText, GalleryVerticalEnd, HelpCircle, Newspaper, Settings2, Users } from 'lucide-react';
+import { AudioWaveform, Award, BookOpen, Building2, Calendar, ClipboardList, Command, FileText, GalleryVerticalEnd, HelpCircle, Newspaper, Settings2, Users } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -216,8 +216,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 title: 'Gestion',
                 url: '#',
                 icon: BookOpen,
-                isActive: currentUrl.startsWith('/dashboard/glossary') || currentUrl.startsWith('/dashboard/blog') || currentUrl.startsWith('/dashboard/events') || currentUrl.startsWith('/dashboard/faqs'),
+                isActive:
+                    currentUrl.startsWith('/dashboard/glossary') ||
+                    currentUrl.startsWith('/dashboard/blog') ||
+                    currentUrl.startsWith('/dashboard/events') ||
+                    currentUrl.startsWith('/dashboard/faqs') ||
+                    currentUrl.startsWith('/dashboard/accredited-organizations'),
                 items: [
+                    {
+                        title: 'Organismes accrédités',
+                        url: '/dashboard/accredited-organizations',
+                        isActive: currentUrl.startsWith('/dashboard/accredited-organizations'),
+                    },
                     {
                         title: 'Glossaire',
                         url: '/dashboard/glossary',

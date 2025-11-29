@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CertificationSeeder::class,
+            AccreditedOrganizationSeeder::class,
         ]);
     }
 }

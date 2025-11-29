@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccreditedOrganizationController;
 use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\GlossaryController;
 use App\Http\Controllers\Api\SearchController;
@@ -80,6 +81,12 @@ Route::prefix('api')->group(function () {
     Route::get('/glossary/grouped', [GlossaryController::class, 'groupedByLetter'])->name('api.glossary.grouped');
     Route::get('/glossary/letter/{letter}', [GlossaryController::class, 'byLetter'])->name('api.glossary.by-letter');
     Route::get('/glossary/search', [GlossaryController::class, 'search'])->name('api.glossary.search');
+
+    // Accredited Organizations API Routes
+    Route::get('/accredited-organizations', [AccreditedOrganizationController::class, 'index'])->name('api.accredited-organizations.index');
+    Route::get('/accredited-organizations/grouped', [AccreditedOrganizationController::class, 'groupedByCountry'])->name('api.accredited-organizations.grouped');
+    Route::get('/accredited-organizations/country/{country}', [AccreditedOrganizationController::class, 'byCountry'])->name('api.accredited-organizations.by-country');
+    Route::get('/accredited-organizations/search', [AccreditedOrganizationController::class, 'search'])->name('api.accredited-organizations.search');
 
     // Global Search API Route
     Route::get('/search', [SearchController::class, 'search'])->name('api.search');

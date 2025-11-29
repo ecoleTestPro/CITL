@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Dashboard\AccreditedOrganizationController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CertificationCategoryController;
@@ -82,6 +83,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{id}/edit', [GlossaryController::class, 'edit'])->name('edit');
         Route::put('/{id}', [GlossaryController::class, 'update'])->name('update');
         Route::delete('/{id}', [GlossaryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Accredited Organizations Management Routes
+    Route::prefix('dashboard/accredited-organizations')->name('dashboard.accredited-organizations.')->group(function () {
+        Route::get('/', [AccreditedOrganizationController::class, 'index'])->name('index');
+        Route::post('/', [AccreditedOrganizationController::class, 'store'])->name('store');
+        Route::post('/{id}', [AccreditedOrganizationController::class, 'update'])->name('update');
+        Route::delete('/{id}', [AccreditedOrganizationController::class, 'destroy'])->name('destroy');
     });
 
     // Blog Management Routes

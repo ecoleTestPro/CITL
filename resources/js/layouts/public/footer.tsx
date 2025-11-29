@@ -191,7 +191,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 const COMPANY_INFO: CompanyInfo = {
     description: 'CITL association à but non lucratif',
-    location: "Abidjan, Côte d'Ivoire",
+    location: "5ème étage, Résidence Pacy, En face de l'immeuble CGK, Cocody Angré Djibi - 9ème tranche, Abidjan, Côte d'Ivoire",
     copyrightText: 'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
     email: 'contact@citl.ci',
     phone: '+225 27 22 39 18 67',

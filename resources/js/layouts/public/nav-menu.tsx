@@ -148,7 +148,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
             title: t('nav.training'),
             type: 'dropdown',
             items: [
-                // { label: t('nav.accredited_organizations'), href: '/accredited-organizations' }, // Temporarily disabled
+                { label: t('nav.accredited_organizations'), href: '/accredited-organizations' },
                 { label: t('nav.accreditation_request'), href: '/accreditation-request' },
             ],
         },

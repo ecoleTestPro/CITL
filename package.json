@@ -9,7 +9,10 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
-        "types": "tsc --noEmit"
+        "types": "tsc --noEmit",
+        "deploy": "bash scripts/deploy.sh",
+        "deploy:build": "bash scripts/deploy.sh --build",
+        "deploy:all": "bash scripts/deploy.sh --build --all"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",

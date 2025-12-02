@@ -17,7 +17,11 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CertificationSeeder::class,
             AccreditedOrganizationSeeder::class,
+            CertificationDocumentTagSeeder::class,
             GlossarySeeder::class,
+            EventSeeder::class,
+            FaqSeeder::class,
+            BlogSeeder::class,
         ]);
     }
 }

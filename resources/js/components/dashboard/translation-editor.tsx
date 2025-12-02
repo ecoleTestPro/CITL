@@ -1,6 +1,8 @@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@headlessui/react';
+import { MiniRichTextEditor } from '@/components/ui/mini-rich-text-editor';
+import { Textarea } from '@/components/ui/textarea';
+import { Badge } from '@/components/ui/badge';
 import { Loader2 } from 'lucide-react';
 
 interface TranslationEditorProps {
@@ -20,23 +22,60 @@ export function TranslationEditor({ translations, selectedLocale, loading, onTra
     }
 
     if (!translations || Object.keys(translations).length === 0) {
-        return <div className="flex items-center justify-center py-8 text-muted-foreground">No translations available for this page.</div>;
+        return <div className="flex items-center justify-center py-8 text-muted-foreground">Aucune traduction disponible pour cette page.</div>;
     }
+
+    // Déterminer le type de champ automatiquement basé sur le contenu
+    const getFieldType = (value: string): 'text' | 'textarea' | 'richtext' => {
+        // Si contient du HTML, c'est du richtext
+        if (value.includes('<') && value.includes('>')) return 'richtext';
+        // Si le texte est long, utiliser textarea
+        if (value.length > 150) return 'textarea';
+        return 'text';
+    };
 
     return (
         <div className="space-y-4">
-            {Object.entries(translations).map(([key, value]) => (
-                <div key={key} className="space-y-2 rounded-lg border p-4">
-                    <Label htmlFor={key} className="text-sm font-medium text-muted-foreground">
-                        {key}
-                    </Label>
-                    {value.length > 100 ? (
-                        <Textarea id={key} value={value} onChange={(e) => onTranslationChange(key, e.target.value)} rows={4} className="resize-none" />
-                    ) : (
-                        <Input id={key} value={value} onChange={(e) => onTranslationChange(key, e.target.value)} />
-                    )}
-                </div>
-            ))}
+            {Object.entries(translations).map(([key, value]) => {
+                const fieldType = getFieldType(value);
+
+                return (
+                    <div key={key} className="space-y-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary/50">
+                        <div className="flex items-center gap-2">
+                            <Label htmlFor={key} className="text-sm font-medium text-muted-foreground">
+                                {key}
+                            </Label>
+                            {fieldType === 'richtext' && (
+                                <Badge variant="secondary" className="text-xs bg-orange-100 text-orange-700 dark:bg-orange-900/50 dark:text-orange-300">
+                                    Texte riche
+                                </Badge>
+                            )}
+                        </div>
+
+                        {fieldType === 'richtext' ? (
+                            <MiniRichTextEditor
+                                content={value}
+                                onChange={(content) => onTranslationChange(key, content)}
+                                minHeight="100px"
+                            />
+                        ) : fieldType === 'textarea' ? (
+                            <Textarea
+                                id={key}
+                                value={value}
+                                onChange={(e) => onTranslationChange(key, e.target.value)}
+                                rows={4}
+                                className="resize-y"
+                            />
+                        ) : (
+                            <Input
+                                id={key}
+                                value={value}
+                                onChange={(e) => onTranslationChange(key, e.target.value)}
+                            />
+                        )}
+                    </div>
+                );
+            })}
         </div>
     );
 }

@@ -1,25 +1,16 @@
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from '@/components/ui/accordion';
-import { Badge } from '@/components/ui/badge';
-import { Loader2, Info } from 'lucide-react';
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from '@/components/ui/tooltip';
-import { Textarea } from '@headlessui/react';
+import { MiniRichTextEditor } from '@/components/ui/mini-rich-text-editor';
+import { Textarea } from '@/components/ui/textarea';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Info, Loader2 } from 'lucide-react';
 
 interface FieldMetadata {
     label: string;
     description: string;
-    type: string;
+    type: 'text' | 'textarea' | 'richtext';
     maxLength?: number;
     placeholder?: string;
     section: string;
@@ -56,11 +47,7 @@ export function EnhancedTranslationEditor({
     }
 
     if (!translations || Object.keys(translations).length === 0) {
-        return (
-            <div className="flex items-center justify-center py-8 text-muted-foreground">
-                No translations available for this page.
-            </div>
-        );
+        return <div className="flex items-center justify-center py-8 text-muted-foreground">Aucune traduction disponible pour cette page.</div>;
     }
 
     const renderField = (key: string, value: string, fieldMeta?: FieldMetadata) => {
@@ -70,12 +57,24 @@ export function EnhancedTranslationEditor({
         const maxLength = fieldMeta?.maxLength;
         const type = fieldMeta?.type || 'text';
 
-        const charCount = value.length;
+        // Déterminer le type de champ automatiquement si non spécifié
+        const autoDetectType = (): 'text' | 'textarea' | 'richtext' => {
+            return 'richtext';
+            if (type === 'richtext') return 'richtext';
+            if (type === 'textarea') return 'textarea';
+            // Auto-detect basé sur le contenu
+            if (value.includes('<') && value.includes('>')) return 'richtext';
+            if (value.length > 150) return 'textarea';
+            return 'text';
+        };
+
+        const fieldType = autoDetectType();
+        const charCount = value.replace(/<[^>]*>/g, '').length; // Strip HTML for char count
         const isNearLimit = maxLength && charCount > maxLength * 0.8;
         const isOverLimit = maxLength && charCount > maxLength;
 
         return (
-            <div key={key} className="space-y-2 rounded-lg border p-4 bg-card hover:border-primary/50 transition-colors">
+            <div key={key} className="space-y-2 rounded-lg border bg-card p-4 transition-colors hover:border-primary/50">
                 <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 space-y-1">
                         <div className="flex items-center gap-2">
@@ -94,25 +93,19 @@ export function EnhancedTranslationEditor({
                                     </Tooltip>
                                 </TooltipProvider>
                             )}
-                            {type === 'richtext' && (
-                                <Badge variant="secondary" className="text-xs">
+                            {fieldType === 'richtext' && (
+                                <Badge variant="secondary" className="bg-orange-100 text-xs text-orange-700 dark:bg-orange-900/50 dark:text-orange-300">
                                     Texte riche
                                 </Badge>
                             )}
                         </div>
-                        {description && (
-                            <p className="text-xs text-muted-foreground">{description}</p>
-                        )}
+                        {description && <p className="text-xs text-muted-foreground">{description}</p>}
                     </div>
                     {maxLength && (
                         <div className="flex items-center gap-1">
                             <span
                                 className={`text-xs ${
-                                    isOverLimit
-                                        ? 'text-destructive font-semibold'
-                                        : isNearLimit
-                                        ? 'text-orange-500'
-                                        : 'text-muted-foreground'
+                                    isOverLimit ? 'font-semibold text-destructive' : isNearLimit ? 'text-orange-500' : 'text-muted-foreground'
                                 }`}
                             >
                                 {charCount}/{maxLength}
@@ -121,14 +114,16 @@ export function EnhancedTranslationEditor({
                     )}
                 </div>
 
-                {type === 'richtext' || value.length > 100 ? (
+                {fieldType === 'richtext' ? (
+                    <MiniRichTextEditor content={value} onChange={(content) => onTranslationChange(key, content)} placeholder={placeholder} minHeight="120px" />
+                ) : fieldType === 'textarea' ? (
                     <Textarea
                         id={key}
                         value={value}
                         onChange={(e) => onTranslationChange(key, e.target.value)}
                         placeholder={placeholder}
                         rows={4}
-                        className="resize-none font-sans"
+                        className="resize-y font-sans"
                         maxLength={maxLength}
                     />
                 ) : (
@@ -150,11 +145,7 @@ export function EnhancedTranslationEditor({
         return (
             <Accordion type="multiple" defaultValue={Object.keys(sections)} className="space-y-2">
                 {Object.entries(sections).map(([sectionName, fields]) => (
-                    <AccordionItem
-                        key={sectionName}
-                        value={sectionName}
-                        className="border rounded-lg px-4"
-                    >
+                    <AccordionItem key={sectionName} value={sectionName} className="rounded-lg border px-4">
                         <AccordionTrigger className="hover:no-underline">
                             <div className="flex items-center gap-2">
                                 <span className="font-semibold">{sectionName}</span>
@@ -164,9 +155,7 @@ export function EnhancedTranslationEditor({
                             </div>
                         </AccordionTrigger>
                         <AccordionContent className="space-y-3 pt-4">
-                            {fields.map(({ key }) =>
-                                renderField(key, translations[key] || '', metadata[key])
-                            )}
+                            {fields.map(({ key }) => renderField(key, translations[key] || '', metadata[key]))}
                         </AccordionContent>
                     </AccordionItem>
                 ))}
@@ -175,11 +164,5 @@ export function EnhancedTranslationEditor({
     }
 
     // Fallback to simple list if no sections
-    return (
-        <div className="space-y-4">
-            {Object.entries(translations).map(([key, value]) =>
-                renderField(key, value, metadata[key])
-            )}
-        </div>
-    );
+    return <div className="space-y-4">{Object.entries(translations).map(([key, value]) => renderField(key, value, metadata[key]))}</div>;
 }

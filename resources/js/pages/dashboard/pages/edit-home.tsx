@@ -1,9 +1,9 @@
+import { EnhancedTranslationEditor } from '@/components/dashboard/enhanced-translation-editor';
 import { PageEditorActions } from '@/components/dashboard/page-editor-actions';
 import { PageEditorLayout } from '@/components/dashboard/page-editor-layout';
 import { PagePreview } from '@/components/dashboard/page-preview';
-import { EnhancedTranslationEditor } from '@/components/dashboard/enhanced-translation-editor';
-import { useTranslations } from '@/hooks/use-translations';
 import { Badge } from '@/components/ui/badge';
+import { useTranslations } from '@/hooks/use-translations';
 
 interface EditHomeProps {
     pageUrl: string;
@@ -11,11 +11,7 @@ interface EditHomeProps {
     pageName: string;
 }
 
-export default function EditHome({
-    pageUrl,
-    pageTitle,
-    pageName,
-}: EditHomeProps) {
+export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps) {
     const {
         translations,
         selectedLocale,
@@ -53,11 +49,9 @@ export default function EditHome({
         >
             <div className="flex max-h-[calc(100vh-200px)] w-1/3 flex-col gap-4 overflow-auto">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">
-                        Edit Translations ({selectedLocale.toUpperCase()})
-                    </h3>
+                    <h3 className="text-lg font-semibold">Edit Translations ({selectedLocale.toUpperCase()})</h3>
                     {hasUnsavedChanges && (
-                        <Badge variant="outline" className="text-orange-600 border-orange-600">
+                        <Badge variant="outline" className="border-orange-600 text-orange-600">
                             Unsaved changes
                         </Badge>
                     )}

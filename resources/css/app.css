@@ -188,6 +188,15 @@
 
     /* Styles pour l'éditeur TipTap */
     .tiptap {
+        /* Placeholder */
+        & p.is-editor-empty:first-child::before {
+            content: attr(data-placeholder);
+            float: left;
+            color: var(--muted-foreground);
+            pointer-events: none;
+            height: 0;
+            opacity: 0.5;
+        }
 
         & ul,
         & ol {
@@ -213,6 +222,43 @@
 
         & ol ol {
             list-style-type: lower-alpha;
+        }
+
+        & h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0.75rem 0 0.5rem 0;
+        }
+
+        & h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0.5rem 0 0.25rem 0;
+        }
+
+        & p {
+            margin: 0.25rem 0;
+        }
+
+        & a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        & strong {
+            font-weight: 600;
+        }
+
+        & em {
+            font-style: italic;
+        }
+
+        & s {
+            text-decoration: line-through;
+        }
+
+        & u {
+            text-decoration: underline;
         }
     }
 

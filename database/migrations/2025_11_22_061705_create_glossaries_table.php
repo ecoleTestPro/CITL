@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('glossaries', function (Blueprint $table) {
             $table->id();
-            $table->string('term');
-            $table->text('definition');
+            $table->string('term_en');
+            $table->string('term_fr')->default('');
+            $table->text('definition_en');
+            $table->text('definition_fr')->default('');
             $table->string('category')->nullable();
             $table->char('letter', 1)->index();
             $table->integer('order')->default(0);

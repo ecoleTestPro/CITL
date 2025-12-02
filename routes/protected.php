@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\GlossaryController;
 use App\Http\Controllers\Dashboard\MembershipApplicationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
+use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -129,6 +130,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{id}', [FaqController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/toggle-active', [FaqController::class, 'toggleActive'])->name('toggle-active');
         Route::post('/{id}/update-order', [FaqController::class, 'updateOrder'])->name('update-order');
+    });
+
+    // User Management Routes - Admin only
+    Route::prefix('dashboard/users')->name('dashboard.users.')->middleware('role:admin')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::put('/{id}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
     });
 });
 

@@ -1,0 +1,3010 @@
+Standard Glossary of Terms 
+used in Software Testing
+Version 4.6.2
+Nov 21, 2025
+Search results
+Exact matches first 
+Except where otherwise noted, content on this site is licensed under 
+a Creative Commons Attribution 4.0 International license.
+All terms
+A/B testing
+Version 2
+A test approach in which two variants of a test object are statistically evaluated to determine which performs better for specified characteristics.
+Reference: 
+After ISO 29119-11
+abnormal end
+Version 1
+The unintended termination of the execution of a component or system prior to completion.
+Reference: 
+After ISO 24765
+Synonyms: 
+abnormal termination
+abuse case
+Version 1
+A use case in which some actors with malicious intent are causing harm to the system or to other actors.
+acceptance criteria
+Version 3
+The criteria that a work product must satisfy to be accepted by the stakeholders.
+Reference: 
+After IREB Glossary
+acceptance test-driven development
+Version 1
+A collaboration-based test-first approach that defines acceptance tests in the stakeholders' domain language.
+Abbreviation: 
+ATDD
+See also: 
+specification by example
+acceptance testing
+Version 2
+A test level that focuses on determining whether to accept the system.
+See also: 
+user acceptance testing
+accessibility
+Version 2
+The degree to which a component or system can be used by people with the widest range of characteristics and capabilities to achieve a
+specified goal in a specified context of use.
+Synonyms: 
+user assistance
+account harvesting
+Version 1
+The process of obtaining user account information based on trial and error with the intention of using that information in a security attack.
+accountability
+Version 1
+The degree to which the actions of an entity can be traced uniquely to that entity.
+Reference: 
+After ISO 25010
+actual result
+Version 1
+The behavior produced/observed when a component or system is tested.
+Synonyms: 
+actual outcome
+ad hoc reviewing
+Version 2
+A review technique performed informally without a structured process.
+Reference: 
+ISO 20246
+Synonyms: 
+ad hoc review
+See also: 
+review technique
+ad hoc testing
+Version 2
+Informal testing performed without test analysis and test design.
+adaptability
+Version 3
+The degree to which a component or system can be adapted to various or evolving hardware, software, or other operational or usage
+environments.
+Reference: 
+After ISO 25010
+See also: 
+portability
+Search resultsPage: 2 of 43
+adversarial example
+Version 1
+An input to an ML model created by applying small perturbations to a working example that results in the model outputting an incorrect result with
+high confidence.
+Reference: 
+ISO 29119-11
+adversarial testing
+Version 1
+A test technique based on the attempted creation and execution of adversarial examples to identify defects in an ML model.
+Reference: 
+After ISO 29119-11
+Agile Manifesto
+Version 1
+A statement on the values that underpin Agile software development. The values are: 
+individuals and interactions over processes and tools,
+working software over comprehensive documentation, customer collaboration over contract negotiation, responding to change over following a
+plan.
+Agile software development
+Version 1
+A group of software development methodologies based on iterative incremental development, where requirements and solutions evolve through
+collaboration between self-organizing cross-functional teams.
+See also: 
+feature-driven development
+Agile test leader
+Version 1
+A leadership role that serves agile teams, championing testing and quality at the organizational level.
+Synonyms: 
+quality coach, agile test manager, quality leader
+See also: 
+test manager, Agile test team leader
+Agile test team leader
+Version 1
+A role that is responsible for maintaining solution quality within an agile delivery team.
+See also: 
+Agile test leader
+alpha testing
+Version 3
+A type of acceptance testing performed in the developer's test environment by roles outside the development organization.
+analytical test strategy
+Version 1
+A test strategy whereby the test team analyzes the test basis to identify the test conditions to cover.
+analyzability
+Version 2
+The degree to which an assessment can be made for a component or system of either the impact of one or more intended changes, the
+diagnosis of deficiencies or causes of failures, or the identification of parts to be modified.
+Reference: 
+After ISO 25010
+See also: 
+maintainability
+anomaly
+Version 1
+A condition that deviates from expectation.
+Reference: 
+After ISO 24765
+anti-malware
+Version 1
+Software that is used to detect and inhibit malware.
+See also: 
+malware
+API testing
+Version 2
+A test approach performed by submitting requests to a test object using its application programming interface.
+application programming interface
+Version 1
+A type of interface in which the components or systems involved exchange information in a defined formal structure.
+Abbreviation: 
+API
+appraisal
+Version 1
+The activities of measuring and monitoring the quality of a system.
+Reference: 
+After ASQ
+Search resultsPage: 3 of 43
+appropriateness recognizability
+Version 2
+The degree to which users can recognize whether a component or system is appropriate for their needs.
+Reference: 
+After ISO 25010
+Synonyms: 
+understandability
+See also: 
+usability
+assertion
+Version 1
+A Boolean expression that is expected to evaluate to true if and only if the software executes correctly.
+atomic condition
+Version 2
+A condition that does not contain logical operators.
+attack vector
+Version 1
+A path or means by which an attacker can gain access to a system for malicious purposes.
+attacker
+Version 1
+A person or process that attempts to access data, functions or other restricted areas of the system without authorization, potentially with
+malicious intent.
+See also: 
+hacker
+audio testing
+Version 1
+Testing to determine if the game music and sound effects will engage the user in the game and enhance the game play.
+audit
+Version 2
+An independent examination performed by a third party on a work product or process to assess whether it complies with specified criteria.
+Reference: 
+After ISO 24765
+authentication
+Version 1
+A procedure determining whether a person or a process is, in fact, who or what it is declared to be.
+See also: 
+authorization
+authenticity
+Version 1
+The degree to which the identity of a subject or resource can be proved to be the one claimed.
+Reference: 
+ISO 25010
+authorization
+Version 1
+Permission given to a user or process to access resources.
+See also: 
+authentication
+automation code defect density
+Version 1
+Defect density of a component of the test automation code.
+See also: 
+defect density
+automotive safety integrity level
+Version 1
+One of four levels that specify the item's or element's necessary requirements of ISO 26262 and safety measures to avoid an unreasonable
+residual risk.
+Abbreviation: 
+ASIL
+Reference: 
+ISO 26262
+See also: 
+safety integrity level
+automotive SPICE
+Version 1
+A process reference model and an associated process assessment model in the automotive industry.
+Abbreviation: 
+ASPICE
+Reference: 
+ISO 33002
+availability
+Version 2
+The degree to which a component or system is operational and accessible when required for use.
+Reference: 
+After ISO 25010
+Search resultsPage: 4 of 43
+back-to-back testing
+Version 2
+A test approach in which a pseudo-oracle is used.
+Reference: 
+After ISO 29119-1
+See also: 
+pseudo-oracle
+base choice coverage
+Version 1
+The coverage of parameter-value combinations in which each value of a parameter is combined with the base values of all other parameters, for
+a chosen base value per parameter.
+Reference: 
+After Ammann and Offutt
+See also: 
+combinatorial testing, pairwise coverage, each choice coverage
+behavior-based test technique
+Version 1
+A black-box test technique in which test conditions are model elements of the state-dependent behavior of a test object.
+behavior-driven development
+Version 1
+A collaborative approach to development in which the team is focusing on delivering expected behavior of a component or system for the
+customer, which forms the basis for testing.
+Abbreviation: 
+BDD
+beta testing
+Version 3
+A type of acceptance testing performed at an external site to the developer's test environment by roles outside the development organization.
+black-box test technique
+Version 3
+A test technique based on the specification of a component or system.
+Synonyms: 
+black-box test design technique, specification-based test technique
+black-box testing
+Version 2
+Testing based on an analysis of the specification of the component or system.
+Synonyms: 
+specification-based testing
+botnet
+Version 1
+A network of compromised computers, called bots or robots, which is controlled by a third party and used to transmit malware or spam, or to
+launch attacks.
+boundary value
+Version 2
+A minimum or maximum value of an ordered equivalence partition.
+See also: 
+boundary value analysis
+boundary value analysis
+Version 2
+A black-box test technique in which test cases are designed based on boundary values.
+Abbreviation: 
+BVA
+See also: 
+boundary value, domain testing
+branch
+Version 2
+A transfer of control between two consecutive nodes in the control flow graph of a test item.
+branch coverage
+Version 2
+The coverage of branches in a control flow graph.
+branch testing
+Version 1
+A white-box test technique in which the test conditions are branches.
+bug hunting
+Version 1
+A test approach in which gamification and awards for defects found are used as a motivator.
+build verification test
+Version 1
+An automated test that validates the integrity of each new build and verifies its key/core functionality, stability, and testability.
+Abbreviation: 
+BVT
+Search resultsPage: 5 of 43
+built-in quality
+Version 1
+A set of practices to ensure that each solution meets quality standards throughout each increment of development, focusing on constructive
+quality assurance as a shared responsibility.
+Reference: 
+After SAFe
+Capability Maturity Model Integration
+Version 1
+A framework that describes the key elements of an effective product development and maintenance process. The Capability Maturity Model
+Integration covers best-practices for planning, engineering and managing product development and maintenance.
+Abbreviation: 
+CMMI
+Reference: 
+CMMI
+capacity
+Version 1
+The degree to which the maximum limits of a component or system parameter meet requirements.
+Reference: 
+After ISO 25010
+capacity testing
+Version 1
+Testing to evaluate the capacity of a system.
+capture/playback
+Version 2
+A test automation approach in which inputs to a test object are recorded during manual testing to generate automated test scripts that can be
+executed later.
+Synonyms: 
+capture/replay, record/playback
+causal loop diagram
+Version 1
+A graphical representation used to visualize cause-effect relationships and feedback loops in a system.
+Reference: 
+After Sterman
+cause-effect diagram
+Version 1
+A graphical representation used to organize and display the interrelationships of various possible root causes of a problem. Possible causes of a
+real or potential defect or failure are organized in categories and subcategories in a horizontal tree-structure, with the (potential) defect or failure
+as the root node.
+Reference: 
+After Juran
+Synonyms: 
+fishbone diagram, Ishikawa diagram
+cause-effect graph
+Version 1
+A graphical representation of logical relationships between inputs (causes) and their associated outputs (effects) of a test object.
+certification
+Version 1
+The process of confirming that a component, system or person complies with specified requirements.
+checklist-based reviewing
+Version 1
+A review technique guided by a list of questions or required attributes.
+Synonyms: 
+checklist-based review
+See also: 
+review technique
+checklist-based testing
+Version 3
+An experience-based test technique in which test cases are designed to exercise the items of a checklist.
+classification tree
+Version 2
+A tree diagram representing test data domains of a test object.
+classification tree technique
+Version 2
+A black-box test technique in which test cases are designed using a classification tree.
+Reference: 
+Grochtmann
+Synonyms: 
+classification tree method
+See also: 
+combinatorial testing
+CLI testing
+Version 1
+Testing performed by submitting commands to the software under test using a dedicated command-line interface.
+Search resultsPage: 6 of 43
+closed-loop-system
+Version 1
+A system in which the controlling action or input is dependent on the output or changes in output.
+Reference: 
+Bakshi
+code injection
+Version 1
+A type of security attack performed by inserting malicious code at an interface into an application to exploit poor handling of untrusted data.
+coding standard
+Version 2
+A quality standard that defines required characteristics of code.
+coexistence
+Version 2
+The degree to which a component or system can perform its required functions while sharing an environment and resources with other
+components or systems without a negative impact on any of them.
+Reference: 
+After ISO 25010
+Synonyms: 
+co-existence
+See also: 
+portability
+collaboration-based test approach
+Version 1
+An approach to testing that focuses on defect avoidance by collaborating among stakeholders.
+combinatorial testing
+Version 3
+A black-box test technique in which test conditions are specific combinations of values of several parameters.
+See also: 
+classification tree technique, pairwise coverage, base choice coverage
+command-line interface
+Version 2
+A type of interface in which the information is passed in form of command lines.
+Abbreviation: 
+CLI
+Common Attack Pattern Enumeration and Classification
+Version 1
+A catalog of known cyber security attack patterns used to prevent attacks.
+Abbreviation: 
+CAPEC
+Reference: 
+MITRE-CAPEC
+Common Vulnerabilities and Exposures
+Version 1
+A catalog of publicly disclosed vulnerabilities in released software packages.
+Abbreviation: 
+CVE
+Reference: 
+MITRE-CVE
+Common Vulnerability Scoring System
+Version 1
+A free and open industry standard for assessing the severity of system security vulnerabilities based on the ease and impact of an attack.
+Abbreviation: 
+CVSS
+Reference: 
+After FIRST-CVSS
+Common Weakness Enumeration
+Version 1
+A community-developed list of common software and hardware weaknesses.
+Abbreviation: 
+CWE
+Reference: 
+MITRE-CWE
+Common Weakness Scoring System
+Version 1
+A standard for assessing software weaknesses and vulnerabilities in a consistent, flexible, and open manner.
+Abbreviation: 
+CWSS
+Reference: 
+MITRE-CWE
+compatibility
+Version 1
+The degree to which a component or system can exchange information with other components or systems, and/or perform its required functions
+while sharing the same hardware or software environment.
+Reference: 
+After ISO 25010
+Search resultsPage: 7 of 43
+compliance
+Version 2
+Adherence of a work product to standards, conventions or regulations in laws and similar prescriptions.
+Reference: 
+IREB Glossary
+compliance testing
+Version 1
+Testing to determine the compliance of the component or system.
+Synonyms: 
+conformance testing, regulation testing, standards testing
+component
+Version 2
+A part of a system that can be tested in isolation.
+Synonyms: 
+module
+component integration testing
+Version 3
+The integration testing of components.
+Synonyms: 
+module integration testing, unit integration testing
+component testing
+Version 3
+A test level that focuses on individual hardware or software components.
+Synonyms: 
+module testing
+computer forensics
+Version 1
+The practice of determining how a security attack has succeeded and assessing the damage caused.
+concurrency
+Version 1
+The simultaneous execution of multiple independent threads by a component or system.
+concurrency testing
+Version 1
+Testing to evaluate if a component or system involving concurrency behaves as specified.
+condition coverage
+Version 1
+The coverage of condition outcomes.
+Synonyms: 
+branch condition coverage
+condition testing
+Version 2
+A white-box test technique in which test conditions are outcomes of atomic conditions.
+confidence interval
+Version 1
+In managing project risks, the period of time within which a contingency action must be implemented in order to be effective in reducing the
+impact of the risk.
+confidentiality
+Version 1
+The degree to which a component or system ensures that data are accessible only to those authorized to have access.
+Reference: 
+After ISO 25010
+confirmation testing
+Version 3
+A type of change-related testing performed after fixing a defect to confirm that a failure caused by that defect does not reoccur.
+Synonyms: 
+retesting
+connectivity
+Version 1
+The degree to which a component or system can connect to other components or systems.
+Reference: 
+After ISO 2382
+consultative test strategy
+Version 1
+A test strategy whereby the test team relies on the input of one or more key stakeholders to determine the details of the strategy.
+Synonyms: 
+directed test strategy
+context of use
+Version 1
+Users, tasks, equipment (hardware, software and materials), and the physical and social environments in which a software product is used.
+Reference: 
+ISO 9241-11
+Search resultsPage: 8 of 43
+continuous delivery
+Version 1
+An automated software development procedure in which code changes are automatically built, tested, and prepared for a release to production.
+Abbreviation: 
+CD
+continuous deployment
+Version 1
+An automated software release procedure in which all code changes are deployed to production after all specified tests have passed.
+​​​​​​​​​​​​​​​​
+Abbreviation: 
+CD
+continuous integration
+Version 1
+An automated software development procedure that merges, integrates and tests all changes as soon as they are committed.
+continuous testing
+Version 1
+A test approach that involves testing early, testing often, testing throughout the software development lifecycle, and automating to obtain
+feedback on the business risks associated with a software release candidate as soon as possible.
+contract testing
+Version 1
+A type of integration testing that verifies that the interfaces are used as specified in their contracts.
+control chart
+Version 1
+A statistical process control tool used to monitor a process and determine whether it is statistically controlled. It graphically depicts the average
+value and the upper and lower control limits (the highest and lowest values) of a process.
+Synonyms: 
+Shewhart chart
+control flow
+Version 3
+The sequence in which operations are performed by a business process, component or system.
+Reference: 
+After ISO 29119-4
+control flow analysis
+Version 3
+A type of static analysis based on a representation of unique paths for executing a component or system.
+convergence metric
+Version 1
+A metric that shows progress toward a defined criterion, e.g., convergence of the total number of tests executed to the total number of tests
+planned for execution.
+cost of quality
+Version 1
+The total costs incurred on quality activities and issues and often split into prevention costs, appraisal costs, internal failure costs and external
+failure costs.
+coverage
+Version 3
+The degree to which specified coverage items are exercised by a test suite, expressed as a percentage.
+Synonyms: 
+test coverage
+coverage criteria
+Version 1
+The criteria to define the coverage items required to reach a test objective.
+See also: 
+coverage item
+coverage item
+Version 2
+An attribute or combination of attributes derived from one or more test conditions by using a test technique.
+See also: 
+coverage criteria
+Critical Testing Processes
+Version 1
+A content-based model for test process improvement built around twelve critical processes. These include highly visible processes, by which
+peers and management judge competence and mission-critical processes in which performance affects the company's profits and reputation.
+Abbreviation: 
+CTP
+cross-browser compatibility
+Version 1
+The degree to which a website or web application can function across different browsers and degrade gracefully when browser features are
+absent or lacking.
+Search resultsPage: 9 of 43
+cross-site scripting
+Version 1
+A vulnerability that allows attackers to inject malicious code into an otherwise benign website.
+Abbreviation: 
+XSS
+Reference: 
+NIST.IR.7298
+See also: 
+vulnerability
+crowd testing
+Version 1
+A test approach in which testing is distributed to a large group of testers.
+CRUD testing
+Version 1
+A black-box test technique in which test conditions are operations of the types create, read, update, and delete for an entity.
+custom tool
+Version 1
+A software tool developed specifically for a set of users or customers.
+cyclomatic complexity
+Version 3
+The maximum number of linear, independent paths through a program.
+Reference: 
+After McCabe
+Synonyms: 
+cyclomatic number
+dashboard
+Version 1
+A representation of dynamic measurements of operational performance for some organization or activity, using metrics represented via
+metaphors such as 
+visual dials, counters, and other devices resembling those on the dashboard of an automobile, so that the effects of events or
+activities can be easily understood and related to operational goals.
+data flow analysis
+Version 2
+A type of static analysis based on the lifecycle of variables.
+data obfuscation
+Version 1
+Data transformation that makes it difficult for a human to recognize the original data.
+data privacy
+Version 1
+The protection of personally identifiable information or otherwise sensitive information from undesired disclosure.
+data-based test technique
+Version 1
+A test technique in which test conditions are model elements of the test object data.
+data-driven testing
+Version 2
+A scripting technique that uses data files to contain the test data and expected results needed to execute the test scripts.
+Abbreviation: 
+DDT
+See also: 
+keyword-driven testing
+debugging
+Version 2
+The process of finding, analyzing and removing the causes of failures in a component or system.
+decision coverage
+Version 2
+The coverage of decision outcomes.
+decision table testing
+Version 4
+A black-box test technique in which the test conditions are the combinations of conditions and the resulting actions shown in a decision table.
+Abbreviation: 
+DTT
+Reference: 
+After ISO 29119-4
+decision testing
+Version 2
+A white-box test technique in which test cases are designed to execute decision outcomes.
+Search resultsPage: 10 of 43
+defect
+Version 3
+An imperfection or deficiency in a work product where it does not meet its requirements or specifications or impairs its intended use.
+Reference: 
+After ISO 24765
+Synonyms: 
+bug, fault, flaw
+See also: 
+error, failure
+defect density
+Version 2
+The number of defects per unit size of a work product.
+Reference: 
+After ISO 24765
+Synonyms: 
+fault density
+See also: 
+automation code defect density
+defect detection percentage
+Version 1
+The number of defects found by a test level, divided by the number found by that test level and any other means afterwards.
+Abbreviation: 
+DDP
+Synonyms: 
+Fault Detection Percentage (FDP)
+See also: 
+escaped defect
+defect management
+Version 4
+The process of recognizing, recording, classifying, investigating, fixing and disposing of defects.
+defect management committee
+Version 2
+A cross-functional team of stakeholders who perform defect management.
+defect prevention
+Version 1
+The measures that reduce the likelihood of recurrence of defects in work products and limit the propagation of defects in subsequent work
+products.
+defect report
+Version 2
+Documentation of the occurrence, nature, and status of a defect.
+Synonyms: 
+bug report
+defect taxonomy
+Version 2
+A list of categories designed to identify and classify defects.
+Synonyms: 
+bug taxonomy
+See also: 
+defect-based test technique
+defect workflow
+Version 1
+The state transition model of a defect lifecycle, including responsibilities.
+defect-based test technique
+Version 2
+A test technique in which test cases are developed from what is known about a specific defect type.
+Synonyms: 
+defect-based test design technique, defect-based technique
+See also: 
+defect taxonomy
+definition-use pair
+Version 2
+The association of a definition of a variable with the subsequent use of that variable.
+demilitarized zone
+Version 1
+A physical or logical subnetwork that contains and exposes an organization's external-facing services to an untrusted network, commonly the
+Internet.
+Abbreviation: 
+DMZ
+See also: 
+network zone
+denial of service
+Version 1
+A security attack that is intended to overload the system with requests such that legitimate requests cannot be serviced.
+Abbreviation: 
+DoS
+Search resultsPage: 11 of 43
+destructive testing
+Version 1
+A test type that subjects a component or system to malicious inputs, abnormal conditions, or security exploits to induce persistent anomalous
+behavior.
+device-based testing
+Version 1
+A test type in which test suites are executed on physical or virtual devices.
+domain testing
+Version 1
+A black-box test technique in which test conditions are points on, near to, inside or outside the boundaries of different equivalence partitions of
+the input value domain.
+See also: 
+boundary value analysis, equivalence partitioning
+driver
+Version 2
+A component or tool that temporarily replaces another component and controls or calls a test item in isolation.
+Synonyms: 
+test driver
+dynamic analysis
+Version 2
+The process of evaluating a component or system based on its behavior during execution.
+Reference: 
+After ISO 24765
+dynamic application security testing
+Version 1
+A test approach in which attacks are simulated and reactions are analyzed to determine the vulnerabilities of a component or system.
+Abbreviation: 
+DAST
+Reference: 
+After NIST.IR.7298
+See also: 
+static application security testing, interactive application security testing, vulnerability
+dynamic testing
+Version 2
+Testing that involves the execution of the test item.
+Reference: 
+After ISO 29119-1
+See also: 
+static testing
+each choice coverage
+Version 1
+The coverage of equivalence partitions in multiple sets of partitions.
+Abbreviation: 
+ECC
+Reference: 
+After Ammann and Offutt
+See also: 
+pairwise coverage, base choice coverage
+effectiveness
+Version 2
+The extent to which correct and complete goals are achieved.
+Reference: 
+ISO 9241-11
+See also: 
+efficiency
+efficiency
+Version 3
+The degree to which resources are expended in relation to results achieved.
+Reference: 
+IREB Glossary
+See also: 
+effectiveness, performance efficiency
+EFQM model
+Version 2
+A management framework that supports organisations in managing change and improving performance.
+Reference: 
+EFQM
+Synonyms: 
+European Foundation for Quality Management excellence model, EFQM excellence model
+emulator
+Version 2
+Software used during testing that mimics the behavior of hardware.
+See also: 
+simulator
+encryption
+Version 1
+The process of encoding information so that only authorized parties can retrieve the original information, usually by means of a specific
+decryption key or process.
+Search resultsPage: 12 of 43
+end-to-end testing
+Version 1
+A test type in which business processes are tested from start to finish under production-like circumstances.
+Synonyms: 
+E2E testing
+endurance testing
+Version 1
+Testing to determine the stability of a system under a significant load over a significant period of time within the system's operational context.
+entry criteria
+Version 2
+The set of conditions for officially starting a defined task.
+Reference: 
+Gilb and Graham
+See also: 
+exit criteria
+environment model
+Version 1
+An abstraction of the real environment of a component or system including other components, processes, and environment conditions, in a real-
+time simulation.
+Reference: 
+Wallentowitz
+epic
+Version 1
+A large user story that cannot be delivered as defined within a single iteration or is large enough that it can be split into smaller user stories.
+Reference: 
+Agile Alliance
+equivalence partition
+Version 4
+A subset of a value domain for which a component or system is expected to treat all values the same based on the specification.
+Reference: 
+After ISO 29119-1
+equivalence partitioning
+Version 3
+A black-box test technique in which test conditions are equivalence partitions exercised by one representative member of each partition.
+Abbreviation: 
+EP
+Reference: 
+After ISO 29119-1
+Synonyms: 
+partition testing
+See also: 
+domain testing
+equivalent manual test effort
+Version 1
+Effort required for running tests manually.
+Abbreviation: 
+EMTE
+ergonomics testing
+Version 1
+Testing to determine whether a component or system and its input devices are being used properly with correct posture.
+error
+Version 1
+A human action that results in a defect.
+Reference: 
+ISO 24765
+Synonyms: 
+mistake
+See also: 
+defect
+error guessing
+Version 3
+A test technique in which the tests conditions are based on the tester's knowledge of past failures or failure modes.
+Reference: 
+ISO 29119-1
+escaped defect
+Version 2
+A defect that is not detected by a test activity that is supposed to find it.
+See also: 
+defect detection percentage
+ethical hacker
+Version 2
+A security tester who follows the code of ethics of their organization.
+Search resultsPage: 13 of 43
+exhaustive testing
+Version 1
+A test approach in which the test suite comprises all combinations of input values and preconditions.
+Synonyms: 
+complete testing
+exit criteria
+Version 2
+The set of conditions for officially completing a defined task.
+Reference: 
+After Gilb and Graham
+Synonyms: 
+test completion criteria, completion criteria
+See also: 
+entry criteria
+expected result
+Version 2
+The observable predicted behavior of a test item under specified conditions based on its test basis.
+Reference: 
+After ISO 29119-1
+Synonyms: 
+predicted outcome, expected outcome
+experience-based test technique
+Version 4
+A test technique based on the tester's experience, knowledge and intuition.
+Synonyms: 
+experience-based test design technique, experience-based technique
+experience-based testing
+Version 1
+A test approach based on the tester's experience, knowledge and intuition.
+expert usability review
+Version 1
+An informal usability review in which the reviewers are experts. Experts can be usability experts or subject matter experts, or both.
+exploratory testing
+Version 4
+A test approach in which tests are dynamically designed and executed based on tester's knowledge, exploration of a test item, and previous test
+results.
+Reference: 
+After ISO 29119-1
+See also: 
+test charter
+external failure
+Version 1
+A failure that occurs during the regular operation of a system after its delivery to the end users.
+Reference: 
+After ASQ
+failed
+Version 1
+The status of a test result if the actual result does not match the expected result.
+failover
+Version 1
+The backup operational mode in which the functions of a system that becomes unavailable are assumed by a secondary system.
+failure
+Version 3
+An event in which a component or system does not meet its requirements within specified limits during its execution.
+Reference: 
+After ISO 24765
+See also: 
+defect
+failure mode
+Version 1
+The physical or functional manifestation of a failure.
+Reference: 
+ISO 24765
+failure mode and effect analysis
+Version 1
+A systematic approach to risk identification and analysis of identifying possible modes of failure and attempting to prevent their occurrence.
+Abbreviation: 
+FMEA
+Synonyms: 
+Software Failure Mode and Effect Analysis
+failure rate
+Version 2
+The ratio of the number of failures of a given category to a given unit of measure.
+Reference: 
+ISO 24765
+Search resultsPage: 14 of 43
+false-negative result
+Version 1
+A test result which fails to identify a defect that is actually present in a test object.
+Synonyms: 
+false-pass result
+false-positive result
+Version 1
+A test result in which a defect is reported although no such defect actually exists in the test object.
+Synonyms: 
+false-fail result
+fault attack
+Version 1
+A test technique to evaluate a specific quality characteristic of a test object by attempting to trigger specific failures.
+See also: 
+security attack
+fault injection
+Version 2
+A techique for creating adverse conditions to evaluate whether a component or system can detect them and show reliable behavior.
+Synonyms: 
+fault insertion
+See also: 
+fault seeding, fault tolerance
+fault seeding
+Version 2
+The process of intentionally adding defects to a component or system to monitor the rate of detection and removal, and to estimate the number
+of defects remaining.
+Reference: 
+After ISO 24765
+Synonyms: 
+bebugging, error seeding
+See also: 
+fault injection
+fault tolerance
+Version 2
+The degree to which a component or system operates as intended despite the presence of hardware or software faults.
+Reference: 
+After ISO 25010
+Synonyms: 
+robustness
+See also: 
+fault injection
+fault tree analysis
+Version 1
+A technique for analyzing the causes of failures that uses a hierarchical model of events and their logical relationships.
+Abbreviation: 
+FTA
+Synonyms: 
+Software Fault Tree Analysis
+feature-driven development
+Version 1
+An iterative and incremental software development process driven from a client-valued functionality (feature) perspective. Feature-driven
+development is mostly used in Agile software development.
+See also: 
+Agile software development
+field testing
+Version 1
+A test level performed to evaluate the system behavior in an operational environment.
+finding
+Version 1
+A result of an evaluation that identifies some important issue, problem, or opportunity.
+firewall
+Version 1
+A component or set of components that controls incoming and outgoing network traffic based on predetermined security rules.
+flexibility
+Version 1
+The degree to which a component or system can be adapted to changes in its requirements, contexts of use, or system environment.
+Reference: 
+After ISO 25010
+See also: 
+portability
+follow-up test case
+Version 1
+A test case generated by applying a metamorphic relation to a source test case during metamorphic testing.
+Search resultsPage: 15 of 43
+formal review
+Version 2
+A review that follows a defined process with a formally documented output.
+Reference: 
+After ISO 20246
+formative evaluation
+Version 1
+A type of evaluation designed and used to improve the quality of a component or system, especially when it is still being designed.
+See also: 
+summative evaluation
+functional appropriateness
+Version 3
+The degree to which the functions facilitate the accomplishment of specified tasks and objectives.
+Reference: 
+ISO 25010
+Synonyms: 
+suitability
+functional completeness
+Version 1
+The degree to which the set of functions covers all the specified tasks and user objectives.
+Reference: 
+ISO 25010
+functional correctness
+Version 2
+The degree to which a component or system provides the correct results with the needed degree of precision.
+Synonyms: 
+accuracy
+functional safety
+Version 1
+The absence of unreasonable risk due to hazards caused by malfunctioning behavior of electric/electronic systems.
+Reference: 
+ISO 26262
+functional suitability
+Version 2
+The degree to which a component or system provides functions that meet stated and implied needs when used under specified conditions.
+Reference: 
+After ISO 25010
+Synonyms: 
+functionality
+See also: 
+interoperability
+functional testing
+Version 3
+Testing performed to evaluate if a component or system satisfies functional requirements.
+Reference: 
+After ISO 24765
+fuzz testing
+Version 2
+A test technique in which high volumes of meaningless data are used to generate test inputs.
+Synonyms: 
+fuzzing
+See also: 
+vulnerability
+generic test automation architecture
+Version 2
+A representation of the layers, components, and interfaces that allows for a structured and modular approach to implement test automation.
+Abbreviation: 
+gTAA
+graphical user interface
+Version 1
+A type of interface that allows users to interact with a component or system through graphical icons and visual indicators.
+Abbreviation: 
+GUI
+grey-box testing
+Version 1
+A test type that combines elements of black-box testing and white-box testing.
+GUI testing
+Version 2
+A test approach performed by interacting with a test object using a graphical user interface.
+hacker
+Version 1
+A person or organization who is actively involved in security attacks, usually with malicious intent.
+See also: 
+attacker, script kiddie
+Search resultsPage: 16 of 43
+hardware-in-the-loop
+Version 2
+A virtual test environment in which real hardware with integrated software is tested.
+Abbreviation: 
+HiL
+Reference: 
+Automotive SPICE
+hashing
+Version 1
+Transformation of a variable length string of characters into a usually shorter fixed-length value or key. Hashed values, or hashes, are commonly
+used in table or database lookups. Cryptographic hash functions are used to secure data.
+See also: 
+salting
+heuristic
+Version 1
+A generally recognized rule of thumb that helps to achieve a goal.
+heuristic evaluation
+Version 2
+A usability review technique that evaluates a work product by using a set of heuristics.
+high-level test case
+Version 3
+A test case with abstract preconditions, input data, expected results, postconditions, and actions (where applicable).
+Synonyms: 
+logical test case, abstract test case
+See also: 
+low-level test case
+human-centered design
+Version 1
+An approach to design that aims to make software products more usable by focusing on the use of the software products and applying human
+factors, ergonomics, and usability knowledge and techniques.
+Reference: 
+ISO 9241-210
+hybrid software development model
+Version 1
+A type of software development lifecycle model that combines elements of different software development lifecycle models.
+hypothesis testing
+Version 1
+The validation of a theory and its assumptions using sample data
+impact analysis
+Version 2
+The identification of all work products affected by a change, including an estimate of the resources needed to accomplish the change.
+Reference: 
+After ISO 24765
+incremental development model
+Version 2
+A type of software development lifecycle model in which the component or system is developed through a series of increments.
+Reference: 
+After PMBOK
+independence of testing
+Version 1
+Separation of responsibilities, which encourages the accomplishment of objective testing.
+Reference: 
+After DO-178C
+independent test lab
+Version 1
+An organization responsible to test and certify that the software, hardware, firmware, platform, and operating system follow all jurisdictional rules
+for each location where a component or system will be used.
+Abbreviation: 
+ITL
+informal review
+Version 3
+A type of review that does not follow a defined process and has no formally documented output.
+information assurance
+Version 1
+Measures that protect and defend information and information systems by ensuring their availability, integrity, authentication, confidentiality, and
+non-repudiation. These measures include providing for restoration of information systems by incorporating protection, detection, and reaction
+capabilities.
+Reference: 
+NIST.IR.7298
+Search resultsPage: 17 of 43
+information security
+Version 1
+The protection of information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction.
+Reference: 
+After NIST.IR.7298
+input data testing
+Version 1
+A test level that focuses on the quality of the data used for training and prediction by ML models.
+insider threat
+Version 1
+A security threat originating from within the organization, often by an authorized system user.
+inspection
+Version 3
+A type of formal review that uses defined team roles and measurement to identify defects in a work product, and improve the review process and
+the software development process.
+Reference: 
+After ISO 20246
+See also: 
+peer review
+installability
+Version 2
+The degree to which a component or system can be successfully installed and/or uninstalled in a specified environment.
+Reference: 
+After ISO 25010
+See also: 
+portability
+integration testing
+Version 2
+A test level that focuses on interactions between components or systems.
+integrity
+Version 1
+The degree to which only authorized access and modification is allowed to a component, a system or data.
+interaction capability
+Version 1
+The degree to which a component or system can exchange information via the user interface with its specified users to complete an intended
+task.
+Reference: 
+After ISO 25010
+See also: 
+usability
+interactive application security testing
+Version 1
+A test approach that analyzes the code executed and pinpoints where a vulnerability exists by combining dynamic application security testing with
+static application security testing
+Abbreviation: 
+IAST
+See also: 
+dynamic application security testing, static application security testing
+interface testing
+Version 1
+A type of integration testing performed to determine whether components or systems pass data and control correctly to one another.
+Reference: 
+After ISO 24765
+internal failure
+Version 1
+A failure that occurs during the operation of a system before its delivery to the end users.
+Reference: 
+After ASQ
+internationalization
+Version 1
+The process of making a system suitable for international user groups.
+See also: 
+localization
+interoperability
+Version 2
+The degree to which two or more components or systems can exchange information and use the information that has been exchanged.
+Reference: 
+After ISO 25010
+See also: 
+functional suitability
+intrusion detection system
+Version 1
+A system which monitors activities to detect violations of the security policy.
+Abbreviation: 
+IDS
+See also: 
+malware scanning
+Search resultsPage: 18 of 43
+iterative development model
+Version 1
+A type of software development lifecycle model in which the component or system is developed through a series of repeated cycles.
+keyword
+Version 1
+A phrase that represents specific actions to be performed during test execution.
+Reference: 
+After ISO 29119-1
+keyword-driven testing
+Version 2
+A scripting technique in which test scripts contain high-level keywords and supporting files that contain low-level scripts that implement those
+keywords.
+Abbreviation: 
+KDT
+Synonyms: 
+action word-driven testing
+See also: 
+data-driven testing
+learnability
+Version 3
+The degree to which specified users can learn to use a component or system within a defined period.
+Reference: 
+After ISO 25010
+level of intrusion
+Version 1
+The level to which a test object is modified by adjusting it for testability.
+level test plan
+Version 1
+A test plan that typically addresses one test level.
+See also: 
+test plan
+linear scripting
+Version 1
+A simple scripting technique without any control structure in the test scripts.
+load generation
+Version 1
+The process of simulating a defined set of activities at a specified load to be submitted to a component or system.
+load generator
+Version 1
+A tool that generates a load for a system under test.
+load management
+Version 1
+The control and execution of load generation, and performance monitoring and reporting of the component or system.
+load profile
+Version 1
+Documentation defining a designated number of virtual users who process a defined set of transactions in a specified time period that a
+component or system being tested may experience in production.
+load testing
+Version 2
+A type of performance testing conducted to evaluate the behavior of a component or system under varying loads, usually between anticipated
+conditions of low, typical, and peak usage.
+Reference: 
+After ISO 29119-1
+localization
+Version 1
+The process of making a system suitable for a specific user group.
+See also: 
+internationalization
+low-level test case
+Version 3
+A test case with concrete values for preconditions, input data, expected results, postconditions, and a detailed description of actions (where
+applicable).
+Synonyms: 
+concrete test case, physical test case
+See also: 
+high-level test case
+maintainability
+Version 2
+The degree to which a component or system can be modified by the intended maintainers.
+Reference: 
+After ISO 25010
+See also: 
+analyzability, modifiability, testability
+Search resultsPage: 19 of 43
+maintenance
+Version 2
+The process of modifying a component or system after delivery to correct defects, improve quality characteristics, or adapt to a changed
+environment.
+Reference: 
+After ISO 24765
+maintenance testing
+Version 1
+Testing the changes to an operational system or the impact of a changed environment to an operational system.
+malware
+Version 1
+Software that is intended to harm a system or its components.
+See also: 
+anti-malware
+malware scanning
+Version 2
+Static analysis aiming to detect malicious code received at an interface.
+See also: 
+intrusion detection system
+management review
+Version 1
+A systematic evaluation of software acquisition, supply, development, operation, or maintenance process, performed by or on behalf of
+management that monitors progress, determines the status of plans and schedules, confirms requirements and their system allocation, or
+evaluates the effectiveness of management approaches to achieve fitness for purpose.
+Reference: 
+After ISO 24765
+manufacturing-based quality
+Version 2
+A view of quality measured by the degree that a product or service conforms to its intended design and requirements based on the process used.
+Reference: 
+After Garvin
+master test plan
+Version 2
+A test plan that is used to coordinate multiple test levels or test types.
+See also: 
+test plan
+math testing
+Version 1
+A test type to determine the correctness of the pay table implementation, the random number generator results, and the return to player
+computations.
+maturity
+Version 2
+(1) The capability of an organization with respect to the effectiveness and efficiency of its processes and work practices. (2) The degree to which
+a component or system meets needs for reliability under normal operation.
+MBT model
+Version 1
+Any model used in model-based testing.
+mean time between failures
+Version 1
+The average time between consecutive failures of a component or system.
+Abbreviation: 
+MTBF
+See also: 
+mean time to failure
+mean time to failure
+Version 1
+The average time from the start of operation to a failure for a component or system.
+Abbreviation: 
+MTTF
+See also: 
+mean time between failures
+mean time to repair
+Version 1
+The average time a component or system will take to recover from a failure.
+Abbreviation: 
+MTTR
+measurement
+Version 1
+The process of assigning a number or category to an entity to describe an attribute of that entity.
+Reference: 
+After ISO 24765
+Search resultsPage: 20 of 43
+memory leak
+Version 2
+A memory access failure due to a defect in a program's dynamic store allocation logic that causes it to fail to release memory after it has finished
+using it.
+metamorphic relation
+Version 1
+A description of how a change to an input for a test case affects an expected result based on the required behavior of a test item.
+Abbreviation: 
+MR
+Reference: 
+After ISO 29119-1
+metamorphic testing
+Version 2
+A test technique in which test conditions are metamorphic relations.
+Abbreviation: 
+MT
+See also: 
+property-based testing
+method table
+Version 1
+A table containing different test approaches, test techniques and test types that are required depending on the automotive safety integrity level
+and on the context of a test object.
+Reference: 
+ISO 26262
+methodical test strategy
+Version 1
+A test strategy whereby the test team uses a pre-determined set of test conditions such as a quality standard, a checklist, or a collection of
+generalized, logical test conditions which may relate to a particular domain, application or type of testing.
+metric
+Version 1
+A measurement scale and the method used for measurement.
+ML functional performance
+Version 1
+The degree to which an ML model meets ML functional performance criteria.
+ML functional performance criteria
+Version 1
+Criteria based on ML functional performance metrics used as a basis for model evaluation, tuning and testing.
+ML functional performance metrics
+Version 1
+A set of measures that relate to the functional correctness of an ML model.
+ML model
+Version 1
+An implementation of machine learning that generates a prediction, classification or recommendation based on input data.
+ML model testing
+Version 1
+A test level that focuses on the ability of an ML model to meet required ML functional performance criteria and non-functional criteria.
+mock
+Version 1
+A type of test double that simulates the expected behavior of the component during testing.
+Synonyms: 
+mock object, mock-up
+See also: 
+test double, stub
+model coverage
+Version 2
+The coverage of model elements.
+model-based test strategy
+Version 1
+A test strategy whereby the test team derives testware from models.
+model-based testing
+Version 1
+Testing based on or involving models.
+Abbreviation: 
+MBT
+Search resultsPage: 21 of 43
+model-in-the-loop
+Version 2
+A virtual test environment in which a simulation model of the system is tested.
+Abbreviation: 
+MiL
+Reference: 
+Automotive SPICE
+moderator
+Version 4
+(1) The person responsible for running review meetings. (2) The person who performs a usability test session.
+Synonyms: 
+facilitator
+modifiability
+Version 2
+The degree to which a component or system can be modified without degrading its quality.
+Reference: 
+After ISO 25010
+Synonyms: 
+changeability
+See also: 
+maintainability
+modified condition/decision coverage
+Version 2
+The coverage of all outcomes of the atomic conditions that independently affect the overall decision outcome.
+Abbreviation: 
+MC/DC
+Synonyms: 
+condition determination coverage, modified multiple condition coverage
+modified condition/decision testing
+Version 1
+A white-box test technique in which test cases are designed to exercise outcomes of atomic conditions that independently affect a decision
+outcome.
+Synonyms: 
+condition determination testing, modified multiple condition testing, MC/DC testing
+modularity
+Version 1
+The degree to which a system is composed of discrete components such that a change to one component has minimal impact on other
+components.
+monitoring tool
+Version 2
+A software tool or hardware device that runs concurrently with the component or system under test and supervises, records and/or analyzes the
+behavior of the component or system.
+Reference: 
+ISO 24765
+multiplayer testing
+Version 1
+A test type to determine if many players can simultaneously interact with the casino game world, with computer-controlled opponents, game
+servers, and with each other based on the game design.
+multiple condition coverage
+Version 1
+The coverage of all possible combinations of all single condition outcomes within one statement.
+Synonyms: 
+branch condition combination coverage, condition combination coverage
+multiple condition testing
+Version 2
+A white-box test technique in which test conditions are outcome combinations of atomic conditions.
+Synonyms: 
+branch condition combination testing, condition combination testing
+Myers-Briggs Type Indicator
+Version 1
+An indicator of psychological preference representing the different personalities and communication styles of people.
+Abbreviation: 
+MBTI
+N-switch coverage
+Version 1
+The coverage of sequences of N+1 transitions.
+Reference: 
+Chow
+Synonyms: 
+Chow's coverage metrics
+negative testing
+Version 1
+A test type in which a component or system is used in a way that it is not intended.
+Synonyms: 
+invalid testing, dirty testing
+Search resultsPage: 22 of 43
+network zone
+Version 1
+A sub-network with a defined level of trust. For example, the Internet or a public zone would be considered to be untrusted.
+See also: 
+demilitarized zone
+neuron coverage
+Version 1
+The coverage of activated neurons in the neural network for a set of tests.
+non-functional testing
+Version 3
+Testing performed to evaluate that a component or system complies with non-functional requirements.
+non-repudiation
+Version 1
+The degree to which actions or events can be proven to have taken place, so that the actions or events cannot be repudiated later.
+Reference: 
+After ISO 25010
+offline MBT
+Version 1
+Model-based test approach whereby test cases are generated into a repository for future execution.
+online MBT
+Version 1
+Model-based test approach whereby test cases are generated and executed simultaneously.
+Synonyms: 
+on-the-fly MBT
+open-loop-system
+Version 1
+A system in which controlling action or input is independent of the output or changes in output.
+Reference: 
+Bakshi
+open-source tool
+Version 1
+A software tool that is available to all potential users in source code form, usually via the internet. 
+Its users are permitted, usually under license, to
+study, change, improve and, at times, to distribute the software.
+Synonyms: 
+open source tool
+operability
+Version 2
+The degree to which a component or system has attributes that make it easy to operate and control.
+Reference: 
+After ISO 25010
+See also: 
+usability
+operational acceptance testing
+Version 3
+A type of acceptance testing performed to determine whether the organization responsible for operating the system can accept it.
+Synonyms: 
+production acceptance testing
+operational profile
+Version 2
+An actual or predicted pattern of use of the component or system.
+operational profiling
+Version 1
+The process of developing and implementing an operational profile.
+organizational test strategy
+Version 1
+A strategy that describes the generic requirements for testing and how to perform testing within an organization.
+pair testing
+Version 1
+A test approach in which two team members simultaneously collaborate on testing a work product.
+pairwise coverage
+Version 1
+The coverage of pairs of parameter-value pairs.
+See also: 
+combinatorial testing, base choice coverage, each choice coverage
+pairwise testing
+Version 2
+A black-box test technique in which test cases are designed to exercise pairs of parameter-value pairs.
+Reference: 
+After ISO 29119-4
+Search resultsPage: 23 of 43
+par sheet testing
+Version 1
+A test type to determine that a game returns the correct mathematical results to the screen, to the players' accounts, and to the casino account.
+pass/fail criteria
+Version 1
+Decision rules used to determine whether a test item has passed or failed.
+Reference: 
+After ISO 29119-1
+passed
+Version 1
+The status of a test result if the actual result matches the expected result.
+password cracking
+Version 1
+A security attack recovering secret passwords stored in a computer system or transmitted over a network.
+Reference: 
+After NIST.IR.7298
+peer review
+Version 2
+A type of review performed on a work product by persons that have the abilities required to create it.
+Reference: 
+After ISO 20246
+See also: 
+technical review, inspection, walkthrough
+penetration testing
+Version 2
+A type of dynamic application security testing to assess weaknesses and vulnerabilities without causing harm by mimicking an attacker.
+See also: 
+vulnerability
+performance efficiency
+Version 2
+The degree to which a component or system uses time, resources and capacity when accomplishing its designated functions.
+Reference: 
+After ISO 25010
+See also: 
+efficiency
+performance testing
+Version 2
+A test type to determine the performance efficiency of a component or system.
+performance testing tool
+Version 1
+A test tool that generates load for a designated test item and that measures and records its performance during test execution.
+perspective-based reading
+Version 2
+A type of role-based reviewing that uses checklists and involves the creation of prototype deliverables.
+Reference: 
+After ISO 20246
+Synonyms: 
+perspective-based reviewing
+See also: 
+review technique
+pharming
+Version 1
+A security attack intended to redirect a website's traffic to a fraudulent website without the user's knowledge or consent.
+phase containment
+Version 2
+The policy of removing defects in the same phase of the software development lifecycle in which they were introduced.
+phishing
+Version 1
+An attempt to acquire personal or sensitive information by masquerading as a trustworthy entity in an electronic communication.
+planning poker
+Version 1
+A consensus-based estimation technique, mostly used to estimate effort or relative size of user stories in Agile software development. It is a
+variation of the Wideband Delphi method using a deck of cards with values representing the units in which the team estimates.
+Reference: 
+Mountain Goat Software
+player perspective testing
+Version 1
+Testing done by testers from a player's perspective to validate player satisfaction.
+playtest
+Version 1
+Ad hoc testing of a game by players to identify failures and gather feedback.
+Search resultsPage: 24 of 43
+portability
+Version 2
+The degree to which a component or system can be transferred from one hardware, software or other operational or usage environment to
+another.
+See also: 
+adaptability, coexistence, installability, replaceability, flexibility
+post-release testing
+Version 1
+A test level performed after the release of a system to validate that it can be deployed in operational environments.
+See also: 
+testing in production
+postcondition
+Version 2
+The expected state of a test item and its test environment at the end of test execution.
+precondition
+Version 2
+The required state of a test item and its test environment prior to test execution.
+priority
+Version 1
+The level of (business) importance assigned to an item, e.g., defect.
+PRISMA
+Version 1
+A technique used in risk-based testing that creates a product risk matrix.
+process assessment
+Version 1
+A disciplined evaluation of an organization's software processes against a reference model.
+Reference: 
+After ISO 15504
+process-compliant test strategy
+Version 1
+A test strategy whereby the test team follows a set of predefined processes, whereby the processes address such items as documentation, the
+proper identification and use of the test basis and test oracle(s), and the organization of the test team.
+process-driven scripting
+Version 1
+A scripting technique where scripts are structured into scenarios which represent use cases of the software under test. The scripts can be
+parameterized with test data.
+product risk
+Version 2
+A risk that impacts the quality of a product.
+See also: 
+risk
+product-based quality
+Version 3
+A view of quality measured by the degree that well-defined quality characteristics are met.
+Reference: 
+After Garvin
+project risk
+Version 2
+A risk that impacts project success.
+See also: 
+risk
+property-based testing
+Version 1
+A test approach in which test results are verified using specified relations between inputs and expected results of a test case.
+See also: 
+metamorphic testing
+proximity-based testing
+Version 1
+A test type to confirm that sensors can detect nearby objects without physical contact.
+pseudo-oracle
+Version 1
+An independently derived variant of the test item used to generate results, which are compared with the results of the original test item based on
+the same test inputs.
+Reference: 
+ISO 29119-11
+See also: 
+back-to-back testing
+Search resultsPage: 25 of 43
+quality
+Version 4
+The degree to which a work product satisfies stated and implied requirements.
+Reference: 
+After IREB Glossary
+quality assistance
+Version 1
+An approach to quality management that focuses on a quality culture throughout an organization.
+quality assurance
+Version 2
+Activities focused on providing confidence that quality requirements will be fulfilled.
+Abbreviation: 
+QA
+Reference: 
+After ISO 24765
+See also: 
+quality management
+quality capability
+Version 1
+The abilities an organization needs to accomplish its quality goals.
+See also: 
+testing capability
+quality characteristic
+Version 3
+A category of quality attributes that bears on work product quality.
+Reference: 
+ISO 24765
+Synonyms: 
+quality attribute, software quality characteristic, software product characteristic
+quality coaching
+Version 1
+The activities focused on helping an agile organization identify, understand, and deal with quality management, business value, flow of work, and
+customer collaboration.
+quality control
+Version 1
+Activities designed to evaluate the quality of a component or system.
+Abbreviation: 
+QC
+Reference: 
+After ISO 24765
+See also: 
+testing
+quality culture
+Version 1
+An organizational value system that results in an environment to establish and continually improve quality.
+quality debt
+Version 1
+The implied cost of deferred quality assurance activities.
+quality gate
+Version 1
+A milestone at which a decision about proceeding to the next phase is taken based on predefined quality criteria.
+quality management
+Version 1
+The process of establishing and directing a quality policy, quality objectives, quality planning, quality control, quality assurance, and quality
+improvement for an organization.
+Reference: 
+After ISO 24765
+See also: 
+quality assurance
+quality risk
+Version 2
+A product risk or a project risk impacting quality management.
+RACI matrix
+Version 1
+A matrix describing the participation by various roles in completing tasks or deliverables for a project or process. It is especially useful in clarifying
+roles and responsibilities. 
+RACI is an acronym derived from the four key responsibilities most typically used: 
+Responsible, Accountable,
+Consulted, and Informed.
+ramp-down
+Version 1
+A technique for decreasing the load on a system in a measurable and controlled way.
+ramp-up
+Version 1
+A technique for increasing the load on a system in a measurable and controlled way.
+Search resultsPage: 26 of 43
+random testing
+Version 1
+A black-box test technique in which input values are randomly generated.
+reactive test strategy
+Version 1
+A test strategy whereby the test team waits to design and implement tests until the software is received, reacting to the actual system under test.
+reactive testing
+Version 1
+A test approach that dynamically responds to the behavior of a test object and to test results being obtained.
+reconnaissance
+Version 1
+The exploration of a target area aiming to gain information that can be useful for an attack.
+Synonyms: 
+footprinting
+recoverability
+Version 2
+The degree to which a component or system can recover the data directly affected by an interruption or a failure and re-establish the desired
+state of the component or system.
+Reference: 
+After ISO 25010
+See also: 
+reliability
+regression testing
+Version 3
+A type of change-related testing to detect whether defects have been introduced or uncovered in unchanged areas of the software.
+regression-averse test strategy
+Version 1
+A test strategy whereby the test team applies various techniques to manage the risk of regression such as functional and/or non-functional
+regression test automation at one or more levels.
+regulatory acceptance testing
+Version 3
+A type of acceptance testing performed to determine the compliance of a test object.
+reliability
+Version 2
+The degree to which a component or system performs specified functions under specified conditions for a specified period of time.
+Reference: 
+After ISO 25010
+See also: 
+recoverability
+reliability growth model
+Version 2
+A model that shows the growth in reliability over time of a component or system as a result of the defect removal.
+remote test lab
+Version 1
+A facility that provides remote access to a test environment.
+replaceability
+Version 2
+The degree to which a component or system can replace another specified component or system for the same purpose in the same environment.
+Reference: 
+After ISO 25010
+See also: 
+portability
+requirement
+Version 2
+A provision that contains criteria to be fulfilled.
+Reference: 
+ISO 24765
+requirements-based testing
+Version 2
+A black-box test technique in which test conditions are derived from atomic requirements.
+Reference: 
+After ISO 29119-1
+resource utilization
+Version 2
+The degree to which the amounts and types of resources used by a component or system, when performing its functions, meet requirements.
+Synonyms: 
+storage
+Search resultsPage: 27 of 43
+retrospective
+Version 2
+A regular event in which team members discuss results, review their practices, and identify ways to improve.
+Reference: 
+After SAFe
+Synonyms: 
+project retrospective, retrospective meeting, post-project meeting
+reusability
+Version 1
+The degree to which a work product can be used in more than one system, or in building other work products.
+Reference: 
+After ISO 25010
+review
+Version 4
+A type of static testing in which the quality of a work product or process is evaluated by individuals.
+See also: 
+static testing
+review plan
+Version 1
+A document describing the approach, resources and schedule of intended review activities. It identifies, amongst others: 
+documents and code to
+be reviewed, review types to be used, participants, as well as entry and exit criteria to be applied in case of formal reviews, and the rationale for
+their choice. It is a record of the review planning process.
+review technique
+Version 1
+A procedure used to perform a review.
+See also: 
+checklist-based reviewing, perspective-based reading, role-based reviewing, scenario-based reviewing, ad hoc reviewing
+reviewer
+Version 2
+A participant in a review who identifies defects in the work product.
+Reference: 
+After ISO 20246
+Synonyms: 
+checker, inspector
+risk
+Version 1
+A factor that could result in future negative consequences.
+See also: 
+product risk, project risk
+risk analysis
+Version 2
+The overall process of risk identification and risk assessment.
+risk appetite
+Version 1
+The amount and type of risk an organization is willing to pursue or retain.
+Reference: 
+After NIST.IR.7298
+risk assessment
+Version 2
+The process to examine identified risks and determine the risk level.
+risk control
+Version 1
+The overall process of risk mitigation and risk monitoring.
+risk identification
+Version 2
+The process of finding, recognizing and describing risks.
+Reference: 
+ISO 31000
+risk impact
+Version 1
+The damage that will be caused if a risk becomes an actual outcome or event.
+Synonyms: 
+impact
+risk level
+Version 2
+The measure of a risk defined by risk impact and risk likelihood.
+Synonyms: 
+risk exposure
+risk likelihood
+Version 1
+The probability that a risk will become an actual outcome or event.
+Synonyms: 
+likelihood
+Search resultsPage: 28 of 43
+risk management
+Version 3
+The process for handling risks.
+Reference: 
+After ISO 24765
+risk mitigation
+Version 2
+The process through which decisions are reached and protective measures are implemented for reducing or maintaining risks to specified levels.
+risk monitoring
+Version 1
+The activity that checks and reports the status of known risks to stakeholders.
+risk-based testing
+Version 3
+A test approach in which the management, selection, prioritization, and use of test activities and resources are based on corresponding risk types
+and risk levels.
+Reference: 
+After ISO 29119-1
+role-based reviewing
+Version 2
+A review technique in which a work product is evaluated from the perspective of different stakeholder roles.
+Reference: 
+After ISO 20246
+Synonyms: 
+role-based review
+See also: 
+review technique
+root cause
+Version 1
+A source of a defect such that if it is removed, the occurrence of the defect type is decreased or removed.
+Reference: 
+CMMI
+root cause analysis
+Version 2
+An analysis technique aimed at identifying the root causes of defects.
+Abbreviation: 
+RCA
+Synonyms: 
+causal analysis
+rule-based test technique
+Version 1
+A black-box test technique in which test conditions are model elements of the state-independent behavior rules of a test object.
+S.M.A.R.T. goal methodology
+Version 1
+A framework for the clear formulation of management objectives by requiring goals to be specific, measurable, attainable, relevant, and timely.
+Abbreviation: 
+SMART
+safety
+Version 2
+The degree to which a component or system under defined conditions can avoid endangering human life, health, property, or the environment.
+Reference: 
+After ISO 25010
+safety integrity level
+Version 1
+The level of risk reduction provided by a safety function, related to the frequency and severity of perceived hazards.
+Abbreviation: 
+SIL
+Reference: 
+After IEC 61508
+See also: 
+automotive safety integrity level
+salting
+Version 1
+A cryptographic technique that adds random data (salt) to the user data prior to hashing.
+See also: 
+hashing
+scalability
+Version 1
+The degree to which a component or system can be adjusted for changing capacity.
+Reference: 
+After Gerrard
+scalability testing
+Version 1
+Testing to determine the scalability of the software product.
+Search resultsPage: 29 of 43
+scenario-based reviewing
+Version 2
+A review technique in which a work product is evaluated to determine its ability to address specific scenarios.
+Reference: 
+After ISO 20246
+Synonyms: 
+scenario-based review
+See also: 
+review technique
+scenario-based testing
+Version 1
+A black-box test technique in which test conditions are sequences of interactions between external actors and the test item.
+Reference: 
+After ISO 29119-1
+Synonyms: 
+scenario testing
+schema validation
+Version 1
+A type of static analysis based on a database schema.
+scribe
+Version 2
+A person who records information at a review meeting.
+Reference: 
+After ISO 24765
+Synonyms: 
+recorder
+script kiddie
+Version 1
+A person who executes security attacks that have been created by other hackers rather than creating one's own attacks.
+See also: 
+hacker
+scripted testing
+Version 1
+A test approach that involves the creation and use of a test script.
+security
+Version 3
+The degree to which a component or system protects its data and resources against unauthorized access or use and secures unobstructed
+access and use for its legitimate users.
+security attack
+Version 1
+An attempt to gain unauthorized access to a component or system, resources, information, or an attempt to compromise system integrity.
+Reference: 
+After NIST.IR.7298
+See also: 
+fault attack
+security audit
+Version 1
+An audit evaluating an organization's security processes and infrastructure.
+security policy
+Version 1
+A high-level document describing the principles, approach and major objectives of the organization regarding security.
+security procedure
+Version 1
+A set of steps required to implement the security policy and the steps to be taken in response to a security incident.
+security risk
+Version 1
+A quality risk related to security.
+security testing
+Version 1
+A test type to determine the security of a component or system.
+sequential development model
+Version 2
+A type of software development lifecycle model in which a complete system is developed in a linear way of several discrete and successive
+phases with no overlap between them.
+service virtualization
+Version 1
+A technique to enable virtual delivery of services which are deployed, accessed and managed remotely.
+Search resultsPage: 30 of 43
+session-based test management
+Version 1
+A method for measuring and managing session-based testing.
+Abbreviation: 
+SBTM
+session-based testing
+Version 1
+A test approach in which test activities are planned as test sessions.
+severity
+Version 1
+The degree of impact that a defect has on the development or operation of a component or system.
+shift left
+Version 1
+A test approach to perform testing and quality assurance activities as early as possible in the software development lifecycle.
+See also: 
+shift right
+shift right
+Version 1
+A test approach to test a system continuously in production.
+See also: 
+shift left, testing in production
+sign change coverage
+Version 1
+The coverage of neurons activated with both positive and negative activation values in a neural network for a set of tests.
+sign-sign coverage
+Version 1
+The coverage achieved if by changing the sign of each neuron it can be shown to individually cause one neuron in the next layer to change sign
+while all other neurons in the next layer do not change sign for a set of tests.
+Reference: 
+After ISO 29119-11
+simulator
+Version 2
+A component or system used during testing which behaves or operates like a given component or system.
+Reference: 
+After ISO 24765
+See also: 
+emulator
+smoke test
+Version 1
+A test suite that covers the main functionality of a component or system to determine whether it works properly before planned testing begins.
+Synonyms: 
+sanity test, intake test, confidence test
+social engineering
+Version 1
+An attempt to trick someone into revealing information (e.g., a password) that can be used to attack systems or networks.
+Reference: 
+NIST.IR.7298
+software development lifecycle
+Version 1
+The activities performed at each stage in software development, and how they relate to one another logically and chronologically.
+Abbreviation: 
+SDLC
+Synonyms: 
+lifecycle model
+software lifecycle
+Version 1
+The period of time that begins when a software product is conceived and ends when the software is no longer available for use. The software
+lifecycle typically includes a concept phase, requirements phase, design phase, implementation phase, test phase, installation and checkout
+phase, operation and maintenance phase, and sometimes, retirement phase. Note these phases may overlap or be performed iteratively.
+software process improvement
+Version 1
+A program of activities designed to improve the performance and maturity of the organization's software processes and the results of such a
+program.
+Abbreviation: 
+SPI
+Reference: 
+After CMMI
+software qualification test
+Version 1
+Testing performed on completed, integrated software to provide evidence for compliance with software requirements.
+Reference: 
+Automotive SPICE
+Search resultsPage: 31 of 43
+Software Usability Measurement Inventory
+Version 2
+A questionnaire-based usability testing tool that measures and benchmarks user experience.
+Abbreviation: 
+SUMI
+Reference: 
+Kirakowski93
+See also: 
+Website Analysis and MeasureMent Inventory
+software-in-the-loop
+Version 2
+A virtual test environment in which real software is tested.
+Abbreviation: 
+SiL
+Reference: 
+Automotive SPICE
+source test case
+Version 1
+A test case that passed and is used as the basis of follow-up test cases in metamorphic testing.
+specification by example
+Version 1
+A development technique in which the specification is defined by examples.
+Abbreviation: 
+SBE
+See also: 
+acceptance test-driven development
+spike testing
+Version 1
+Testing to determine the ability of a system to recover from sudden bursts of peak loads and return to a steady state.
+standard-compliant test strategy
+Version 1
+A test strategy whereby the test team follows a standard. Standards followed may be valid e.g., for a country (legislation standards), a business
+domain (domain standards), or internally (organizational standards).
+state transition testing
+Version 3
+A black-box test technique in which test cases are designed to exercise elements of a state transition model.
+Reference: 
+After ISO 29119-4
+Synonyms: 
+finite state testing
+statement coverage
+Version 2
+The coverage of executable statements.
+statement testing
+Version 2
+A white-box test technique in which test cases are designed to execute statements.
+static analysis
+Version 2
+The process of evaluating a component or system without executing it, based on its form, structure, content, or documentation.
+Reference: 
+After ISO 24765
+See also: 
+static testing
+static application security testing
+Version 1
+A type of static analysis that focuses on detecting vulnerabilities.
+Abbreviation: 
+SAST
+Reference: 
+After NIST.IR.7298
+See also: 
+dynamic application security testing, interactive application security testing, vulnerability
+static testing
+Version 4
+Testing that does not involve the execution of a test item.
+See also: 
+dynamic testing, static analysis, review
+stress testing
+Version 1
+A type of performance testing conducted to evaluate a system or component at or beyond the limits of its anticipated or specified workloads, or
+with reduced availability of resources such as access to memory or servers.
+Reference: 
+ISO 24765
+structural coverage
+Version 1
+Coverage measures based on the internal structure of a component or system.
+Search resultsPage: 32 of 43
+structured scripting
+Version 1
+A scripting technique that builds and utilizes a library of reusable (parts of) scripts.
+stub
+Version 2
+A type of test double providing predefined responses.
+See also: 
+mock
+summative evaluation
+Version 1
+A type of evaluation designed and used to gather conclusions about the quality of a component or system, especially when a substantial part of it
+has completed design.
+See also: 
+formative evaluation
+system hardening
+Version 1
+The step-by-step process of reducing the vulnerabilities of a system by applying a security policy and different layers of protection.
+system integration testing
+Version 4
+The integration testing of systems.
+system of systems
+Version 1
+Multiple heterogeneous, distributed systems that are embedded in networks at multiple levels and in multiple interconnected domains, addressing
+large-scale inter-disciplinary common problems and purposes, usually without a common management structure.
+Synonyms: 
+multi-system
+system qualification test
+Version 1
+Testing performed on the completed, integrated system of software components, hardware components, and mechanics to provide evidence for
+compliance with system requirements and that the complete system is ready for delivery.
+Reference: 
+Automotive SPICE
+system testing
+Version 2
+A test level that focuses on verifying that a system as a whole meets specified requirements.
+system throughput
+Version 1
+The amount of data passing through a component or system in a given time period.
+Reference: 
+After ISO 24765
+system under test
+Version 2
+A type of test object that is a system.
+Abbreviation: 
+SUT
+System Usability Scale
+Version 1
+A simple, ten-item attitude scale giving a global view of subjective assessments of usability.
+Abbreviation: 
+SUS
+Systematic Test and Evaluation Process
+Version 2
+A structured testing methodology also used as a content-based model for improving the testing process. It does not require that improvements
+occur in a specific order.
+Abbreviation: 
+STEP
+technical review
+Version 3
+A formal review by technical experts that examine the quality of a work product and identify discrepancies from specifications and standards.
+Reference: 
+After IEEE 1028
+See also: 
+peer review
+test
+Version 1
+A set of one or more test cases.
+test adaptation layer
+Version 1
+The layer in a test automation architecture which provides the necessary code to adapt test scripts on an abstract level to the various
+components, configuration or interfaces of the SUT.
+Search resultsPage: 33 of 43
+test analysis
+Version 2
+The activity that identifies test conditions by analyzing the test basis.
+test analyst
+Version 1
+A person responsible for test analysis, test design, test implementation, and test execution, focusing on non-technical aspects of software.
+test approach
+Version 3
+The manner of implementing testing tasks.
+test architect
+Version 1
+(1) A person who provides guidance and strategic direction for a test organization and for its relationship with other disciplines. (2) A person who
+defines the way testing is structured for a given system, including topics such as test tools and test data management.
+test automation
+Version 3
+The conversion of test activities to automatic operation.
+Reference: 
+After ISO 2382
+test automation architecture
+Version 2
+An instantiation of the generic test automation architecture for a system.
+test automation engineer
+Version 1
+A person who is responsible for the design, implementation and maintenance of a test automation architecture as well as the technical evolution
+of the resulting test automation solution.
+Abbreviation: 
+TAE
+test automation framework
+Version 2
+A set of test harnesses and test libraries for test automation.
+Abbreviation: 
+TAF
+test automation manager
+Version 1
+A person who is responsible for the planning and supervision of the development and evolution of a test automation solution.
+test automation solution
+Version 2
+The implementation of a test automation architecture for a test automation assignment.
+Abbreviation: 
+TAS
+test automation strategy
+Version 2
+A high-level description how to achieve long-term objectives of test automation under given technological, organizational and economic
+conditions.
+test basis
+Version 2
+The body of knowledge used as the basis for test analysis and test design.
+Reference: 
+After TMap
+test case
+Version 2
+A set of preconditions, inputs, actions (where applicable), expected results and postconditions, developed based on test conditions.
+See also: 
+test step
+test case explosion
+Version 1
+The disproportionate growth of the number of test cases with growing size of the test basis, when using a certain test design technique. 
+Test case
+explosion may also happen when applying the test design technique systematically for the first time.
+test charter
+Version 3
+Documentation of the goal or objective for a test session.
+Synonyms: 
+charter
+See also: 
+exploratory testing
+Search resultsPage: 34 of 43
+test closure
+Version 1
+During the test closure phase of a test process data is collected from completed activities to consolidate experience, testware, facts and numbers.
+The test closure phase consists of finalizing and archiving the testware and evaluating the test process, including preparation of a test evaluation
+report.
+test completion
+Version 2
+The activity that makes testware available for later use, leaves test environments in a satisfactory condition and communicates the results of
+testing to relevant stakeholders.
+test completion report
+Version 3
+A type of test report produced at completion milestones that provides an evaluation of the corresponding test items against exit criteria.
+Synonyms: 
+test summary report
+test condition
+Version 4
+A testable aspect of a component or system that is intended to be tested.
+Reference: 
+After ISO 29119-1
+Synonyms: 
+test situation, test requirement
+test control
+Version 2
+The activity that develops and applies corrective actions to get a test project on track when it deviates from what was planned.
+See also: 
+test management
+test cycle
+Version 1
+An instance of the test process against a single identifiable version of the test object.
+test data
+Version 3
+Data needed for test execution.
+Synonyms: 
+test dataset
+test data management
+Version 1
+The process of providing the required test data for a component or system while ensuring compliance with legislation and standards.
+test data preparation
+Version 1
+The activity to select data from existing databases or create, generate, manipulate and edit data for testing.
+test definition layer
+Version 1
+The layer in a generic test automation architecture which supports test implementation by supporting the definition of test suites and/or test
+cases, e.g., by offering templates or guidelines.
+test design
+Version 3
+The activity that derives and specifies test cases from test conditions.
+test director
+Version 1
+A senior manager who manages test managers.
+See also: 
+test manager
+test double
+Version 1
+A replacement component invoked by a test object to perform testing.
+See also: 
+mock
+test environment
+Version 1
+An environment containing hardware, instrumentation, simulators, software tools, and other support elements needed to perform a test.
+Reference: 
+ISO 24765
+Synonyms: 
+test bed, test rig
+test estimation
+Version 2
+An approximation related to various aspects of testing.
+test execution
+Version 2
+The activity that runs a test on a component or system producing actual results.
+Search resultsPage: 35 of 43
+test execution automation
+Version 1
+The use of software, e.g., capture/playback tools, to control the execution of tests, the comparison of actual results to expected results, the
+setting up of test preconditions, and other test control and reporting functions.
+test execution layer
+Version 1
+The layer in a generic test automation architecture which supports the execution of test suites and/or test cases.
+test execution schedule
+Version 2
+A schedule for the execution of test suites within a test cycle.
+test execution tool
+Version 1
+A test tool that executes tests against a designated test item and evaluates the outcomes against expected results and postconditions.
+test fixture
+Version 1
+The predefined data and test environment to test software in a repeatable manner.
+test generation layer
+Version 1
+The layer in a generic test automation architecture which supports manual or automated design of test suites and/or test cases.
+test harness
+Version 2
+A collection of drivers and test doubles needed to execute a test suite.
+test histogram
+Version 1
+A visual representation that shows the distribution of test results.
+test hook
+Version 1
+A customized software interface that enables automated testing of a test object.
+test implementation
+Version 3
+The activity that prepares the testware needed for test execution.
+test infrastructure
+Version 1
+The test environments, test tools, office environment and procedures needed to perform testing.
+test item
+Version 2
+A part of a test object used in the test process.
+See also: 
+test object
+test leader
+Version 1
+On large projects, the person who reports to the test manager and is responsible for project management of a particular test level or a particular
+set of testing activities.
+Synonyms: 
+lead tester
+See also: 
+test manager
+test level
+Version 2
+A specific instantiation of a test process.
+Synonyms: 
+test stage
+test log
+Version 1
+A chronological record of relevant details about the execution of tests.
+Reference: 
+ISO 24765
+Synonyms: 
+test record, test run log
+test logging
+Version 2
+The activity of creating a test log.
+Synonyms: 
+test recording
+Search resultsPage: 36 of 43
+test management
+Version 2
+The process of planning, scheduling, estimating, monitoring, reporting, controlling, and completing test activities.
+Reference: 
+ISO 29119-1
+See also: 
+test control, test monitoring
+test manager
+Version 2
+The person responsible for project management of testing activities, resources, and evaluation of a test object.
+See also: 
+test director, test leader, Agile test leader
+Test Maturity Model integration
+Version 1
+A five-level staged framework for test process improvement, related to the Capability Maturity Model Integration (CMMI), that describes the key
+elements of an effective test process.
+Abbreviation: 
+TMMi
+test mission
+Version 1
+The purpose of testing for an organization, often documented as part of the test policy.
+See also: 
+test policy
+test model
+Version 1
+A model describing testware that is used for testing a component or a system under test.
+test monitoring
+Version 3
+The activity that checks the status of testing activities, identifies any variances from planned or expected, and reports status to stakeholders.
+See also: 
+test management
+test object
+Version 2
+The work product to be tested.
+See also: 
+test item
+test objective
+Version 3
+The purpose for testing.
+Synonyms: 
+test goal
+test oracle
+Version 2
+A source to determine an expected result.
+Reference: 
+After Adrion
+Synonyms: 
+oracle
+test plan
+Version 2
+Documentation describing the test objectives to be achieved and the means and the schedule for achieving them, organized to coordinate testing.
+Reference: 
+After ISO 29119-1
+See also: 
+master test plan, level test plan, test scope
+test planning
+Version 1
+The activity of establishing or updating a test plan.
+test point analysis
+Version 1
+A formula-based test estimation technique based on function point analysis.
+Abbreviation: 
+TPA
+Reference: 
+TMap
+test policy
+Version 1
+High-level documentation describing the principles, approach and major objectives of the organization regarding testing.
+Synonyms: 
+organizational test policy
+See also: 
+test mission
+Search resultsPage: 37 of 43
+test procedure
+Version 1
+A sequence of test cases in execution order and any associated actions that may be required to set up the initial preconditions and any wrap-up
+activities after execution.
+Reference: 
+After ISO 29119-1
+test process
+Version 2
+The set of interrelated activities comprising of test planning, test monitoring, test control, test analysis, test design, test implementation, test
+execution, and test completion.
+test process group
+Version 2
+A collection of specialists who facilitate the definition, maintenance, and improvement of the test processes used by an organization.
+Abbreviation: 
+TPG
+Reference: 
+After CMMI
+test process improvement
+Version 1
+A program of activities undertaken to improve the performance and maturity of the organization's test processes.
+Reference: 
+After CMMI
+test process improvement manifesto
+Version 2
+A statement that echoes the Agile manifesto, and defines values for improving the test process.
+Reference: 
+Veenendaal08
+test progress
+Version 1
+The progress of testing against a baseline.
+test progress report
+Version 4
+A type of periodic test report that includes the progress of test activities against a baseline, risks, and alternatives requiring a decision.
+Synonyms: 
+test status report
+test pyramid
+Version 1
+A graphical model representing the relationship of the amount of testing per level, with more at the bottom than at the top.
+test report
+Version 1
+Documentation summarizing testing and results.
+test reporting
+Version 2
+The activity that consolidates test monitoring information and evaluates whether test objectives have been reached to inform stakeholders.
+test result
+Version 1
+The consequence/outcome of the execution of a test.
+Synonyms: 
+outcome, test outcome, result
+test run
+Version 1
+The execution of a test suite on a specific version of the test object.
+test schedule
+Version 1
+A list of activities, tasks, and milestones of the test process, their intended start and finish dates and interdependencies.
+test scope
+Version 1
+A description of the test object and its features to be tested.
+See also: 
+test plan
+test script
+Version 2
+A sequence of instructions for the execution of a test.
+test selection criteria
+Version 1
+The criteria used to guide the generation of test cases or to select test cases in order to limit the size of a test.
+test session
+Version 1
+An uninterrupted period of time spent in executing tests.
+Search resultsPage: 38 of 43
+test specification
+Version 2
+The complete documentation of the test design, test cases, and test scripts for a specific test item.
+Reference: 
+After ISO 29119-1
+test step
+Version 1
+A single interaction between an actor and a test object consisting of an input, an action, and an expected result.
+See also: 
+test case
+test strategy
+Version 4
+A description of how to perform testing to reach test objectives under given circumstances.
+test suite
+Version 3
+A set of test scripts or test procedures to be executed in a specific test run.
+Synonyms: 
+test set, test case suite
+test technique
+Version 3
+A procedure used to define test conditions, design test cases, and specify test data.
+Synonyms: 
+test design technique
+test type
+Version 2
+A group of test activities based on specific test objectives aimed at specific characteristics of a component or system.
+Reference: 
+After TMap
+test-driven development
+Version 2
+A software development technique in which the test cases are developed, automated and then the software is developed incrementally to pass
+those test cases.
+Abbreviation: 
+TDD
+See also: 
+test-first approach
+test-first approach
+Version 1
+An approach to software development in which the test cases are designed and implemented before the associated component or system is
+developed.
+See also: 
+test-driven development
+testability
+Version 3
+The degree to which test conditions can be established for a component or system, and tests can be performed to determine whether those test
+conditions have been met.
+See also: 
+maintainability
+tester
+Version 2
+A person who performs testing.
+testing
+Version 3
+The process within the software development lifecycle that evaluates the quality of a component or system and related work products.
+See also: 
+quality control
+testing capability
+Version 1
+The abilities an organization needs to accomplish its test objectives.
+See also: 
+quality capability
+testing in production
+Version 1
+A test type performed in the production environment with live data.
+See also: 
+post-release testing, shift right
+testing quadrants
+Version 1
+A classification model of test types/test levels in four quadrants, relating them to two dimensions of test objectives: supporting the product team
+versus critiquing the product, and technology-facing versus business-facing.
+Search resultsPage: 39 of 43
+testware
+Version 2
+Work products produced during the test process for use in planning, designing, executing, evaluating and reporting on testing.
+Reference: 
+After ISO 29119-1
+think aloud usability testing
+Version 1
+A usability testing technique where test participants share their thoughts with the moderator and observers by thinking aloud while they solve
+usability test tasks. Think aloud is useful to understand the test participant.
+think time
+Version 1
+The amount of time required by a user to determine and execute the next action in a sequence of actions.
+threshold coverage
+Version 1
+The coverage of neurons exceeding a threshold activation value in a neural network for a set of tests.
+time behavior
+Version 1
+The degree to which a component or system can perform its required functions within required response times, processing times and throughput
+rates.
+Total Quality Management
+Version 2
+An organization-wide management approach to quality based on employee participation to achieve long-term success through customer
+satisfaction.
+Abbreviation: 
+TQM
+Reference: 
+After ISO 24765
+tour
+Version 1
+A set of exploratory tests organized around a special focus.
+TPI Next
+Version 1
+A continuous business-driven framework for test process improvement that describes the key elements of an effective and efficient test process.
+traceability
+Version 3
+The ability to establish explicit relationships between related work products or items within work products.
+Reference: 
+IREB Glossary
+traceability matrix
+Version 1
+A two-dimensional table, which correlates two entities (e.g., requirements and test cases). The table allows tracing back and forth the links of one
+entity to the other, thus enabling the determination of coverage achieved and the assessment of 
+impact of proposed changes.
+transcendent quality
+Version 2
+A view of quality based on the perception and feeling of individuals.
+Reference: 
+After Garvin
+unit test framework
+Version 1
+A tool that provides an environment for unit or component testing in which a component can be tested in isolation or with suitable stubs and
+drivers. It also provides other support for the developer, such as debugging capabilities.
+Reference: 
+Graham
+usability
+Version 3
+The degree to which a component or system can be used by specified users to achieve specified goals in a specified context of use.
+See also: 
+user interface aesthetics, operability, appropriateness recognizability, interaction capability
+usability evaluation
+Version 1
+A process through which information about the usability of a system is gathered in order to improve the system (known as formative evaluation)
+or to assess the merit or worth of a system (known as summative evaluation).
+usability lab
+Version 1
+A test facility in which unintrusive observation of participant reactions and responses to software takes place.
+usability requirement
+Version 1
+A requirement on the usability of a component or system.
+Search resultsPage: 40 of 43
+usability test participant
+Version 1
+A representative user who solves typical tasks in a usability test.
+usability test script
+Version 1
+A document specifying a sequence of actions for the execution of a usability test. It is used by the moderator to keep track of briefing and pre-
+session interview questions, usability test tasks, and post-session interview questions.
+usability test session
+Version 1
+A test session in usability testing in which a usability test participant is executing tests, moderated by a moderator and observed by a number of
+observers.
+usability test task
+Version 1
+A usability test execution activity specified by the moderator that needs to be accomplished by a usability test participant within a given period of
+time.
+usability testing
+Version 2
+Testing to evaluate the degree to which the system can be used by specified users with effectiveness, efficiency and satisfaction in a specified
+context of use.
+Reference: 
+After ISO 25010
+use case testing
+Version 3
+A black-box test technique in which test cases are designed to exercise use case behaviors.
+user acceptance testing
+Version 4
+A type of acceptance testing performed to determine if intended users accept the system.
+Abbreviation: 
+UAT
+See also: 
+acceptance testing
+user error protection
+Version 1
+The degree to which a component or system protects users against making errors.
+Reference: 
+After ISO 25010
+user experience
+Version 1
+A person's perceptions and responses resulting from the use or anticipated use of a software product.
+Reference: 
+ISO 9241-210
+user interface
+Version 1
+All components of a system that provide information and controls for the user to accomplish specific tasks with the system.
+Abbreviation: 
+UI
+user interface aesthetics
+Version 2
+The degree to which a user interface enables pleasing and satisfying interaction for the user.
+Reference: 
+ISO 25010
+Synonyms: 
+attractiveness
+See also: 
+usability
+user interface guideline
+Version 1
+A low-level, specific rule or recommendation for user interface design that leaves little room for interpretation so designers implement it similarly.
+It is often used to ensure consistency in the appearance and behavior of the user interface of the systems produced by an organization.
+user story
+Version 3
+A user or business requirement consisting of one sentence expressed in the everyday or business language which is capturing the functionality a
+user needs, the reason behind it, any non-functional criteria, and also including acceptance criteria.
+See also: 
+user story testing
+user story testing
+Version 2
+A black-box test technique in which test conditions are the acceptance criteria of user stories.
+See also: 
+user story
+Search resultsPage: 41 of 43
+user survey
+Version 1
+A usability evaluation whereby a representative sample of users are asked to report subjective evaluation into a questionnaire based on their
+experience in using a component or system.
+user-agent based testing
+Version 1
+A test type in which a test client is used to switch the user agent string and identify itself as a different client while executing test suites.
+user-based quality
+Version 2
+A view of quality measured by the degree that the needs, wants, and desires of a user are met.
+Reference: 
+After Garvin
+V-model
+Version 2
+A sequential software development lifecycle model describing a one-for-one relationship between major phases of software development from
+business requirements specification to delivery, and corresponding test levels from acceptance testing to component testing.
+validation
+Version 2
+Confirmation by examination that a work product matches a stakeholder's needs.
+Reference: 
+After IREB Glossary
+value change coverage
+Version 1
+The coverage of neurons activated where their activation values differ by more than a change amount in the neural network for a set of tests.
+value-based quality
+Version 2
+A view of quality measured by the ratio of the cost to the value received from a product or service.
+Reference: 
+After Garvin
+verification
+Version 2
+The process of confirming that a work product fulfills its specification.
+Reference: 
+After IREB Glossary
+virtual test environment
+Version 1
+A test environment in which one or more parts are digitally simulated.
+Reference: 
+ISO 29119-11
+virtual user
+Version 1
+A simulation of activities performed according to a user operational profile.
+visual testing
+Version 1
+Testing that uses image recognition to interact with GUI objects.
+Reference: 
+After ISO 29119-11
+vulnerability
+Version 2
+A weakness in a component, system, procedures, or controls that could allow for a successful security attack.
+Reference: 
+After NIST.IR.7298
+Synonyms: 
+security vulnerability
+See also: 
+cross-site scripting, vulnerability scanner, dynamic application security testing, static application security testing, weakness, fuzz testing, penetration testing
+vulnerability scanner
+Version 1
+A static analyzer that is used to detect particular security vulnerabilities in the code.
+See also: 
+vulnerability
+vulnerability scanning
+Version 1
+A type of static analysis that detects vulnerabilities in a system.
+Search resultsPage: 42 of 43
+walkthrough
+Version 3
+A type of review in which an author leads members of the review through a work product and the members ask questions and make comments
+about possible issues.
+Reference: 
+After ISO 20246
+Synonyms: 
+structured walkthrough
+See also: 
+peer review
+weakness
+Version 1
+A defect that may lead to undesirable security behavior.
+Reference: 
+After NIST.IR.7298
+See also: 
+vulnerability
+Web Content Accessibility Guidelines
+Version 1
+A part of a series of web accessibility guidelines published by the Web Accessibility Initiative (WAI) of the World Wide Web Consortium (W3C),
+the main international standards organization for the internet. They consist of a set of guidelines for making content accessible, primarily for
+people with disabilities.
+Abbreviation: 
+WCAG
+Website Analysis and MeasureMent Inventory
+Version 2
+A commercial website analysis service providing a questionnaire for measuring user experience and assessing delivery of business goals online.
+Abbreviation: 
+WAMMI
+See also: 
+Software Usability Measurement Inventory
+white-box test technique
+Version 3
+A test technique based on the internal structure of a component or system.
+Synonyms: 
+white-box test design technique, structure-based test technique
+white-box testing
+Version 1
+Testing based on an analysis of the internal structure of the component or system.
+Synonyms: 
+clear-box testing, code-based testing, glass-box testing, logic-coverage testing, logic-driven testing, structural testing, structure-based testing
+Wideband Delphi
+Version 1
+An expert-based test estimation technique that aims at making an accurate estimation using the collective wisdom of the team members.
+wild pointer
+Version 1
+A pointer that references a location that is out of scope for that pointer or that does not exist.
+Search resultsPage: 43 of 43

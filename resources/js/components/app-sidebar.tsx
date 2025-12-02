@@ -1,25 +1,45 @@
 'use client';
 
 import { Link, usePage } from '@inertiajs/react';
-import { AudioWaveform, Award, BookOpen, Building2, Calendar, ClipboardList, Command, FileText, GalleryVerticalEnd, HelpCircle, Newspaper, Settings2, Users } from 'lucide-react';
+import { AudioWaveform, Award, BookOpen, ClipboardList, Command, FileText, GalleryVerticalEnd, Settings2, Shield, Users } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { LanguageSwitcher } from '@/components/language-switcher';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from '@/components/ui/sidebar';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarRail,
+} from '@/components/ui/sidebar';
 import Logo from '@/layouts/public/logo';
 import appearance from '@/routes/appearance';
 import profile from '@/routes/profile';
 import userPassword from '@/routes/user-password';
 import { type SharedData } from '@/types';
 
+interface UserRole {
+    id: number;
+    name: string;
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const { auth, url } = usePage<SharedData>().props;
     const { t } = useTranslation();
     const user = auth?.user;
     const currentUrl = (url || '') as string;
+
+    // Check if user is admin
+    const userRoles = (user as { roles?: UserRole[] })?.roles || [];
+    const isAdmin = userRoles.some((role) => role.name === 'admin');
 
     // Configuration des données de navigation
     const data = {
@@ -282,10 +302,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 isActive: currentUrl.startsWith('/dashboard/exam-registrations'),
             },
             {
-                name: 'Demandes d\'adhésion',
+                name: "Demandes d'adhésion",
                 url: '/dashboard/membership-applications',
                 icon: Users,
                 isActive: currentUrl.startsWith('/dashboard/membership-applications'),
+            },
+        ],
+        navAdmin: [
+            {
+                name: 'Utilisateurs',
+                url: '/dashboard/users',
+                icon: Users,
+                isActive: currentUrl.startsWith('/dashboard/users'),
             },
         ],
     };
@@ -317,10 +345,32 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         ))}
                     </SidebarMenu>
                 </SidebarGroup>
+
+                {/* Administration Section - Admin only */}
+                {isAdmin && (
+                    <SidebarGroup>
+                        <SidebarGroupLabel>
+                            <Shield className="mr-2 h-4 w-4" />
+                            Administration
+                        </SidebarGroupLabel>
+                        <SidebarMenu>
+                            {data.navAdmin.map((item) => (
+                                <SidebarMenuItem key={item.name}>
+                                    <SidebarMenuButton asChild isActive={item.isActive}>
+                                        <Link href={item.url}>
+                                            <item.icon />
+                                            <span>{item.name}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                        </SidebarMenu>
+                    </SidebarGroup>
+                )}
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={data.user} />
-                <div className="flex items-center justify-center gap-2 p-2 border-t border-sidebar-border">
+                <div className="flex items-center justify-center gap-2 border-t border-sidebar-border p-2">
                     <LanguageSwitcher />
                 </div>
             </SidebarFooter>

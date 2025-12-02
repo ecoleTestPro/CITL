@@ -380,7 +380,40 @@
         "card3_description": "After passing the exam, receive your ISTQB® certificate recognized in over 120 countries and register in the international registry."
     },
     "footer": {
-        "all_rights_reserved": "All rights reserved"
+        "all_rights_reserved": "All rights reserved",
+        "description": "The Ivorian Committee for Software Testing (CITL) is a non-profit organization dedicated to promoting and developing software testing skills in Côte d'Ivoire.",
+        "follow_us": "Follow us",
+        "copyright": "CITL - Ivorian Committee for Software Testing. All rights reserved.",
+        "sections": {
+            "about": {
+                "title": "About",
+                "about_istqb": "About ISTQB",
+                "about_citl": "About CITL",
+                "vision": "Our Vision",
+                "missions": "Our Missions",
+                "executive_board": "Executive Board",
+                "members": "CITL Members"
+            },
+            "training": {
+                "title": "Training & Exams",
+                "find_training": "Find a Training Provider",
+                "register_exam": "Register for an Exam",
+                "become_training": "Become a Training Provider"
+            },
+            "info": {
+                "title": "Information",
+                "certifications": "Certifications",
+                "news": "News",
+                "events": "Events",
+                "glossary": "Glossary",
+                "help": "Help"
+            }
+        },
+        "legal": {
+            "privacy_policy": "Privacy Policy",
+            "terms": "Terms of Use",
+            "help": "Help"
+        }
     },
     "cookie_consent": {
         "title": "Welcome to CITL",
@@ -1034,5 +1067,54 @@
         "domain_14": "Training and Mentoring",
         "conclusion": "CITL working groups are open to all those who wish to actively contribute to the growth of software testing in Côte d'Ivoire. If you are passionate about software quality, join us to share your knowledge, develop new skills and help shape the future of testing in our country.",
         "cta_text": "Join a Working Group"
+    },
+    "auth": {
+        "register": {
+            "unauthorized_title": "Access Denied",
+            "unauthorized_heading": "Registration Disabled",
+            "unauthorized_message": "Public registration is not available on this platform. Please contact an administrator to create an account.",
+            "redirect_message": "You will be redirected to the homepage in {{seconds}} seconds...",
+            "go_home": "Return to Home"
+        }
+    },
+    "dashboard": {
+        "users": {
+            "title": "User Management",
+            "add_user": "Add User",
+            "edit_user": "Edit User",
+            "create_user": "Create User",
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "password": "Password",
+            "password_confirmation": "Confirm Password",
+            "verified": "Verified",
+            "not_verified": "Not Verified",
+            "created_at": "Created At",
+            "actions": "Actions",
+            "admin": "Administrator",
+            "manager": "Manager",
+            "admin_description": "Full access to all dashboard features, including user management.",
+            "manager_description": "Limited dashboard access. Can manage content but cannot manage users.",
+            "delete_confirm_title": "Delete User",
+            "delete_confirm_message": "Are you sure you want to delete the user \"{{name}}\"? This action cannot be undone.",
+            "user_created": "User created successfully",
+            "user_updated": "User updated successfully",
+            "user_deleted": "User deleted successfully",
+            "cannot_delete_self": "You cannot delete your own account",
+            "no_users": "No users found",
+            "search_placeholder": "Name or email...",
+            "all_roles": "All Roles",
+            "filter": "Filter",
+            "reset": "Reset",
+            "refresh": "Refresh",
+            "previous": "Previous",
+            "next": "Next",
+            "save": "Save",
+            "cancel": "Cancel",
+            "back_to_list": "Back to List",
+            "password_optional": "New Password (optional)",
+            "password_keep_current": "Leave blank to keep current"
+        }
     }
 }

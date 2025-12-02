@@ -8,6 +8,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, MapPin, Moon, Phone, Sun } from 'lucide-react';
 import { type ComponentType, type SVGProps, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Logo from './logo';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -28,14 +29,6 @@ interface SocialLink {
     href: string;
     icon: ComponentType<SVGProps<SVGSVGElement>>;
     ariaLabel: string;
-}
-
-interface CompanyInfo {
-    description: string;
-    location: string;
-    copyrightText: string;
-    email: string;
-    phone: string;
 }
 
 // Custom Social Icons (SVG Components)
@@ -117,99 +110,49 @@ const TikTokIcon = (props: SVGProps<SVGSVGElement>) => (
     </svg>
 );
 
-// Configuration du Footer
-const FOOTER_SECTIONS: FooterSection[] = [
-    {
-        title: 'À propos',
-        links: [
-            { label: "À propos de l'ISTQB", href: '/about-istqb' },
-            { label: 'À propos du CITL', href: '/about-citl' },
-            { label: 'Notre vision', href: '/vision' },
-            { label: 'Nos missions', href: '/missions' },
-            { label: 'Le bureau exécutif', href: '/executive-board' },
-            { label: 'Membres du CITL', href: '/members' },
-        ],
-    },
-    {
-        title: 'Formation & Examens',
-        links: [
-            {
-                label: 'Trouver un organisme de formation',
-                href: '/accredited-organizations',
-            },
-            { label: "S'inscrire à un examen", href: '/exam-registration' },
-            {
-                label: 'Devenir organisme de formation',
-                href: '/accreditation-request',
-            },
-        ],
-    },
-    {
-        title: 'Informations',
-        links: [
-            { label: 'Certifications', href: '/why-certification' },
-            { label: 'Actualités', href: '/blog' },
-            { label: 'Événements', href: '/events' },
-            { label: 'Glossaire', href: '/glossary' },
-            { label: 'Aide', href: '/contact' },
-        ],
-    },
-];
+// Footer sections will be built dynamically with translations
 
 const SOCIAL_LINKS: SocialLink[] = [
-    {
-        name: 'Facebook',
-        href: '#',
-        icon: FacebookIcon,
-        ariaLabel: 'Facebook',
-    },
-    {
-        name: 'TikTok',
-        href: '#',
-        icon: TikTokIcon,
-        ariaLabel: 'TikTok',
-    },
-    {
-        name: 'Twitter',
-        href: '#',
-        icon: TwitterIcon,
-        ariaLabel: 'Twitter',
-    },
-    {
-        name: 'LinkedIn',
-        href: '#',
-        icon: LinkedinIcon,
-        ariaLabel: 'LinkedIn',
-    },
-    {
-        name: 'YouTube',
-        href: '#',
-        icon: YoutubeIcon,
-        ariaLabel: 'YouTube',
-    },
+    // {
+    //     name: 'Facebook',
+    //     href: '#',
+    //     icon: FacebookIcon,
+    //     ariaLabel: 'Facebook',
+    // },
+    // {
+    //     name: 'TikTok',
+    //     href: '#',
+    //     icon: TikTokIcon,
+    //     ariaLabel: 'TikTok',
+    // },
+    // {
+    //     name: 'Twitter',
+    //     href: '#',
+    //     icon: TwitterIcon,
+    //     ariaLabel: 'Twitter',
+    // },
+    // {
+    //     name: 'LinkedIn',
+    //     href: '#',
+    //     icon: LinkedinIcon,
+    //     ariaLabel: 'LinkedIn',
+    // },
+    // {
+    //     name: 'YouTube',
+    //     href: '#',
+    //     icon: YoutubeIcon,
+    //     ariaLabel: 'YouTube',
+    // },
 ];
 
-const COMPANY_INFO: CompanyInfo = {
-    description: 'CITL association à but non lucratif',
+const COMPANY_INFO = {
     location: "5ème étage, Résidence Pacy, En face de l'immeuble CGK, Cocody Angré Djibi - 9ème tranche, Abidjan, Côte d'Ivoire",
-    copyrightText: 'CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.',
     email: 'contact@citl.ci',
     phone: '+225 27 22 39 18 67',
 };
 
-const LEGAL_LINKS: FooterLink[] = [
-    {
-        label: 'Politique de confidentialité',
-        href: '/privacy-policy',
-    },
-    {
-        label: "Conditions d'utilisation",
-        href: '/terms',
-    },
-    { label: 'Aide', href: '/contact' },
-];
-
 const Footer = () => {
+    const { t } = useTranslation();
     const { appearance, updateAppearance } = useAppearance();
     const footerRef = useRef<HTMLElement>(null);
     const logoRef = useRef<HTMLDivElement>(null);
@@ -223,6 +166,46 @@ const Footer = () => {
         const newTheme = appearance === 'dark' ? 'light' : 'dark';
         updateAppearance(newTheme);
     };
+
+    // Build footer sections with translations
+    const footerSections: FooterSection[] = [
+        {
+            title: t('footer.sections.about.title'),
+            links: [
+                { label: t('footer.sections.about.about_istqb'), href: '/about-istqb' },
+                { label: t('footer.sections.about.about_citl'), href: '/about-citl' },
+                { label: t('footer.sections.about.vision'), href: '/vision' },
+                { label: t('footer.sections.about.missions'), href: '/missions' },
+                { label: t('footer.sections.about.executive_board'), href: '/executive-board' },
+                { label: t('footer.sections.about.members'), href: '/members' },
+            ],
+        },
+        {
+            title: t('footer.sections.training.title'),
+            links: [
+                { label: t('footer.sections.training.find_training'), href: '/accredited-organizations' },
+                { label: t('footer.sections.training.register_exam'), href: '/exam-registration' },
+                { label: t('footer.sections.training.become_training'), href: '/accreditation-request' },
+            ],
+        },
+        {
+            title: t('footer.sections.info.title'),
+            links: [
+                { label: t('footer.sections.info.certifications'), href: '/why-certification' },
+                { label: t('footer.sections.info.news'), href: '/blog' },
+                { label: t('footer.sections.info.events'), href: '/events' },
+                { label: t('footer.sections.info.glossary'), href: '/glossary' },
+                { label: t('footer.sections.info.help'), href: '/contact' },
+            ],
+        },
+    ];
+
+    // Legal links with translations
+    const legalLinks: FooterLink[] = [
+        { label: t('footer.legal.privacy_policy'), href: '/privacy-policy' },
+        { label: t('footer.legal.terms'), href: '/terms' },
+        { label: t('footer.legal.help'), href: '/contact' },
+    ];
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -322,7 +305,7 @@ const Footer = () => {
     };
 
     // Hover animation for links
-    const handleLinkHover = (e: React.MouseEvent<HTMLAnchorElement>, isEnter: boolean) => {
+    const handleLinkHover = (e: React.MouseEvent<HTMLElement>, isEnter: boolean) => {
         gsap.to(e.currentTarget, {
             x: isEnter ? 8 : 0,
             color: isEnter ? '#e36c19' : '',
@@ -341,17 +324,14 @@ const Footer = () => {
                     <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
                 </div>
 
-                <div className="container relative z-10 mx-auto px-4 py-16">
+                <div className="relative z-10 container mx-auto px-4 py-16">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
                         {/* Logo and company info - 4 columns */}
                         <div ref={logoRef} className="lg:col-span-4">
                             <div className="mb-6">
                                 <Logo />
                             </div>
-                            <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                                Le Comité Ivoirien pour les Tests Logiciels (CITL) est une association à but non lucratif dédiée à la promotion et au développement des
-                                compétences en tests logiciels en Côte d&apos;Ivoire.
-                            </p>
+                            <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">{t('footer.description')}</p>
 
                             {/* Contact info */}
                             <div className="mb-6 space-y-3">
@@ -379,7 +359,7 @@ const Footer = () => {
 
                             {/* Social links */}
                             <div ref={socialRef}>
-                                <p className="mb-3 text-sm font-semibold text-foreground">Suivez-nous</p>
+                                {SOCIAL_LINKS.length > 0 && <p className="mb-3 text-sm font-semibold text-foreground">{t('footer.follow_us')}</p>}
                                 <div className="flex gap-2">
                                     {SOCIAL_LINKS.map((social) => {
                                         const Icon = social.icon;
@@ -402,7 +382,7 @@ const Footer = () => {
 
                         {/* Navigation sections - 8 columns */}
                         <div ref={sectionsRef} className="grid grid-cols-1 gap-8 sm:grid-cols-3 lg:col-span-8">
-                            {FOOTER_SECTIONS.map((section) => (
+                            {footerSections.map((section) => (
                                 <div key={section.title} className="footer-section">
                                     <h3 className="relative mb-6 text-lg font-bold text-foreground">
                                         {section.title}
@@ -449,7 +429,7 @@ const Footer = () => {
 
                             {/* Legal links */}
                             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-                                {LEGAL_LINKS.map((link, index) => (
+                                {legalLinks.map((link, index) => (
                                     <span key={link.href} className="flex items-center">
                                         {index > 0 && <Separator orientation="vertical" className="mx-2 h-4" />}
                                         <Link href={link.href} className="text-xs text-muted-foreground transition-colors hover:text-primary">
@@ -461,7 +441,7 @@ const Footer = () => {
 
                             {/* Copyright */}
                             <p className="text-center text-xs text-muted-foreground">
-                                © {currentYear} {COMPANY_INFO.copyrightText}
+                                © {currentYear} {t('footer.copyright')}
                             </p>
                         </div>
                     </div>

@@ -392,7 +392,40 @@
         "card3_description": "Après réussite de l'examen, recevez votre certificat ISTQB® reconnu dans plus de 120 pays et inscrivez-vous au registre international."
     },
     "footer": {
-        "all_rights_reserved": "Tous droits réservés"
+        "all_rights_reserved": "Tous droits réservés",
+        "description": "Le Comité Ivoirien pour les Tests Logiciels (CITL) est une association à but non lucratif dédiée à la promotion et au développement des compétences en tests logiciels en Côte d'Ivoire.",
+        "follow_us": "Suivez-nous",
+        "copyright": "CITL - Comité Ivoirien pour les Tests Logiciels. Tous droits réservés.",
+        "sections": {
+            "about": {
+                "title": "À propos",
+                "about_istqb": "À propos de l'ISTQB",
+                "about_citl": "À propos du CITL",
+                "vision": "Notre vision",
+                "missions": "Nos missions",
+                "executive_board": "Le bureau exécutif",
+                "members": "Membres du CITL"
+            },
+            "training": {
+                "title": "Formation & Examens",
+                "find_training": "Trouver un organisme de formation",
+                "register_exam": "S'inscrire à un examen",
+                "become_training": "Devenir organisme de formation"
+            },
+            "info": {
+                "title": "Informations",
+                "certifications": "Certifications",
+                "news": "Actualités",
+                "events": "Événements",
+                "glossary": "Glossaire",
+                "help": "Aide"
+            }
+        },
+        "legal": {
+            "privacy_policy": "Politique de confidentialité",
+            "terms": "Conditions d'utilisation",
+            "help": "Aide"
+        }
     },
     "cookie_consent": {
         "title": "Bienvenue sur CITL",
@@ -1163,5 +1196,54 @@
         "domain_14": "Formation et Mentorat",
         "conclusion": "Les groupes de travail du CITL sont ouverts à tous ceux qui souhaitent contribuer activement à l'essor du testing logiciel en Côte d'Ivoire. Si vous êtes passionné par la qualité logicielle, rejoignez-nous pour partager vos connaissances, développer de nouvelles compétences et aider à façonner l'avenir du testing dans notre pays.",
         "cta_text": "Rejoindre un groupe de travail"
+    },
+    "auth": {
+        "register": {
+            "unauthorized_title": "Accès non autorisé",
+            "unauthorized_heading": "Inscription désactivée",
+            "unauthorized_message": "L'inscription publique n'est pas disponible sur cette plateforme. Veuillez contacter un administrateur pour créer un compte.",
+            "redirect_message": "Vous serez redirigé vers la page d'accueil dans {{seconds}} secondes...",
+            "go_home": "Retourner à l'accueil"
+        }
+    },
+    "dashboard": {
+        "users": {
+            "title": "Gestion des utilisateurs",
+            "add_user": "Ajouter un utilisateur",
+            "edit_user": "Modifier l'utilisateur",
+            "create_user": "Créer un utilisateur",
+            "name": "Nom",
+            "email": "Email",
+            "role": "Rôle",
+            "password": "Mot de passe",
+            "password_confirmation": "Confirmer le mot de passe",
+            "verified": "Vérifié",
+            "not_verified": "Non vérifié",
+            "created_at": "Créé le",
+            "actions": "Actions",
+            "admin": "Administrateur",
+            "manager": "Gestionnaire",
+            "admin_description": "Accès complet à toutes les fonctionnalités du dashboard, y compris la gestion des utilisateurs.",
+            "manager_description": "Accès limité au dashboard. Peut gérer le contenu mais ne peut pas gérer les utilisateurs.",
+            "delete_confirm_title": "Supprimer l'utilisateur",
+            "delete_confirm_message": "Êtes-vous sûr de vouloir supprimer l'utilisateur \"{{name}}\" ? Cette action est irréversible.",
+            "user_created": "Utilisateur créé avec succès",
+            "user_updated": "Utilisateur mis à jour avec succès",
+            "user_deleted": "Utilisateur supprimé avec succès",
+            "cannot_delete_self": "Vous ne pouvez pas supprimer votre propre compte",
+            "no_users": "Aucun utilisateur trouvé",
+            "search_placeholder": "Nom ou email...",
+            "all_roles": "Tous les rôles",
+            "filter": "Filtrer",
+            "reset": "Réinitialiser",
+            "refresh": "Actualiser",
+            "previous": "Précédent",
+            "next": "Suivant",
+            "save": "Enregistrer",
+            "cancel": "Annuler",
+            "back_to_list": "Retour à la liste",
+            "password_optional": "Nouveau mot de passe (optionnel)",
+            "password_keep_current": "Laisser vide pour conserver l'actuel"
+        }
     }
 }

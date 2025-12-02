@@ -20,6 +20,7 @@ import {
 import { ArrowUpDown, Edit, Plus, RefreshCw, Search, Shield, Trash2, UserCog, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface Role {
     id: number;
@@ -52,6 +53,7 @@ interface Props {
 }
 
 export default function UsersIndex({ users, roles, filters }: Props) {
+    const { t, i18n } = useTranslation();
     const [sorting, setSorting] = useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [globalFilter, setGlobalFilter] = useState(filters.search || '');
@@ -108,7 +110,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
             only: ['users'],
             onFinish: () => {
                 setIsRefreshing(false);
-                toast.success('Liste actualisée');
+                toast.success(t('dashboard.users.list_refreshed'));
             },
         });
     };
@@ -119,12 +121,12 @@ export default function UsersIndex({ users, roles, filters }: Props) {
         router.delete(`/dashboard/users/${userToDelete.id}`, {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success('Utilisateur supprimé avec succès');
+                toast.success(t('dashboard.users.deleted_success'));
                 setShowDeleteModal(false);
                 setUserToDelete(null);
             },
             onError: (errors) => {
-                const errorMessage = Object.values(errors)[0] || 'Erreur lors de la suppression';
+                const errorMessage = Object.values(errors)[0] || t('dashboard.users.deleted_error');
                 toast.error(errorMessage as string);
             },
         });
@@ -165,14 +167,14 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                 return (
                     <Badge className="bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
                         <Shield className="mr-1 h-3 w-3" />
-                        Admin
+                        {t('dashboard.users.role_admin')}
                     </Badge>
                 );
             case 'manager':
                 return (
                     <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
                         <UserCog className="mr-1 h-3 w-3" />
-                        Manager
+                        {t('dashboard.users.role_manager')}
                     </Badge>
                 );
             default:
@@ -185,7 +187,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
             accessorKey: 'name',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
-                    Nom
+                    {t('dashboard.users.name')}
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
@@ -195,7 +197,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
             accessorKey: 'email',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
-                    Email
+                    {t('dashboard.users.email')}
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
@@ -203,7 +205,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
         },
         {
             accessorKey: 'roles',
-            header: 'Rôle',
+            header: t('dashboard.users.role'),
             cell: ({ row }) => {
                 const userRoles = row.original.roles;
                 return (
@@ -217,15 +219,15 @@ export default function UsersIndex({ users, roles, filters }: Props) {
         },
         {
             accessorKey: 'email_verified_at',
-            header: 'Vérifié',
+            header: t('dashboard.users.verified'),
             cell: ({ row }) => {
                 const verified = row.getValue('email_verified_at') as string | null;
                 return verified ? (
                     <Badge variant="default" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
-                        Vérifié
+                        {t('dashboard.users.verified')}
                     </Badge>
                 ) : (
-                    <Badge variant="secondary">Non vérifié</Badge>
+                    <Badge variant="secondary">{t('dashboard.users.not_verified')}</Badge>
                 );
             },
         },
@@ -233,13 +235,13 @@ export default function UsersIndex({ users, roles, filters }: Props) {
             accessorKey: 'created_at',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
-                    Créé le
+                    {t('dashboard.users.created_at')}
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
             cell: ({ row }) => {
                 const date = new Date(row.getValue('created_at'));
-                return <div className="text-sm">{date.toLocaleDateString('fr-FR')}</div>;
+                return <div className="text-sm">{date.toLocaleDateString(i18n.language === 'fr' ? 'fr-FR' : 'en-US')}</div>;
             },
         },
         {
@@ -281,22 +283,22 @@ export default function UsersIndex({ users, roles, filters }: Props) {
 
     return (
         <AppLayout>
-            <Head title="Gestion des utilisateurs" />
+            <Head title={t('dashboard.users.title')} />
 
             <div className="container mx-auto px-4 py-8">
                 <div className="mb-6 flex items-center justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold">Gestion des utilisateurs</h1>
-                        <p className="mt-1 text-gray-600 dark:text-gray-400">Total: {users.total} utilisateurs</p>
+                        <h1 className="text-3xl font-bold">{t('dashboard.users.title')}</h1>
+                        <p className="mt-1 text-gray-600 dark:text-gray-400">{t('dashboard.users.total', { count: users.total })}</p>
                     </div>
                     <div className="flex gap-2">
                         <Button variant="outline" size="sm" onClick={handleRefresh} disabled={isRefreshing}>
                             <RefreshCw className={`mr-2 h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-                            Actualiser
+                            {t('dashboard.users.refresh')}
                         </Button>
                         <Button onClick={handleOpenCreateModal}>
                             <Plus className="mr-2 h-4 w-4" />
-                            Ajouter un utilisateur
+                            {t('dashboard.users.add_user')}
                         </Button>
                     </div>
                 </div>
@@ -305,23 +307,28 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                 <div className="mb-6 rounded-lg border bg-card p-4">
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div>
-                            <label className="mb-2 block text-sm font-medium">Rechercher</label>
+                            <label className="mb-2 block text-sm font-medium">{t('dashboard.users.search')}</label>
                             <div className="relative">
                                 <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
-                                <Input placeholder="Nom ou email..." value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} className="pl-9" />
+                                <Input
+                                    placeholder={t('dashboard.users.search_placeholder')}
+                                    value={globalFilter}
+                                    onChange={(e) => setGlobalFilter(e.target.value)}
+                                    className="pl-9"
+                                />
                             </div>
                         </div>
                         <div>
-                            <label className="mb-2 block text-sm font-medium">Rôle</label>
+                            <label className="mb-2 block text-sm font-medium">{t('dashboard.users.role')}</label>
                             <Select value={roleFilter || 'all'} onValueChange={(value) => setRoleFilter(value === 'all' ? '' : value)}>
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Tous les rôles" />
+                                    <SelectValue placeholder={t('dashboard.users.all_roles')} />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="all">Tous les rôles</SelectItem>
+                                    <SelectItem value="all">{t('dashboard.users.all_roles')}</SelectItem>
                                     {roles.map((role) => (
                                         <SelectItem key={role.id} value={role.name}>
-                                            {role.name === 'admin' ? 'Administrateur' : role.name === 'manager' ? 'Gestionnaire' : role.name}
+                                            {role.name === 'admin' ? t('dashboard.users.role_admin') : t('dashboard.users.role_manager')}
                                         </SelectItem>
                                     ))}
                                 </SelectContent>
@@ -331,7 +338,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                             {hasActiveFilters && (
                                 <Button variant="outline" onClick={handleReset} className="w-full">
                                     <X className="mr-2 h-4 w-4" />
-                                    Réinitialiser les filtres
+                                    {t('dashboard.users.reset_filters')}
                                 </Button>
                             )}
                         </div>
@@ -357,7 +364,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                                 {table.getRowModel().rows.length === 0 ? (
                                     <tr>
                                         <td colSpan={columns.length} className="px-4 py-8 text-center text-gray-500">
-                                            Aucun utilisateur trouvé
+                                            {t('dashboard.users.no_users')}
                                         </td>
                                     </tr>
                                 ) : (
@@ -378,7 +385,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                     {/* Pagination */}
                     <div className="flex items-center justify-between border-t px-4 py-3">
                         <div className="text-sm text-gray-600 dark:text-gray-400">
-                            Page {users.current_page} sur {users.last_page}
+                            {t('dashboard.users.page_info', { current: users.current_page, total: users.last_page })}
                         </div>
                         <div className="flex gap-2">
                             <Button
@@ -387,7 +394,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                                 onClick={() => router.get(`/dashboard/users?page=${users.current_page - 1}`)}
                                 disabled={users.current_page === 1}
                             >
-                                Précédent
+                                {t('dashboard.users.previous')}
                             </Button>
                             <Button
                                 variant="outline"
@@ -395,7 +402,7 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                                 onClick={() => router.get(`/dashboard/users?page=${users.current_page + 1}`)}
                                 disabled={users.current_page === users.last_page}
                             >
-                                Suivant
+                                {t('dashboard.users.next')}
                             </Button>
                         </div>
                     </div>
@@ -409,8 +416,8 @@ export default function UsersIndex({ users, roles, filters }: Props) {
                 isOpen={showDeleteModal}
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleDelete}
-                title="Supprimer l'utilisateur"
-                message={`Êtes-vous sûr de vouloir supprimer l'utilisateur "${userToDelete?.name}" ? Cette action est irréversible.`}
+                title={t('dashboard.users.delete_confirm_title')}
+                message={t('dashboard.users.delete_confirm_message', { name: userToDelete?.name })}
             />
         </AppLayout>
     );

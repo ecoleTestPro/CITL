@@ -7,6 +7,7 @@ import { useForm } from '@inertiajs/react';
 import { Eye, EyeOff, Save, Shield, UserCog } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface Role {
     id: number;
@@ -29,6 +30,7 @@ interface Props {
 }
 
 export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props) {
+    const { t } = useTranslation();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -66,12 +68,12 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
         const options = {
             preserveScroll: true,
             onSuccess: () => {
-                toast.success(isEditing ? 'Utilisateur mis à jour avec succès' : 'Utilisateur créé avec succès');
+                toast.success(isEditing ? t('dashboard.users.updated_success') : t('dashboard.users.created_success'));
                 onClose();
                 onSuccess();
             },
             onError: () => {
-                toast.error(isEditing ? 'Erreur lors de la mise à jour' : 'Erreur lors de la création');
+                toast.error(isEditing ? t('dashboard.users.updated_error') : t('dashboard.users.created_error'));
             },
         };
 
@@ -90,9 +92,9 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
     const getRoleDescription = (roleName: string) => {
         switch (roleName) {
             case 'admin':
-                return 'Accès complet à toutes les fonctionnalités du dashboard, y compris la gestion des utilisateurs.';
+                return t('dashboard.users.role_admin_description');
             case 'manager':
-                return "Accès limité au dashboard. Peut gérer le contenu mais ne peut pas gérer les utilisateurs.";
+                return t('dashboard.users.role_manager_description');
             default:
                 return '';
         }
@@ -102,35 +104,35 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
         <Dialog open={isOpen} onOpenChange={handleClose}>
             <DialogContent className="sm:max-w-[500px]">
                 <DialogHeader>
-                    <DialogTitle>{isEditing ? 'Modifier l\'utilisateur' : 'Créer un utilisateur'}</DialogTitle>
+                    <DialogTitle>{isEditing ? t('dashboard.users.edit_title') : t('dashboard.users.create_title')}</DialogTitle>
                     <DialogDescription>
                         {isEditing
-                            ? `Modifiez les informations de ${user?.name}. Laissez le mot de passe vide pour le conserver.`
-                            : 'Ajoutez un nouvel utilisateur au système avec un rôle spécifique.'}
+                            ? t('dashboard.users.edit_description', { name: user?.name })
+                            : t('dashboard.users.create_description')}
                     </DialogDescription>
                 </DialogHeader>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="name">Nom complet</Label>
+                        <Label htmlFor="name">{t('dashboard.users.full_name')}</Label>
                         <Input
                             id="name"
                             value={data.name}
                             onChange={(e) => setData('name', e.target.value)}
-                            placeholder="Jean Dupont"
+                            placeholder={t('dashboard.users.full_name_placeholder')}
                             className={errors.name ? 'border-red-500' : ''}
                         />
                         {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="email">Adresse email</Label>
+                        <Label htmlFor="email">{t('dashboard.users.email')}</Label>
                         <Input
                             id="email"
                             type="email"
                             value={data.email}
                             onChange={(e) => setData('email', e.target.value)}
-                            placeholder="jean.dupont@citl-istqb.org"
+                            placeholder={t('dashboard.users.email_placeholder')}
                             className={errors.email ? 'border-red-500' : ''}
                         />
                         {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
@@ -138,7 +140,7 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
 
                     <div className="space-y-2">
                         <Label htmlFor="password">
-                            {isEditing ? 'Nouveau mot de passe (optionnel)' : 'Mot de passe'}
+                            {isEditing ? t('dashboard.users.new_password_optional') : t('dashboard.users.password')}
                         </Label>
                         <div className="relative">
                             <Input
@@ -146,7 +148,7 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
                                 type={showPassword ? 'text' : 'password'}
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
-                                placeholder={isEditing ? 'Laisser vide pour conserver' : '••••••••'}
+                                placeholder={isEditing ? t('dashboard.users.password_keep_placeholder') : '••••••••'}
                                 className={errors.password ? 'border-red-500 pr-10' : 'pr-10'}
                             />
                             <button
@@ -161,7 +163,7 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="password_confirmation">Confirmer le mot de passe</Label>
+                        <Label htmlFor="password_confirmation">{t('dashboard.users.confirm_password')}</Label>
                         <div className="relative">
                             <Input
                                 id="password_confirmation"
@@ -182,10 +184,10 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="role">Rôle</Label>
+                        <Label htmlFor="role">{t('dashboard.users.role')}</Label>
                         <Select value={data.role} onValueChange={(value) => setData('role', value)}>
                             <SelectTrigger className={errors.role ? 'border-red-500' : ''}>
-                                <SelectValue placeholder="Sélectionner un rôle" />
+                                <SelectValue placeholder={t('dashboard.users.select_role')} />
                             </SelectTrigger>
                             <SelectContent>
                                 {roles.map((role) => (
@@ -196,7 +198,7 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
                                             ) : (
                                                 <UserCog className="h-4 w-4 text-blue-500" />
                                             )}
-                                            {role.name === 'admin' ? 'Administrateur' : 'Gestionnaire'}
+                                            {role.name === 'admin' ? t('dashboard.users.role_admin') : t('dashboard.users.role_manager')}
                                         </div>
                                     </SelectItem>
                                 ))}
@@ -210,11 +212,11 @@ export function UserFormModal({ isOpen, onClose, user, roles, onSuccess }: Props
 
                     <div className="flex justify-end gap-3 pt-4">
                         <Button type="button" variant="outline" onClick={handleClose}>
-                            Annuler
+                            {t('common.cancel')}
                         </Button>
                         <Button type="submit" disabled={processing}>
                             <Save className="mr-2 h-4 w-4" />
-                            {processing ? 'Enregistrement...' : isEditing ? 'Enregistrer' : 'Créer'}
+                            {processing ? t('common.saving') : isEditing ? t('common.save') : t('common.create')}
                         </Button>
                     </div>
                 </form>

@@ -31,6 +31,9 @@ function AccreditedOrganizations() {
                 title={t('training.accredited_organizations_title')}
                 description={t('training.accredited_organizations_subtitle')}
             />
+            
+            {/* Organizations List Section */}
+            <OrganizationsListSection />
 
             {/* About Overview Section */}
             <AboutOverview
@@ -41,9 +44,6 @@ function AccreditedOrganizations() {
                 imageSrc="/assets/images/ads/ads-2.jpg"
                 imageAlt={t('training.accredited_organizations_title')}
             />
-
-            {/* Organizations List Section */}
-            <OrganizationsListSection />
         </PublicLayout>
     );
 }

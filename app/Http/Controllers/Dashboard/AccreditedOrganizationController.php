@@ -55,6 +55,7 @@ class AccreditedOrganizationController extends Controller
             'phone' => 'nullable|string|max:50',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
+            'certifications' => 'nullable|string',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -85,6 +86,7 @@ class AccreditedOrganizationController extends Controller
             'phone' => 'nullable|string|max:50',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
+            'certifications' => 'nullable|string',
             'is_active' => 'nullable|boolean',
         ]);
 

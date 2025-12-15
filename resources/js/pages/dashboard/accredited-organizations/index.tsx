@@ -31,6 +31,7 @@ interface AccreditedOrganization {
     phone: string | null;
     logo: string | null;
     description: string | null;
+    certifications: string | null;
     is_active: boolean;
     order: number;
     created_at: string;
@@ -206,6 +207,27 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
                             </div>
                         )}
                         {!org.website && !org.email && !org.phone && <span className="text-sm text-gray-400">-</span>}
+                    </div>
+                );
+            },
+        },
+        {
+            accessorKey: 'certifications',
+            header: 'Certifications',
+            cell: ({ row }) => {
+                const certs = row.getValue('certifications') as string | null;
+                if (!certs) return <span className="text-sm text-gray-400">-</span>;
+
+                // Split by newline and render each certification on its own line
+                return (
+                    <div className="space-y-1">
+                        {certs.split(/\r?\n/).map((line, idx) => (
+                            line.trim() ? (
+                                <div key={idx} className="text-sm text-gray-700">
+                                    {line}
+                                </div>
+                            ) : null
+                        ))}
                     </div>
                 );
             },

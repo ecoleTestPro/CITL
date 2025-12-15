@@ -19,6 +19,7 @@ interface AccreditedOrganization {
     phone: string | null;
     logo: string | null;
     description: string | null;
+    certifications: string | null;
     is_active: boolean;
 }
 
@@ -42,6 +43,7 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
         phone: organization?.phone || '',
         logo: null as File | null,
         description: organization?.description || '',
+        certifications: organization?.certifications || '',
         is_active: organization?.is_active ?? true,
     });
 
@@ -56,6 +58,7 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                 phone: organization.phone || '',
                 logo: null,
                 description: organization.description || '',
+                certifications: organization.certifications || '',
                 is_active: organization.is_active,
             });
         } else {
@@ -257,6 +260,20 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                                 disabled={processing}
                             />
                             {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
+                        </div>
+
+                        {/* Certifications */}
+                        <div className="space-y-2">
+                            <Label htmlFor="certifications">Certifications</Label>
+                            <Textarea
+                                id="certifications"
+                                value={data.certifications}
+                                onChange={(e) => setData('certifications', e.target.value)}
+                                placeholder="Liste des certifications disponibles (une par ligne)&#10;Ex:&#10;Niveau Fondation – CTFL – Version 4.0 – Français&#10;Niveau Fondation Agile – Testeur Agile – Français"
+                                rows={6}
+                                disabled={processing}
+                            />
+                            {errors.certifications && <p className="text-sm text-red-500">{errors.certifications}</p>}
                         </div>
 
                         {/* Active Status */}

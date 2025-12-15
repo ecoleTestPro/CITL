@@ -19,6 +19,7 @@ class AccreditedOrganization extends Model
         'phone',
         'logo',
         'description',
+        'certifications',
         'is_active',
     ];
 

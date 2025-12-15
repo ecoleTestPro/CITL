@@ -18,7 +18,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, ExternalLink, Globe, Mail, Phone, Plus, RefreshCw, Search, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface AccreditedOrganization {
@@ -116,27 +116,26 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
         router.reload({ only: ['organizations', 'countries'] });
     };
 
-    const handleSearch = () => {
-        router.get(
-            '/dashboard/accredited-organizations',
-            {
-                search: globalFilter || undefined,
-                country: countryFilter || undefined,
-                is_active: statusFilter || undefined,
-            },
-            {
-                preserveState: true,
-                preserveScroll: true,
-            },
-        );
-    };
+    // Auto-apply filters when they change
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            router.get(
+                '/dashboard/accredited-organizations',
+                {
+                    search: globalFilter || undefined,
+                    country: countryFilter || undefined,
+                    is_active: statusFilter || undefined,
+                },
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                },
+            );
+        }, 300); // Debounce for 300ms
 
-    const handleReset = () => {
-        setGlobalFilter('');
-        setCountryFilter('');
-        setStatusFilter('');
-        router.get('/dashboard/accredited-organizations', {}, { preserveState: true, preserveScroll: true });
-    };
+        return () => clearTimeout(timeoutId);
+    }, [globalFilter, countryFilter, statusFilter]);
 
     const columns: ColumnDef<AccreditedOrganization>[] = [
         {
@@ -288,7 +287,7 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
 
                 {/* Filters */}
                 <div className="mb-6 rounded-lg border bg-card p-4">
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div>
                             <label className="mb-2 block text-sm font-medium">Rechercher</label>
                             <div className="relative">
@@ -329,14 +328,6 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
                                     <SelectItem value="0">Inactif</SelectItem>
                                 </SelectContent>
                             </Select>
-                        </div>
-                        <div className="flex items-end gap-2">
-                            <Button onClick={handleSearch} className="flex-1">
-                                Filtrer
-                            </Button>
-                            <Button variant="outline" onClick={handleReset}>
-                                Réinitialiser
-                            </Button>
                         </div>
                     </div>
                 </div>

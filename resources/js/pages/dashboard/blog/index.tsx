@@ -18,7 +18,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, Eye, Plus, RefreshCw, Search, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface Blog {
@@ -134,43 +134,26 @@ export default function BlogIndex({ blogs, categories, filters }: Props) {
         router.reload({ only: ['blogs'] });
     };
 
-    const handleTogglePublish = (blog: Blog) => {
-        router.post(
-            `/dashboard/blog/${blog.id}/toggle-publish`,
-            {},
-            {
-                preserveScroll: true,
-                onSuccess: () => {
-                    toast.success(blog.is_published ? 'Article dépublié avec succès' : 'Article publié avec succès');
+    // Auto-apply filters when they change
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            router.get(
+                '/dashboard/blog',
+                {
+                    search: globalFilter || undefined,
+                    category_id: categoryFilter || undefined,
+                    is_published: statusFilter || undefined,
                 },
-                onError: () => {
-                    toast.error('Erreur lors de la modification du statut');
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
                 },
-            },
-        );
-    };
+            );
+        }, 300); // Debounce for 300ms
 
-    const handleSearch = () => {
-        router.get(
-            '/dashboard/blog',
-            {
-                search: globalFilter || undefined,
-                category_id: categoryFilter || undefined,
-                is_published: statusFilter || undefined,
-            },
-            {
-                preserveState: true,
-                preserveScroll: true,
-            },
-        );
-    };
-
-    const handleReset = () => {
-        setGlobalFilter('');
-        setCategoryFilter('');
-        setStatusFilter('');
-        router.get('/dashboard/blog', {}, { preserveState: true, preserveScroll: true });
-    };
+        return () => clearTimeout(timeoutId);
+    }, [globalFilter, categoryFilter, statusFilter]);
 
     const handlePreview = (slug: string) => {
         window.open(`/blog/${slug}`, '_blank');
@@ -304,7 +287,7 @@ export default function BlogIndex({ blogs, categories, filters }: Props) {
 
                 {/* Filters */}
                 <div className="mb-6 rounded-lg border bg-card p-4">
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div>
                             <label className="mb-2 block text-sm font-medium">Rechercher</label>
                             <div className="relative">
@@ -340,14 +323,6 @@ export default function BlogIndex({ blogs, categories, filters }: Props) {
                                     <SelectItem value="0">Brouillon</SelectItem>
                                 </SelectContent>
                             </Select>
-                        </div>
-                        <div className="flex items-end gap-2">
-                            <Button onClick={handleSearch} className="flex-1">
-                                Filtrer
-                            </Button>
-                            <Button variant="outline" onClick={handleReset}>
-                                Réinitialiser
-                            </Button>
                         </div>
                     </div>
                 </div>

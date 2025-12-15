@@ -18,7 +18,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, Plus, RefreshCw, Search, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface Glossary {
@@ -113,27 +113,26 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
         router.reload({ only: ['glossaries'] });
     };
 
-    const handleSearch = () => {
-        router.get(
-            '/dashboard/glossary',
-            {
-                search: globalFilter || undefined,
-                letter: letterFilter || undefined,
-                is_active: statusFilter || undefined,
-            },
-            {
-                preserveState: true,
-                preserveScroll: true,
-            },
-        );
-    };
+    // Auto-apply filters when they change
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            router.get(
+                '/dashboard/glossary',
+                {
+                    search: globalFilter || undefined,
+                    letter: letterFilter || undefined,
+                    is_active: statusFilter || undefined,
+                },
+                {
+                    preserveState: true,
+                    preserveScroll: true,
+                    replace: true,
+                },
+            );
+        }, 300); // Debounce for 300ms
 
-    const handleReset = () => {
-        setGlobalFilter('');
-        setLetterFilter('');
-        setStatusFilter('');
-        router.get('/dashboard/glossary', {}, { preserveState: true, preserveScroll: true });
-    };
+        return () => clearTimeout(timeoutId);
+    }, [globalFilter, letterFilter, statusFilter]);
 
     const columns: ColumnDef<Glossary>[] = [
         {
@@ -246,7 +245,7 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
 
                 {/* Filters */}
                 <div className="mb-6 rounded-lg border bg-card p-4">
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div>
                             <label className="mb-2 block text-sm font-medium">Rechercher</label>
                             <div className="relative">
@@ -287,14 +286,6 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                                     <SelectItem value="0">Inactif</SelectItem>
                                 </SelectContent>
                             </Select>
-                        </div>
-                        <div className="flex items-end gap-2">
-                            <Button onClick={handleSearch} className="flex-1">
-                                Filtrer
-                            </Button>
-                            <Button variant="outline" onClick={handleReset}>
-                                Réinitialiser
-                            </Button>
                         </div>
                     </div>
                 </div>

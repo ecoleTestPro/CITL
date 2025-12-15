@@ -18,7 +18,7 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, Plus, RefreshCw, Search, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 
 interface Faq {
@@ -76,19 +76,25 @@ export default function FaqsIndex({ faqs, categories, filters }: Props) {
         });
     };
 
-    const handleFilter = () => {
-        const params: any = {};
+    // Auto-apply filters when they change
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            const params: any = {};
 
-        if (selectedCategory !== 'all') params.category = selectedCategory;
-        if (selectedLocale !== 'all') params.locale = selectedLocale;
-        if (selectedStatus !== 'all') params.is_active = selectedStatus === 'true';
-        if (globalFilter) params.search = globalFilter;
+            if (selectedCategory !== 'all') params.category = selectedCategory;
+            if (selectedLocale !== 'all') params.locale = selectedLocale;
+            if (selectedStatus !== 'all') params.is_active = selectedStatus === 'true';
+            if (globalFilter) params.search = globalFilter;
 
-        router.get('/dashboard/faqs', params, {
-            preserveState: true,
-            preserveScroll: true,
-        });
-    };
+            router.get('/dashboard/faqs', params, {
+                preserveState: true,
+                preserveScroll: true,
+                replace: true,
+            });
+        }, 300); // Debounce for 300ms
+
+        return () => clearTimeout(timeoutId);
+    }, [globalFilter, selectedCategory, selectedLocale, selectedStatus]);
 
     const handleDelete = () => {
         if (!faqToDelete) return;
@@ -247,14 +253,13 @@ export default function FaqsIndex({ faqs, categories, filters }: Props) {
                 </div>
 
                 <div className="rounded-lg border bg-white p-6 shadow-sm dark:bg-gray-900">
-                    <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-4">
+                    <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
                             <Input
                                 placeholder="Rechercher..."
                                 value={globalFilter}
                                 onChange={(e) => setGlobalFilter(e.target.value)}
-                                onKeyDown={(e) => e.key === 'Enter' && handleFilter()}
                                 className="pl-9"
                             />
                         </div>
@@ -296,13 +301,10 @@ export default function FaqsIndex({ faqs, categories, filters }: Props) {
                         </Select>
                     </div>
 
-                    <div className="mb-4 flex items-center justify-between">
+                    <div className="mb-4 flex items-center justify-end">
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                             {faqs.total} FAQ{faqs.total > 1 ? 's' : ''} au total
                         </p>
-                        <Button onClick={handleFilter} size="sm">
-                            Filtrer
-                        </Button>
                     </div>
 
                     <div className="overflow-x-auto rounded-md border">

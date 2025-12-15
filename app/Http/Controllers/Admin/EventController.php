@@ -43,7 +43,6 @@ class EventController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'string',
             'is_active' => 'boolean',
-            'order' => 'integer',
         ]);
 
         $event = $this->eventRepository->create($validated);
@@ -67,7 +66,6 @@ class EventController extends Controller
             'tags' => 'nullable|array',
             'tags.*' => 'string',
             'is_active' => 'boolean',
-            'order' => 'integer',
         ]);
 
         $event = $this->eventRepository->update($id, $validated);

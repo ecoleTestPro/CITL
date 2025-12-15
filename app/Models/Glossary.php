@@ -16,13 +16,11 @@ class Glossary extends Model
         'definition_fr',
         'category',
         'letter',
-        'order',
         'is_active',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'order' => 'integer',
     ];
 
     /**
@@ -39,16 +37,6 @@ class Glossary extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
-    }
-
-    /**
-     * Scope to order by custom order
-     */
-    public function scopeOrdered($query, $locale = 'fr')
-    {
-        $termColumn = $locale === 'en' ? 'term_en' : 'term_fr';
-
-        return $query->orderBy('order')->orderBy($termColumn);
     }
 
     /**

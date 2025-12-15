@@ -56,7 +56,6 @@ class AccreditedOrganizationController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'is_active' => 'nullable|boolean',
-            'order' => 'nullable|integer',
         ]);
 
         // Handle logo upload
@@ -65,7 +64,6 @@ class AccreditedOrganizationController extends Controller
         }
 
         $validated['is_active'] = $validated['is_active'] ?? true;
-        $validated['order'] = $validated['order'] ?? 0;
 
         $this->organizationRepo->create($validated);
 
@@ -88,7 +86,6 @@ class AccreditedOrganizationController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
             'is_active' => 'nullable|boolean',
-            'order' => 'nullable|integer',
         ]);
 
         $organization = $this->organizationRepo->find($id);

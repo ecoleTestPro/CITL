@@ -1,6 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
-import { Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { Link } from '@inertiajs/react';
 
 interface Certification {
     id: number;
@@ -29,6 +30,7 @@ interface Props {
 }
 
 export default function CertificationsIndex({ certifications }: Props) {
+    const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
 
     const filteredCertifications = certifications.filter(
@@ -38,15 +40,15 @@ export default function CertificationsIndex({ certifications }: Props) {
     );
 
     return (
-        <AppLayout title="Gestion des Certifications">
+        <AppLayout title={t('dashboard.certifications.page_title')}>
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Certifications</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.all_certifications')}</h1>
                     <Link
                         href="/dashboard/certifications/create"
                         className="rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
                     >
-                        Ajouter une certification
+                        {t('dashboard.certifications.add_certification')}
                     </Link>
                 </div>
 
@@ -54,7 +56,7 @@ export default function CertificationsIndex({ certifications }: Props) {
                     <div className="mb-6">
                         <input
                             type="text"
-                            placeholder="Rechercher une certification..."
+                            placeholder={t('dashboard.certifications.search_placeholder')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
@@ -65,19 +67,19 @@ export default function CertificationsIndex({ certifications }: Props) {
                         <table className="w-full">
                             <thead className="border-b border-gray-200 dark:border-gray-700">
                                 <tr>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Titre</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Catégorie</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Questions</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Durée</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Statut</th>
-                                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-gray-100">Actions</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.title')}</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.category')}</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.questions')}</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.duration')}</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.status')}</th>
+                                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.actions')}</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {filteredCertifications.length === 0 ? (
                                     <tr>
                                         <td colSpan={6} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
-                                            Aucune certification trouvée
+                                            {t('dashboard.certifications.no_certifications_found')}
                                         </td>
                                     </tr>
                                 ) : (
@@ -99,11 +101,11 @@ export default function CertificationsIndex({ certifications }: Props) {
                                             <td className="px-4 py-4">
                                                 {cert.is_active ? (
                                                     <span className="inline-flex rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                                                        Active
+                                                        {t('dashboard.certifications.status_active')}
                                                     </span>
                                                 ) : (
                                                     <span className="inline-flex rounded-full bg-gray-100 px-2 py-1 text-xs font-medium text-gray-800">
-                                                        Inactive
+                                                        {t('dashboard.certifications.status_inactive')}
                                                     </span>
                                                 )}
                                             </td>
@@ -113,7 +115,7 @@ export default function CertificationsIndex({ certifications }: Props) {
                                                         href={`/dashboard/certifications/${cert.id}/edit`}
                                                         className="text-sm text-secondary hover:text-secondary/80"
                                                     >
-                                                        Modifier
+                                                        {t('dashboard.certifications.edit')}
                                                     </Link>
                                                     <Link
                                                         href={`/dashboard/certifications/${cert.id}`}
@@ -121,12 +123,12 @@ export default function CertificationsIndex({ certifications }: Props) {
                                                         as="button"
                                                         className="text-sm text-red-600 hover:text-red-800"
                                                         onClick={(e) => {
-                                                            if (!confirm('Êtes-vous sûr de vouloir supprimer cette certification ?')) {
+                                                            if (!confirm(t('dashboard.certifications.confirm_delete'))) {
                                                                 e.preventDefault();
                                                             }
                                                         }}
                                                     >
-                                                        Supprimer
+                                                        {t('dashboard.certifications.delete')}
                                                     </Link>
                                                 </div>
                                             </td>

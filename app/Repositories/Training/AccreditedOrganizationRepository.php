@@ -13,11 +13,11 @@ class AccreditedOrganizationRepository extends BaseRepository
     }
 
     /**
-     * Get all active organizations ordered
+     * Get all active organizations ordered by name
      */
     public function getAllActive()
     {
-        return $this->model->active()->ordered()->get();
+        return $this->model->active()->orderBy('name')->get();
     }
 
     /**
@@ -25,7 +25,7 @@ class AccreditedOrganizationRepository extends BaseRepository
      */
     public function getByCountry($country)
     {
-        return $this->model->byCountry($country)->active()->ordered()->get();
+        return $this->model->byCountry($country)->active()->orderBy('name')->get();
     }
 
     /**
@@ -33,7 +33,7 @@ class AccreditedOrganizationRepository extends BaseRepository
      */
     public function getAllGroupedByCountry()
     {
-        return $this->model->active()->ordered()->get()->groupBy('country');
+        return $this->model->active()->orderBy('country')->orderBy('name')->get()->groupBy('country');
     }
 
     /**
@@ -48,7 +48,7 @@ class AccreditedOrganizationRepository extends BaseRepository
                     ->orWhere('country', 'like', '%' . $term . '%');
             })
             ->active()
-            ->ordered()
+            ->orderBy('name')
             ->get();
     }
 
@@ -76,7 +76,7 @@ class AccreditedOrganizationRepository extends BaseRepository
             $query->where('is_active', $filters['is_active']);
         }
 
-        return $query->ordered()->paginate($perPage);
+        return $query->orderBy('name')->paginate($perPage);
     }
 
     /**

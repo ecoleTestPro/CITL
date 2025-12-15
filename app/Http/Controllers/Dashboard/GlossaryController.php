@@ -55,7 +55,6 @@ class GlossaryController extends Controller
             'definition_fr' => 'required|string',
             'category' => 'nullable|string|max:255',
             'letter' => 'required|string|size:1',
-            'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -94,7 +93,6 @@ class GlossaryController extends Controller
             'definition_fr' => 'required|string',
             'category' => 'nullable|string|max:255',
             'letter' => 'required|string|size:1',
-            'order' => 'nullable|integer',
             'is_active' => 'nullable|boolean',
         ]);
 

@@ -13,24 +13,22 @@ class EventRepository extends BaseRepository
     }
 
     /**
-     * Get all active events ordered by order and start_date
+     * Get all active events ordered by start_date
      */
     public function getAllActive()
     {
         return $this->model
             ->where('is_active', true)
-            ->orderBy('order', 'asc')
             ->orderBy('start_date', 'desc')
             ->get();
     }
 
     /**
-     * Get all events ordered for display
+     * Get all events ordered by start_date
      */
     public function getAllOrdered()
     {
         return $this->model
-            ->orderBy('order', 'asc')
             ->orderBy('start_date', 'desc')
             ->get();
     }
@@ -41,7 +39,6 @@ class EventRepository extends BaseRepository
     public function getPaginated($perPage = 15)
     {
         return $this->model
-            ->orderBy('order', 'asc')
             ->orderBy('start_date', 'desc')
             ->paginate($perPage);
     }

@@ -19,7 +19,6 @@ class Event extends Model
         'location',
         'tags',
         'is_active',
-        'order',
     ];
 
     protected $casts = [

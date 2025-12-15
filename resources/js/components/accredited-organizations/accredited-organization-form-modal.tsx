@@ -20,7 +20,6 @@ interface AccreditedOrganization {
     logo: string | null;
     description: string | null;
     is_active: boolean;
-    order: number;
 }
 
 interface AccreditedOrganizationFormModalProps {
@@ -44,7 +43,6 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
         logo: null as File | null,
         description: organization?.description || '',
         is_active: organization?.is_active ?? true,
-        order: organization?.order || 0,
     });
 
     useEffect(() => {
@@ -59,7 +57,6 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                 logo: null,
                 description: organization.description || '',
                 is_active: organization.is_active,
-                order: organization.order,
             });
         } else {
             reset();
@@ -260,20 +257,6 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                                 disabled={processing}
                             />
                             {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
-                        </div>
-
-                        {/* Order */}
-                        <div className="space-y-2">
-                            <Label htmlFor="order">Ordre d'affichage</Label>
-                            <Input
-                                id="order"
-                                type="number"
-                                value={data.order}
-                                onChange={(e) => setData('order', parseInt(e.target.value) || 0)}
-                                min="0"
-                                disabled={processing}
-                            />
-                            {errors.order && <p className="text-sm text-red-500">{errors.order}</p>}
                         </div>
 
                         {/* Active Status */}

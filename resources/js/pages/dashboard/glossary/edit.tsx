@@ -17,7 +17,6 @@ interface Glossary {
     definition: string;
     category: string | null;
     letter: string;
-    order: number;
     is_active: boolean;
 }
 
@@ -31,7 +30,6 @@ export default function GlossaryEdit({ glossary }: Props) {
         definition: glossary.definition,
         category: glossary.category || '',
         letter: glossary.letter,
-        order: glossary.order,
         is_active: glossary.is_active,
     });
 
@@ -130,12 +128,6 @@ export default function GlossaryEdit({ glossary }: Props) {
                                 </SelectContent>
                             </Select>
                             {errors.letter && <p className="text-sm text-red-500">{errors.letter}</p>}
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="order">Ordre d'affichage</Label>
-                            <Input id="order" type="number" value={data.order} onChange={(e) => setData('order', parseInt(e.target.value) || 0)} min="0" />
-                            {errors.order && <p className="text-sm text-red-500">{errors.order}</p>}
                         </div>
                     </div>
 

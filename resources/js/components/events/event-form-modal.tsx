@@ -19,7 +19,6 @@ interface Event {
     location: string | null;
     tags: string[] | null;
     is_active: boolean;
-    order: number;
 }
 
 interface Props {
@@ -39,7 +38,6 @@ export function EventFormModal({ isOpen, onClose, event, onSuccess }: Props) {
     const [tagInput, setTagInput] = useState('');
     const [tags, setTags] = useState<string[]>([]);
     const [isActive, setIsActive] = useState(true);
-    const [order, setOrder] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
@@ -52,7 +50,6 @@ export function EventFormModal({ isOpen, onClose, event, onSuccess }: Props) {
             setLocation(event.location || '');
             setTags(event.tags || []);
             setIsActive(event.is_active);
-            setOrder(event.order);
         } else {
             resetForm();
         }
@@ -68,7 +65,6 @@ export function EventFormModal({ isOpen, onClose, event, onSuccess }: Props) {
         setTagInput('');
         setTags([]);
         setIsActive(true);
-        setOrder(0);
     };
 
     const handleAddTag = () => {
@@ -226,18 +222,11 @@ export function EventFormModal({ isOpen, onClose, event, onSuccess }: Props) {
                         )}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="order">Ordre d'affichage</Label>
-                            <Input id="order" type="number" value={order} onChange={(e) => setOrder(parseInt(e.target.value) || 0)} min="0" />
-                        </div>
-
-                        <div className="flex items-center space-x-2 pt-8">
-                            <Switch id="is_active" checked={isActive} onCheckedChange={setIsActive} />
-                            <Label htmlFor="is_active" className="cursor-pointer">
-                                Événement actif
-                            </Label>
-                        </div>
+                    <div className="flex items-center space-x-2">
+                        <Switch id="is_active" checked={isActive} onCheckedChange={setIsActive} />
+                        <Label htmlFor="is_active" className="cursor-pointer">
+                            Événement actif
+                        </Label>
                     </div>
 
                     <DialogFooter>

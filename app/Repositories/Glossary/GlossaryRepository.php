@@ -13,11 +13,12 @@ class GlossaryRepository extends BaseRepository
     }
 
     /**
-     * Get all active glossaries ordered by letter and order
+     * Get all active glossaries ordered by letter and term
      */
     public function getAllActive(string $locale = 'fr')
     {
-        return $this->model->active()->ordered($locale)->get();
+        $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+        return $this->model->active()->orderBy('letter')->orderBy($termColumn)->get();
     }
 
     /**
@@ -25,7 +26,8 @@ class GlossaryRepository extends BaseRepository
      */
     public function getByLetter($letter, string $locale = 'fr')
     {
-        return $this->model->byLetter($letter)->active()->ordered($locale)->get();
+        $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+        return $this->model->byLetter($letter)->active()->orderBy($termColumn)->get();
     }
 
     /**
@@ -33,6 +35,7 @@ class GlossaryRepository extends BaseRepository
      */
     public function search($term, string $locale = 'fr')
     {
+        $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
         return $this->model
             ->where(function ($query) use ($term) {
                 $query->where('term_en', 'like', '%' . $term . '%')
@@ -41,7 +44,8 @@ class GlossaryRepository extends BaseRepository
                     ->orWhere('definition_fr', 'like', '%' . $term . '%');
             })
             ->active()
-            ->ordered($locale)
+            ->orderBy('letter')
+            ->orderBy($termColumn)
             ->get();
     }
 
@@ -50,7 +54,8 @@ class GlossaryRepository extends BaseRepository
      */
     public function getAllGroupedByLetter(string $locale = 'fr')
     {
-        return $this->model->active()->ordered($locale)->get()->groupBy('letter');
+        $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+        return $this->model->active()->orderBy('letter')->orderBy($termColumn)->get()->groupBy('letter');
     }
 
     /**
@@ -75,6 +80,7 @@ class GlossaryRepository extends BaseRepository
             $query->where('is_active', $filters['is_active']);
         }
 
-        return $query->ordered($locale)->paginate($perPage);
+        $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+        return $query->orderBy('letter')->orderBy($termColumn)->paginate($perPage);
     }
 }

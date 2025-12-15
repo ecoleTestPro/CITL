@@ -15,22 +15,40 @@ interface AccreditedOrganization {
     phone: string | null;
     logo: string | null;
     description: string | null;
+    certifications: string | null;
 }
 
 // Composant pour afficher le nom avec le logo
 function OrganizationName({ org }: { org: AccreditedOrganization }) {
+    const { t } = useTranslation();
+
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-3">
             {org.logo ? (
-                <img src={`/storage/${org.logo}`} alt={org.name} className="h-10 w-10 rounded-lg object-contain" />
+                (() => {
+                    const src = String(org.logo || '');
+                    const logoSrc = src.startsWith('http') || src.startsWith('https') ? src : `/storage/${src}`;
+                    return <img src={logoSrc} alt={org.name} className="h-10 w-10 rounded-lg object-contain" />;
+                })()
             ) : (
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-citl-orange/10">
                     <Globe className="h-5 w-5 text-citl-orange" />
                 </div>
             )}
-            <div>
-                <span className="font-medium text-gray-900 dark:text-white">{org.name}</span>
+            <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                    <span className="font-medium text-gray-900 dark:text-white break-words">{org.name}</span>
+                </div>
                 {org.city && <p className="text-xs text-gray-500 dark:text-gray-400">{org.city}</p>}
+
+                {org.certifications ? (
+                    <div className="mt-2">
+                        <div className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-1">
+                            {t('training.column_certifications')}
+                        </div>
+                        <div className="prose prose-sm dark:prose-invert max-w-none text-sm text-gray-700" dangerouslySetInnerHTML={{ __html: org.certifications }} />
+                    </div>
+                ) : null}
             </div>
         </div>
     );
@@ -99,6 +117,7 @@ export function OrganizationsListSection() {
         { key: 'country', header: t('training.column_country'), align: 'left' as const },
         { key: 'website', header: t('training.column_website'), align: 'center' as const },
         { key: 'email', header: t('training.column_email'), align: 'left' as const },
+        // { key: 'certifications', header: t('training.column_certifications') || 'Certifications', align: 'left' as const },
     ];
 
     // Transformer les données pour le tableau
@@ -107,6 +126,11 @@ export function OrganizationsListSection() {
         country: org.country,
         website: <WebsiteLink website={org.website} />,
         email: <EmailLink email={org.email} />,
+        certifications: org.certifications ? (
+            <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: org.certifications }} />
+        ) : (
+            <span className="text-gray-400">-</span>
+        ),
     }));
 
     // Loading state

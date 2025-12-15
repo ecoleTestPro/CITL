@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/rich-text-editor';
 import { useForm } from '@inertiajs/react';
 import { Save, X, Upload } from 'lucide-react';
 import { useEffect, useRef } from 'react';
@@ -215,11 +216,13 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                             <Label htmlFor="logo">Logo</Label>
                             <div className="flex items-center gap-4">
                                 {organization?.logo && !data.logo && (
-                                    <img
-                                        src={`/storage/${organization.logo}`}
-                                        alt="Logo actuel"
-                                        className="h-16 w-16 rounded object-cover"
-                                    />
+                                    (() => {
+                                        const src = String(organization.logo || '');
+                                        const logoSrc = src.startsWith('http') || src.startsWith('https') ? src : `/storage/${src}`;
+                                        return (
+                                            <img src={logoSrc} alt="Logo actuel" className="h-16 w-16 rounded object-cover" />
+                                        );
+                                    })()
                                 )}
                                 {data.logo && (
                                     <img
@@ -262,16 +265,13 @@ export function AccreditedOrganizationFormModal({ isOpen, onClose, organization,
                             {errors.description && <p className="text-sm text-red-500">{errors.description}</p>}
                         </div>
 
-                        {/* Certifications */}
+                        {/* Certifications (rich text) */}
                         <div className="space-y-2">
                             <Label htmlFor="certifications">Certifications</Label>
-                            <Textarea
-                                id="certifications"
-                                value={data.certifications}
-                                onChange={(e) => setData('certifications', e.target.value)}
-                                placeholder="Liste des certifications disponibles (une par ligne)&#10;Ex:&#10;Niveau Fondation – CTFL – Version 4.0 – Français&#10;Niveau Fondation Agile – Testeur Agile – Français"
-                                rows={6}
-                                disabled={processing}
+                            <RichTextEditor
+                                content={data.certifications || ''}
+                                onChange={(content) => setData('certifications', content)}
+                                placeholder="Liste des certifications disponibles..."
                             />
                             {errors.certifications && <p className="text-sm text-red-500">{errors.certifications}</p>}
                         </div>

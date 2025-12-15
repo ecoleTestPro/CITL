@@ -152,7 +152,11 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
                 return (
                     <div className="flex items-center gap-3">
                         {org.logo ? (
-                            <img src={`/storage/${org.logo}`} alt={org.name} className="h-10 w-10 rounded object-cover" />
+                            (() => {
+                                const src = String(org.logo || '');
+                                const logoSrc = src.startsWith('http') || src.startsWith('https') ? src : `/storage/${src}`;
+                                return <img src={logoSrc} alt={org.name} className="h-10 w-10 rounded object-cover" />;
+                            })()
                         ) : (
                             <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/10 text-primary">
                                 <Globe className="h-5 w-5" />
@@ -218,7 +222,13 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
                 const certs = row.getValue('certifications') as string | null;
                 if (!certs) return <span className="text-sm text-gray-400">-</span>;
 
-                // Split by newline and render each certification on its own line
+                const containsHtml = /<[^>]+>/.test(certs);
+
+                if (containsHtml) {
+                    return <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: certs }} />;
+                }
+
+                // Fallback: plain text with newlines
                 return (
                     <div className="space-y-1">
                         {certs.split(/\r?\n/).map((line, idx) => (

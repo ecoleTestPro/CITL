@@ -26,14 +26,14 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
 
     const columns: ColumnDef<Certification>[] = [
         {
-            accessorKey: 'title',
+            accessorKey: 'title_fr',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
                     Titre
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
-            cell: ({ row }) => <div className="font-medium">{row.getValue('title')}</div>,
+            cell: ({ row }) => <div className="font-medium">{row.getValue('title_fr')}</div>,
         },
         {
             accessorKey: 'category.name',

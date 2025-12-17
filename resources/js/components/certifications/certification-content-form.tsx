@@ -1,73 +1,98 @@
 import RichTextEditor from '@/components/rich-text-editor';
-import { CertificationFormData } from '@/types';
+import { CertificationFormData, SupportedLanguage } from '@/types';
 import { InertiaFormProps } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 interface CertificationContentFormProps {
     form: InertiaFormProps<CertificationFormData>;
+    currentLanguage: SupportedLanguage;
 }
 
-export function CertificationContentForm({ form }: CertificationContentFormProps) {
+export function CertificationContentForm({ form, currentLanguage }: CertificationContentFormProps) {
+    const { t } = useTranslation();
+
+    // Helper pour obtenir la clé du champ en fonction de la langue
+    const getFieldKey = (field: string) => `${field}_${currentLanguage}` as keyof CertificationFormData;
+
+    // Helper pour obtenir la valeur d'un champ traduisible
+    const getFieldValue = (field: string): string => {
+        const key = getFieldKey(field);
+        return (form.data[key] as string) || '';
+    };
+
+    // Helper pour définir la valeur d'un champ traduisible
+    const setFieldValue = (field: string, value: string) => {
+        const key = getFieldKey(field);
+        form.setData({ ...form.data, [key]: value });
+    };
+
+    const languageLabel = currentLanguage === 'fr' ? '(Français)' : '(English)';
+
     return (
         <div className="space-y-6">
             <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Vue d'ensemble</label>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('dashboard.certifications.overview')} {languageLabel}
+                </label>
                 <RichTextEditor
-                    content={form.data.overview}
-                    onChange={(content) => form.setData('overview', content)}
-                    placeholder="Décrivez la vue d'ensemble de la certification..."
-                />
-            </div>
-
-            <div>
-                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Public cible</label>
-                <RichTextEditor
-                    content={form.data.target_audience}
-                    onChange={(content) => form.setData('target_audience', content)}
-                    placeholder="Décrivez le public cible..."
+                    content={getFieldValue('overview')}
+                    onChange={(content) => setFieldValue('overview', content)}
+                    placeholder={currentLanguage === 'fr' ? "Décrivez la vue d'ensemble de la certification..." : 'Describe the certification overview...'}
                 />
             </div>
 
             <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Contenu de la formation
+                    {t('dashboard.certifications.target_audience')} {languageLabel}
                 </label>
                 <RichTextEditor
-                    content={form.data.training_content}
-                    onChange={(content) => form.setData('training_content', content)}
-                    placeholder="Décrivez le contenu de la formation..."
+                    content={getFieldValue('target_audience')}
+                    onChange={(content) => setFieldValue('target_audience', content)}
+                    placeholder={currentLanguage === 'fr' ? 'Décrivez le public cible...' : 'Describe the target audience...'}
                 />
             </div>
 
             <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Structure de l'examen (détails)
+                    {t('dashboard.certifications.training_content')} {languageLabel}
                 </label>
                 <RichTextEditor
-                    content={form.data.exam_structure_details}
-                    onChange={(content) => form.setData('exam_structure_details', content)}
-                    placeholder="Détaillez la structure de l'examen..."
+                    content={getFieldValue('training_content')}
+                    onChange={(content) => setFieldValue('training_content', content)}
+                    placeholder={currentLanguage === 'fr' ? 'Décrivez le contenu de la formation...' : 'Describe the training content...'}
                 />
             </div>
 
             <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Bénéfices professionnels
+                    {t('dashboard.certifications.exam_structure')} {languageLabel}
                 </label>
                 <RichTextEditor
-                    content={form.data.business_outcomes}
-                    onChange={(content) => form.setData('business_outcomes', content)}
-                    placeholder="Décrivez les bénéfices professionnels..."
+                    content={getFieldValue('exam_structure_details')}
+                    onChange={(content) => setFieldValue('exam_structure_details', content)}
+                    placeholder={currentLanguage === 'fr' ? "Détaillez la structure de l'examen..." : 'Detail the exam structure...'}
                 />
             </div>
 
             <div>
                 <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Informations complémentaires
+                    {t('dashboard.certifications.business_outcomes')} {languageLabel}
                 </label>
                 <RichTextEditor
-                    content={form.data.additional_information}
-                    onChange={(content) => form.setData('additional_information', content)}
-                    placeholder="Ajoutez des informations complémentaires..."
+                    content={getFieldValue('business_outcomes')}
+                    onChange={(content) => setFieldValue('business_outcomes', content)}
+                    placeholder={currentLanguage === 'fr' ? 'Décrivez les bénéfices professionnels...' : 'Describe the business outcomes...'}
+                />
+            </div>
+
+            <div>
+                <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t('dashboard.certifications.additional_info')} {languageLabel}
+                </label>
+                <RichTextEditor
+                    content={getFieldValue('additional_information')}
+                    onChange={(content) => setFieldValue('additional_information', content)}
+                    placeholder={currentLanguage === 'fr' ? 'Ajoutez des informations complémentaires...' : 'Add additional information...'}
                 />
             </div>
         </div>

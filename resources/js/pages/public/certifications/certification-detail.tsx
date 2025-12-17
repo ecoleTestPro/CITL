@@ -55,22 +55,22 @@ function CertificationDetail({ slug }: Props) {
         { title: 'Accueil', href: '/' },
         { title: 'Certifications', href: '/why-certification' },
         { title: certification.category.name, href: `/${certification.category.slug}` },
-        { title: certification.title, href: '' },
+        { title: certification.title_fr, href: '' },
     ];
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{`${certification.title} - CITL`}</title>
+                <title>{`${certification.title_fr} - CITL`}</title>
                 <meta
                     name="description"
-                    content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`}
+                    content={certification.description_fr || `Certification ${certification.title_fr} disponible en Côte d'Ivoire avec le CITL.`}
                 />
-                <meta name="keywords" content={`${certification.title}, ISTQB, certification, CITL, test logiciel`} />
-                <meta property="og:title" content={`${certification.title} - CITL`} />
+                <meta name="keywords" content={`${certification.title_fr}, ISTQB, certification, CITL, test logiciel`} />
+                <meta property="og:title" content={`${certification.title_fr} - CITL`} />
                 <meta
                     property="og:description"
-                    content={certification.description || `Certification ${certification.title} disponible en Côte d'Ivoire avec le CITL.`}
+                    content={certification.description_fr || `Certification ${certification.title_fr} disponible en Côte d'Ivoire avec le CITL.`}
                 />
                 <meta property="og:type" content="website" />
             </Head>
@@ -78,8 +78,8 @@ function CertificationDetail({ slug }: Props) {
             {/* Hero Section */}
             <HeroCommon
                 badge={certification.category.name}
-                title={certification.title}
-                description={certification.subtitle || certification.description}
+                title={certification.title_fr}
+                description={certification.subtitle_fr || certification.description_fr}
                 backgroundImage="/assets/images/bg/sharp-2.png"
             />
 
@@ -95,8 +95,8 @@ function CertificationDetail({ slug }: Props) {
                                     id="overview"
                                     title="Vue d'ensemble"
                                     delay={0.3}
-                                    richContent={certification.overview}
-                                    fallbackContent={<p className="text-gray-700 dark:text-gray-300">{certification.description}</p>}
+                                    richContent={certification.overview_fr}
+                                    fallbackContent={<p className="text-gray-700 dark:text-gray-300">{certification.description_fr}</p>}
                                 />
 
                                 {/* Audience Section */}
@@ -104,7 +104,7 @@ function CertificationDetail({ slug }: Props) {
                                     id="audience"
                                     title="Public cible"
                                     delay={0.4}
-                                    richContent={certification.target_audience}
+                                    richContent={certification.target_audience_fr}
                                     fallbackContent={<AudienceFallback />}
                                 />
 
@@ -113,7 +113,7 @@ function CertificationDetail({ slug }: Props) {
                                     id="content"
                                     title="Contenu de la formation"
                                     delay={0.5}
-                                    richContent={certification.training_content}
+                                    richContent={certification.training_content_fr}
                                     fallbackContent={<TrainingContentFallback />}
                                 />
 
@@ -123,7 +123,7 @@ function CertificationDetail({ slug }: Props) {
                                         id="exam-structure"
                                         title="Structure de l'examen"
                                         delay={0.6}
-                                        richContent={certification.exam_structure_details}
+                                        richContent={certification.exam_structure_details_fr}
                                         fallbackContent={
                                             <ExamStructureFallback
                                                 examQuestions={certification.exam_questions}
@@ -140,7 +140,7 @@ function CertificationDetail({ slug }: Props) {
                                     id="business-outcomes"
                                     title="Bénéfices professionnels"
                                     delay={0.7}
-                                    richContent={certification.business_outcomes}
+                                    richContent={certification.business_outcomes_fr}
                                     fallbackContent={<BusinessOutcomesFallback />}
                                 />
 
@@ -149,7 +149,7 @@ function CertificationDetail({ slug }: Props) {
                                     id="more-information"
                                     title="Informations complémentaires"
                                     delay={0.8}
-                                    richContent={certification.additional_information}
+                                    richContent={certification.additional_information_fr}
                                     fallbackContent={<AdditionalInformationFallback />}
                                 />
                             </div>

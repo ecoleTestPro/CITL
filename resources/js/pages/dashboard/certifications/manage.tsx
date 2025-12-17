@@ -42,16 +42,25 @@ export default function ManageCertifications({ categories, certifications }: Pro
 
     const certificationForm = useForm<CertificationFormData>({
         certification_category_id: 0,
-        title: '',
+        title_fr: '',
+        title_en: '',
         slug: '',
-        subtitle: '',
-        description: '',
-        overview: '',
-        target_audience: '',
-        training_content: '',
-        exam_structure_details: '',
-        business_outcomes: '',
-        additional_information: '',
+        subtitle_fr: '',
+        subtitle_en: '',
+        description_fr: '',
+        description_en: '',
+        overview_fr: '',
+        overview_en: '',
+        target_audience_fr: '',
+        target_audience_en: '',
+        training_content_fr: '',
+        training_content_en: '',
+        exam_structure_details_fr: '',
+        exam_structure_details_en: '',
+        business_outcomes_fr: '',
+        business_outcomes_en: '',
+        additional_information_fr: '',
+        additional_information_en: '',
         icon: 'ns-shape-35',
         exam_questions: 40,
         exam_passing_score: 65,
@@ -117,16 +126,25 @@ export default function ManageCertifications({ categories, certifications }: Pro
         setEditingCertification(certification);
         certificationForm.setData({
             certification_category_id: certification.certification_category_id,
-            title: certification.title,
+            title_fr: certification.title_fr,
+            title_en: certification.title_en || '',
             slug: certification.slug,
-            subtitle: certification.subtitle || '',
-            description: certification.description,
-            overview: certification.overview || '',
-            target_audience: certification.target_audience || '',
-            training_content: certification.training_content || '',
-            exam_structure_details: certification.exam_structure_details || '',
-            business_outcomes: certification.business_outcomes || '',
-            additional_information: certification.additional_information || '',
+            subtitle_fr: certification.subtitle_fr || '',
+            subtitle_en: certification.subtitle_en || '',
+            description_fr: certification.description_fr,
+            description_en: certification.description_en || '',
+            overview_fr: certification.overview_fr || '',
+            overview_en: certification.overview_en || '',
+            target_audience_fr: certification.target_audience_fr || '',
+            target_audience_en: certification.target_audience_en || '',
+            training_content_fr: certification.training_content_fr || '',
+            training_content_en: certification.training_content_en || '',
+            exam_structure_details_fr: certification.exam_structure_details_fr || '',
+            exam_structure_details_en: certification.exam_structure_details_en || '',
+            business_outcomes_fr: certification.business_outcomes_fr || '',
+            business_outcomes_en: certification.business_outcomes_en || '',
+            additional_information_fr: certification.additional_information_fr || '',
+            additional_information_en: certification.additional_information_en || '',
             icon: certification.icon,
             exam_questions: certification.exam_questions,
             exam_passing_score: certification.exam_passing_score,
@@ -143,7 +161,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
     };
 
     const handleDeleteCertification = (certification: Certification) => {
-        setItemToDelete({ type: 'certification', id: certification.id, name: certification.title });
+        setItemToDelete({ type: 'certification', id: certification.id, name: certification.title_fr });
         setShowDeleteModal(true);
     };
 

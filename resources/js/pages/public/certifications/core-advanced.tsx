@@ -22,11 +22,11 @@ function CoreAdvanced({ category, certifications }: Props) {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.core_advanced.title')}</title>
-                <meta name="description" content={t('seo.core_advanced.description')} />
+                <title>{t('seo.core_advanced.title_fr')}</title>
+                <meta name="description" content={t('seo.core_advanced.description_fr')} />
                 <meta name="keywords" content={t('seo.core_advanced.keywords')} />
-                <meta property="og:title" content={t('seo.core_advanced.title')} />
-                <meta property="og:description" content={t('seo.core_advanced.description')} />
+                <meta property="og:title" content={t('seo.core_advanced.title_fr')} />
+                <meta property="og:description" content={t('seo.core_advanced.description_fr')} />
                 <meta property="og:type" content="website" />
             </Head>
             <HeroCommon

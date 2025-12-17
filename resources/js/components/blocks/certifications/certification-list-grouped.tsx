@@ -86,12 +86,12 @@ function CertificationListGrouped({ categories }: CertificationListGroupedProps)
                                         </div>
                                         <div className="space-y-3">
                                             <h3 className="text-heading-6 transition-colors duration-300 group-hover:text-secondary dark:group-hover:text-accent md:text-heading-5">
-                                                {cert.title}
+                                                {cert.title_fr}
                                             </h3>
-                                            {cert.subtitle && (
-                                                <p className="text-sm font-medium text-secondary dark:text-accent">{cert.subtitle}</p>
+                                            {cert.subtitle_fr && (
+                                                <p className="text-sm font-medium text-secondary dark:text-accent">{cert.subtitle_fr}</p>
                                             )}
-                                            <p className="max-w-[345px] text-gray-700 dark:text-gray-300">{cert.description}</p>
+                                            <p className="max-w-[345px] text-gray-700 dark:text-gray-300">{cert.description_fr}</p>
                                             <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
                                                 <p>
                                                     <strong>Questions:</strong> {cert.exam_questions}

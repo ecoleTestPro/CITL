@@ -22,11 +22,11 @@ function Specialist({ category, certifications }: Props) {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.specialist.title')}</title>
-                <meta name="description" content={t('seo.specialist.description')} />
+                <title>{t('seo.specialist.title_fr')}</title>
+                <meta name="description" content={t('seo.specialist.description_fr')} />
                 <meta name="keywords" content={t('seo.specialist.keywords')} />
-                <meta property="og:title" content={t('seo.specialist.title')} />
-                <meta property="og:description" content={t('seo.specialist.description')} />
+                <meta property="og:title" content={t('seo.specialist.title_fr')} />
+                <meta property="og:description" content={t('seo.specialist.description_fr')} />
                 <meta property="og:type" content="website" />
             </Head>
             <HeroCommon

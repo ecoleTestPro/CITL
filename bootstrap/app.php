@@ -25,6 +25,12 @@ return Application::configure(basePath: dirname(__DIR__))
             AddLinkHeadersForPreloadedAssets::class,
         ]);
 
+        // Exclude translation API routes from CSRF verification
+        $middleware->validateCsrfTokens(except: [
+            'api/translate',
+            'api/translate/*',
+        ]);
+
         // Spatie Permission middleware aliases
         $middleware->alias([
             'role' => RoleMiddleware::class,

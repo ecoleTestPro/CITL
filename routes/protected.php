@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Dashboard\AccreditedOrganizationController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
@@ -21,6 +22,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+
+    // Translation API Routes
+    Route::prefix('api/translate')->name('api.translate.')->group(function () {
+        Route::post('/', [TranslationController::class, 'translate'])->name('single');
+        Route::post('/multiple', [TranslationController::class, 'translateMultiple'])->name('multiple');
+    });
 
     // Page Management Routes
     Route::prefix('dashboard/pages')->name('dashboard.pages.')->group(function () {

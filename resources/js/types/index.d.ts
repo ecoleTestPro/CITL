@@ -83,16 +83,25 @@ export interface CertificationCategory {
  */
 export interface Certification {
     id: number;
-    title: string;
+    title_fr: string;
+    title_en: string | null;
     slug: string;
-    subtitle: string | null;
-    description: string;
-    overview: string | null;
-    target_audience: string | null;
-    training_content: string | null;
-    exam_structure_details: string | null;
-    business_outcomes: string | null;
-    additional_information: string | null;
+    subtitle_fr: string | null;
+    subtitle_en: string | null;
+    description_fr: string;
+    description_en: string | null;
+    overview_fr: string | null;
+    overview_en: string | null;
+    target_audience_fr: string | null;
+    target_audience_en: string | null;
+    training_content_fr: string | null;
+    training_content_en: string | null;
+    exam_structure_details_fr: string | null;
+    exam_structure_details_en: string | null;
+    business_outcomes_fr: string | null;
+    business_outcomes_en: string | null;
+    additional_information_fr: string | null;
+    additional_information_en: string | null;
     icon: string;
     exam_questions: number;
     exam_passing_score: number;
@@ -109,20 +118,34 @@ export interface Certification {
 }
 
 /**
+ * Type pour les langues supportées
+ */
+export type SupportedLanguage = 'fr' | 'en';
+
+/**
  * Interface représentant les données du formulaire de certification
  */
 export interface CertificationFormData {
     certification_category_id: number;
-    title: string;
+    title_fr: string;
+    title_en: string;
     slug: string;
-    subtitle: string;
-    description: string;
-    overview: string;
-    target_audience: string;
-    training_content: string;
-    exam_structure_details: string;
-    business_outcomes: string;
-    additional_information: string;
+    subtitle_fr: string;
+    subtitle_en: string;
+    description_fr: string;
+    description_en: string;
+    overview_fr: string;
+    overview_en: string;
+    target_audience_fr: string;
+    target_audience_en: string;
+    training_content_fr: string;
+    training_content_en: string;
+    exam_structure_details_fr: string;
+    exam_structure_details_en: string;
+    business_outcomes_fr: string;
+    business_outcomes_en: string;
+    additional_information_fr: string;
+    additional_information_en: string;
     icon: string;
     exam_questions: number;
     exam_passing_score: number;
@@ -135,6 +158,20 @@ export interface CertificationFormData {
     order: number;
     is_active: boolean;
 }
+
+/**
+ * Champs traduisibles d'une certification
+ */
+export type TranslatableField =
+    | 'title'
+    | 'subtitle'
+    | 'description'
+    | 'overview'
+    | 'target_audience'
+    | 'training_content'
+    | 'exam_structure_details'
+    | 'business_outcomes'
+    | 'additional_information';
 
 /**
  * Interface représentant les données du formulaire de catégorie

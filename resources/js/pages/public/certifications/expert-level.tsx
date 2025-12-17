@@ -22,11 +22,11 @@ function ExpertLevel({ category, certifications }: Props) {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.expert_level.title')}</title>
-                <meta name="description" content={t('seo.expert_level.description')} />
+                <title>{t('seo.expert_level.title_fr')}</title>
+                <meta name="description" content={t('seo.expert_level.description_fr')} />
                 <meta name="keywords" content={t('seo.expert_level.keywords')} />
-                <meta property="og:title" content={t('seo.expert_level.title')} />
-                <meta property="og:description" content={t('seo.expert_level.description')} />
+                <meta property="og:title" content={t('seo.expert_level.title_fr')} />
+                <meta property="og:description" content={t('seo.expert_level.description_fr')} />
                 <meta property="og:type" content="website" />
             </Head>
             <HeroCommon

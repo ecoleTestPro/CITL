@@ -81,9 +81,9 @@ function CertificationList({ certifications }: CertificationListProps) {
                                 </div>
                             </div>
                             <div className="space-y-3">
-                                <h3 className="text-heading-6 md:text-heading-5 text-gray-900 dark:text-white">{cert.title}</h3>
-                                {cert.subtitle && <p className="text-sm font-medium text-secondary dark:text-primary">{cert.subtitle}</p>}
-                                <p className="max-w-[345px] text-gray-600 dark:text-gray-400">{cert.description}</p>
+                                <h3 className="text-heading-6 md:text-heading-5 text-gray-900 dark:text-white">{cert.title_fr}</h3>
+                                {cert.subtitle_fr && <p className="text-sm font-medium text-secondary dark:text-primary">{cert.subtitle_fr}</p>}
+                                <p className="max-w-[345px] text-gray-600 dark:text-gray-400">{cert.description_fr}</p>
                                 <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
                                     <p>
                                         <strong className="text-gray-900 dark:text-gray-200">Questions:</strong> {cert.exam_questions}

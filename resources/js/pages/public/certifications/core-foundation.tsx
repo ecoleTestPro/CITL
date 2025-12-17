@@ -22,11 +22,11 @@ function CoreFoundation({ category, certifications }: Props) {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.core_foundation.title')}</title>
-                <meta name="description" content={t('seo.core_foundation.description')} />
+                <title>{t('seo.core_foundation.title_fr')}</title>
+                <meta name="description" content={t('seo.core_foundation.description_fr')} />
                 <meta name="keywords" content={t('seo.core_foundation.keywords')} />
-                <meta property="og:title" content={t('seo.core_foundation.title')} />
-                <meta property="og:description" content={t('seo.core_foundation.description')} />
+                <meta property="og:title" content={t('seo.core_foundation.title_fr')} />
+                <meta property="og:description" content={t('seo.core_foundation.description_fr')} />
                 <meta property="og:type" content="website" />
             </Head>
             <HeroCommon

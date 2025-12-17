@@ -25,6 +25,7 @@ import {
     Underline as UnderlineIcon,
     Undo,
 } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface RichTextEditorProps {
     content: string;
@@ -81,6 +82,13 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Comme
             },
         },
     });
+
+    // Update editor content when the content prop changes (e.g., when switching language or loading data)
+    useEffect(() => {
+        if (editor && content !== editor.getHTML()) {
+            editor.commands.setContent(content, false);
+        }
+    }, [content, editor]);
 
     if (!editor) {
         return null;

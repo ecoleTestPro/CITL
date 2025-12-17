@@ -43,17 +43,6 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                             rows={3}
                         />
                     </div>
-                    <div>
-                        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {t('dashboard.certifications.category_order')}
-                        </label>
-                        <input
-                            type="number"
-                            value={form.data.order}
-                            onChange={(e) => form.setData('order', parseInt(e.target.value))}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
-                        />
-                    </div>
                     <div className="flex items-center gap-2">
                         <input
                             type="checkbox"

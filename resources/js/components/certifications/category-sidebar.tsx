@@ -33,7 +33,7 @@ export function CategorySidebar({
                         <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.categories')}</h2>
                         <Button
                             onClick={onAddCategory}
-                            className="rounded-lg bg-secondary p-2 text-white transition-colors hover:bg-secondary/90"
+                            className="rounded-lg bg-primary p-2 text-white transition-colors hover:bg-primary/90"
                             title={t('dashboard.certifications.add_category')}
                         >
                             <Plus className="h-4 w-4" />
@@ -44,7 +44,7 @@ export function CategorySidebar({
                             onClick={() => onSelectCategory('all')}
                             className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
                                 selectedCategory === 'all'
-                                    ? 'bg-secondary text-white'
+                                    ? 'bg-primary text-white'
                                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                             }`}
                         >
@@ -61,7 +61,7 @@ export function CategorySidebar({
                                         onClick={() => onSelectCategory(category.slug)}
                                         className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm transition-colors ${
                                             selectedCategory === category.slug
-                                                ? 'bg-secondary text-white'
+                                                ? 'bg-primary text-white'
                                                 : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                                         }`}
                                     >
@@ -77,7 +77,7 @@ export function CategorySidebar({
                                     <div className="absolute top-2 right-2 hidden gap-1 group-hover:flex">
                                         <button
                                             onClick={() => onEditCategory(category)}
-                                            className="rounded bg-white p-1 text-secondary shadow-sm hover:bg-gray-50 dark:bg-gray-700"
+                                            className="rounded bg-white p-1 text-primary shadow-sm hover:bg-gray-50 dark:bg-gray-700"
                                             title={t('common.edit')}
                                         >
                                             <Edit className="h-3 w-3" />

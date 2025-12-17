@@ -6,11 +6,11 @@ import { DeleteConfirmationModal } from '@/components/delete-confirmation-modal'
 import { Button } from '@/components/ui/button';
 import AppLayout from '@/layouts/app-layout';
 import { Certification, CertificationCategory, CertificationFormData } from '@/types';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     categories: CertificationCategory[];
@@ -58,7 +58,9 @@ export default function ManageCertifications({ categories, certifications }: Pro
         exam_total_points: 40,
         exam_duration: '60 min',
         syllabus_url: '',
+        syllabus_file: '',
         image: '',
+        featured_image: '',
         order: 0,
         is_active: true,
     });
@@ -131,7 +133,9 @@ export default function ManageCertifications({ categories, certifications }: Pro
             exam_total_points: certification.exam_total_points,
             exam_duration: certification.exam_duration,
             syllabus_url: certification.syllabus_url || '',
+            syllabus_file: certification.syllabus_file || '',
             image: certification.image || '',
+            featured_image: certification.featured_image || '',
             order: certification.order,
             is_active: certification.is_active,
         });
@@ -200,31 +204,54 @@ export default function ManageCertifications({ categories, certifications }: Pro
         }
     };
 
-    const submitCertificationForm = (e: React.FormEvent) => {
+    const submitCertificationForm = (
+        e: React.FormEvent,
+        files: { featuredImage: File | null; syllabusFile: File | null; removeFeaturedImage: boolean; removeSyllabusFile: boolean },
+    ) => {
         e.preventDefault();
-        if (editingCertification) {
-            certificationForm.post(`/dashboard/certifications/${editingCertification.id}/update`, {
-                preserveScroll: true,
-                onSuccess: () => {
-                    setShowCertificationModal(false);
-                    toast.success('Certification modifiée avec succès');
-                },
-                onError: () => {
-                    toast.error('Erreur lors de la modification de la certification');
-                },
-            });
-        } else {
-            certificationForm.post('/dashboard/certifications/store', {
-                preserveScroll: true,
-                onSuccess: () => {
-                    setShowCertificationModal(false);
-                    toast.success('Certification créée avec succès');
-                },
-                onError: () => {
-                    toast.error('Erreur lors de la création de la certification');
-                },
-            });
+
+        // Create FormData for file uploads
+        const formData = new FormData();
+
+        // Add all form fields
+        Object.entries(certificationForm.data).forEach(([key, value]) => {
+            if (value !== null && value !== undefined && key !== 'featured_image' && key !== 'syllabus_file') {
+                // Convert boolean to "1" or "0" for Laravel validation
+                if (typeof value === 'boolean') {
+                    formData.append(key, value ? '1' : '0');
+                } else {
+                    formData.append(key, String(value));
+                }
+            }
+        });
+
+        // Add files if present
+        if (files.featuredImage) {
+            formData.append('featured_image', files.featuredImage);
         }
+        if (files.syllabusFile) {
+            formData.append('syllabus_file', files.syllabusFile);
+        }
+        if (files.removeFeaturedImage) {
+            formData.append('remove_featured_image', '1');
+        }
+        if (files.removeSyllabusFile) {
+            formData.append('remove_syllabus_file', '1');
+        }
+
+        const url = editingCertification ? `/dashboard/certifications/${editingCertification.id}/update` : '/dashboard/certifications/store';
+
+        router.post(url, formData, {
+            preserveScroll: true,
+            onSuccess: () => {
+                setShowCertificationModal(false);
+                toast.success(editingCertification ? 'Certification modifiée avec succès' : 'Certification créée avec succès');
+            },
+            onError: (errors) => {
+                toast.error(editingCertification ? 'Erreur lors de la modification de la certification' : 'Erreur lors de la création de la certification');
+                console.error(errors);
+            },
+        });
     };
 
     return (
@@ -243,7 +270,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
                 </div>
                 <Button
                     onClick={handleAddCertification}
-                    className="flex items-center gap-2 rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
+                    className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
                 >
                     <Plus className="h-4 w-4" />
                     {t('dashboard.certifications.add_certification')}
@@ -296,6 +323,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
                 form={certificationForm}
                 categories={categories}
                 certificationId={editingCertification?.id}
+                existingCertification={editingCertification}
                 onClose={() => setShowCertificationModal(false)}
                 onSubmit={submitCertificationForm}
             />

@@ -1,7 +1,8 @@
 import AppLayout from '@/layouts/app-layout';
-import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import { BreadcrumbItem } from '@/types';
 import { Link } from '@inertiajs/react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Certification {
     id: number;
@@ -33,20 +34,23 @@ export default function CertificationsIndex({ certifications }: Props) {
     const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
 
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: t('dashboard.breadcrumbs.dashboard'), href: '/dashboard' },
+        { title: t('dashboard.breadcrumbs.certifications'), href: '/dashboard/certifications' },
+    ];
+
     const filteredCertifications = certifications.filter(
-        (cert) =>
-            cert.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            cert.category.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        (cert) => cert.title.toLowerCase().includes(searchTerm.toLowerCase()) || cert.category.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
 
     return (
-        <AppLayout title={t('dashboard.certifications.page_title')}>
+        <AppLayout breadcrumbs={breadcrumbs}>
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.all_certifications')}</h1>
                     <Link
                         href="/dashboard/certifications/create"
-                        className="rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
+                        className="rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
                     >
                         {t('dashboard.certifications.add_certification')}
                     </Link>
@@ -59,7 +63,7 @@ export default function CertificationsIndex({ certifications }: Props) {
                             placeholder={t('dashboard.certifications.search_placeholder')}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         />
                     </div>
 
@@ -67,12 +71,24 @@ export default function CertificationsIndex({ certifications }: Props) {
                         <table className="w-full">
                             <thead className="border-b border-gray-200 dark:border-gray-700">
                                 <tr>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.title')}</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.category')}</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.questions')}</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.duration')}</th>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.status')}</th>
-                                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.certifications.actions')}</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.title')}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.category')}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.questions')}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.duration')}
+                                    </th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.status')}
+                                    </th>
+                                    <th className="px-4 py-3 text-right text-sm font-semibold text-gray-900 dark:text-gray-100">
+                                        {t('dashboard.certifications.actions')}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -92,7 +108,7 @@ export default function CertificationsIndex({ certifications }: Props) {
                                                 </div>
                                             </td>
                                             <td className="px-4 py-4">
-                                                <span className="inline-flex rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">
+                                                <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
                                                     {cert.category.name}
                                                 </span>
                                             </td>
@@ -113,7 +129,7 @@ export default function CertificationsIndex({ certifications }: Props) {
                                                 <div className="flex items-center justify-end gap-2">
                                                     <Link
                                                         href={`/dashboard/certifications/${cert.id}/edit`}
-                                                        className="text-sm text-secondary hover:text-secondary/80"
+                                                        className="text-sm text-primary hover:text-primary/80"
                                                     >
                                                         {t('dashboard.certifications.edit')}
                                                     </Link>

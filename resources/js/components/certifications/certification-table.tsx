@@ -39,7 +39,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
             accessorKey: 'category.name',
             header: 'Catégorie',
             cell: ({ row }) => (
-                <span className="inline-flex rounded-full bg-secondary/10 px-2 py-1 text-xs font-medium text-secondary">{row.original.category.name}</span>
+                <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">{row.original.category.name}</span>
             ),
         },
         {
@@ -122,7 +122,7 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
                     value={globalFilter ?? ''}
                     onChange={(e) => setGlobalFilter(e.target.value)}
                     placeholder="Rechercher..."
-                    className="rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                    className="rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                 />
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                     {certifications.length} certification{certifications.length > 1 ? 's' : ''}

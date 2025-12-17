@@ -264,7 +264,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                         onDrop={handleDrop}
                         onDragOver={handleDragOver}
                         onClick={() => fileInputRef.current?.click()}
-                        className="mb-6 cursor-pointer rounded-lg border-2 border-dashed border-gray-300 bg-white p-8 text-center transition-colors hover:border-secondary dark:border-gray-600 dark:bg-gray-800 dark:hover:border-accent"
+                        className="mb-6 cursor-pointer rounded-lg border-2 border-dashed border-gray-300 bg-white p-8 text-center transition-colors hover:border-primary dark:border-gray-600 dark:bg-gray-800 dark:hover:border-accent"
                     >
                         <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
                         <p className="mb-2 text-sm text-gray-700 dark:text-gray-300">
@@ -284,7 +284,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
 
                 {/* Pending files confirmation */}
                 {pendingFiles.length > 0 && (
-                    <div className="mb-6 space-y-4 rounded-lg border-2 border-secondary bg-secondary/5 p-4 dark:border-accent dark:bg-accent/5">
+                    <div className="mb-6 space-y-4 rounded-lg border-2 border-primary bg-primary/5 p-4 dark:border-accent dark:bg-accent/5">
                         <div className="flex items-center justify-between">
                             <h4 className="font-medium text-gray-900 dark:text-gray-100">
                                 {pendingFiles.length} fichier{pendingFiles.length > 1 ? 's' : ''} sélectionné{pendingFiles.length > 1 ? 's' : ''}
@@ -302,7 +302,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                 <div key={index} className="rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800">
                                     <div className="mb-3 flex items-center justify-between">
                                         <div className="flex items-center gap-3">
-                                            <FileText className="h-5 w-5 text-secondary dark:text-accent" />
+                                            <FileText className="h-5 w-5 text-primary dark:text-accent" />
                                             <div>
                                                 <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{pf.file.name}</p>
                                                 <p className="text-xs text-gray-500 dark:text-gray-400">{formatFileSize(pf.file.size)}</p>
@@ -333,7 +333,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                                         onClick={() => handleToggleTagForPendingFile(index, tag.id)}
                                                         className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
                                                             pf.tagIds.includes(tag.id)
-                                                                ? 'bg-secondary text-white dark:bg-accent'
+                                                                ? 'bg-primary text-white dark:bg-accent'
                                                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'
                                                         }`}
                                                     >
@@ -355,7 +355,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                             <button
                                 onClick={handleConfirmUpload}
                                 disabled={isUploading}
-                                className="flex-1 rounded-lg bg-secondary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-secondary/90 disabled:opacity-50 dark:bg-accent dark:hover:bg-accent/90"
+                                className="flex-1 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-50 dark:bg-accent dark:hover:bg-accent/90"
                             >
                                 {isUploading ? 'Importation en cours...' : 'Confirmer l\'importation'}
                             </button>
@@ -375,8 +375,8 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                     className="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800"
                                 >
                                     <div className="flex flex-1 items-center gap-3">
-                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-secondary/10 dark:bg-accent/10">
-                                            <FileText className="h-6 w-6 text-secondary dark:text-accent" />
+                                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 dark:bg-accent/10">
+                                            <FileText className="h-6 w-6 text-primary dark:text-accent" />
                                         </div>
                                         <div className="min-w-0 flex-1">
                                             <p className="truncate text-sm font-medium text-gray-900 dark:text-gray-100">{doc.name}</p>
@@ -385,7 +385,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                                 {doc.tags.map((tag) => (
                                                     <span
                                                         key={tag.id}
-                                                        className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary dark:bg-accent/10 dark:text-accent"
+                                                        className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary dark:bg-accent/10 dark:text-accent"
                                                     >
                                                         {tag.name}
                                                         <button
@@ -404,7 +404,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                                             e.target.value = '';
                                                         }
                                                     }}
-                                                    className="rounded-full border border-dashed border-gray-300 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-600 hover:border-secondary hover:text-secondary dark:border-gray-600 dark:text-gray-400"
+                                                    className="rounded-full border border-dashed border-gray-300 bg-transparent px-2 py-0.5 text-xs font-medium text-gray-600 hover:border-primary hover:text-primary dark:border-gray-600 dark:text-gray-400"
                                                 >
                                                     <option value="">+ Ajouter</option>
                                                     {availableTags
@@ -467,7 +467,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                                 <button
                                     type="button"
                                     onClick={handleCreateTag}
-                                    className="rounded-lg bg-secondary px-3 py-1 text-sm text-white hover:bg-secondary/90"
+                                    className="rounded-lg bg-primary px-3 py-1 text-sm text-white hover:bg-primary/90"
                                 >
                                     Créer
                                 </button>
@@ -486,7 +486,7 @@ export function CertificationDocumentsTab({ certificationId }: CertificationDocu
                             <button
                                 type="button"
                                 onClick={() => setShowNewTagInput(true)}
-                                className="inline-flex items-center gap-1 rounded-full border border-dashed border-gray-300 px-3 py-1 text-xs font-medium text-gray-600 hover:border-secondary hover:text-secondary dark:border-gray-600 dark:text-gray-400"
+                                className="inline-flex items-center gap-1 rounded-full border border-dashed border-gray-300 px-3 py-1 text-xs font-medium text-gray-600 hover:border-primary hover:text-primary dark:border-gray-600 dark:text-gray-400"
                             >
                                 <Plus className="h-3 w-3" />
                                 Créer une catégorie

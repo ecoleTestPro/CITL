@@ -1,9 +1,9 @@
 import RichTextEditor from '@/components/rich-text-editor';
 import { CertificationFormData } from '@/types';
-import { UseFormReturn } from '@inertiajs/react';
+import { InertiaFormProps } from '@inertiajs/react';
 
 interface CertificationContentFormProps {
-    form: UseFormReturn<CertificationFormData>;
+    form: InertiaFormProps<CertificationFormData>;
 }
 
 export function CertificationContentForm({ form }: CertificationContentFormProps) {

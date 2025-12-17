@@ -99,7 +99,9 @@ export interface Certification {
     exam_total_points: number;
     exam_duration: string;
     syllabus_url: string | null;
+    syllabus_file: string | null;
     image: string | null;
+    featured_image: string | null;
     order: number;
     is_active: boolean;
     certification_category_id: number;
@@ -127,7 +129,9 @@ export interface CertificationFormData {
     exam_total_points: number;
     exam_duration: string;
     syllabus_url: string;
+    syllabus_file: string;
     image: string;
+    featured_image: string;
     order: number;
     is_active: boolean;
 }

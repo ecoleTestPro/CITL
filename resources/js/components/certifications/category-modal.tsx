@@ -1,11 +1,11 @@
 import { CategoryFormData } from '@/types';
-import { UseFormReturn } from '@inertiajs/react';
+import { InertiaFormProps } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 interface CategoryModalProps {
     isOpen: boolean;
     isEditing: boolean;
-    form: UseFormReturn<CategoryFormData>;
+    form: InertiaFormProps<CategoryFormData>;
     onClose: () => void;
     onSubmit: (e: React.FormEvent) => void;
 }
@@ -23,14 +23,12 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                 </h2>
                 <form onSubmit={onSubmit} className="space-y-4">
                     <div>
-                        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {t('dashboard.certifications.category_name')}
-                        </label>
+                        <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300">{t('dashboard.certifications.category_name')}</label>
                         <input
                             type="text"
                             value={form.data.name}
                             onChange={(e) => form.setData('name', e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             required
                         />
                     </div>
@@ -41,7 +39,7 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                         <textarea
                             value={form.data.description}
                             onChange={(e) => form.setData('description', e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                             rows={3}
                         />
                     </div>
@@ -53,7 +51,7 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                             type="number"
                             value={form.data.order}
                             onChange={(e) => form.setData('order', parseInt(e.target.value))}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:outline-none focus:ring-2 focus:ring-secondary/20 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         />
                     </div>
                     <div className="flex items-center gap-2">
@@ -61,11 +59,9 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                             type="checkbox"
                             checked={form.data.is_active}
                             onChange={(e) => form.setData('is_active', e.target.checked)}
-                            className="h-4 w-4 rounded border-gray-300 text-secondary focus:ring-secondary"
+                            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
                         />
-                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {t('dashboard.certifications.category_active')}
-                        </label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300">{t('dashboard.certifications.category_active')}</label>
                     </div>
                     <div className="flex gap-2">
                         <button
@@ -78,7 +74,7 @@ export function CategoryModal({ isOpen, isEditing, form, onClose, onSubmit }: Ca
                         <button
                             type="submit"
                             disabled={form.processing}
-                            className="flex-1 rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90 disabled:opacity-50"
+                            className="flex-1 rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
                         >
                             {form.processing ? t('dashboard.certifications.saving') : t('common.save')}
                         </button>

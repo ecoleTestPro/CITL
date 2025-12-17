@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Certification\CertificationCategoryRepository;
 use App\Repositories\Certification\CertificationRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class CertificationManagementController extends Controller
@@ -105,10 +106,24 @@ class CertificationManagementController extends Controller
             'exam_total_points' => 'nullable|integer',
             'exam_duration' => 'nullable|string',
             'syllabus_url' => 'nullable|url',
+            'syllabus_file' => 'nullable|file|mimes:pdf|max:10240',
             'image' => 'nullable|string',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
         ]);
+
+        // Handle featured image upload
+        if ($request->hasFile('featured_image')) {
+            $featuredImagePath = $request->file('featured_image')->store('certifications/featured', 'public');
+            $validated['featured_image'] = '/storage/' . $featuredImagePath;
+        }
+
+        // Handle syllabus file upload
+        if ($request->hasFile('syllabus_file')) {
+            $syllabusPath = $request->file('syllabus_file')->store('certifications/syllabus', 'public');
+            $validated['syllabus_file'] = '/storage/' . $syllabusPath;
+        }
 
         $this->certificationRepository->create($validated);
 
@@ -132,10 +147,56 @@ class CertificationManagementController extends Controller
             'exam_total_points' => 'nullable|integer',
             'exam_duration' => 'nullable|string',
             'syllabus_url' => 'nullable|url',
+            'syllabus_file' => 'nullable|file|mimes:pdf|max:10240',
             'image' => 'nullable|string',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:5120',
+            'remove_featured_image' => 'nullable|boolean',
+            'remove_syllabus_file' => 'nullable|boolean',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
         ]);
+
+        $certification = $this->certificationRepository->find($id);
+
+        // Handle featured image upload
+        if ($request->hasFile('featured_image')) {
+            // Delete old image if exists
+            if ($certification->featured_image) {
+                $oldPath = str_replace('/storage/', '', $certification->featured_image);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $featuredImagePath = $request->file('featured_image')->store('certifications/featured', 'public');
+            $validated['featured_image'] = '/storage/' . $featuredImagePath;
+        } elseif ($request->boolean('remove_featured_image')) {
+            // Remove existing image
+            if ($certification->featured_image) {
+                $oldPath = str_replace('/storage/', '', $certification->featured_image);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $validated['featured_image'] = null;
+        }
+
+        // Handle syllabus file upload
+        if ($request->hasFile('syllabus_file')) {
+            // Delete old file if exists
+            if ($certification->syllabus_file) {
+                $oldPath = str_replace('/storage/', '', $certification->syllabus_file);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $syllabusPath = $request->file('syllabus_file')->store('certifications/syllabus', 'public');
+            $validated['syllabus_file'] = '/storage/' . $syllabusPath;
+        } elseif ($request->boolean('remove_syllabus_file')) {
+            // Remove existing file
+            if ($certification->syllabus_file) {
+                $oldPath = str_replace('/storage/', '', $certification->syllabus_file);
+                Storage::disk('public')->delete($oldPath);
+            }
+            $validated['syllabus_file'] = null;
+        }
+
+        // Remove non-model fields
+        unset($validated['remove_featured_image']);
+        unset($validated['remove_syllabus_file']);
 
         $this->certificationRepository->update($id, $validated);
 

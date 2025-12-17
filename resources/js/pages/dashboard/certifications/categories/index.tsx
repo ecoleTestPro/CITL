@@ -29,7 +29,7 @@ export default function CategoriesIndex({ categories }: Props) {
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Catégories de Certifications</h1>
                     <Link
                         href="/dashboard/certification-categories/create"
-                        className="rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90"
+                        className="rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90"
                     >
                         Ajouter une catégorie
                     </Link>
@@ -42,7 +42,7 @@ export default function CategoriesIndex({ categories }: Props) {
                             placeholder="Rechercher une catégorie..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-secondary focus:ring-2 focus:ring-secondary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         />
                     </div>
 
@@ -91,7 +91,7 @@ export default function CategoriesIndex({ categories }: Props) {
                                                 <div className="flex items-center justify-end gap-2">
                                                     <Link
                                                         href={`/dashboard/certification-categories/${category.id}/edit`}
-                                                        className="text-sm text-secondary hover:text-secondary/80"
+                                                        className="text-sm text-primary hover:text-primary/80"
                                                     >
                                                         Modifier
                                                     </Link>

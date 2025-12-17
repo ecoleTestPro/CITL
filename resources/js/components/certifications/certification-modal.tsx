@@ -1,24 +1,59 @@
 import { CertificationBasicForm } from '@/components/certifications/certification-basic-form';
 import { CertificationContentForm } from '@/components/certifications/certification-content-form';
 import { CertificationDocumentsTab } from '@/components/certifications/certification-documents-tab';
-import { CertificationCategory, CertificationFormData } from '@/types';
-import { UseFormReturn } from '@inertiajs/react';
+import { Certification, CertificationCategory, CertificationFormData } from '@/types';
+import { InertiaFormProps } from '@inertiajs/react';
 import { useState } from 'react';
 
 interface CertificationModalProps {
     isOpen: boolean;
     isEditing: boolean;
-    form: UseFormReturn<CertificationFormData>;
+    form: InertiaFormProps<CertificationFormData>;
     categories: CertificationCategory[];
     certificationId?: number;
+    existingCertification?: Certification | null;
     onClose: () => void;
-    onSubmit: (e: React.FormEvent) => void;
+    onSubmit: (e: React.FormEvent, files: { featuredImage: File | null; syllabusFile: File | null; removeFeaturedImage: boolean; removeSyllabusFile: boolean }) => void;
 }
 
-export function CertificationModal({ isOpen, isEditing, form, categories, certificationId, onClose, onSubmit }: CertificationModalProps) {
+export function CertificationModal({ isOpen, isEditing, form, categories, certificationId, existingCertification, onClose, onSubmit }: CertificationModalProps) {
     const [activeTab, setActiveTab] = useState<'basic' | 'content' | 'documents'>('basic');
+    const [featuredImageFile, setFeaturedImageFile] = useState<File | null>(null);
+    const [syllabusFile, setSyllabusFile] = useState<File | null>(null);
+    const [removeFeaturedImage, setRemoveFeaturedImage] = useState(false);
+    const [removeSyllabusFile, setRemoveSyllabusFile] = useState(false);
 
     if (!isOpen) return null;
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        onSubmit(e, {
+            featuredImage: featuredImageFile,
+            syllabusFile: syllabusFile,
+            removeFeaturedImage,
+            removeSyllabusFile,
+        });
+    };
+
+    const handleFeaturedImageChange = (file: File | null) => {
+        setFeaturedImageFile(file);
+        setRemoveFeaturedImage(false);
+    };
+
+    const handleSyllabusFileChange = (file: File | null) => {
+        setSyllabusFile(file);
+        setRemoveSyllabusFile(false);
+    };
+
+    const handleRemoveFeaturedImage = () => {
+        setFeaturedImageFile(null);
+        setRemoveFeaturedImage(true);
+    };
+
+    const handleRemoveSyllabusFile = () => {
+        setSyllabusFile(null);
+        setRemoveSyllabusFile(true);
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
@@ -38,7 +73,7 @@ export function CertificationModal({ isOpen, isEditing, form, categories, certif
                             onClick={() => setActiveTab('basic')}
                             className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
                                 activeTab === 'basic'
-                                    ? 'border-secondary text-secondary dark:border-accent dark:text-accent'
+                                    ? 'border-primary text-primary dark:border-accent dark:text-accent'
                                     : 'border-transparent text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                             }`}
                         >
@@ -49,7 +84,7 @@ export function CertificationModal({ isOpen, isEditing, form, categories, certif
                             onClick={() => setActiveTab('content')}
                             className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
                                 activeTab === 'content'
-                                    ? 'border-secondary text-secondary dark:border-accent dark:text-accent'
+                                    ? 'border-primary text-primary dark:border-accent dark:text-accent'
                                     : 'border-transparent text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                             }`}
                         >
@@ -61,7 +96,7 @@ export function CertificationModal({ isOpen, isEditing, form, categories, certif
                                 onClick={() => setActiveTab('documents')}
                                 className={`border-b-2 px-4 py-3 text-sm font-medium transition-colors ${
                                     activeTab === 'documents'
-                                        ? 'border-secondary text-secondary dark:border-accent dark:text-accent'
+                                        ? 'border-primary text-primary dark:border-accent dark:text-accent'
                                         : 'border-transparent text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                                 }`}
                             >
@@ -73,8 +108,19 @@ export function CertificationModal({ isOpen, isEditing, form, categories, certif
 
                 {/* Content */}
                 <div className="max-h-[calc(90vh-220px)] overflow-y-auto p-6">
-                    <form onSubmit={onSubmit}>
-                        {activeTab === 'basic' && <CertificationBasicForm form={form} categories={categories} />}
+                    <form onSubmit={handleSubmit}>
+                        {activeTab === 'basic' && (
+                            <CertificationBasicForm
+                                form={form}
+                                categories={categories}
+                                existingFeaturedImage={existingCertification?.featured_image}
+                                existingSyllabusFile={existingCertification?.syllabus_file}
+                                onFeaturedImageChange={handleFeaturedImageChange}
+                                onSyllabusFileChange={handleSyllabusFileChange}
+                                onRemoveFeaturedImage={handleRemoveFeaturedImage}
+                                onRemoveSyllabusFile={handleRemoveSyllabusFile}
+                            />
+                        )}
                         {activeTab === 'content' && <CertificationContentForm form={form} />}
                         {activeTab === 'documents' && isEditing && certificationId && <CertificationDocumentsTab certificationId={certificationId} />}
                     </form>
@@ -93,9 +139,9 @@ export function CertificationModal({ isOpen, isEditing, form, categories, certif
                             </button>
                             <button
                                 type="button"
-                                onClick={(e: React.MouseEvent<HTMLButtonElement>) => onSubmit(e as unknown as React.FormEvent)}
+                                onClick={handleSubmit}
                                 disabled={form.processing}
-                                className="flex-1 rounded-lg bg-secondary px-4 py-2 text-white transition-colors hover:bg-secondary/90 disabled:opacity-50"
+                                className="flex-1 rounded-lg bg-primary px-4 py-2 text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
                             >
                                 {form.processing ? 'Enregistrement...' : 'Enregistrer'}
                             </button>

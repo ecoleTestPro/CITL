@@ -5,14 +5,90 @@ namespace Database\Seeders;
 use App\Models\Certification\Certification;
 use App\Models\Certification\CertificationCategory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CertificationSeeder extends Seeder
 {
+    /**
+     * Source directory for syllabus PDFs (in public folder, for seeding only)
+     */
+    private string $syllabusSourceDir = 'certifications';
+
+    /**
+     * Destination directory for syllabus PDFs (in storage)
+     */
+    private string $syllabusDestDir = 'certifications/syllabus';
+
+    /**
+     * Source directory for featured images (in public folder, for seeding only)
+     */
+    private string $imageSourceDir = 'certifications/images';
+
+    /**
+     * Destination directory for featured images (in storage)
+     */
+    private string $imageDestDir = 'certifications/featured';
+
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        // Ensure destination directories exist
+        Storage::disk('public')->makeDirectory($this->syllabusDestDir);
+        Storage::disk('public')->makeDirectory($this->imageDestDir);
+
+        // Create all certifications
+        $this->createCategories();
+
+        // Auto-attach syllabus files based on slug
+        $this->attachSyllabusFiles();
+
+        // Auto-attach featured images based on slug
+        $this->attachFeaturedImages();
+    }
+
+    /**
+     * Automatically attach syllabus PDF files to certifications based on their slug.
+     * Looks for files in public/certifications/{slug}.pdf and copies them to storage.
+     */
+    private function attachSyllabusFiles(): void
+    {
+        $certifications = Certification::whereNull('syllabus_file')->get();
+
+        foreach ($certifications as $certification) {
+            $syllabusPath = $this->copySyllabusFile($certification->slug);
+
+            if ($syllabusPath) {
+                $certification->update(['syllabus_file' => $syllabusPath]);
+            }
+        }
+    }
+
+    /**
+     * Automatically attach featured images to certifications based on their slug.
+     * Looks for files in public/certifications/images/{slug}.{jpg|png|webp} and copies them to storage.
+     */
+    private function attachFeaturedImages(): void
+    {
+        $certifications = Certification::whereNull('featured_image')->get();
+
+        foreach ($certifications as $certification) {
+            $imagePath = $this->copyFeaturedImage($certification->slug);
+
+            if ($imagePath) {
+                $certification->update(['featured_image' => $imagePath]);
+            }
+        }
+    }
+
+    /**
+     * Create all categories and certifications.
+     */
+    private function createCategories(): void
+    {
+
         // Create categories
         $coreFoundation = CertificationCategory::create([
             'name_fr' => 'Core Foundation',
@@ -383,5 +459,70 @@ class CertificationSeeder extends Seeder
             'is_active' => true,
             'can_delete' => false,
         ]);
+    }
+
+    /**
+     * Copy syllabus PDF from public/certifications to storage if it exists
+     *
+     * @param  string  $slug  The certification slug (filename without extension)
+     * @return string|null The storage path or null if file doesn't exist
+     */
+    private function copySyllabusFile(string $slug): ?string
+    {
+        $sourceFile = public_path("{$this->syllabusSourceDir}/{$slug}.pdf");
+
+        if (! File::exists($sourceFile)) {
+            return null;
+        }
+
+        $destinationPath = "{$this->syllabusDestDir}/{$slug}.pdf";
+
+        // Copy file to storage
+        Storage::disk('public')->put(
+            $destinationPath,
+            File::get($sourceFile)
+        );
+
+        // Return the path as it would be stored in the database
+        return "/storage/{$destinationPath}";
+    }
+
+    /**
+     * Copy featured image from public/certifications/images to storage if it exists
+     * Supports jpg, jpeg, png, webp formats
+     *
+     * @param  string  $slug  The certification slug (filename without extension)
+     * @return string|null The storage path or null if file doesn't exist
+     */
+    private function copyFeaturedImage(string $slug): ?string
+    {
+        $supportedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+        $sourceFile = null;
+        $extension = null;
+
+        // Check for each supported extension
+        foreach ($supportedExtensions as $ext) {
+            $filePath = public_path("{$this->imageSourceDir}/{$slug}.{$ext}");
+            if (File::exists($filePath)) {
+                $sourceFile = $filePath;
+                $extension = $ext;
+                break;
+            }
+        }
+
+        if (! $sourceFile) {
+            return null;
+        }
+
+        $destinationPath = "{$this->imageDestDir}/{$slug}.{$extension}";
+
+        // Copy file to storage
+        Storage::disk('public')->put(
+            $destinationPath,
+            File::get($sourceFile)
+        );
+
+        // Return the path as it would be stored in the database
+        return "/storage/{$destinationPath}";
     }
 }

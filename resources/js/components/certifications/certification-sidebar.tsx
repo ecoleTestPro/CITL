@@ -141,7 +141,7 @@ export function CertificationSidebar({ certification, currentLanguage }: Certifi
                         <div className="border-t border-gray-200 pt-6 dark:border-gray-700">
                             <h4 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">{labels.syllabus}</h4>
                             <a
-                                href={certification.syllabus_file ? `/storage/${certification.syllabus_file}` : certification.syllabus_url || '#'}
+                                href={certification.syllabus_file || certification.syllabus_url || '#'}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-3 rounded-lg bg-primary/10 p-4 transition-all duration-300 hover:bg-primary/20 hover:shadow-md"

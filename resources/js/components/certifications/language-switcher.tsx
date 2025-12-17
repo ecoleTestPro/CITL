@@ -1,5 +1,5 @@
 import { SupportedLanguage } from '@/types';
-import { Languages, Loader2, Wand2 } from 'lucide-react';
+import { Check, Globe, Loader2, Sparkles } from 'lucide-react';
 
 interface LanguageSwitcherProps {
     currentLanguage: SupportedLanguage;
@@ -17,51 +17,62 @@ export function LanguageSwitcher({
     showTranslateButton = true,
 }: LanguageSwitcherProps) {
     return (
-        <div className="flex items-center justify-between rounded-lg bg-gray-100 p-2 dark:bg-gray-700">
-            <div className="flex items-center gap-2">
-                <Languages className="h-4 w-4 text-gray-500 dark:text-gray-400" />
-                <div className="flex rounded-md bg-white shadow-sm dark:bg-gray-800">
+        <div className="flex items-center justify-between gap-4">
+            {/* Sélecteur de langue */}
+            <div className="flex items-center gap-3">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700">
+                    <Globe className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+                </div>
+                <div className="flex items-center rounded-xl bg-gray-100 p-1 dark:bg-gray-700">
                     <button
                         type="button"
                         onClick={() => onLanguageChange('fr')}
-                        className={`px-4 py-2 text-sm font-medium transition-colors ${
+                        className={`relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                             currentLanguage === 'fr'
-                                ? 'rounded-md bg-primary text-white'
+                                ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-white'
                                 : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                         }`}
                     >
-                        Français
+                        <span className="text-base">🇫🇷</span>
+                        <span>Français</span>
+                        {currentLanguage === 'fr' && <Check className="h-4 w-4 text-green-500" />}
                     </button>
                     <button
                         type="button"
                         onClick={() => onLanguageChange('en')}
-                        className={`px-4 py-2 text-sm font-medium transition-colors ${
+                        className={`relative flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                             currentLanguage === 'en'
-                                ? 'rounded-md bg-primary text-white'
+                                ? 'bg-white text-gray-900 shadow-sm dark:bg-gray-800 dark:text-white'
                                 : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100'
                         }`}
                     >
-                        English
+                        <span className="text-base">🇬🇧</span>
+                        <span>English</span>
+                        {currentLanguage === 'en' && <Check className="h-4 w-4 text-green-500" />}
                     </button>
                 </div>
             </div>
 
+            {/* Bouton de traduction automatique */}
             {showTranslateButton && onAutoTranslate && (
                 <button
                     type="button"
                     onClick={onAutoTranslate}
                     disabled={isTranslating}
-                    className="flex items-center gap-2 rounded-md bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                    className="group relative flex items-center gap-2 overflow-hidden rounded-xl bg-gradient-to-r from-violet-500 to-purple-500 px-5 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:shadow-lg hover:shadow-purple-500/25 disabled:cursor-not-allowed disabled:opacity-60"
                 >
+                    {/* Effet de brillance au survol */}
+                    <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
+
                     {isTranslating ? (
                         <>
                             <Loader2 className="h-4 w-4 animate-spin" />
-                            Traduction...
+                            <span>Traduction en cours...</span>
                         </>
                     ) : (
                         <>
-                            <Wand2 className="h-4 w-4" />
-                            Traduire vers {currentLanguage === 'fr' ? 'English' : 'Français'}
+                            <Sparkles className="h-4 w-4" />
+                            <span>Traduire vers {currentLanguage === 'fr' ? '🇬🇧 English' : '🇫🇷 Français'}</span>
                         </>
                     )}
                 </button>

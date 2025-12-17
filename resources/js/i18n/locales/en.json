@@ -305,6 +305,17 @@
         "exam_duration": "Duration",
         "exam_total_points": "Total Points",
         "view_details": "View Details",
+        "sidebar": {
+            "search": "Search",
+            "search_placeholder": "Search for a certification...",
+            "other_categories": "Other Categories",
+            "quick_links": "Quick Links",
+            "find_training": "Find Training",
+            "register_exam": "Register for Exam",
+            "why_certify": "Why Get Certified?",
+            "results_count": "{{count}} result(s) found",
+            "no_results": "No results found"
+        },
         "why_certification": {
             "badge": "Why Get Certified",
             "hero_title": "Why Get **ISTQB Certified**?",

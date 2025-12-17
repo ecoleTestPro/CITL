@@ -319,6 +319,17 @@
         "exam_duration": "Durée",
         "exam_total_points": "Points totaux",
         "view_details": "Voir les détails",
+        "sidebar": {
+            "search": "Rechercher",
+            "search_placeholder": "Rechercher une certification...",
+            "other_categories": "Autres catégories",
+            "quick_links": "Liens rapides",
+            "find_training": "Trouver une formation",
+            "register_exam": "S'inscrire à l'examen",
+            "why_certify": "Pourquoi se certifier ?",
+            "results_count": "{{count}} résultat(s) trouvé(s)",
+            "no_results": "Aucun résultat trouvé"
+        },
         "why_certification": {
             "badge": "Pourquoi se certifier",
             "hero_title": "Pourquoi obtenir la **certification ISTQB** ?",

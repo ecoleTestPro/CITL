@@ -79,6 +79,7 @@ export interface CertificationCategory {
     is_active: boolean;
     activeCertifications?: Certification[];
     active_certifications?: Certification[]; // Support for snake_case from API
+    certifications?: Certification[]; // When loaded with certifications relationship
     can_delete: boolean;
 }
 

@@ -68,4 +68,29 @@ class CertificationCategoryRepository extends BaseRepository
     {
         return $this->model->where('key', $key)->first();
     }
+
+    /**
+     * Get all active categories ordered.
+     */
+    public function getActiveCategories()
+    {
+        return $this->model
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
+    }
+
+    /**
+     * Get all active categories with their active certifications.
+     */
+    public function getActiveCategoriesWithCertifications()
+    {
+        return $this->model
+            ->where('is_active', true)
+            ->with(['certifications' => function ($query) {
+                $query->where('is_active', true)->orderBy('order');
+            }])
+            ->orderBy('order')
+            ->get();
+    }
 }

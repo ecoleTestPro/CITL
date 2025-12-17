@@ -8,10 +8,16 @@ import { useTranslation } from 'react-i18next';
 interface Props {
     category: CertificationCategory;
     certifications: Certification[];
+    categories: CertificationCategory[];
 }
 
-function CoreAdvanced({ category, certifications }: Props) {
-    const { t } = useTranslation();
+function CoreAdvanced({ category, certifications, categories }: Props) {
+    const { t, i18n } = useTranslation();
+    const isEnglish = i18n.language === 'en';
+
+    // Get localized category fields
+    const categoryName = (isEnglish && category.name_en) || category.name_fr;
+    const categoryDescription = (isEnglish && category.description_en) || category.description_fr;
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -22,21 +28,21 @@ function CoreAdvanced({ category, certifications }: Props) {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.core_advanced.title_fr')}</title>
-                <meta name="description" content={t('seo.core_advanced.description_fr')} />
+                <title>{t('seo.core_advanced.title')}</title>
+                <meta name="description" content={t('seo.core_advanced.description')} />
                 <meta name="keywords" content={t('seo.core_advanced.keywords')} />
-                <meta property="og:title" content={t('seo.core_advanced.title_fr')} />
-                <meta property="og:description" content={t('seo.core_advanced.description_fr')} />
+                <meta property="og:title" content={t('seo.core_advanced.title')} />
+                <meta property="og:description" content={t('seo.core_advanced.description')} />
                 <meta property="og:type" content="website" />
             </Head>
             <HeroCommon
                 badge={t('nav.certifications')}
-                title={category.name}
-                description={category.description || t('certifications.core_advanced.hero_description')}
+                title={categoryName}
+                description={categoryDescription || ''}
                 backgroundImage="/assets/images/bg/sharp-2.png"
             />
 
-            <CertificationList certifications={certifications} categorySlug="core-advanced" />
+            <CertificationList certifications={certifications} categories={categories} categorySlug="core-advanced" />
         </PublicLayout>
     );
 }

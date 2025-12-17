@@ -11,10 +11,12 @@ class CertificationCategory extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'name_fr',
+        'name_en',
         'slug',
         'key',
-        'description',
+        'description_fr',
+        'description_en',
         'order',
         'is_active',
         'can_delete',
@@ -25,6 +27,22 @@ class CertificationCategory extends Model
         'can_delete' => 'boolean',
         'order' => 'integer',
     ];
+
+    /**
+     * Accessor for backward compatibility - returns name_fr by default.
+     */
+    public function getNameAttribute(): string
+    {
+        return $this->name_fr ?? '';
+    }
+
+    /**
+     * Accessor for backward compatibility - returns description_fr by default.
+     */
+    public function getDescriptionAttribute(): ?string
+    {
+        return $this->description_fr;
+    }
 
     /**
      * Get the certifications for this category.

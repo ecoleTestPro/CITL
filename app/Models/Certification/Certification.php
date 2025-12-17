@@ -2,8 +2,10 @@
 
 namespace App\Models\Certification;
 
+use App\Models\Certificate\CertificationDocument;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Certification extends Model
@@ -73,5 +75,15 @@ class Certification extends Model
             'totalPoints' => $this->exam_total_points,
             'duration' => $this->exam_duration,
         ];
+    }
+
+    /**
+     * Get the documents for this certification.
+     */
+    public function documents(): HasMany
+    {
+        return $this->hasMany(CertificationDocument::class)
+            ->where('is_active', true)
+            ->orderBy('order');
     }
 }

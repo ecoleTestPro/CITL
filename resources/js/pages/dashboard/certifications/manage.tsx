@@ -33,9 +33,11 @@ export default function ManageCertifications({ categories, certifications }: Pro
 
     // Forms
     const categoryForm = useForm({
-        name: '',
+        name_fr: '',
+        name_en: '',
         slug: '',
-        description: '',
+        description_fr: '',
+        description_en: '',
         order: 0,
         is_active: true,
     });
@@ -101,9 +103,11 @@ export default function ManageCertifications({ categories, certifications }: Pro
     const handleEditCategory = (category: CertificationCategory) => {
         setEditingCategory(category);
         categoryForm.setData({
-            name: category.name,
+            name_fr: category.name_fr,
+            name_en: category.name_en || '',
             slug: category.slug,
-            description: category.description || '',
+            description_fr: category.description_fr || '',
+            description_en: category.description_en || '',
             order: category.order,
             is_active: category.is_active,
         });

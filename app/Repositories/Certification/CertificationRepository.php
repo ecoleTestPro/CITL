@@ -43,7 +43,7 @@ class CertificationRepository extends BaseRepository
     {
         return $this->model
             ->where('slug', $slug)
-            ->with(['category'])
+            ->with(['category', 'documents.tags'])
             ->first();
     }
 

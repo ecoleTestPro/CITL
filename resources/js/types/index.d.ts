@@ -67,10 +67,14 @@ export interface User {
  */
 export interface CertificationCategory {
     id: number;
-    name: string;
+    name_fr: string;
+    name_en: string | null;
+    name: string; // Accessor pour rétrocompatibilité (retourne name_fr)
     slug: string;
     key: string;
-    description: string | null;
+    description_fr: string | null;
+    description_en: string | null;
+    description: string | null; // Accessor pour rétrocompatibilité (retourne description_fr)
     order: number;
     is_active: boolean;
     activeCertifications?: Certification[];
@@ -115,6 +119,7 @@ export interface Certification {
     is_active: boolean;
     certification_category_id: number;
     category: CertificationCategory;
+    documents?: CertificationDocument[];
 }
 
 /**
@@ -177,9 +182,36 @@ export type TranslatableField =
  * Interface représentant les données du formulaire de catégorie
  */
 export interface CategoryFormData {
-    name: string;
+    name_fr: string;
+    name_en: string;
     slug: string;
-    description: string;
+    description_fr: string;
+    description_en: string;
     order: number;
     is_active: boolean;
+}
+
+/**
+ * Interface représentant un tag de document de certification
+ */
+export interface CertificationDocumentTag {
+    id: number;
+    name: string;
+    slug: string;
+    order: number;
+}
+
+/**
+ * Interface représentant un document de certification
+ */
+export interface CertificationDocument {
+    id: number;
+    certification_id: number;
+    name: string;
+    file_path: string;
+    file_type: string;
+    file_size: number;
+    order: number;
+    is_active: boolean;
+    tags: CertificationDocumentTag[];
 }

@@ -11,19 +11,24 @@ import { CertificationLoading } from '@/components/certifications/certification-
 import { CertificationSidebar } from '@/components/certifications/certification-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import PublicLayout from '@/layouts/public/public-layout';
-import { Certification } from '@/types';
+import { Certification, SupportedLanguage } from '@/types';
 import { Head } from '@inertiajs/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     slug: string;
 }
 
 function CertificationDetail({ slug }: Props) {
+    const { i18n } = useTranslation();
     const [certification, setCertification] = useState<Certification | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+
+    // Détermine la langue courante à partir de i18n
+    const currentLanguage: SupportedLanguage = (i18n.language?.startsWith('en') ? 'en' : 'fr') as SupportedLanguage;
 
     useEffect(() => {
         const fetchCertification = async () => {
@@ -33,7 +38,7 @@ function CertificationDetail({ slug }: Props) {
                 setCertification(response.data.data);
                 setError(null);
             } catch (err) {
-                setError('Impossible de charger les détails de la certification');
+                setError(currentLanguage === 'fr' ? 'Impossible de charger les détails de la certification' : 'Unable to load certification details');
                 console.error('Error fetching certification:', err);
             } finally {
                 setLoading(false);
@@ -41,7 +46,7 @@ function CertificationDetail({ slug }: Props) {
         };
 
         fetchCertification();
-    }, [slug]);
+    }, [slug, currentLanguage]);
 
     if (loading) {
         return <CertificationLoading />;
@@ -51,35 +56,81 @@ function CertificationDetail({ slug }: Props) {
         return <CertificationError error={error} />;
     }
 
+    // Helper pour vérifier si une valeur a du contenu réel (pas null, undefined, ou chaîne vide/HTML vide)
+    const hasRealContent = (value: string | null | undefined): boolean => {
+        if (!value) return false;
+        // Pour le contenu HTML, on retire les balises et on vérifie s'il reste du texte
+        const strippedContent = value.replace(/<[^>]*>/g, '').trim();
+        return strippedContent.length > 0;
+    };
+
+    // Helper pour obtenir le contenu dans la langue courante avec fallback intelligent
+    const getLocalizedContent = (field: string): string | null => {
+        const localizedKey = `${field}_${currentLanguage}` as keyof Certification;
+        const fallbackKey = `${field}_fr` as keyof Certification;
+
+        const localizedValue = certification[localizedKey] as string | null;
+        const fallbackValue = certification[fallbackKey] as string | null;
+
+        // Si le contenu localisé existe et a du contenu réel, l'utiliser
+        if (hasRealContent(localizedValue)) {
+            return localizedValue;
+        }
+        // Sinon, utiliser le fallback français
+        return hasRealContent(fallbackValue) ? fallbackValue : null;
+    };
+
+    // Titres et labels localisés
+    const labels = {
+        overview: currentLanguage === 'fr' ? "Vue d'ensemble" : 'Overview',
+        audience: currentLanguage === 'fr' ? 'Public cible' : 'Target Audience',
+        trainingContent: currentLanguage === 'fr' ? 'Contenu de la formation' : 'Training Content',
+        examStructure: currentLanguage === 'fr' ? "Structure de l'examen" : 'Exam Structure',
+        businessOutcomes: currentLanguage === 'fr' ? 'Bénéfices professionnels' : 'Business Outcomes',
+        additionalInfo: currentLanguage === 'fr' ? 'Informations complémentaires' : 'Additional Information',
+        home: currentLanguage === 'fr' ? 'Accueil' : 'Home',
+        certifications: 'Certifications',
+    };
+
+    const title = getLocalizedContent('title') || certification.title_fr;
+    const subtitle = getLocalizedContent('subtitle');
+    const description = getLocalizedContent('description') || certification.description_fr;
+
+    // Helper pour obtenir le nom de catégorie localisé
+    const getCategoryName = (): string => {
+        const category = certification.category;
+        if (currentLanguage === 'en' && category.name_en) {
+            return category.name_en;
+        }
+        return category.name_fr || category.name;
+    };
+
+    const categoryName = getCategoryName();
+
     const breadcrumbs = [
-        { title: 'Accueil', href: '/' },
-        { title: 'Certifications', href: '/why-certification' },
-        { title: certification.category.name, href: `/${certification.category.slug}` },
-        { title: certification.title_fr, href: '' },
+        { title: labels.home, href: '/' },
+        { title: labels.certifications, href: '/why-certification' },
+        { title: categoryName, href: `/${certification.category.slug}` },
+        { title: title, href: '' },
     ];
+
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{`${certification.title_fr} - CITL`}</title>
-                <meta
-                    name="description"
-                    content={certification.description_fr || `Certification ${certification.title_fr} disponible en Côte d'Ivoire avec le CITL.`}
-                />
-                <meta name="keywords" content={`${certification.title_fr}, ISTQB, certification, CITL, test logiciel`} />
-                <meta property="og:title" content={`${certification.title_fr} - CITL`} />
-                <meta
-                    property="og:description"
-                    content={certification.description_fr || `Certification ${certification.title_fr} disponible en Côte d'Ivoire avec le CITL.`}
-                />
+                <title>{`${title} - CITL`}</title>
+                <meta name="description" content={description || `Certification ${title} disponible en Côte d'Ivoire avec le CITL.`} />
+                <meta name="keywords" content={`${title}, ISTQB, certification, CITL, test logiciel`} />
+                <meta property="og:title" content={`${title} - CITL`} />
+                <meta property="og:description" content={description || `Certification ${title} disponible en Côte d'Ivoire avec le CITL.`} />
                 <meta property="og:type" content="website" />
             </Head>
 
             {/* Hero Section */}
             <HeroCommon
-                badge={certification.category.name}
-                title={certification.title_fr}
-                description={certification.subtitle_fr || certification.description_fr}
+                badge={categoryName}
+                title={title}
+                description={subtitle || description}
                 backgroundImage="/assets/images/bg/sharp-2.png"
             />
 
@@ -93,27 +144,27 @@ function CertificationDetail({ slug }: Props) {
                                 {/* Overview Section */}
                                 <CertificationContentSection
                                     id="overview"
-                                    title="Vue d'ensemble"
+                                    title={labels.overview}
                                     delay={0.3}
-                                    richContent={certification.overview_fr}
-                                    fallbackContent={<p className="text-gray-700 dark:text-gray-300">{certification.description_fr}</p>}
+                                    richContent={getLocalizedContent('overview')}
+                                    fallbackContent={<p className="text-gray-700 dark:text-gray-300">{description}</p>}
                                 />
 
                                 {/* Audience Section */}
                                 <CertificationContentSection
                                     id="audience"
-                                    title="Public cible"
+                                    title={labels.audience}
                                     delay={0.4}
-                                    richContent={certification.target_audience_fr}
+                                    richContent={getLocalizedContent('target_audience')}
                                     fallbackContent={<AudienceFallback />}
                                 />
 
                                 {/* Training Content Section */}
                                 <CertificationContentSection
                                     id="content"
-                                    title="Contenu de la formation"
+                                    title={labels.trainingContent}
                                     delay={0.5}
-                                    richContent={certification.training_content_fr}
+                                    richContent={getLocalizedContent('training_content')}
                                     fallbackContent={<TrainingContentFallback />}
                                 />
 
@@ -121,15 +172,15 @@ function CertificationDetail({ slug }: Props) {
                                 {false && certification && (
                                     <CertificationContentSection
                                         id="exam-structure"
-                                        title="Structure de l'examen"
+                                        title={labels.examStructure}
                                         delay={0.6}
-                                        richContent={certification.exam_structure_details_fr}
+                                        richContent={getLocalizedContent('exam_structure_details')}
                                         fallbackContent={
                                             <ExamStructureFallback
-                                                examQuestions={certification.exam_questions}
-                                                examDuration={certification.exam_duration}
-                                                examPassingScore={certification.exam_passing_score}
-                                                examTotalPoints={certification.exam_total_points}
+                                                examQuestions={certification?.exam_questions ?? 0}
+                                                examDuration={certification?.exam_duration ?? ''}
+                                                examPassingScore={certification?.exam_passing_score ?? 0}
+                                                examTotalPoints={certification?.exam_total_points ?? 0}
                                             />
                                         }
                                     />
@@ -138,25 +189,25 @@ function CertificationDetail({ slug }: Props) {
                                 {/* Business Outcomes Section */}
                                 <CertificationContentSection
                                     id="business-outcomes"
-                                    title="Bénéfices professionnels"
+                                    title={labels.businessOutcomes}
                                     delay={0.7}
-                                    richContent={certification.business_outcomes_fr}
+                                    richContent={getLocalizedContent('business_outcomes')}
                                     fallbackContent={<BusinessOutcomesFallback />}
                                 />
 
                                 {/* Additional Information Section */}
                                 <CertificationContentSection
                                     id="more-information"
-                                    title="Informations complémentaires"
+                                    title={labels.additionalInfo}
                                     delay={0.8}
-                                    richContent={certification.additional_information_fr}
+                                    richContent={getLocalizedContent('additional_information')}
                                     fallbackContent={<AdditionalInformationFallback />}
                                 />
                             </div>
                         </div>
 
                         {/* Right Column - Sticky Sidebar */}
-                        <CertificationSidebar certification={certification} />
+                        <CertificationSidebar certification={certification} currentLanguage={currentLanguage} />
                     </div>
                 </div>
             </section>

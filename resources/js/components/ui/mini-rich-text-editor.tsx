@@ -113,7 +113,7 @@ export function MiniRichTextEditor({ content, onChange, placeholder = 'Entrez vo
     // Sync content when it changes externally
     React.useEffect(() => {
         if (editor && content !== editor.getHTML()) {
-            editor.commands.setContent(content, false);
+            editor.commands.setContent(content, { emitUpdate: false });
         }
     }, [content, editor]);
 

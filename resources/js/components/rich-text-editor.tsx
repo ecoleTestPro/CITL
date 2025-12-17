@@ -86,7 +86,7 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Comme
     // Update editor content when the content prop changes (e.g., when switching language or loading data)
     useEffect(() => {
         if (editor && content !== editor.getHTML()) {
-            editor.commands.setContent(content, false);
+            editor.commands.setContent(content, { emitUpdate: false });
         }
     }, [content, editor]);
 

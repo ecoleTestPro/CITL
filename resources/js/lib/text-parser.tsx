@@ -3,7 +3,8 @@
  * @param text - Le texte à vérifier
  * @returns true si le texte contient des balises HTML
  */
-function containsHtml(text: string): boolean {
+function containsHtml(text: string | null | undefined): boolean {
+    if (!text) return false;
     return /<[a-z][\s\S]*>/i.test(text);
 }
 
@@ -12,7 +13,10 @@ function containsHtml(text: string): boolean {
  * @param text - Le texte à parser (peut contenir **mot** pour le gras)
  * @returns Un tableau de ReactNode avec les parties en gras
  */
-export function parseTextWithBold(text: string): React.ReactNode {
+export function parseTextWithBold(text: string | null | undefined): React.ReactNode {
+    // Si le texte est null ou undefined, retourner une chaîne vide
+    if (!text) return '';
+
     // Regex pour capturer le texte entre **
     const boldPattern = /\*\*(.*?)\*\*/g;
     const parts: React.ReactNode[] = [];
@@ -51,12 +55,17 @@ export function parseTextWithBold(text: string): React.ReactNode {
  * @param as - Élément HTML à utiliser (par défaut: span)
  */
 interface RichTextProps {
-    text: string;
+    text: string | null | undefined;
     className?: string;
     as?: 'span' | 'p' | 'div' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'li' | 'td' | 'th' | 'label';
 }
 
 export function RichText({ text, className = '', as = 'span' }: RichTextProps) {
+    // Si le texte est null ou undefined, retourner un élément vide
+    if (!text) {
+        return null;
+    }
+
     const combinedClassName = containsHtml(text) ? `prose prose-sm dark:prose-invert max-w-none ${className}` : className;
 
     // Si le texte contient du HTML, utiliser dangerouslySetInnerHTML

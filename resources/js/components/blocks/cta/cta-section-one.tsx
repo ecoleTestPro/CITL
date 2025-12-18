@@ -1,15 +1,21 @@
 import { FadeIn, SlideIn } from '@/components/animations';
 import { AnimatedButton } from '@/components/ui/animated-button';
+import { useImage } from '@/hooks/use-image';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function CtaSectionOne() {
     const { t } = useTranslation();
+    const ctaBackground = useImage('home', 'cta_background', '/assets/images/cta/cta-bg-pattern.png');
+    const ctaImage = useImage('home', 'cta_image', '/assets/images/cta/cta-savings-growth.png');
 
     return (
         <section className="overflow-hidden pt-[50px] pb-16 md:pt-[100px] md:pb-20 lg:pt-[150px] lg:pb-[90px] xl:pt-[200px] xl:pb-[100px]">
             <div className="container mx-auto px-4">
-                <div className="rounded-[20px] bg-white md:bg-[url('/assets/images/cta/cta-bg-pattern.png')] md:bg-cover md:bg-top md:bg-no-repeat dark:bg-gray-900">
+                <div
+                    className="rounded-[20px] bg-white md:bg-cover md:bg-top md:bg-no-repeat dark:bg-gray-900"
+                    style={{ backgroundImage: `url('${ctaBackground}')` }}
+                >
                     <div className="relative pr-3.5 pl-7 max-lg:space-y-10 max-md:pt-10 md:py-10 lg:py-16 lg:pr-[42px] lg:pl-14">
                         {/* Image à gauche - Version desktop */}
                         <SlideIn
@@ -19,7 +25,7 @@ export default function CtaSectionOne() {
                             className="mx-auto w-[340px] overflow-hidden min-[925px]:top-[-85px] sm:w-[450px] md:absolute md:top-[-10px] md:-left-6 md:mx-0 md:w-[450px] lg:top-[-90px] lg:w-[540px] xl:top-[-204px] xl:w-[670px]"
                         >
                             <img
-                                src="/assets/images/cta/cta-savings-growth.png"
+                                src={ctaImage}
                                 alt="Visualisation de la croissance des certifications ISTQB"
                                 className="size-full object-cover"
                                 loading="lazy"

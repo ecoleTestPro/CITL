@@ -1,3 +1,4 @@
+import { useImage } from '@/hooks/use-image';
 import { CertificationCategory } from '@/types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,6 +12,7 @@ interface CertificationListGroupedProps {
 
 function CertificationListGrouped({ categories }: CertificationListGroupedProps) {
     const sectionRef = useRef<HTMLDivElement>(null);
+    const bgSharp3 = useImage('global', 'bg_sharp_3', '/assets/images/bg/sharp-3.png');
 
     useEffect(() => {
         if (!sectionRef.current || categories.length === 0) return;
@@ -49,7 +51,7 @@ function CertificationListGrouped({ categories }: CertificationListGroupedProps)
         <div ref={sectionRef} className="relative overflow-hidden py-12">
             <div className="pointer-events-none absolute inset-0 z-0">
                 <div className="absolute -top-20 -right-20 opacity-5 dark:opacity-[0.02]">
-                    <img src="/assets/images/bg/sharp-3.png" alt="Background shape" className="h-auto w-auto max-w-none" />
+                    <img src={bgSharp3} alt="Background shape" className="h-auto w-auto max-w-none" />
                 </div>
             </div>
 

@@ -1,22 +1,38 @@
+import { useImage } from '@/hooks/use-image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Données des certifications pour le carrousel
-const certifications = [
-    { id: 'ctfl', name: 'CTFL', logo: '/assets/images/certifications/logo-ctfl.png' },
-    { id: 'ctal-ta', name: 'CTAL-TA', logo: '/assets/images/certifications/logo-ctal-ta.png' },
-    { id: 'ctal-tm', name: 'CTAL-TM', logo: '/assets/images/certifications/logo-ctal-tm.png' },
-    { id: 'ctal-tae', name: 'CTAL-TAE', logo: '/assets/images/certifications/logo-ctal-tae.png' },
-    { id: 'agile', name: 'Agile Tester', logo: '/assets/images/certifications/logo-agile.png' },
-    { id: 'expert', name: 'Expert Level', logo: '/assets/images/certifications/logo-expert.png' },
-];
-
 function FeaturesSection() {
     const { t } = useTranslation();
+
+    // Images configurables
+    const featuresBackground = useImage('home', 'features_background', '/assets/images/features/feature-certification-process.jpg');
+    const featuresExam1 = useImage('home', 'features_exam_1', '/assets/images/features/feature-exam-1.png');
+    const featuresExam2 = useImage('home', 'features_exam_2', '/assets/images/features/feature-exam-2.png');
+    const featuresExam3 = useImage('home', 'features_exam_3', '/assets/images/features/feature-exam-3.png');
+    const logoCTFL = useImage('home', 'cert_logo_ctfl', '/assets/images/certifications/logo-ctfl.png');
+    const logoCTAL_TA = useImage('home', 'cert_logo_ctal_ta', '/assets/images/certifications/logo-ctal-ta.png');
+    const logoCTAL_TM = useImage('home', 'cert_logo_ctal_tm', '/assets/images/certifications/logo-ctal-tm.png');
+    const logoCTAL_TAE = useImage('home', 'cert_logo_ctal_tae', '/assets/images/certifications/logo-ctal-tae.png');
+    const logoAgile = useImage('home', 'cert_logo_agile', '/assets/images/certifications/logo-agile.png');
+    const logoExpert = useImage('home', 'cert_logo_expert', '/assets/images/certifications/logo-expert.png');
+
+    // Données des certifications pour le carrousel
+    const certifications = useMemo(
+        () => [
+            { id: 'ctfl', name: 'CTFL', logo: logoCTFL },
+            { id: 'ctal-ta', name: 'CTAL-TA', logo: logoCTAL_TA },
+            { id: 'ctal-tm', name: 'CTAL-TM', logo: logoCTAL_TM },
+            { id: 'ctal-tae', name: 'CTAL-TAE', logo: logoCTAL_TAE },
+            { id: 'agile', name: 'Agile Tester', logo: logoAgile },
+            { id: 'expert', name: 'Expert Level', logo: logoExpert },
+        ],
+        [logoCTFL, logoCTAL_TA, logoCTAL_TM, logoCTAL_TAE, logoAgile, logoExpert],
+    );
     const sectionRef = useRef<HTMLElement>(null);
     const headerRef = useRef<HTMLDivElement>(null);
     const leftCardRef = useRef<HTMLDivElement>(null);
@@ -275,7 +291,7 @@ function FeaturesSection() {
                                 {/* Image de fond */}
                                 <div
                                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                                    style={{ backgroundImage: "url('/assets/images/features/feature-certification-process.jpg')" }}
+                                    style={{ backgroundImage: `url('${featuresBackground}')` }}
                                 />
 
                                 {/* Gradient overlay */}
@@ -340,17 +356,13 @@ function FeaturesSection() {
                             <div ref={rightBottomRef} className="space-y-8 rounded-[20px] bg-white p-5 sm:p-8 md:p-5 xl:p-8 dark:bg-gray-900">
                                 <div className="flex items-center justify-center -space-x-12">
                                     <figure className="w-full max-w-[214px] rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:scale-105 hover:rotate-0">
-                                        <img src="/assets/images/features/feature-exam-1.png" alt="Examen ISTQB" className="h-full w-full object-cover" />
+                                        <img src={featuresExam1} alt="Examen ISTQB" className="h-full w-full object-cover" />
                                     </figure>
                                     <figure className="relative z-10 w-full max-w-[214px] overflow-hidden rounded-b-[15px] shadow-2xl transition-transform duration-500 hover:scale-110">
-                                        <img
-                                            src="/assets/images/features/feature-exam-2.png"
-                                            alt="Certification réussie"
-                                            className="h-full w-full object-cover"
-                                        />
+                                        <img src={featuresExam2} alt="Certification réussie" className="h-full w-full object-cover" />
                                     </figure>
                                     <figure className="relative z-10 w-full max-w-[214px] -rotate-12 overflow-hidden rounded-b-[15px] shadow-xl transition-transform duration-500 hover:scale-105 hover:rotate-0">
-                                        <img src="/assets/images/features/feature-exam-3.png" alt="Certificat ISTQB" className="h-full w-full object-cover" />
+                                        <img src={featuresExam3} alt="Certificat ISTQB" className="h-full w-full object-cover" />
                                     </figure>
                                 </div>
 

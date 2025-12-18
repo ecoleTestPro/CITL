@@ -1,5 +1,6 @@
 import { FadeIn, SlideIn } from '@/components/animations';
 import { AnimatedButton } from '@/components/ui/animated-button';
+import { useImage } from '@/hooks/use-image';
 import { Link } from '@inertiajs/react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
@@ -7,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 const CertificationWheelTwo = () => {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const certificationWheel = useImage('home', 'certification_wheel', '/assets/images/pages/certification/certification-wheel.png');
     const containerRef = useRef<HTMLDivElement>(null);
     const wheelRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +32,7 @@ const CertificationWheelTwo = () => {
         <section ref={containerRef} className="relative overflow-hidden bg-gray-50 py-16 md:py-24 dark:bg-gray-800">
             {/* Background shapes */}
             <div className="pointer-events-none absolute top-0 left-0 h-full w-1/3 opacity-5 dark:opacity-[0.02]">
-                <img src="/assets/images/bg/sharp-2.png" alt="" className="h-full w-full object-cover object-right" />
+                <img src={bgSharp2} alt="" className="h-full w-full object-cover object-right" />
             </div>
 
             <div className="relative container mx-auto px-4 md:px-5 lg:px-5">
@@ -83,7 +86,7 @@ const CertificationWheelTwo = () => {
 
                             {/* Image de la roue */}
                             <motion.img
-                                src="/assets/images/pages/certification/certification-wheel.png"
+                                src={certificationWheel}
                                 alt="ISTQB Certification Wheel"
                                 className="relative h-full w-full object-contain drop-shadow-2xl"
                                 initial={{ opacity: 0, scale: 0.8 }}

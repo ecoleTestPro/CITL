@@ -2,7 +2,24 @@
     "home": {
         "hero_background": "/assets/images/hero/hero-bg-01.jpg",
         "about_image_1": "/assets/images/about/about-01.jpg",
-        "about_image_2": "/assets/images/about/about-02.jpg"
+        "about_image_2": "/assets/images/about/about-02.jpg",
+        "cta_background": "/assets/images/cta/cta-bg-pattern.png",
+        "cta_image": "/assets/images/cta/cta-savings-growth.png",
+        "certification_wheel": "/assets/images/pages/certification/certification-wheel.png",
+        "features_background": "/assets/images/features/feature-certification-process.jpg",
+        "features_exam_1": "/assets/images/features/feature-exam-1.png",
+        "features_exam_2": "/assets/images/features/feature-exam-2.png",
+        "features_exam_3": "/assets/images/features/feature-exam-3.png",
+        "cert_logo_ctfl": "/assets/images/certifications/logo-ctfl.png",
+        "cert_logo_ctal_ta": "/assets/images/certifications/logo-ctal-ta.png",
+        "cert_logo_ctal_tm": "/assets/images/certifications/logo-ctal-tm.png",
+        "cert_logo_ctal_tae": "/assets/images/certifications/logo-ctal-tae.png",
+        "cert_logo_agile": "/assets/images/certifications/logo-agile.png",
+        "cert_logo_expert": "/assets/images/certifications/logo-expert.png"
+    },
+    "global": {
+        "bg_sharp_2": "/assets/images/bg/sharp-2.png",
+        "bg_sharp_3": "/assets/images/bg/sharp-3.png"
     },
     "about.citl": {
         "overview": "/assets/images/pages/about/citl-overview.jpg"

@@ -4,6 +4,7 @@ import { PageEditorLayout } from '@/components/dashboard/page-editor-layout';
 import { PagePreview } from '@/components/dashboard/page-preview';
 import { Badge } from '@/components/ui/badge';
 import { useTranslations } from '@/hooks/use-translations';
+import { Circle } from 'lucide-react';
 
 interface EditHomeProps {
     pageUrl: string;
@@ -40,6 +41,7 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
                     availableLocales={availableLocales}
                     loading={loading}
                     saving={saving}
+                    hasUnsavedChanges={hasUnsavedChanges}
                     onLocaleChange={setSelectedLocale}
                     onReset={handleReset}
                     onPreview={handlePreview}
@@ -47,26 +49,41 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
                 />
             }
         >
-            <div className="flex max-h-[calc(100vh-200px)] w-1/3 flex-col gap-4 overflow-auto">
-                <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-semibold">Edit Translations ({selectedLocale.toUpperCase()})</h3>
-                    {hasUnsavedChanges && (
-                        <Badge variant="outline" className="border-orange-600 text-orange-600">
-                            Unsaved changes
+            {/* Editor Panel */}
+            <div className="flex h-[calc(100vh-180px)] w-[380px] shrink-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
+                {/* Editor Header */}
+                <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
+                    <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Édition</span>
+                        <Badge variant="outline" className="h-5 border-gray-200 px-1.5 text-[10px] font-medium uppercase dark:border-gray-700">
+                            {selectedLocale}
                         </Badge>
+                    </div>
+                    {hasUnsavedChanges && (
+                        <div className="flex items-center gap-1.5 text-xs text-orange-600 dark:text-orange-400">
+                            <Circle className="h-2 w-2 fill-current" />
+                            <span>Non enregistré</span>
+                        </div>
                     )}
                 </div>
-                <EnhancedTranslationEditor
-                    translations={translations[selectedLocale] || {}}
-                    selectedLocale={selectedLocale}
-                    loading={loading}
-                    sections={sections}
-                    metadata={metadata}
-                    onTranslationChange={handleTranslationChange}
-                />
+
+                {/* Editor Content */}
+                <div className="flex-1 overflow-hidden p-4">
+                    <EnhancedTranslationEditor
+                        translations={translations[selectedLocale] || {}}
+                        selectedLocale={selectedLocale}
+                        loading={loading}
+                        sections={sections}
+                        metadata={metadata}
+                        onTranslationChange={handleTranslationChange}
+                    />
+                </div>
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            {/* Preview Panel */}
+            <div className="flex-1 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800">
+                <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            </div>
         </PageEditorLayout>
     );
 }

@@ -1,0 +1,91 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: citl-app
+    restart: unless-stopped
+    ports:
+      - "8100:80"
+    volumes:
+      - .:/var/www
+      - ./docker/nginx.conf:/etc/nginx/sites-available/default
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - citl-network
+    environment:
+      - APP_ENV=${APP_ENV:-local}
+      - APP_DEBUG=${APP_DEBUG:-true}
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-citl}
+      - DB_USERNAME=${DB_USERNAME:-citl}
+      - DB_PASSWORD=${DB_PASSWORD:-secret}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  mysql:
+    image: mysql:8.0
+    container_name: citl-mysql
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-citl}
+      MYSQL_USER: ${DB_USERNAME:-citl}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootsecret}
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - citl-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: citl-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8180:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: ${DB_ROOT_PASSWORD:-rootsecret}
+    depends_on:
+      - mysql
+    networks:
+      - citl-network
+
+  redis:
+    image: redis:alpine
+    container_name: citl-redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - citl-network
+
+  node:
+    image: node:22-alpine
+    container_name: citl-node
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5174:5173"
+    networks:
+      - citl-network
+
+networks:
+  citl-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  redis-data:

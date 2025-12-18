@@ -1,11 +1,13 @@
 import { FadeIn, ScaleIn, SlideIn } from '@/components/animations';
 import { AnimatedButton } from '@/components/ui/animated-button';
-import { Button } from '@/components/ui/button';
+import { useImage } from '@/hooks/use-image';
 import { useRichTranslation } from '@/hooks/use-rich-translation';
 import { Link } from '@inertiajs/react';
 
 export default function AboutUsOne() {
     const { t, tRich } = useRichTranslation();
+    const aboutImage1 = useImage('home', 'about_image_1', '/assets/images/about/about-01.jpg');
+    const aboutImage2 = useImage('home', 'about_image_2', '/assets/images/about/about-02.jpg');
 
     return (
         <section className="relative bg-white/80 pt-12 pb-6 sm:pt-24 dark:bg-gray-900">
@@ -19,12 +21,12 @@ export default function AboutUsOne() {
                             delay={0}
                             className="flex items-start justify-center gap-2.5 pt-0 sm:justify-end sm:pt-24 lg:justify-center"
                         >
-                            <img className="max-h-[250px] w-full rounded-xl object-cover sm:max-h-none sm:w-auto" src="/assets/images/about/about-02.jpg" alt="Équipe CITL - Testing Logiciel" />
+                            <img className="max-h-[250px] w-full rounded-xl object-cover sm:max-h-none sm:w-auto" src={aboutImage2} alt="Équipe CITL - Testing Logiciel" />
                         </SlideIn>
                         <SlideIn direction="left" duration={1.2} delay={0.2}>
                             <img
                                 className="mx-auto max-h-[250px] w-full rounded-xl object-cover sm:mx-0 sm:ml-0 sm:max-h-none sm:w-auto"
-                                src="/assets/images/about/about-01.jpg"
+                                src={aboutImage1}
                                 alt="Certification ISTQB en Côte d'Ivoire"
                             />
                         </SlideIn>

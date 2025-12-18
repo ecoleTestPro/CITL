@@ -1,0 +1,22 @@
+{
+    "home": {
+        "hero_background": "/assets/images/hero/hero-bg-01.jpg",
+        "about_image_1": "/assets/images/about/about-01.jpg",
+        "about_image_2": "/assets/images/about/about-02.jpg"
+    },
+    "about.citl": {
+        "overview": "/assets/images/pages/about/citl-overview.jpg"
+    },
+    "about.istqb": {
+        "overview": "/assets/images/pages/about/istqb.png"
+    },
+    "about.vision": {
+        "overview": "/assets/images/pages/about/vision-overview.jpg"
+    },
+    "about.missions": {
+        "overview": "/assets/images/pages/about/missions-overview.jpg"
+    },
+    "about.executive_board": {
+        "overview": "/assets/images/pages/about/executive-board.jpg"
+    }
+}

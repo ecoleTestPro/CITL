@@ -1,6 +1,7 @@
 import { AnimatedButton } from '@/components/ui/animated-button';
 import AnimatedGridPattern from '@/components/ui/animated-grid-pattern';
 import { Badge } from '@/components/ui/badge';
+import { useImage } from '@/hooks/use-image';
 import { useRichTranslation } from '@/hooks/use-rich-translation';
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
@@ -9,6 +10,7 @@ import { ArrowUpRight, Trophy } from 'lucide-react';
 
 const HeroHome = () => {
     const { t, tRich } = useRichTranslation();
+    const heroBackground = useImage('home', 'hero_background', '/assets/images/hero/hero-bg-01.jpg');
 
     // Animation variants
     const containerVariants = {
@@ -126,7 +128,7 @@ const HeroHome = () => {
                 >
                     <img
                         className="h-full w-full rounded-2xl object-cover"
-                        src="/assets/images/hero/hero-bg-01.jpg"
+                        src={heroBackground}
                         alt={t('hero.imageAlt', 'CITL - Certification ISTQB')}
                     />
                 </motion.div>

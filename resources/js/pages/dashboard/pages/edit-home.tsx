@@ -1,10 +1,13 @@
+import { EnhancedImageEditor } from '@/components/dashboard/enhanced-image-editor';
 import { EnhancedTranslationEditor } from '@/components/dashboard/enhanced-translation-editor';
 import { PageEditorActions } from '@/components/dashboard/page-editor-actions';
 import { PageEditorLayout } from '@/components/dashboard/page-editor-layout';
 import { PagePreview } from '@/components/dashboard/page-preview';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useImages } from '@/hooks/use-images';
 import { useTranslations } from '@/hooks/use-translations';
-import { Circle } from 'lucide-react';
+import { Circle, ImageIcon, Type } from 'lucide-react';
 
 interface EditHomeProps {
     pageUrl: string;
@@ -17,9 +20,9 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
         translations,
         selectedLocale,
         availableLocales,
-        loading,
+        loading: translationsLoading,
         saving,
-        hasUnsavedChanges,
+        hasUnsavedChanges: hasUnsavedTranslations,
         metadata,
         sections,
         setSelectedLocale,
@@ -27,6 +30,15 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
         handleSave,
         handleReset,
     } = useTranslations(pageName);
+
+    const {
+        images,
+        loading: imagesLoading,
+        uploading,
+        uploadingKey,
+        sections: imageSections,
+        handleUpload,
+    } = useImages(pageName);
 
     const handlePreview = () => {
         window.open(pageUrl, '_blank');
@@ -39,9 +51,9 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
                 <PageEditorActions
                     selectedLocale={selectedLocale}
                     availableLocales={availableLocales}
-                    loading={loading}
+                    loading={translationsLoading}
                     saving={saving}
-                    hasUnsavedChanges={hasUnsavedChanges}
+                    hasUnsavedChanges={hasUnsavedTranslations}
                     onLocaleChange={setSelectedLocale}
                     onReset={handleReset}
                     onPreview={handlePreview}
@@ -51,33 +63,57 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
         >
             {/* Editor Panel */}
             <div className="flex h-[calc(100vh-180px)] w-[380px] shrink-0 flex-col overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950">
-                {/* Editor Header */}
-                <div className="flex items-center justify-between border-b border-gray-200 px-4 py-3 dark:border-gray-800">
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Édition</span>
-                        <Badge variant="outline" className="h-5 border-gray-200 px-1.5 text-[10px] font-medium uppercase dark:border-gray-700">
-                            {selectedLocale}
-                        </Badge>
+                {/* Tabs Header */}
+                <Tabs defaultValue="translations" className="flex h-full flex-col">
+                    <div className="flex items-center justify-between border-b border-gray-200 px-4 py-2 dark:border-gray-800">
+                        <TabsList className="h-8 bg-gray-100 p-0.5 dark:bg-gray-800">
+                            <TabsTrigger value="translations" className="h-7 gap-1.5 px-3 text-xs">
+                                <Type className="h-3.5 w-3.5" />
+                                Textes
+                            </TabsTrigger>
+                            <TabsTrigger value="images" className="h-7 gap-1.5 px-3 text-xs">
+                                <ImageIcon className="h-3.5 w-3.5" />
+                                Images
+                            </TabsTrigger>
+                        </TabsList>
+                        {hasUnsavedTranslations && (
+                            <div className="flex items-center gap-1.5 text-xs text-orange-600 dark:text-orange-400">
+                                <Circle className="h-2 w-2 fill-current" />
+                                <span>Non enregistré</span>
+                            </div>
+                        )}
                     </div>
-                    {hasUnsavedChanges && (
-                        <div className="flex items-center gap-1.5 text-xs text-orange-600 dark:text-orange-400">
-                            <Circle className="h-2 w-2 fill-current" />
-                            <span>Non enregistré</span>
-                        </div>
-                    )}
-                </div>
 
-                {/* Editor Content */}
-                <div className="flex-1 overflow-hidden p-4">
-                    <EnhancedTranslationEditor
-                        translations={translations[selectedLocale] || {}}
-                        selectedLocale={selectedLocale}
-                        loading={loading}
-                        sections={sections}
-                        metadata={metadata}
-                        onTranslationChange={handleTranslationChange}
-                    />
-                </div>
+                    {/* Translations Tab */}
+                    <TabsContent value="translations" className="mt-0 flex-1 overflow-hidden p-4">
+                        <div className="mb-3 flex items-center gap-2">
+                            <span className="text-xs text-gray-500">Langue:</span>
+                            <Badge variant="outline" className="h-5 border-gray-200 px-1.5 text-[10px] font-medium uppercase dark:border-gray-700">
+                                {selectedLocale}
+                            </Badge>
+                        </div>
+                        <EnhancedTranslationEditor
+                            translations={translations[selectedLocale] || {}}
+                            selectedLocale={selectedLocale}
+                            loading={translationsLoading}
+                            sections={sections}
+                            metadata={metadata}
+                            onTranslationChange={handleTranslationChange}
+                        />
+                    </TabsContent>
+
+                    {/* Images Tab */}
+                    <TabsContent value="images" className="mt-0 flex-1 overflow-hidden p-4">
+                        <EnhancedImageEditor
+                            images={images}
+                            loading={imagesLoading}
+                            uploading={uploading}
+                            uploadingKey={uploadingKey}
+                            sections={imageSections}
+                            onUpload={handleUpload}
+                        />
+                    </TabsContent>
+                </Tabs>
             </div>
 
             {/* Preview Panel */}

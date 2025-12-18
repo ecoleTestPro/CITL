@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\GlossaryController;
 use App\Http\Controllers\Dashboard\MembershipApplicationController;
+use App\Http\Controllers\Dashboard\ImageManagementController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Translation API routes
         Route::get('/{page}/translations', [PageManagementController::class, 'getTranslations'])->name('translations.get');
         Route::post('/translations', [PageManagementController::class, 'updateTranslations'])->name('translations.update');
+
+        // Image API routes
+        Route::get('/{page}/images', [ImageManagementController::class, 'getImages'])->name('images.get');
+        Route::post('/images/upload', [ImageManagementController::class, 'uploadImage'])->name('images.upload');
+        Route::get('/images/all', [ImageManagementController::class, 'getAllImages'])->name('images.all');
     });
 
     // Certification Management Routes (Unified)

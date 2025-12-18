@@ -9,7 +9,6 @@ use App\Repositories\CourseRepository;
 use App\Repositories\PlanRepository;
 use App\Repositories\SettingRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PlanController extends Controller
 {
@@ -25,6 +24,7 @@ class PlanController extends Controller
     public function create()
     {
         $courses = CourseRepository::query()->where('is_active', true)->get();
+
         return view('plan.create', compact('courses'));
     }
 
@@ -38,6 +38,7 @@ class PlanController extends Controller
     public function edit(Plan $plan)
     {
         $courses = CourseRepository::query()->where('is_active', true)->get();
+
         return view('plan.edit', compact('plan', 'courses'));
     }
 
@@ -51,12 +52,14 @@ class PlanController extends Controller
     public function delete(Plan $plan)
     {
         $plan->delete();
+
         return to_route('plan.index')->withSuccess('Plan deleted successfully.');
     }
 
     public function trash()
     {
         $plans = PlanRepository::query()->onlyTrashed()->latest('id')->paginate(10);
+
         return view('plan.restore', compact('plans'));
     }
 
@@ -64,6 +67,7 @@ class PlanController extends Controller
     {
         $plan = PlanRepository::query()->onlyTrashed()->findOrFail($planId);
         $plan->onlyTrashed()->restore();
+
         return to_route('plan.index')->withSuccess('Plan restored successfully.');
     }
 
@@ -78,7 +82,7 @@ class PlanController extends Controller
         $setting = SettingRepository::query()->first();
 
         $setting->update([
-            'publish_plan' => $is_publish
+            'publish_plan' => $is_publish,
         ]);
 
         return to_route('plan.index')->withSuccess('Plan published successfully.');

@@ -20,9 +20,9 @@ class InstructorRepository extends BaseRepository
     public function getTopInstructors($limit = 10)
     {
         return $this->model->with('courses')
-                          ->withCount('courses')
-                          ->orderBy('courses_count', 'desc')
-                          ->limit($limit)
-                          ->get();
+            ->withCount('courses')
+            ->orderBy('courses_count', 'desc')
+            ->limit($limit)
+            ->get();
     }
 }

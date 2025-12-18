@@ -27,15 +27,15 @@ class UserRepository extends BaseRepository
     {
         $query = $this->model->with('roles');
 
-        if (isset($filters['search']) && !empty($filters['search'])) {
+        if (isset($filters['search']) && ! empty($filters['search'])) {
             $search = $filters['search'];
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('email', 'like', '%' . $search . '%');
+                $q->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%');
             });
         }
 
-        if (isset($filters['role']) && !empty($filters['role'])) {
+        if (isset($filters['role']) && ! empty($filters['role'])) {
             $query->whereHas('roles', function ($q) use ($filters) {
                 $q->where('name', $filters['role']);
             });
@@ -94,7 +94,7 @@ class UserRepository extends BaseRepository
     {
         $user = $this->find($id);
 
-        if (!$user) {
+        if (! $user) {
             return null;
         }
 

@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Course;
 
-use App\Events\CustomNotifyEvent;
-use App\Events\NotifyEvent;
 use App\Http\Resources\ChapterResource;
 use App\Http\Resources\ContentResource;
 use App\Http\Resources\CourseDescriptionResource;
@@ -20,7 +18,6 @@ use App\Repositories\CourseRepository;
 use App\Repositories\EnrollmentRepository;
 use App\Repositories\SubscriberRepository;
 use App\Repositories\UserContentViewRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -89,11 +86,10 @@ class CourseController extends Controller
             ->leftJoinSub($subquery, 'subquery', 'courses.id', '=', 'subquery.id')
             ->orderBy('subquery.total_duration', $sortOrder);
 
-
         // Search
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
-            $query->where('title', 'like', '%' . $searchTerm . '%');
+            $query->where('title', 'like', '%'.$searchTerm.'%');
         }
 
         // Pagination
@@ -120,16 +116,16 @@ class CourseController extends Controller
     {
         $course = CourseRepository::find($id);
 
-        if (!$course->is_active) {
+        if (! $course->is_active) {
             return $this->json('Course not found', null, 404);
         }
 
         // Increment course view per visit
         $course->update([
-            'view_count' => $course->view_count + 1
+            'view_count' => $course->view_count + 1,
         ]);
 
-        return $this->json($course ? 'Course found' : 'Course not found',  !$course ? null : [
+        return $this->json($course ? 'Course found' : 'Course not found', ! $course ? null : [
             'course' => CourseResource::make($course),
             'description' => CourseDescriptionResource::collection(collect(json_decode($course->description))),
             'chapters' => ChapterResource::collection($course->chapters),
@@ -180,9 +176,10 @@ class CourseController extends Controller
         if ($content->is_free || $content->chapter->course->is_free) {
             UserContentViewRepository::create([
                 'user_id' => $loggedInUser->id,
-                'content_id' => $content->id
+                'content_id' => $content->id,
             ]);
             EnrollmentRepository::updateProgress($content->chapter->course, $loggedInUser);
+
             return $this->json('Content viewed', ['content' => ContentResource::make($content)], 200);
         }
 
@@ -191,7 +188,7 @@ class CourseController extends Controller
             ->where('user_id', $loggedInUser->id)
             ->first();
 
-        if (!$enrollment) {
+        if (! $enrollment) {
             return $this->json('Enrollment required', null, 403);
         }
 
@@ -202,12 +199,12 @@ class CourseController extends Controller
 
             $now = now();
 
-            if (!$subscriber) {
+            if (! $subscriber) {
                 return $this->json('Please subscribe again to access this course', null, 403);
             }
 
             // Check if now is *between* starts_at and ends_at (inclusive)
-            if (!$now->between($subscriber->starts_at, $subscriber->ends_at)) {
+            if (! $now->between($subscriber->starts_at, $subscriber->ends_at)) {
                 return $this->json('Please subscribe again to access this course', null, 403);
             }
 
@@ -220,7 +217,7 @@ class CourseController extends Controller
         // Passed all checks, record view and update progress
         UserContentViewRepository::create([
             'user_id' => $loggedInUser->id,
-            'content_id' => $content->id
+            'content_id' => $content->id,
         ]);
 
         EnrollmentRepository::updateProgress($content->chapter->course, $loggedInUser);
@@ -232,10 +229,10 @@ class CourseController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        $progress = $course->userProgress()->wherePivot('user_id',  $user->id)->first();
+        $progress = $course->userProgress()->wherePivot('user_id', $user->id)->first();
 
         return $this->json('Course Progress Track', [
-            'progress' => $progress->pivot->progress
+            'progress' => $progress->pivot->progress,
         ], 200);
     }
 
@@ -246,9 +243,9 @@ class CourseController extends Controller
 
         $progress = $user?->courseProgresses()?->wherePivot('course_id', $course->id)->first();
 
-        if (!$progress) {
+        if (! $progress) {
             $user->courseProgresses()->attach($course->id, ['progress' => $request->progress]);
-        } else if ($progress && $progress?->pivot->progress < $request->progress) {
+        } elseif ($progress && $progress?->pivot->progress < $request->progress) {
             $user->courseProgresses()?->updateExistingPivot($course->id, ['progress' => $request->progress]);
         }
 

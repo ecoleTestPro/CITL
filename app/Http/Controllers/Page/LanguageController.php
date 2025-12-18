@@ -42,9 +42,9 @@ class LanguageController extends Controller
 
     public function store(LanguageRequest $request)
     {
-        $newFile = base_path('lang/') . $request->name . '.json';
+        $newFile = base_path('lang/').$request->name.'.json';
 
-        if (!file_exists($newFile)) {
+        if (! file_exists($newFile)) {
 
             $response = LanguageRepository::storeByRequest($request);
 
@@ -63,7 +63,7 @@ class LanguageController extends Controller
 
     public function edit(Language $language)
     {
-        $filePath = base_path('lang/') . $language->name . '.json';
+        $filePath = base_path('lang/').$language->name.'.json';
 
         if (file_exists($filePath)) {
             $languageData = json_decode(file_get_contents($filePath)) ?? [];
@@ -90,7 +90,7 @@ class LanguageController extends Controller
         $language = LanguageRepository::query()->where('id', $langId)->first();
 
         $langName = $language?->name;
-        $filePath = base_path('lang/') . $langName . '.json'; // directory
+        $filePath = base_path('lang/').$langName.'.json'; // directory
 
         if ($language) {
             LanguageRepository::query()->where('name', $langName)->delete();
@@ -114,15 +114,13 @@ class LanguageController extends Controller
         return to_route('language.index')->withSuccess(__('Deleted Successfully'));
     }
 
-
-
     public function export($langId)
     {
         $language = LanguageRepository::query()->where('id', $langId)->first();
 
         if ($language) {
             $langName = $language->name;
-            $filePath = base_path('lang/') . $langName . '.json'; // directory
+            $filePath = base_path('lang/').$langName.'.json'; // directory
 
             if (file_exists($filePath)) {
                 return response()->download($filePath);
@@ -152,28 +150,27 @@ class LanguageController extends Controller
         if ($language) {
 
             $langName = $language->name;
-            $filePath = base_path('lang/') . $langName . '.json'; // directory
+            $filePath = base_path('lang/').$langName.'.json'; // directory
 
             if (file_exists($filePath)) {
 
                 File::delete($filePath);
 
-                $requestFile->move(base_path('lang/'), $langName . '.json');
+                $requestFile->move(base_path('lang/'), $langName.'.json');
 
                 try {
-                    chmod(base_path('lang/') . $langName . '.json', 0777);
+                    chmod(base_path('lang/').$langName.'.json', 0777);
                 } catch (\Throwable $th) {
                 }
 
                 return back()->with('successAlert', __('Language imported successfully and language file is updated'));
             } else {
-                return back()->withError(__('File does not exist') . ' path: ' . $filePath);
+                return back()->withError(__('File does not exist').' path: '.$filePath);
             }
         }
 
         return back()->withError(__('File does not exist'));
     }
-
 
     public function setDefaultLanguage(Language $language)
     {

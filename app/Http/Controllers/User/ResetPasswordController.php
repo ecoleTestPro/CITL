@@ -8,20 +8,19 @@ use App\Repositories\ResetPasswordRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class ResetPasswordController extends Controller
 {
     public function index(Request $request)
     {
-        if(!$request->email){
+        if (! $request->email) {
             return $this->json('email field is required!', 500);
         }
 
         $user = UserRepository::query()->where('email', $request->email)->first();
         $otp = rand(1111, 9999);
 
-        if (!$user) {
+        if (! $user) {
             return $this->json('this email does not exists on database', 500);
         }
 

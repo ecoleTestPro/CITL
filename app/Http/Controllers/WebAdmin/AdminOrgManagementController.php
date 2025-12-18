@@ -4,7 +4,6 @@ namespace App\Http\Controllers\WebAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrgPlanRequest;
-use App\Models\OrganizationPlanSubscription;
 use App\Repositories\OrganizationPlanRepository;
 use App\Repositories\OrganizationPlanSubscriptionRepository;
 use App\Repositories\OrganizationRepository;
@@ -18,7 +17,7 @@ class AdminOrgManagementController extends Controller
         $search = request()->search;
         $users = OrganizationRepository::query()
             ->when($search, function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })
             ->whereHas('user', function ($query) {
                 $query->where('is_org', 1);
@@ -32,6 +31,7 @@ class AdminOrgManagementController extends Controller
     public function edit($id)
     {
         $user = UserRepository::find($id);
+
         return view('user.edit', compact('user'));
     }
 
@@ -39,6 +39,7 @@ class AdminOrgManagementController extends Controller
     {
         $plan = [];
         $plans = OrganizationPlanRepository::query()->latest('id')->paginate(10);
+
         return view('adminOrgPlans.index', compact('plan', 'plans'));
     }
 
@@ -46,6 +47,7 @@ class AdminOrgManagementController extends Controller
     {
         return view('adminOrgPlans.create');
     }
+
     public function planStore(OrgPlanRequest $request)
     {
         $orgPlan = OrganizationPlanRepository::storeByRequest($request);
@@ -60,8 +62,10 @@ class AdminOrgManagementController extends Controller
     public function planEdit($id)
     {
         $plan = OrganizationPlanRepository::find($id);
+
         return view('adminOrgPlans.edit', compact('plan'));
     }
+
     public function planUpdate($id, OrgPlanRequest $request)
     {
         $plan = OrganizationPlanRepository::find($id);
@@ -76,9 +80,9 @@ class AdminOrgManagementController extends Controller
         $subscribers = OrganizationPlanSubscriptionRepository::query()
             ->when($search, function ($query) use ($search) {
                 return $query->whereHas('organization', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%');
                 })->orWhereHas('plan', function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%');
+                    $query->where('title', 'like', '%'.$search.'%');
                 });
             })
             ->where('is_paid', true)

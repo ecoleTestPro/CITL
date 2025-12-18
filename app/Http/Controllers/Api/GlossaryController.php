@@ -64,7 +64,7 @@ class GlossaryController extends Controller
         $glossaries = $this->glossaryRepo->getByLetter(strtoupper($letter), $locale);
 
         return response()->json([
-            'message' => 'Glossaries for letter ' . strtoupper($letter) . ' retrieved successfully',
+            'message' => 'Glossaries for letter '.strtoupper($letter).' retrieved successfully',
             'data' => $glossaries,
             'locale' => $locale,
         ]);

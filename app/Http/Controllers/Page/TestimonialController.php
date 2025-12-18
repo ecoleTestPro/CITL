@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Page;
 
 use App\Http\Resources\TestimonialResource;
 use App\Repositories\TestimonialRepository;
-use Illuminate\Http\Request;
 
 class TestimonialController extends Controller
 {

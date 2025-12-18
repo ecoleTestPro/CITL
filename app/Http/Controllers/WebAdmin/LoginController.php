@@ -4,16 +4,13 @@ namespace App\Http\Controllers\WebAdmin;
 
 use App\Events\MailSendEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\InstructorStoreRequest;
 use App\Models\Instructor;
 use App\Models\User;
-use App\Repositories\AccountActivationRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\VerifyOtpRepository;
 use App\Rules\PhoneNumber;
 use Carbon\Carbon;
-use FontLib\Table\Type\loca;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,27 +45,26 @@ class LoginController extends Controller
             ->withTrashed()
             ->first();
 
-        if (!$user) {
+        if (! $user) {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ])->onlyInput('email');
         }
 
-        if ($user && !Hash::check($request->password, $user->password)) {
+        if ($user && ! Hash::check($request->password, $user->password)) {
             return back()->withErrors([
                 'password' => 'The password you entered is incorrect.',
             ])->onlyInput('password');
         }
 
         if ($user && $user->deleted_at !== null) {
-            $message = "We hope this message finds you well. We are writing to inform you that your account with <span class='fw-bold text-primary'>" . config('app.name') . "</span> has been temporarily suspended as of <span class='fw-bold'>" . Carbon::parse($user->deleted_at)->format('F j, Y') . "</span>. This decision was made in accordance with our policies to ensure the safety, integrity, and proper use of our platform.";
+            $message = "We hope this message finds you well. We are writing to inform you that your account with <span class='fw-bold text-primary'>".config('app.name')."</span> has been temporarily suspended as of <span class='fw-bold'>".Carbon::parse($user->deleted_at)->format('F j, Y').'</span>. This decision was made in accordance with our policies to ensure the safety, integrity, and proper use of our platform.';
 
             return to_route('admin.login')->with('account-suspended', $message);
         }
 
         // Check organization by domain
         $host = $request->getSchemeAndHttpHost();
-
 
         if ($user->instructor || $user->hasRole('instructor')) {
             $orgDomain = $user->instructor->organization?->domain;
@@ -79,12 +75,12 @@ class LoginController extends Controller
                 ])->onlyInput('email');
             }
 
-            if (!$orgDomain && $host != config('app.url')) {
+            if (! $orgDomain && $host != config('app.url')) {
                 return back()->withErrors([
                     'email' => 'You are not authorized to access this area.',
                 ])->onlyInput('email');
             }
-        } else if ($user->organization && $user->hasRole('organization')) {
+        } elseif ($user->organization && $user->hasRole('organization')) {
             $host = $request->getSchemeAndHttpHost();
             $rootHost = config('app.url');
 
@@ -120,9 +116,9 @@ class LoginController extends Controller
             // Redirect based on user role
             if ($user->is_admin && $user->hasRole('admin')) {
                 return to_route('admin.dashboard');
-            } else if ($user->is_org && $user->organization) {
+            } elseif ($user->is_org && $user->organization) {
                 return to_route('org.dashboard');
-            } else if ($user->hasRole('instructor') || $user->instructor) {
+            } elseif ($user->hasRole('instructor') || $user->instructor) {
                 return to_route('instructor.dashboard');
             }
 
@@ -145,18 +141,17 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'phone' => ['required', 'unique:users,phone',  new PhoneNumber()],
+            'phone' => ['required', 'unique:users,phone',  new PhoneNumber],
             'password' => 'required',
         ]);
 
         $password_regex_length = '/^.{8,}/';
 
-        if (!preg_match($password_regex_length, $request->password)) {
+        if (! preg_match($password_regex_length, $request->password)) {
             return back()->withErrors([
                 'password' => 'Password must be at least 8 characters long.',
             ])->withInput();
         }
-
 
         $credentials['password'] = bcrypt($credentials['password']);
         $user = User::create($credentials);
@@ -176,7 +171,7 @@ class LoginController extends Controller
             'contact' => $user->email,
         ], [
             'otp_code' => $otp,
-            'token' => $token
+            'token' => $token,
         ]);
 
         try {

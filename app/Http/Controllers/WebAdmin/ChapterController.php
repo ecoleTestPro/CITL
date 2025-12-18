@@ -12,7 +12,6 @@ use App\Models\Course;
 use App\Repositories\ChapterRepository;
 use App\Repositories\CourseRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ChapterController extends Controller
 {
@@ -23,10 +22,10 @@ class ChapterController extends Controller
         $query = CourseRepository::query();
 
         // Search filter (applies for all)
-        $query->when($search, function ($q) use ($search, $user) {
+        $query->when($search, function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-                ->orWhereHas('organization.user', fn($q) => $q->where('name', 'like', "%{$search}%"))
-                ->orWhereHas('instructor.user', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                ->orWhereHas('organization.user', fn ($q) => $q->where('name', 'like', "%{$search}%"))
+                ->orWhereHas('instructor.user', fn ($q) => $q->where('name', 'like', "%{$search}%"));
         });
 
         // Role/organization-specific filtering
@@ -51,12 +50,12 @@ class ChapterController extends Controller
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
 
         $chapters = ChapterRepository::query()->when($search, function ($query) use ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%'.$search.'%');
         })->where('course_id', '=', $course->id)->latest('id')->paginate(8)->withQueryString();
 
         return view('chapter.index', [
             'chapters' => $chapters,
-            'course' => $course
+            'course' => $course,
         ]);
     }
 
@@ -94,7 +93,7 @@ class ChapterController extends Controller
 
         return $this->json('Chapter created successfully', [
             'redirect' => route('chapter.index', ['course' => $chapter->course_id]),
-            "chapter" => $chapter,
+            'chapter' => $chapter,
             'message' => 'Chapter created',
         ], 200);
     }
@@ -123,7 +122,7 @@ class ChapterController extends Controller
         try {
             if ($newContent) {
                 NotifyEvent::dispatch(NotificationTypeEnum::NewContentFromCourse->value, $chapter->course_id, [
-                    'course' => $chapter->course
+                    'course' => $chapter->course,
                 ]);
             }
         } catch (\Throwable $th) {
@@ -132,7 +131,7 @@ class ChapterController extends Controller
 
         return $this->json('Chapter updated successfully', [
             'redirect' => route('chapter.index', ['course' => $chapter->course_id]),
-            "chapter" => $chapter,
+            'chapter' => $chapter,
             'message' => 'Chapter updated',
         ], 200);
         // return to_route('chapter.index', ['course' => $chapter->course_id])->withSuccess('Chapter updated');

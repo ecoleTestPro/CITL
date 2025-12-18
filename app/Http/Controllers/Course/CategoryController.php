@@ -19,7 +19,7 @@ class CategoryController extends Controller
         // Search
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
-            $query->where('title', 'like', '%' . $searchTerm . '%');
+            $query->where('title', 'like', '%'.$searchTerm.'%');
         }
 
         if ($request->has('is_featured')) {

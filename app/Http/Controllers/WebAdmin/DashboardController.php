@@ -36,13 +36,13 @@ class DashboardController extends Controller
                 'courses as reviews_count' => function ($query) {
                     $query->join('reviews', 'reviews.course_id', '=', 'courses.id')
                         ->select(DB::raw('count(reviews.id)'));
-                }
+                },
             ])
             ->withAvg([
                 'courses as rating_avg' => function ($query) {
                     $query->join('reviews', 'reviews.course_id', '=', 'courses.id')
                         ->select(DB::raw('avg(reviews.rating)'));
-                }
+                },
             ], 'rating')
             ->orderBy('courses_count', 'desc')
             ->limit(5)
@@ -68,12 +68,12 @@ class DashboardController extends Controller
 
         try {
             $user = UserRepository::find($request->author_id);
-            //Ensure the user is authenticated
+            // Ensure the user is authenticated
             $instructorId = $user?->instructor?->id;
             $type = $request->type;
 
             // Check if 'type' is provided
-            if (!in_array($type, ['daily', 'monthly', 'yearly'])) {
+            if (! in_array($type, ['daily', 'monthly', 'yearly'])) {
                 return response()->json([
                     'message' => 'Invalid type provided.',
                 ], 400);
@@ -200,13 +200,13 @@ class DashboardController extends Controller
         } catch (\Exception $e) {
             // Log the exception details
             Log::error('Error fetching statistics', ['error' => $e->getMessage(), 'stack' => $e->getTraceAsString()]);
+
             return response()->json([
                 'message' => 'An error occurred while fetching statistics.',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
-
 
     public function instructorHome()
     {
@@ -245,7 +245,6 @@ class DashboardController extends Controller
         $studentCounts = UserRepository::query()->whereHas('enrollments', function ($query) use ($courseId) {
             $query->whereIn('course_id', $courseId);
         })->count();
-
 
         return view('dashboard.instructor', [
             'topSaleCourse' => $topSaleCourse,

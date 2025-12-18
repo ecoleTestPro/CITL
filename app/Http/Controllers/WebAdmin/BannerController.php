@@ -28,7 +28,7 @@ class BannerController extends Controller
 
         return view('banner.index', [
             'banners' => $banners,
-            'is_publish' => $setting?->show_banner
+            'is_publish' => $setting?->show_banner,
         ]);
     }
 
@@ -46,7 +46,6 @@ class BannerController extends Controller
         }
 
         OfferBannerRepository::storeByRequest($request, $isActive);
-
 
         return to_route('banner.index')->withSuccess('Banner created successfully.');
     }
@@ -74,6 +73,7 @@ class BannerController extends Controller
     {
         $banner = OfferBannerRepository::findOrFail($id);
         $banner->delete();
+
         return to_route('banner.index')->withSuccess('Banner deleted successfully.');
     }
 
@@ -93,9 +93,8 @@ class BannerController extends Controller
             $setting = OrganizationSiteSettingRepository::query()->first();
         }
 
-
         $setting->update([
-            'show_banner' => $is_publish
+            'show_banner' => $is_publish,
         ]);
 
         $this->setEnv('SHOW_BANNER', $is_publish ? 'true' : 'false');
@@ -114,13 +113,13 @@ class BannerController extends Controller
 
             $exists = false;
             foreach ($diffFileLines as $lineNo => $oldValue) {
-                if (strpos($oldValue, $key . '=') !== false) {
-                    $file[$lineNo] = $key . '="' . $value . '"' . "\n";
+                if (strpos($oldValue, $key.'=') !== false) {
+                    $file[$lineNo] = $key.'="'.$value.'"'."\n";
                     $exists = true;
                 }
             }
-            if (!$exists) {
-                $file[] = $key . '="' . $value . '"' . "\n";
+            if (! $exists) {
+                $file[] = $key.'="'.$value.'"'."\n";
             }
 
             file_put_contents($path, implode('', $file));
@@ -129,6 +128,7 @@ class BannerController extends Controller
         } catch (Exception $e) {
             // Log or report the exception
             Log::error("Error updating environment variable: {$e->getMessage()}");
+
             return false;
         }
     }

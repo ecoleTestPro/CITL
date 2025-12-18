@@ -8,11 +8,6 @@ abstract class Controller
 {
     /**
      * Return a JSON response with consistent format
-     *
-     * @param string $message
-     * @param array|null $data
-     * @param int $statusCode
-     * @return JsonResponse
      */
     protected function json(string $message, ?array $data = null, int $statusCode = 200): JsonResponse
     {

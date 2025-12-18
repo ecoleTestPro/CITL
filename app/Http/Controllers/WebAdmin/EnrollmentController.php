@@ -42,9 +42,9 @@ class EnrollmentController extends Controller
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
                     $query->whereHas('course', function ($q) use ($search) {
-                        $q->where('title', 'like', '%' . $search . '%');
+                        $q->where('title', 'like', '%'.$search.'%');
                     })->orWhereHas('user', function ($q) use ($search) {
-                        $q->where('name', 'like', '%' . $search . '%');
+                        $q->where('name', 'like', '%'.$search.'%');
                     });
                 });
             })
@@ -63,11 +63,14 @@ class EnrollmentController extends Controller
         $enrollment->course_progress = 0.00;
         $enrollment->save();
         $enrollment->delete();
+
         return redirect()->route('enrollment.index')->withSuccess('Enrollment Canceled');
     }
+
     public function suspended(Enrollment $enrollment)
     {
         $enrollment->delete();
+
         return redirect()->route('enrollment.index')->withSuccess('Enrollment Successfully Suspended');
     }
 
@@ -115,13 +118,12 @@ class EnrollmentController extends Controller
 
         $reportsQuery = $enrollments;
 
-
         $pdf = Pdf::loadView('pdf.enrollment', [
             'enrollments' => $reportsQuery->items(),
             'page_num' => $page_num,
         ]);
 
-        return $pdf->stream("report-{$page_num}" . ".pdf");
+        return $pdf->stream("report-{$page_num}".'.pdf');
     }
 
     public function exportCSV(Request $request)
@@ -140,7 +142,6 @@ class EnrollmentController extends Controller
                 ->paginate(15, ['*'], 'page', $page_num);
         }
 
-
         // Generate CSV content
         $csvContent = "SL,Enroll ID,Student,Course Title,Progress\n";
         foreach ($enrollments as $index => $enrollment) {
@@ -149,8 +150,8 @@ class EnrollmentController extends Controller
                 $enrollment->id,
                 $enrollment->user?->name ?? 'N/A',
                 $enrollment->course?->title ?? 'N/A',
-                $enrollment->course_progress
-            ]) . "\n";
+                $enrollment->course_progress,
+            ])."\n";
         }
 
         // Send response as a CSV file

@@ -49,8 +49,10 @@ class MembershipApplicationRepository extends BaseRepository
         $application = $this->find($id);
         if ($application) {
             $application->status = $status;
+
             return $application->save();
         }
+
         return false;
     }
 }

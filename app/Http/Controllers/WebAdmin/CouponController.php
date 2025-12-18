@@ -8,7 +8,6 @@ use App\Http\Requests\CouponUpdateRequest;
 use App\Models\Coupon;
 use App\Repositories\CouponRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
 {
@@ -17,7 +16,7 @@ class CouponController extends Controller
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
 
         $coupons = CouponRepository::query()->when($search, function ($query) use ($search) {
-            $query->where('code', 'like', '%' . $search . '%');
+            $query->where('code', 'like', '%'.$search.'%');
         })
             ->latest('id')->paginate(8)->withQueryString();
 

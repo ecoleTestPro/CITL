@@ -16,27 +16,27 @@ class CertificationDocumentTagSeeder extends Seeder
             [
                 'name' => 'Syllabus officiel',
                 'slug' => 'syllabus-officiel',
-                'order' => 1
+                'order' => 1,
             ],
             [
                 'name' => 'Guide de formation',
                 'slug' => 'guide-formation',
-                'order' => 2
+                'order' => 2,
             ],
             [
                 'name' => 'Examen blanc',
                 'slug' => 'examen-blanc',
-                'order' => 3
+                'order' => 3,
             ],
             [
                 'name' => 'Documentation complémentaire',
                 'slug' => 'documentation-complementaire',
-                'order' => 4
+                'order' => 4,
             ],
             [
                 'name' => 'Glossaire',
                 'slug' => 'glossaire',
-                'order' => 5
+                'order' => 5,
             ],
         ];
 

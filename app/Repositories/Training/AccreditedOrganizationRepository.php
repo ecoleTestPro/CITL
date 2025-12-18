@@ -43,9 +43,9 @@ class AccreditedOrganizationRepository extends BaseRepository
     {
         return $this->model
             ->where(function ($query) use ($term) {
-                $query->where('name', 'like', '%' . $term . '%')
-                    ->orWhere('city', 'like', '%' . $term . '%')
-                    ->orWhere('country', 'like', '%' . $term . '%');
+                $query->where('name', 'like', '%'.$term.'%')
+                    ->orWhere('city', 'like', '%'.$term.'%')
+                    ->orWhere('country', 'like', '%'.$term.'%');
             })
             ->active()
             ->orderBy('name')
@@ -66,9 +66,9 @@ class AccreditedOrganizationRepository extends BaseRepository
         if (isset($filters['search']) && $filters['search']) {
             $term = $filters['search'];
             $query->where(function ($q) use ($term) {
-                $q->where('name', 'like', '%' . $term . '%')
-                    ->orWhere('city', 'like', '%' . $term . '%')
-                    ->orWhere('email', 'like', '%' . $term . '%');
+                $q->where('name', 'like', '%'.$term.'%')
+                    ->orWhere('city', 'like', '%'.$term.'%')
+                    ->orWhere('email', 'like', '%'.$term.'%');
             });
         }
 

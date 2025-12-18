@@ -12,7 +12,6 @@ use App\Models\Quiz;
 use App\Repositories\CourseRepository;
 use App\Repositories\QuizRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
@@ -23,10 +22,10 @@ class QuizController extends Controller
         $query = CourseRepository::query();
 
         // Search filter (applies for all)
-        $query->when($search, function ($q) use ($search, $user) {
+        $query->when($search, function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-                ->orWhereHas('organization.user', fn($q) => $q->where('name', 'like', "%{$search}%"))
-                ->orWhereHas('instructor.user', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                ->orWhereHas('organization.user', fn ($q) => $q->where('name', 'like', "%{$search}%"))
+                ->orWhereHas('instructor.user', fn ($q) => $q->where('name', 'like', "%{$search}%"));
         });
 
         // Role/organization-specific filtering
@@ -41,7 +40,6 @@ class QuizController extends Controller
         // Finalize query
         $courses = $query->latest('id')->paginate(10)->withQueryString();
 
-
         return view('quiz.select_course', [
             'courses' => $courses,
         ]);
@@ -52,7 +50,7 @@ class QuizController extends Controller
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
 
         $quizzes = QuizRepository::query()->when($search, function ($query) use ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%'.$search.'%');
         })
             ->where('course_id', '=', $course->id)
             ->latest('id')
@@ -60,7 +58,7 @@ class QuizController extends Controller
 
         return view('quiz.index', [
             'quizzes' => $quizzes,
-            'course' => $course
+            'course' => $course,
         ]);
     }
 
@@ -85,7 +83,7 @@ class QuizController extends Controller
         $quiz = QuizRepository::storeByRequest($request);
 
         NotifyEvent::dispatch(NotificationTypeEnum::NewQuizFromCourse->value, $quiz->course_id, [
-            'course' => $quiz->course
+            'course' => $quiz->course,
         ]);
 
         return to_route('quiz.index', ['course' => $quiz->course_id])->with('success', 'Quiz created');

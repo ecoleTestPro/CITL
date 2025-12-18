@@ -14,18 +14,18 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'              => 'Admin CITL',
-                'email'             => 'admin@citl-istqb.org',
-                'password'          => 'mHbG9=}s;wIT9Y16BEDORs(iTNUufT',
+                'name' => 'Admin CITL',
+                'email' => 'admin@citl-istqb.org',
+                'password' => 'mHbG9=}s;wIT9Y16BEDORs(iTNUufT',
                 'email_verified_at' => now(),
-                'role'              => 'admin',
+                'role' => 'admin',
             ],
             [
-                'name'              => 'Contact CITL',
-                'email'             => 'contact@citl-istqb.org',
-                'password'          => 'S8i~jFuytow3$HF2wrQnQclxBF[zQb',
+                'name' => 'Contact CITL',
+                'email' => 'contact@citl-istqb.org',
+                'password' => 'S8i~jFuytow3$HF2wrQnQclxBF[zQb',
                 'email_verified_at' => now(),
-                'role'              => 'manager',
+                'role' => 'manager',
             ],
         ];
 
@@ -39,11 +39,11 @@ class UserSeeder extends Seeder
             );
 
             // Assign role if user doesn't have it
-            if (!$user->hasRole($role)) {
+            if (! $user->hasRole($role)) {
                 $user->assignRole($role);
             }
         }
 
-        $this->command->info('User seeder completed with ' . count($users) . ' users.');
+        $this->command->info('User seeder completed with '.count($users).' users.');
     }
 }

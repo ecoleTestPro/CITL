@@ -71,7 +71,7 @@ class BlogController extends Controller
         $validated['user_id'] = Auth::id();
 
         // Set published_at if publishing
-        if (!empty($validated['is_published']) && empty($validated['published_at'])) {
+        if (! empty($validated['is_published']) && empty($validated['published_at'])) {
             $validated['published_at'] = now();
         }
 
@@ -88,7 +88,7 @@ class BlogController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:blogs,slug,' . $id,
+            'slug' => 'nullable|string|max:255|unique:blogs,slug,'.$id,
             'excerpt' => 'nullable|string',
             'content' => 'required|string',
             'blog_category_id' => 'nullable|exists:blog_categories,id',
@@ -106,13 +106,13 @@ class BlogController extends Controller
 
         $blog = $this->blogRepo->find($id);
 
-        if (!$blog) {
+        if (! $blog) {
             return redirect()->route('dashboard.blog.index')
                 ->with('error', 'Blog not found.');
         }
 
         // Handle image removal
-        if (!empty($validated['remove_image']) && $blog->featured_image) {
+        if (! empty($validated['remove_image']) && $blog->featured_image) {
             Storage::disk('public')->delete($blog->featured_image);
             $validated['featured_image'] = null;
         }
@@ -128,7 +128,7 @@ class BlogController extends Controller
         }
 
         // Set published_at if publishing for the first time
-        if (!empty($validated['is_published']) && empty($blog->published_at) && empty($validated['published_at'])) {
+        if (! empty($validated['is_published']) && empty($blog->published_at) && empty($validated['published_at'])) {
             $validated['published_at'] = now();
         }
 
@@ -145,7 +145,7 @@ class BlogController extends Controller
     {
         $blog = $this->blogRepo->find($id);
 
-        if (!$blog) {
+        if (! $blog) {
             return redirect()->route('dashboard.blog.index')
                 ->with('error', 'Blog not found.');
         }
@@ -168,16 +168,16 @@ class BlogController extends Controller
     {
         $blog = $this->blogRepo->find($id);
 
-        if (!$blog) {
+        if (! $blog) {
             return back()->with('error', 'Blog not found.');
         }
 
         $this->blogRepo->update($id, [
-            'is_published' => !$blog->is_published,
-            'published_at' => !$blog->is_published && !$blog->published_at ? now() : $blog->published_at,
+            'is_published' => ! $blog->is_published,
+            'published_at' => ! $blog->is_published && ! $blog->published_at ? now() : $blog->published_at,
         ]);
 
-        $status = !$blog->is_published ? 'published' : 'unpublished';
+        $status = ! $blog->is_published ? 'published' : 'unpublished';
 
         return back()->with('success', "Blog {$status} successfully.");
     }

@@ -16,7 +16,7 @@ class BlogController extends Controller
 
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
-            $query->where('title', 'like', '%' . $searchTerm . '%');
+            $query->where('title', 'like', '%'.$searchTerm.'%');
         }
         // Pagination
         $totalItems = $query->count();
@@ -35,7 +35,8 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
-        $url = url('/blog/details/' . $blog->id);
+        $url = url('/blog/details/'.$blog->id);
+
         return $this->json($blog->count() > 0 ? 'blog found' : 'No blog found', [
             'blog' => BlogResource::make($blog),
             'shareable_url' => $url,

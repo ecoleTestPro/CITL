@@ -6,8 +6,6 @@ use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Dashboard\AccreditedOrganizationController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
-use App\Http\Controllers\Dashboard\CertificationCategoryController;
-use App\Http\Controllers\Dashboard\CertificationController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\GlossaryController;
@@ -148,6 +146,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-
 // Settings Routes
-require __DIR__ . '/settings.php';
+require __DIR__.'/settings.php';

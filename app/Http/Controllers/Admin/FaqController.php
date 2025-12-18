@@ -75,7 +75,7 @@ class FaqController extends Controller
 
         $faq = $this->faqRepository->update($id, $validated);
 
-        if (!$faq) {
+        if (! $faq) {
             return redirect()->route('admin.faqs.index')
                 ->with('error', 'FAQ non trouvée.');
         }
@@ -91,7 +91,7 @@ class FaqController extends Controller
     {
         $deleted = $this->faqRepository->delete($id);
 
-        if (!$deleted) {
+        if (! $deleted) {
             return redirect()->route('admin.faqs.index')
                 ->with('error', 'FAQ non trouvée.');
         }
@@ -107,7 +107,7 @@ class FaqController extends Controller
     {
         $toggled = $this->faqRepository->toggleActive($id);
 
-        if (!$toggled) {
+        if (! $toggled) {
             return back()->with('error', 'FAQ non trouvée.');
         }
 
@@ -125,7 +125,7 @@ class FaqController extends Controller
 
         $updated = $this->faqRepository->updateOrder($id, $validated['order']);
 
-        if (!$updated) {
+        if (! $updated) {
             return back()->with('error', 'FAQ non trouvée.');
         }
 

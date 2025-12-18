@@ -9,20 +9,19 @@ use App\Repositories\SocialMediaRepository;
 use Exception;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        $zones = array();
+        $zones = [];
         $timestamp = time();
         $setting = SettingRepository::query()->first();
 
         foreach (timezone_identifiers_list() as $key => $zone) {
             date_default_timezone_set($zone);
             $zones[$key]['zone'] = $zone;
-            $zones[$key]['diff_from_GMT'] = 'UTC/GMT ' . date('P', $timestamp);
+            $zones[$key]['diff_from_GMT'] = 'UTC/GMT '.date('P', $timestamp);
         }
 
         return view('setting.edit', [
@@ -30,6 +29,7 @@ class SettingController extends Controller
             'setting' => $setting,
         ]);
     }
+
     public function homePageSetup()
     {
         return view('setting.homeSetting', [
@@ -43,6 +43,7 @@ class SettingController extends Controller
             'setting' => SettingRepository::query()->first(),
         ]);
     }
+
     public function socialMediaSetup()
     {
         return view('setting.socialMedia', [
@@ -80,10 +81,9 @@ class SettingController extends Controller
             $this->setEnv('JWT_SECRET', $request->get('jwt_secret'));
         }
 
-
         $medias = $request?->social_links;
 
-        if (!empty($medias)) {
+        if (! empty($medias)) {
             foreach ($medias as $id => $url) {
                 SocialMediaRepository::query()->updateOrCreate(
                     ['id' => $id],
@@ -92,7 +92,7 @@ class SettingController extends Controller
                         'status' => $url ? true : false,
                     ],
                 );
-            };
+            }
         }
 
         Artisan::call('config:clear');
@@ -109,13 +109,13 @@ class SettingController extends Controller
 
             $exists = false;
             foreach ($diffFileLines as $lineNo => $oldValue) {
-                if (strpos($oldValue, $key . '=') !== false) {
-                    $file[$lineNo] = $key . '="' . $value . '"' . "\n";
+                if (strpos($oldValue, $key.'=') !== false) {
+                    $file[$lineNo] = $key.'="'.$value.'"'."\n";
                     $exists = true;
                 }
             }
-            if (!$exists) {
-                $file[] = $key . '="' . $value . '"' . "\n";
+            if (! $exists) {
+                $file[] = $key.'="'.$value.'"'."\n";
             }
 
             file_put_contents($path, implode('', $file));
@@ -124,6 +124,7 @@ class SettingController extends Controller
         } catch (Exception $e) {
             // Log or report the exception
             Log::error("Error updating environment variable: {$e->getMessage()}");
+
             return false;
         }
     }

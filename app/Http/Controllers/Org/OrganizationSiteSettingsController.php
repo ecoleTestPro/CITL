@@ -15,6 +15,7 @@ class OrganizationSiteSettingsController extends Controller
         $setting = OrganizationSiteSettingRepository::query()->where('organization_id', $loggedInUser->organization->id)->first();
 
         $socialMedias = SocialMediaRepository::query()->where('organization_id', $loggedInUser->organization->id)->get();
+
         return view('organization.settings.index', [
             'socialMedias' => $socialMedias,
             'setting' => $setting,
@@ -34,7 +35,7 @@ class OrganizationSiteSettingsController extends Controller
         }
 
         $medias = $request?->social_links;
-        if (!empty($medias)) {
+        if (! empty($medias)) {
             foreach ($medias as $id => $url) {
                 SocialMediaRepository::query()->updateOrCreate(
                     ['id' => $id],
@@ -43,7 +44,7 @@ class OrganizationSiteSettingsController extends Controller
                         'status' => $url ? true : false,
                     ],
                 );
-            };
+            }
         }
 
         return to_route('org.site.setting.index')->withSuccess('Organization settings updated successfully');

@@ -38,13 +38,13 @@ class HomeController extends Controller
                 'courses as reviews_count' => function ($query) {
                     $query->join('reviews', 'reviews.course_id', '=', 'courses.id')
                         ->select(DB::raw('count(reviews.id)'));
-                }
+                },
             ])
             ->withAvg([
                 'courses as rating_avg' => function ($query) {
                     $query->join('reviews', 'reviews.course_id', '=', 'courses.id')
                         ->select(DB::raw('avg(reviews.rating)'));
-                }
+                },
             ], 'rating')
             ->orderBy('courses_count', 'desc')
             ->limit(5)
@@ -122,14 +122,14 @@ class HomeController extends Controller
             'total_client_feedback' => $clientFeedback,
             'popular_courses' => $popular_courses,
             'topStudents' => $topStudents,
-            'topInstructors' => $topInstructors
+            'topInstructors' => $topInstructors,
         ]);
     }
 
     public function revenue()
     {
         $startDate = Carbon::now()->subMonths(11)->startOfMonth();
-        $endDate   = Carbon::now()->endOfMonth();
+        $endDate = Carbon::now()->endOfMonth();
 
         $months = [];
         $courseData = [];
@@ -180,7 +180,7 @@ class HomeController extends Controller
                     'backgroundColor' => 'rgba(78,115,223,0.4)',
                     'fill' => true,
                     'tension' => 0.4,
-                    'borderWidth' => 3
+                    'borderWidth' => 3,
                 ],
                 [
                     'label' => 'Enrollments',
@@ -189,7 +189,7 @@ class HomeController extends Controller
                     'backgroundColor' => 'rgba(28,200,138,0.4)',
                     'fill' => true,
                     'tension' => 0.4,
-                    'borderWidth' => 3
+                    'borderWidth' => 3,
                 ],
                 [
                     'label' => 'Reviews',
@@ -198,9 +198,9 @@ class HomeController extends Controller
                     'backgroundColor' => 'rgba(246,194,62,0.4)',
                     'fill' => true,
                     'tension' => 0.4,
-                    'borderWidth' => 3
+                    'borderWidth' => 3,
                 ],
-            ]
+            ],
         ]);
     }
 

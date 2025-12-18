@@ -25,7 +25,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Razorpay\Api\Subscription;
 
 class EnrollController extends Controller
 {
@@ -48,7 +47,6 @@ class EnrollController extends Controller
         $regularCourses = $enrolledCourses->where('course_progress', '<=', 100)->where('subscriber_id', null);
         $completedCourses = $enrolledCourses->where('course_progress', '>=', 100.00);
         $subscribedCourses = $enrolledCourses->whereNotNull('subscriber_id');
-
 
         return $this->json($enrolledCourses ? 'Enrolled courses found' : 'No enrolled courses found', [
             'total_items' => count($enrolledCourses),
@@ -73,7 +71,7 @@ class EnrollController extends Controller
                 ->where('certificate_available', '=', true)
                 ->whereHas('enrollments', function ($query) {
                     return $query
-                        ->where('user_id',  auth()->id())
+                        ->where('user_id', auth()->id())
                         ->where('course_progress', 100.00);
                 })->count(),
             'last_activity_course' => $lastActivityCourse ? CourseResource::make($lastActivityCourse) : null,
@@ -111,15 +109,15 @@ class EnrollController extends Controller
 
                 $jsonResponse = file_get_contents($currencyConversionApi);
 
-                if (false !== $jsonResponse) {
+                if ($jsonResponse !== false) {
                     try {
                         $response = json_decode($jsonResponse);
-                        if ('success' === $response->result) {
+                        if ($response->result === 'success') {
                             $currentPrice = $amount;
                             $amount = round(($currentPrice * $response->conversion_rates->BDT), 2);
                         }
                     } catch (Exception $e) {
-                        $amount  = $amount * 100;
+                        $amount = $amount * 100;
                     }
                 }
             }
@@ -136,10 +134,11 @@ class EnrollController extends Controller
                 ->pluck('course_id')
                 ->toArray();
 
-            if (!empty($alreadyEnrolledCourses)) {
+            if (! empty($alreadyEnrolledCourses)) {
                 // Get enrolled course titles
                 $enrolledTitles = $titles->only($alreadyEnrolledCourses)->values()->toArray();
-                $message = 'Already enrolled in: ' . implode(', ', $enrolledTitles);
+                $message = 'Already enrolled in: '.implode(', ', $enrolledTitles);
+
                 return $this->json($message, null, 400);
             }
         } else {
@@ -148,16 +147,15 @@ class EnrollController extends Controller
                 ->where('course_id', $course->id)
                 ->exists();
             if ($alreadyEnrolled) {
-                return $this->json('Already enrolled in: ' . $course->title, null, 400);
+                return $this->json('Already enrolled in: '.$course->title, null, 400);
             }
         }
-
 
         $paymentGateway = PaymentGateway::where('name', $request->payment_gateway)
             ->where('is_active', true)
             ->first();
 
-        if (!$paymentGateway) {
+        if (! $paymentGateway) {
             return $this->json('Invalid payment gateway', null, 400);
         }
 
@@ -191,7 +189,7 @@ class EnrollController extends Controller
 
         $courseTitle = Str::limit($courses->pluck('title')->join(', '), 200, '...');
 
-        $paymentGateway =  PaymentGateway::where('name', $request->payment_gateway)
+        $paymentGateway = PaymentGateway::where('name', $request->payment_gateway)
             ->where('is_active', true)
             ->first();
 
@@ -209,15 +207,15 @@ class EnrollController extends Controller
 
                 $jsonResponse = file_get_contents($currencyConversionApi);
 
-                if (false !== $jsonResponse) {
+                if ($jsonResponse !== false) {
                     try {
                         $response = json_decode($jsonResponse);
-                        if ('success' === $response->result) {
+                        if ($response->result === 'success') {
                             $currentPrice = $amount;
                             $amount = round(($currentPrice * $response->conversion_rates->BDT), 2);
                         }
                     } catch (Exception $e) {
-                        $amount  = $amount * 100;
+                        $amount = $amount * 100;
                     }
                 }
             }
@@ -237,7 +235,7 @@ class EnrollController extends Controller
             'is_paid' => false,
         ]);
 
-        $subscription =  SubscriberRepository::query()->updateOrCreate([
+        $subscription = SubscriberRepository::query()->updateOrCreate([
             'user_id' => $authUser->id,
             'plan_id' => $plan->id,
         ], [
@@ -269,15 +267,15 @@ class EnrollController extends Controller
                 'product' => [
                     'product' => $transaction->course->title,
                     'price' => $transaction->payment_amount,
-                    'images' => $transaction->course->mediaPath
+                    'images' => $transaction->course->mediaPath,
                 ],
                 'customer' => [
                     'name' => $transaction->user?->name ?? 'N/A',
                     'email' => $transaction->user?->email ?? 'N/A',
                     'phone' => $transaction->user?->phone ?? 'N/A',
-                ]
+                ],
             ]);
-        } else if ($transaction->invoice_id) {
+        } elseif ($transaction->invoice_id) {
 
             $courseTitle = $transaction->invoice->courses->pluck('title')->toArray();
 
@@ -291,15 +289,15 @@ class EnrollController extends Controller
                 'product' => [
                     'product' => $courseTitle,
                     'price' => $transaction->payment_amount,
-                    'images' => $transaction->course->mediaPath ?? $transaction->invoice->courses->first()?->mediaPath
+                    'images' => $transaction->course->mediaPath ?? $transaction->invoice->courses->first()?->mediaPath,
                 ],
                 'customer' => [
                     'name' => $transaction->user?->name ?? 'N/A',
                     'email' => $transaction->user?->email ?? 'N/A',
                     'phone' => $transaction->user?->phone ?? 'N/A',
-                ]
+                ],
             ]);
-        } else if ($transaction->subscriber_id) {
+        } elseif ($transaction->subscriber_id) {
 
             $courseTitle = $transaction->course_title;
 
@@ -309,28 +307,28 @@ class EnrollController extends Controller
                 'product' => [
                     'product' => $courseTitle,
                     'price' => $transaction->payment_amount,
-                    'images' => $transaction->course->mediaPath ?? 'https://placehold.co/600x400'
+                    'images' => $transaction->course->mediaPath ?? 'https://placehold.co/600x400',
                 ],
                 'customer' => [
                     'name' => $transaction->user?->name ?? 'N/A',
                     'email' => $transaction->user?->email ?? 'N/A',
                     'phone' => $transaction->user?->phone ?? 'N/A',
-                ]
+                ],
             ]);
-        } else if ($transaction->organization_plan_id && $transaction->organization_id) {
+        } elseif ($transaction->organization_plan_id && $transaction->organization_id) {
             return $this->paymentService->processPayment($transaction->payment_amount, [
                 'gateway' => $transaction->payment_method,
                 'identifier' => base64_encode($transaction->identifier),
                 'product' => [
-                    'product' => $transaction->organizationPlan?->title . ' ' . $transaction->organizationPlan?->plan_type,
+                    'product' => $transaction->organizationPlan?->title.' '.$transaction->organizationPlan?->plan_type,
                     'price' => $transaction->payment_amount,
-                    'images' => $transaction->course->mediaPath ?? 'https://placehold.co/600x400'
+                    'images' => $transaction->course->mediaPath ?? 'https://placehold.co/600x400',
                 ],
                 'customer' => [
                     'name' => $transaction->user?->name ?? 'N/A',
                     'email' => $transaction->user?->email ?? 'N/A',
                     'phone' => $transaction->user?->phone ?? 'N/A',
-                ]
+                ],
             ]);
         }
     }
@@ -341,7 +339,7 @@ class EnrollController extends Controller
 
         return $this->json($coupon ? 'Coupon is valid' : 'Coupon is invalid', [
             'is_valid' => $coupon ? true : false,
-            'discount' => $coupon ? $coupon->discount : 0
+            'discount' => $coupon ? $coupon->discount : 0,
         ], $coupon ? 200 : 404);
     }
 
@@ -354,7 +352,6 @@ class EnrollController extends Controller
             ->where('is_active', true)
             ->first();
     }
-
 
     public function freeEnrollment(Course $course)
     {
@@ -378,7 +375,7 @@ class EnrollController extends Controller
             'course_id' => $enrollment->course->id,
             'metadata' => json_encode($enrollment->course),
             'url' => route('enrollment.index'),
-            'content' => "Hi Chief, Mr. " . $enrollment->user->name . ' You have successfully enrolled in the course ' . $enrollment->course->title,
+            'content' => 'Hi Chief, Mr. '.$enrollment->user->name.' You have successfully enrolled in the course '.$enrollment->course->title,
         ]);
 
         // Send notification to user

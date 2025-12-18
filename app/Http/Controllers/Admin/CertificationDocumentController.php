@@ -32,7 +32,7 @@ class CertificationDocumentController extends Controller
         foreach ($request->file('files') as $file) {
             $originalName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
-            $filename = Str::slug(pathinfo($originalName, PATHINFO_FILENAME)) . '_' . time() . '_' . Str::random(8) . '.' . $extension;
+            $filename = Str::slug(pathinfo($originalName, PATHINFO_FILENAME)).'_'.time().'_'.Str::random(8).'.'.$extension;
 
             // Store file in storage/app/public/certifications/documents
             $path = $file->storeAs('certifications/documents', $filename, 'public');
@@ -59,6 +59,7 @@ class CertificationDocumentController extends Controller
     public function index(Request $request, int $certificationId)
     {
         $documents = $this->documentRepository->getByCertificationId($certificationId);
+
         return $this->json('Documents retrieved successfully', ['documents' => $documents], 200);
     }
 
@@ -69,7 +70,7 @@ class CertificationDocumentController extends Controller
     {
         $document = $this->documentRepository->find($id);
 
-        if (!$document) {
+        if (! $document) {
             return $this->json('Document not found', [], 404);
         }
 
@@ -94,7 +95,7 @@ class CertificationDocumentController extends Controller
 
         $document = $this->documentRepository->attachTags($documentId, [$request->tag_id]);
 
-        if (!$document) {
+        if (! $document) {
             return $this->json('Document not found', [], 404);
         }
 
@@ -114,7 +115,7 @@ class CertificationDocumentController extends Controller
 
         $document = $this->documentRepository->detachTag($documentId, $request->tag_id);
 
-        if (!$document) {
+        if (! $document) {
             return $this->json('Document not found', [], 404);
         }
 
@@ -127,6 +128,7 @@ class CertificationDocumentController extends Controller
     public function getTags()
     {
         $tags = $this->tagRepository->getAllActive();
+
         return $this->json('Tags retrieved successfully', ['tags' => $tags], 200);
     }
 

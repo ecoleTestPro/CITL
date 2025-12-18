@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Repositories\Certification\CertificationCategoryRepository;
 use App\Repositories\Certification\CertificationRepository;
-use Illuminate\Http\Request;
 
 class CertificationController extends Controller
 {
     protected $categoryRepository;
+
     protected $certificationRepository;
 
     public function __construct(
@@ -40,7 +40,7 @@ class CertificationController extends Controller
     {
         $certification = $this->certificationRepository->findBySlugWithCategory($slug);
 
-        if (!$certification) {
+        if (! $certification) {
             return response()->json([
                 'success' => false,
                 'message' => 'Certification non trouvée',

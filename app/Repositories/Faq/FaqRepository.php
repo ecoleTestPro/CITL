@@ -71,8 +71,8 @@ class FaqRepository extends BaseRepository
 
         if (isset($filters['search'])) {
             $query->where(function ($q) use ($filters) {
-                $q->where('question', 'like', '%' . $filters['search'] . '%')
-                    ->orWhere('answer', 'like', '%' . $filters['search'] . '%');
+                $q->where('question', 'like', '%'.$filters['search'].'%')
+                    ->orWhere('answer', 'like', '%'.$filters['search'].'%');
             });
         }
 
@@ -106,6 +106,7 @@ class FaqRepository extends BaseRepository
     public function toggleActive(int $id): bool
     {
         $faq = $this->findById($id);
-        return $faq->update(['is_active' => !$faq->is_active]);
+
+        return $faq->update(['is_active' => ! $faq->is_active]);
     }
 }

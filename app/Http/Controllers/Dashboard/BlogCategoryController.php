@@ -51,7 +51,7 @@ class BlogCategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:blog_categories,slug,' . $id,
+            'slug' => 'nullable|string|max:255|unique:blog_categories,slug,'.$id,
             'description' => 'nullable|string',
             'is_active' => 'nullable|boolean',
             'order' => 'nullable|integer|min:0',
@@ -59,7 +59,7 @@ class BlogCategoryController extends Controller
 
         $category = $this->categoryRepo->update($id, $validated);
 
-        if (!$category) {
+        if (! $category) {
             return $this->json('Category not found', [], 404);
         }
 
@@ -76,7 +76,7 @@ class BlogCategoryController extends Controller
         // Check if category has blogs
         $category = $this->categoryRepo->find($id);
 
-        if (!$category) {
+        if (! $category) {
             return $this->json('Category not found', [], 404);
         }
 
@@ -96,15 +96,15 @@ class BlogCategoryController extends Controller
     {
         $category = $this->categoryRepo->find($id);
 
-        if (!$category) {
+        if (! $category) {
             return $this->json('Category not found', [], 404);
         }
 
         $updated = $this->categoryRepo->update($id, [
-            'is_active' => !$category->is_active,
+            'is_active' => ! $category->is_active,
         ]);
 
-        $status = !$category->is_active ? 'activated' : 'deactivated';
+        $status = ! $category->is_active ? 'activated' : 'deactivated';
 
         return $this->json("Category {$status} successfully", [
             'category' => $updated,

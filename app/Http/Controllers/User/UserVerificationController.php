@@ -26,7 +26,7 @@ class UserVerificationController extends Controller
             'contact' => $user->email,
         ], [
             'otp_code' => $otp,
-            'token' => $token
+            'token' => $token,
         ]);
 
         try {
@@ -41,11 +41,11 @@ class UserVerificationController extends Controller
 
     public function verify(Request $request, string $email)
     {
-        $otpString = implode('', (array)$request->otp);
+        $otpString = implode('', (array) $request->otp);
 
         $user = UserRepository::query()->where('email', $email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return back()->with('verify_error', 'The provided credentials do not match our records.');
         }
 
@@ -62,9 +62,9 @@ class UserVerificationController extends Controller
             // Redirect based on user role
             if ($user->is_admin && $user->hasRole('admin')) {
                 return to_route('admin.dashboard');
-            } else if ($user->is_org && $user->organization) {
+            } elseif ($user->is_org && $user->organization) {
                 return to_route('org.dashboard');
-            } else if ($user->hasRole('instructor') || $user->instructor) {
+            } elseif ($user->hasRole('instructor') || $user->instructor) {
                 return to_route('instructor.dashboard');
             }
         }

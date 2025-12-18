@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Notification;
 
 use App\Http\Resources\NotificationInstanceResource;
-use App\Models\Notification;
 use App\Models\NotificationInstance;
 use App\Repositories\NotificationInstanceRepository;
 use Illuminate\Http\Request;
@@ -19,7 +18,7 @@ class NotificationController extends Controller
 
         $user = Auth::guard('api')->user();
 
-        if (!$user) {
+        if (! $user) {
             return $this->json('No notifications found', [
                 'total_items' => 0,
                 'notifications' => [],
@@ -42,7 +41,7 @@ class NotificationController extends Controller
             $notificationInstance->save();
 
             return $this->json('Notification marked as read', [
-                'notifications' => NotificationInstanceResource::make($notificationInstance)
+                'notifications' => NotificationInstanceResource::make($notificationInstance),
             ]);
         }
 

@@ -37,7 +37,7 @@ class CouponController extends Controller
         $coupon = CouponRepository::storeByRequest($request);
 
         return $this->json('Coupon created successfully', [
-            'coupon' => CouponResource::make($coupon)
+            'coupon' => CouponResource::make($coupon),
         ], 201);
     }
 
@@ -50,7 +50,7 @@ class CouponController extends Controller
         $updatedCoupon = CouponRepository::find($coupon->id);
 
         return $this->json('Coupon updated successfully', [
-            'coupon' => CouponResource::make($updatedCoupon)
+            'coupon' => CouponResource::make($updatedCoupon),
         ]);
     }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Course;
 
 use App\Http\Resources\CourseResource;
 use App\Http\Resources\InstructorResource;
-use App\Models\Instructor;
 use App\Repositories\InstructorRepository;
 use Illuminate\Http\Request;
 
@@ -27,7 +26,6 @@ class InstructorController extends Controller
         $instructors = $instructors->when($perPage && $skip, function ($query) use ($perPage, $skip) {
             $query->skip($skip)->take($perPage);
         })->get();
-
 
         return $this->json('Instructors found', [
             'instructors' => InstructorResource::collection($instructors),

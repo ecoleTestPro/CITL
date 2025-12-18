@@ -60,7 +60,7 @@ class ExamRegistrationController extends Controller
             return redirect()->back()->with('success', 'Inscription envoyée avec succès ! Vous recevrez un email de confirmation.');
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Failed to send exam registration email: ' . $e->getMessage());
+            \Log::error('Failed to send exam registration email: '.$e->getMessage());
 
             return redirect()->back()->with('error', 'Inscription enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
         }

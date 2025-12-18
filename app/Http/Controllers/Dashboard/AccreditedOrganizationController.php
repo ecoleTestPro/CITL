@@ -92,7 +92,7 @@ class AccreditedOrganizationController extends Controller
 
         $organization = $this->organizationRepo->find($id);
 
-        if (!$organization) {
+        if (! $organization) {
             return redirect()->route('dashboard.accredited-organizations.index')
                 ->with('error', 'Organisme non trouvé.');
         }
@@ -119,7 +119,7 @@ class AccreditedOrganizationController extends Controller
     {
         $organization = $this->organizationRepo->find($id);
 
-        if (!$organization) {
+        if (! $organization) {
             return redirect()->route('dashboard.accredited-organizations.index')
                 ->with('error', 'Organisme non trouvé.');
         }

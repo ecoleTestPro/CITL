@@ -6,8 +6,6 @@ class TranslationMetadataService
 {
     /**
      * Get user-friendly metadata for translation fields
-     *
-     * @return array
      */
     public static function getFieldMetadata(): array
     {
@@ -145,21 +143,16 @@ class TranslationMetadataService
 
     /**
      * Get metadata for a specific field
-     *
-     * @param string $key
-     * @return array|null
      */
     public static function getMetadata(string $key): ?array
     {
         $metadata = self::getFieldMetadata();
+
         return $metadata[$key] ?? null;
     }
 
     /**
      * Get fields grouped by section
-     *
-     * @param array $translationKeys
-     * @return array
      */
     public static function getFieldsBySection(array $translationKeys): array
     {
@@ -168,13 +161,13 @@ class TranslationMetadataService
 
         foreach ($translationKeys as $key) {
             $fieldMeta = $metadata[$key] ?? null;
-            if (!$fieldMeta) {
+            if (! $fieldMeta) {
                 continue;
             }
 
             $section = $fieldMeta['section'] ?? 'Autres';
 
-            if (!isset($sections[$section])) {
+            if (! isset($sections[$section])) {
                 $sections[$section] = [];
             }
 

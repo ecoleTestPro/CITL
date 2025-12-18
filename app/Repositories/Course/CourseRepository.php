@@ -15,7 +15,7 @@ class CourseRepository extends BaseRepository
     public function getWithDetails($courseId)
     {
         return $this->model->with(['instructor', 'category', 'chapters.contents', 'reviews'])
-                          ->find($courseId);
+            ->find($courseId);
     }
 
     public function getByCategory($categoryId)
@@ -31,7 +31,7 @@ class CourseRepository extends BaseRepository
     public function searchCourses($query)
     {
         return $this->model->where('title', 'like', "%{$query}%")
-                          ->orWhere('description', 'like', "%{$query}%")
-                          ->get();
+            ->orWhere('description', 'like', "%{$query}%")
+            ->get();
     }
 }

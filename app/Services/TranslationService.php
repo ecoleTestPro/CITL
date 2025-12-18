@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class TranslationService
 {
@@ -180,9 +179,6 @@ class TranslationService
 
     /**
      * Get translation keys for a specific page
-     *
-     * @param string $pageName
-     * @return array
      */
     public function getPageTranslationKeys(string $pageName): array
     {
@@ -191,9 +187,6 @@ class TranslationService
 
     /**
      * Get all translations for a page in all languages
-     *
-     * @param string $pageName
-     * @return array
      */
     public function getPageTranslations(string $pageName): array
     {
@@ -202,7 +195,7 @@ class TranslationService
         $translations = [];
 
         // Get all locale files
-        $localeFiles = File::glob($localesPath . '/*.json');
+        $localeFiles = File::glob($localesPath.'/*.json');
 
         foreach ($localeFiles as $localeFile) {
             $locale = pathinfo($localeFile, PATHINFO_FILENAME);
@@ -223,16 +216,12 @@ class TranslationService
 
     /**
      * Update translations for a specific locale
-     *
-     * @param string $locale
-     * @param array $updates
-     * @return bool
      */
     public function updateTranslations(string $locale, array $updates): bool
     {
         $localeFile = resource_path("js/i18n/locales/{$locale}.json");
 
-        if (!File::exists($localeFile)) {
+        if (! File::exists($localeFile)) {
             return false;
         }
 
@@ -255,16 +244,13 @@ class TranslationService
 
     /**
      * Create a backup of the translation file
-     *
-     * @param string $locale
-     * @return void
      */
     private function createBackup(string $locale): void
     {
         $localeFile = resource_path("js/i18n/locales/{$locale}.json");
         $backupDir = storage_path('app/translation-backups');
 
-        if (!File::exists($backupDir)) {
+        if (! File::exists($backupDir)) {
             File::makeDirectory($backupDir, 0755, true);
         }
 
@@ -279,10 +265,6 @@ class TranslationService
 
     /**
      * Clean old backup files, keeping only the 10 most recent
-     *
-     * @param string $locale
-     * @param string $backupDir
-     * @return void
      */
     private function cleanOldBackups(string $locale, string $backupDir): void
     {
@@ -305,8 +287,6 @@ class TranslationService
     /**
      * Get nested value from array using dot notation
      *
-     * @param array $array
-     * @param string $key
      * @return mixed
      */
     private function getNestedValue(array $array, string $key)
@@ -315,7 +295,7 @@ class TranslationService
         $value = $array;
 
         foreach ($keys as $k) {
-            if (!isset($value[$k])) {
+            if (! isset($value[$k])) {
                 return null;
             }
             $value = $value[$k];
@@ -327,10 +307,7 @@ class TranslationService
     /**
      * Set nested value in array using dot notation
      *
-     * @param array &$array
-     * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param  mixed  $value
      */
     private function setNestedValue(array &$array, string $key, $value): void
     {
@@ -341,7 +318,7 @@ class TranslationService
             if ($i === count($keys) - 1) {
                 $current[$k] = $value;
             } else {
-                if (!isset($current[$k]) || !is_array($current[$k])) {
+                if (! isset($current[$k]) || ! is_array($current[$k])) {
                     $current[$k] = [];
                 }
                 $current = &$current[$k];
@@ -351,13 +328,11 @@ class TranslationService
 
     /**
      * Get list of available locales
-     *
-     * @return array
      */
     public function getAvailableLocales(): array
     {
         $localesPath = resource_path('js/i18n/locales');
-        $localeFiles = File::glob($localesPath . '/*.json');
+        $localeFiles = File::glob($localesPath.'/*.json');
 
         return array_map(function ($file) {
             return pathinfo($file, PATHINFO_FILENAME);
@@ -366,17 +341,13 @@ class TranslationService
 
     /**
      * Restore translations from a backup
-     *
-     * @param string $locale
-     * @param string $backupTimestamp
-     * @return bool
      */
     public function restoreFromBackup(string $locale, string $backupTimestamp): bool
     {
         $backupFile = storage_path("app/translation-backups/{$locale}_{$backupTimestamp}.json");
         $localeFile = resource_path("js/i18n/locales/{$locale}.json");
 
-        if (!File::exists($backupFile)) {
+        if (! File::exists($backupFile)) {
             return false;
         }
 

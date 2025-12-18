@@ -12,6 +12,7 @@ use Inertia\Inertia;
 class CertificationManagementController extends Controller
 {
     protected $certificationRepository;
+
     protected $categoryRepository;
 
     public function __construct(
@@ -61,7 +62,7 @@ class CertificationManagementController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:certification_categories,slug,' . $id,
+            'slug' => 'required|string|max:255|unique:certification_categories,slug,'.$id,
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
@@ -80,7 +81,7 @@ class CertificationManagementController extends Controller
         $category = $this->categoryRepository->findById($id);
 
         // Check if category can be deleted
-        if (!$category->can_delete) {
+        if (! $category->can_delete) {
             return redirect()->back()->with('error', 'Cette catégorie par défaut ne peut pas être supprimée.');
         }
 
@@ -131,13 +132,13 @@ class CertificationManagementController extends Controller
         // Handle featured image upload
         if ($request->hasFile('featured_image')) {
             $featuredImagePath = $request->file('featured_image')->store('certifications/featured', 'public');
-            $validated['featured_image'] = '/storage/' . $featuredImagePath;
+            $validated['featured_image'] = '/storage/'.$featuredImagePath;
         }
 
         // Handle syllabus file upload
         if ($request->hasFile('syllabus_file')) {
             $syllabusPath = $request->file('syllabus_file')->store('certifications/syllabus', 'public');
-            $validated['syllabus_file'] = '/storage/' . $syllabusPath;
+            $validated['syllabus_file'] = '/storage/'.$syllabusPath;
         }
 
         $this->certificationRepository->create($validated);
@@ -154,7 +155,7 @@ class CertificationManagementController extends Controller
             'certification_category_id' => 'required|exists:certification_categories,id',
             'title_fr' => 'required|string|max:255',
             'title_en' => 'nullable|string|max:255',
-            'slug' => 'required|string|max:255|unique:certifications,slug,' . $id,
+            'slug' => 'required|string|max:255|unique:certifications,slug,'.$id,
             'subtitle_fr' => 'nullable|string|max:255',
             'subtitle_en' => 'nullable|string|max:255',
             'description_fr' => 'required|string',
@@ -196,7 +197,7 @@ class CertificationManagementController extends Controller
                 Storage::disk('public')->delete($oldPath);
             }
             $featuredImagePath = $request->file('featured_image')->store('certifications/featured', 'public');
-            $validated['featured_image'] = '/storage/' . $featuredImagePath;
+            $validated['featured_image'] = '/storage/'.$featuredImagePath;
         } elseif ($request->boolean('remove_featured_image')) {
             // Remove existing image
             if ($certification->featured_image) {
@@ -214,7 +215,7 @@ class CertificationManagementController extends Controller
                 Storage::disk('public')->delete($oldPath);
             }
             $syllabusPath = $request->file('syllabus_file')->store('certifications/syllabus', 'public');
-            $validated['syllabus_file'] = '/storage/' . $syllabusPath;
+            $validated['syllabus_file'] = '/storage/'.$syllabusPath;
         } elseif ($request->boolean('remove_syllabus_file')) {
             // Remove existing file
             if ($certification->syllabus_file) {

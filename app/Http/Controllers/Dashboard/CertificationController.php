@@ -11,6 +11,7 @@ use Inertia\Inertia;
 class CertificationController extends Controller
 {
     protected $certificationRepository;
+
     protected $categoryRepository;
 
     public function __construct(
@@ -107,7 +108,7 @@ class CertificationController extends Controller
         $validated = $request->validate([
             'certification_category_id' => 'required|exists:certification_categories,id',
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:certifications,slug,' . $id,
+            'slug' => 'required|string|max:255|unique:certifications,slug,'.$id,
             'subtitle' => 'nullable|string|max:255',
             'description' => 'required|string',
             'icon' => 'nullable|string',
@@ -135,7 +136,7 @@ class CertificationController extends Controller
         $certification = $this->certificationRepository->findById($id);
 
         // Prevent deletion of protected certifications
-        if ($certification && !$certification->can_delete) {
+        if ($certification && ! $certification->can_delete) {
             return redirect()->route('dashboard.certifications.index')
                 ->with('error', 'Cette certification ne peut pas être supprimée car elle est protégée par le système.');
         }

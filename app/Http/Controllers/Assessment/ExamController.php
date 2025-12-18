@@ -22,7 +22,7 @@ class ExamController extends Controller
 
         $isEnrolled = $exam->course->enrollments->contains('user_id', $loggedInUser->id);
 
-        if (!$isEnrolled) {
+        if (! $isEnrolled) {
             return $this->json('Cannot start exam without course enrollment', null, 403);
         }
 
@@ -35,14 +35,13 @@ class ExamController extends Controller
 
         if ($examSessionExists) {
             return $this->json('Exam session already submitted', null, 400);
-        } else if (!$examSessionExists) {
+        } elseif (! $examSessionExists) {
             $examSessionTimeExists = (clone $eloquentQuery)->where('end_time', '>', now())->exists();
 
             if ($examSessionTimeExists) {
                 return $this->json('You have already submitted the exam', null, 400);
             }
         }
-
 
         // Start the exam session
         $examSession = ExamSessionRepository::create([
@@ -52,7 +51,7 @@ class ExamController extends Controller
             'start_time' => now(),
             'end_time' => now()->addMinutes($exam->duration),
             'total_mark' => $exam->mark_per_question * $exam->questions->count(),
-            'obtained_mark' => 0
+            'obtained_mark' => 0,
         ]);
 
         $questions = QuestionRepository::query()->where('exam_id', '=', $exam->id)->get();
@@ -66,7 +65,7 @@ class ExamController extends Controller
     public function submit(ExamSession $examSession, ExamSubmitRequest $request)
     {
         /** @var User */
-        $loggedInUser =  Auth::guard('api')->user();
+        $loggedInUser = Auth::guard('api')->user();
 
         if ($examSession->user_id != $loggedInUser->id) {
             return $this->json('Cannot submit exam session', null, 403);
@@ -93,7 +92,7 @@ class ExamController extends Controller
                 ->where('exam_id', '=', $exam->id)
                 ->first();
 
-            if (!$question) {
+            if (! $question) {
                 return $this->json('Invalid question', null, 404);
             }
 
@@ -107,7 +106,7 @@ class ExamController extends Controller
 
         ExamSessionRepository::update($examSession, [
             'submitted' => true,
-            'obtained_mark' => $obtainedMark
+            'obtained_mark' => $obtainedMark,
         ]);
 
         return $this->json('Exam session submitted successfully', ExamSessionResource::make($examSession), 201);

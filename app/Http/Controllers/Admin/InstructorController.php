@@ -34,7 +34,6 @@ class InstructorController extends Controller
         ], $instructors ? 200 : 404);
     }
 
-
     /**
      * Store a newly created resource in storage.
      */
@@ -43,7 +42,7 @@ class InstructorController extends Controller
         $instructor = InstructorRepository::storeByRequest($request);
 
         return $this->json('Instructor created successfully', [
-            'instructor' => InstructorResource::make($instructor)
+            'instructor' => InstructorResource::make($instructor),
         ]);
     }
 
@@ -53,7 +52,7 @@ class InstructorController extends Controller
     public function show(Instructor $instructor)
     {
         return $this->json('Instructor found', [
-            'instructor' => InstructorResource::make($instructor)
+            'instructor' => InstructorResource::make($instructor),
         ]);
     }
 
@@ -62,12 +61,12 @@ class InstructorController extends Controller
      */
     public function me()
     {
-        if (!auth()->user()->instructor) {
+        if (! auth()->user()->instructor) {
             return $this->json('Instructor profile does not exist');
         }
 
         return $this->json('Instructor found', [
-            'instructor' => InstructorResource::make(auth()->user()->instructor)
+            'instructor' => InstructorResource::make(auth()->user()->instructor),
         ]);
     }
 
@@ -80,7 +79,7 @@ class InstructorController extends Controller
         $updatedInstructor = InstructorRepository::find($instructor->id);
 
         return $this->json('Instructor updated successfully', [
-            'instructor' => InstructorResource::make($updatedInstructor)
+            'instructor' => InstructorResource::make($updatedInstructor),
         ]);
     }
 

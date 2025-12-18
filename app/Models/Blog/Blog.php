@@ -58,12 +58,12 @@ class Blog extends Model
             }
 
             // Auto-generate excerpt from content if not provided
-            if (empty($blog->excerpt) && !empty($blog->content)) {
+            if (empty($blog->excerpt) && ! empty($blog->content)) {
                 $blog->excerpt = Str::limit(strip_tags($blog->content), 200);
             }
 
             // Calculate read time based on content
-            if (empty($blog->read_time) && !empty($blog->content)) {
+            if (empty($blog->read_time) && ! empty($blog->content)) {
                 $wordCount = str_word_count(strip_tags($blog->content));
                 $blog->read_time = max(1, ceil($wordCount / 200)); // 200 mots par minute
             }
@@ -105,7 +105,7 @@ class Blog extends Model
      */
     public function getReadingTimeTextAttribute(): string
     {
-        return $this->read_time . ' min';
+        return $this->read_time.' min';
     }
 
     /**

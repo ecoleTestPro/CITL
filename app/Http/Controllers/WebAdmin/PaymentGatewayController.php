@@ -5,7 +5,6 @@ namespace App\Http\Controllers\WebAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaymentGatewayUpdateRequest;
 use App\Models\PaymentGateway;
-use Illuminate\Http\Request;
 
 class PaymentGatewayController extends Controller
 {
@@ -16,7 +15,6 @@ class PaymentGatewayController extends Controller
         $twoCheckout = PaymentGateway::query()->where('name', '2checkout')->first();
         $aamarpay = PaymentGateway::query()->where('name', 'aamarpay')->first();
         $razorpay = PaymentGateway::query()->where('name', 'razorpay')->first();
-
 
         return view('payment_gateway.index', [
             'paypal' => $paypal,
@@ -46,7 +44,7 @@ class PaymentGatewayController extends Controller
 
         $paymentGateway->update([
             'config' => json_encode($request->except(['_token', '_method'])),
-            'is_active' => $isActive
+            'is_active' => $isActive,
         ]);
 
         return to_route('payment_gateway.index')->withSuccess('Payment gateway updated');

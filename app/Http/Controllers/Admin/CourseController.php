@@ -19,7 +19,7 @@ class CourseController extends Controller
         $course = CourseRepository::storeByRequest($request);
 
         return $this->json('Course created successfully', [
-            'course' => CourseResource::make($course)
+            'course' => CourseResource::make($course),
         ], 201);
     }
 
@@ -32,7 +32,7 @@ class CourseController extends Controller
         $updatedCourse = CourseRepository::find($course->id);
 
         return $this->json('Course updated successfully', [
-            'course' => CourseResource::make($updatedCourse)
+            'course' => CourseResource::make($updatedCourse),
         ], 200);
     }
 

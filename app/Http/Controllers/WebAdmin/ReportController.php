@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\WebAdmin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
-use App\Models\Enrollment;
 use App\Repositories\CourseRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -106,7 +104,6 @@ class ReportController extends Controller
         ]);
     }
 
-
     public function filter(Request $request)
     {
         $filterType = $request->query('filter_type');
@@ -154,8 +151,6 @@ class ReportController extends Controller
         ]);
     }
 
-
-
     public function generatePdf(Request $request)
     {
         $filterType = $request->query('filter_type');
@@ -170,6 +165,7 @@ class ReportController extends Controller
             ->when($filterType != 'all' && $filterType != 'unpaid' && $daterange, function ($query) use ($daterange) {
                 $query->whereHas('transactions', function ($query) use ($daterange) {
                     [$startDate, $endDate] = explode('-', $daterange);
+
                     return $query->whereDate('created_at', '>=', date('Y-m-d', strtotime($startDate)))
                         ->whereDate('created_at', '<=', date('Y-m-d', strtotime($endDate)));
                 });
@@ -186,13 +182,12 @@ class ReportController extends Controller
             })
             ->withTrashed()->paginate(10, ['*'], 'page', $page_num);
 
-
         $pdf = Pdf::loadView('pdf.report', [
             'reports' => $reportsQuery->items(),
             'page_num' => $page_num,
         ]);
 
-        return $pdf->stream("report-{$page_num}" . ".pdf");
+        return $pdf->stream("report-{$page_num}".'.pdf');
     }
 
     public function exportCSV(Request $request)
@@ -209,6 +204,7 @@ class ReportController extends Controller
             ->when($filterType != 'all' && $filterType != 'unpaid' && $daterange, function ($query) use ($daterange) {
                 $query->whereHas('transactions', function ($query) use ($daterange) {
                     [$startDate, $endDate] = explode('-', $daterange);
+
                     return $query->whereDate('created_at', '>=', date('Y-m-d', strtotime($startDate)))
                         ->whereDate('created_at', '<=', date('Y-m-d', strtotime($endDate)));
                 });
@@ -237,7 +233,7 @@ class ReportController extends Controller
                 $report->enrollments->count(),
                 $report->transactions->count(),
                 $report->transactions->sum('payment_amount') ?? 'N/A',
-            ]) . "\n";
+            ])."\n";
         }
 
         // Send response as a CSV file

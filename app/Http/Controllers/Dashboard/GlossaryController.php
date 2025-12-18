@@ -71,7 +71,7 @@ class GlossaryController extends Controller
     {
         $glossary = $this->glossaryRepo->find($id);
 
-        if (!$glossary) {
+        if (! $glossary) {
             return redirect()->route('dashboard.glossary.index')
                 ->with('error', 'Glossary term not found.');
         }
@@ -98,7 +98,7 @@ class GlossaryController extends Controller
 
         $glossary = $this->glossaryRepo->update($id, $validated);
 
-        if (!$glossary) {
+        if (! $glossary) {
             return redirect()->route('dashboard.glossary.index')
                 ->with('error', 'Glossary term not found.');
         }
@@ -114,7 +114,7 @@ class GlossaryController extends Controller
     {
         $deleted = $this->glossaryRepo->delete($id);
 
-        if (!$deleted) {
+        if (! $deleted) {
             return redirect()->route('dashboard.glossary.index')
                 ->with('error', 'Glossary term not found.');
         }

@@ -31,18 +31,18 @@ class CertifiedTesterRegistrationController extends Controller
             return response()->json([
                 'success' => true,
                 'data' => [],
-                'message' => 'Please provide a search term'
+                'message' => 'Please provide a search term',
             ]);
         }
 
         $query = CertifiedTesterRegistration::approved();
 
-        if (!empty($name)) {
-            $query->where('full_name', 'like', '%' . $name . '%');
+        if (! empty($name)) {
+            $query->where('full_name', 'like', '%'.$name.'%');
         }
 
-        if (!empty($certificateNumber)) {
-            $query->where('certificate_number', 'like', '%' . $certificateNumber . '%');
+        if (! empty($certificateNumber)) {
+            $query->where('certificate_number', 'like', '%'.$certificateNumber.'%');
         }
 
         $testers = $query->select([
@@ -50,13 +50,13 @@ class CertifiedTesterRegistrationController extends Controller
             'full_name',
             'certification_obtained',
             'certificate_number',
-            'exam_date'
+            'exam_date',
         ])->orderBy('full_name')->get();
 
         return response()->json([
             'success' => true,
             'data' => $testers,
-            'message' => $testers->count() > 0 ? 'Testers found' : 'No testers found'
+            'message' => $testers->count() > 0 ? 'Testers found' : 'No testers found',
         ]);
     }
 
@@ -106,7 +106,7 @@ class CertifiedTesterRegistrationController extends Controller
             return redirect()->back()->with('success', 'Votre demande d\'inscription a été envoyée avec succès !');
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Failed to send certified tester registration email: ' . $e->getMessage());
+            \Log::error('Failed to send certified tester registration email: '.$e->getMessage());
 
             return redirect()->back()->with('success', 'Votre demande d\'inscription a été enregistrée. Nous vous contacterons bientôt.');
         }

@@ -34,7 +34,7 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
             'is_active' => true,
             'is_org' => true,
-            'organization_id' => $organization->id
+            'organization_id' => $organization->id,
         ]);
 
         // finally assign user to organization
@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'contact' => $user->email,
         ], [
             'otp_code' => $otp,
-            'token' => $token
+            'token' => $token,
         ]);
 
         // send otp

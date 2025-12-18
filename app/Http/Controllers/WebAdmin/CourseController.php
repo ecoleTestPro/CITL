@@ -9,14 +9,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseStoreRequest;
 use App\Http\Requests\CourseUpdateRequest;
 use App\Models\Course;
-use App\Models\User;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ContentRepository;
 use App\Repositories\CourseRepository;
 use App\Repositories\InstructorRepository;
 use App\Repositories\NotificationInstanceRepository;
 use App\Repositories\NotificationRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,10 +27,10 @@ class CourseController extends Controller
         $query = CourseRepository::query();
 
         // Search filter (applies for all)
-        $query->when($search, function ($q) use ($search, $user) {
+        $query->when($search, function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-                ->orWhereHas('organization.user', fn($q) => $q->where('name', 'like', "%{$search}%"))
-                ->orWhereHas('instructor.user', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                ->orWhereHas('organization.user', fn ($q) => $q->where('name', 'like', "%{$search}%"))
+                ->orWhereHas('instructor.user', fn ($q) => $q->where('name', 'like', "%{$search}%"));
         });
 
         // Role/organization-specific filtering
@@ -60,9 +58,9 @@ class CourseController extends Controller
         if ($user->is_org == 1 || $user->organization) {
             $course = CourseRepository::query()
                 ->when($search, function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%')
+                    $query->where('title', 'like', '%'.$search.'%')
                         ->orWhereHas('organization.user', function ($query) use ($search) {
-                            $query->where('name', 'like', '%' . $search . '%');
+                            $query->where('name', 'like', '%'.$search.'%');
                         });
                 })
                 ->where('organization_id', $user->organization?->id)
@@ -71,20 +69,19 @@ class CourseController extends Controller
                 ->paginate(10)->withQueryString();
         } else {
             $course = CourseRepository::query()
-                ->when(!$user->hasRole('admin'), function ($query) use ($user) {
+                ->when(! $user->hasRole('admin'), function ($query) use ($user) {
                     $query->where('instructor_id', $user->instructor?->id);
                 })
                 ->when($search, function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%')
+                    $query->where('title', 'like', '%'.$search.'%')
                         ->orWhereHas('instructor.user', function ($query) use ($search) {
-                            $query->where('name', 'like', '%' . $search . '%');
+                            $query->where('name', 'like', '%'.$search.'%');
                         });
                 })
                 ->latest('id')
                 ->onlyTrashed()
                 ->paginate(10)->withQueryString();
         }
-
 
         return view('course.restore', [
             'courses' => $course,
@@ -106,7 +103,7 @@ class CourseController extends Controller
             $categories = CategoryRepository::query()->where('organization_id', $user->organization?->id)->get();
         } else {
             $instructors = InstructorRepository::query()
-                ->when(!$user->hasRole('admin') || !$user->is_admin, function ($query) use ($user) {
+                ->when(! $user->hasRole('admin') || ! $user->is_admin, function ($query) use ($user) {
                     $query->where('user_id', $user->id);
                 })
                 ->withTrashed()
@@ -120,6 +117,7 @@ class CourseController extends Controller
             'instructors' => $instructors,
         ]);
     }
+
     public function show(Course $course)
     {
         $totalEnrollments = $course?->enrollments->count();
@@ -133,8 +131,8 @@ class CourseController extends Controller
 
         return view('course.overview', [
             'course' => $course,
-            "enrollments" => $totalEnrollments,
-            "transactions" => $transactions,
+            'enrollments' => $totalEnrollments,
+            'transactions' => $transactions,
             'reviews' => $course->reviews,
             'students' => $students,
             'countClass' => $countClass,
@@ -143,7 +141,7 @@ class CourseController extends Controller
             'imageCount' => $contents->where('type', MediaTypeEnum::IMAGE)->count(),
             'audioCount' => $contents->where('type', MediaTypeEnum::AUDIO)->count(),
             'freeContentCount' => $contents->where('is_free', true)->count(),
-            "chapters" => $chapters,
+            'chapters' => $chapters,
         ]);
     }
 
@@ -159,8 +157,8 @@ class CourseController extends Controller
                 'recipient_id' => null,
                 'course_id' => $course->id,
                 'metadata' => json_encode($course),
-                'url' => '/admin/course/show/' . $course->id,
-                'content' => 'New course ' . $course->title . ' has been created by ' . Auth::user()->name,
+                'url' => '/admin/course/show/'.$course->id,
+                'content' => 'New course '.$course->title.' has been created by '.Auth::user()->name,
             ]);
 
             foreach ($course->instructor->courses as $instructorCourse) {
@@ -189,7 +187,7 @@ class CourseController extends Controller
             $categories = CategoryRepository::query()->where('organization_id', $user->organization?->id)->get();
         } else {
             $instructors = InstructorRepository::query()
-                ->when(!$user->hasRole('admin') || !$user->is_admin, function ($query) use ($user) {
+                ->when(! $user->hasRole('admin') || ! $user->is_admin, function ($query) use ($user) {
                     $query->where('user_id', $user->id);
                 })
                 ->withTrashed()
@@ -217,7 +215,7 @@ class CourseController extends Controller
             ], [
                 'metadata' => json_encode($course),
                 'url' => route('course.show', $course->id),
-                'content' => 'New course ' . $course->title . ' has been created by ' . Auth::user()->name,
+                'content' => 'New course '.$course->title.' has been created by '.Auth::user()->name,
             ]);
             NotifyEvent::dispatch(NotificationTypeEnum::NewCourseFromInstructor->value, $course->id, [
                 'course' => $course,
@@ -245,7 +243,7 @@ class CourseController extends Controller
 
     public function freeCourse(Course $course)
     {
-        $course->is_free = !$course->is_free;
+        $course->is_free = ! $course->is_free;
         $course->updated_at = now();
 
         $course->save();

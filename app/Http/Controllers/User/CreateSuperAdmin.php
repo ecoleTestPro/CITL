@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Enums\Roles;
-use App\Models\Shop;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class CreateSuperAdmin extends Controller
 {
@@ -25,14 +23,14 @@ class CreateSuperAdmin extends Controller
 
         // Admin User
         $localAdmin = UserRepository::create([
-                'email' => $request->email,
-                'phone' => '011' . rand(100000000, 999999999),
-                'name' => 'Administrator',
-                'is_active' => true,
-                'is_admin' => true,
-                'email_verified_at' => now(),
-                'password' => bcrypt($request->password),
-            ]);
+            'email' => $request->email,
+            'phone' => '011'.rand(100000000, 999999999),
+            'name' => 'Administrator',
+            'is_active' => true,
+            'is_admin' => true,
+            'email_verified_at' => now(),
+            'password' => bcrypt($request->password),
+        ]);
 
         $localAdmin->assignRole('admin');
 

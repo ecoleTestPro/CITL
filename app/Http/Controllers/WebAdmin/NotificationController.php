@@ -13,6 +13,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = NotificationRepository::query()->latest('id')->get();
+
         return view('notification.index', [
             'notifications' => $notifications,
         ]);
@@ -27,7 +28,7 @@ class NotificationController extends Controller
 
     public function switchStatus(Notification $notification)
     {
-        $notification->is_enabled = !$notification->is_enabled;
+        $notification->is_enabled = ! $notification->is_enabled;
         $notification->save();
 
         return to_route('notification.index')->withSuccess('Notification status updated');
@@ -43,19 +44,20 @@ class NotificationController extends Controller
     public function markAsRead(NotificationInstance $notificationInstance)
     {
 
-
         $notificationInstance->is_read = true;
         $notificationInstance->save();
 
         if ($notificationInstance->url == null) {
             return back();
         }
+
         return redirect($notificationInstance->url);
     }
 
     public function markAsReadAll()
     {
         NotificationInstance::where('recipient_id', null)->update(['is_read' => true]);
+
         return back()->withSuccess('All notifications marked as read');
     }
 }

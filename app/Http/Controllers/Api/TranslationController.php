@@ -43,7 +43,7 @@ class TranslationController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Translation error: ' . $e->getMessage(),
+                'message' => 'Translation error: '.$e->getMessage(),
                 'translation' => $validated['text'],
             ], 500);
         }
@@ -73,6 +73,7 @@ class TranslationController extends Controller
         foreach ($validated['fields'] as $key => $text) {
             if (empty(trim($text ?? ''))) {
                 $translations[$key] = '';
+
                 continue;
             }
 
@@ -119,6 +120,7 @@ class TranslationController extends Controller
                         $translatedParts[] = $part[0];
                     }
                 }
+
                 return implode('', $translatedParts);
             }
         }

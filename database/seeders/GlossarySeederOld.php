@@ -13,7 +13,7 @@ class GlossarySeeder extends Seeder
     public function run(): void
     {
         $glossaries = [
-           
+
         ];
 
         foreach ($glossaries as $glossary) {

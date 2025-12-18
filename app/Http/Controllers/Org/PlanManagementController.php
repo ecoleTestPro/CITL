@@ -6,11 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PaymentGateway;
 use App\Repositories\OrganizationPlanSubscriptionRepository;
 use App\Repositories\TransactionRepository;
-use Illuminate\Http\Request;
 
 class PlanManagementController extends Controller
 {
-
     public function index()
     {
         $organization = auth()->user()->organization;
@@ -18,8 +16,9 @@ class PlanManagementController extends Controller
         $plan = $subscription?->plan;
         $paymentGateways = PaymentGateway::where('is_active', true)->get() ?? [];
 
-        return view('organization.subscription.index', compact('plan', 'paymentGateways','subscription'));
+        return view('organization.subscription.index', compact('plan', 'paymentGateways', 'subscription'));
     }
+
     public function billingHistory()
     {
         $loggedInUser = auth()->user();

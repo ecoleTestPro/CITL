@@ -53,7 +53,7 @@ class BlogController extends Controller
     {
         $blog = $this->blogRepo->findBySlug($slug);
 
-        if (!$blog) {
+        if (! $blog) {
             abort(404);
         }
 
@@ -84,7 +84,7 @@ class BlogController extends Controller
     {
         $category = $this->categoryRepo->findBySlug($slug);
 
-        if (!$category || !$category->is_active) {
+        if (! $category || ! $category->is_active) {
             abort(404);
         }
 

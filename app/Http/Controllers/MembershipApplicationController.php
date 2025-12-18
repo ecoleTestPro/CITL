@@ -48,7 +48,7 @@ class MembershipApplicationController extends Controller
             return redirect()->back()->with('success', 'Demande d\'adhésion envoyée avec succès ! Vous recevrez un email de confirmation.');
         } catch (\Exception $e) {
             // Log the error
-            \Log::error('Failed to send membership application email: ' . $e->getMessage());
+            \Log::error('Failed to send membership application email: '.$e->getMessage());
 
             return redirect()->back()->with('error', 'Demande enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
         }

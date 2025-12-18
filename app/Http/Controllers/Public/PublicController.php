@@ -143,7 +143,7 @@ class PublicController extends Controller
         // Verify certification exists and is active before rendering the page
         $certification = $this->certificationRepo->findBySlugWithCategory($slug);
 
-        if (!$certification || !$certification->is_active) {
+        if (! $certification || ! $certification->is_active) {
             abort(404);
         }
 

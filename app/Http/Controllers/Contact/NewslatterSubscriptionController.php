@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Contact;
 
 use App\Models\NewslatterSubscription;
 use Illuminate\Http\Request;
-use Svg\Tag\Rect;
 
 class NewslatterSubscriptionController extends Controller
 {
@@ -14,8 +13,7 @@ class NewslatterSubscriptionController extends Controller
             'email' => 'required|email|unique:newslatter_subscriptions,email',
         ]);
 
-
-        $subscription = new NewslatterSubscription();
+        $subscription = new NewslatterSubscription;
         $subscription->email = $request->email;
         $subscription->status = false;
         $subscription->save();

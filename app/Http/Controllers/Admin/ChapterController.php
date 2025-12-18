@@ -19,7 +19,7 @@ class ChapterController extends Controller
         $chapter = ChapterRepository::storeByRequest($request);
 
         return $this->json('Chapter created successfully', [
-            'chapter' => ChapterResource::make($chapter)
+            'chapter' => ChapterResource::make($chapter),
         ], 201);
     }
 
@@ -32,7 +32,7 @@ class ChapterController extends Controller
         $updatedChapter = ChapterRepository::find($chapter->id);
 
         return $this->json('Chapter updated successfully', [
-            'chapter' => ChapterResource::make($updatedChapter)
+            'chapter' => ChapterResource::make($updatedChapter),
         ], 201);
     }
 

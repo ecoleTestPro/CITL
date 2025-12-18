@@ -15,9 +15,9 @@ class SubscribersController extends Controller
         $subscribers = SubscriberRepository::query()
             ->when($search, function ($query) use ($search) {
                 return $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%');
                 })->orWhereHas('plan', function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%');
+                    $query->where('title', 'like', '%'.$search.'%');
                 });
             })
             ->get();

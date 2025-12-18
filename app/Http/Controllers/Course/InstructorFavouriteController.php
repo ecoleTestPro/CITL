@@ -29,7 +29,7 @@ class InstructorFavouriteController extends Controller
         } else {
             $guest = GuestRepository::query()->where('unique_id', '=', $request->input('guest_id'))->first();
 
-            if (!$guest) {
+            if (! $guest) {
                 return $this->json('Unauthenticated and non existing guest', null, 401);
             }
 
@@ -51,10 +51,10 @@ class InstructorFavouriteController extends Controller
         /** @var User */
         $loggedInUser = Auth::guard('api')->user();
 
-        if (!$loggedInUser) {
+        if (! $loggedInUser) {
             $guest = GuestRepository::query()->where('unique_id', '=', $request->input('guest_id'))->first();
 
-            if (!$guest) {
+            if (! $guest) {
                 return $this->json('Unauthenticated and non existing guest', null, 401);
             }
 

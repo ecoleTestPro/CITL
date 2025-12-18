@@ -26,10 +26,10 @@ class TransactionController extends Controller
         }
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('course', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('course', function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
             })->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             });
         })
             ->latest('id')
@@ -47,10 +47,10 @@ class TransactionController extends Controller
         $transactionQuery = TransactionRepository::query();
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('course', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('course', function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
             })->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             });
         })
             ->where('is_paid', false)
@@ -69,10 +69,10 @@ class TransactionController extends Controller
         $transactionQuery = TransactionRepository::query();
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('course', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('course', function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
             })->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             });
         })
             ->whereNotNull('course_id')
@@ -98,10 +98,10 @@ class TransactionController extends Controller
         $transactionQuery = TransactionRepository::query();
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('course', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('course', function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
             })->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             });
         })
             ->whereNotNull('enrollment_id')
@@ -127,12 +127,12 @@ class TransactionController extends Controller
         $transactionQuery = TransactionRepository::query();
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('course', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('course', function ($query) use ($search) {
+                $query->where('title', 'like', '%'.$search.'%');
             })->orWhereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', 'like', '%'.$search.'%');
             })->orWhereHas('plan', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+                $query->where('title', 'like', '%'.$search.'%');
             });
         })
             ->whereNotNull('plan_id')
@@ -151,16 +151,17 @@ class TransactionController extends Controller
             'transactions' => $transections,
         ]);
     }
+
     public function dnsWiseTransaction(Request $request)
     {
         $search = $request->transaction_search ? strtolower($request->transaction_search) : null;
         $transactionQuery = TransactionRepository::query();
 
         $transections = $transactionQuery->when($search, function ($query) use ($search) {
-            $query->where('payment_method', 'like', '%' . $search . '%')->whereHas('organization', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+            $query->where('payment_method', 'like', '%'.$search.'%')->whereHas('organization', function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%');
             })->orWhereHas('organizationPlan', function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+                $query->where('title', 'like', '%'.$search.'%');
             });
         })
             ->whereNotNull('organization_id')

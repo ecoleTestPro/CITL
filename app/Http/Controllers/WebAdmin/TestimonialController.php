@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\WebAdmin;
 
-use App\Enum\MediaTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestimonialStoreRequest;
 use App\Http\Requests\TestimonialUpdateRequest;
 use App\Models\Testimonial;
-use App\Repositories\MediaRepository;
 use App\Repositories\TestimonialRepository;
 use Illuminate\Http\Request;
-use PHPUnit\Event\Code\Test;
 
 class TestimonialController extends Controller
 {
@@ -20,7 +17,7 @@ class TestimonialController extends Controller
         $loggedInUser = auth()->user();
 
         $query = TestimonialRepository::query()->when($search, function ($query) use ($search) {
-            $query->where('name', 'like', '%' . $search . '%')->OrWhere('designation', 'like', '%' . $search . '%');
+            $query->where('name', 'like', '%'.$search.'%')->OrWhere('designation', 'like', '%'.$search.'%');
         });
 
         if ($loggedInUser->is_org || $loggedInUser->hasRole('organization')) {
@@ -28,7 +25,6 @@ class TestimonialController extends Controller
         }
 
         $testimonials = $query->withTrashed()->latest('id')->paginate(15)->withQueryString();
-
 
         return view('testimonial.index', [
             'testimonials' => $testimonials,
@@ -61,6 +57,7 @@ class TestimonialController extends Controller
     public function update(TestimonialUpdateRequest $request, Testimonial $testimonial)
     {
         TestimonialRepository::updateByRequest($request, $testimonial);
+
         return to_route('testimonial.index')->withSuccess('Testimonial updated successfully.');
     }
 
@@ -69,12 +66,14 @@ class TestimonialController extends Controller
         $testimonial->delete();
         $testimonial->is_active = false;
         $testimonial->save();
+
         return to_route('testimonial.index')->withSuccess('Testimonial deleted successfully.');
     }
 
     public function restore($testimonial)
     {
         TestimonialRepository::query()->withTrashed()->find($testimonial)->restore();
+
         return to_route('testimonial.index')->withSuccess('Testimonial restored successfully.');
     }
 }

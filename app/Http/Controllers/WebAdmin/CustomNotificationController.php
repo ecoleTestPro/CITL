@@ -4,7 +4,6 @@ namespace App\Http\Controllers\WebAdmin;
 
 use App\Enum\NotificationTypeEnum;
 use App\Events\CustomNotifyEvent;
-use App\Events\NotifyEvent;
 use App\Http\Controllers\Controller;
 use App\Repositories\NotificationInstanceRepository;
 use App\Repositories\NotificationRepository;
@@ -19,21 +18,20 @@ class CustomNotificationController extends Controller
 
         if ($request->user_scope_filter == 'all') {
             $users = UserRepository::query()->where('is_admin', false)->get();
-        } else if ($request->user_scope_filter == 'instructor') {
+        } elseif ($request->user_scope_filter == 'instructor') {
             $users = UserRepository::query()->where('is_admin', false)->whereHas('instructor')->get();
-        } else if ($request->user_scope_filter == 'student') {
+        } elseif ($request->user_scope_filter == 'student') {
             $users = UserRepository::query()->where('is_admin', false)->whereDoesntHave('instructor')->get();
         } else {
             $users = UserRepository::query()->where('is_admin', false)->get();
         }
-
 
         return view('notification.custom.index', compact('users'));
     }
 
     public function sendMessage(Request $request)
     {
-        if (!isset($request->confirm)) {
+        if (! isset($request->confirm)) {
             return back()->withInput()->with([
                 'confirmation_not_enabled' => 'Please check the confirmation box before proceeding.',
             ]);
@@ -50,9 +48,9 @@ class CustomNotificationController extends Controller
         $type = NotificationTypeEnum::CustomNotification;
         $getNotifyId = NotificationRepository::query()->where('type', $type->value)->first();
 
-        if (!$getNotifyId->is_enabled) {
+        if (! $getNotifyId->is_enabled) {
             return back()->with([
-                'notification_not_enabled' => "It seems you haven’t enabled custom notifications. Please check the box to activate this feature.",
+                'notification_not_enabled' => 'It seems you haven’t enabled custom notifications. Please check the box to activate this feature.',
             ]);
         }
 
@@ -64,7 +62,7 @@ class CustomNotificationController extends Controller
             $client = UserRepository::find($user);
 
             if (Str::contains($title, '{user_name}') || Str::contains($message, '{user_name}')) {
-                $title = str_replace('{user_name}', $client->name,  $title);
+                $title = str_replace('{user_name}', $client->name, $title);
                 $message = str_replace('{user_name}', $client->name, $message);
             }
 
@@ -78,7 +76,7 @@ class CustomNotificationController extends Controller
 
             $tokens = $client->fcmDeviceTokens()->pluck('token')->toArray();
 
-            if (!empty($tokens)) {
+            if (! empty($tokens)) {
                 CustomNotifyEvent::dispatch($tokens, $title, $message);
             }
         }

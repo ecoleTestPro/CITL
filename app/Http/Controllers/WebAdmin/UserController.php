@@ -25,8 +25,8 @@ class UserController extends Controller
         $usersQuery = UserRepository::query()
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
-                    $q->where('name', 'like', '%' . $search . '%')
-                        ->orWhere('email', 'like', '%' . $search . '%');
+                    $q->where('name', 'like', '%'.$search.'%')
+                        ->orWhere('email', 'like', '%'.$search.'%');
                 });
             })
             ->where('is_admin', false)
@@ -36,9 +36,9 @@ class UserController extends Controller
             ->whereDoesntHave('instructor')
             ->whereDoesntHave('organization');
 
-        if ($organization && !auth()->user()->hasRole('instructor')) {
+        if ($organization && ! auth()->user()->hasRole('instructor')) {
             $usersQuery->where('student_organization_id', $organization->id);
-        } else if ($instructor && auth()->user()->hasRole('instructor')) {
+        } elseif ($instructor && auth()->user()->hasRole('instructor')) {
             $usersQuery->whereHas('enrollments', function ($q) use ($instructor) {
                 $q->whereHas('course', function ($qc) use ($instructor) {
                     $qc->where('instructor_id', $instructor->id);
@@ -53,7 +53,6 @@ class UserController extends Controller
             ->withTrashed()
             ->paginate(25)
             ->withQueryString();
-
 
         return view('user.index', [
             'users' => $users,
@@ -105,7 +104,7 @@ class UserController extends Controller
             $isActive = $request->is_active == 'on' ? true : false;
             if ($isActive == true) {
                 $newUser->update([
-                    'email_verified_at' => now()
+                    'email_verified_at' => now(),
                 ]);
             }
         } else {
@@ -124,11 +123,11 @@ class UserController extends Controller
                 'contact' => $newUser->email,
             ], [
                 'otp_code' => $otp,
-                'token' => $token
+                'token' => $token,
             ]);
 
             $newUser->update([
-                'email_verified_at' => null
+                'email_verified_at' => null,
             ]);
 
             try {
@@ -160,7 +159,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return view('user.edit', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -183,11 +182,11 @@ class UserController extends Controller
                 'contact' => $user->email,
             ], [
                 'otp_code' => $otp,
-                'token' => $token
+                'token' => $token,
             ]);
 
             $user->update([
-                'email_verified_at' => null
+                'email_verified_at' => null,
             ]);
 
             try {

@@ -14,17 +14,21 @@ class UserRoleController extends Controller
     {
         $users = UserRepository::query()->whereHas('instructor')->withTrashed()->get();
         $roles = Role::all();
+
         return view('role.index', compact('users', 'roles'));
     }
+
     public function create()
     {
         $roles = Role::all();
+
         return view('role.create', compact('roles'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
-            "role_title" => "required|string",
+            'role_title' => 'required|string',
         ]);
 
         $filteredRoleName = strtolower($request->role_title);
@@ -35,11 +39,9 @@ class UserRoleController extends Controller
             return back()->with('title_exists', 'The name you entered already exists. Please try a different name.');
         }
 
-
-
         Role::create([
-            "name" => $filteredRoleName,
-            "created_by" => now(),
+            'name' => $filteredRoleName,
+            'created_by' => now(),
         ]);
 
         return redirect()->route('role.create')->withSuccess('Role created successfully.');
@@ -57,14 +59,14 @@ class UserRoleController extends Controller
         }
 
         $request->validate([
-            "role_title" => "required|string",
+            'role_title' => 'required|string',
         ]);
 
         $filteredRoleName = strtolower($request->role_title);
 
         $role->update([
-            "name" => $filteredRoleName,
-            "updated_by" => now(),
+            'name' => $filteredRoleName,
+            'updated_by' => now(),
         ]);
 
         return redirect()->route('role.create')->withSuccess('Role updated successfully.');
@@ -76,6 +78,7 @@ class UserRoleController extends Controller
         $roleId = $role->id;
         $permissions = config('acl.permissions');
         $rolePermission = $role->permissions->pluck('name')->toArray();
+
         return view('role.create', compact('roles', 'permissions', 'roleId', 'rolePermission'));
     }
 
@@ -89,12 +92,14 @@ class UserRoleController extends Controller
             return redirect()->route('role.create')->withError('Admin role cannot be updated.');
         }
         $role->syncPermissions($request->permissions);
+
         return redirect()->route('role.create')->withSuccess('Role updated successfully.');
     }
 
     public function assignRoleToUser(Request $request, User $user)
     {
         $user->assignRole($request->role_name);
+
         return redirect()->route('role.index')->withSuccess('Assigned role successfully.');
     }
 
@@ -107,6 +112,7 @@ class UserRoleController extends Controller
         if ($user->hasRole($role->name)) {
             $user->removeRole($role->name);
         }
+
         return redirect()->route('role.index')->withSuccess('Removed role successfully.');
     }
 
@@ -116,12 +122,13 @@ class UserRoleController extends Controller
             return to_route('role.index')->with('error', 'Role not deleted in demo mode');
         }
 
-        if($role->name == 'admin') {
+        if ($role->name == 'admin') {
             return redirect()->route('role.create')->withError('Admin role cannot be deleted.');
         }
 
         $role->delete();
         $role->permissions()->sync([]);
+
         return redirect()->route('role.create')->withSuccess('Role deleted successfully.');
     }
 }

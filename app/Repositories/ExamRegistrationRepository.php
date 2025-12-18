@@ -45,8 +45,10 @@ class ExamRegistrationRepository extends BaseRepository
         $registration = $this->find($id);
         if ($registration) {
             $registration->status = $status;
+
             return $registration->save();
         }
+
         return false;
     }
 }

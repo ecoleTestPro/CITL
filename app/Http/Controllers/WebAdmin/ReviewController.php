@@ -23,7 +23,7 @@ class ReviewController extends Controller
                     });
                 });
             });
-        } else if (auth()->user()->organization || auth()->user()->hasRole('organization') || auth()->user()->is_org) {
+        } elseif (auth()->user()->organization || auth()->user()->hasRole('organization') || auth()->user()->is_org) {
             // Organization case
             $reviewQuery->whereHas('course', function ($query) {
                 $query->whereHas('organization', function ($query) {
@@ -35,12 +35,12 @@ class ReviewController extends Controller
         }
 
         $reviews = $reviewQuery->when($search, function ($query) use ($search) {
-            $query->where('comment', 'like', '%' . $search . '%')
+            $query->where('comment', 'like', '%'.$search.'%')
                 ->OrwhereHas('course', function ($query) use ($search) {
-                    $query->where('title', 'like', '%' . $search . '%');
+                    $query->where('title', 'like', '%'.$search.'%');
                 })
                 ->OrwhereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%');
                 });
         })
             ->withTrashed()
@@ -55,6 +55,7 @@ class ReviewController extends Controller
     public function delete(Review $review)
     {
         $review->delete();
+
         return redirect()->route('review.index')->withSuccess('Review removed');
     }
 }

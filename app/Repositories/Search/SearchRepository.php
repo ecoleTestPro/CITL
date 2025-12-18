@@ -278,7 +278,7 @@ class SearchRepository
         return Glossary::active()
             ->where(function ($q) use ($query) {
                 $q->where('term', 'LIKE', "%{$query}%")
-                  ->orWhere('definition', 'LIKE', "%{$query}%");
+                    ->orWhere('definition', 'LIKE', "%{$query}%");
             })
             ->select('id', 'term', 'definition', 'letter')
             ->orderBy('term')
@@ -290,7 +290,7 @@ class SearchRepository
                     'term' => $item->term,
                     'definition' => $item->definition,
                     'letter' => $item->letter,
-                    'url' => '/glossary#' . strtolower($item->letter),
+                    'url' => '/glossary#'.strtolower($item->letter),
                 ];
             });
     }

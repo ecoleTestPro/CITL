@@ -70,7 +70,7 @@ class EventController extends Controller
 
         $event = $this->eventRepository->update($id, $validated);
 
-        if (!$event) {
+        if (! $event) {
             return redirect()->route('admin.events.index')
                 ->with('error', 'Événement non trouvé.');
         }
@@ -86,7 +86,7 @@ class EventController extends Controller
     {
         $result = $this->eventRepository->delete($id);
 
-        if (!$result) {
+        if (! $result) {
             return redirect()->route('admin.events.index')
                 ->with('error', 'Événement non trouvé.');
         }
@@ -102,7 +102,7 @@ class EventController extends Controller
     {
         $event = $this->eventRepository->toggleActive($id);
 
-        if (!$event) {
+        if (! $event) {
             return redirect()->route('admin.events.index')
                 ->with('error', 'Événement non trouvé.');
         }

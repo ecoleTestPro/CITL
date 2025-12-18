@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Certificate;
 
 use App\Http\Resources\CourseResource;
-use App\Models\Course;
 use App\Repositories\CourseRepository;
 use App\Repositories\EnrollmentRepository;
 use App\Repositories\InstructorRepository;
 use App\Repositories\ManageCertificateRepository;
 use App\Repositories\UserRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Endroid\QrCode\Writer\PngWriter;
 use Endroid\QrCode\QrCode as EndroidQrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Crypt;
 
 class CertificateController extends Controller
 {
@@ -23,7 +21,7 @@ class CertificateController extends Controller
         $courses = CourseRepository::query()
             ->where('certificate_available', '=', true)
             ->whereHas('enrollments', function ($query) {
-                return $query->where('user_id',  auth()->id());
+                return $query->where('user_id', auth()->id());
             })
             ->get();
 
@@ -41,15 +39,15 @@ class CertificateController extends Controller
             ->where('user_id', '=', auth()->user()->id)
             ->first();
 
-        if (!$enrollment) {
+        if (! $enrollment) {
             return $this->json('Enrollment required', null, 403);
         }
 
-        if (!$enrollment->course->certificate_available) {
+        if (! $enrollment->course->certificate_available) {
             return $this->json('Certificate not available', null, 404);
         }
 
-        EnrollmentRepository::update($enrollment, ['is_certificate_downloaded' => true,]);
+        EnrollmentRepository::update($enrollment, ['is_certificate_downloaded' => true]);
 
         $url = [
             'course_id' => $course->id,
@@ -99,11 +97,11 @@ class CertificateController extends Controller
                 ->where('course_progress', '=', 100.00)
                 ->first();
 
-            if (!$enrollment->course->certificate_available) {
+            if (! $enrollment->course->certificate_available) {
                 return $this->json('Certificate not available', null, 404);
             }
 
-            if (!$enrollment) {
+            if (! $enrollment) {
                 return $this->json('certificate does not exist', [], 422);
             }
 
@@ -121,7 +119,6 @@ class CertificateController extends Controller
         }
     }
 
-
     public function generatePdf($studentName, $courseTitle, $instructor, $courseId, $userId)
     {
         $instructorTitle = InstructorRepository::query()->where('user_id', $instructor->id)->first();
@@ -135,7 +132,6 @@ class CertificateController extends Controller
         $writer = new PngWriter;
         $qrCodeImage = $writer->write($qrCode)->getDataUri();
 
-
         $pdf = Pdf::loadView('enrollment.certificate', [
             'studentName' => $studentName,
             'courseTitle' => $courseTitle,
@@ -144,14 +140,13 @@ class CertificateController extends Controller
             'instructor' => $instructor,
             'instructorTitle' => $instructorTitle->title,
             'instructorSignature' => $instructorTitle->user->signaturePath,
-            'qrCodeImage' => $qrCodeImage
+            'qrCodeImage' => $qrCodeImage,
         ]);
 
         $pdf->setPaper('A4', 'landscape');
 
-        return $pdf->stream("$courseTitle" . ".pdf");
+        return $pdf->stream("$courseTitle".'.pdf');
     }
-
 
     public function generatePdfForCheck($studentName, $courseTitle, $instructor, $courseId, $userId)
     {
@@ -175,10 +170,10 @@ class CertificateController extends Controller
             'instructor' => $instructorDetails,
             'instructorTitle' => $instructorTitle->title,
             'instructorSignature' => $instructorTitle->user->signaturePath,
-            'qrCodeImage' => $qrCodeImage
+            'qrCodeImage' => $qrCodeImage,
         ]);
         $pdf->setPaper('A4', 'landscape');
 
-        return $pdf->stream("$courseTitle" . ".pdf");
+        return $pdf->stream("$courseTitle".'.pdf');
     }
 }

@@ -33,8 +33,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $record = $this->find($id);
         if ($record) {
             $record->update($data);
+
             return $record;
         }
+
         return null;
     }
 
@@ -44,6 +46,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         if ($record) {
             return $record->delete();
         }
+
         return false;
     }
 

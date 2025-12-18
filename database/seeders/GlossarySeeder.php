@@ -2681,6 +2681,6 @@ class GlossarySeeder extends Seeder
             Glossary::create(array_merge($glossary, ['is_active' => true]));
         }
 
-        $this->command->info('Glossary seeded with ' . count($glossaries) . ' ISTQB terms (A-Z).');
+        $this->command->info('Glossary seeded with '.count($glossaries).' ISTQB terms (A-Z).');
     }
 }

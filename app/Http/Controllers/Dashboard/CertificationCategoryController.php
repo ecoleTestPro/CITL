@@ -86,7 +86,7 @@ class CertificationCategoryController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:certification_categories,slug,' . $id,
+            'slug' => 'required|string|max:255|unique:certification_categories,slug,'.$id,
             'description' => 'nullable|string',
             'order' => 'nullable|integer',
             'is_active' => 'boolean',
@@ -106,7 +106,7 @@ class CertificationCategoryController extends Controller
         $category = $this->categoryRepository->findById($id);
 
         // Check if category can be deleted
-        if (!$category->can_delete) {
+        if (! $category->can_delete) {
             return redirect()->route('dashboard.certification-categories.index')
                 ->with('error', 'Cette catégorie par défaut ne peut pas être supprimée.');
         }

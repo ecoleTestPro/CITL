@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\EnrollmentResource;
 use App\Http\Resources\SubscriberResource;
-use App\Models\Subscriber;
-use App\Repositories\EnrollmentRepository;
 use App\Repositories\SubscriberRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PlanWiseEnrollController extends Controller

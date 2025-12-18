@@ -8,7 +8,6 @@ use App\Repositories\AccountActivationRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AccountActivationController extends Controller
 {

@@ -25,7 +25,7 @@ class ArticleRepository extends BaseRepository
     public function searchArticles($query)
     {
         return $this->model->where('title', 'like', "%{$query}%")
-                          ->orWhere('content', 'like', "%{$query}%")
-                          ->get();
+            ->orWhere('content', 'like', "%{$query}%")
+            ->get();
     }
 }

@@ -12,7 +12,6 @@ use App\Models\Exam;
 use App\Repositories\CourseRepository;
 use App\Repositories\ExamRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -23,10 +22,10 @@ class ExamController extends Controller
         $query = CourseRepository::query();
 
         // Search filter (applies for all)
-        $query->when($search, function ($q) use ($search, $user) {
+        $query->when($search, function ($q) use ($search) {
             $q->where('title', 'like', "%{$search}%")
-                ->orWhereHas('organization.user', fn($q) => $q->where('name', 'like', "%{$search}%"))
-                ->orWhereHas('instructor.user', fn($q) => $q->where('name', 'like', "%{$search}%"));
+                ->orWhereHas('organization.user', fn ($q) => $q->where('name', 'like', "%{$search}%"))
+                ->orWhereHas('instructor.user', fn ($q) => $q->where('name', 'like', "%{$search}%"));
         });
 
         // Role/organization-specific filtering
@@ -51,7 +50,7 @@ class ExamController extends Controller
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
 
         $exams = ExamRepository::query()->when($search, function ($query) use ($search) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%'.$search.'%');
         })
             ->where('course_id', '=', $course->id)
             ->latest('id')
@@ -59,7 +58,7 @@ class ExamController extends Controller
 
         return view('exam.index', [
             'exams' => $exams,
-            'course' => $course
+            'course' => $course,
         ]);
     }
 
@@ -101,7 +100,6 @@ class ExamController extends Controller
             })
             ->latest('id')
             ->get();
-
 
         return view('exam.edit', [
             'exam' => $exam,

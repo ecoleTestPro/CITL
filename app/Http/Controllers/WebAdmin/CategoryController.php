@@ -17,7 +17,7 @@ class CategoryController extends Controller
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
         $query = CategoryRepository::query()
             ->when($search, function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+                $query->where('title', 'like', '%'.$search.'%');
             });
 
         // Apply organization condition
@@ -53,6 +53,7 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         CategoryRepository::storeByRequest($request);
+
         return to_route('category.index')->with('success', 'Category created');
     }
 
@@ -83,7 +84,6 @@ class CategoryController extends Controller
 
         return redirect()->route('category.index')->withSuccess('Category restored');
     }
-
 
     public function sort(Request $request)
     {

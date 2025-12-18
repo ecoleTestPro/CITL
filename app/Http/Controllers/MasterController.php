@@ -6,7 +6,6 @@ use App\Http\Resources\InstructorResource;
 use App\Http\Resources\PageResource;
 use App\Http\Resources\PaymentGatewayResource;
 use App\Models\PaymentGateway;
-use App\Models\SocialMedia;
 use App\Repositories\CourseRepository;
 use App\Repositories\EnrollmentRepository;
 use App\Repositories\InstructorRepository;
@@ -46,7 +45,7 @@ class MasterController extends Controller
         $whatsappSupport = str_replace(['+', ' ', '-', '(', ')'], '', $setting->whatsapp_support_number);
 
         if ($whatsappSupport) {
-            $whatsappSupportNumber = 'https://api.whatsapp.com/send?phone=' . $whatsappSupport;
+            $whatsappSupportNumber = 'https://api.whatsapp.com/send?phone='.$whatsappSupport;
         }
 
         return $this->json('Master info found', [
@@ -62,16 +61,16 @@ class MasterController extends Controller
                 'currency' => $organization ? $setting->app_currency : config('app.currency'),
                 'default_language' => config('app.locale'),
                 'minimum_amount' => config('app.minimum_amount'),
-                'currency_position' => $organization ? "Left" : $setting->currency_position,
+                'currency_position' => $organization ? 'Left' : $setting->currency_position,
                 'timezone' => config('app.timezone'),
                 'credit_text' => $setting->footer_text,
                 'min_course_price' => 0,
-                'max_course_price' => 0 == $mostValuableCoursePrice ? 1_000 : $mostValuableCoursePrice,
+                'max_course_price' => $mostValuableCoursePrice == 0 ? 1_000 : $mostValuableCoursePrice,
                 'payment_methods' => PaymentGatewayResource::collection(PaymentGateway::query()->where('is_active', '=', true)->get()),
                 'pages' => PageResource::collection(PageRepository::query()->get()),
-                'total_student' =>  UserRepository::getAll()->count(),
-                'total_courses' =>  CourseRepository::getAll()->count(),
-                'total_enrollments' =>  EnrollmentRepository::getAll()->count(),
+                'total_student' => UserRepository::getAll()->count(),
+                'total_courses' => CourseRepository::getAll()->count(),
+                'total_enrollments' => EnrollmentRepository::getAll()->count(),
                 'footer_contact' => $setting->footer_contact_number,
                 'footer_email' => $setting->footer_support_mail,
                 'footer_description' => $setting->footer_description,

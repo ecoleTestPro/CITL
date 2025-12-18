@@ -28,7 +28,7 @@ class InstructorController extends Controller
         if ($authUser->is_org == 1 || $authUser->organization) {
             $instructors = InstructorRepository::query()->when($search, function ($query) use ($search) {
                 $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%')->OrWhere('email', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%')->OrWhere('email', 'like', '%'.$search.'%');
                 });
             })
                 ->where('organization_id', $authUser->organization?->id)
@@ -39,7 +39,7 @@ class InstructorController extends Controller
         } else {
             $instructors = InstructorRepository::query()->when($search, function ($query) use ($search) {
                 $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%')->OrWhere('email', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%')->OrWhere('email', 'like', '%'.$search.'%');
                 });
             })
                 ->withTrashed()
@@ -62,7 +62,7 @@ class InstructorController extends Controller
         if ($authUser->is_org == 1 || $authUser->organization) {
             $instructors = InstructorRepository::query()->when($search, function ($query) use ($search) {
                 $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%')->OrWhere('email', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%')->OrWhere('email', 'like', '%'.$search.'%');
                 });
             })
                 ->where('organization_id', $authUser->organization?->id)
@@ -74,7 +74,7 @@ class InstructorController extends Controller
         } else {
             $instructors = InstructorRepository::query()->when($search, function ($query) use ($search) {
                 $query->whereHas('user', function ($query) use ($search) {
-                    $query->where('name', 'like', '%' . $search . '%')->OrWhere('email', 'like', '%' . $search . '%');
+                    $query->where('name', 'like', '%'.$search.'%')->OrWhere('email', 'like', '%'.$search.'%');
                 });
             })
                 ->whereNull('organization_id')
@@ -84,7 +84,6 @@ class InstructorController extends Controller
                 ->paginate(10)
                 ->withQueryString();
         }
-
 
         return view('instructor.featured', [
             'instructors' => $instructors,
@@ -99,7 +98,7 @@ class InstructorController extends Controller
     public function promote(User $user)
     {
         return view('instructor.promote', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 
@@ -144,11 +143,11 @@ class InstructorController extends Controller
                 'contact' => $user->email,
             ], [
                 'otp_code' => $otp,
-                'token' => $token
+                'token' => $token,
             ]);
 
             $user->update([
-                'email_verified_at' => null
+                'email_verified_at' => null,
             ]);
 
             try {
@@ -161,7 +160,7 @@ class InstructorController extends Controller
 
         $user->update([
             'is_active' => $isActive,
-            'email_verified_at' => $isActive ? now() : NULL,
+            'email_verified_at' => $isActive ? now() : null,
         ]);
 
         return to_route('instructor.index')->with('success', 'Instructor created');
@@ -203,11 +202,11 @@ class InstructorController extends Controller
                 'contact' => $instructor->user->email,
             ], [
                 'otp_code' => $otp,
-                'token' => $token
+                'token' => $token,
             ]);
 
             $instructor->user->update([
-                'email_verified_at' => null
+                'email_verified_at' => null,
             ]);
 
             try {
@@ -220,7 +219,7 @@ class InstructorController extends Controller
 
         $instructor->user->update([
             'is_active' => $isActive,
-            'email_verified_at' => $isActive ? now() : NULL,
+            'email_verified_at' => $isActive ? now() : null,
         ]);
 
         return to_route('instructor.index')->withSuccess('Instructor updated');

@@ -21,7 +21,7 @@ class QuizController extends Controller
 
         $isEnrolled = $quiz->course->enrollments->contains('user_id', $loggedInUser->id);
 
-        if (!$isEnrolled) {
+        if (! $isEnrolled) {
             return $this->json('Cannot start quiz without course enrollment', null, 403);
         }
 
@@ -45,18 +45,18 @@ class QuizController extends Controller
             'user_id' => $loggedInUser->id,
             'seen_question_ids' => json_encode([$question->id]),
             'last_answered_at' => now(),
-            'obtained_mark' => 0
+            'obtained_mark' => 0,
         ]);
 
         return $this->json('Quiz started successfully', [
             'quiz_session' => QuizSessionResource::make($quizSession),
             'previous_was_correct' => null,
             'question' => QuestionResource::make($question),
-            'question_count' => $questions->count()
+            'question_count' => $questions->count(),
         ], 201);
     }
 
-public function submit(QuizSession $quizSession, QuizSubmitRequest $request)
+    public function submit(QuizSession $quizSession, QuizSubmitRequest $request)
     {
         /** @var User */
         $loggedInUser = auth()->user();
@@ -75,11 +75,10 @@ public function submit(QuizSession $quizSession, QuizSubmitRequest $request)
             ->where('quiz_id', $quiz->id)
             ->first();
 
-
         if (
-            !$question
+            ! $question
             || in_array($question->id, $answeredQuestionIds)
-            || !in_array($question->id, $seenQuestionIds)
+            || ! in_array($question->id, $seenQuestionIds)
         ) {
             return $this->json('Invalid question', null, 404);
         }
@@ -102,9 +101,9 @@ public function submit(QuizSession $quizSession, QuizSubmitRequest $request)
         QuizSessionRepository::update($quizSession, [
             'seen_question_ids' => $nextQuestion ? json_encode(array_merge($seenQuestionIds, [$nextQuestion?->id])) : json_encode($seenQuestionIds),
             'answered_question_ids' => json_encode(array_merge($answeredQuestionIds, [$question->id])),
-            'obtained_mark' => !$answer['skip'] && $isCorrect ? $quizSession->obtained_mark + $quiz->mark_per_question : $quizSession->obtained_mark,
-            'right_answer_count' => !$answer['skip'] && $isCorrect ? $quizSession->right_answer_count + 1 : $quizSession->right_answer_count,
-            'wrong_answer_count' => !$answer['skip'] && !$isCorrect ? $quizSession->wrong_answer_count + 1 : $quizSession->wrong_answer_count,
+            'obtained_mark' => ! $answer['skip'] && $isCorrect ? $quizSession->obtained_mark + $quiz->mark_per_question : $quizSession->obtained_mark,
+            'right_answer_count' => ! $answer['skip'] && $isCorrect ? $quizSession->right_answer_count + 1 : $quizSession->right_answer_count,
+            'wrong_answer_count' => ! $answer['skip'] && ! $isCorrect ? $quizSession->wrong_answer_count + 1 : $quizSession->wrong_answer_count,
             'skipped_answer_count' => $answer['skip'] ? $quizSession->skipped_answer_count + 1 : $quizSession->skipped_answer_count,
             'last_answered_at' => now(),
         ]);
@@ -112,7 +111,7 @@ public function submit(QuizSession $quizSession, QuizSubmitRequest $request)
         return $this->json($responseMessage, [
             'quiz_session' => QuizSessionResource::make($quizSession),
             'previous_was_correct' => $isCorrect,
-            'question' => $nextQuestion ? QuestionResource::make($nextQuestion) : null
+            'question' => $nextQuestion ? QuestionResource::make($nextQuestion) : null,
         ], 201);
     }
 }

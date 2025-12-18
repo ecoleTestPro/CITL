@@ -6,10 +6,8 @@ use App\Enum\MediaTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ManageCertificateRequest;
 use App\Models\Frame;
-use App\Models\ManageCertificate;
 use App\Repositories\FrameRepository;
 use App\Repositories\ManageCertificateRepository;
-use Illuminate\Http\Request;
 
 class ManageCertificateController extends Controller
 {
@@ -20,6 +18,7 @@ class ManageCertificateController extends Controller
     {
         $frames = FrameRepository::query()->get();
         $certificate = ManageCertificateRepository::query()->latest('id')->first();
+
         return view('certificateConfigaration.index', compact('certificate', 'frames'));
     }
 
@@ -56,6 +55,7 @@ class ManageCertificateController extends Controller
     {
         $frame = Frame::findOrFail($id);
         $frame->delete();
+
         return to_route('certificate.index')->withSuccess('Frame deleted successfully');
     }
 }

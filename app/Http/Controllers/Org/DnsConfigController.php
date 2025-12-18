@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Org;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\OrganizationPlanRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\ServerConfigurationRepository;
 use Illuminate\Http\Request;
@@ -19,7 +18,7 @@ class DnsConfigController extends Controller
 
         $server = ServerConfigurationRepository::query()->first();
 
-        return view('organization.dns.index', compact('domain', 'server'));;
+        return view('organization.dns.index', compact('domain', 'server'));
     }
 
     public function store(Request $request)

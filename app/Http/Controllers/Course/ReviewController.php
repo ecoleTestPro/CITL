@@ -19,7 +19,7 @@ class ReviewController extends Controller
             ->where('user_id', $user->id)
             ->exists();
 
-        if (!$isEnrolled) {
+        if (! $isEnrolled) {
             return $this->json('Enrollment required', null, 403);
         }
 
@@ -35,7 +35,7 @@ class ReviewController extends Controller
         $review = ReviewRepository::storeByRequest($request, $course);
 
         return $this->json('Review created successfully', [
-            'review' => ReviewResource::make($review)
+            'review' => ReviewResource::make($review),
         ]);
     }
 }

@@ -18,6 +18,7 @@ class GlossaryRepository extends BaseRepository
     public function getAllActive(string $locale = 'fr')
     {
         $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+
         return $this->model->active()->orderBy('letter')->orderBy($termColumn)->get();
     }
 
@@ -27,6 +28,7 @@ class GlossaryRepository extends BaseRepository
     public function getByLetter($letter, string $locale = 'fr')
     {
         $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+
         return $this->model->byLetter($letter)->active()->orderBy($termColumn)->get();
     }
 
@@ -36,12 +38,13 @@ class GlossaryRepository extends BaseRepository
     public function search($term, string $locale = 'fr')
     {
         $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+
         return $this->model
             ->where(function ($query) use ($term) {
-                $query->where('term_en', 'like', '%' . $term . '%')
-                    ->orWhere('term_fr', 'like', '%' . $term . '%')
-                    ->orWhere('definition_en', 'like', '%' . $term . '%')
-                    ->orWhere('definition_fr', 'like', '%' . $term . '%');
+                $query->where('term_en', 'like', '%'.$term.'%')
+                    ->orWhere('term_fr', 'like', '%'.$term.'%')
+                    ->orWhere('definition_en', 'like', '%'.$term.'%')
+                    ->orWhere('definition_fr', 'like', '%'.$term.'%');
             })
             ->active()
             ->orderBy('letter')
@@ -55,6 +58,7 @@ class GlossaryRepository extends BaseRepository
     public function getAllGroupedByLetter(string $locale = 'fr')
     {
         $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+
         return $this->model->active()->orderBy('letter')->orderBy($termColumn)->get()->groupBy('letter');
     }
 
@@ -71,8 +75,8 @@ class GlossaryRepository extends BaseRepository
 
         if (isset($filters['search'])) {
             $query->where(function ($q) use ($filters) {
-                $q->where('term_en', 'like', '%' . $filters['search'] . '%')
-                    ->orWhere('term_fr', 'like', '%' . $filters['search'] . '%');
+                $q->where('term_en', 'like', '%'.$filters['search'].'%')
+                    ->orWhere('term_fr', 'like', '%'.$filters['search'].'%');
             });
         }
 
@@ -81,6 +85,7 @@ class GlossaryRepository extends BaseRepository
         }
 
         $termColumn = $locale === 'fr' ? 'term_fr' : 'term_en';
+
         return $query->orderBy('letter')->orderBy($termColumn)->paginate($perPage);
     }
 }

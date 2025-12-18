@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\WebAdmin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InvoiceRequest;
 use App\Models\Invoice;
 use App\Models\PaymentGateway;
+use App\Repositories\CourseRepository;
+use App\Repositories\EnrollmentRepository;
+use App\Repositories\InvoicesRepository;
+use App\Repositories\SettingRepository;
+use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Mpdf\Config\ConfigVariables;
 use Mpdf\Config\FontVariables;
 use Mpdf\Mpdf;
-use App\Repositories\CourseRepository;
-use App\Repositories\EnrollmentRepository;
-use App\Repositories\GenerateInvoiceRepository;
-use App\Repositories\SettingRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\InvoicesRepository;
 
 class InvoicesController extends Controller
 {
@@ -32,12 +31,12 @@ class InvoicesController extends Controller
             ->with(['user', 'courses'])
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($query) use ($search) {
-                    $query->whereRaw("lower(invoice_token) like ?", ["%{$search}%"])
+                    $query->whereRaw('lower(invoice_token) like ?', ["%{$search}%"])
                         ->orWhereHas('user', function ($query) use ($search) {
-                            $query->whereRaw("lower(name) like ?", ["%{$search}%"]);
+                            $query->whereRaw('lower(name) like ?', ["%{$search}%"]);
                         })
                         ->orWhereHas('courses', function ($query) use ($search) {
-                            $query->whereRaw("lower(title) like ?", ["%{$search}%"]);
+                            $query->whereRaw('lower(title) like ?', ["%{$search}%"]);
                         });
                 });
             })
@@ -53,9 +52,10 @@ class InvoicesController extends Controller
             ->orderBy('created_at', 'desc');
 
         return view('invoice.index', [
-            'invoices' => $invoices->paginate(20)->withQueryString()
+            'invoices' => $invoices->paginate(20)->withQueryString(),
         ]);
     }
+
     public function restoreTrash(Request $request)
     {
         $search = $request->cat_search ? strtolower($request->cat_search) : null;
@@ -78,9 +78,10 @@ class InvoicesController extends Controller
             ->withQueryString();
 
         return view('invoice.restore', [
-            'invoices' => $invoices
+            'invoices' => $invoices,
         ]);
     }
+
     public function create()
     {
         $courses = CourseRepository::query()->where('is_active', true)->get();
@@ -88,17 +89,17 @@ class InvoicesController extends Controller
 
         return view('invoice.create', [
             'courses' => $courses,
-            'users' => $users
+            'users' => $users,
         ]);
     }
+
     public function store(InvoiceRequest $request)
     {
-        $invoiceToken = 'IV' . '-' . $request->user_id . '-' . Str::random(3);
+        $invoiceToken = 'IV'.'-'.$request->user_id.'-'.Str::random(3);
 
         if (Invoice::where('invoice_token', $invoiceToken)->exists()) {
             return back()->withError('sorry cannot create invoice, please refresh the page');
         }
-
 
         $alreadyEnrolledCourseIds = EnrollmentRepository::query()
             ->where('user_id', $request->user_id)
@@ -110,6 +111,7 @@ class InvoicesController extends Controller
             // Fetch the course names
             $courseNames = CourseRepository::query()->whereIn('id', $alreadyEnrolledCourseIds)->pluck('title')->toArray();
             $courseList = implode(', ', $courseNames);
+
             return back()->withError("User already enrolled in the following course(s): $courseList");
         }
 
@@ -160,7 +162,7 @@ class InvoicesController extends Controller
         return view('invoice.edit', [
             'invoice' => $invoice,
             'courses' => $courses,
-            'users' => $users
+            'users' => $users,
         ]);
     }
 
@@ -284,7 +286,7 @@ class InvoicesController extends Controller
         $mPdf->WriteHTML($view);
 
         // Output the PDF as a download
-        return $mPdf->Output('invoice-' . $invoice->invoice_token . '.pdf', 'D');
+        return $mPdf->Output('invoice-'.$invoice->invoice_token.'.pdf', 'D');
 
         // Output the PDF as a stream
         // return $mPdf->Output('invoice-' . $invoice->invoice_token . '.pdf', 'I');

@@ -50,10 +50,12 @@ class EventRepository extends BaseRepository
     {
         $event = $this->find($id);
         if ($event) {
-            $event->is_active = !$event->is_active;
+            $event->is_active = ! $event->is_active;
             $event->save();
+
             return $event;
         }
+
         return null;
     }
 

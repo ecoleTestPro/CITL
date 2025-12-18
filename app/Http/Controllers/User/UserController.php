@@ -13,11 +13,9 @@ use App\Repositories\GuestRepository;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
 {
@@ -49,7 +47,7 @@ class UserController extends Controller
         try {
             MailSendEvent::dispatch($code, $newUser->email);
         } catch (\Throwable $th) {
-            //throw $th;
+            // throw $th;
         }
 
         if ($request->guest_id) {
@@ -80,7 +78,7 @@ class UserController extends Controller
         // $token = JWTAuth::attempt($validatedData);
 
         try {
-            if (!$token = JWTAuth::attempt($validatedData)) {
+            if (! $token = JWTAuth::attempt($validatedData)) {
                 return $this->json('Invalid credentials', null, 403);
             }
         } catch (JWTException $e) {
@@ -104,7 +102,6 @@ class UserController extends Controller
             }
         }
 
-
         if ($request->fcm_token) {
             FcmDeviceTokenRepository::create([
                 'user_id' => $user->id,
@@ -117,7 +114,7 @@ class UserController extends Controller
         }
 
         return $this->json('Login successful', [
-            'user'  => UserResource::make($user),
+            'user' => UserResource::make($user),
             'token' => $token,
         ]);
     }
@@ -136,7 +133,7 @@ class UserController extends Controller
 
         // Check current password if provided
         if ($request->current_password) {
-            if (!Hash::check($request->current_password, $user->password)) {
+            if (! Hash::check($request->current_password, $user->password)) {
                 return $this->json('password mismatch', ['current_password_error' => 'Current password is incorrect'], 401);
             }
         }
@@ -172,6 +169,7 @@ class UserController extends Controller
         /** @var User */
         $user = auth()->user();
         $user->delete();
+
         return $this->json('User deleted', null, 200);
     }
 
@@ -182,7 +180,7 @@ class UserController extends Controller
     {
         $guest = GuestRepository::query()->where('unique_id', '=', $guestId)->first();
 
-        if (!$guest) {
+        if (! $guest) {
             return;
         }
 

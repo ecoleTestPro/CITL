@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Org;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrganizationPlan;
-use App\Models\OrganizationPlanSubscription;
 use App\Models\PaymentGateway;
 use App\Repositories\OrganizationPlanRepository;
 use App\Repositories\OrganizationPlanSubscriptionRepository;
@@ -18,6 +17,7 @@ class OrgDnsPricingController extends Controller
     {
         $plans = OrganizationPlanRepository::query()->where('is_active', true)->get() ?? [];
         $paymentGateways = PaymentGateway::where('is_active', true)->get() ?? [];
+
         return view('organization.dnsPlan.index', compact('plans', 'paymentGateways'));
     }
 

@@ -19,7 +19,7 @@ class ContentController extends Controller
         $content = ContentRepository::storeByRequest($request);
 
         return $this->json('Content created successfully', [
-            'content' => ContentResource::make($content)
+            'content' => ContentResource::make($content),
         ], 201);
     }
 
@@ -32,7 +32,7 @@ class ContentController extends Controller
         $updatedContent = ContentRepository::find($content->id);
 
         return $this->json('Content updated successfully', [
-            'content' => ContentResource::make($updatedContent)
+            'content' => ContentResource::make($updatedContent),
         ]);
     }
 

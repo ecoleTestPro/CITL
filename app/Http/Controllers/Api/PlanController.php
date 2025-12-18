@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\PlanResource;
 use App\Models\Plan;
 use App\Repositories\PlanRepository;
-use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {

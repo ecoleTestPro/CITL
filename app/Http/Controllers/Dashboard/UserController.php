@@ -65,14 +65,14 @@ class UserController extends Controller
     {
         $user = $this->userRepo->find($id);
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('dashboard.users.index')
                 ->with('error', 'Utilisateur non trouvé.');
         }
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.$id,
             'password' => 'nullable|string|min:8|confirmed',
             'role' => 'required|string|exists:roles,name',
         ]);
@@ -98,7 +98,7 @@ class UserController extends Controller
     {
         $user = $this->userRepo->find($id);
 
-        if (!$user) {
+        if (! $user) {
             return redirect()->route('dashboard.users.index')
                 ->with('error', 'Utilisateur non trouvé.');
         }

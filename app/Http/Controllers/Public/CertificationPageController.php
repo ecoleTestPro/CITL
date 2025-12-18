@@ -18,13 +18,13 @@ class CertificationPageController extends Controller
     {
         $category = $this->categoryRepo->findBySlug($categorySlug);
 
-        if (!$category || !$category->is_active) {
+        if (! $category || ! $category->is_active) {
             abort(404);
         }
 
         $certifications = $this->certificationRepo->getByCategorySlug($categorySlug);
 
-        return Inertia::render('public/certifications/' . $categorySlug, [
+        return Inertia::render('public/certifications/'.$categorySlug, [
             'category' => $category,
             'certifications' => $certifications,
         ]);

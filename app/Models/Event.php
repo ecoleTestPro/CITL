@@ -34,9 +34,9 @@ class Event extends Model
     public function getPeriodAttribute(): string
     {
         if ($this->end_date) {
-            return $this->start_date->format('M Y') . ' - ' . $this->end_date->format('M Y');
+            return $this->start_date->format('M Y').' - '.$this->end_date->format('M Y');
         }
 
-        return $this->start_date->format('M Y') . ' - Present';
+        return $this->start_date->format('M Y').' - Present';
     }
 }

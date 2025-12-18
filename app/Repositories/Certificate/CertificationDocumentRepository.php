@@ -41,8 +41,10 @@ class CertificationDocumentRepository extends BaseRepository
         $document = $this->find($documentId);
         if ($document) {
             $document->tags()->syncWithoutDetaching($tagIds);
+
             return $document->load('tags');
         }
+
         return null;
     }
 
@@ -54,8 +56,10 @@ class CertificationDocumentRepository extends BaseRepository
         $document = $this->find($documentId);
         if ($document) {
             $document->tags()->detach($tagId);
+
             return $document->load('tags');
         }
+
         return null;
     }
 }

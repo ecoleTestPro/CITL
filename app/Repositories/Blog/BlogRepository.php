@@ -25,22 +25,22 @@ class BlogRepository extends BaseRepository
             ->latest();
 
         // Filter by category
-        if (!empty($filters['category_id'])) {
+        if (! empty($filters['category_id'])) {
             $query->byCategory($filters['category_id']);
         }
 
         // Filter by tag
-        if (!empty($filters['tag'])) {
+        if (! empty($filters['tag'])) {
             $query->byTag($filters['tag']);
         }
 
         // Search
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
 
         // Filter by month/year
-        if (!empty($filters['month']) && !empty($filters['year'])) {
+        if (! empty($filters['month']) && ! empty($filters['year'])) {
             $query->whereYear('published_at', $filters['year'])
                 ->whereMonth('published_at', $filters['month']);
         }
@@ -113,6 +113,7 @@ class BlogRepository extends BaseRepository
                 ->map(function ($item) {
                     $item->year = (int) $item->year;
                     $item->month = (int) $item->month;
+
                     return $item;
                 });
         } else {
@@ -166,12 +167,12 @@ class BlogRepository extends BaseRepository
         }
 
         // Filter by category
-        if (!empty($filters['category_id'])) {
+        if (! empty($filters['category_id'])) {
             $query->where('blog_category_id', $filters['category_id']);
         }
 
         // Search
-        if (!empty($filters['search'])) {
+        if (! empty($filters['search'])) {
             $query->search($filters['search']);
         }
 

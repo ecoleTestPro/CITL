@@ -61,7 +61,8 @@ class AccreditedOrganizationController extends Controller
 
         // Handle logo upload
         if ($request->hasFile('logo')) {
-            $validated['logo'] = $request->file('logo')->store('organizations', 'public');
+            $logoPath = $request->file('logo')->store('organizations', 'public');
+            $validated['logo'] = '/storage/'.$logoPath;
         }
 
         $validated['is_active'] = $validated['is_active'] ?? true;
@@ -101,9 +102,12 @@ class AccreditedOrganizationController extends Controller
         if ($request->hasFile('logo')) {
             // Delete old logo if exists
             if ($organization->logo) {
-                Storage::disk('public')->delete($organization->logo);
+                // Remove /storage/ prefix for deletion
+                $oldPath = str_replace('/storage/', '', $organization->logo);
+                Storage::disk('public')->delete($oldPath);
             }
-            $validated['logo'] = $request->file('logo')->store('organizations', 'public');
+            $logoPath = $request->file('logo')->store('organizations', 'public');
+            $validated['logo'] = '/storage/'.$logoPath;
         }
 
         $this->organizationRepo->update($id, $validated);
@@ -126,7 +130,9 @@ class AccreditedOrganizationController extends Controller
 
         // Delete logo if exists
         if ($organization->logo) {
-            Storage::disk('public')->delete($organization->logo);
+            // Remove /storage/ prefix for deletion
+            $logoPath = str_replace('/storage/', '', $organization->logo);
+            Storage::disk('public')->delete($logoPath);
         }
 
         $this->organizationRepo->delete($id);

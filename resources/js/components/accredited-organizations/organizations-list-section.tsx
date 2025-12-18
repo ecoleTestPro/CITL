@@ -22,14 +22,21 @@ interface AccreditedOrganization {
 function OrganizationName({ org }: { org: AccreditedOrganization }) {
     const { t } = useTranslation();
 
+    // Helper to get the correct logo URL
+    const getLogoSrc = (logo: string) => {
+        if (logo.startsWith('http') || logo.startsWith('https')) {
+            return logo;
+        }
+        if (logo.startsWith('/storage')) {
+            return logo;
+        }
+        return `/storage/${logo}`;
+    };
+
     return (
         <div className="flex items-start gap-3">
             {org.logo ? (
-                (() => {
-                    const src = String(org.logo || '');
-                    const logoSrc = src.startsWith('http') || src.startsWith('https') ? src : `/storage/${src}`;
-                    return <img src={logoSrc} alt={org.name} className="h-10 w-10 rounded-lg object-contain" />;
-                })()
+                <img src={getLogoSrc(org.logo)} alt={org.name} className="h-10 w-10 rounded-lg object-contain" />
             ) : (
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-citl-orange/10">
                     <Globe className="h-5 w-5 text-citl-orange" />

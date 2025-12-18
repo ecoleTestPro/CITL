@@ -18,6 +18,17 @@ interface OrganizationCardProps {
     organization: AccreditedOrganization;
 }
 
+// Helper to get the correct image URL
+function getImageSrc(src: string): string {
+    if (src.startsWith('http') || src.startsWith('https')) {
+        return src;
+    }
+    if (src.startsWith('/storage')) {
+        return src;
+    }
+    return `/storage/${src}`;
+}
+
 export function OrganizationCard({ organization }: OrganizationCardProps) {
     const { t } = useTranslation();
 
@@ -27,7 +38,7 @@ export function OrganizationCard({ organization }: OrganizationCardProps) {
                 <div className="mb-4 flex items-start gap-4">
                     {organization.logo ? (
                         <img
-                            src={`/storage/${organization.logo}`}
+                            src={getImageSrc(organization.logo)}
                             alt={organization.name}
                             className="h-16 w-16 rounded-lg object-contain"
                         />

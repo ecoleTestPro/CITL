@@ -149,14 +149,16 @@ export default function AccreditedOrganizationsIndex({ organizations, filters, c
             ),
             cell: ({ row }) => {
                 const org = row.original;
+                // Helper to get the correct image URL
+                const getImageSrc = (src: string) => {
+                    if (src.startsWith('http') || src.startsWith('https')) return src;
+                    if (src.startsWith('/storage')) return src;
+                    return `/storage/${src}`;
+                };
                 return (
                     <div className="flex items-center gap-3">
                         {org.logo ? (
-                            (() => {
-                                const src = String(org.logo || '');
-                                const logoSrc = src.startsWith('http') || src.startsWith('https') ? src : `/storage/${src}`;
-                                return <img src={logoSrc} alt={org.name} className="h-10 w-10 rounded object-cover" />;
-                            })()
+                            <img src={getImageSrc(org.logo)} alt={org.name} className="h-10 w-10 rounded object-cover" />
                         ) : (
                             <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/10 text-primary">
                                 <Globe className="h-5 w-5" />

@@ -30,16 +30,24 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
             header: 'Image',
             cell: ({ row }) => {
                 const image = row.getValue('featured_image') as string | null;
-                return image ? (
+                if (!image) {
+                    return (
+                        <div className="flex h-12 w-16 items-center justify-center rounded bg-gray-100 dark:bg-gray-700">
+                            <span className="text-xs text-gray-400">N/A</span>
+                        </div>
+                    );
+                }
+                // Handle different image path formats
+                let imageSrc = image;
+                if (!image.startsWith('http') && !image.startsWith('/storage')) {
+                    imageSrc = `/storage/${image}`;
+                }
+                return (
                     <img
-                        src={image.startsWith('http') ? image : `/storage/${image}`}
+                        src={imageSrc}
                         alt={row.original.title_fr}
                         className="h-12 w-16 rounded object-cover"
                     />
-                ) : (
-                    <div className="flex h-12 w-16 items-center justify-center rounded bg-gray-100 dark:bg-gray-700">
-                        <span className="text-xs text-gray-400">N/A</span>
-                    </div>
                 );
             },
         },

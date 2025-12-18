@@ -4,9 +4,11 @@ import { useState } from 'react';
 
 interface Category {
     id: number;
-    name: string;
+    name_fr: string;
+    name_en: string | null;
     slug: string;
-    description: string | null;
+    description_fr: string | null;
+    description_en: string | null;
     order: number;
     is_active: boolean;
     can_delete: boolean;
@@ -19,7 +21,11 @@ interface Props {
 export default function CategoriesIndex({ categories }: Props) {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const filteredCategories = categories.filter((cat) => cat.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filteredCategories = categories.filter(
+        (cat) =>
+            cat.name_fr.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (cat.name_en && cat.name_en.toLowerCase().includes(searchTerm.toLowerCase())),
+    );
 
     return (
         <AppLayout>
@@ -50,7 +56,8 @@ export default function CategoriesIndex({ categories }: Props) {
                         <table className="w-full">
                             <thead className="border-b border-gray-200 dark:border-gray-700">
                                 <tr>
-                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Nom</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Nom (FR)</th>
+                                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Nom (EN)</th>
                                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Slug</th>
                                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Ordre</th>
                                     <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900 dark:text-gray-100">Statut</th>
@@ -60,7 +67,7 @@ export default function CategoriesIndex({ categories }: Props) {
                             <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                                 {filteredCategories.length === 0 ? (
                                     <tr>
-                                        <td colSpan={5} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
+                                        <td colSpan={6} className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
                                             Aucune catégorie trouvée
                                         </td>
                                     </tr>
@@ -69,9 +76,20 @@ export default function CategoriesIndex({ categories }: Props) {
                                         <tr key={category.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
                                             <td className="px-4 py-4">
                                                 <div>
-                                                    <p className="font-medium text-gray-900 dark:text-gray-100">{category.name}</p>
-                                                    {category.can_delete}
-                                                    {category.description && <p className="text-sm text-gray-500 dark:text-gray-400">{category.description}</p>}
+                                                    <p className="font-medium text-gray-900 dark:text-gray-100">{category.name_fr}</p>
+                                                    {category.description_fr && (
+                                                        <p className="max-w-xs truncate text-sm text-gray-500 dark:text-gray-400">{category.description_fr}</p>
+                                                    )}
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-4">
+                                                <div>
+                                                    <p className="font-medium text-gray-900 dark:text-gray-100">
+                                                        {category.name_en || <span className="text-gray-400">-</span>}
+                                                    </p>
+                                                    {category.description_en && (
+                                                        <p className="max-w-xs truncate text-sm text-gray-500 dark:text-gray-400">{category.description_en}</p>
+                                                    )}
                                                 </div>
                                             </td>
                                             <td className="px-4 py-4 text-gray-900 dark:text-gray-100">{category.slug}</td>

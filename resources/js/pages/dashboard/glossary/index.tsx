@@ -23,8 +23,10 @@ import toast from 'react-hot-toast';
 
 interface Glossary {
     id: number;
-    term: string;
-    definition: string;
+    term_en: string;
+    term_fr: string | null;
+    definition_en: string;
+    definition_fr: string | null;
     category: string | null;
     letter: string;
     order: number;
@@ -146,19 +148,40 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
             cell: ({ row }) => <div className="text-center text-lg font-bold">{row.getValue('letter')}</div>,
         },
         {
-            accessorKey: 'term',
+            accessorKey: 'term_en',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
-                    Terme
+                    Terme (EN)
                     <ArrowUpDown className="h-4 w-4" />
                 </button>
             ),
-            cell: ({ row }) => <div className="font-medium">{row.getValue('term')}</div>,
+            cell: ({ row }) => <div className="font-medium">{row.getValue('term_en')}</div>,
         },
         {
-            accessorKey: 'definition',
-            header: 'Définition',
-            cell: ({ row }) => <div className="max-w-md truncate text-sm text-gray-600 dark:text-gray-400">{row.getValue('definition')}</div>,
+            accessorKey: 'term_fr',
+            header: ({ column }) => (
+                <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
+                    Terme (FR)
+                    <ArrowUpDown className="h-4 w-4" />
+                </button>
+            ),
+            cell: ({ row }) => {
+                const termFr = row.getValue('term_fr') as string | null;
+                return <div className="font-medium">{termFr || <span className="text-gray-400">-</span>}</div>;
+            },
+        },
+        {
+            accessorKey: 'definition_en',
+            header: 'Définition (EN)',
+            cell: ({ row }) => <div className="max-w-xs truncate text-sm text-gray-600 dark:text-gray-400">{row.getValue('definition_en')}</div>,
+        },
+        {
+            accessorKey: 'definition_fr',
+            header: 'Définition (FR)',
+            cell: ({ row }) => {
+                const defFr = row.getValue('definition_fr') as string | null;
+                return <div className="max-w-xs truncate text-sm text-gray-600 dark:text-gray-400">{defFr || <span className="text-gray-400">-</span>}</div>;
+            },
         },
         {
             accessorKey: 'category',
@@ -359,7 +382,7 @@ export default function GlossaryIndex({ glossaries, filters }: Props) {
                 onClose={() => setShowDeleteModal(false)}
                 onConfirm={handleDelete}
                 title="Supprimer le terme"
-                message={`Êtes-vous sûr de vouloir supprimer le terme "${glossaryToDelete?.term}" ? Cette action est irréversible.`}
+                message={`Êtes-vous sûr de vouloir supprimer le terme "${glossaryToDelete?.term_en}" ? Cette action est irréversible.`}
             />
 
             <GlossaryFormModal isOpen={showFormModal} onClose={closeFormModal} glossary={glossaryToEdit} onSuccess={handleFormSuccess} />

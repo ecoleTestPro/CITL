@@ -54,10 +54,10 @@ function ExamFees() {
     ];
 
     const feeData = [
-        { level: t('exams.fees.level_foundation'), flex: <PriceWithTooltip euroAmount={100} />, pearson: <PriceWithTooltip euroAmount={100} /> },
-        { level: t('exams.fees.level_advanced'), flex: <PriceWithTooltip euroAmount={120} />, pearson: <PriceWithTooltip euroAmount={120} /> },
-        { level: t('exams.fees.level_specialist'), flex: <PriceWithTooltip euroAmount={120} />, pearson: <PriceWithTooltip euroAmount={120} /> },
-        { level: t('exams.fees.level_expert'), flex: <PriceWithTooltip euroAmount={155} />, pearson: <PriceWithTooltip euroAmount={155} /> },
+        { level: t('exams.fees.level_foundation'), flex: <PriceWithTooltip euroAmount={185} />, pearson: <PriceWithTooltip euroAmount={185} /> },
+        { level: t('exams.fees.level_advanced'), flex: <PriceWithTooltip euroAmount={185} />, pearson: <PriceWithTooltip euroAmount={185} /> },
+        { level: t('exams.fees.level_specialist'), flex: <PriceWithTooltip euroAmount={185} />, pearson: <PriceWithTooltip euroAmount={185} /> },
+        { level: t('exams.fees.level_expert'), flex: <PriceWithTooltip euroAmount={185} />, pearson: <PriceWithTooltip euroAmount={185} /> },
     ];
 
     return (

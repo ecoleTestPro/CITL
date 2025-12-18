@@ -81,7 +81,10 @@ export default function Timeline({ events = [] }: TimelineProps) {
                                     )}
                                 </div>
                             </div>
-                            <p className="text-sm text-pretty text-muted-foreground sm:text-base">{event.description}</p>
+                            <div
+                                className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground sm:prose-base prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
+                                dangerouslySetInnerHTML={{ __html: event.description }}
+                            />
                             {event.tags && event.tags.length > 0 && (
                                 <div className="flex flex-wrap gap-2">
                                     {event.tags.map((tag) => (

@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { MiniRichTextEditor } from '@/components/ui/mini-rich-text-editor';
 import { Switch } from '@/components/ui/switch';
-import { Textarea } from '@/components/ui/textarea';
 import { router } from '@inertiajs/react';
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -172,7 +172,12 @@ export function EventFormModal({ isOpen, onClose, event, onSuccess }: Props) {
                         <Label htmlFor="description">
                             Description <span className="text-red-500">*</span>
                         </Label>
-                        <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description de l'événement" rows={4} required />
+                        <MiniRichTextEditor
+                            content={description}
+                            onChange={setDescription}
+                            placeholder="Description de l'événement..."
+                            minHeight="120px"
+                        />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">

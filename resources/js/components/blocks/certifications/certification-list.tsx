@@ -47,17 +47,29 @@ function CertificationList({ certifications, categories = [], categorySlug }: Ce
 
         const ctx = gsap.context(() => {
             const cards = sectionRef.current?.querySelectorAll('article') ?? [];
-            gsap.from(cards, {
-                y: 40,
-                opacity: 0,
-                duration: 0.6,
-                stagger: 0.08,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: 'top 85%',
+
+            // Kill any existing animations on these cards first
+            gsap.killTweensOf(cards);
+
+            // Set initial state immediately to avoid flash of invisible content
+            gsap.set(cards, { opacity: 1, y: 0 });
+
+            // Animate from slightly offset position
+            gsap.fromTo(
+                cards,
+                {
+                    y: 20,
+                    opacity: 0.3,
                 },
-            });
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.4,
+                    stagger: 0.05,
+                    ease: 'power2.out',
+                    clearProps: 'all', // Clear inline styles after animation so CSS takes over
+                },
+            );
         }, sectionRef);
 
         return () => ctx.revert();

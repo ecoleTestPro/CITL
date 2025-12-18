@@ -76,6 +76,7 @@
         "globals": "^15.14.0",
         "gsap": "^3.13.0",
         "i18next": "^25.6.3",
+        "i18next-http-backend": "^3.0.2",
         "input-otp": "^1.4.2",
         "laravel-vite-plugin": "^2.0",
         "lucide-react": "^0.475.0",

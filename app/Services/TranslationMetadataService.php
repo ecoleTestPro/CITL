@@ -10,6 +10,55 @@ class TranslationMetadataService
     public static function getFieldMetadata(): array
     {
         return [
+            // HeroHome component keys
+            'hero.foundedDate' => [
+                'label' => 'Date de fondation',
+                'description' => 'La date de fondation affichée dans le badge du hero',
+                'type' => 'text',
+                'maxLength' => 50,
+                'placeholder' => 'Ex: Fondé le 24 octobre 2025',
+                'section' => 'Hero Section',
+            ],
+            'hero.title' => [
+                'label' => 'Titre principal',
+                'description' => 'Le titre principal du hero (HeroHome)',
+                'type' => 'text',
+                'maxLength' => 150,
+                'placeholder' => 'Ex: Comité Ivoirien des Tests Logiciels',
+                'section' => 'Hero Section',
+            ],
+            'hero.description' => [
+                'label' => 'Description',
+                'description' => 'Le texte descriptif sous le titre du hero',
+                'type' => 'richtext',
+                'maxLength' => 500,
+                'placeholder' => 'Décrivez votre organisation...',
+                'section' => 'Hero Section',
+            ],
+            'hero.registerExam' => [
+                'label' => 'Bouton inscription examen',
+                'description' => 'Le texte du bouton pour s\'inscrire à un examen',
+                'type' => 'text',
+                'maxLength' => 50,
+                'placeholder' => 'Ex: S\'inscrire à un examen',
+                'section' => 'Hero Section',
+            ],
+            'hero.findTraining' => [
+                'label' => 'Bouton trouver formation',
+                'description' => 'Le texte du bouton pour trouver une formation',
+                'type' => 'text',
+                'maxLength' => 50,
+                'placeholder' => 'Ex: Trouver une formation',
+                'section' => 'Hero Section',
+            ],
+            'hero.findCertification' => [
+                'label' => 'Bouton trouver certification',
+                'description' => 'Le texte du bouton pour trouver une certification',
+                'type' => 'text',
+                'maxLength' => 50,
+                'placeholder' => 'Ex: Trouver une certification',
+                'section' => 'Hero Section',
+            ],
             'home.hero_title' => [
                 'label' => 'Titre principal',
                 'description' => 'Le titre principal affiché en haut de la page d\'accueil',

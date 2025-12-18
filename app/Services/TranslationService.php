@@ -12,11 +12,20 @@ class TranslationService
     private const PAGE_COMPONENTS_MAP = [
         'home' => [
             'components' => [
+                'HeroHome',
                 'AboutUsOne',
                 'CertificationWheel',
                 'FeaturesCertifications',
             ],
             'translation_keys' => [
+                // HeroHome keys
+                'hero.foundedDate',
+                'hero.title',
+                'hero.description',
+                'hero.registerExam',
+                'hero.findTraining',
+                'hero.findCertification',
+                // Home page keys
                 'home.hero_title',
                 'home.hero_description',
                 'home.certifications_count',

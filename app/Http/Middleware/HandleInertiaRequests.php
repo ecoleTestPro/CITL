@@ -39,18 +39,31 @@ class HandleInertiaRequests extends Middleware
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         $user = $request->user();
+        $userData = null;
+
+        if ($user) {
+            $userData = $user->toArray();
+            // Vérifier si le trait HasRoles est disponible et les permissions sont configurées
+            if (method_exists($user, 'roles') && config('permission.models.role')) {
+                try {
+                    $userData['roles'] = $user->roles->map(fn ($role) => [
+                        'id' => $role->id,
+                        'name' => $role->name,
+                    ])->toArray();
+                } catch (\Throwable $e) {
+                    $userData['roles'] = [];
+                }
+            } else {
+                $userData['roles'] = [];
+            }
+        }
 
         return [
             ...parent::share($request),
             'name' => config('app.name'),
             'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
-                'user' => $user ? array_merge($user->toArray(), [
-                    'roles' => $user->roles->map(fn ($role) => [
-                        'id' => $role->id,
-                        'name' => $role->name,
-                    ])->toArray(),
-                ]) : null,
+                'user' => $userData,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];

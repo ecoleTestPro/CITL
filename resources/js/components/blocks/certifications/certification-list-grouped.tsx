@@ -3,6 +3,7 @@ import { CertificationCategory } from '@/types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useEffect, useRef } from 'react';
+import CertificationCard from './certification-card';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,59 +66,21 @@ function CertificationListGrouped({ categories }: CertificationListGroupedProps)
                         <section key={category.id} className="category-group">
                             {/* Category Header */}
                             <div className="mb-8">
-                                <h2 className="text-heading-3 mb-3 text-gray-900 dark:text-gray-100">{category.name}</h2>
-                                {category.description && (
-                                    <p className="text-lg text-gray-600 dark:text-gray-400">{category.description}</p>
+                                <h2 className="text-heading-3 mb-3 text-gray-900 dark:text-gray-100">
+                                    {category.name_fr || category.name}
+                                </h2>
+                                {(category.description_fr || category.description) && (
+                                    <p className="text-lg text-gray-600 dark:text-gray-400">
+                                        {category.description_fr || category.description}
+                                    </p>
                                 )}
                                 <div className="mt-4 h-1 w-20 bg-gradient-to-r from-secondary to-primary"></div>
                             </div>
 
                             {/* Certifications Grid */}
-                            <div className="grid grid-cols-12 gap-8">
+                            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {certifications.map((cert) => (
-                                    <article
-                                        key={cert.id}
-                                        className="group col-span-12 space-y-3.5 rounded-[20px] bg-white p-8 transition-all duration-300 hover:shadow-xl dark:bg-gray-800 md:col-span-6 lg:col-span-4"
-                                    >
-                                        <div className="space-y-11">
-                                            <div>
-                                                <span
-                                                    className={`${cert.icon} text-[52px] text-secondary transition-transform duration-300 group-hover:scale-110 dark:text-accent`}
-                                                ></span>
-                                            </div>
-                                        </div>
-                                        <div className="space-y-3">
-                                            <h3 className="text-heading-6 transition-colors duration-300 group-hover:text-secondary dark:group-hover:text-accent md:text-heading-5">
-                                                {cert.title_fr}
-                                            </h3>
-                                            {cert.subtitle_fr && (
-                                                <p className="text-sm font-medium text-secondary dark:text-accent">{cert.subtitle_fr}</p>
-                                            )}
-                                            <p className="max-w-[345px] text-gray-700 dark:text-gray-300">{cert.description_fr}</p>
-                                            <div className="pt-4 text-sm text-gray-600 dark:text-gray-400">
-                                                <p>
-                                                    <strong>Questions:</strong> {cert.exam_questions}
-                                                </p>
-                                                <p>
-                                                    <strong>Score requis:</strong> {cert.exam_passing_score}%
-                                                </p>
-                                                <p>
-                                                    <strong>Durée:</strong> {cert.exam_duration}
-                                                </p>
-                                                <p>
-                                                    <strong>Points totaux:</strong> {cert.exam_total_points}
-                                                </p>
-                                            </div>
-                                            <div className="pt-4">
-                                                <a
-                                                    href={`/certifications/${cert.slug}`}
-                                                    className="inline-flex items-center justify-center rounded-lg bg-secondary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-secondary/90 hover:shadow-md dark:bg-accent dark:hover:bg-accent/90"
-                                                >
-                                                    Voir les détails
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </article>
+                                    <CertificationCard key={cert.id} certification={cert} />
                                 ))}
                             </div>
                         </section>

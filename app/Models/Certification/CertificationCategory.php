@@ -28,6 +28,11 @@ class CertificationCategory extends Model
         'order' => 'integer',
     ];
 
+    protected $appends = [
+        'name',
+        'description',
+    ];
+
     /**
      * Accessor for backward compatibility - returns name_fr by default.
      */

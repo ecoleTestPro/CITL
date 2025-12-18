@@ -26,6 +26,24 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
 
     const columns: ColumnDef<Certification>[] = [
         {
+            accessorKey: 'featured_image',
+            header: 'Image',
+            cell: ({ row }) => {
+                const image = row.getValue('featured_image') as string | null;
+                return image ? (
+                    <img
+                        src={image.startsWith('http') ? image : `/storage/${image}`}
+                        alt={row.original.title_fr}
+                        className="h-12 w-16 rounded object-cover"
+                    />
+                ) : (
+                    <div className="flex h-12 w-16 items-center justify-center rounded bg-gray-100 dark:bg-gray-700">
+                        <span className="text-xs text-gray-400">N/A</span>
+                    </div>
+                );
+            },
+        },
+        {
             accessorKey: 'title_fr',
             header: ({ column }) => (
                 <button onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')} className="flex items-center gap-1 font-medium">
@@ -36,11 +54,17 @@ export function CertificationTable({ certifications, onEdit, onDelete }: Certifi
             cell: ({ row }) => <div className="font-medium">{row.getValue('title_fr')}</div>,
         },
         {
-            accessorKey: 'category.name',
+            accessorKey: 'category',
             header: 'Catégorie',
-            cell: ({ row }) => (
-                <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">{row.original.category.name}</span>
-            ),
+            cell: ({ row }) => {
+                const category = row.original.category;
+                const categoryName = category?.name_fr || category?.name || '-';
+                return (
+                    <span className="inline-flex rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                        {categoryName}
+                    </span>
+                );
+            },
         },
         {
             accessorKey: 'exam_questions',

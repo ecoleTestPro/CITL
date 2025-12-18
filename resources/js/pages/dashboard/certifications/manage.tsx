@@ -284,7 +284,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
                     <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                         {selectedCategory === 'all'
                             ? t('dashboard.certifications.all_certifications')
-                            : categories.find((c) => c.slug === selectedCategory)?.name}
+                            : categories.find((c) => c.slug === selectedCategory)?.name_fr}
                     </h1>
                     <p className="text-sm text-gray-600 dark:text-gray-400">
                         {filteredCertifications.length} {t('dashboard.certifications.certification_count', { count: filteredCertifications.length })}
@@ -316,7 +316,7 @@ export default function ManageCertifications({ categories, certifications }: Pro
                             />
 
                             <div className="w-3/4">
-                                <div className="flex justify-center px-2">
+                                <div className="px-2">
                                     <CertificationTable
                                         certifications={filteredCertifications}
                                         onEdit={handleEditCertification}

@@ -65,7 +65,7 @@ export function CategorySidebar({
                                                 : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700'
                                         }`}
                                     >
-                                        <span className="truncate">{category.name}</span>
+                                        <span className="truncate">{category.name_fr}</span>
                                         <span
                                             className={`rounded-full px-2 py-0.5 text-xs ${
                                                 selectedCategory === category.slug ? 'bg-white/20' : 'bg-gray-200 dark:bg-gray-700'

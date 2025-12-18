@@ -12,80 +12,123 @@ use Inertia\Response;
 
 class PageManagementController extends Controller
 {
+    /**
+     * Configuration des pages éditables
+     * slug => [routeName, pageTitle, translationKey]
+     */
+    private const PAGE_CONFIG = [
+        'home' => ['home', 'Page d\'accueil', 'home'],
+        'about-citl' => ['about-citl', 'À propos du CITL', 'about.citl'],
+        'about-istqb' => ['about-istqb', 'À propos de l\'ISTQB', 'about.istqb'],
+        'vision' => ['vision', 'Vision', 'about.vision'],
+        'missions' => ['missions', 'Missions', 'about.missions'],
+        'executive-board' => ['executive-board', 'Bureau exécutif', 'about.executive_board'],
+        'anti-piracy' => ['anti-piracy', 'Anti-piratage', 'exams.anti_piracy'],
+        'exam-faq' => ['exam-faq', 'FAQ Examens', 'exams.faq'],
+        'exam-fees' => ['exam-fees', 'Frais d\'examen', 'exams.fees'],
+        'exam-questions' => ['exam-questions', 'Questions d\'examen', 'exams.questions'],
+        'exam-registration' => ['exam-registration', 'Inscription aux examens', 'exams.registration'],
+        'members' => ['members', 'Membres', 'membership.members'],
+        'working-groups' => ['working-groups', 'Groupes de travail', 'membership.working_groups'],
+        'certified-testers-list' => ['certified-testers-list', 'Liste des testeurs certifiés', 'certification.testers_list'],
+        'istqb-registry' => ['istqb-registry', 'Registre ISTQB', 'certification.registry'],
+        'register-certified-testers' => ['register-certified-testers', 'Enregistrer un testeur', 'certification.register'],
+        'accreditation-request' => ['accreditation-request', 'Demande d\'accréditation', 'accreditation.request'],
+        'accredited-organizations' => ['accredited-organizations', 'Organismes accrédités', 'accreditation.organizations'],
+        'glossary' => ['glossary', 'Glossaire', 'glossary'],
+    ];
+
     public function __construct(
         private TranslationService $translationService
     ) {}
 
     /**
-     * Edit homepage content
+     * Generic page editor - handles all page editing via a single component
+     */
+    public function edit(string $pageSlug): Response
+    {
+        $config = self::PAGE_CONFIG[$pageSlug] ?? null;
+
+        if (! $config) {
+            abort(404, "Page '{$pageSlug}' not found in configuration");
+        }
+
+        [$routeName, $pageTitle, $translationKey] = $config;
+
+        return Inertia::render('dashboard/pages/generic-page-editor', [
+            'pageSlug' => $pageSlug,
+            'pageUrl' => route($routeName),
+            'pageTitle' => $pageTitle,
+            'pageName' => $translationKey,
+        ]);
+    }
+
+    /**
+     * Get list of all editable pages
+     */
+    public function getEditablePages(): JsonResponse
+    {
+        $pages = [];
+        foreach (self::PAGE_CONFIG as $slug => [$routeName, $title, $translationKey]) {
+            $pages[] = [
+                'slug' => $slug,
+                'title' => $title,
+                'translationKey' => $translationKey,
+            ];
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => ['pages' => $pages],
+        ]);
+    }
+
+    /**
+     * Edit homepage content (legacy - uses generic editor)
      */
     public function editHome(): Response
     {
-        return Inertia::render('dashboard/pages/edit-home', [
-            'pageUrl' => route('home'),
-            'pageTitle' => 'Home',
-            'pageName' => 'home',
-        ]);
+        return $this->edit('home');
     }
 
     /**
-     * Edit About CITL page content
+     * Edit About CITL page content (legacy - uses generic editor)
      */
     public function editAboutCITL(): Response
     {
-        return Inertia::render('dashboard/pages/about/edit-about-citl', [
-            'pageUrl' => route('about-citl'),
-            'pageTitle' => 'About CITL',
-            'pageName' => 'about.citl',
-        ]);
+        return $this->edit('about-citl');
     }
 
     /**
-     * Edit About ISTQB page content
+     * Edit About ISTQB page content (legacy - uses generic editor)
      */
     public function editAboutISTQB(): Response
     {
-        return Inertia::render('dashboard/pages/about/edit-about-istqb', [
-            'pageUrl' => route('about-istqb'),
-            'pageTitle' => 'About ISTQB',
-            'pageName' => 'about.istqb',
-        ]);
+        return $this->edit('about-istqb');
     }
 
     /**
-     * Edit Vision page content
+     * Edit Vision page content (legacy - uses generic editor)
      */
     public function editVision(): Response
     {
-        return Inertia::render('dashboard/pages/about/edit-vision', [
-            'pageUrl' => route('vision'),
-            'pageTitle' => 'Vision',
-            'pageName' => 'about.vision',
-        ]);
+        return $this->edit('vision');
     }
 
     /**
-     * Edit Missions page content
+     * Edit Missions page content (legacy - uses generic editor)
      */
     public function editMissions(): Response
     {
-        return Inertia::render('dashboard/pages/about/edit-missions', [
-            'pageUrl' => route('missions'),
-            'pageTitle' => 'Missions',
-            'pageName' => 'about.missions',
-        ]);
+        return $this->edit('missions');
     }
 
     /**
-     * Edit Executive Board page content
+     * Edit Executive Board page content (legacy - uses generic editor)
      */
     public function editExecutiveBoard(): Response
     {
-        return Inertia::render('dashboard/pages/about/edit-executive-board', [
-            'pageUrl' => route('executive-board'),
-            'pageTitle' => 'Executive Board',
-            'pageName' => 'about.executive_board',
-        ]);
+        return $this->edit('executive-board');
     }
 
     /**

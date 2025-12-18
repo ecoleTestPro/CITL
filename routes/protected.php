@@ -30,6 +30,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Page Management Routes
     Route::prefix('dashboard/pages')->name('dashboard.pages.')->group(function () {
+        // Generic page editor route (handles all pages via slug parameter)
+        Route::get('/edit/{pageSlug}', [PageManagementController::class, 'edit'])->name('edit');
+
+        // API route to get list of editable pages
+        Route::get('/list', [PageManagementController::class, 'getEditablePages'])->name('list');
+
+        // Legacy routes (maintained for backward compatibility)
         Route::get('/home', [PageManagementController::class, 'editHome'])->name('home.edit');
         Route::get('/about-citl', [PageManagementController::class, 'editAboutCITL'])->name('about-citl.edit');
         Route::get('/about-istqb', [PageManagementController::class, 'editAboutISTQB'])->name('about-istqb.edit');

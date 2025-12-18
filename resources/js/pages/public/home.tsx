@@ -22,9 +22,7 @@ function Home() {
                 <meta property="og:description" content={t('seo.home.description')} />
                 <meta property="og:type" content="website" />
             </Head>
-            <section>
-                <HeroHome />
-            </section>
+            <HeroHome />
             <AboutUsOne />
             <FeaturesCertifications />
             <CertificationWheelTwo />

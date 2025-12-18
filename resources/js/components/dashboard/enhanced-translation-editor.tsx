@@ -1,10 +1,10 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Input } from '@/components/ui/input';
 import { MiniRichTextEditor } from '@/components/ui/mini-rich-text-editor';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Textarea } from '@/components/ui/textarea';
+import { toEditorFormat, toStorageFormat } from '@/lib/markdown-html-converter';
 import { cn } from '@/lib/utils';
-import { ChevronRight, FileText, Loader2, Type } from 'lucide-react';
+import { ChevronRight, FileText, Loader2 } from 'lucide-react';
+import { useCallback, useMemo } from 'react';
 
 interface FieldMetadata {
     label: string;
@@ -37,6 +37,42 @@ export function EnhancedTranslationEditor({
     metadata = {},
     onTranslationChange,
 }: EnhancedTranslationEditorProps) {
+    // Convert value from storage format (Markdown) to editor format (HTML)
+    const getEditorValue = useCallback((value: string): string => {
+        return toEditorFormat(value || '');
+    }, []);
+
+    // Convert value from editor format (HTML) to storage format (Markdown)
+    const handleEditorChange = useCallback(
+        (key: string, htmlContent: string) => {
+            const markdownContent = toStorageFormat(htmlContent);
+            onTranslationChange(key, markdownContent);
+        },
+        [onTranslationChange],
+    );
+
+    // Get plain text character count (strip HTML/Markdown)
+    const getCharCount = useCallback((value: string): number => {
+        return value
+            .replace(/<[^>]*>/g, '') // Remove HTML tags
+            .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold markdown
+            .replace(/\*([^*]+)\*/g, '$1') // Remove italic markdown
+            .replace(/__([^_]+)__/g, '$1') // Remove underline markdown
+            .replace(/~~([^~]+)~~/g, '$1') // Remove strikethrough markdown
+            .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove link markdown
+            .replace(/^#+\s/gm, '') // Remove heading markdown
+            .length;
+    }, []);
+
+    // Memoize converted translations for editor
+    const editorTranslations = useMemo(() => {
+        const result: { [key: string]: string } = {};
+        for (const [key, value] of Object.entries(translations)) {
+            result[key] = getEditorValue(value);
+        }
+        return result;
+    }, [translations, getEditorValue]);
+
     if (loading) {
         return (
             <div className="flex h-64 items-center justify-center">
@@ -58,19 +94,8 @@ export function EnhancedTranslationEditor({
         const label = fieldMeta?.label || key.split('.').pop() || key;
         const placeholder = fieldMeta?.placeholder;
         const maxLength = fieldMeta?.maxLength;
-        const type = fieldMeta?.type || 'text';
 
-        // Auto-detect field type
-        const autoDetectType = (): 'text' | 'textarea' | 'richtext' => {
-            if (type === 'richtext') return 'richtext';
-            if (type === 'textarea') return 'textarea';
-            if (value.includes('<') && value.includes('>')) return 'richtext';
-            if (value.length > 150) return 'textarea';
-            return 'text';
-        };
-
-        const fieldType = autoDetectType();
-        const charCount = value.replace(/<[^>]*>/g, '').length;
+        const charCount = getCharCount(value);
         const isNearLimit = maxLength && charCount > maxLength * 0.8;
         const isOverLimit = maxLength && charCount > maxLength;
 
@@ -78,7 +103,6 @@ export function EnhancedTranslationEditor({
             <div key={key} className="group">
                 <div className="mb-1.5 flex items-center justify-between">
                     <label htmlFor={key} className="flex items-center gap-1.5 text-xs font-medium text-gray-600 dark:text-gray-400">
-                        {fieldType === 'richtext' && <Type className="h-3 w-3 text-orange-500" />}
                         <span className="truncate">{label}</span>
                     </label>
                     {maxLength && (
@@ -93,33 +117,12 @@ export function EnhancedTranslationEditor({
                     )}
                 </div>
 
-                {fieldType === 'richtext' ? (
-                    <MiniRichTextEditor
-                        content={value}
-                        onChange={(content) => onTranslationChange(key, content)}
-                        placeholder={placeholder}
-                        minHeight="100px"
-                    />
-                ) : fieldType === 'textarea' ? (
-                    <Textarea
-                        id={key}
-                        value={value}
-                        onChange={(e) => onTranslationChange(key, e.target.value)}
-                        placeholder={placeholder}
-                        rows={3}
-                        maxLength={maxLength}
-                        className="resize-none border-gray-200 bg-white text-sm transition-colors focus:border-primary focus:ring-1 focus:ring-primary dark:border-gray-700 dark:bg-gray-900"
-                    />
-                ) : (
-                    <Input
-                        id={key}
-                        value={value}
-                        onChange={(e) => onTranslationChange(key, e.target.value)}
-                        placeholder={placeholder}
-                        maxLength={maxLength}
-                        className="h-9 border-gray-200 bg-white text-sm transition-colors focus:border-primary focus:ring-1 focus:ring-primary dark:border-gray-700 dark:bg-gray-900"
-                    />
-                )}
+                <MiniRichTextEditor
+                    content={editorTranslations[key] || ''}
+                    onChange={(content) => handleEditorChange(key, content)}
+                    placeholder={placeholder}
+                    minHeight="80px"
+                />
             </div>
         );
     };
@@ -145,9 +148,7 @@ export function EnhancedTranslationEditor({
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="border-t border-gray-100 bg-gray-50/50 px-4 py-4 dark:border-gray-800 dark:bg-gray-950/50">
-                                <div className="space-y-4">
-                                    {fields.map(({ key }) => renderField(key, translations[key] || '', metadata[key]))}
-                                </div>
+                                <div className="space-y-4">{fields.map(({ key }) => renderField(key, translations[key] || '', metadata[key]))}</div>
                             </AccordionContent>
                         </AccordionItem>
                     ))}

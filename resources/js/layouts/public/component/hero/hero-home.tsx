@@ -60,7 +60,7 @@ const HeroHome = () => {
     };
 
     return (
-        <div className={'container mx-auto flex items-center justify-center overflow-hidden min-h-[70vh] py-8 lg:py-0'}>
+        <div className={'container mx-auto flex min-h-[70vh] items-center justify-center overflow-hidden py-8 lg:py-0'}>
             <div className="grid w-full gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
                 <motion.div className="relative my-auto overflow-hidden py-6 lg:py-12" variants={containerVariants} initial="hidden" animate="visible">
                     <AnimatedGridPattern
@@ -89,7 +89,10 @@ const HeroHome = () => {
                             {t('hero.description')}
                         </motion.p>
 
-                        <motion.div variants={itemVariants} className="relative mt-8 flex flex-col items-start gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4">
+                        <motion.div
+                            variants={itemVariants}
+                            className="relative mt-8 flex flex-col items-start gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4"
+                        >
                             <Link href="/exam-registration" className="w-full sm:w-auto">
                                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                     <AnimatedButton className="w-full rounded-full sm:w-auto">
@@ -112,8 +115,18 @@ const HeroHome = () => {
                     </div>
                 </motion.div>
 
-                <motion.div className="hidden h-[50vh] lg:block lg:h-[70vh]" aria-label="Hero Image" variants={imageVariants} initial="hidden" animate="visible">
-                    <img className="h-full w-full rounded-2xl object-cover" src="/assets/images/hero/hero-bg-01.jpg" alt={t('hero.imageAlt', 'CITL - Certification ISTQB')} />
+                <motion.div
+                    className="hidden h-[50vh] lg:block lg:h-[70vh]"
+                    aria-label="Hero Image"
+                    variants={imageVariants}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <img
+                        className="h-full w-full rounded-2xl object-cover"
+                        src="/assets/images/hero/hero-bg-01.jpg"
+                        alt={t('hero.imageAlt', 'CITL - Certification ISTQB')}
+                    />
                 </motion.div>
             </div>
         </div>

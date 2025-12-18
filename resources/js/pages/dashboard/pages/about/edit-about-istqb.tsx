@@ -66,7 +66,7 @@ export default function EditAboutISTQB({ pageUrl, pageTitle, pageName }: EditAbo
                 />
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
         </PageEditorLayout>
     );
 }

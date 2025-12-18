@@ -66,7 +66,7 @@ export default function EditExecutiveBoard({ pageUrl, pageTitle, pageName }: Edi
                 />
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
         </PageEditorLayout>
     );
 }

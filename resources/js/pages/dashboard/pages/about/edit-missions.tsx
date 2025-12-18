@@ -66,7 +66,7 @@ export default function EditMissions({ pageUrl, pageTitle, pageName }: EditMissi
                 />
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
         </PageEditorLayout>
     );
 }

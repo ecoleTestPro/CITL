@@ -66,7 +66,7 @@ export default function EditAboutCITL({ pageUrl, pageTitle, pageName }: EditAbou
                 />
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
         </PageEditorLayout>
     );
 }

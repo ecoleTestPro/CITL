@@ -10,7 +10,7 @@ interface Translations {
 interface FieldMetadata {
     label: string;
     description: string;
-    type: string;
+    type: 'text' | 'textarea' | 'richtext';
     maxLength?: number;
     placeholder?: string;
     section: string;

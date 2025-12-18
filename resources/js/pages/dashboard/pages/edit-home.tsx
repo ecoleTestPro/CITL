@@ -82,7 +82,7 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
 
             {/* Preview Panel */}
             <div className="flex-1 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800">
-                <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+                <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
             </div>
         </PageEditorLayout>
     );

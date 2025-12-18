@@ -66,7 +66,7 @@ export default function EditVision({ pageUrl, pageTitle, pageName }: EditVisionP
                 />
             </div>
 
-            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} />
+            <PagePreview pageUrl={pageUrl} pageTitle={pageTitle} locale={selectedLocale} />
         </PageEditorLayout>
     );
 }

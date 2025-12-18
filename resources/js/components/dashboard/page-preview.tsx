@@ -7,6 +7,7 @@ interface PagePreviewProps {
     pageUrl: string;
     pageTitle: string;
     previewKey?: number;
+    locale?: string;
 }
 
 type DeviceType = 'desktop' | 'tablet' | 'mobile';
@@ -17,16 +18,26 @@ const deviceWidths: Record<DeviceType, string> = {
     mobile: 'w-[375px]',
 };
 
-export function PagePreview({ pageUrl, pageTitle, previewKey = 0 }: PagePreviewProps) {
+export function PagePreview({ pageUrl, pageTitle, previewKey = 0, locale }: PagePreviewProps) {
     const [device, setDevice] = useState<DeviceType>('desktop');
     const [refreshKey, setRefreshKey] = useState(previewKey);
+
+    // Build URL with locale parameter
+    const buildUrlWithLocale = (url: string, lang?: string): string => {
+        if (!lang) return url;
+        const urlObj = new URL(url, window.location.origin);
+        urlObj.searchParams.set('lang', lang);
+        return urlObj.toString();
+    };
+
+    const previewUrl = buildUrlWithLocale(pageUrl, locale);
 
     const handleRefresh = () => {
         setRefreshKey((prev) => prev + 1);
     };
 
     const handleOpenNewTab = () => {
-        window.open(pageUrl, '_blank');
+        window.open(previewUrl, '_blank');
     };
 
     return (
@@ -86,8 +97,8 @@ export function PagePreview({ pageUrl, pageTitle, previewKey = 0 }: PagePreviewP
                     )}
                 >
                     <iframe
-                        key={refreshKey}
-                        src={pageUrl}
+                        key={`${refreshKey}-${locale}`}
+                        src={previewUrl}
                         className="h-full w-full"
                         style={{ minHeight: 'calc(100vh - 220px)' }}
                         title={pageTitle}

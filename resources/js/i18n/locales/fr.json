@@ -39,7 +39,7 @@
         "register": "S'inscrire"
     },
     "hero": {
-        "foundedDate": "Fondé le 24 octobre 2025",
+        "foundedDate": "Fondé le 24 octobre 2025 **aaaaaaaaaaaaaaaa**",
         "title": "Comité Ivoirien des Tests Logiciels",
         "description": "Unique structure officielle en Côte d'Ivoire chargée de représenter et de promouvoir l'ISTQB®. Nous délivrons les certifications ISTQB, accréditons les formateurs et participons activement aux standards internationaux du testing logiciel.",
         "registerExam": "S'inscrire à un examen",
@@ -972,7 +972,7 @@
             "column_name": "Étape",
             "column_description": "Description",
             "column_responsible": "Responsable",
-            "column_observations": "Observations / Résultats",
+            "column_observations": "Observations \/ Résultats",
             "step_1_name": "Vérification des prérequis",
             "step_1_description": "L'organisme de formation doit être membre du CITL.",
             "step_1_responsible": "Organisme de formation",

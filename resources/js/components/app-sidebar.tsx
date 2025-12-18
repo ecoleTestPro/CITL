@@ -136,31 +136,31 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 url: '/dashboard/pages/why-certification',
                                 isActive: currentUrl === '/dashboard/pages/why-certification',
                             },
-                            {
-                                title: t('sidebar.core_foundation'),
-                                url: '/dashboard/pages/core-foundation',
-                                isActive: currentUrl === '/dashboard/pages/core-foundation',
-                            },
-                            {
-                                title: t('sidebar.core_advanced'),
-                                url: '/dashboard/pages/core-advanced',
-                                isActive: currentUrl === '/dashboard/pages/core-advanced',
-                            },
-                            {
-                                title: t('sidebar.specialist'),
-                                url: '/dashboard/pages/specialist',
-                                isActive: currentUrl === '/dashboard/pages/specialist',
-                            },
-                            {
-                                title: t('sidebar.expert_level'),
-                                url: '/dashboard/pages/expert-level',
-                                isActive: currentUrl === '/dashboard/pages/expert-level',
-                            },
-                            {
-                                title: t('sidebar.a4q_practical_tester'),
-                                url: '/dashboard/pages/a4q-practical-tester',
-                                isActive: currentUrl === '/dashboard/pages/a4q-practical-tester',
-                            },
+                            // {
+                            //     title: t('sidebar.core_foundation'),
+                            //     url: '/dashboard/pages/core-foundation',
+                            //     isActive: currentUrl === '/dashboard/pages/core-foundation',
+                            // },
+                            // {
+                            //     title: t('sidebar.core_advanced'),
+                            //     url: '/dashboard/pages/core-advanced',
+                            //     isActive: currentUrl === '/dashboard/pages/core-advanced',
+                            // },
+                            // {
+                            //     title: t('sidebar.specialist'),
+                            //     url: '/dashboard/pages/specialist',
+                            //     isActive: currentUrl === '/dashboard/pages/specialist',
+                            // },
+                            // {
+                            //     title: t('sidebar.expert_level'),
+                            //     url: '/dashboard/pages/expert-level',
+                            //     isActive: currentUrl === '/dashboard/pages/expert-level',
+                            // },
+                            // {
+                            //     title: t('sidebar.a4q_practical_tester'),
+                            //     url: '/dashboard/pages/a4q-practical-tester',
+                            //     isActive: currentUrl === '/dashboard/pages/a4q-practical-tester',
+                            // },
                         ],
                     },
                     // Examens
@@ -187,21 +187,21 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 url: '/dashboard/pages/exam-registration',
                                 isActive: currentUrl === '/dashboard/pages/exam-registration',
                             },
-                            {
-                                title: t('sidebar.exam_faq'),
-                                url: '/dashboard/pages/exam-faq',
-                                isActive: currentUrl === '/dashboard/pages/exam-faq',
-                            },
+                            // {
+                            //     title: t('sidebar.exam_faq'),
+                            //     url: '/dashboard/pages/exam-faq',
+                            //     isActive: currentUrl === '/dashboard/pages/exam-faq',
+                            // },
                             {
                                 title: t('sidebar.anti_piracy'),
                                 url: '/dashboard/pages/anti-piracy',
                                 isActive: currentUrl === '/dashboard/pages/anti-piracy',
                             },
-                            {
-                                title: t('sidebar.glossary'),
-                                url: '/dashboard/pages/glossary',
-                                isActive: currentUrl === '/dashboard/pages/glossary',
-                            },
+                            // {
+                            //     title: t('sidebar.glossary'),
+                            //     url: '/dashboard/pages/glossary',
+                            //     isActive: currentUrl === '/dashboard/pages/glossary',
+                            // },
                         ],
                     },
                     // Formation
@@ -243,25 +243,25 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                                 url: '/dashboard/pages/certified-testers-list',
                                 isActive: currentUrl === '/dashboard/pages/certified-testers-list',
                             },
-                            {
-                                title: t('sidebar.istqb_registry'),
-                                url: '/dashboard/pages/istqb-registry',
-                                isActive: currentUrl === '/dashboard/pages/istqb-registry',
-                            },
+                            // {
+                            //     title: t('sidebar.istqb_registry'),
+                            //     url: '/dashboard/pages/istqb-registry',
+                            //     isActive: currentUrl === '/dashboard/pages/istqb-registry',
+                            // },
                         ],
                     },
                     // Événements
-                    {
-                        title: t('sidebar.events'),
-                        url: '/dashboard/pages/events',
-                        isActive: currentUrl === '/dashboard/pages/events',
-                    },
+                    // {
+                    //     title: t('sidebar.events'),
+                    //     url: '/dashboard/pages/events',
+                    //     isActive: currentUrl === '/dashboard/pages/events',
+                    // },
                     // Blog
-                    {
-                        title: t('sidebar.blog'),
-                        url: '/dashboard/pages/blog',
-                        isActive: currentUrl === '/dashboard/pages/blog',
-                    },
+                    // {
+                    //     title: t('sidebar.blog'),
+                    //     url: '/dashboard/pages/blog',
+                    //     isActive: currentUrl === '/dashboard/pages/blog',
+                    // },
                     // Contact
                     {
                         title: t('sidebar.contact'),

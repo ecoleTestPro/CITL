@@ -2,7 +2,7 @@ import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import { useImage } from '@/hooks/use-image';
-import { CertifiedTesterSearchForm } from '@/components/registration/certified-tester-search-form';
+import { AccreditedOrganizationSearchForm } from '@/components/registration/accredited-organization-search-form';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
@@ -27,22 +27,22 @@ function CertifiedTestersList() {
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
         { title: t('nav.registration'), href: '#' },
-        { title: t('nav.certified_testers_list'), href: '/certified-testers-list' },
+        { title: t('nav.accredited_organizations'), href: '/certified-testers-list' },
     ];
 
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
-            <Head title={`${t('certified_testers_list.page_title')} | CITL`} />
+            <Head title={`${t('accredited_organizations_search.page_title')} | CITL`} />
 
             <HeroCommon
-                badge={t('certified_testers_list.hero_badge')}
-                title={t('certified_testers_list.hero_title')}
-                description={t('certified_testers_list.hero_description')}
+                badge={t('accredited_organizations_search.hero_badge')}
+                title={t('accredited_organizations_search.hero_title')}
+                description={t('accredited_organizations_search.hero_description')}
                 backgroundImage={bgSharp2}
             />
 
             {/* Introduction Section */}
-            <CommonTextBlock description={`<p>${t('certified_testers_list.intro_paragraph_1')}</p>`} />
+            <CommonTextBlock description={`<p>${t('accredited_organizations_search.intro_paragraph_1')}</p>`} />
 
             {/* Search Section with Sidebar */}
             <section className="bg-white py-16 dark:bg-gray-900">
@@ -50,22 +50,22 @@ function CertifiedTestersList() {
                     <div className="flex flex-col gap-8 lg:flex-row">
                         {/* Main Content - 3/4 width */}
                         <div className="w-full lg:w-3/4">
-                            <CertifiedTesterSearchForm />
+                            <AccreditedOrganizationSearchForm />
                         </div>
 
                         {/* Sidebar - 1/4 width */}
                         <BenefitsSidebar
-                            title={t('certified_tester_registration.sidebar_title')}
+                            title={t('accredited_organizations_search.sidebar_title')}
                             benefits={[
-                                { text: t('certified_tester_registration.benefit_1') },
-                                { text: t('certified_tester_registration.benefit_2') },
-                                { text: t('certified_tester_registration.benefit_3') },
-                                { text: t('certified_tester_registration.benefit_4') },
+                                { text: t('accredited_organizations_search.benefit_1') },
+                                { text: t('accredited_organizations_search.benefit_2') },
+                                { text: t('accredited_organizations_search.benefit_3') },
+                                { text: t('accredited_organizations_search.benefit_4') },
                             ]}
                             adBanner={{
                                 imageSrc: adsBanner,
                                 imageAlt: 'Certification ISTQB',
-                                title: 'Passez votre certification ISTQB',
+                                title: t('accredited_organizations_search.sidebar_title'),
                                 href: '/exam-registration',
                             }}
                         />

@@ -870,6 +870,30 @@
         "table_certificate_number": "Certificate #",
         "table_date": "Date"
     },
+    "accredited_organizations_search": {
+        "page_title": "Search Accredited Organizations",
+        "hero_badge": "Accredited Organizations",
+        "hero_title": "Search for an Accredited Training Organization",
+        "hero_description": "Find training organizations accredited by CITL to deliver quality ISTQB® training in Ivory Coast.",
+        "intro_paragraph_1": "The organizations listed here are officially accredited by CITL to deliver ISTQB® training. They comply with international standards and employ certified trainers.",
+        "search_title": "Search for an organization",
+        "search_label": "Search",
+        "search_placeholder": "Enter name, city or country",
+        "search_hint": "You can search by organization name, city or country.",
+        "search_button": "Search",
+        "searching": "Searching...",
+        "results_title": "Search Results",
+        "result_count": "organization(s) found",
+        "no_results": "No organization found for your search.",
+        "enter_search": "Enter a search term to find accredited organizations.",
+        "error": "An error occurred",
+        "search_error": "Error during search",
+        "sidebar_title": "Why choose an accredited organization?",
+        "benefit_1": "Training aligned with official ISTQB® syllabus",
+        "benefit_2": "Certified and experienced trainers",
+        "benefit_3": "Course materials validated by CITL",
+        "benefit_4": "Optimal preparation for the certification exam"
+    },
     "seo": {
         "home": {
             "title": "CITL - Ivorian Software Testing Committee | ISTQB Certifications",

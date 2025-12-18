@@ -1120,6 +1120,30 @@
         "table_certificate_number": "N° Certificat",
         "table_date": "Date"
     },
+    "accredited_organizations_search": {
+        "page_title": "Recherche d'organismes accrédités",
+        "hero_badge": "Organismes Accrédités",
+        "hero_title": "Rechercher un organisme de formation accrédité",
+        "hero_description": "Trouvez les organismes de formation accrédités par le CITL pour dispenser des formations ISTQB® de qualité en Côte d'Ivoire.",
+        "intro_paragraph_1": "Les organismes listés ici sont officiellement accrédités par le CITL pour dispenser des formations ISTQB®. Ils respectent les standards internationaux et emploient des formateurs certifiés.",
+        "search_title": "Rechercher un organisme",
+        "search_label": "Recherche",
+        "search_placeholder": "Entrez le nom, la ville ou le pays",
+        "search_hint": "Vous pouvez rechercher par nom d'organisme, ville ou pays.",
+        "search_button": "Rechercher",
+        "searching": "Recherche...",
+        "results_title": "Résultats de recherche",
+        "result_count": "organisme(s) trouvé(s)",
+        "no_results": "Aucun organisme trouvé pour votre recherche.",
+        "enter_search": "Entrez un terme de recherche pour trouver des organismes accrédités.",
+        "error": "Une erreur est survenue",
+        "search_error": "Erreur lors de la recherche",
+        "sidebar_title": "Pourquoi choisir un organisme accrédité ?",
+        "benefit_1": "Formation conforme au syllabus officiel ISTQB®",
+        "benefit_2": "Formateurs certifiés et expérimentés",
+        "benefit_3": "Support de cours validé par le CITL",
+        "benefit_4": "Préparation optimale pour l'examen de certification"
+    },
     "seo": {
         "home": {
             "title": "CITL - Comité Ivoirien des Tests Logiciels | Certifications ISTQB",

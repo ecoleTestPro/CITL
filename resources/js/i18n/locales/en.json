@@ -1372,5 +1372,69 @@
         "membership_applications": "Membership Applications",
         "administration": "Administration",
         "users": "Users"
+    },
+    "settings": {
+        "title": "Settings",
+        "description": "Manage your profile and account settings",
+        "nav": {
+            "profile": "Profile",
+            "password": "Password",
+            "two_factor": "Two-Factor Auth",
+            "appearance": "Appearance"
+        },
+        "profile": {
+            "title": "Profile settings",
+            "heading": "Profile information",
+            "description": "Update your name and email address",
+            "name": "Name",
+            "name_placeholder": "Full name",
+            "email": "Email address",
+            "email_placeholder": "Email address",
+            "email_unverified": "Your email address is unverified.",
+            "resend_verification": "Click here to resend the verification email.",
+            "verification_sent": "A new verification link has been sent to your email address.",
+            "save": "Save",
+            "saved": "Saved"
+        },
+        "password": {
+            "title": "Password settings",
+            "heading": "Update password",
+            "description": "Ensure your account is using a long, random password to stay secure",
+            "current_password": "Current password",
+            "current_password_placeholder": "Current password",
+            "new_password": "New password",
+            "new_password_placeholder": "New password",
+            "confirm_password": "Confirm password",
+            "confirm_password_placeholder": "Confirm password",
+            "save": "Save password",
+            "saved": "Saved"
+        },
+        "two_factor": {
+            "title": "Two-Factor Authentication",
+            "heading": "Two-Factor Authentication",
+            "description": "Manage your two-factor authentication settings",
+            "enabled": "Enabled",
+            "disabled": "Disabled",
+            "enabled_description": "With two-factor authentication enabled, you will be prompted for a secure, random PIN during login, which you can retrieve from the TOTP-supported application on your phone.",
+            "disabled_description": "When you enable two-factor authentication, you will be prompted for a secure PIN during login. This PIN can be retrieved from a TOTP-supported application on your phone.",
+            "enable": "Enable 2FA",
+            "disable": "Disable 2FA",
+            "continue_setup": "Continue Setup"
+        },
+        "appearance": {
+            "title": "Appearance settings",
+            "heading": "Appearance settings",
+            "description": "Update your account's appearance settings"
+        },
+        "delete_account": {
+            "title": "Delete account",
+            "description": "Once your account is deleted, all of its resources and data will be permanently deleted.",
+            "button": "Delete account",
+            "modal_title": "Are you sure you want to delete your account?",
+            "modal_description": "Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.",
+            "password_placeholder": "Password",
+            "cancel": "Cancel",
+            "confirm": "Delete account"
+        }
     }
 }

@@ -1528,5 +1528,69 @@
         "membership_applications": "Demandes d'adhésion",
         "administration": "Administration",
         "users": "Utilisateurs"
+    },
+    "settings": {
+        "title": "Paramètres",
+        "description": "Gérez votre profil et les paramètres de votre compte",
+        "nav": {
+            "profile": "Profil",
+            "password": "Mot de passe",
+            "two_factor": "Auth. à deux facteurs",
+            "appearance": "Apparence"
+        },
+        "profile": {
+            "title": "Paramètres du profil",
+            "heading": "Informations du profil",
+            "description": "Mettez à jour votre nom et votre adresse email",
+            "name": "Nom",
+            "name_placeholder": "Nom complet",
+            "email": "Adresse email",
+            "email_placeholder": "Adresse email",
+            "email_unverified": "Votre adresse email n'est pas vérifiée.",
+            "resend_verification": "Cliquez ici pour renvoyer l'email de vérification.",
+            "verification_sent": "Un nouveau lien de vérification a été envoyé à votre adresse email.",
+            "save": "Enregistrer",
+            "saved": "Enregistré"
+        },
+        "password": {
+            "title": "Paramètres du mot de passe",
+            "heading": "Mettre à jour le mot de passe",
+            "description": "Assurez-vous que votre compte utilise un mot de passe long et aléatoire pour rester sécurisé",
+            "current_password": "Mot de passe actuel",
+            "current_password_placeholder": "Mot de passe actuel",
+            "new_password": "Nouveau mot de passe",
+            "new_password_placeholder": "Nouveau mot de passe",
+            "confirm_password": "Confirmer le mot de passe",
+            "confirm_password_placeholder": "Confirmer le mot de passe",
+            "save": "Enregistrer le mot de passe",
+            "saved": "Enregistré"
+        },
+        "two_factor": {
+            "title": "Authentification à deux facteurs",
+            "heading": "Authentification à deux facteurs",
+            "description": "Gérez vos paramètres d'authentification à deux facteurs",
+            "enabled": "Activée",
+            "disabled": "Désactivée",
+            "enabled_description": "Avec l'authentification à deux facteurs activée, vous serez invité à saisir un code PIN sécurisé et aléatoire lors de la connexion, que vous pouvez récupérer depuis l'application compatible TOTP sur votre téléphone.",
+            "disabled_description": "Lorsque vous activez l'authentification à deux facteurs, vous serez invité à saisir un code PIN sécurisé lors de la connexion. Ce code peut être récupéré depuis une application compatible TOTP sur votre téléphone.",
+            "enable": "Activer la 2FA",
+            "disable": "Désactiver la 2FA",
+            "continue_setup": "Continuer la configuration"
+        },
+        "appearance": {
+            "title": "Paramètres d'apparence",
+            "heading": "Paramètres d'apparence",
+            "description": "Mettez à jour les paramètres d'apparence de votre compte"
+        },
+        "delete_account": {
+            "title": "Supprimer le compte",
+            "description": "Une fois votre compte supprimé, toutes ses ressources et données seront définitivement effacées.",
+            "button": "Supprimer le compte",
+            "modal_title": "Êtes-vous sûr de vouloir supprimer votre compte ?",
+            "modal_description": "Une fois votre compte supprimé, toutes ses ressources et données seront définitivement effacées. Veuillez entrer votre mot de passe pour confirmer que vous souhaitez supprimer définitivement votre compte.",
+            "password_placeholder": "Mot de passe",
+            "cancel": "Annuler",
+            "confirm": "Supprimer le compte"
+        }
     }
 }

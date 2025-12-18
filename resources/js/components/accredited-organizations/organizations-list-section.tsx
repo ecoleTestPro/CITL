@@ -36,9 +36,9 @@ function OrganizationName({ org }: { org: AccreditedOrganization }) {
     return (
         <div className="flex items-start gap-3">
             {org.logo ? (
-                <img src={getLogoSrc(org.logo)} alt={org.name} className="h-10 w-10 rounded-lg object-contain" />
+                <img src={getLogoSrc(org.logo)} alt={org.name} className="h-32 w-32 rounded-lg object-contain" />
             ) : (
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-citl-orange/10">
+                <div className="flex h-32 w-32 items-center justify-center rounded-lg bg-citl-orange/10">
                     <Globe className="h-5 w-5 text-citl-orange" />
                 </div>
             )}

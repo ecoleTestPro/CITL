@@ -1,11 +1,17 @@
 import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
 import { TeamMembers } from '@/components/blocks/team';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function ExecutiveBoard() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const overviewImage = useImage('about.executive_board', 'overview', '/assets/images/pages/about/executive-board.jpg');
+    const member1Image = useImage('about.executive_board', 'member_1', '/assets/images/team/alexis-nana.png');
+    const member2Image = useImage('about.executive_board', 'member_2', '/assets/images/team/sylviane-akpangny.jpeg');
+    const member3Image = useImage('about.executive_board', 'member_3', '/assets/images/team/sekou-diabate.png');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -31,19 +37,19 @@ function ExecutiveBoard() {
             name: t('about.executive_board.member_1_name'),
             role: t('about.executive_board.member_1_role'),
             description: t('about.executive_board.member_1_description'),
-            image: '/assets/images/team/alexis-nana.png',
+            image: member1Image,
         },
         {
             name: t('about.executive_board.member_2_name'),
             role: t('about.executive_board.member_2_role'),
             description: t('about.executive_board.member_2_description'),
-            image: '/assets/images/team/sylviane-akpangny.jpeg',
+            image: member2Image,
         },
         {
             name: t('about.executive_board.member_3_name'),
             role: t('about.executive_board.member_3_role'),
             description: t('about.executive_board.member_3_description'),
-            image: '/assets/images/team/sekou-diabate.png',
+            image: member3Image,
         },
     ];
 
@@ -62,7 +68,7 @@ function ExecutiveBoard() {
                     badge={t('about.executive_board.badge')}
                     title={t('about.executive_board.hero_title')}
                     description={t('about.executive_board.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 <AboutOverview
@@ -70,7 +76,7 @@ function ExecutiveBoard() {
                     description={t('about.executive_board.overview_description')}
                     learnTitle={t('about.executive_board.learn_title')}
                     items={overviewItems}
-                    imageSrc="/assets/images/pages/about/executive-board.jpg"
+                    imageSrc={overviewImage}
                     imageAlt="Bureau Exécutif - CITL"
                 />
 

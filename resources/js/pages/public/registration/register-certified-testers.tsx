@@ -1,6 +1,7 @@
 import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import { CertifiedTesterRegistrationForm } from '@/components/registration/certified-tester-registration-form';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
@@ -10,6 +11,8 @@ import { useTranslation } from 'react-i18next';
 function RegisterCertifiedTesters() {
     const { t } = useTranslation();
     const { flash } = usePage().props as any;
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const adsBanner = useImage('global', 'ads_1', '/assets/images/ads/ads-1.jpg');
 
     useEffect(() => {
         if (flash?.success) {
@@ -40,7 +43,7 @@ function RegisterCertifiedTesters() {
                 badge={t('certified_tester_registration.hero_badge')}
                 title={t('certified_tester_registration.hero_title')}
                 description={t('certified_tester_registration.hero_description')}
-                backgroundImage="/assets/images/bg/sharp-2.png"
+                backgroundImage={bgSharp2}
             />
 
             {/* Form Section */}
@@ -69,7 +72,7 @@ function RegisterCertifiedTesters() {
                                 { text: t('certified_tester_registration.benefit_4') },
                             ]}
                             adBanner={{
-                                imageSrc: '/assets/images/ads/ads-1.jpg',
+                                imageSrc: adsBanner,
                                 imageAlt: 'Certification ISTQB',
                                 title: 'Passez votre certification ISTQB',
                                 href: '/exam-registration',

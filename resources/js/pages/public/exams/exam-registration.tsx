@@ -1,6 +1,7 @@
 import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import { ExamRegistrationForm } from '@/components/exams/exam-registration-form';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
@@ -9,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 
 function ExamRegistration() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const adsBanner = useImage('global', 'ads_1', '/assets/images/ads/ads-1.jpg');
     const { flash } = usePage().props as any;
 
     useEffect(() => {
@@ -37,7 +40,7 @@ function ExamRegistration() {
                 <meta property="og:type" content="website" />
             </Head>
 
-            <HeroCommon title={t('exam.hero_title')} description={t('exam.hero_description')} backgroundImage="/assets/images/bg/sharp-2.png" />
+            <HeroCommon title={t('exam.hero_title')} description={t('exam.hero_description')} backgroundImage={bgSharp2} />
 
             <div className="container mx-auto px-4 py-16">
                 <div className="flex flex-col gap-8 lg:flex-row">
@@ -63,7 +66,7 @@ function ExamRegistration() {
                             { text: t('exam.benefit_support') },
                         ]}
                         adBanner={{
-                            imageSrc: '/assets/images/ads/ads-1.jpg',
+                            imageSrc: adsBanner,
                             imageAlt: 'Certification ISTQB',
                             title: 'Devenez certifié ISTQB',
                             href: '/certifications',

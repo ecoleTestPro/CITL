@@ -141,6 +141,14 @@ class ImageMetadataService
             ],
 
             // Global background images
+            'global.bg_sharp_1' => [
+                'label' => 'Fond décoratif 1',
+                'description' => 'Image décorative de fond (sharp-1)',
+                'recommendedSize' => '400x800',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Fonds décoratifs',
+            ],
             'global.bg_sharp_2' => [
                 'label' => 'Fond décoratif 2',
                 'description' => 'Image décorative de fond (sharp-2)',
@@ -156,6 +164,22 @@ class ImageMetadataService
                 'maxSize' => 2,
                 'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
                 'section' => 'Fonds décoratifs',
+            ],
+            'global.ads_1' => [
+                'label' => 'Bannière publicitaire 1',
+                'description' => 'Première bannière publicitaire (sidebar)',
+                'recommendedSize' => '300x250',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Bannières',
+            ],
+            'global.ads_2' => [
+                'label' => 'Bannière publicitaire 2',
+                'description' => 'Deuxième bannière publicitaire (sidebar)',
+                'recommendedSize' => '300x250',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Bannières',
             ],
 
             // About CITL
@@ -206,6 +230,78 @@ class ImageMetadataService
                 'maxSize' => 3,
                 'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
                 'section' => 'Présentation',
+            ],
+            'about.executive_board.member_1' => [
+                'label' => 'Photo Membre 1',
+                'description' => 'Photo du premier membre du bureau exécutif',
+                'recommendedSize' => '400x400',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Membres',
+            ],
+            'about.executive_board.member_2' => [
+                'label' => 'Photo Membre 2',
+                'description' => 'Photo du deuxième membre du bureau exécutif',
+                'recommendedSize' => '400x400',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Membres',
+            ],
+            'about.executive_board.member_3' => [
+                'label' => 'Photo Membre 3',
+                'description' => 'Photo du troisième membre du bureau exécutif',
+                'recommendedSize' => '400x400',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Membres',
+            ],
+
+            // Exams - Anti Piracy
+            'exams.anti_piracy.shield_main' => [
+                'label' => 'Image bouclier principale',
+                'description' => 'Image du bouclier dans la section avertissement',
+                'recommendedSize' => '300x300',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Images',
+            ],
+            'exams.anti_piracy.shield_verification' => [
+                'label' => 'Image bouclier vérification',
+                'description' => 'Image du bouclier dans la section vérification',
+                'recommendedSize' => '400x400',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Images',
+            ],
+
+            // Exams - Questions
+            'exams.questions.exam_success' => [
+                'label' => 'Image succès examen',
+                'description' => 'Image illustrant le succès aux examens',
+                'recommendedSize' => '300x300',
+                'maxSize' => 2,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Images',
+            ],
+
+            // Membership - Members
+            'membership.members.benefits' => [
+                'label' => 'Image avantages adhésion',
+                'description' => 'Image illustrant les avantages de l\'adhésion',
+                'recommendedSize' => '800x600',
+                'maxSize' => 3,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Images',
+            ],
+
+            // Membership - Working Groups
+            'membership.working_groups.overview' => [
+                'label' => 'Image présentation',
+                'description' => 'Image de présentation des groupes de travail',
+                'recommendedSize' => '800x600',
+                'maxSize' => 3,
+                'acceptedFormats' => ['image/jpeg', 'image/png', 'image/webp'],
+                'section' => 'Images',
             ],
         ];
     }

@@ -5,9 +5,10 @@ import { PageEditorLayout } from '@/components/dashboard/page-editor-layout';
 import { PagePreview } from '@/components/dashboard/page-preview';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useImages } from '@/hooks/use-images';
+import { useMultiPageImages } from '@/hooks/use-images';
 import { useTranslations } from '@/hooks/use-translations';
 import { Circle, ImageIcon, Type } from 'lucide-react';
+import { useMemo } from 'react';
 
 interface EditHomeProps {
     pageUrl: string;
@@ -31,6 +32,8 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
         handleReset,
     } = useTranslations(pageName);
 
+    // Charger les images de 'home' et 'global' car les composants de la page home utilisent les deux
+    const imagePages = useMemo(() => [pageName, 'global'], [pageName]);
     const {
         images,
         loading: imagesLoading,
@@ -38,7 +41,7 @@ export default function EditHome({ pageUrl, pageTitle, pageName }: EditHomeProps
         uploadingKey,
         sections: imageSections,
         handleUpload,
-    } = useImages(pageName);
+    } = useMultiPageImages(imagePages);
 
     const handlePreview = () => {
         window.open(pageUrl, '_blank');

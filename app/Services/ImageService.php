@@ -15,6 +15,26 @@ class ImageService
             'hero_background',
             'about_image_1',
             'about_image_2',
+            'cta_background',
+            'cta_image',
+            'certification_wheel',
+            'features_background',
+            'features_exam_1',
+            'features_exam_2',
+            'features_exam_3',
+            'cert_logo_ctfl',
+            'cert_logo_ctal_ta',
+            'cert_logo_ctal_tm',
+            'cert_logo_ctal_tae',
+            'cert_logo_agile',
+            'cert_logo_expert',
+        ],
+        'global' => [
+            'bg_sharp_1',
+            'bg_sharp_2',
+            'bg_sharp_3',
+            'ads_1',
+            'ads_2',
         ],
         'about.citl' => [
             'overview',
@@ -29,6 +49,22 @@ class ImageService
             'overview',
         ],
         'about.executive_board' => [
+            'overview',
+            'member_1',
+            'member_2',
+            'member_3',
+        ],
+        'exams.anti_piracy' => [
+            'shield_main',
+            'shield_verification',
+        ],
+        'exams.questions' => [
+            'exam_success',
+        ],
+        'membership.members' => [
+            'benefits',
+        ],
+        'membership.working_groups' => [
             'overview',
         ],
     ];
@@ -127,11 +163,16 @@ class ImageService
     {
         $directoryMap = [
             'home' => 'uploads/home',
+            'global' => 'uploads/global',
             'about.citl' => 'uploads/about',
             'about.istqb' => 'uploads/about',
             'about.vision' => 'uploads/about',
             'about.missions' => 'uploads/about',
             'about.executive_board' => 'uploads/about',
+            'exams.anti_piracy' => 'uploads/exams',
+            'exams.questions' => 'uploads/exams',
+            'membership.members' => 'uploads/membership',
+            'membership.working_groups' => 'uploads/membership',
         ];
 
         return $directoryMap[$pageName] ?? 'uploads';

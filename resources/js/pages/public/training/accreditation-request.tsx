@@ -1,6 +1,7 @@
 import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
 import { TableSection } from '@/components/common/table-section';
+import { useImage } from '@/hooks/use-image';
 import { AccreditationRequestForm } from '@/components/training/accreditation-request-form';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head, usePage } from '@inertiajs/react';
@@ -11,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 function AccreditationRequest() {
     const { t } = useTranslation();
     const { flash } = usePage().props as any;
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const adsBanner2 = useImage('global', 'ads_2', '/assets/images/ads/ads-2.jpg');
 
     useEffect(() => {
         if (flash?.success) {
@@ -67,7 +70,7 @@ function AccreditationRequest() {
                 badge={t('training.hero_badge')}
                 title={t('training.hero_title')}
                 description={t('training.hero_description')}
-                backgroundImage="/assets/images/bg/sharp-2.png"
+                backgroundImage={bgSharp2}
             />
 
             {/* Accreditation Steps Table */}
@@ -106,7 +109,7 @@ function AccreditationRequest() {
                                 { text: t('training.process_step_4') },
                             ]}
                             adBanner={{
-                                imageSrc: '/assets/images/ads/ads-2.jpg',
+                                imageSrc: adsBanner2,
                                 imageAlt: 'Accréditation CITL',
                                 title: 'Devenez organisme accrédité',
                                 href: '/accredited-organizations',

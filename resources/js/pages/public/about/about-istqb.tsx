@@ -1,10 +1,13 @@
 import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AboutIstqb() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const overviewImage = useImage('about.istqb', 'overview', '/assets/images/pages/about/istqb.png');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -40,7 +43,7 @@ function AboutIstqb() {
                     badge={t('about.istqb.badge')}
                     title={t('about.istqb.hero_title')}
                     description={t('about.istqb.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 <AboutOverview
@@ -48,7 +51,7 @@ function AboutIstqb() {
                     description={t('about.istqb.overview_description')}
                     learnTitle={t('about.istqb.learn_title')}
                     items={overviewItems}
-                    imageSrc="/assets/images/pages/about/istqb.png"
+                    imageSrc={overviewImage}
                     imageAlt="ISTQB - International Software Testing Qualifications Board"
                 />
 

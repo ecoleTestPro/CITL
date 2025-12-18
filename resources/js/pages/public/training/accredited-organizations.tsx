@@ -1,12 +1,14 @@
 import { OrganizationsListSection } from '@/components/accredited-organizations/organizations-list-section';
 import AboutOverview from '@/components/blocks/about/about-overview';
 import HeroCommon from '@/components/common/common-hero';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AccreditedOrganizations() {
     const { t, ready } = useTranslation();
+    const adsBanner2 = useImage('global', 'ads_2', '/assets/images/ads/ads-2.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -41,7 +43,7 @@ function AccreditedOrganizations() {
                 description={t('training.accreditation_overview_description')}
                 learnTitle={t('training.accreditation_learn_title')}
                 items={overviewItems}
-                imageSrc="/assets/images/ads/ads-2.jpg"
+                imageSrc={adsBanner2}
                 imageAlt={t('training.accredited_organizations_title')}
             />
         </PublicLayout>

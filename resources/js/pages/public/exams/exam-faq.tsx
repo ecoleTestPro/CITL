@@ -1,5 +1,6 @@
 import FaqBlockOne from '@/components/blocks/faq/faq-block-one';
 import HeroCommon from '@/components/common/common-hero';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import axios from 'axios';
@@ -19,6 +20,7 @@ interface FaqCategory {
 
 function ExamFaq() {
     const { t, i18n } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
     const [faqCategories, setFaqCategories] = useState<FaqCategory[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -57,7 +59,7 @@ function ExamFaq() {
                 badge={t('exams.faq.hero_badge')}
                 title={t('exams.faq.hero_title')}
                 description={t('exams.faq.hero_description')}
-                backgroundImage="/assets/images/bg/sharp-2.png"
+                backgroundImage={bgSharp2}
             />
 
             {loading ? (

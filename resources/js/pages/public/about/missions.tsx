@@ -1,10 +1,13 @@
 import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function Missions() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const overviewImage = useImage('about.missions', 'overview', '/assets/images/pages/about/missions-overview.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -40,7 +43,7 @@ function Missions() {
                     badge={t('about.missions.badge')}
                     title={t('about.missions.hero_title')}
                     description={t('about.missions.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 <AboutOverview
@@ -48,7 +51,7 @@ function Missions() {
                     description={t('about.missions.overview_description')}
                     learnTitle={t('about.missions.learn_title')}
                     items={overviewItems}
-                    imageSrc="/assets/images/pages/about/missions-overview.jpg"
+                    imageSrc={overviewImage}
                     imageAlt="Nos Missions - CITL"
                 />
 

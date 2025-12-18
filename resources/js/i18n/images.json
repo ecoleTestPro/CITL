@@ -18,8 +18,11 @@
         "cert_logo_expert": "/assets/images/certifications/logo-expert.png"
     },
     "global": {
+        "bg_sharp_1": "/assets/images/bg/sharp-1.png",
         "bg_sharp_2": "/assets/images/bg/sharp-2.png",
-        "bg_sharp_3": "/assets/images/bg/sharp-3.png"
+        "bg_sharp_3": "/assets/images/bg/sharp-3.png",
+        "ads_1": "/assets/images/ads/ads-1.jpg",
+        "ads_2": "/assets/images/ads/ads-2.jpg"
     },
     "about.citl": {
         "overview": "/assets/images/pages/about/citl-overview.jpg"
@@ -34,6 +37,22 @@
         "overview": "/assets/images/pages/about/missions-overview.jpg"
     },
     "about.executive_board": {
-        "overview": "/assets/images/pages/about/executive-board.jpg"
+        "overview": "/assets/images/pages/about/executive-board.jpg",
+        "member_1": "/assets/images/team/alexis-nana.png",
+        "member_2": "/assets/images/team/sylviane-akpangny.jpeg",
+        "member_3": "/assets/images/team/sekou-diabate.png"
+    },
+    "exams.anti_piracy": {
+        "shield_main": "/assets/images/pages/certification/shield-2.png",
+        "shield_verification": "/assets/images/pages/certification/shield.png"
+    },
+    "exams.questions": {
+        "exam_success": "/assets/images/pages/certification/exam-success.png"
+    },
+    "membership.members": {
+        "benefits": "/assets/images/pages/membership/membership-benefits.jpg"
+    },
+    "membership.working_groups": {
+        "overview": "/assets/images/about/about-03.jpg"
     }
 }

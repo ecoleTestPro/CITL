@@ -1,5 +1,6 @@
 import { AboutKeyTakeaways, HeroCommon } from '@/components/blocks/about';
 import { WhyJoinSection } from '@/components/blocks/membership';
+import { useImage } from '@/hooks/use-image';
 import MembershipFormModal from '@/components/membership/membership-form-modal';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
@@ -9,6 +10,8 @@ import { useTranslation } from 'react-i18next';
 function Members() {
     const { t } = useTranslation();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const benefitsImage = useImage('membership.members', 'benefits', '/assets/images/pages/membership/membership-benefits.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -47,7 +50,7 @@ function Members() {
                     badge={t('about.members.badge')}
                     title={t('about.members.hero_title')}
                     description={t('about.members.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 {/* Why Join CITL Section */}
@@ -57,7 +60,7 @@ function Members() {
                     description={t('about.members.why_join_description')}
                     ctaText={t('about.members.join_now')}
                     onCtaClick={() => setIsModalOpen(true)}
-                    imageSrc="/assets/images/pages/membership/membership-benefits.jpg"
+                    imageSrc={benefitsImage}
                     imageAlt="CITL Membership Benefits"
                     imagePosition="right"
                 />

@@ -1,5 +1,6 @@
 import HeroCommon from '@/components/common/common-hero';
 import { TableSection } from '@/components/common/table-section';
+import { useImage } from '@/hooks/use-image';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
@@ -44,6 +45,7 @@ function PriceWithTooltip({ euroAmount }: PriceWithTooltipProps) {
 
 function ExamFees() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
 
     const feeColumns = [
         { key: 'level', header: t('exams.fees.column_level'), align: 'left' as const },
@@ -72,7 +74,7 @@ function ExamFees() {
                 badge={t('nav.exam_fees')}
                 title={t('exams.fees.title')}
                 description={t('exams.fees.description')}
-                backgroundImage="/assets/images/bg/sharp-2.png"
+                backgroundImage={bgSharp2}
             />
 
             <TableSection

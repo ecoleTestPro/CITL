@@ -2,12 +2,17 @@ import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
 import { TableSection } from '@/components/common/table-section';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function ExamQuestions() {
     const { t } = useTranslation();
+    const bgSharp1 = useImage('global', 'bg_sharp_1', '/assets/images/bg/sharp-1.png');
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const examSuccess = useImage('exams.questions', 'exam_success', '/assets/images/pages/certification/exam-success.png');
+    const certificationWheel = useImage('home', 'certification_wheel', '/assets/images/pages/certification/certification-wheel.png');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -64,22 +69,22 @@ function ExamQuestions() {
                 badge={t('exams.hero.badge')}
                 title={t('exams.hero.title')}
                 description={t('exams.hero.description')}
-                backgroundImage="/assets/images/bg/sharp-2.png"
+                backgroundImage={bgSharp2}
             />
 
             <CommonTextBlock
-                image={{ src: '/assets/images/pages/certification/exam-success.png', alt: t('exams.understanding.image_alt'), width: 300 }}
+                image={{ src: examSuccess, alt: t('exams.understanding.image_alt'), width: 300 }}
                 title={t('exams.understanding.title')}
                 description={t('exams.understanding.description')}
                 backgroundColor="#f8fafc"
                 backgroundShapes={[
                     {
-                        src: '/assets/images/bg/sharp-1.png',
+                        src: bgSharp1,
                         position: 'top-right',
                         opacity: 0.05,
                     },
                     {
-                        src: '/assets/images/bg/sharp-2.png',
+                        src: bgSharp2,
                         position: 'bottom-left',
                         opacity: 0.03,
                     },
@@ -106,7 +111,7 @@ function ExamQuestions() {
                         { text: t('exams.foundation.item_3') },
                         { text: t('exams.foundation.item_4') },
                     ]}
-                    imageSrc="/assets/images/pages/certification/certification-wheel.png"
+                    imageSrc={certificationWheel}
                     imageAlt={t('exams.foundation.image_alt')}
                 />
             </div>

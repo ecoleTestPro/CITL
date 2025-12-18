@@ -1,12 +1,17 @@
 import AboutBlockOne from '@/components/blocks/about-us/about-block-one';
 import HeroCommon from '@/components/common/common-hero';
 import CommonTextBlock from '@/components/common/common-text-block';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AntiPiracy() {
     const { t } = useTranslation();
+    const bgSharp1 = useImage('global', 'bg_sharp_1', '/assets/images/bg/sharp-1.png');
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const shieldMain = useImage('exams.anti_piracy', 'shield_main', '/assets/images/pages/certification/shield-2.png');
+    const shieldVerification = useImage('exams.anti_piracy', 'shield_verification', '/assets/images/pages/certification/shield.png');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -31,18 +36,18 @@ function AntiPiracy() {
             />
 
             <CommonTextBlock
-                image={{ src: '/assets/images/pages/certification/shield-2.png', alt: 'Protection Shield', width: 300 }}
+                image={{ src: shieldMain, alt: 'Protection Shield', width: 300 }}
                 title={t('exams.anti_piracy.warning_title')}
                 description={t('exams.anti_piracy.warning_text')}
                 backgroundColor="#f8fafc"
                 backgroundShapes={[
                     {
-                        src: '/assets/images/bg/sharp-1.png',
+                        src: bgSharp1,
                         position: 'top-right',
                         opacity: 0.05,
                     },
                     {
-                        src: '/assets/images/bg/sharp-2.png',
+                        src: bgSharp2,
                         position: 'bottom-left',
                         opacity: 0.03,
                     },
@@ -60,7 +65,7 @@ function AntiPiracy() {
                         { text: t('exams.anti_piracy.verify_exam_provider') },
                         { text: t('exams.anti_piracy.verify_certificate') },
                     ]}
-                    imageSrc="/assets/images/pages/certification/shield.png"
+                    imageSrc={shieldVerification}
                     imageAlt="Online Verification Tool"
                 />
             </div>

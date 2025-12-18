@@ -1,10 +1,13 @@
 import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function Vision() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const overviewImage = useImage('about.vision', 'overview', '/assets/images/pages/about/vision-overview.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -42,7 +45,7 @@ function Vision() {
                     badge={t('about.vision.badge')}
                     title={t('about.vision.hero_title')}
                     description={t('about.vision.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 <AboutOverview
@@ -50,7 +53,7 @@ function Vision() {
                     description={t('about.vision.overview_description')}
                     learnTitle={t('about.vision.learn_title')}
                     items={overviewItems}
-                    imageSrc="/assets/images/pages/about/vision-overview.jpg"
+                    imageSrc={overviewImage}
                     imageAlt="Notre Vision - CITL"
                 />
 

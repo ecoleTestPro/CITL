@@ -1,12 +1,14 @@
 import AboutOverview from '@/components/blocks/about/about-overview';
 import DomainsGrid from '@/components/blocks/about/domains-grid';
 import HeroCommon from '@/components/common/common-hero';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function WorkingGroups() {
     const { t, ready } = useTranslation();
+    const overviewImage = useImage('membership.working_groups', 'overview', '/assets/images/about/about-03.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -56,7 +58,7 @@ function WorkingGroups() {
                 description={t('working_groups.overview_description')}
                 learnTitle={t('working_groups.learn_title')}
                 items={overviewItems}
-                imageSrc="/assets/images/about/about-03.jpg"
+                imageSrc={overviewImage}
                 imageAlt={t('working_groups.hero_title')}
             />
 

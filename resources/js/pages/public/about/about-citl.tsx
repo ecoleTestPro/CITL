@@ -1,10 +1,13 @@
 import { AboutKeyTakeaways, AboutOverview, HeroCommon } from '@/components/blocks/about';
+import { useImage } from '@/hooks/use-image';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 function AboutCitl() {
     const { t } = useTranslation();
+    const bgSharp2 = useImage('global', 'bg_sharp_2', '/assets/images/bg/sharp-2.png');
+    const overviewImage = useImage('about.citl', 'overview', '/assets/images/pages/about/citl-overview.jpg');
 
     const breadcrumbs = [
         { title: t('nav.home'), href: '/' },
@@ -39,7 +42,7 @@ function AboutCitl() {
                     badge={t('about.citl.badge')}
                     title={t('about.citl.hero_title')}
                     description={t('about.citl.hero_description')}
-                    backgroundImage="/assets/images/bg/sharp-2.png"
+                    backgroundImage={bgSharp2}
                 />
 
                 <AboutOverview
@@ -47,7 +50,7 @@ function AboutCitl() {
                     description={t('about.citl.overview_description')}
                     learnTitle={t('about.citl.learn_title')}
                     items={overviewItems}
-                    imageSrc="/assets/images/pages/about/citl-overview.jpg"
+                    imageSrc={overviewImage}
                     imageAlt="CITL - Comité Ivoirien des Tests Logiciels"
                 />
 

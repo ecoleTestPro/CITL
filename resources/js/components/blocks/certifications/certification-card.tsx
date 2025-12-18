@@ -1,4 +1,5 @@
 import { Certification } from '@/types';
+import { Link } from '@inertiajs/react';
 import { ArrowRight, BookOpen, CheckCircle, Clock, Target } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -23,10 +24,25 @@ function CertificationCard({ certification }: CertificationCardProps) {
 
     return (
         <article className="group relative flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white transition-all duration-300 hover:border-gray-200 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-700">
-            {/* Icon Header */}
+            {/* Header */}
             <div className="flex items-center gap-4 border-b border-gray-100 p-6 dark:border-gray-800">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-secondary/10 to-secondary/5 dark:from-primary/20 dark:to-primary/10">
-                    <span className={`${certification.icon} text-4xl text-secondary dark:text-primary`}></span>
+                {/* Featured Image or Icon Fallback */}
+                <div
+                    className={`flex h-32 w-32 shrink-0 items-center justify-center overflow-hidden rounded-xl ${
+                        certification.featured_image
+                            ? 'bg-white dark:bg-gray-800'
+                            : 'bg-gradient-to-br from-secondary/10 to-secondary/5 dark:from-primary/20 dark:to-primary/10'
+                    }`}
+                >
+                    {certification.featured_image ? (
+                        <img
+                            src={certification.featured_image}
+                            alt={title}
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                    ) : (
+                        <span className={`${certification.icon} text-4xl text-secondary dark:text-primary`}></span>
+                    )}
                 </div>
                 <div className="min-w-0 flex-1">
                     <h3 className="text-lg leading-tight font-semibold text-gray-900 dark:text-white">{title}</h3>
@@ -49,13 +65,14 @@ function CertificationCard({ certification }: CertificationCardProps) {
 
             {/* Footer CTA */}
             <div className="border-t border-gray-100 p-4 dark:border-gray-800">
-                <a
+                <Link
                     href={`/certifications/${certification.slug}`}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gray-900 px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-gray-800 dark:bg-primary dark:hover:bg-primary/90"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary/70 px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-primary dark:bg-primary dark:hover:bg-primary/90"
+                    preserveScroll
                 >
                     {t('certifications.view_details')}
                     <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-                </a>
+                </Link>
             </div>
         </article>
     );

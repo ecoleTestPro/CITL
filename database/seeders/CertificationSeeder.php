@@ -13,7 +13,7 @@ class CertificationSeeder extends Seeder
     /**
      * Source directory for syllabus PDFs (in public folder, for seeding only)
      */
-    private string $syllabusSourceDir = 'certifications';
+    private string $syllabusSourceDir = 'certifications/syllabus';
 
     /**
      * Destination directory for syllabus PDFs (in storage)
@@ -91,39 +91,39 @@ class CertificationSeeder extends Seeder
 
         // Create categories
         $coreFoundation = CertificationCategory::create([
-            'name_fr' => 'Core Foundation',
-            'name_en' => 'Core Foundation',
-            'slug' => 'core-foundation',
-            'key' => 'core-foundation',
+            'name_fr'        => 'Core Foundation',
+            'name_en'        => 'Core Foundation',
+            'slug'           => 'core-foundation',
+            'key'            => 'core-foundation',
             'description_fr' => 'Niveau de base pour toutes les certifications ISTQB',
             'description_en' => 'Entry level for all ISTQB certifications',
-            'order' => 1,
-            'is_active' => true,
-            'can_delete' => false,
+            'order'          => 1,
+            'is_active'      => true,
+            'can_delete'     => false,
         ]);
 
         $coreAdvanced = CertificationCategory::create([
-            'name_fr' => 'Core Advanced',
-            'name_en' => 'Core Advanced',
-            'slug' => 'core-advanced',
-            'key' => 'core-advanced',
+            'name_fr'        => 'Core Advanced',
+            'name_en'        => 'Core Advanced',
+            'slug'           => 'core-advanced',
+            'key'            => 'core-advanced',
             'description_fr' => 'Certifications avancées pour approfondir vos compétences',
             'description_en' => 'Advanced certifications to deepen your skills',
-            'order' => 2,
-            'is_active' => true,
-            'can_delete' => false,
+            'order'          => 2,
+            'is_active'      => true,
+            'can_delete'     => false,
         ]);
 
         $specialist = CertificationCategory::create([
-            'name_fr' => 'Spécialiste',
-            'name_en' => 'Specialist',
-            'slug' => 'specialist',
-            'key' => 'specialist',
+            'name_fr'        => 'Spécialiste',
+            'name_en'        => 'Specialist',
+            'slug'           => 'specialist',
+            'key'            => 'specialist',
             'description_fr' => 'Certifications spécialisées dans des domaines spécifiques',
             'description_en' => 'Specialized certifications in specific domains',
-            'order' => 3,
-            'is_active' => true,
-            'can_delete' => false,
+            'order'          => 3,
+            'is_active'      => true,
+            'can_delete'     => false,
         ]);
 
         $expertLevel = CertificationCategory::create([
@@ -138,17 +138,17 @@ class CertificationSeeder extends Seeder
             'can_delete' => false,
         ]);
 
-        $requirementsEngineering = CertificationCategory::create([
-            'name_fr' => 'Ingénieurie des exigences',
-            'name_en' => 'Requirements Engineering',
-            'slug' => 'requirements-engineering',
-            'key' => 'requirements-engineering',
-            'description_fr' => 'Certifications en ingénierie des exigences',
-            'description_en' => 'Requirements engineering certifications',
-            'order' => 5,
-            'is_active' => true,
-            'can_delete' => false,
-        ]);
+        // $requirementsEngineering = CertificationCategory::create([
+        //     'name_fr'        => 'Ingénieurie des exigences',
+        //     'name_en'        => 'Requirements Engineering',
+        //     'slug'           => 'requirements-engineering',
+        //     'key'            => 'requirements-engineering',
+        //     'description_fr' => 'Certifications en ingénierie des exigences',
+        //     'description_en' => 'Requirements engineering certifications',
+        //     'order'          => 5,
+        //     'is_active'      => true,
+        //     'can_delete'     => false,
+        // ]);
 
         $a4q = CertificationCategory::create([
             'name_fr' => 'A4Q',
@@ -338,7 +338,7 @@ class CertificationSeeder extends Seeder
         ]);
 
         Certification::create([
-            'certification_category_id' => $requirementsEngineering->id,
+            'certification_category_id' => $coreFoundation->id,
             'title_fr' => 'CFLBA',
             'title_en' => 'CFLBA',
             'slug' => 'cflba',
@@ -356,7 +356,7 @@ class CertificationSeeder extends Seeder
         ]);
 
         Certification::create([
-            'certification_category_id' => $requirementsEngineering->id,
+            'certification_category_id' => $coreFoundation->id,
             'title_fr' => 'IREB CPRE Foundation',
             'title_en' => 'IREB CPRE Foundation',
             'slug' => 'ireb-cpre-foundation',

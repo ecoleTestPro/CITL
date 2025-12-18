@@ -1,4 +1,5 @@
 import { Certification, CertificationCategory } from '@/types';
+import { Link } from '@inertiajs/react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -63,13 +64,14 @@ function CertificationTreeView({ categories, categorySlug, getCategoryRoute }: C
                             ) : (
                                 <span className="w-4" />
                             )}
-                            <a
+                            <Link
                                 href={getCategoryRoute(cat.slug)}
                                 className="flex-1 hover:text-primary"
                                 onClick={(e) => e.stopPropagation()}
+                                preserveScroll
                             >
                                 {getCategoryLocalizedField(cat, 'name')}
-                            </a>
+                            </Link>
                             {catCertifications.length > 0 && (
                                 <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-400">
                                     {catCertifications.length}
@@ -82,13 +84,14 @@ function CertificationTreeView({ categories, categorySlug, getCategoryRoute }: C
                             <ul className="ml-6 mt-1 space-y-0.5 border-l border-gray-200 pl-3 dark:border-gray-700">
                                 {catCertifications.map((cert: Certification) => (
                                     <li key={cert.id}>
-                                        <a
+                                        <Link
                                             href={`/certifications/${cert.slug}`}
                                             className="group flex items-center gap-2 rounded-md px-2 py-1.5 text-xs text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                                            preserveScroll
                                         >
                                             <span className="h-1 w-1 shrink-0 rounded-full bg-gray-300 dark:bg-gray-600" />
                                             <span className="line-clamp-1">{(isEnglish && cert.title_en) || cert.title_fr}</span>
-                                        </a>
+                                        </Link>
                                     </li>
                                 ))}
                             </ul>

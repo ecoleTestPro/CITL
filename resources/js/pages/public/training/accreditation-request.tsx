@@ -1,9 +1,10 @@
 import { BenefitsSidebar } from '@/components/common/benefits-sidebar';
 import HeroCommon from '@/components/common/common-hero';
+import { TableSection } from '@/components/common/table-section';
 import { AccreditationRequestForm } from '@/components/training/accreditation-request-form';
 import PublicLayout from '@/layouts/public/public-layout';
 import { Head, usePage } from '@inertiajs/react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useTranslation } from 'react-i18next';
 
@@ -26,6 +27,31 @@ function AccreditationRequest() {
         { title: t('nav.accreditation_request'), href: '/accreditation-request' },
     ];
 
+    // Table columns for accreditation steps
+    const stepsColumns = useMemo(
+        () => [
+            { key: 'step', header: t('training.steps_table.column_step'), align: 'center' as const },
+            { key: 'name', header: t('training.steps_table.column_name') },
+            { key: 'description', header: t('training.steps_table.column_description') },
+            { key: 'responsible', header: t('training.steps_table.column_responsible') },
+            { key: 'observations', header: t('training.steps_table.column_observations') },
+        ],
+        [t],
+    );
+
+    // Table data for accreditation steps
+    const stepsData = useMemo(
+        () =>
+            Array.from({ length: 11 }, (_, i) => ({
+                step: i + 1,
+                name: t(`training.steps_table.step_${i + 1}_name`),
+                description: t(`training.steps_table.step_${i + 1}_description`),
+                responsible: t(`training.steps_table.step_${i + 1}_responsible`),
+                observations: t(`training.steps_table.step_${i + 1}_observations`),
+            })),
+        [t],
+    );
+
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
@@ -42,6 +68,16 @@ function AccreditationRequest() {
                 title={t('training.hero_title')}
                 description={t('training.hero_description')}
                 backgroundImage="/assets/images/bg/sharp-2.png"
+            />
+
+            {/* Accreditation Steps Table */}
+            <TableSection
+                title={t('training.accreditation_steps_title')}
+                description={t('training.accreditation_steps_description')}
+                columns={stepsColumns}
+                data={stepsData}
+                maxWidth="7xl"
+                bgColor="bg-white dark:bg-gray-900"
             />
 
             {/* Application Form Section */}

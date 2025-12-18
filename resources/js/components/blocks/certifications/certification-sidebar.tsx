@@ -1,4 +1,5 @@
 import { CertificationCategory } from '@/types';
+import { Link } from '@inertiajs/react';
 import { Award, ExternalLink, GraduationCap, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import CertificationTreeView from './certification-tree-view';
@@ -65,31 +66,34 @@ function CertificationSidebar({ categories, categorySlug, searchQuery, onSearchC
                 </h3>
                 <ul className="space-y-2">
                     <li>
-                        <a
+                        <Link
                             href="/accredited-organizations"
                             className="group flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                            preserveScroll
                         >
                             <ExternalLink className="h-3.5 w-3.5" />
                             {t('certifications.sidebar.find_training')}
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="/exam-registration"
                             className="group flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                            preserveScroll
                         >
                             <ExternalLink className="h-3.5 w-3.5" />
                             {t('certifications.sidebar.register_exam')}
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a
+                        <Link
                             href="/why-certification"
                             className="group flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
+                            preserveScroll
                         >
                             <ExternalLink className="h-3.5 w-3.5" />
                             {t('certifications.sidebar.why_certify')}
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

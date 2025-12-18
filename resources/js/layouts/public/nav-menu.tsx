@@ -447,6 +447,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                         anchorEl={anchorEl[menuKey]}
                         open={isOpen}
                         onClose={() => handleMenuClose(menuKey)}
+                        sx={{ zIndex: 50 }}
                         PaperProps={{
                             elevation: 0,
                             sx: {
@@ -489,6 +490,7 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
                     anchorEl={anchorEl[menuKey]}
                     open={isOpen}
                     onClose={() => handleMenuClose(menuKey)}
+                    sx={{ zIndex: 50 }}
                     PaperProps={{
                         elevation: 0,
                         sx: {

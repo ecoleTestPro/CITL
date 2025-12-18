@@ -1,14 +1,14 @@
 import { AnimatedButton } from '@/components/ui/animated-button';
 import AnimatedGridPattern from '@/components/ui/animated-grid-pattern';
 import { Badge } from '@/components/ui/badge';
+import { useRichTranslation } from '@/hooks/use-rich-translation';
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Trophy } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 const HeroHome = () => {
-    const { t } = useTranslation();
+    const { t, tRich } = useRichTranslation();
 
     // Animation variants
     const containerVariants = {
@@ -73,7 +73,8 @@ const HeroHome = () => {
                         <motion.div variants={badgeVariants}>
                             <Badge variant="secondary" className="relative rounded-full border-border" asChild>
                                 <Link href="/about-citl">
-                                    {t('hero.foundedDate')} <ArrowUpRight className="ml-1 size-4" />
+                                    <span dangerouslySetInnerHTML={{ __html: tRich('hero.foundedDate') }} />
+                                    <ArrowUpRight className="ml-1 size-4" />
                                 </Link>
                             </Badge>
                         </motion.div>
@@ -81,13 +82,14 @@ const HeroHome = () => {
                         <motion.h1
                             variants={itemVariants}
                             className="relative mt-4 max-w-[20ch] text-3xl leading-[1.2]! font-semibold tracking-tighter sm:mt-6 sm:text-4xl md:text-5xl lg:text-[2.75rem] xl:text-[3.25rem]"
-                        >
-                            {t('hero.title')}
-                        </motion.h1>
+                            dangerouslySetInnerHTML={{ __html: tRich('hero.title') }}
+                        />
 
-                        <motion.p variants={itemVariants} className="relative mt-4 max-w-[60ch] text-base text-foreground/80 sm:mt-6 sm:text-lg">
-                            {t('hero.description')}
-                        </motion.p>
+                        <motion.p
+                            variants={itemVariants}
+                            className="relative mt-4 max-w-[60ch] text-base text-foreground/80 sm:mt-6 sm:text-lg"
+                            dangerouslySetInnerHTML={{ __html: tRich('hero.description') }}
+                        />
 
                         <motion.div
                             variants={itemVariants}

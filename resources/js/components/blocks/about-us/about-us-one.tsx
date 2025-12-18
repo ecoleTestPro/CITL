@@ -1,11 +1,11 @@
 import { FadeIn, ScaleIn, SlideIn } from '@/components/animations';
 import { AnimatedButton } from '@/components/ui/animated-button';
 import { Button } from '@/components/ui/button';
+import { useRichTranslation } from '@/hooks/use-rich-translation';
 import { Link } from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
 
 export default function AboutUsOne() {
-    const { t } = useTranslation();
+    const { t, tRich } = useRichTranslation();
 
     return (
         <section className="relative bg-white/80 pt-12 pb-6 sm:pt-24 dark:bg-gray-900">
@@ -35,12 +35,14 @@ export default function AboutUsOne() {
                         <div className="relative flex w-full flex-col items-start justify-center gap-8">
                             {/* Titre et description avec FadeIn */}
                             <FadeIn duration={1.2} delay={0.3} className="flex w-full flex-col items-center justify-start gap-3 lg:items-start">
-                                <h2 className="font-manrope text-center text-4xl leading-normal font-bold text-gray-900 lg:text-start dark:text-gray-100">
-                                    {t('home.hero_title')}
-                                </h2>
-                                <p className="text-center text-[17px] leading-relaxed font-normal text-gray-500 text-muted-foreground lg:text-start dark:text-gray-400">
-                                    {t('home.hero_description')}
-                                </p>
+                                <h2
+                                    className="font-manrope text-center text-4xl leading-normal font-bold text-gray-900 lg:text-start dark:text-gray-100"
+                                    dangerouslySetInnerHTML={{ __html: tRich('home.hero_title') }}
+                                />
+                                <p
+                                    className="text-center text-[17px] leading-relaxed font-normal text-gray-500 text-muted-foreground lg:text-start dark:text-gray-400"
+                                    dangerouslySetInnerHTML={{ __html: tRich('home.hero_description') }}
+                                />
                             </FadeIn>
 
                             {/* Statistiques avec ScaleIn et stagger */}

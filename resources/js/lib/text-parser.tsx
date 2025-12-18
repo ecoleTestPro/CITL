@@ -1,3 +1,5 @@
+import { markdownToHtml, containsMarkdown, containsHtml as checkHtml } from './markdown-html-converter';
+
 /**
  * Vérifie si le texte contient du HTML
  * @param text - Le texte à vérifier
@@ -5,7 +7,22 @@
  */
 function containsHtml(text: string | null | undefined): boolean {
     if (!text) return false;
-    return /<[a-z][\s\S]*>/i.test(text);
+    return checkHtml(text);
+}
+
+/**
+ * Convertit le texte Markdown en HTML si nécessaire
+ * @param text - Le texte à convertir
+ * @returns Le texte converti en HTML ou le texte original
+ */
+function convertToHtml(text: string): string {
+    if (containsHtml(text)) {
+        return text; // Déjà du HTML
+    }
+    if (containsMarkdown(text)) {
+        return markdownToHtml(text);
+    }
+    return text;
 }
 
 /**
@@ -66,68 +83,17 @@ export function RichText({ text, className = '', as = 'span' }: RichTextProps) {
         return null;
     }
 
-    const combinedClassName = containsHtml(text) ? `prose prose-sm dark:prose-invert max-w-none ${className}` : className;
+    // Convertir le Markdown en HTML si nécessaire
+    const htmlContent = convertToHtml(text);
+    const hasFormatting = containsHtml(htmlContent) || containsMarkdown(text);
 
-    // Si le texte contient du HTML, utiliser dangerouslySetInnerHTML
-    if (containsHtml(text)) {
-        switch (as) {
-            case 'p':
-                return <p className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'div':
-                return <div className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h1':
-                return <h1 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h2':
-                return <h2 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h3':
-                return <h3 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h4':
-                return <h4 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h5':
-                return <h5 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'h6':
-                return <h6 className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'li':
-                return <li className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'td':
-                return <td className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'th':
-                return <th className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            case 'label':
-                return <label className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-            default:
-                return <span className={combinedClassName} dangerouslySetInnerHTML={{ __html: text }} />;
-        }
+    // Si le texte contient du formatage (HTML ou Markdown converti), utiliser dangerouslySetInnerHTML
+    if (hasFormatting) {
+        const Element = as;
+        return <Element className={className} dangerouslySetInnerHTML={{ __html: htmlContent }} />;
     }
 
-    // Sinon, utiliser le parser markdown pour **gras**
-    const content = parseTextWithBold(text);
-    switch (as) {
-        case 'p':
-            return <p className={className}>{content}</p>;
-        case 'div':
-            return <div className={className}>{content}</div>;
-        case 'h1':
-            return <h1 className={className}>{content}</h1>;
-        case 'h2':
-            return <h2 className={className}>{content}</h2>;
-        case 'h3':
-            return <h3 className={className}>{content}</h3>;
-        case 'h4':
-            return <h4 className={className}>{content}</h4>;
-        case 'h5':
-            return <h5 className={className}>{content}</h5>;
-        case 'h6':
-            return <h6 className={className}>{content}</h6>;
-        case 'li':
-            return <li className={className}>{content}</li>;
-        case 'td':
-            return <td className={className}>{content}</td>;
-        case 'th':
-            return <th className={className}>{content}</th>;
-        case 'label':
-            return <label className={className}>{content}</label>;
-        default:
-            return <span className={className}>{content}</span>;
-    }
+    // Sinon, retourner le texte brut
+    const Element = as;
+    return <Element className={className}>{text}</Element>;
 }

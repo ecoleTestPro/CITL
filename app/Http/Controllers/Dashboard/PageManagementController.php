@@ -17,25 +17,42 @@ class PageManagementController extends Controller
      * slug => [routeName, pageTitle, translationKey]
      */
     private const PAGE_CONFIG = [
+        // Accueil
         'home' => ['home', 'Page d\'accueil', 'home'],
+
+        // À propos
         'about-citl' => ['about-citl', 'À propos du CITL', 'about.citl'],
         'about-istqb' => ['about-istqb', 'À propos de l\'ISTQB', 'about.istqb'],
         'vision' => ['vision', 'Vision', 'about.vision'],
         'missions' => ['missions', 'Missions', 'about.missions'],
         'executive-board' => ['executive-board', 'Bureau exécutif', 'about.executive_board'],
-        'anti-piracy' => ['anti-piracy', 'Anti-piratage', 'exams.anti_piracy'],
-        'exam-faq' => ['exam-faq', 'FAQ Examens', 'exams.faq'],
-        'exam-fees' => ['exam-fees', 'Frais d\'examen', 'exams.fees'],
-        'exam-questions' => ['exam-questions', 'Questions d\'examen', 'exams.questions'],
-        'exam-registration' => ['exam-registration', 'Inscription aux examens', 'exams.registration'],
+
+        // Adhésion
         'members' => ['members', 'Membres', 'membership.members'],
         'working-groups' => ['working-groups', 'Groupes de travail', 'membership.working_groups'],
-        'certified-testers-list' => ['certified-testers-list', 'Liste des testeurs certifiés', 'certification.testers_list'],
-        'istqb-registry' => ['istqb-registry', 'Registre ISTQB', 'certification.registry'],
-        'register-certified-testers' => ['register-certified-testers', 'Enregistrer un testeur', 'certification.register'],
-        'accreditation-request' => ['accreditation-request', 'Demande d\'accréditation', 'accreditation.request'],
-        'accredited-organizations' => ['accredited-organizations', 'Organismes accrédités', 'accreditation.organizations'],
+
+        // Certifications
+        'why-certification' => ['why-certification', 'Pourquoi la certification', 'certification.why'],
+
+        // Examens
+        'exam-questions' => ['exam-questions', 'Questions d\'examen', 'exams.questions'],
+        'exam-fees' => ['exam-fees', 'Frais d\'examen', 'exams.fees'],
+        'exam-registration' => ['exam-registration', 'Inscription aux examens', 'exams.registration'],
+        'exam-faq' => ['exam-faq', 'FAQ Examens', 'exams.faq'],
+        'anti-piracy' => ['anti-piracy', 'Anti-piratage', 'exams.anti_piracy'],
         'glossary' => ['glossary', 'Glossaire', 'glossary'],
+
+        // Formation
+        'accredited-organizations' => ['accredited-organizations', 'Organismes accrédités', 'accreditation.organizations'],
+        'accreditation-request' => ['accreditation-request', 'Demande d\'accréditation', 'accreditation.request'],
+
+        // Inscription
+        'register-certified-testers' => ['register-certified-testers', 'Inscrire testeurs', 'certification.register'],
+        'certified-testers-list' => ['certified-testers-list', 'Liste testeurs', 'certification.testers_list'],
+        'istqb-registry' => ['istqb-registry', 'Registre ISTQB', 'certification.registry'],
+
+        // Contact
+        'contact' => ['contact', 'Contact', 'contact'],
     ];
 
     public function __construct(
@@ -81,54 +98,6 @@ class PageManagementController extends Controller
             'success' => true,
             'data' => ['pages' => $pages],
         ]);
-    }
-
-    /**
-     * Edit homepage content (legacy - uses generic editor)
-     */
-    public function editHome(): Response
-    {
-        return $this->edit('home');
-    }
-
-    /**
-     * Edit About CITL page content (legacy - uses generic editor)
-     */
-    public function editAboutCITL(): Response
-    {
-        return $this->edit('about-citl');
-    }
-
-    /**
-     * Edit About ISTQB page content (legacy - uses generic editor)
-     */
-    public function editAboutISTQB(): Response
-    {
-        return $this->edit('about-istqb');
-    }
-
-    /**
-     * Edit Vision page content (legacy - uses generic editor)
-     */
-    public function editVision(): Response
-    {
-        return $this->edit('vision');
-    }
-
-    /**
-     * Edit Missions page content (legacy - uses generic editor)
-     */
-    public function editMissions(): Response
-    {
-        return $this->edit('missions');
-    }
-
-    /**
-     * Edit Executive Board page content (legacy - uses generic editor)
-     */
-    public function editExecutiveBoard(): Response
-    {
-        return $this->edit('executive-board');
     }
 
     /**

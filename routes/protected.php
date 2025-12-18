@@ -30,19 +30,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Page Management Routes
     Route::prefix('dashboard/pages')->name('dashboard.pages.')->group(function () {
-        // Generic page editor route (handles all pages via slug parameter)
-        Route::get('/edit/{pageSlug}', [PageManagementController::class, 'edit'])->name('edit');
-
         // API route to get list of editable pages
         Route::get('/list', [PageManagementController::class, 'getEditablePages'])->name('list');
-
-        // Legacy routes (maintained for backward compatibility)
-        Route::get('/home', [PageManagementController::class, 'editHome'])->name('home.edit');
-        Route::get('/about-citl', [PageManagementController::class, 'editAboutCITL'])->name('about-citl.edit');
-        Route::get('/about-istqb', [PageManagementController::class, 'editAboutISTQB'])->name('about-istqb.edit');
-        Route::get('/vision', [PageManagementController::class, 'editVision'])->name('vision.edit');
-        Route::get('/missions', [PageManagementController::class, 'editMissions'])->name('missions.edit');
-        Route::get('/executive-board', [PageManagementController::class, 'editExecutiveBoard'])->name('executive-board.edit');
 
         // Translation API routes
         Route::get('/{page}/translations', [PageManagementController::class, 'getTranslations'])->name('translations.get');
@@ -52,6 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{page}/images', [ImageManagementController::class, 'getImages'])->name('images.get');
         Route::post('/images/upload', [ImageManagementController::class, 'uploadImage'])->name('images.upload');
         Route::get('/images/all', [ImageManagementController::class, 'getAllImages'])->name('images.all');
+
+        // Generic page editor route (handles all pages via slug parameter)
+        // This must be at the end to not interfere with other routes
+        Route::get('/{pageSlug}', [PageManagementController::class, 'edit'])->name('edit');
     });
 
     // Certification Management Routes (Unified)

@@ -21,7 +21,7 @@ export interface PageEditorConfig {
  * Le slug correspond à l'URL de l'admin (ex: /dashboard/pages/about-citl)
  */
 export const PAGE_EDITOR_CONFIGS: Record<string, PageEditorConfig> = {
-    // Home
+    // Accueil
     home: {
         translationKey: 'home',
         imagePages: ['home', 'global'],
@@ -30,7 +30,7 @@ export const PAGE_EDITOR_CONFIGS: Record<string, PageEditorConfig> = {
         hasImages: true,
     },
 
-    // About section
+    // À propos
     'about-citl': {
         translationKey: 'about.citl',
         imagePages: ['about.citl', 'global'],
@@ -67,44 +67,7 @@ export const PAGE_EDITOR_CONFIGS: Record<string, PageEditorConfig> = {
         hasImages: true,
     },
 
-    // Exams section
-    'anti-piracy': {
-        translationKey: 'exams.anti_piracy',
-        imagePages: ['exams.anti_piracy', 'global'],
-        title: 'Anti-piratage',
-        routeName: 'anti-piracy',
-        hasImages: true,
-    },
-    'exam-faq': {
-        translationKey: 'exams.faq',
-        imagePages: ['global'],
-        title: 'FAQ Examens',
-        routeName: 'exam-faq',
-        hasImages: false,
-    },
-    'exam-fees': {
-        translationKey: 'exams.fees',
-        imagePages: ['global'],
-        title: 'Frais d\'examen',
-        routeName: 'exam-fees',
-        hasImages: false,
-    },
-    'exam-questions': {
-        translationKey: 'exams.questions',
-        imagePages: ['exams.questions', 'global'],
-        title: 'Questions d\'examen',
-        routeName: 'exam-questions',
-        hasImages: true,
-    },
-    'exam-registration': {
-        translationKey: 'exams.registration',
-        imagePages: ['global'],
-        title: 'Inscription aux examens',
-        routeName: 'exam-registration',
-        hasImages: false,
-    },
-
-    // Membership section
+    // Adhésion
     members: {
         translationKey: 'membership.members',
         imagePages: ['membership.members', 'global'],
@@ -120,11 +83,87 @@ export const PAGE_EDITOR_CONFIGS: Record<string, PageEditorConfig> = {
         hasImages: true,
     },
 
-    // Certification section
+    // Certifications
+    'why-certification': {
+        translationKey: 'certification.why',
+        imagePages: ['global'],
+        title: 'Pourquoi la certification',
+        routeName: 'why-certification',
+        hasImages: false,
+    },
+
+    // Examens
+    'exam-questions': {
+        translationKey: 'exams.questions',
+        imagePages: ['exams.questions', 'global'],
+        title: 'Questions d\'examen',
+        routeName: 'exam-questions',
+        hasImages: true,
+    },
+    'exam-fees': {
+        translationKey: 'exams.fees',
+        imagePages: ['global'],
+        title: 'Frais d\'examen',
+        routeName: 'exam-fees',
+        hasImages: false,
+    },
+    'exam-registration': {
+        translationKey: 'exams.registration',
+        imagePages: ['global'],
+        title: 'Inscription aux examens',
+        routeName: 'exam-registration',
+        hasImages: false,
+    },
+    'exam-faq': {
+        translationKey: 'exams.faq',
+        imagePages: ['global'],
+        title: 'FAQ Examens',
+        routeName: 'exam-faq',
+        hasImages: false,
+    },
+    'anti-piracy': {
+        translationKey: 'exams.anti_piracy',
+        imagePages: ['exams.anti_piracy', 'global'],
+        title: 'Anti-piratage',
+        routeName: 'anti-piracy',
+        hasImages: true,
+    },
+    glossary: {
+        translationKey: 'glossary',
+        imagePages: ['global'],
+        title: 'Glossaire',
+        routeName: 'glossary',
+        hasImages: false,
+    },
+
+    // Formation
+    'accredited-organizations': {
+        translationKey: 'accreditation.organizations',
+        imagePages: ['global'],
+        title: 'Organismes accrédités',
+        routeName: 'accredited-organizations',
+        hasImages: false,
+    },
+    'accreditation-request': {
+        translationKey: 'accreditation.request',
+        imagePages: ['global'],
+        title: 'Demande d\'accréditation',
+        routeName: 'accreditation-request',
+        hasImages: false,
+    },
+
+    // Inscription
+    'register-certified-testers': {
+        translationKey: 'certification.register',
+        imagePages: ['global'],
+        title: 'Inscrire testeurs',
+        routeName: 'register-certified-testers',
+        hasImages: false,
+    },
     'certified-testers-list': {
         translationKey: 'certification.testers_list',
         imagePages: ['global'],
-        title: 'Liste des testeurs certifiés',
+        title: 'Liste testeurs',
         routeName: 'certified-testers-list',
         hasImages: false,
     },
@@ -135,36 +174,13 @@ export const PAGE_EDITOR_CONFIGS: Record<string, PageEditorConfig> = {
         routeName: 'istqb-registry',
         hasImages: false,
     },
-    'register-certified-testers': {
-        translationKey: 'certification.register',
-        imagePages: ['global'],
-        title: 'Enregistrer un testeur certifié',
-        routeName: 'register-certified-testers',
-        hasImages: false,
-    },
 
-    // Accreditation section
-    'accreditation-request': {
-        translationKey: 'accreditation.request',
+    // Contact
+    contact: {
+        translationKey: 'contact',
         imagePages: ['global'],
-        title: 'Demande d\'accréditation',
-        routeName: 'accreditation-request',
-        hasImages: false,
-    },
-    'accredited-organizations': {
-        translationKey: 'accreditation.organizations',
-        imagePages: ['global'],
-        title: 'Organismes accrédités',
-        routeName: 'accredited-organizations',
-        hasImages: false,
-    },
-
-    // Other pages
-    glossary: {
-        translationKey: 'glossary',
-        imagePages: ['global'],
-        title: 'Glossaire',
-        routeName: 'glossary',
+        title: 'Contact',
+        routeName: 'contact',
         hasImages: false,
     },
 };
@@ -182,9 +198,10 @@ export function getPageConfig(slug: string): PageEditorConfig | undefined {
 export const PAGE_CATEGORIES = {
     'Accueil': ['home'],
     'À propos': ['about-citl', 'about-istqb', 'vision', 'missions', 'executive-board'],
-    'Examens': ['anti-piracy', 'exam-faq', 'exam-fees', 'exam-questions', 'exam-registration'],
     'Adhésion': ['members', 'working-groups'],
-    'Certification': ['certified-testers-list', 'istqb-registry', 'register-certified-testers'],
-    'Accréditation': ['accreditation-request', 'accredited-organizations'],
-    'Autres': ['glossary'],
+    'Certifications': ['why-certification'],
+    'Examens': ['exam-questions', 'exam-fees', 'exam-registration', 'exam-faq', 'anti-piracy', 'glossary'],
+    'Formation': ['accredited-organizations', 'accreditation-request'],
+    'Inscription': ['register-certified-testers', 'certified-testers-list', 'istqb-registry'],
+    'Contact': ['contact'],
 } as const;

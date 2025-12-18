@@ -1205,6 +1205,42 @@
         }
     },
     "dashboard": {
+        "title": "Dashboard",
+        "welcome": "Welcome to the Dashboard",
+        "overview_description": "Here is an overview of CITL activity",
+        "pending": "pending",
+        "pending_items": "pending items",
+        "view_all": "View all",
+        "pending_alert_title": "{{count}} pending requests",
+        "pending_alert_description": "Some requests require your attention. See details below.",
+        "stats": {
+            "exam_registrations": "Exam Registrations",
+            "membership_applications": "Membership Applications",
+            "accreditation_requests": "Accreditation Requests",
+            "certified_testers": "Certified Testers"
+        },
+        "content": {
+            "certifications": "Certifications",
+            "accredited_orgs": "Accredited Orgs",
+            "articles": "Articles",
+            "events": "Events",
+            "glossary": "Glossary",
+            "faqs": "FAQs"
+        },
+        "tables": {
+            "exam_registrations": "Pending Exam Registrations",
+            "membership_applications": "Pending Membership Applications",
+            "accreditation_requests": "Pending Accreditation Requests",
+            "certified_testers": "Testers to Validate"
+        },
+        "no_pending_exams": "No pending exam registrations",
+        "no_pending_memberships": "No pending membership applications",
+        "no_pending_accreditations": "No pending accreditation requests",
+        "no_pending_testers": "No testers to validate",
+        "upcoming_events": "Upcoming Events",
+        "no_upcoming_events": "No upcoming events",
+        "monthly_activity": "Monthly Activity",
+        "last_6_months": "Last 6 months",
         "users": {
             "title": "User Management",
             "total": "Total: {{count}} users",

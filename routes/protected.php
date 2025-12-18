@@ -7,20 +7,18 @@ use App\Http\Controllers\Dashboard\AccreditedOrganizationController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\GlossaryController;
-use App\Http\Controllers\Dashboard\MembershipApplicationController;
 use App\Http\Controllers\Dashboard\ImageManagementController;
+use App\Http\Controllers\Dashboard\MembershipApplicationController;
 use App\Http\Controllers\Dashboard\PageManagementController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // Protected Routes - Require authentication and email verification
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     // Translation API Routes
     Route::prefix('api/translate')->name('api.translate.')->group(function () {

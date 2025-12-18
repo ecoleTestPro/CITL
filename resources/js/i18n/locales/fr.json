@@ -372,6 +372,42 @@
         }
     },
     "dashboard": {
+        "title": "Tableau de bord",
+        "welcome": "Bienvenue sur le tableau de bord",
+        "overview_description": "Voici un aperçu de l'activité du CITL",
+        "pending": "en attente",
+        "pending_items": "éléments en attente",
+        "view_all": "Voir tout",
+        "pending_alert_title": "{{count}} demandes en attente",
+        "pending_alert_description": "Des demandes nécessitent votre attention. Consultez les détails ci-dessous.",
+        "stats": {
+            "exam_registrations": "Inscriptions examens",
+            "membership_applications": "Demandes d'adhésion",
+            "accreditation_requests": "Demandes d'accréditation",
+            "certified_testers": "Testeurs certifiés"
+        },
+        "content": {
+            "certifications": "Certifications",
+            "accredited_orgs": "Org. accrédités",
+            "articles": "Articles",
+            "events": "Événements",
+            "glossary": "Glossaire",
+            "faqs": "FAQs"
+        },
+        "tables": {
+            "exam_registrations": "Inscriptions examens en attente",
+            "membership_applications": "Demandes d'adhésion en attente",
+            "accreditation_requests": "Demandes d'accréditation en attente",
+            "certified_testers": "Testeurs à valider"
+        },
+        "no_pending_exams": "Aucune inscription en attente",
+        "no_pending_memberships": "Aucune demande d'adhésion en attente",
+        "no_pending_accreditations": "Aucune demande d'accréditation en attente",
+        "no_pending_testers": "Aucun testeur à valider",
+        "upcoming_events": "Événements à venir",
+        "no_upcoming_events": "Aucun événement à venir",
+        "monthly_activity": "Activité mensuelle",
+        "last_6_months": "Les 6 derniers mois",
         "users": {
             "title": "Gestion des utilisateurs",
             "total": "Total: {{count}} utilisateurs",

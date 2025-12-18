@@ -1139,6 +1139,69 @@
             "unauthorized_message": "Public registration is not available on this platform. Please contact an administrator to create an account.",
             "redirect_message": "You will be redirected to the homepage in {{seconds}} seconds...",
             "go_home": "Return to Home"
+        },
+        "login": {
+            "title": "Log in to your account",
+            "description": "Enter your email and password below to log in",
+            "page_title": "Log in",
+            "email": "Email address",
+            "email_placeholder": "email@example.com",
+            "password": "Password",
+            "password_placeholder": "Password",
+            "forgot_password": "Forgot password?",
+            "remember_me": "Remember me",
+            "submit": "Log in",
+            "no_account": "Don't have an account?",
+            "sign_up": "Sign up"
+        },
+        "forgot_password": {
+            "title": "Forgot password",
+            "description": "Enter your email to receive a password reset link",
+            "page_title": "Forgot password",
+            "email": "Email address",
+            "email_placeholder": "email@example.com",
+            "submit": "Email password reset link",
+            "back_to_login": "Or, return to",
+            "login": "log in"
+        },
+        "reset_password": {
+            "title": "Reset password",
+            "description": "Please enter your new password below",
+            "page_title": "Reset password",
+            "email": "Email",
+            "password": "Password",
+            "password_placeholder": "Password",
+            "confirm_password": "Confirm password",
+            "confirm_password_placeholder": "Confirm password",
+            "submit": "Reset password"
+        },
+        "verify_email": {
+            "title": "Verify email",
+            "description": "Please verify your email address by clicking on the link we just emailed to you.",
+            "page_title": "Email verification",
+            "verification_sent": "A new verification link has been sent to the email address you provided during registration.",
+            "resend": "Resend verification email",
+            "logout": "Log out"
+        },
+        "confirm_password": {
+            "title": "Confirm your password",
+            "description": "This is a secure area of the application. Please confirm your password before continuing.",
+            "page_title": "Confirm password",
+            "password": "Password",
+            "password_placeholder": "Password",
+            "submit": "Confirm password"
+        },
+        "two_factor": {
+            "page_title": "Two-Factor Authentication",
+            "auth_code_title": "Authentication Code",
+            "auth_code_description": "Enter the authentication code provided by your authenticator application.",
+            "recovery_code_title": "Recovery Code",
+            "recovery_code_description": "Please confirm access to your account by entering one of your emergency recovery codes.",
+            "recovery_code_placeholder": "Enter recovery code",
+            "continue": "Continue",
+            "or_use": "or you can",
+            "use_recovery": "login using a recovery code",
+            "use_auth": "login using an authentication code"
         }
     },
     "dashboard": {

@@ -1353,6 +1353,69 @@
             "unauthorized_message": "L'inscription publique n'est pas disponible sur cette plateforme. Veuillez contacter un administrateur pour créer un compte.",
             "redirect_message": "Vous serez redirigé vers la page d'accueil dans {{seconds}} secondes...",
             "go_home": "Retourner à l'accueil"
+        },
+        "login": {
+            "title": "Connectez-vous à votre compte",
+            "description": "Entrez votre email et mot de passe ci-dessous pour vous connecter",
+            "page_title": "Connexion",
+            "email": "Adresse email",
+            "email_placeholder": "email@exemple.com",
+            "password": "Mot de passe",
+            "password_placeholder": "Mot de passe",
+            "forgot_password": "Mot de passe oublié ?",
+            "remember_me": "Se souvenir de moi",
+            "submit": "Se connecter",
+            "no_account": "Vous n'avez pas de compte ?",
+            "sign_up": "S'inscrire"
+        },
+        "forgot_password": {
+            "title": "Mot de passe oublié",
+            "description": "Entrez votre email pour recevoir un lien de réinitialisation",
+            "page_title": "Mot de passe oublié",
+            "email": "Adresse email",
+            "email_placeholder": "email@exemple.com",
+            "submit": "Envoyer le lien de réinitialisation",
+            "back_to_login": "Ou, retourner à",
+            "login": "connexion"
+        },
+        "reset_password": {
+            "title": "Réinitialiser le mot de passe",
+            "description": "Veuillez entrer votre nouveau mot de passe ci-dessous",
+            "page_title": "Réinitialiser le mot de passe",
+            "email": "Email",
+            "password": "Mot de passe",
+            "password_placeholder": "Mot de passe",
+            "confirm_password": "Confirmer le mot de passe",
+            "confirm_password_placeholder": "Confirmer le mot de passe",
+            "submit": "Réinitialiser le mot de passe"
+        },
+        "verify_email": {
+            "title": "Vérifier l'email",
+            "description": "Veuillez vérifier votre adresse email en cliquant sur le lien que nous venons de vous envoyer.",
+            "page_title": "Vérification de l'email",
+            "verification_sent": "Un nouveau lien de vérification a été envoyé à l'adresse email que vous avez fournie lors de l'inscription.",
+            "resend": "Renvoyer l'email de vérification",
+            "logout": "Se déconnecter"
+        },
+        "confirm_password": {
+            "title": "Confirmez votre mot de passe",
+            "description": "Ceci est une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.",
+            "page_title": "Confirmer le mot de passe",
+            "password": "Mot de passe",
+            "password_placeholder": "Mot de passe",
+            "submit": "Confirmer le mot de passe"
+        },
+        "two_factor": {
+            "page_title": "Authentification à deux facteurs",
+            "auth_code_title": "Code d'authentification",
+            "auth_code_description": "Entrez le code d'authentification fourni par votre application d'authentification.",
+            "recovery_code_title": "Code de récupération",
+            "recovery_code_description": "Veuillez confirmer l'accès à votre compte en entrant l'un de vos codes de récupération d'urgence.",
+            "recovery_code_placeholder": "Entrez le code de récupération",
+            "continue": "Continuer",
+            "or_use": "ou vous pouvez",
+            "use_recovery": "vous connecter avec un code de récupération",
+            "use_auth": "vous connecter avec un code d'authentification"
         }
     },
     "sidebar": {

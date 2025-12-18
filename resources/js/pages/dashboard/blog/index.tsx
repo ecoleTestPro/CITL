@@ -220,7 +220,17 @@ export default function BlogIndex({ blogs, categories, filters }: Props) {
             ),
             cell: ({ row }) => {
                 const publishedAt = row.getValue('published_at') as string | null;
-                return publishedAt ? <div className="text-sm">{new Date(publishedAt).toLocaleDateString('fr-FR')}</div> : <span className="text-sm text-gray-400">-</span>;
+                return publishedAt ? (
+                    <div className="text-sm">
+                        {new Date(publishedAt).toLocaleDateString('fr-FR', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric',
+                        })}
+                    </div>
+                ) : (
+                    <span className="text-sm text-gray-400">-</span>
+                );
             },
         },
         {

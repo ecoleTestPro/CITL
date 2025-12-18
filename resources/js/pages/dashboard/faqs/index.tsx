@@ -64,6 +64,7 @@ export default function FaqsIndex({ faqs, categories, filters }: Props) {
     const [selectedCategory, setSelectedCategory] = useState<string>(filters.category || 'all');
     const [selectedLocale, setSelectedLocale] = useState<string>(filters.locale || 'all');
     const [selectedStatus, setSelectedStatus] = useState<string>(filters.is_active !== undefined ? String(filters.is_active) : 'all');
+    const [isInitialized, setIsInitialized] = useState(false);
 
     const handleRefresh = () => {
         setIsRefreshing(true);
@@ -78,8 +79,14 @@ export default function FaqsIndex({ faqs, categories, filters }: Props) {
 
     // Auto-apply filters when they change
     useEffect(() => {
+        // Skip the first render to avoid reloading the page on initial load
+        if (!isInitialized) {
+            setIsInitialized(true);
+            return;
+        }
+
         const timeoutId = setTimeout(() => {
-            const params: any = {};
+            const params: Record<string, string | boolean> = {};
 
             if (selectedCategory !== 'all') params.category = selectedCategory;
             if (selectedLocale !== 'all') params.locale = selectedLocale;

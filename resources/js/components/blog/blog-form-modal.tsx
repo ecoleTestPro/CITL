@@ -238,7 +238,7 @@ export function BlogFormModal({ isOpen, onClose, blog, categories, onSuccess }: 
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className="w-[95vw] sm:max-w-6xl! max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle>{blog ? 'Modifier l\'article' : 'Nouvel article'}</DialogTitle>
                     <DialogDescription>Remplissez les informations de l'article. Les champs marqués sont obligatoires.</DialogDescription>
@@ -330,12 +330,12 @@ export function BlogFormModal({ isOpen, onClose, blog, categories, onSuccess }: 
                         <TabsContent value="settings" className="space-y-4">
                             <div className="space-y-2">
                                 <Label htmlFor="category">Catégorie</Label>
-                                <Select value={categoryId} onValueChange={setCategoryId}>
+                                <Select value={categoryId || 'none'} onValueChange={(value) => setCategoryId(value === 'none' ? '' : value)}>
                                     <SelectTrigger>
                                         <SelectValue placeholder="Sélectionner une catégorie" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="">Aucune catégorie</SelectItem>
+                                        <SelectItem value="none">Aucune catégorie</SelectItem>
                                         {categories.map((category) => (
                                             <SelectItem key={category.id} value={category.id.toString()}>
                                                 {category.name}

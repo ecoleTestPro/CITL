@@ -11,8 +11,10 @@ services:
       - .:/var/www
       - ./docker/nginx.conf:/etc/nginx/sites-available/default
     depends_on:
-      - mysql
-      - redis
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - citl-network
     environment:
@@ -42,6 +44,11 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - citl-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootsecret"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -74,8 +81,11 @@ services:
     image: node:22-alpine
     container_name: citl-node
     working_dir: /var/www
+    tty: true
+    stdin_open: true
     volumes:
       - .:/var/www
+      - node_modules:/var/www/node_modules
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
     ports:
       - "5174:5173"
@@ -89,3 +99,4 @@ networks:
 volumes:
   mysql-data:
   redis-data:
+  node_modules:

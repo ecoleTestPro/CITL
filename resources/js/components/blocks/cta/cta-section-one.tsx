@@ -22,13 +22,16 @@ export default function CtaSectionOne() {
                             direction="right"
                             duration={1}
                             delay={0.3}
+                            // Disable scroll trigger so the image isn't hidden by GSAP until user scrolls
+                            triggerOnScroll={false}
                             className="mx-auto w-[340px] overflow-hidden min-[925px]:top-[-85px] sm:w-[450px] md:absolute md:top-[-10px] md:-left-6 md:mx-0 md:w-[450px] lg:top-[-90px] lg:w-[540px] xl:top-[-204px] xl:w-[670px]"
                         >
                             <img
                                 src={ctaImage}
                                 alt="Visualisation de la croissance des certifications ISTQB"
                                 className="size-full object-cover"
-                                loading="lazy"
+                                // Force eager loading so the image is requested even if GSAP initially hides it
+                                loading="eager"
                             />
                         </SlideIn>
 

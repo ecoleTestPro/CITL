@@ -1,7 +1,7 @@
 'use client';
 
 import { Link, usePage } from '@inertiajs/react';
-import { Award, BookOpen, ClipboardList, FileText, Settings2, Shield, Users } from 'lucide-react';
+import { Award, BookOpen, Building2, ClipboardList, FileText, Settings2, Shield, Users } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 

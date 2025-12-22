@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Mail\AccreditationRequestMail;
 use App\Models\AccreditationRequest;
+use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class AccreditationRequestController extends Controller
 {
+    use EmailRecipientTrait;
+
     /**
      * Show the accreditation request page
      */
@@ -42,8 +45,8 @@ class AccreditationRequestController extends Controller
 
         // Send email notification
         try {
-            // Get the recipient email from config, fallback to default
-            $recipientEmail = config('mail.registration_recipient', 'keraste38@gmail.com');
+            // Get the recipient email based on environment
+            $recipientEmail = $this->getRecipientEmail();
 
             Mail::to($recipientEmail)->send(new AccreditationRequestMail($accreditationRequest));
 

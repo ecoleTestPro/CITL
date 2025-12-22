@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Mail\ExamRegistrationMail;
 use App\Repositories\ExamRegistrationRepository;
+use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class ExamRegistrationController extends Controller
 {
+    use EmailRecipientTrait;
+
     public function __construct(
         private ExamRegistrationRepository $examRegistrationRepository
     ) {}
@@ -49,8 +52,8 @@ class ExamRegistrationController extends Controller
 
         // Send email notification
         try {
-            // Get the recipient email from config, fallback to default
-            $recipientEmail = config('mail.registration_recipient', 'keraste38@gmail.com');
+            // Get the recipient email based on environment
+            $recipientEmail = $this->getRecipientEmail();
 
             Mail::to($recipientEmail)->send(new ExamRegistrationMail($registration));
 

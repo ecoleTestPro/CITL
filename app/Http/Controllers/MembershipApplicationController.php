@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Mail\MembershipApplicationMail;
 use App\Repositories\MembershipApplicationRepository;
+use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class MembershipApplicationController extends Controller
 {
+    use EmailRecipientTrait;
+
     public function __construct(
         private MembershipApplicationRepository $membershipApplicationRepository
     ) {}
@@ -37,8 +40,8 @@ class MembershipApplicationController extends Controller
 
         // Send email notification
         try {
-            // Get the recipient email from config, fallback to default
-            $recipientEmail = config('mail.membership_recipient', 'keraste38@gmail.com');
+            // Get the recipient email based on environment
+            $recipientEmail = $this->getRecipientEmail();
 
             Mail::to($recipientEmail)->send(new MembershipApplicationMail($application));
 

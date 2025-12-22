@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ContactMessage;
+use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    use EmailRecipientTrait;
+
     /**
      * Send contact form email
      */
@@ -25,7 +28,7 @@ class ContactController extends Controller
 
         try {
             // Send email to the site admin
-            Mail::to(config('mail.from.address'))
+            Mail::to($this->getRecipientEmail())
                 ->send(new ContactMessage(
                     civility: $validated['civility'],
                     senderName: $validated['name'],

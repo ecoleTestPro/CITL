@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Mail\CertifiedTesterRegistrationMail;
 use App\Models\Registration\CertifiedTesterRegistration;
+use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class CertifiedTesterRegistrationController extends Controller
 {
+    use EmailRecipientTrait;
+
     /**
      * Show the certified testers list/search page
      */
@@ -95,8 +98,8 @@ class CertifiedTesterRegistrationController extends Controller
 
         // Send email notification
         try {
-            // Get the recipient email from config, fallback to default
-            $recipientEmail = config('mail.registration_recipient', 'contact@citl.ci');
+            // Get the recipient email based on environment
+            $recipientEmail = $this->getRecipientEmail();
 
             Mail::to($recipientEmail)->send(new CertifiedTesterRegistrationMail($registration));
 

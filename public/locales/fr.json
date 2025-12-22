@@ -995,6 +995,7 @@
         "column_country": "Pays",
         "column_website": "Site Web",
         "column_email": "Email",
+        "column_certifications": "Certifications",
         "search_placeholder": "Rechercher un organisme...",
         "all_countries": "Tous les pays",
         "organizations_count": "organismes",

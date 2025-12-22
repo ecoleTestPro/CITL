@@ -745,6 +745,7 @@
         "column_country": "Country",
         "column_website": "Website",
         "column_email": "Email",
+        "column_certifications": "Certifications",
         "search_placeholder": "Search for an organization...",
         "all_countries": "All countries",
         "organizations_count": "organizations",

@@ -41,7 +41,7 @@ function WhyCertification() {
     return (
         <PublicLayout breadcrumbs={breadcrumbs}>
             <Head>
-                <title>{t('seo.why_certification.title_fr')}</title>
+                <title>{t('certifications.why_certification.content_title')}</title>
                 <meta name="description" content={t('seo.why_certification.description_fr')} />
                 <meta name="keywords" content={t('seo.why_certification.keywords')} />
                 <meta property="og:title" content={t('seo.why_certification.title_fr')} />

@@ -1,7 +1,7 @@
 'use client';
 
 import { Link, usePage } from '@inertiajs/react';
-import { Award, BookOpen, Building2, ClipboardList, FileText, Settings2, Shield, Users } from 'lucide-react';
+import { Award, BookOpen, Building2, ClipboardList, FileText, Mail, MessageSquare, Settings2, Shield, UserCheck, Users } from 'lucide-react';
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -351,6 +351,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 url: '/dashboard/membership-applications',
                 icon: Users,
                 isActive: currentUrl.startsWith('/dashboard/membership-applications'),
+            },
+            {
+                name: t('sidebar.accreditation_requests'),
+                url: '/dashboard/accreditation-requests',
+                icon: Building2,
+                isActive: currentUrl.startsWith('/dashboard/accreditation-requests'),
+            },
+            {
+                name: t('sidebar.certified_tester_registrations'),
+                url: '/dashboard/certified-tester-registrations',
+                icon: UserCheck,
+                isActive: currentUrl.startsWith('/dashboard/certified-tester-registrations'),
+            },
+            {
+                name: t('sidebar.contact_messages'),
+                url: '/dashboard/contact-messages',
+                icon: MessageSquare,
+                isActive: currentUrl.startsWith('/dashboard/contact-messages'),
+            },
+            {
+                name: t('sidebar.email_logs'),
+                url: '/dashboard/email-logs',
+                icon: Mail,
+                isActive: currentUrl.startsWith('/dashboard/email-logs'),
             },
         ],
         navAdmin: [

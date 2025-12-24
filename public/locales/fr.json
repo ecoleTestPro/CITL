@@ -1528,7 +1528,11 @@
         "exam_registrations": "Inscriptions Examens",
         "membership_applications": "Demandes d'adhésion",
         "administration": "Administration",
-        "users": "Utilisateurs"
+        "users": "Utilisateurs",
+        "accreditation_requests": "Demandes d'accréditation",
+        "certified_tester_registrations": "Inscriptions testeurs certifiés",
+        "contact_messages": "Messages de contact",
+        "email_logs": "Logs des emails"
     },
     "settings": {
         "title": "Paramètres",

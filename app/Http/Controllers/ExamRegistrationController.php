@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ExamRegistrationMail;
+use App\Models\EmailLog;
 use App\Repositories\ExamRegistrationRepository;
 use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class ExamRegistrationController extends Controller
@@ -50,22 +50,39 @@ class ExamRegistrationController extends Controller
         // Create the registration
         $registration = $this->examRegistrationRepository->createRegistration($validated);
 
-        // Send email notification
-        try {
-            // Get the recipient email based on environment
-            $recipientEmail = $this->getRecipientEmail();
+        // Send emails with logging
+        $emails = [
+            [
+                'email' => $this->getRecipientEmail(),
+                'mailable' => new ExamRegistrationMail($registration),
+                'name' => 'CITL Admin',
+                'is_confirmation' => false,
+            ],
+            [
+                'email' => $registration->email,
+                'mailable' => new ExamRegistrationMail($registration),
+                'name' => $registration->first_name . ' ' . $registration->last_name,
+                'is_confirmation' => true,
+            ],
+        ];
 
-            Mail::to($recipientEmail)->send(new ExamRegistrationMail($registration));
+        $logs = $this->sendMultipleEmailsWithLog(
+            $emails,
+            EmailLog::REQUEST_TYPE_EXAM_REGISTRATION,
+            (string) $registration->id,
+            [
+                'exam_name' => $registration->exam_name,
+                'candidate_name' => $registration->first_name . ' ' . $registration->last_name,
+            ]
+        );
 
-            // Optionally send confirmation email to the candidate
-            Mail::to($registration->email)->send(new ExamRegistrationMail($registration));
+        // Check if at least one email was sent successfully
+        $hasSentEmail = collect($logs)->contains(fn ($log) => $log->status === EmailLog::STATUS_SENT);
 
+        if ($hasSentEmail) {
             return redirect()->back()->with('success', 'Inscription envoyée avec succès ! Vous recevrez un email de confirmation.');
-        } catch (\Exception $e) {
-            // Log the error
-            \Log::error('Failed to send exam registration email: '.$e->getMessage());
-
-            return redirect()->back()->with('error', 'Inscription enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
         }
+
+        return redirect()->back()->with('error', 'Inscription enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
     }
 }

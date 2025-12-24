@@ -1372,7 +1372,11 @@
         "exam_registrations": "Exam Registrations",
         "membership_applications": "Membership Applications",
         "administration": "Administration",
-        "users": "Users"
+        "users": "Users",
+        "accreditation_requests": "Accreditation Requests",
+        "certified_tester_registrations": "Certified Tester Registrations",
+        "contact_messages": "Contact Messages",
+        "email_logs": "Email Logs"
     },
     "settings": {
         "title": "Settings",

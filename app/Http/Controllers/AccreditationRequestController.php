@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\AccreditationRequestMail;
 use App\Models\AccreditationRequest;
+use App\Models\EmailLog;
 use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class AccreditationRequestController extends Controller
@@ -43,22 +43,39 @@ class AccreditationRequestController extends Controller
         // Create the accreditation request
         $accreditationRequest = AccreditationRequest::create($validated);
 
-        // Send email notification
-        try {
-            // Get the recipient email based on environment
-            $recipientEmail = $this->getRecipientEmail();
+        // Send emails with logging
+        $emails = [
+            [
+                'email' => $this->getRecipientEmail(),
+                'mailable' => new AccreditationRequestMail($accreditationRequest),
+                'name' => 'CITL Admin',
+                'is_confirmation' => false,
+            ],
+            [
+                'email' => $accreditationRequest->email,
+                'mailable' => new AccreditationRequestMail($accreditationRequest, true),
+                'name' => $accreditationRequest->contact_person,
+                'is_confirmation' => true,
+            ],
+        ];
 
-            Mail::to($recipientEmail)->send(new AccreditationRequestMail($accreditationRequest));
+        $logs = $this->sendMultipleEmailsWithLog(
+            $emails,
+            EmailLog::REQUEST_TYPE_ACCREDITATION,
+            (string) $accreditationRequest->id,
+            [
+                'company_name' => $accreditationRequest->company_name,
+                'contact_person' => $accreditationRequest->contact_person,
+            ]
+        );
 
-            // Optionally send confirmation email to the organization
-            Mail::to($accreditationRequest->email)->send(new AccreditationRequestMail($accreditationRequest, true));
+        // Check if at least one email was sent successfully
+        $hasSentEmail = collect($logs)->contains(fn ($log) => $log->status === EmailLog::STATUS_SENT);
 
+        if ($hasSentEmail) {
             return redirect()->back()->with('success', 'Demande d\'accréditation envoyée avec succès ! Nous vous contacterons bientôt.');
-        } catch (\Exception $e) {
-            // Log the error
-            \Log::error('Failed to send accreditation request email: '.$e->getMessage());
-
-            return redirect()->back()->with('error', 'Demande enregistrée mais l\'envoi de l\'email a échoué. Nous vous contacterons sous peu.');
         }
+
+        return redirect()->back()->with('error', 'Demande enregistrée mais l\'envoi de l\'email a échoué. Nous vous contacterons sous peu.');
     }
 }

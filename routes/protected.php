@@ -8,6 +8,10 @@ use App\Http\Controllers\Dashboard\BlogCategoryController;
 use App\Http\Controllers\Dashboard\BlogController;
 use App\Http\Controllers\Dashboard\CertificationManagementController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\AccreditationRequestController;
+use App\Http\Controllers\Dashboard\CertifiedTesterRegistrationController;
+use App\Http\Controllers\Dashboard\ContactRequestController;
+use App\Http\Controllers\Dashboard\EmailLogController;
 use App\Http\Controllers\Dashboard\ExamRegistrationController;
 use App\Http\Controllers\Dashboard\GlossaryController;
 use App\Http\Controllers\Dashboard\ImageManagementController;
@@ -83,6 +87,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/', [MembershipApplicationController::class, 'index'])->name('index');
         Route::post('/{id}/status', [MembershipApplicationController::class, 'updateStatus'])->name('status');
         Route::delete('/{id}', [MembershipApplicationController::class, 'destroy'])->name('destroy');
+    });
+
+    // Accreditation Request Management Routes
+    Route::prefix('dashboard/accreditation-requests')->name('dashboard.accreditation-requests.')->group(function () {
+        Route::get('/', [AccreditationRequestController::class, 'index'])->name('index');
+        Route::post('/{id}/status', [AccreditationRequestController::class, 'updateStatus'])->name('status');
+        Route::delete('/{id}', [AccreditationRequestController::class, 'destroy'])->name('destroy');
+    });
+
+    // Certified Tester Registration Management Routes
+    Route::prefix('dashboard/certified-tester-registrations')->name('dashboard.certified-tester-registrations.')->group(function () {
+        Route::get('/', [CertifiedTesterRegistrationController::class, 'index'])->name('index');
+        Route::post('/{id}/status', [CertifiedTesterRegistrationController::class, 'updateStatus'])->name('status');
+        Route::delete('/{id}', [CertifiedTesterRegistrationController::class, 'destroy'])->name('destroy');
+    });
+
+    // Contact Messages Management Routes
+    Route::prefix('dashboard/contact-messages')->name('dashboard.contact-messages.')->group(function () {
+        Route::get('/', [ContactRequestController::class, 'index'])->name('index');
+        Route::get('/{id}', [ContactRequestController::class, 'show'])->name('show');
+        Route::post('/{id}/status', [ContactRequestController::class, 'updateStatus'])->name('status');
+        Route::delete('/{id}', [ContactRequestController::class, 'destroy'])->name('destroy');
+    });
+
+    // Email Logs Management Routes
+    Route::prefix('dashboard/email-logs')->name('dashboard.email-logs.')->group(function () {
+        Route::get('/', [EmailLogController::class, 'index'])->name('index');
+        Route::get('/{id}', [EmailLogController::class, 'show'])->name('show');
     });
 
     // Glossary Management Routes

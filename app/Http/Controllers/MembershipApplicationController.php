@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\MembershipApplicationMail;
+use App\Models\EmailLog;
 use App\Repositories\MembershipApplicationRepository;
 use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 
 class MembershipApplicationController extends Controller
 {
@@ -38,22 +38,39 @@ class MembershipApplicationController extends Controller
         // Create the application
         $application = $this->membershipApplicationRepository->createApplication($validated);
 
-        // Send email notification
-        try {
-            // Get the recipient email based on environment
-            $recipientEmail = $this->getRecipientEmail();
+        // Send emails with logging
+        $emails = [
+            [
+                'email' => $this->getRecipientEmail(),
+                'mailable' => new MembershipApplicationMail($application),
+                'name' => 'CITL Admin',
+                'is_confirmation' => false,
+            ],
+            [
+                'email' => $application->email,
+                'mailable' => new MembershipApplicationMail($application),
+                'name' => $application->first_name . ' ' . $application->surname,
+                'is_confirmation' => true,
+            ],
+        ];
 
-            Mail::to($recipientEmail)->send(new MembershipApplicationMail($application));
+        $logs = $this->sendMultipleEmailsWithLog(
+            $emails,
+            EmailLog::REQUEST_TYPE_MEMBERSHIP,
+            (string) $application->id,
+            [
+                'applicant_name' => $application->first_name . ' ' . $application->surname,
+                'membership_level' => $application->membership_level,
+            ]
+        );
 
-            // Optionally send confirmation email to the applicant
-            Mail::to($application->email)->send(new MembershipApplicationMail($application));
+        // Check if at least one email was sent successfully
+        $hasSentEmail = collect($logs)->contains(fn ($log) => $log->status === EmailLog::STATUS_SENT);
 
+        if ($hasSentEmail) {
             return redirect()->back()->with('success', 'Demande d\'adhésion envoyée avec succès ! Vous recevrez un email de confirmation.');
-        } catch (\Exception $e) {
-            // Log the error
-            \Log::error('Failed to send membership application email: '.$e->getMessage());
-
-            return redirect()->back()->with('error', 'Demande enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
         }
+
+        return redirect()->back()->with('error', 'Demande enregistrée mais l\'envoi de l\'email a échoué. Nous vous contactons sous peu.');
     }
 }

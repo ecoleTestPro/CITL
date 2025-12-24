@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Mail\CertifiedTesterRegistrationMail;
+use App\Models\EmailLog;
 use App\Models\Registration\CertifiedTesterRegistration;
 use App\Traits\EmailRecipientTrait;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class CertifiedTesterRegistrationController extends Controller
@@ -96,22 +96,39 @@ class CertifiedTesterRegistrationController extends Controller
             'status' => 'pending',
         ]);
 
-        // Send email notification
-        try {
-            // Get the recipient email based on environment
-            $recipientEmail = $this->getRecipientEmail();
+        // Send emails with logging
+        $emails = [
+            [
+                'email' => $this->getRecipientEmail(),
+                'mailable' => new CertifiedTesterRegistrationMail($registration),
+                'name' => 'CITL Admin',
+                'is_confirmation' => false,
+            ],
+            [
+                'email' => $registration->email,
+                'mailable' => new CertifiedTesterRegistrationMail($registration, true),
+                'name' => $registration->full_name,
+                'is_confirmation' => true,
+            ],
+        ];
 
-            Mail::to($recipientEmail)->send(new CertifiedTesterRegistrationMail($registration));
+        $logs = $this->sendMultipleEmailsWithLog(
+            $emails,
+            EmailLog::REQUEST_TYPE_CERTIFIED_TESTER,
+            (string) $registration->id,
+            [
+                'full_name' => $registration->full_name,
+                'certification' => $registration->certification_obtained,
+            ]
+        );
 
-            // Send confirmation email to the applicant
-            Mail::to($registration->email)->send(new CertifiedTesterRegistrationMail($registration, true));
+        // Check if at least one email was sent successfully
+        $hasSentEmail = collect($logs)->contains(fn ($log) => $log->status === EmailLog::STATUS_SENT);
 
+        if ($hasSentEmail) {
             return redirect()->back()->with('success', 'Votre demande d\'inscription a été envoyée avec succès !');
-        } catch (\Exception $e) {
-            // Log the error
-            \Log::error('Failed to send certified tester registration email: '.$e->getMessage());
-
-            return redirect()->back()->with('success', 'Votre demande d\'inscription a été enregistrée. Nous vous contacterons bientôt.');
         }
+
+        return redirect()->back()->with('success', 'Votre demande d\'inscription a été enregistrée. Nous vous contacterons bientôt.');
     }
 }

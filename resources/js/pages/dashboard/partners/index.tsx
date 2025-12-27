@@ -72,6 +72,9 @@ export default function PartnersIndex({ partners, tiers, filters }: Props) {
     const [selectedTier, setSelectedTier] = useState<string>(filters.tier || 'all');
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<string>('fr');
+    const [showTierChangeModal, setShowTierChangeModal] = useState(false);
+    const [tierChangeData, setTierChangeData] = useState<{ partner: Partner; newTier: PartnerTier } | null>(null);
+    const [isChangingTier, setIsChangingTier] = useState(false);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         partner_tier_id: '',
@@ -200,10 +203,24 @@ export default function PartnersIndex({ partners, tiers, filters }: Props) {
         );
     };
 
-    // Quick tier change function
-    const handleQuickTierChange = (partner: Partner, newTierId: number) => {
+    // Open tier change confirmation modal
+    const openTierChangeModal = (partner: Partner, newTierId: number) => {
+        const newTier = tiers.find((t) => t.id === newTierId);
+        if (newTier) {
+            setTierChangeData({ partner, newTier });
+            setShowTierChangeModal(true);
+        }
+    };
+
+    // Confirm tier change
+    const confirmTierChange = () => {
+        if (!tierChangeData) return;
+
+        setIsChangingTier(true);
+        const { partner, newTier } = tierChangeData;
+
         const formData = new FormData();
-        formData.append('partner_tier_id', String(newTierId));
+        formData.append('partner_tier_id', String(newTier.id));
         formData.append('name', partner.name);
         formData.append('website', partner.website || '');
         formData.append('description', partner.description || '');
@@ -214,13 +231,21 @@ export default function PartnersIndex({ partners, tiers, filters }: Props) {
         router.post(`/dashboard/partners/${partner.id}`, formData, {
             preserveScroll: true,
             onSuccess: () => {
-                const newTier = tiers.find((t) => t.id === newTierId);
-                toast.success(`${partner.name} déplacé vers ${newTier?.name}`);
+                toast.success(`${partner.name} déplacé vers ${newTier.name}`);
+                setShowTierChangeModal(false);
+                setTierChangeData(null);
+                setIsChangingTier(false);
             },
             onError: () => {
                 toast.error('Erreur lors du changement de catégorie');
+                setIsChangingTier(false);
             },
         });
+    };
+
+    const closeTierChangeModal = () => {
+        setShowTierChangeModal(false);
+        setTierChangeData(null);
     };
 
     const handleFilterChange = (tier: string) => {
@@ -274,21 +299,24 @@ export default function PartnersIndex({ partners, tiers, filters }: Props) {
             accessorKey: 'tier',
             header: 'Catégorie',
             cell: ({ row }) => (
-                <div className="flex flex-col gap-2">
-                    <Badge style={{ backgroundColor: row.original.tier.color, color: '#fff' }}>{row.original.tier.name}</Badge>
+                <div className="flex flex-col gap-3">
+                    <Badge style={{ backgroundColor: row.original.tier.color, color: '#fff' }} className="w-fit">
+                        {row.original.tier.name}
+                    </Badge>
                     {/* Quick tier change buttons */}
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap gap-1.5">
                         {tiers
                             .filter((t) => t.id !== row.original.partner_tier_id)
                             .map((tier) => (
                                 <button
                                     key={tier.id}
-                                    onClick={() => handleQuickTierChange(row.original, tier.id)}
-                                    className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
+                                    onClick={() => openTierChangeModal(row.original, tier.id)}
+                                    className="group inline-flex items-center gap-1.5 rounded-md border border-gray-200 bg-white px-2 py-1 text-xs font-medium text-gray-600 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:border-gray-600 dark:hover:bg-gray-700"
                                     title={`Déplacer vers ${tier.name}`}
                                 >
-                                    <ArrowRight className="h-3 w-3" />
-                                    <span className="h-2 w-2 rounded-full" style={{ backgroundColor: tier.color }} />
+                                    <ArrowRight className="h-3 w-3 text-gray-400 transition-transform group-hover:translate-x-0.5 group-hover:text-gray-600 dark:group-hover:text-gray-300" />
+                                    <span className="h-2.5 w-2.5 rounded-full ring-1 ring-gray-200 dark:ring-gray-600" style={{ backgroundColor: tier.color }} />
+                                    <span className="max-w-[80px] truncate">{tier.name.replace('Partenaires ', '').replace(' CITL', '')}</span>
                                 </button>
                             ))}
                     </div>
@@ -565,6 +593,47 @@ export default function PartnersIndex({ partners, tiers, filters }: Props) {
                 title="Supprimer le partenaire"
                 message={`Êtes-vous sûr de vouloir supprimer le partenaire "${partnerToDelete?.name}" ?`}
             />
+
+            {/* Tier Change Confirmation Modal */}
+            <Dialog open={showTierChangeModal} onOpenChange={setShowTierChangeModal}>
+                <DialogContent className="max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Changer de catégorie</DialogTitle>
+                    </DialogHeader>
+                    {tierChangeData && (
+                        <div className="space-y-4">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                Voulez-vous déplacer <strong>{tierChangeData.partner.name}</strong> vers une nouvelle catégorie ?
+                            </p>
+
+                            <div className="flex items-center justify-center gap-4 rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+                                <div className="text-center">
+                                    <Badge style={{ backgroundColor: tierChangeData.partner.tier.color, color: '#fff' }}>
+                                        {tierChangeData.partner.tier.name}
+                                    </Badge>
+                                    <p className="mt-1 text-xs text-gray-500">Actuelle</p>
+                                </div>
+                                <ArrowRight className="h-5 w-5 text-gray-400" />
+                                <div className="text-center">
+                                    <Badge style={{ backgroundColor: tierChangeData.newTier.color, color: '#fff' }}>
+                                        {tierChangeData.newTier.name}
+                                    </Badge>
+                                    <p className="mt-1 text-xs text-gray-500">Nouvelle</p>
+                                </div>
+                            </div>
+
+                            <div className="flex justify-end gap-2 pt-2">
+                                <Button type="button" variant="outline" onClick={closeTierChangeModal} disabled={isChangingTier}>
+                                    Annuler
+                                </Button>
+                                <Button type="button" onClick={confirmTierChange} disabled={isChangingTier}>
+                                    {isChangingTier ? 'Déplacement...' : 'Confirmer'}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </DialogContent>
+            </Dialog>
         </AppLayout>
     );
 }

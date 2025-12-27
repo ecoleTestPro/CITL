@@ -106,9 +106,9 @@ export default function Dashboard({ stats }: Props) {
                     <div className="mt-1 flex items-start justify-between gap-4">
                         <div>
                             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">{t('dashboard.title')}</h1>
-                            <p className="mt-1 max-w-xl text-sm text-muted-foreground">
+                            {/* <p className="mt-1 max-w-xl text-sm text-muted-foreground">
                                 {t('dashboard.subtitle') || t('dashboard.description') || t('dashboard.title')}
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                 </header>

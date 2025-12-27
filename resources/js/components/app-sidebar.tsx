@@ -16,10 +16,10 @@ import {
     SidebarGroupLabel,
     SidebarHeader,
     SidebarMenu,
+    SidebarMenuButton,
     SidebarMenuItem,
     SidebarRail,
 } from '@/components/ui/sidebar';
-import { cn } from '@/lib/utils';
 import Logo from '@/layouts/public/logo';
 import appearance from '@/routes/appearance';
 import profile from '@/routes/profile';
@@ -313,6 +313,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         url: '/dashboard/faqs',
                         isActive: currentUrl.startsWith('/dashboard/faqs'),
                     },
+                    {
+                        title: t('sidebar.partners'),
+                        url: '/dashboard/partners',
+                        isActive: currentUrl.startsWith('/dashboard/partners') || currentUrl.startsWith('/dashboard/partner-tiers'),
+                    },
                 ],
             },
             {
@@ -403,21 +408,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenu>
                         {data.navRequests.map((item) => (
                             <SidebarMenuItem key={item.name}>
-                                <Link
-                                    href={item.url}
-                                    className={cn(
-                                        'flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-all',
-                                        'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-                                        item.isActive
-                                            ? 'bg-gray-100 text-gray-700 font-semibold dark:bg-gray-900/50 dark:text-gray-300'
-                                            : 'text-sidebar-foreground',
-                                    )}
-                                >
-                                    <item.icon
-                                        className={cn('h-4 w-4 shrink-0', item.isActive && 'text-gray-600 dark:text-gray-400')}
-                                    />
-                                    <span>{item.name}</span>
-                                </Link>
+                                <SidebarMenuButton asChild isActive={item.isActive} tooltip={item.name}>
+                                    <Link href={item.url}>
+                                        <item.icon className="h-4 w-4 shrink-0" />
+                                        <span>{item.name}</span>
+                                    </Link>
+                                </SidebarMenuButton>
                             </SidebarMenuItem>
                         ))}
                     </SidebarMenu>
@@ -433,21 +429,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                         <SidebarMenu>
                             {data.navAdmin.map((item) => (
                                 <SidebarMenuItem key={item.name}>
-                                    <Link
-                                        href={item.url}
-                                        className={cn(
-                                            'flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm transition-all',
-                                            'hover:bg-sidebar-accent hover:text-sidebar-accent-foreground',
-                                            item.isActive
-                                                ? 'bg-gray-100 text-gray-700 font-semibold dark:bg-gray-900/50 dark:text-gray-300'
-                                                : 'text-sidebar-foreground',
-                                        )}
-                                    >
-                                        <item.icon
-                                            className={cn('h-4 w-4 shrink-0', item.isActive && 'text-gray-600 dark:text-gray-400')}
-                                        />
-                                        <span>{item.name}</span>
-                                    </Link>
+                                    <SidebarMenuButton asChild isActive={item.isActive} tooltip={item.name}>
+                                        <Link href={item.url}>
+                                            <item.icon className="h-4 w-4 shrink-0" />
+                                            <span>{item.name}</span>
+                                        </Link>
+                                    </SidebarMenuButton>
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>

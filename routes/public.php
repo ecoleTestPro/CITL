@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\GlossaryController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\Public\BlogController;
 use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +51,7 @@ Route::post('/training/accreditation-request', [\App\Http\Controllers\Accreditat
 
 // Events & Blog
 Route::get('/events', [EventController::class, 'index'])->name('events');
+Route::get('/partners', [PartnerController::class, 'index'])->name('partners');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 Route::get('/blog/tag/{tag}', [BlogController::class, 'tag'])->name('blog.tag');

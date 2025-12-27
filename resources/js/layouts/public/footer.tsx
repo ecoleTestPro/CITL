@@ -147,7 +147,7 @@ const SOCIAL_LINKS: SocialLink[] = [
 
 const COMPANY_INFO = {
     location: "5ème étage de la Résidence Pacy, En face de l'immeuble CGK, Cocody Angré Djibi - 9ème tranche, Abidjan, Côte d'Ivoire",
-    email: 'contact@citl.ci',
+    email: 'contact@citl-istqb.org',
     phone: '+225 27 22 39 18 67',
 };
 

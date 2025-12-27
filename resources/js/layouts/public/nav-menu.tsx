@@ -166,6 +166,11 @@ const NavMenu = ({ mobile = false, onNavigate }: NavMenuProps) => {
     // Configuration du menu traduite - Partie droite (liens secondaires)
     const menuRight: MenuSection[] = [
         {
+            title: t('nav.partners'),
+            type: 'link',
+            href: '/partners',
+        },
+        {
             title: t('nav.events'),
             type: 'link',
             href: '/events',

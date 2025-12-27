@@ -31,6 +31,7 @@
         "register_certified_testers": "S'inscrire sur la liste officielle",
         "certified_testers_list": "Liste officielle des testeurs",
         "istqb_registry": "Registre ISTQB",
+        "partners": "Partenaires",
         "events": "Événements",
         "blog": "Blog",
         "contact": "Contact",
@@ -274,7 +275,7 @@
         "phone_label": "Téléphone",
         "phone_number": "+225 27 22 39 18 67",
         "email_label": "Email",
-        "email_address": "contact@citl.ci",
+        "email_address": "contact@citl-istqb.org",
         "civility": "Civilité",
         "civility_placeholder": "Sélectionnez votre civilité",
         "mr": "Monsieur",
@@ -302,6 +303,26 @@
         "page_description": "Découvrez nos événements, formations et conférences à venir sur les tests logiciels et la certification ISTQB.",
         "no_events_title": "Aucun événement disponible pour le moment",
         "no_events_message": "Cette fonctionnalité sera bientôt disponible. Revenez prochainement pour découvrir nos événements et formations."
+    },
+    "partners": {
+        "seo": {
+            "title": "Nos Partenaires | CITL - Comité Ivoirien des Tests Logiciels",
+            "description": "Découvrez les partenaires de confiance du CITL qui contribuent à l'excellence en test logiciel en Côte d'Ivoire."
+        },
+        "badge": "Partenaires",
+        "hero_title": "Nos Partenaires",
+        "hero_description": "Découvrez les entreprises qui nous font confiance et avec lesquelles nous collaborons pour promouvoir l'excellence en test logiciel.",
+        "no_partners": "Aucun partenaire pour le moment.",
+        "no_partners_in_tier": "Aucun partenaire dans cette catégorie.",
+        "visit_website": "Visiter le site",
+        "cta_title": "Devenez partenaire CITL",
+        "cta_description": "Rejoignez notre réseau de partenaires et contribuez à l'excellence en test logiciel en Côte d'Ivoire et en Afrique.",
+        "cta_button": "Nous contacter",
+        "tiers": {
+            "platinum": "Partenaires Platine CITL",
+            "gold": "Partenaires Gold CITL",
+            "silver": "Partenaires Silver CITL"
+        }
     },
     "common": {
         "cancel": "Annuler",
@@ -790,7 +811,7 @@
             "cat_registration": "Inscription et prérequis",
             "cat_certificates": "Certificats et validité",
             "q1": "Où puis-je trouver la liste des fournisseurs d'examens?",
-            "a1": "Envoyez votre demande à contact@citl.ci ou utilisez le formulaire de contact sur notre page Contact.",
+            "a1": "Envoyez votre demande à contact@citl-istqb.org ou utilisez le formulaire de contact sur notre page Contact.",
             "q2": "Où puis-je trouver la liste des organismes de formation accrédités?",
             "a2": "Tous les organismes de formation accrédités sont listés sur notre page Formation.",
             "q3": "Comment obtenir un certificat ISTQB® pour testeurs logiciels?",
@@ -860,7 +881,7 @@
             "q25": "Comment puis-je obtenir mon certificat ISTQB®?",
             "a25": "Le CITL, via iSQI, vous enverra le certificat par courrier ou par e-mail.",
             "q26": "J'ai perdu mon certificat ISTQB®, comment puis-je obtenir une nouvelle copie?",
-            "a26": "Veuillez contacter le CITL à contact@citl.ci pour la réémission de votre certificat.",
+            "a26": "Veuillez contacter le CITL à contact@citl-istqb.org pour la réémission de votre certificat.",
             "q27": "Où et quand puis-je passer un examen?",
             "a27": "Les examens sont proposés par le CITL. Vous pouvez vous inscrire pour votre examen sur notre page d'inscription.",
             "q28": "Quels types de formats d'examen sont disponibles?",
@@ -888,13 +909,13 @@
             "q37": "Puis-je passer un examen sans avoir rempli les prérequis?",
             "a37": "Par défaut, il n'est pas possible de passer un examen sans avoir rempli les prérequis nécessaires. Le certificat ne sera délivré qu'après avoir réussi l'examen prérequis.",
             "q38": "Qui dois-je contacter si je n'ai pas trouvé les informations que je cherchais?",
-            "a38": "Vous pouvez utiliser le formulaire de contact sur notre page Contact ou envoyer vos questions à contact@citl.ci",
+            "a38": "Vous pouvez utiliser le formulaire de contact sur notre page Contact ou envoyer vos questions à contact@citl-istqb.org",
             "q39": "Qu'est-ce que le registre ISTQB® des candidats ayant réussi (SCR)?",
             "a39": "Le registre ISTQB® des candidats ayant réussi reconnaît la réussite des candidats qui ont obtenu un certificat ISTQB® et qui ont donné leur permission pour que leurs informations soient incluses. Le registre permet également la validation des certificats.",
             "q40": "J'ai réussi un examen ISTQB® mais je ne suis pas listé dans le registre. Que dois-je faire?",
             "a40": "Les personnes détenant un certificat ISTQB® avant le lancement du registre peuvent ne pas encore être listées. Veuillez nous contacter pour plus d'informations sur la façon d'être ajouté.",
             "q41": "Je suis inscrit dans le registre et je souhaite me retirer. Que dois-je faire?",
-            "a41": "Si vous souhaitez retirer ou modifier vos informations dans le registre SCR, veuillez nous contacter via le formulaire de contact sur la page Contact ou envoyer votre demande à contact@citl.ci"
+            "a41": "Si vous souhaitez retirer ou modifier vos informations dans le registre SCR, veuillez nous contacter via le formulaire de contact sur la page Contact ou envoyer votre demande à contact@citl-istqb.org"
         },
         "glossary": {
             "hero_badge": "Glossaire ISTQB®",
@@ -1268,7 +1289,7 @@
         "table_of_contents": "Table des matières",
         "last_updated": "Dernière mise à jour",
         "section": "Section",
-        "footer_note": "Pour toute question concernant cette politique de confidentialité, n'hésitez pas à nous contacter à l'adresse contact@citl.ci",
+        "footer_note": "Pour toute question concernant cette politique de confidentialité, n'hésitez pas à nous contacter à l'adresse contact@citl-istqb.org",
         "sections": {
             "introduction": {
                 "title": "Introduction",
@@ -1302,7 +1323,7 @@
                 "title": "Vos Droits",
                 "content_1": "Conformément à la réglementation applicable, vous disposez d'un droit d'accès, de rectification, de suppression et de portabilité de vos données personnelles.",
                 "content_2": "Vous pouvez également vous opposer au traitement de vos données ou demander la limitation de celui-ci dans certaines circonstances.",
-                "content_3": "Pour exercer ces droits, contactez-nous à l'adresse : contact@citl.ci. Nous nous engageons à répondre à votre demande dans un délai de 30 jours."
+                "content_3": "Pour exercer ces droits, contactez-nous à l'adresse : contact@citl-istqb.org. Nous nous engageons à répondre à votre demande dans un délai de 30 jours."
             },
             "data_retention": {
                 "title": "Conservation des Données",
@@ -1311,7 +1332,7 @@
             },
             "contact": {
                 "title": "Nous Contacter",
-                "content_1": "Pour toute question relative à cette politique de confidentialité ou à vos données personnelles, vous pouvez nous contacter par email à contact@citl.ci.",
+                "content_1": "Pour toute question relative à cette politique de confidentialité ou à vos données personnelles, vous pouvez nous contacter par email à contact@citl-istqb.org.",
                 "content_2": "CITL - Comité Ivoirien des Tests Logiciels, Abidjan, Côte d'Ivoire."
             }
         }
@@ -1328,7 +1349,7 @@
         "last_updated": "Dernière mise à jour",
         "article": "Article",
         "important_notice": "En utilisant ce site, vous acceptez ces conditions. Si vous n'êtes pas d'accord, veuillez ne pas utiliser nos services.",
-        "footer_note": "Ces conditions sont régies par le droit ivoirien. Pour toute question, contactez-nous à contact@citl.ci",
+        "footer_note": "Ces conditions sont régies par le droit ivoirien. Pour toute question, contactez-nous à contact@citl-istqb.org",
         "sections": {
             "acceptance": {
                 "title": "Acceptation des Conditions",
@@ -1532,7 +1553,9 @@
         "accreditation_requests": "Demandes d'accréditation",
         "certified_tester_registrations": "Inscriptions testeurs certifiés",
         "contact_messages": "Messages de contact",
-        "email_logs": "Logs des emails"
+        "email_logs": "Logs des emails",
+        "partner_tiers": "Catégories partenaires",
+        "partners": "Partenaires"
     },
     "settings": {
         "title": "Paramètres",

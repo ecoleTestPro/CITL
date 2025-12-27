@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\PartnerTierController;
 use App\Http\Controllers\Api\TranslationController;
 use App\Http\Controllers\Dashboard\AccreditedOrganizationController;
 use App\Http\Controllers\Dashboard\BlogCategoryController;
@@ -171,6 +173,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{id}', [FaqController::class, 'destroy'])->name('destroy');
         Route::post('/{id}/toggle-active', [FaqController::class, 'toggleActive'])->name('toggle-active');
         Route::post('/{id}/update-order', [FaqController::class, 'updateOrder'])->name('update-order');
+    });
+
+    // Partner Tier Management Routes
+    Route::prefix('dashboard/partner-tiers')->name('admin.partner-tiers.')->group(function () {
+        Route::get('/', [PartnerTierController::class, 'index'])->name('index');
+        Route::post('/', [PartnerTierController::class, 'store'])->name('store');
+        Route::put('/{partnerTier}', [PartnerTierController::class, 'update'])->name('update');
+        Route::delete('/{partnerTier}', [PartnerTierController::class, 'destroy'])->name('destroy');
+        Route::post('/{partnerTier}/toggle-active', [PartnerTierController::class, 'toggleActive'])->name('toggle-active');
+    });
+
+    // Partner Management Routes
+    Route::prefix('dashboard/partners')->name('admin.partners.')->group(function () {
+        Route::get('/', [PartnerController::class, 'index'])->name('index');
+        Route::post('/', [PartnerController::class, 'store'])->name('store');
+        Route::put('/{partner}', [PartnerController::class, 'update'])->name('update');
+        Route::delete('/{partner}', [PartnerController::class, 'destroy'])->name('destroy');
+        Route::post('/{partner}/toggle-active', [PartnerController::class, 'toggleActive'])->name('toggle-active');
     });
 
     // User Management Routes - Admin only

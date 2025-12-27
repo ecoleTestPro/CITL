@@ -16,7 +16,7 @@ class FaqSeeder extends Seeder
             // Informations générales
             [
                 'question' => 'Où puis-je trouver la liste des fournisseurs d\'examens?',
-                'answer' => 'Envoyez votre demande à contact@citl.ci ou utilisez le formulaire de contact sur notre page Contact.',
+                'answer' => 'Envoyez votre demande à contact@citl-istqb.org ou utilisez le formulaire de contact sur notre page Contact.',
                 'category' => 'Informations générales',
                 'locale' => 'fr',
                 'order' => 1,
@@ -130,7 +130,7 @@ class FaqSeeder extends Seeder
             ],
             [
                 'question' => 'Qui dois-je contacter si je n\'ai pas trouvé les informations que je cherchais?',
-                'answer' => 'Vous pouvez utiliser le formulaire de contact sur notre page Contact ou envoyer vos questions à contact@citl.ci',
+                'answer' => 'Vous pouvez utiliser le formulaire de contact sur notre page Contact ou envoyer vos questions à contact@citl-istqb.org',
                 'category' => 'Certificats et validité',
                 'locale' => 'fr',
                 'order' => 2,

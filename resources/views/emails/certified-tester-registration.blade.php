@@ -229,7 +229,7 @@
                                                     <p style="margin: 0 0 25px 0; color: #666666; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 15px;">
                                                         Notre équipe va vérifier vos informations et vous contactera prochainement.
                                                     </p>
-                                                    <a href="mailto:contact@citl.ci" style="display: inline-block; background-color: #e36c19; color: #ffffff; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 30px; border-radius: 5px;">
+                                                    <a href="mailto:contact@citl-istqb.org" style="display: inline-block; background-color: #e36c19; color: #ffffff; font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 30px; border-radius: 5px;">
                                                         Nous Contacter
                                                     </a>
                                                 </td>

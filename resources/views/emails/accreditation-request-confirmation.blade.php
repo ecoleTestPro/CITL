@@ -206,7 +206,7 @@
                                                             <table cellpadding="0" cellspacing="0" style="font-family: 'Montserrat', 'Trebuchet MS', Arial, sans-serif; font-size: 14px;">
                                                                 <tr>
                                                                     <td style="padding: 5px 0; color: #1a1a1a;">
-                                                                        📧 <a href="mailto:contact@citl.ci" style="color: #e36c19; text-decoration: none;">contact@citl.ci</a>
+                                                                        📧 <a href="mailto:contact@citl-istqb.org" style="color: #e36c19; text-decoration: none;">contact@citl-istqb.org</a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>

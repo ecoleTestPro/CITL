@@ -130,37 +130,39 @@ export function TableSection({
     }, []);
 
     return (
-        <section ref={sectionRef} className={cn('py-16 md:py-24', bgColor, className)}>
-            <div className="container mx-auto px-4">
-                <div className={cn('mx-auto', maxWidthClass)}>
-                    <div className="mb-12 text-center">
-                        <h2 ref={titleRef} className="text-3xl font-bold text-gray-900 dark:text-gray-100">
-                            {title}
-                        </h2>
-                        {description && (
-                            <p ref={descriptionRef} className="mt-4 text-gray-600 dark:text-gray-400">
-                                {description}
-                            </p>
+        <>
+            <section ref={sectionRef} className={cn('py-16 md:py-24', bgColor, className)}>
+                <div className="container mx-auto px-4">
+                    <div className={cn('mx-auto', maxWidthClass)}>
+                        <div className="mb-12 text-center">
+                            <h2 ref={titleRef} className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                                {title}
+                            </h2>
+                            {description && (
+                                <p ref={descriptionRef} className="mt-4 text-gray-600 dark:text-gray-400">
+                                    {description}
+                                </p>
+                            )}
+                        </div>
+
+                        <PublicTable columns={columns} data={data} />
+
+                        {notes && notes.length > 0 && (
+                            <div ref={notesRef} className={cn('mt-8 rounded-lg p-6', notesBgColor, notesBgColorDark)}>
+                                <h3 className="mb-3 font-semibold text-gray-900 dark:text-gray-100">{notesTitle}</h3>
+                                <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                                    {notes.map((note, index) => (
+                                        <li key={index} className="flex items-start gap-2">
+                                            <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-citl-orange"></span>
+                                            <span>{note.text}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         )}
                     </div>
-
-                    <PublicTable columns={columns} data={data} />
-
-                    {notes && notes.length > 0 && (
-                        <div ref={notesRef} className={cn('mt-8 rounded-lg p-6', notesBgColor, notesBgColorDark)}>
-                            <h3 className="mb-3 font-semibold text-gray-900 dark:text-gray-100">{notesTitle}</h3>
-                            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-                                {notes.map((note, index) => (
-                                    <li key={index} className="flex items-start gap-2">
-                                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-citl-orange"></span>
-                                        <span>{note.text}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 }
